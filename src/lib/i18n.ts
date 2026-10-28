@@ -284,7 +284,21 @@ const dict = {
   generateApis: { en: 'Define API contracts', ar: 'تعريف عقود الواجهات' },
   generateScreens: { en: 'Specify screens', ar: 'تحديد الشاشات' },
   generateArchitecture: { en: 'Recommend architecture', ar: 'توصية المعمارية' },
-  regenerate: { en: 'Regenerate unreviewed', ar: 'إعادة إنشاء غير المراجع' },
+  regenerate: { en: 'Regenerate unreviewed / rejected', ar: 'إعادة إنشاء غير المراجَع والمرفوض' },
+  rejectedArchNotice: {
+    en: 'You rejected this architecture recommendation. Tell the engineer what to change (e.g. "use SQLite instead of PostgreSQL") and regenerate — the new proposal must address your notes.',
+    ar: 'لقد رفضت توصية المعمارية. أخبر المهندس بما يجب تغييره (مثل: «استخدم SQLite بدل PostgreSQL») ثم أعد التوليد — يجب أن تعالج التوصية الجديدة ملاحظاتك.',
+  },
+  feedbackLabel: { en: 'What should change?', ar: 'ما الذي يجب تغييره؟' },
+  feedbackPlaceholder: {
+    en: 'e.g. Use SQLite instead of PostgreSQL — a single server with no database operations team',
+    ar: 'مثال: استخدم SQLite بدل PostgreSQL — خادم واحد دون فريق تشغيل قواعد بيانات',
+  },
+  regenerateWithFeedback: { en: 'Regenerate with feedback', ar: 'إعادة التوليد مع الملاحظات' },
+  regenReplacesRejected: {
+    en: 'Regenerating replaces rejected and unreviewed items; confirmed ones are kept.',
+    ar: 'إعادة التوليد تستبدل المرفوض وغير المراجَع، وتحافظ على المعتمد.',
+  },
   genProcesses1: { en: 'Reading confirmed requirements…', ar: 'يقرأ المتطلبات المعتمدة…' },
   genProcesses2: { en: 'Modeling workflows, rules and exceptions…', ar: 'ينمذج المسارات والقواعد والاستثناءات…' },
   genEntities1: { en: 'Identifying entities and relationships…', ar: 'يحدد الكيانات والعلاقات…' },
@@ -387,6 +401,7 @@ const dict = {
   // Misc engineering
   reviewed: { en: 'reviewed', ar: 'تمت مراجعته' },
   unreviewed: { en: 'unreviewed', ar: 'غير مراجع' },
+  rejectedShort: { en: 'rejected', ar: 'مرفوض' },
   confirmArtifact: { en: 'Confirm', ar: 'اعتماد' },
   rejectArtifact: { en: 'Reject', ar: 'رفض' },
   viewLess: { en: 'Show less', ar: 'عرض أقل' },

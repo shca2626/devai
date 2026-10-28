@@ -1,0 +1,609 @@
+     1→'use client'
+     2→
+     3→import { useState } from 'react'
+     4→import { Button } from '@/components/ui/button'
+     5→import { Badge } from '@/components/ui/badge'
+     6→import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+     7→import { useApp } from '@/components/app/context'
+     8→import { CodeChip, ReviewBadge, WorkingPanel } from '@/components/app/bits'
+     9→import type { IdeaDetail } from '@/lib/types'
+    10→import type { DictKey } from '@/lib/i18n'
+    11→import {
+    12→  Boxes,
+    13→  Check,
+    14→  ChevronDown,
+    15→  ChevronUp,
+    16→  Database,
+    17→  GitBranch,
+    18→  LayoutTemplate,
+    19→  Server,
+    20→  Workflow,
+    21→  X,
+    22→} from 'lucide-react'
+    23→import { useToast } from '@/hooks/use-toast'
+    24→
+    25→// ============================================================
+    26→// Stage 6 — System design: five engines (processes, data, API,
+    27→// screens, architecture) turn confirmed requirements into the
+    28→// system specification. Each artifact set is reviewed item by
+    29→// item; needs_revision items come from change-impact control.
+    30→// ============================================================
+    31→
+    32→type Kind = 'processes' | 'entities' | 'apis' | 'screens' | 'architecture'
+    33→
+    34→const GENERATE_KEYS: Record<Kind, { label: DictKey; steps: [DictKey, DictKey] }> = {
+    35→  processes: { label: 'generateProcesses', steps: ['genProcesses1', 'genProcesses2'] },
+    36→  entities: { label: 'generateEntities', steps: ['genEntities1', 'genEntities2'] },
+    37→  apis: { label: 'generateApis', steps: ['genApis1', 'genApis2'] },
+    38→  screens: { label: 'generateScreens', steps: ['genScreens1', 'genScreens2'] },
+    39→  architecture: { label: 'generateArchitecture', steps: ['genArch1', 'genArch2'] },
+    40→}
+    41→
+    42→export function DesignStage({ detail }: { detail: IdeaDetail }) {
+    43→  const { t, setDetail, refreshIdeas } = useApp()
+    44→  const { toast } = useToast()
+    45→  const { idea, processes, entities, apis, screens, architecture } = detail
+    46→  const active = idea.stage === 'design'
+    47→  const [busyKind, setBusyKind] = useState<Kind | null>(null)
+    48→  const [busyGate, setBusyGate] = useState(false)
+    49→  const [expanded, setExpanded] = useState<string | null>(null)
+    50→  const [tab, setTab] = useState('processes')
+    51→
+    52→  async function generate(kind: Kind) {
+    53→    setBusyKind(kind)
+    54→    const res = await fetch(`/api/ideas/${idea.id}/design/generate`, {
+    55→      method: 'POST',
+    56→      headers: { 'Content-Type': 'application/json' },
+    57→      body: JSON.stringify({ kind }),
+    58→    })
+    59→    const data = await res.json()
+    60→    setBusyKind(null)
+    61→    if (!res.ok) {
+    62→      toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
+    63→      return
+    64→    }
+    65→    setDetail(data as IdeaDetail)
+    66→    refreshIdeas()
+    67→  }
+    68→
+    69→  async function review(kind: string, id: string, status: string) {
+    70→    const res = await fetch(`/api/artifacts/${kind}/${id}`, {
+    71→      method: 'PATCH',
+    72→      headers: { 'Content-Type': 'application/json' },
+    73→      body: JSON.stringify({ status }),
+    74→    })
+    75→    const data = await res.json()
+    76→    if (!res.ok) {
+    77→      toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
+    78→      return
+    79→    }
+    80→    setDetail(data as IdeaDetail)
+    81→    refreshIdeas()
+    82→  }
+    83→
+    84→  async function confirmAll(kind: Kind) {
+    85→    setBusyKind(kind)
+    86→    const list =
+    87→      kind === 'processes' ? processes : kind === 'entities' ? entities : kind === 'apis' ? apis : kind === 'screens' ? screens : []
+    88→    const artifactKind = kind === 'processes' ? 'process' : kind === 'entities' ? 'entity' : kind === 'apis' ? 'api' : 'screen'
+    89→    for (const item of list) {
+    90→      if (item.status === 'proposed' || item.status === 'needs_revision') {
+    91→        const res = await fetch(`/api/artifacts/${artifactKind}/${item.id}`, {
+    92→          method: 'PATCH',
+    93→          headers: { 'Content-Type': 'application/json' },
+    94→          body: JSON.stringify({ status: 'confirmed' }),
+    95→        })
+    96→        if (res.ok) setDetail((await res.json()) as IdeaDetail)
+    97→      }
+    98→    }
+    99→    setBusyKind(null)
+   100→    refreshIdeas()
+   101→  }
+   102→
+   103→  async function passGate() {
+   104→    setBusyGate(true)
+   105→    const res = await fetch(`/api/ideas/${idea.id}/gate`, {
+   106→      method: 'POST',
+   107→      headers: { 'Content-Type': 'application/json' },
+   108→      body: JSON.stringify({ gate: 'design', action: 'approve' }),
+   109→    })
+   110→    const data = await res.json()
+   111→    setBusyGate(false)
+   112→    if (!res.ok) {
+   113→      toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
+   114→      return
+   115→    }
+   116→    setDetail(data as IdeaDetail)
+   117→    refreshIdeas()
+   118→  }
+   119→
+   120→  if (!active && processes.length === 0 && entities.length === 0 && apis.length === 0 && screens.length === 0 && !architecture) {
+   121→    return (
+   122→      <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
+   123→        <Boxes className="h-8 w-8 text-muted-foreground mx-auto" />
+   124→        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockedStageTeaser')}</p>
+   125→      </div>
+   126→    )
+   127→  }
+   128→
+   129→  return (
+   130→    <div className="space-y-4">
+   131→      <p className="text-xs text-muted-foreground leading-6">{t('designIntro')}</p>
+   132→
+   133→      <Tabs value={tab} onValueChange={setTab}>
+   134→        <TabsList className="w-full justify-start overflow-x-auto nice-scroll h-auto p-1">
+   135→          <TabsTrigger value="processes" className="gap-1.5 text-xs">
+   136→            <Workflow className="h-3.5 w-3.5" />
+   137→            {t('tabProcesses')} ({processes.length})
+   138→          </TabsTrigger>
+   139→          <TabsTrigger value="entities" className="gap-1.5 text-xs">
+   140→            <Database className="h-3.5 w-3.5" />
+   141→            {t('tabData')} ({entities.length})
+   142→          </TabsTrigger>
+   143→          <TabsTrigger value="apis" className="gap-1.5 text-xs">
+   144→            <Server className="h-3.5 w-3.5" />
+   145→            {t('tabApis')} ({apis.length})
+   146→          </TabsTrigger>
+   147→          <TabsTrigger value="screens" className="gap-1.5 text-xs">
+   148→            <LayoutTemplate className="h-3.5 w-3.5" />
+   149→            {t('tabScreens')} ({screens.length})
+   150→          </TabsTrigger>
+   151→          <TabsTrigger value="architecture" className="gap-1.5 text-xs">
+   152→            <Boxes className="h-3.5 w-3.5" />
+   153→            {t('tabArchitecture')}
+   154→          </TabsTrigger>
+   155→        </TabsList>
+   156→
+   157→        {/* ---------- Processes ---------- */}
+   158→        <TabsContent value="processes" className="mt-3 space-y-3">
+   159→          <GenerateBar kind="processes" count={processes.length} unreviewed={processes.filter((p) => p.status === 'proposed' || p.status === 'needs_revision').length} active={active} busy={busyKind === 'processes'} t={t} onGenerate={() => generate('processes')} onConfirmAll={() => confirmAll('processes')} />
+   160→          {processes.map((p) => (
+   161→            <div key={p.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${p.status === 'rejected' ? 'opacity-60' : ''}`}>
+   162→              <div className="flex items-start gap-2 flex-wrap">
+   163→                <CodeChip code={p.code} className="mt-0.5" />
+   164→                <div className="flex-1 min-w-[200px]">
+   165→                  <div className="text-sm font-medium" dir="ltr">
+   166→                    {p.name}
+   167→                    {p.nameAr && <span className="text-muted-foreground font-arabic ms-2" dir="rtl">· {p.nameAr}</span>}
+   168→                  </div>
+   169→                  {p.trigger && <p className="text-xs text-muted-foreground mt-0.5" dir="ltr">⚡ {p.trigger}</p>}
+   170→                  <div className="flex flex-wrap gap-1 mt-1.5">
+   171→                    {p.actors.map((a) => (
+   172→                      <Badge key={a} variant="outline" className="text-[10px] bg-muted/40">{a}</Badge>
+   173→                    ))}
+   174→                    {p.linkedRequirements.map((c) => <CodeChip key={c} code={c} />)}
+   175→                  </div>
+   176→                </div>
+   177→                <ReviewBadge status={p.status} />
+   178→              </div>
+   179→              {expanded === p.id && (
+   180→                <div className="mt-3 border-t pt-3 space-y-3" dir="ltr">
+   181→                  <div className="overflow-x-auto nice-scroll">
+   182→                    <table className="w-full text-xs">
+   183→                      <thead>
+   184→                        <tr className="text-muted-foreground border-b">
+   185→                          <th className="py-1.5 text-start font-medium pe-2">#</th>
+   186→                          <th className="py-1.5 text-start font-medium pe-2">Actor</th>
+   187→                          <th className="py-1.5 text-start font-medium pe-2">Action</th>
+   188→                          <th className="py-1.5 text-start font-medium pe-2">Decision / Exception</th>
+   189→                        </tr>
+   190→                      </thead>
+   191→                      <tbody>
+   192→                        {p.steps.map((s) => (
+   193→                          <tr key={s.n} className="border-b last:border-0 align-top">
+   194→                            <td className="py-1.5 pe-2 font-mono text-muted-foreground">{s.n}</td>
+   195→                            <td className="py-1.5 pe-2 whitespace-nowrap">{s.actor}</td>
+   196→                            <td className="py-1.5 pe-2">{s.action}{s.input ? <span className="text-muted-foreground"> (in: {s.input})</span> : ''}{s.output ? <span className="text-muted-foreground"> (out: {s.output})</span> : ''}</td>
+   197→                            <td className="py-1.5 text-muted-foreground">{s.decision ?? s.exception ?? '—'}</td>
+   198→                          </tr>
+   199→                        ))}
+   200→                      </tbody>
+   201→                    </table>
+   202→                  </div>
+   203→                  {p.businessRules.length > 0 && (
+   204→                    <div>
+   205→                      <div className="text-[11px] font-semibold text-muted-foreground mb-1">{t('businessRules')}</div>
+   206→                      <ul className="space-y-1">
+   207→                        {p.businessRules.map((b, i) => (
+   208→                          <li key={i} className="text-xs leading-6 flex gap-1.5 flex-wrap">
+   209→                            <GitBranch className="h-3.5 w-3.5 text-primary shrink-0 mt-1" />
+   210→                            <span>
+   211→                              {b.rule}
+   212→                              {b.linkedRequirements.length > 0 && <span className="ms-1">{b.linkedRequirements.map((c) => <CodeChip key={c} code={c} className="ms-1" />)}</span>}
+   213→                            </span>
+   214→                          </li>
+   215→                        ))}
+   216→                      </ul>
+   217→                    </div>
+   218→                  )}
+   219→                  {p.exceptions.length > 0 && (
+   220→                    <div>
+   221→                      <div className="text-[11px] font-semibold text-muted-foreground mb-1">{t('exceptionsTitle')}</div>
+   222→                      <ul className="space-y-0.5">
+   223→                        {p.exceptions.map((e, i) => (
+   224→                          <li key={i} className="text-xs leading-6 text-muted-foreground">• {e}</li>
+   225→                        ))}
+   226→                      </ul>
+   227→                    </div>
+   228→                  )}
+   229→                </div>
+   230→              )}
+   231→              <Expand id={p.id} expanded={expanded} setExpanded={setExpanded} t={t} />
+   232→              <ReviewActions kind="process" id={p.id} status={p.status} active={active} t={t} onReview={review} />
+   233→            </div>
+   234→          ))}
+   235→        </TabsContent>
+   236→
+   237→        {/* ---------- Entities ---------- */}
+   238→        <TabsContent value="entities" className="mt-3 space-y-3">
+   239→          <GenerateBar kind="entities" count={entities.length} unreviewed={entities.filter((e) => e.status === 'proposed' || e.status === 'needs_revision').length} active={active} busy={busyKind === 'entities'} t={t} onGenerate={() => generate('entities')} onConfirmAll={() => confirmAll('entities')} />
+   240→          {entities.map((e) => (
+   241→            <div key={e.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${e.status === 'rejected' ? 'opacity-60' : ''}`}>
+   242→              <div className="flex items-start gap-2 flex-wrap">
+   243→                <CodeChip code={e.code} className="mt-0.5" />
+   244→                <div className="flex-1 min-w-[200px]">
+   245→                  <div className="text-sm font-medium" dir="ltr">
+   246→                    {e.name}
+   247→                    {e.nameAr && <span className="text-muted-foreground font-arabic ms-2" dir="rtl">· {e.nameAr}</span>}
+   248→                  </div>
+   249→                  {e.description && <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2" dir="ltr">{e.description}</p>}
+   250→                  <div className="text-[11px] text-muted-foreground mt-1">{e.fields.length} {t('fieldsTitle').toLowerCase()}</div>
+   251→                </div>
+   252→                <ReviewBadge status={e.status} />
+   253→              </div>
+   254→              {expanded === e.id && (
+   255→                <div className="mt-3 border-t pt-3 space-y-3" dir="ltr">
+   256→                  <div className="overflow-x-auto nice-scroll">
+   257→                    <table className="w-full text-xs">
+   258→                      <thead>
+   259→                        <tr className="text-muted-foreground border-b">
+   260→                          <th className="py-1.5 text-start font-medium pe-2">Field</th>
+   261→                          <th className="py-1.5 text-start font-medium pe-2">Type</th>
+   262→                          <th className="py-1.5 text-start font-medium pe-2">R</th>
+   263→                          <th className="py-1.5 text-start font-medium pe-2">U</th>
+   264→                          <th className="py-1.5 text-start font-medium">Description</th>
+   265→                        </tr>
+   266→                      </thead>
+   267→                      <tbody>
+   268→                        {e.fields.map((f) => (
+   269→                          <tr key={f.name} className="border-b last:border-0">
+   270→                            <td className="py-1.5 pe-2 font-mono">{f.name}</td>
+   271→                            <td className="py-1.5 pe-2 text-muted-foreground">{f.type}</td>
+   272→                            <td className="py-1.5 pe-2">{f.required ? '✓' : ''}</td>
+   273→                            <td className="py-1.5 pe-2">{f.unique ? '✓' : ''}</td>
+   274→                            <td className="py-1.5 text-muted-foreground">{f.description}{f.refEntity ? <span className="text-primary"> → {f.refEntity}</span> : ''}</td>
+   275→                          </tr>
+   276→                        ))}
+   277→                      </tbody>
+   278→                    </table>
+   279→                  </div>
+   280→                  {e.relationships.length > 0 && (
+   281→                    <div className="text-xs text-muted-foreground">
+   282→                      <span className="font-semibold text-foreground">{t('relationshipsTitle')}: </span>
+   283→                      {e.relationships.map((r, i) => (
+   284→                        <span key={i}>{i > 0 && ' · '}{r.type} → {r.target} <span className="text-muted-foreground/70">({r.description})</span></span>
+   285→                      ))}
+   286→                    </div>
+   287→                  )}
+   288→                  {e.constraints.length > 0 && (
+   289→                    <div className="text-xs">
+   290→                      <span className="font-semibold">{t('constraintsTitle')}: </span>
+   291→                      <span className="text-muted-foreground">{e.constraints.join(' · ')}</span>
+   292→                    </div>
+   293→                  )}
+   294→                </div>
+   295→              )}
+   296→              <Expand id={e.id} expanded={expanded} setExpanded={setExpanded} t={t} />
+   297→              <ReviewActions kind="entity" id={e.id} status={e.status} active={active} t={t} onReview={review} />
+   298→            </div>
+   299→          ))}
+   300→        </TabsContent>
+   301→
+   302→        {/* ---------- APIs ---------- */}
+   303→        <TabsContent value="apis" className="mt-3 space-y-3">
+   304→          <GenerateBar kind="apis" count={apis.length} unreviewed={apis.filter((a) => a.status === 'proposed' || a.status === 'needs_revision').length} active={active} busy={busyKind === 'apis'} t={t} onGenerate={() => generate('apis')} onConfirmAll={() => confirmAll('apis')} />
+   305→          {apis.map((a) => (
+   306→            <div key={a.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${a.status === 'rejected' ? 'opacity-60' : ''}`}>
+   307→              <div className="flex items-start gap-2 flex-wrap">
+   308→                <CodeChip code={a.code} className="mt-0.5" />
+   309→                <div className="flex-1 min-w-[200px]">
+   310→                  <div className="text-sm font-mono font-medium" dir="ltr">
+   311→                    <Badge className={`me-1.5 text-[10px] ${a.method === 'GET' ? 'bg-teal-600' : a.method === 'POST' ? 'bg-primary' : a.method === 'DELETE' ? 'bg-red-500' : 'bg-amber-500'}`}>
+   312→                      {a.method}
+   313→                    </Badge>
+   314→                    {a.path}
+   315→                  </div>
+   316→                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2" dir="ltr">
+   317→                    {a.auth && <span className="font-semibold">{a.auth}: </span>}
+   318→                    {a.purpose}
+   319→                  </p>
+   320→                  <div className="flex flex-wrap gap-1 mt-1.5">
+   321→                    {a.linkedRequirements.map((c) => <CodeChip key={c} code={c} />)}
+   322→                    {a.linkedEntities.map((c) => <CodeChip key={c} code={c} className="bg-teal-50 border-teal-200 text-teal-700" />)}
+   323→                  </div>
+   324→                </div>
+   325→                <ReviewBadge status={a.status} />
+   326→              </div>
+   327→              {expanded === a.id && (
+   328→                <div className="mt-3 border-t pt-3 space-y-3" dir="ltr">
+   329→                  {a.request.length > 0 && (
+   330→                    <div>
+   331→                      <div className="text-[11px] font-semibold text-muted-foreground mb-1">{t('requestFields')}</div>
+   332→                      <div className="overflow-x-auto nice-scroll">
+   333→                        <table className="w-full text-xs">
+   334→                          <thead>
+   335→                            <tr className="text-muted-foreground border-b">
+   336→                              <th className="py-1.5 text-start font-medium pe-2">Field</th>
+   337→                              <th className="py-1.5 text-start font-medium pe-2">Type</th>
+   338→                              <th className="py-1.5 text-start font-medium">Validation</th>
+   339→                            </tr>
+   340→                          </thead>
+   341→                          <tbody>
+   342→                            {a.request.map((f) => (
+   343→                              <tr key={f.field} className="border-b last:border-0">
+   344→                                <td className="py-1.5 pe-2 font-mono">{f.field}{f.required ? <span className="text-red-500">*</span> : ''}</td>
+   345→                                <td className="py-1.5 pe-2 text-muted-foreground">{f.type}</td>
+   346→                                <td className="py-1.5 text-muted-foreground">{f.notes}</td>
+   347→                              </tr>
+   348→                            ))}
+   349→                          </tbody>
+   350→                        </table>
+   351→                      </div>
+   352→                    </div>
+   353→                  )}
+   354→                  {a.errors.length > 0 && (
+   355→                    <div className="text-xs">
+   356→                      <span className="font-semibold">{t('errorCodes')}: </span>
+   357→                      {a.errors.map((e, i) => (
+   358→                        <span key={i}>{i > 0 && ' · '}<code className="bg-muted/60 rounded px-1 py-0.5 font-mono text-[10px]">{e.code}</code> {e.when}</span>
+   359→                      ))}
+   360→                    </div>
+   361→                  )}
+   362→                </div>
+   363→              )}
+   364→              <Expand id={a.id} expanded={expanded} setExpanded={setExpanded} t={t} />
+   365→              <ReviewActions kind="api" id={a.id} status={a.status} active={active} t={t} onReview={review} />
+   366→            </div>
+   367→          ))}
+   368→        </TabsContent>
+   369→
+   370→        {/* ---------- Screens ---------- */}
+   371→        <TabsContent value="screens" className="mt-3 space-y-3">
+   372→          <GenerateBar kind="screens" count={screens.length} unreviewed={screens.filter((s) => s.status === 'proposed' || s.status === 'needs_revision').length} active={active} busy={busyKind === 'screens'} t={t} onGenerate={() => generate('screens')} onConfirmAll={() => confirmAll('screens')} />
+   373→          {screens.map((s) => (
+   374→            <div key={s.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${s.status === 'rejected' ? 'opacity-60' : ''}`}>
+   375→              <div className="flex items-start gap-2 flex-wrap">
+   376→                <CodeChip code={s.code} className="mt-0.5" />
+   377→                <div className="flex-1 min-w-[200px]">
+   378→                  <div className="text-sm font-medium" dir="ltr">
+   379→                    {s.name}
+   380→                    {s.nameAr && <span className="text-muted-foreground font-arabic ms-2" dir="rtl">· {s.nameAr}</span>}
+   381→                  </div>
+   382→                  {s.route && <code className="text-[11px] text-muted-foreground font-mono" dir="ltr">{s.route}</code>}
+   383→                  <div className="flex flex-wrap gap-1 mt-1.5">
+   384→                    {s.roles.map((r) => (
+   385→                      <Badge key={r} variant="outline" className="text-[10px] bg-muted/40">{r}</Badge>
+   386→                    ))}
+   387→                    {s.linkedRequirements.map((c) => <CodeChip key={c} code={c} />)}
+   388→                  </div>
+   389→                </div>
+   390→                <ReviewBadge status={s.status} />
+   391→              </div>
+   392→              {expanded === s.id && (
+   393→                <div className="mt-3 border-t pt-3 space-y-3" dir="ltr">
+   394→                  {s.purpose && <p className="text-xs text-muted-foreground leading-6">{s.purpose}</p>}
+   395→                  {s.elements.length > 0 && (
+   396→                    <div>
+   397→                      <div className="text-[11px] font-semibold text-muted-foreground mb-1">{t('colFeature')}</div>
+   398→                      <ul className="space-y-1">
+   399→                        {s.elements.map((el, i) => (
+   400→                          <li key={i} className="text-xs leading-6">• <span className="font-medium">{el.element}</span> — <span className="text-muted-foreground">{el.behavior}</span></li>
+   401→                        ))}
+   402→                      </ul>
+   403→                    </div>
+   404→                  )}
+   405→                  <div className="text-xs text-muted-foreground">
+   406→                    <span className="font-semibold text-foreground">{t('statesTitle')}: </span>
+   407→                    ⏳ {s.states.loading} · ◻ {s.states.empty} · ⚠ {s.states.error}
+   408→                  </div>
+   409→                  {s.rtlNote && (
+   410→                    <div className="text-xs text-muted-foreground">
+   411→                      <span className="font-semibold text-foreground">{t('rtlConsideration')}: </span>
+   412→                      {s.rtlNote}
+   413→                    </div>
+   414→                  )}
+   415→                </div>
+   416→              )}
+   417→              <Expand id={s.id} expanded={expanded} setExpanded={setExpanded} t={t} />
+   418→              <ReviewActions kind="screen" id={s.id} status={s.status} active={active} t={t} onReview={review} />
+   419→            </div>
+   420→          ))}
+   421→        </TabsContent>
+   422→
+   423→        {/* ---------- Architecture ---------- */}
+   424→        <TabsContent value="architecture" className="mt-3 space-y-3">
+   425→          <GenerateBar
+   426→            kind="architecture"
+   427→            count={architecture ? 1 : 0}
+   428→            unreviewed={architecture && architecture.status !== 'confirmed' && architecture.status !== 'rejected' ? 1 : 0}
+   429→            active={active}
+   430→            busy={busyKind === 'architecture'}
+   431→            t={t}
+   432→            onGenerate={() => generate('architecture')}
+   433→            onConfirmAll={null}
+   434→          />
+   435→          {busyKind === 'architecture' && (
+   436→            <WorkingPanel steps={[t('genArch1'), t('genArch2')]} />
+   437→          )}
+   438→          {architecture && (
+   439→            <div className={`rounded-xl border bg-card p-3 sm:p-4 ${architecture.status === 'rejected' ? 'opacity-60' : ''}`}>
+   440→              <div className="flex items-start gap-2 flex-wrap">
+   441→                <Boxes className="h-4.5 w-4.5 text-primary mt-0.5" />
+   442→                <div className="text-sm font-semibold flex-1">{t('tabArchitecture')}</div>
+   443→                <ReviewBadge status={architecture.status} />
+   444→              </div>
+   445→              <div className="mt-3 space-y-3" dir="ltr">
+   446→                {architecture.components.length > 0 && (
+   447→                  <div className="flex flex-wrap gap-1.5">
+   448→                    {architecture.components.map((c) => (
+   449→                      <Badge key={c.name} variant="outline" className="text-[10px] bg-muted/40 max-w-[260px] whitespace-normal h-auto py-1" title={c.responsibility}>
+   450→                        {c.name}
+   451→                      </Badge>
+   452→                    ))}
+   453→                  </div>
+   454→                )}
+   455→                <div className="overflow-x-auto nice-scroll">
+   456→                  <table className="w-full text-xs">
+   457→                    <thead>
+   458→                      <tr className="text-muted-foreground border-b">
+   459→                        <th className="py-1.5 text-start font-medium pe-2">Area</th>
+   460→                        <th className="py-1.5 text-start font-medium pe-2">Choice</th>
+   461→                        <th className="py-1.5 text-start font-medium pe-2">Rationale</th>
+   462→                        <th className="py-1.5 text-start font-medium">Trade-offs</th>
+   463→                      </tr>
+   464→                    </thead>
+   465→                    <tbody>
+   466→                      {architecture.techStack.map((tech) => (
+   467→                        <tr key={tech.area} className="border-b last:border-0 align-top">
+   468→                          <td className="py-1.5 pe-2 font-medium whitespace-nowrap">
+   469→                            {tech.area}
+   470→                            {tech.simplestOption && <Badge variant="outline" className="ms-1 text-[9px] bg-emerald-50 text-emerald-700 border-emerald-200 whitespace-nowrap">{t('simplestOption')}</Badge>}
+   471→                          </td>
+   472→                          <td className="py-1.5 pe-2">{tech.choice}</td>
+   473→                          <td className="py-1.5 pe-2 text-muted-foreground">{tech.rationale}</td>
+   474→                          <td className="py-1.5 text-muted-foreground">{tech.tradeOffs}</td>
+   475→                        </tr>
+   476→                      ))}
+   477→                    </tbody>
+   478→                  </table>
+   479→                </div>
+   480→                {architecture.integrations.length > 0 && (
+   481→                  <div className="text-xs text-muted-foreground">
+   482→                    {architecture.integrations.map((i, idx) => (
+   483→                      <span key={idx}>{idx > 0 && ' · '}<span className="font-medium text-foreground">{i.system}</span> — {i.purpose} <span className="text-muted-foreground/70">({i.necessity})</span></span>
+   484→                    ))}
+   485→                  </div>
+   486→                )}
+   487→                {architecture.notes && <p className="text-xs leading-6 text-muted-foreground bg-muted/30 rounded-lg p-3">{architecture.notes}</p>}
+   488→              </div>
+   489→              <ReviewActions kind="architecture" id={architecture.id} status={architecture.status} active={active} t={t} onReview={review} />
+   490→            </div>
+   491→          )}
+   492→        </TabsContent>
+   493→      </Tabs>
+   494→
+   495→      {/* Gate */}
+   496→      {active && (
+   497→        <div className="rounded-xl border border-primary/25 bg-primary/[0.03] p-4">
+   498→          <Button className="gap-2" onClick={passGate} disabled={busyGate}>
+   499→            <Check className="h-4 w-4" />
+   500→            {t('approveDesign')}
+   501→          </Button>
+   502→        </div>
+   503→      )}
+   504→    </div>
+   505→  )
+   506→}
+   507→
+   508→// ---------- Module-level shared pieces (no components inside render) ----------
+   509→
+   510→function GenerateBar({
+   511→  kind,
+   512→  count,
+   513→  unreviewed,
+   514→  active,
+   515→  busy,
+   516→  t,
+   517→  onGenerate,
+   518→  onConfirmAll,
+   519→}: {
+   520→  kind: Kind
+   521→  count: number
+   522→  unreviewed: number
+   523→  active: boolean
+   524→  busy: boolean
+   525→  t: (key: Parameters<ReturnType<typeof useApp>['t']>[0]) => string
+   526→  onGenerate: () => void
+   527→  onConfirmAll: (() => void) | null
+   528→}) {
+   529→  return (
+   530→    <div className="flex flex-wrap items-center gap-2">
+   531→      {busy ? (
+   532→        <WorkingPanel steps={[t(GENERATE_KEYS[kind].steps[0]), t(GENERATE_KEYS[kind].steps[1])]} className="flex-1" />
+   533→      ) : (
+   534→        <>
+   535→          {active && (
+   536→            <>
+   537→              <Button size="sm" onClick={onGenerate} className="gap-1.5">
+   538→                {count === 0 ? t(GENERATE_KEYS[kind].label) : t('regenerate')}
+   539→              </Button>
+   540→              {count > 0 && unreviewed > 0 && onConfirmAll && (
+   541→                <Button size="sm" variant="outline" onClick={onConfirmAll}>
+   542→                  {t('confirmAllKind')} ({unreviewed})
+   543→                </Button>
+   544→              )}
+   545→            </>
+   546→          )}
+   547→          <span className="text-xs text-muted-foreground">
+   548→            {count} · {unreviewed} {t('unreviewed')}
+   549→          </span>
+   550→        </>
+   551→      )}
+   552→    </div>
+   553→  )
+   554→}
+   555→
+   556→function ReviewActions({
+   557→  kind,
+   558→  id,
+   559→  status,
+   560→  active,
+   561→  t,
+   562→  onReview,
+   563→}: {
+   564→  kind: string
+   565→  id: string
+   566→  status: string
+   567→  active: boolean
+   568→  t: (key: Parameters<ReturnType<typeof useApp>['t']>[0]) => string
+   569→  onReview: (kind: string, id: string, status: string) => void
+   570→}) {
+   571→  if (!active || status === 'rejected') return null
+   572→  return (
+   573→    <div className="mt-2 flex gap-1.5 border-t pt-2">
+   574→      {status !== 'confirmed' && (
+   575→        <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50" onClick={() => onReview(kind, id, 'confirmed')}>
+   576→          <Check className="h-3.5 w-3.5" />
+   577→          {t('confirmArtifact')}
+   578→        </Button>
+   579→      )}
+   580→      {status !== 'rejected' && (
+   581→        <Button size="sm" variant="outline" className="gap-1 border-red-200 text-red-600 hover:bg-red-50" onClick={() => onReview(kind, id, 'rejected')}>
+   582→          <X className="h-3.5 w-3.5" />
+   583→          {t('rejectArtifact')}
+   584→        </Button>
+   585→      )}
+   586→    </div>
+   587→  )
+   588→}
+   589→
+   590→function Expand({
+   591→  id,
+   592→  expanded,
+   593→  setExpanded,
+   594→  t,
+   595→}: {
+   596→  id: string
+   597→  expanded: string | null
+   598→  setExpanded: (v: string | null) => void
+   599→  t: (key: Parameters<ReturnType<typeof useApp>['t']>[0]) => string
+   600→}) {
+   601→  const open = expanded === id
+   602→  return (
+   603→    <button type="button" onClick={() => setExpanded(open ? null : id)} className="mt-1 text-[11px] text-primary hover:underline inline-flex items-center gap-1 min-h-9">
+   604→      {open ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+   605→      {open ? t('viewLess') : t('viewMore')}
+   606→    </button>
+   607→  )
+   608→}
+   609→

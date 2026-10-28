@@ -16,6 +16,8 @@ import {
   Database,
   GitBranch,
   LayoutTemplate,
+  MessageSquareWarning,
+  RotateCcw,
   Server,
   Workflow,
   X,
@@ -26,7 +28,9 @@ import { useToast } from '@/hooks/use-toast'
 // Stage 6 — System design: five engines (processes, data, API,
 // screens, architecture) turn confirmed requirements into the
 // system specification. Each artifact set is reviewed item by
-// item; needs_revision items come from change-impact control.
+// item; rejected artifacts are never a dead end — they can be
+// regenerated, optionally with client feedback the engine must
+// address. Only confirmed decisions are protected.
 // ============================================================
 
 type Kind = 'processes' | 'entities' | 'apis' | 'screens' | 'architecture'
@@ -48,13 +52,14 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
   const [busyGate, setBusyGate] = useState(false)
   const [expanded, setExpanded] = useState<string | null>(null)
   const [tab, setTab] = useState('processes')
+  const [archFeedback, setArchFeedback] = useState('')
 
-  async function generate(kind: Kind) {
+  async function generate(kind: Kind, feedback?: string) {
     setBusyKind(kind)
     const res = await fetch(`/api/ideas/${idea.id}/design/generate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ kind }),
+      body: JSON.stringify({ kind, feedback }),
     })
     const data = await res.json()
     setBusyKind(null)
@@ -62,6 +67,7 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
       toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
       return
     }
+    if (kind === 'architecture') setArchFeedback('')
     setDetail(data as IdeaDetail)
     refreshIdeas()
   }
@@ -156,7 +162,7 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- Processes ---------- */}
         <TabsContent value="processes" className="mt-3 space-y-3">
-          <GenerateBar kind="processes" count={processes.length} unreviewed={processes.filter((p) => p.status === 'proposed' || p.status === 'needs_revision').length} active={active} busy={busyKind === 'processes'} t={t} onGenerate={() => generate('processes')} onConfirmAll={() => confirmAll('processes')} />
+          <GenerateBar kind="processes" count={processes.length} unreviewed={processes.filter((p) => p.status === 'proposed' || p.status === 'needs_revision').length} rejected={processes.filter((p) => p.status === 'rejected').length} active={active} busy={busyKind === 'processes'} t={t} onGenerate={() => generate('processes')} onConfirmAll={() => confirmAll('processes')} />
           {processes.map((p) => (
             <div key={p.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${p.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -236,7 +242,7 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- Entities ---------- */}
         <TabsContent value="entities" className="mt-3 space-y-3">
-          <GenerateBar kind="entities" count={entities.length} unreviewed={entities.filter((e) => e.status === 'proposed' || e.status === 'needs_revision').length} active={active} busy={busyKind === 'entities'} t={t} onGenerate={() => generate('entities')} onConfirmAll={() => confirmAll('entities')} />
+          <GenerateBar kind="entities" count={entities.length} unreviewed={entities.filter((e) => e.status === 'proposed' || e.status === 'needs_revision').length} rejected={entities.filter((e) => e.status === 'rejected').length} active={active} busy={busyKind === 'entities'} t={t} onGenerate={() => generate('entities')} onConfirmAll={() => confirmAll('entities')} />
           {entities.map((e) => (
             <div key={e.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${e.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -301,7 +307,7 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- APIs ---------- */}
         <TabsContent value="apis" className="mt-3 space-y-3">
-          <GenerateBar kind="apis" count={apis.length} unreviewed={apis.filter((a) => a.status === 'proposed' || a.status === 'needs_revision').length} active={active} busy={busyKind === 'apis'} t={t} onGenerate={() => generate('apis')} onConfirmAll={() => confirmAll('apis')} />
+          <GenerateBar kind="apis" count={apis.length} unreviewed={apis.filter((a) => a.status === 'proposed' || a.status === 'needs_revision').length} rejected={apis.filter((a) => a.status === 'rejected').length} active={active} busy={busyKind === 'apis'} t={t} onGenerate={() => generate('apis')} onConfirmAll={() => confirmAll('apis')} />
           {apis.map((a) => (
             <div key={a.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${a.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -369,7 +375,7 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- Screens ---------- */}
         <TabsContent value="screens" className="mt-3 space-y-3">
-          <GenerateBar kind="screens" count={screens.length} unreviewed={screens.filter((s) => s.status === 'proposed' || s.status === 'needs_revision').length} active={active} busy={busyKind === 'screens'} t={t} onGenerate={() => generate('screens')} onConfirmAll={() => confirmAll('screens')} />
+          <GenerateBar kind="screens" count={screens.length} unreviewed={screens.filter((s) => s.status === 'proposed' || s.status === 'needs_revision').length} rejected={screens.filter((s) => s.status === 'rejected').length} active={active} busy={busyKind === 'screens'} t={t} onGenerate={() => generate('screens')} onConfirmAll={() => confirmAll('screens')} />
           {screens.map((s) => (
             <div key={s.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${s.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -425,13 +431,45 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
           <GenerateBar
             kind="architecture"
             count={architecture ? 1 : 0}
-            unreviewed={architecture && architecture.status !== 'confirmed' && architecture.status !== 'rejected' ? 1 : 0}
+            unreviewed={architecture && architecture.status !== 'confirmed' ? 1 : 0}
+            rejected={architecture?.status === 'rejected' ? 1 : 0}
             active={active}
             busy={busyKind === 'architecture'}
             t={t}
-            onGenerate={() => generate('architecture')}
+            onGenerate={() => generate('architecture', archFeedback)}
             onConfirmAll={null}
           />
+          {active && architecture?.status === 'rejected' && (
+            <div className="rounded-xl border border-amber-300/80 bg-amber-50 p-4 space-y-3">
+              <div className="flex items-start gap-2">
+                <MessageSquareWarning className="h-4.5 w-4.5 text-amber-600 shrink-0 mt-0.5" />
+                <p className="text-sm text-amber-900 leading-6">{t('rejectedArchNotice')}</p>
+              </div>
+              <div>
+                <label className="text-xs font-semibold text-amber-900 block mb-1.5" htmlFor="arch-feedback">{t('feedbackLabel')}</label>
+                <textarea
+                  id="arch-feedback"
+                  rows={3}
+                  value={archFeedback}
+                  onChange={(ev) => setArchFeedback(ev.target.value)}
+                  placeholder={t('feedbackPlaceholder')}
+                  className="w-full rounded-lg border border-amber-300 bg-white p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
+                />
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button
+                  size="sm"
+                  className="gap-1.5"
+                  onClick={() => generate('architecture', archFeedback)}
+                  disabled={busyKind === 'architecture'}
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                  {t('regenerateWithFeedback')}
+                </Button>
+                <span className="text-xs text-amber-800">{t('regenReplacesRejected')}</span>
+              </div>
+            </div>
+          )}
           {busyKind === 'architecture' && (
             <WorkingPanel steps={[t('genArch1'), t('genArch2')]} />
           )}
@@ -511,6 +549,7 @@ function GenerateBar({
   kind,
   count,
   unreviewed,
+  rejected,
   active,
   busy,
   t,
@@ -520,6 +559,7 @@ function GenerateBar({
   kind: Kind
   count: number
   unreviewed: number
+  rejected: number
   active: boolean
   busy: boolean
   t: (key: Parameters<ReturnType<typeof useApp>['t']>[0]) => string
@@ -546,6 +586,7 @@ function GenerateBar({
           )}
           <span className="text-xs text-muted-foreground">
             {count} · {unreviewed} {t('unreviewed')}
+            {rejected > 0 && <span> · {rejected} {t('rejectedShort')}</span>}
           </span>
         </>
       )}

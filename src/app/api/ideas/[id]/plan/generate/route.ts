@@ -81,7 +81,8 @@ export async function POST(req: Request, { params }: Params) {
       })
       if (drafts.length === 0) throw new Error('No tasks returned')
 
-      await db.implTask.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision'] } } })
+      // Rejected tasks are replaced too — a rejection is not a dead end.
+      await db.implTask.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision', 'rejected'] } } })
 
       // Map the LLM's internal ids (T1, T2…) to stable codes (T-01…)
       const existing = await db.implTask.findMany({ where: { ideaId: id } })

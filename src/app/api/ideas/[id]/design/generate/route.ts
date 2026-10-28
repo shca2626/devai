@@ -7,10 +7,11 @@ import type { Requirement } from '@/lib/types'
 
 // ============================================================
 // System design engines — processes, data model, API contracts,
-// screens, architecture. Each kind regenerates only unreviewed
-// (proposed / needs_revision) artifacts; confirmed and rejected
-// decisions are preserved. Confirmed requirements are the only
-// facts passed downstream.
+// screens, architecture. Regeneration replaces unreviewed
+// (proposed / needs_revision) AND rejected artifacts; only
+// confirmed decisions are preserved. A rejected artifact is
+// never a dead end — it can always be regenerated, optionally
+// with client feedback the engines must address.
 // ============================================================
 
 type Params = { params: Promise<{ id: string }> }
@@ -50,11 +51,13 @@ function safeArr(raw: string | null): string[] {
 export async function POST(req: Request, { params }: Params) {
   try {
     const { id } = await params
-    const body = (await req.json().catch(() => ({}))) as { kind?: string }
+    const body = (await req.json().catch(() => ({}))) as { kind?: string; feedback?: string }
     const kind = KINDS.find((k) => k === body.kind)
     if (!kind) {
       return NextResponse.json({ error: 'Unknown design kind.' }, { status: 400 })
     }
+    // Optional client feedback steering the regeneration (e.g. "use SQLite, not PostgreSQL")
+    const feedback = typeof body.feedback === 'string' ? body.feedback.trim().slice(0, 2000) : ''
 
     const idea = await db.idea.findUnique({ where: { id } })
     if (!idea) {
@@ -102,9 +105,10 @@ export async function POST(req: Request, { params }: Params) {
     }
 
     if (kind === 'processes') {
-      const drafts = await generateProcesses({ ctx, roles, requirements })
+      const rejectedRows = await db.processFlow.findMany({ where: { ideaId: id, status: 'rejected' }, select: { name: true } })
+      const drafts = await generateProcesses({ ctx, roles, requirements, feedback, rejected: rejectedRows.map((r) => r.name) })
       if (drafts.length === 0) throw new Error('No processes returned')
-      await db.processFlow.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision'] } } })
+      await db.processFlow.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision', 'rejected'] } } })
       order = await nextOrder('processFlow')
       for (const d of drafts) {
         await db.processFlow.create({
@@ -125,11 +129,12 @@ export async function POST(req: Request, { params }: Params) {
           },
         })
       }
-      await logDecision(id, 'Business processes analyzed', `${count} process flows proposed`, 'design')
+      await logDecision(id, 'Business processes analyzed', `${count} process flows proposed${feedback ? ' — addressing client feedback' : ''}`, 'design')
     } else if (kind === 'entities') {
-      const drafts = await generateEntities({ ctx, requirements })
+      const rejectedRows = await db.dataEntity.findMany({ where: { ideaId: id, status: 'rejected' }, select: { name: true } })
+      const drafts = await generateEntities({ ctx, requirements, feedback, rejected: rejectedRows.map((r) => r.name) })
       if (drafts.length === 0) throw new Error('No entities returned')
-      await db.dataEntity.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision'] } } })
+      await db.dataEntity.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision', 'rejected'] } } })
       order = await nextOrder('dataEntity')
       for (const d of drafts) {
         await db.dataEntity.create({
@@ -148,21 +153,24 @@ export async function POST(req: Request, { params }: Params) {
           },
         })
       }
-      await logDecision(id, 'Data model designed', `${count} entities proposed`, 'design')
+      await logDecision(id, 'Data model designed', `${count} entities proposed${feedback ? ' — addressing client feedback' : ''}`, 'design')
     } else if (kind === 'apis') {
       const entities = await db.dataEntity.findMany({ where: { ideaId: id, status: 'confirmed' } })
       const processes = await db.processFlow.findMany({ where: { ideaId: id, status: 'confirmed' } })
+      const rejectedRows = await db.apiEndpoint.findMany({ where: { ideaId: id, status: 'rejected' }, select: { method: true, path: true } })
       const drafts = await generateApis({
         ctx,
         requirements,
         entityNames: entities.map((e) => e.name),
         processNames: processes.map((p) => p.name),
+        feedback,
+        rejected: rejectedRows.map((r) => `${r.method} ${r.path}`),
       })
       if (drafts.length === 0) throw new Error('No endpoints returned')
       if (entities.length === 0) {
         return NextResponse.json({ error: 'Confirm the data model first — API contracts reference confirmed entities.' }, { status: 409 })
       }
-      await db.apiEndpoint.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision'] } } })
+      await db.apiEndpoint.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision', 'rejected'] } } })
       order = await nextOrder('apiEndpoint')
       for (const d of drafts) {
         await db.apiEndpoint.create({
@@ -182,11 +190,12 @@ export async function POST(req: Request, { params }: Params) {
           },
         })
       }
-      await logDecision(id, 'API contracts defined', `${count} endpoints proposed`, 'design')
+      await logDecision(id, 'API contracts defined', `${count} endpoints proposed${feedback ? ' — addressing client feedback' : ''}`, 'design')
     } else if (kind === 'screens') {
-      const drafts = await generateScreens({ ctx, roles, requirements })
+      const rejectedRows = await db.screenSpec.findMany({ where: { ideaId: id, status: 'rejected' }, select: { name: true } })
+      const drafts = await generateScreens({ ctx, roles, requirements, feedback, rejected: rejectedRows.map((r) => r.name) })
       if (drafts.length === 0) throw new Error('No screens returned')
-      await db.screenSpec.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision'] } } })
+      await db.screenSpec.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision', 'rejected'] } } })
       order = await nextOrder('screenSpec')
       for (const d of drafts) {
         await db.screenSpec.create({
@@ -207,40 +216,67 @@ export async function POST(req: Request, { params }: Params) {
           },
         })
       }
-      await logDecision(id, 'UX/UI specification drafted', `${count} screens proposed`, 'design')
+      await logDecision(id, 'UX/UI specification drafted', `${count} screens proposed${feedback ? ' — addressing client feedback' : ''}`, 'design')
     } else {
-      // architecture
-      const draft = await generateArchitecture({ ctx, requirements })
+      // architecture — rejected is NOT a locked decision; only confirmed is protected.
       const existing = await db.architectureDoc.findUnique({ where: { ideaId: id } })
-      if (!existing || existing.status === 'proposed' || existing.status === 'needs_revision') {
-        if (existing) {
-          await db.architectureDoc.update({
-            where: { ideaId: id },
-            data: {
-              components: JSON.stringify(draft.components),
-              integrations: JSON.stringify(draft.integrations),
-              techStack: JSON.stringify(draft.techStack),
-              notes: draft.notes,
-              status: 'proposed',
-            },
-          })
-        } else {
-          await db.architectureDoc.create({
-            data: {
-              ideaId: id,
-              components: JSON.stringify(draft.components),
-              integrations: JSON.stringify(draft.integrations),
-              techStack: JSON.stringify(draft.techStack),
-              notes: draft.notes,
-              status: 'proposed',
-            },
-          })
-        }
-        count = 1
-        await logDecision(id, 'Architecture recommendation drafted', 'Simplest-first recommendation with trade-offs', 'design')
-      } else {
-        return NextResponse.json({ error: 'Architecture is already reviewed — regenerate is disabled to protect decisions.' }, { status: 409 })
+      if (existing?.status === 'confirmed') {
+        return NextResponse.json(
+          { error: 'Architecture is confirmed — regeneration is disabled to protect decisions. Reject it first if you really want to redo it.' },
+          { status: 409 }
+        )
       }
+
+      // When regenerating after a rejection, pass the rejected proposal so the
+      // engine does not repeat it and steers by the client's feedback.
+      let previousStack: Array<{ area: string; choice: string }> | undefined
+      if (existing?.status === 'rejected' && existing.techStack) {
+        try {
+          const parsed = JSON.parse(existing.techStack)
+          if (Array.isArray(parsed)) {
+            previousStack = parsed
+              .filter((t): t is { area: string; choice: string } =>
+                typeof t?.area === 'string' && typeof t?.choice === 'string')
+              .map((t) => ({ area: t.area, choice: t.choice }))
+          }
+        } catch {
+          previousStack = undefined
+        }
+      }
+
+      const draft = await generateArchitecture({ ctx, requirements, feedback, previousStack })
+      if (existing) {
+        await db.architectureDoc.update({
+          where: { ideaId: id },
+          data: {
+            components: JSON.stringify(draft.components),
+            integrations: JSON.stringify(draft.integrations),
+            techStack: JSON.stringify(draft.techStack),
+            notes: draft.notes,
+            status: 'proposed',
+          },
+        })
+      } else {
+        await db.architectureDoc.create({
+          data: {
+            ideaId: id,
+            components: JSON.stringify(draft.components),
+            integrations: JSON.stringify(draft.integrations),
+            techStack: JSON.stringify(draft.techStack),
+            notes: draft.notes,
+            status: 'proposed',
+          },
+        })
+      }
+      count = 1
+      await logDecision(
+        id,
+        'Architecture recommendation regenerated',
+        existing?.status === 'rejected'
+          ? `Previous rejected proposal replaced${feedback ? ' — client feedback: ' + feedback.slice(0, 200) : ''}`
+          : 'Simplest-first recommendation with trade-offs',
+        'design'
+      )
     }
 
     const payload = await buildIdeaDetail(id)

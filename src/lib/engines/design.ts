@@ -18,6 +18,19 @@ function requirementsDigest(requirements: Requirement[], onlyConfirmed = true): 
   return list.map((r) => `- ${r.code} [${r.type === 'functional' ? 'FR' : 'NFR'}${r.category ? `:${r.category}` : ''}] ${r.title}`).join('\n')
 }
 
+// Client feedback from a rejection — the generator MUST address it.
+function feedbackBlock(feedback?: string): string {
+  const f = feedback?.trim()
+  if (!f) return ''
+  return `\n\nCLIENT FEEDBACK — the client rejected the previous proposal. You MUST change the recommendation to address these notes:\n"""\n${f}\n"""`
+}
+
+// Names of previously rejected items — do not re-propose them unchanged.
+function rejectedBlock(rejected: string[]): string {
+  if (!rejected.length) return ''
+  return `\n\nThe client explicitly REJECTED these previous proposals (do not re-propose them as-is; produce materially better alternatives):\n${rejected.map((r) => `- ${r}`).join('\n')}`
+}
+
 // ------------------------------------------------------------
 // Business Process Analysis
 // ------------------------------------------------------------
@@ -53,11 +66,13 @@ export async function generateProcesses(params: {
   ctx: ProjectContext
   roles: Array<{ name: string; description: string; permissions: string[] }>
   requirements: Requirement[]
+  feedback?: string
+  rejected?: string[]
 }): Promise<ProcessDraft[]> {
   const { ctx, roles, requirements } = params
   const raw = await chatJson<{ processes?: Array<Record<string, unknown>> }>(
     PROCESS_PROMPT,
-    `${contextToPrompt(ctx)}\n\nRoles matrix:\n${roles.map((r) => `- ${r.name}: ${r.description} [${r.permissions.join(', ')}]`).join('\n') || '(none)'}\n\nConfirmed requirements (valid codes):\n${requirementsDigest(requirements)}`
+    `${contextToPrompt(ctx)}\n\nRoles matrix:\n${roles.map((r) => `- ${r.name}: ${r.description} [${r.permissions.join(', ')}]`).join('\n') || '(none)'}\n\nConfirmed requirements (valid codes):\n${requirementsDigest(requirements)}${rejectedBlock(params.rejected ?? [])}${feedbackBlock(params.feedback)}`
   )
 
   const validCodes = new Set(requirements.filter((r) => r.status === 'confirmed').map((r) => r.code))
@@ -140,11 +155,11 @@ Rules:
 Return STRICT JSON only:
 {"entities": [{"name": "...", "nameAr": "...", "description": "...", "fields": [{"name": "...", "type": "string", "required": true, "unique": false, "description": "...", "refEntity": "... or null"}], "relationships": [{"target": "...", "type": "one-to-many", "description": "..."}], "constraints": ["..."], "rationale": "..."}]}`
 
-export async function generateEntities(params: { ctx: ProjectContext; requirements: Requirement[] }): Promise<EntityDraft[]> {
+export async function generateEntities(params: { ctx: ProjectContext; requirements: Requirement[]; feedback?: string; rejected?: string[] }): Promise<EntityDraft[]> {
   const { ctx, requirements } = params
   const raw = await chatJson<{ entities?: Array<Record<string, unknown>> }>(
     ENTITY_PROMPT,
-    `${contextToPrompt(ctx)}\n\nConfirmed requirements:\n${requirementsDigest(requirements)}`
+    `${contextToPrompt(ctx)}\n\nConfirmed requirements:\n${requirementsDigest(requirements)}${rejectedBlock(params.rejected ?? [])}${feedbackBlock(params.feedback)}`
   )
 
   return (Array.isArray(raw?.entities) ? raw.entities : [])
@@ -229,11 +244,13 @@ export async function generateApis(params: {
   requirements: Requirement[]
   entityNames: string[]
   processNames: string[]
+  feedback?: string
+  rejected?: string[]
 }): Promise<ApiDraft[]> {
   const { ctx, requirements, entityNames, processNames } = params
   const raw = await chatJson<{ endpoints?: Array<Record<string, unknown>> }>(
     API_PROMPT,
-    `${contextToPrompt(ctx)}\n\nConfirmed requirements (valid codes):\n${requirementsDigest(requirements)}\n\nApproved data entities (valid names): ${entityNames.join(', ') || '(none)'}\n\nBusiness processes: ${processNames.join(', ') || '(none)'}`
+    `${contextToPrompt(ctx)}\n\nConfirmed requirements (valid codes):\n${requirementsDigest(requirements)}\n\nApproved data entities (valid names): ${entityNames.join(', ') || '(none)'}\n\nBusiness processes: ${processNames.join(', ') || '(none)'}${rejectedBlock(params.rejected ?? [])}${feedbackBlock(params.feedback)}`
   )
 
   const validCodes = new Set(requirements.filter((r) => r.status === 'confirmed').map((r) => r.code))
@@ -319,11 +336,13 @@ export async function generateScreens(params: {
   ctx: ProjectContext
   roles: Array<{ name: string }>
   requirements: Requirement[]
+  feedback?: string
+  rejected?: string[]
 }): Promise<ScreenDraft[]> {
   const { ctx, roles, requirements } = params
   const raw = await chatJson<{ screens?: Array<Record<string, unknown>> }>(
     SCREEN_PROMPT,
-    `${contextToPrompt(ctx)}\n\nRoles: ${roles.map((r) => r.name).join(', ') || '(none)'}\n\nConfirmed requirements (valid codes):\n${requirementsDigest(requirements)}`
+    `${contextToPrompt(ctx)}\n\nRoles: ${roles.map((r) => r.name).join(', ') || '(none)'}\n\nConfirmed requirements (valid codes):\n${requirementsDigest(requirements)}${rejectedBlock(params.rejected ?? [])}${feedbackBlock(params.feedback)}`
   )
 
   const validCodes = new Set(requirements.filter((r) => r.status === 'confirmed').map((r) => r.code))
@@ -387,11 +406,19 @@ Rules:
 Return STRICT JSON only:
 {"components": [{"name": "...", "responsibility": "..."}], "integrations": [{"system": "...", "purpose": "...", "necessity": "..."}], "techStack": [{"area": "database", "choice": "...", "rationale": "...", "tradeOffs": "...", "simplestOption": true}], "notes": "2-4 sentences: the overall shape, what was consciously kept simple, and when to revisit."}`
 
-export async function generateArchitecture(params: { ctx: ProjectContext; requirements: Requirement[] }): Promise<ArchitectureDraft> {
+export async function generateArchitecture(params: {
+  ctx: ProjectContext
+  requirements: Requirement[]
+  feedback?: string
+  previousStack?: Array<{ area: string; choice: string }>
+}): Promise<ArchitectureDraft> {
   const { ctx, requirements } = params
+  const rejectedStack = params.previousStack?.length
+    ? `\n\nThe client REJECTED this previous recommendation:\n${params.previousStack.map((s) => `- ${s.area}: ${s.choice}`).join('\n')}\nDo NOT repeat it. Produce a materially different recommendation that respects the client feedback.`
+    : ''
   const raw = await chatJson<Record<string, unknown>>(
     ARCH_PROMPT,
-    `${contextToPrompt(ctx)}\n\nConfirmed requirements:\n${requirementsDigest(requirements)}\n\nNon-functional requirements (all statuses):\n${requirementsDigest(requirements, false)}`
+    `${contextToPrompt(ctx)}\n\nConfirmed requirements:\n${requirementsDigest(requirements)}\n\nNon-functional requirements (all statuses):\n${requirementsDigest(requirements, false)}${rejectedStack}${feedbackBlock(params.feedback)}`
   )
 
   const mapPairs = (v: unknown, keys: [string, string, string]) =>
