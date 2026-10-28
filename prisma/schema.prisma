@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================
+// Blueprint Assistant P0 — data model
+// Workflow stages: understanding -> discovery -> features -> baseline
+// Approval gates are enforced by the application, never by the model.
+// ============================================================
+
+model Idea {
+  id             String   @id @default(cuid())
+  title          String   @default("Untitled idea")
+  originalText   String
+  sourceLang     String   @default("ar") // ar | en
+  stage          String   @default("understanding")
+  interpretation String? // JSON { englishInterpretation, problemStatement, understood[], unclear[], assumed[] }
+  summary        String? // JSON { summaryMarkdown, openRisks[] }
+  featuresMeta   String? // JSON { missingFeatures[], dependencies[], releaseNote }
+  baseline       String? // JSON snapshot of the approved baseline
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  questions   Question[]
+  features    Feature[]
+  assumptions Assumption[]
+  decisions   Decision[]
+}
+
+model Question {
+  id           String   @id @default(cuid())
+  ideaId       String
+  idea         Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  area         String // business_problem | target_users | product_format | business_model | user_journeys | scope | constraints | success_criteria | unknowns
+  questionEn   String
+  questionAr   String?
+  whyItMatters String?
+  options      String? // JSON [{ label, consequence }]
+  answer       String?
+  answerKind   String? // choice | custom
+  status       String   @default("pending") // pending | answered | skipped
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model Feature {
+  id        String   @id @default(cuid())
+  ideaId    String
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  module    String
+  feature   String
+  user      String
+  priority  String   @default("should") // must | should | could
+  status    String   @default("proposed") // proposed | needs_confirmation | accepted | rejected | deferred
+  rationale String?
+  origin    String   @default("ai") // ai | user
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model Assumption {
+  id        String   @id @default(cuid())
+  ideaId    String
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  text      String
+  kind      String   @default("suggested") // suggested | uncertain
+  status    String   @default("open") // open | confirmed | rejected
+  source    String   @default("understanding") // understanding | discovery
+  createdAt DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model Decision {
+  id        String   @id @default(cuid())
+  ideaId    String
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  action    String
+  detail    String?
+  stage     String?
+  createdAt DateTime @default(now())
+
+  @@index([ideaId])
+}
