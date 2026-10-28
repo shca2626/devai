@@ -57,7 +57,7 @@ export async function POST(req: Request, { params }: Params) {
       return NextResponse.json({ error: 'Unknown design kind.' }, { status: 400 })
     }
     // Optional client feedback steering the regeneration (e.g. "use SQLite, not PostgreSQL")
-    const feedback = typeof body.feedback === 'string' ? body.feedback.trim().slice(0, 2000) : ''
+    const feedback = typeof body.feedback === 'string' ? body.feedback.trim() : ''
 
     const idea = await db.idea.findUnique({ where: { id } })
     if (!idea) {

@@ -13,9 +13,6 @@ export async function POST(req: Request) {
     if (text.length < 3) {
       return NextResponse.json({ error: 'Please provide text to translate.' }, { status: 400 })
     }
-    if (text.length > 8000) {
-      return NextResponse.json({ error: 'Text is too long (max 8000 characters).' }, { status: 400 })
-    }
     if (!target) {
       return NextResponse.json({ error: 'Target must be "ar" or "en".' }, { status: 400 })
     }

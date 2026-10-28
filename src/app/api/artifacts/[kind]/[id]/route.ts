@@ -190,7 +190,7 @@ export async function PATCH(req: Request, { params }: Params) {
           where: { id },
           data: {
             ...(techStack !== undefined ? { techStack } : {}),
-            ...(typeof body.edits.notes === 'string' ? { notes: body.edits.notes.slice(0, 4000) } : {}),
+            ...(typeof body.edits.notes === 'string' ? { notes: body.edits.notes } : {}),
             status: nextStatus,
           },
         })

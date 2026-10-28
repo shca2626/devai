@@ -87,7 +87,7 @@ Hard rules:
 - NEVER invent facts about the user's business, numbers, or branding. Where details are missing, phrase reasonable suggestions explicitly as suggestions (e.g. "مقترح: ..." / "Suggested: ...") so the user can edit them.
 - Stay faithful to the original intent — this is an enhancement of THEIR idea, not a new product.
 - Respect the PROJECT TYPE briefing below (Website / App / Prototype each steer scope, features, and tech stack differently).
-- Keep the whole prompt between 250 and 600 words. Concrete and specific beats generic.
+- Make the enhanced prompt proportional to the input: for a short idea aim for 250-600 words; for a long, detailed input, preserve EVERY substantive detail the user provided — the enhanced prompt may be as long as needed (never drop or compress user-given requirements to stay short). Concrete and specific beats generic.
 - The output must read as a ready-to-paste build prompt, not as a conversation.`
 
 export async function enhancePrompt(rawText: string, projectType: ProjectType): Promise<EnhancedPrompt> {

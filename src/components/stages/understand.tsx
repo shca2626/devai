@@ -233,7 +233,6 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
                 placeholder={t('correctPlaceholder')}
                 rows={5}
                 dir="auto"
-                maxLength={2000}
               />
               <DialogFooter>
                 <Button variant="outline" onClick={() => setCorrecting(false)}>

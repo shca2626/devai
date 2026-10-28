@@ -44,7 +44,7 @@ export async function POST(req: Request, { params }: Params) {
       }
       await db.question.update({
         where: { id: question.id },
-        data: { answer: answer.slice(0, 2000), answerKind: body.kind === 'choice' ? 'choice' : 'custom', status: 'answered' },
+        data: { answer, answerKind: body.kind === 'choice' ? 'choice' : 'custom', status: 'answered' },
       })
       await logDecision(
         id,

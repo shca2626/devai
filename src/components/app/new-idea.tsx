@@ -152,7 +152,7 @@ export function NewIdeaDialog({
       for (let i = event.resultIndex; i < event.results.length; i++) {
         transcript += event.results[i][0].transcript
       }
-      setText((prev) => (prev ? `${prev} ${transcript}`.slice(0, 4000) : transcript.slice(0, 4000)))
+      setText((prev) => (prev ? `${prev} ${transcript}` : transcript))
     }
     recognition.onend = () => setListening(false)
     recognition.onerror = () => setListening(false)
@@ -186,7 +186,7 @@ export function NewIdeaDialog({
         toast({ description: t('alreadyInTarget') })
         return
       }
-      setText(data.text.slice(0, 4000))
+      setText(data.text)
       toast({ description: t('translatedOk') })
     } catch {
       toast({ description: t('toolsError'), variant: 'destructive' })
@@ -217,7 +217,7 @@ export function NewIdeaDialog({
         return
       }
       setEnhanced(data)
-      setEnhancedText(data.enhanced.slice(0, 4000))
+      setEnhancedText(data.enhanced)
       setEnhanceState('result')
     } catch {
       toast({ description: t('toolsError'), variant: 'destructive' })
@@ -231,7 +231,7 @@ export function NewIdeaDialog({
       toast({ description: t('minChars') })
       return
     }
-    setText(value.slice(0, 4000))
+    setText(value)
     setEnhanceState('idle')
     setEnhanced(null)
     setEnhancedText('')
@@ -341,7 +341,6 @@ export function NewIdeaDialog({
                 onChange={(e) => setText(e.target.value)}
                 placeholder={t('ideaPlaceholder')}
                 rows={6}
-                maxLength={4000}
                 dir="auto"
                 className="resize-none text-base leading-relaxed"
                 aria-label={t('ideaLabel')}
@@ -435,7 +434,9 @@ export function NewIdeaDialog({
                     {enhanceState === 'working' ? t('enhancing2') : t('enhancePrompt')}
                   </Button>
                 </div>
-                <span className="text-[11px] text-muted-foreground">{text.length}/4000</span>
+                <span className="text-[11px] text-muted-foreground" dir="ltr">
+                  {text.length.toLocaleString()} {t('charsCount')}
+                </span>
               </div>
             </div>
 
@@ -483,14 +484,13 @@ export function NewIdeaDialog({
                   value={enhancedText}
                   onChange={(e) => setEnhancedText(e.target.value)}
                   rows={10}
-                  maxLength={4000}
                   dir="auto"
                   className="resize-none text-sm leading-relaxed bg-background"
                   aria-label={t('enhancedTitle')}
                 />
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <p className="text-[11px] text-muted-foreground">
-                    {t('enhancedEditable')} ({enhancedText.length}/4000)
+                    {t('enhancedEditable')} · {enhancedText.length.toLocaleString()} {t('charsCount')}
                   </p>
                   <div className="flex flex-wrap items-center gap-1.5">
                     <Button type="button" variant="ghost" size="sm" onClick={copyEnhanced} className="gap-1.5">

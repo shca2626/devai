@@ -485,6 +485,7 @@ const dict = {
     ar: 'يبدو أن النص موجود بالفعل باللغة المطلوبة.',
   },
   translatedOk: { en: 'Translated successfully', ar: 'تمت الترجمة بنجاح' },
+  charsCount: { en: 'characters', ar: 'حرف' },
   toolsError: {
     en: 'The AI tool failed. Please try again.',
     ar: 'تعذّر تنفيذ العملية. حاول مرة أخرى.',

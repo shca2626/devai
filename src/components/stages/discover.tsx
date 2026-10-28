@@ -232,7 +232,6 @@ export function DiscoverStage({ detail }: { detail: IdeaDetail }) {
                 placeholder={t('ownWordsPlaceholder')}
                 rows={2}
                 dir="auto"
-                maxLength={2000}
                 className="resize-none"
               />
               <Button

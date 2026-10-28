@@ -20,9 +20,6 @@ export async function POST(req: Request) {
         { status: 400 }
       )
     }
-    if (text.length > 4000) {
-      return NextResponse.json({ error: 'Idea text is too long (max 4000 characters).' }, { status: 400 })
-    }
     if (!projectType) {
       return NextResponse.json(
         { error: 'projectType must be "website", "app" or "prototype".' },
