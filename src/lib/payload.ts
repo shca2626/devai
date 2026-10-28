@@ -19,6 +19,7 @@ import type {
   Interpretation,
   Priority,
   ProcessFlow,
+  ProjectType,
   Question,
   Requirement,
   RiskItem,
@@ -112,6 +113,10 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
     title: idea.title,
     originalText: idea.originalText,
     sourceLang: idea.sourceLang === 'en' || isProbablyArabic(idea.originalText) ? (idea.sourceLang as 'ar' | 'en') : 'ar',
+    projectType:
+      idea.projectType === 'website' || idea.projectType === 'app' || idea.projectType === 'prototype'
+        ? (idea.projectType as ProjectType)
+        : null,
     stage: idea.stage as Stage,
     interpretation: parseInterpretation(idea.interpretation),
     summary: parseSummary(idea.summary),
@@ -356,6 +361,10 @@ export async function buildIdeaList(): Promise<IdeaListItem[]> {
     id: idea.id,
     title: idea.title,
     stage: idea.stage as Stage,
+    projectType:
+      idea.projectType === 'website' || idea.projectType === 'app' || idea.projectType === 'prototype'
+        ? (idea.projectType as ProjectType)
+        : null,
     updatedAt: idea.updatedAt.toISOString(),
     counts: {
       answered: idea.questions.length,

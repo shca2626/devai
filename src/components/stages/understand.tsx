@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
+import { AppWindow, FlaskConical, Globe } from 'lucide-react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { useApp } from '@/components/app/context'
 import { WorkingPanel } from '@/components/app/bits'
@@ -106,6 +107,24 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
             <Badge variant="outline" className="text-[10px] font-arabic bg-background">
               {idea.sourceLang === 'ar' ? 'العربية' : 'English'}
             </Badge>
+            {idea.projectType && (
+              <Badge variant="outline" className="text-[10px] bg-background gap-1">
+                {idea.projectType === 'website' ? (
+                  <Globe className="h-3 w-3" />
+                ) : idea.projectType === 'prototype' ? (
+                  <FlaskConical className="h-3 w-3" />
+                ) : (
+                  <AppWindow className="h-3 w-3" />
+                )}
+                {t(
+                  idea.projectType === 'website'
+                    ? 'typeWebsite'
+                    : idea.projectType === 'prototype'
+                      ? 'typePrototype'
+                      : 'typeApp'
+                )}
+              </Badge>
+            )}
           </div>
           <p className="font-arabic text-[15px] leading-8 text-foreground whitespace-pre-wrap">
             {idea.originalText}

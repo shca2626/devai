@@ -21,6 +21,7 @@ model Idea {
   title          String   @default("Untitled idea")
   originalText   String
   sourceLang     String   @default("ar") // ar | en
+  projectType    String?  // website | app | prototype (Bolt-style build target)
   stage          String   @default("understanding")
   interpretation String? // JSON { englishInterpretation, problemStatement, understood[], unclear[], assumed[] }
   summary        String? // JSON { summaryMarkdown, openRisks[] }

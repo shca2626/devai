@@ -32,7 +32,7 @@ export async function POST(req: Request, { params }: Params) {
       return NextResponse.json({ error: 'No previous interpretation to correct.' }, { status: 409 })
     }
 
-    const updated = await reinterpretIdea(idea.originalText, previous, corrections)
+    const updated = await reinterpretIdea(idea.originalText, previous, corrections, idea.projectType as 'website' | 'app' | 'prototype' | null)
 
     await db.idea.update({
       where: { id },

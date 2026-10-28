@@ -1,5 +1,5 @@
 import { chatJson } from '@/lib/ai'
-import type { Interpretation } from '@/lib/types'
+import type { Interpretation, ProjectType } from '@/lib/types'
 
 // ============================================================
 // Engine 1 — Bilingual Idea Understanding & Translation
@@ -39,10 +39,19 @@ function validate(result: Interpretation): Interpretation {
   }
 }
 
-export async function interpretIdea(rawText: string): Promise<Interpretation> {
+const TYPE_HINT: Record<ProjectType, string> = {
+  website:
+    'The user chose WEBSITE as the build target (presence site: landing/marketing/e-commerce/content site, not an internal application).',
+  app: 'The user chose APP as the build target (a full-stack web application with accounts, data and workflows).',
+  prototype:
+    'The user chose PROTOTYPE as the build target (an interactive clickable demo with mock data — speed of demonstration over production readiness).',
+}
+
+export async function interpretIdea(rawText: string, projectType?: ProjectType | null): Promise<Interpretation> {
+  const typeHint = projectType ? `\n${TYPE_HINT[projectType]}\nInterpret the idea consistently with this build target (it is a user-confirmed fact, not an assumption).` : ''
   const result = await chatJson<Interpretation>(
     SYSTEM_PROMPT,
-    `Raw product idea (submit as-is, keep the original wording):\n"""\n${rawText}\n"""`
+    `Raw product idea (submit as-is, keep the original wording):\n"""\n${rawText}\n"""${typeHint}`
   )
   return validate(result)
 }
@@ -50,11 +59,13 @@ export async function interpretIdea(rawText: string): Promise<Interpretation> {
 export async function reinterpretIdea(
   rawText: string,
   previous: Interpretation,
-  corrections: string
+  corrections: string,
+  projectType?: ProjectType | null
 ): Promise<Interpretation> {
+  const typeHint = projectType ? `\nUser-confirmed build target: ${projectType.toUpperCase()} (${TYPE_HINT[projectType].split(' (')[1]?.replace(').', '') ?? projectType}).` : ''
   const result = await chatJson<Interpretation>(
     SYSTEM_PROMPT,
-    `Raw product idea:\n"""\n${rawText}\n"""\n\nPrevious interpretation (JSON):\n${JSON.stringify(previous, null, 2)}\n\nThe user reviewed the previous interpretation and gave these corrections:\n"""\n${corrections}\n"""\n\nProduce an UPDATED interpretation that incorporates the corrections. Keep everything that was right, fix what was wrong, and re-evaluate the understood/unclear/assumed lists accordingly. Return the same strict JSON format.`
+    `Raw product idea:\n"""\n${rawText}\n"""\n\nPrevious interpretation (JSON):\n${JSON.stringify(previous, null, 2)}\n\nThe user reviewed the previous interpretation and gave these corrections:\n"""\n${corrections}\n"""${typeHint}\n\nProduce an UPDATED interpretation that incorporates the corrections. Keep everything that was right, fix what was wrong, and re-evaluate the understood/unclear/assumed lists accordingly. Return the same strict JSON format.`
   )
   return validate(result)
 }

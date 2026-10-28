@@ -16,7 +16,7 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
-    const body = (await req.json()) as { text?: string }
+    const body = (await req.json()) as { text?: string; projectType?: string }
     const text = (body.text ?? '').trim()
     if (text.length < 10) {
       return NextResponse.json(
@@ -29,15 +29,21 @@ export async function POST(req: Request) {
     }
 
     const sourceLang = isProbablyArabic(text) ? 'ar' : 'en'
+    const projectType =
+      body.projectType === 'website' || body.projectType === 'app' || body.projectType === 'prototype'
+        ? body.projectType
+        : 'app'
 
-    // Engine 1 — bilingual understanding (real AI call)
-    const interpretation = await interpretIdea(text)
+    // Engine 1 — bilingual understanding (real AI call), steered by the
+    // user-selected build target (Website / App / Prototype).
+    const interpretation = await interpretIdea(text, projectType)
 
     const idea = await db.idea.create({
       data: {
         title: interpretation.title,
         originalText: text,
         sourceLang,
+        projectType,
         stage: 'understanding',
         interpretation: JSON.stringify(interpretation),
       },
@@ -50,7 +56,7 @@ export async function POST(req: Request) {
       })
     }
 
-    await logDecision(idea.id, 'Idea submitted and interpreted', `Detected language: ${sourceLang === 'ar' ? 'Arabic' : 'English'}`, 'understanding')
+    await logDecision(idea.id, 'Idea submitted and interpreted', `Detected language: ${sourceLang === 'ar' ? 'Arabic' : 'English'} · Build target: ${projectType}`, 'understanding')
 
     const payload = await buildIdeaDetail(idea.id)
     return NextResponse.json(payload, { status: 201 })

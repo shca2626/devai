@@ -51,6 +51,11 @@ export type FeatureStatus = (typeof FEATURE_STATUSES)[number]
 export const PRIORITIES = ['must', 'should', 'could'] as const
 export type Priority = (typeof PRIORITIES)[number]
 
+// Build targets — Bolt-style tabs shown when describing a new idea.
+// They steer prompt enhancement and the understanding engine.
+export const PROJECT_TYPES = ['website', 'app', 'prototype'] as const
+export type ProjectType = (typeof PROJECT_TYPES)[number]
+
 export interface Interpretation {
   title: string
   englishInterpretation: string
@@ -131,6 +136,7 @@ export interface IdeaRecord {
   title: string
   originalText: string
   sourceLang: 'ar' | 'en'
+  projectType: ProjectType | null
   stage: Stage
   interpretation: Interpretation | null
   summary: IdeaSummaryData | null
@@ -164,6 +170,7 @@ export interface IdeaListItem {
   id: string
   title: string
   stage: Stage
+  projectType: ProjectType | null
   updatedAt: string
   counts: {
     answered: number
@@ -405,6 +412,20 @@ export interface ReadinessReport {
   metrics: ReadinessMetric[]
   blockers: string[]
   warnings: string[]
+}
+
+// Result of the AI prompt-engineering pass (Enhance button)
+export interface EnhancedPrompt {
+  enhanced: string
+  improvements: string[]
+  lang: 'ar' | 'en'
+}
+
+// Result of the AI translation pass (Translate button)
+export interface TranslationResult {
+  text: string
+  detectedLanguage: string
+  alreadyInTarget: boolean
 }
 
 export interface TraceRow {

@@ -29,7 +29,7 @@ import { StageBadge } from '@/components/app/bits'
 import { useApp } from '@/components/app/context'
 import type { IdeaListItem } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { MoreHorizontal, Pencil, Plus, Search, Trash2 } from 'lucide-react'
+import { AppWindow, FlaskConical, Globe, MoreHorizontal, Pencil, Plus, Search, Trash2 } from 'lucide-react'
 import { useState } from 'react'
 
 function timeAgo(iso: string, lang: 'ar' | 'en'): string {
@@ -131,6 +131,33 @@ function IdeaRow({ idea }: { idea: IdeaListItem }) {
       </div>
       <div className="mt-2 flex items-center gap-2">
         <StageBadge stage={idea.stage} />
+        {idea.projectType && (
+          <span
+            className="inline-flex items-center gap-1 rounded-full border px-1.5 py-0 text-[10px] text-muted-foreground"
+            title={t(
+              idea.projectType === 'website'
+                ? 'typeWebsite'
+                : idea.projectType === 'prototype'
+                  ? 'typePrototype'
+                  : 'typeApp'
+            )}
+          >
+            {idea.projectType === 'website' ? (
+              <Globe className="h-2.5 w-2.5" />
+            ) : idea.projectType === 'prototype' ? (
+              <FlaskConical className="h-2.5 w-2.5" />
+            ) : (
+              <AppWindow className="h-2.5 w-2.5" />
+            )}
+            {t(
+              idea.projectType === 'website'
+                ? 'typeWebsite'
+                : idea.projectType === 'prototype'
+                  ? 'typePrototype'
+                  : 'typeApp'
+            )}
+          </span>
+        )}
         <span className="text-[11px] text-muted-foreground">{timeAgo(idea.updatedAt, lang)}</span>
       </div>
 
