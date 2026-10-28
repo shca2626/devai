@@ -25,7 +25,7 @@ export async function POST(req: Request, { params }: Params) {
   try {
     const { id } = await params
     const body = (await req.json()) as {
-      gate?: 'interpretation' | 'baseline'
+      gate?: 'interpretation' | 'baseline' | 'engineering_start' | 'requirements' | 'design' | 'planning' | 'package'
       action?: 'approve'
       unreviewedAction?: 'accept' | 'defer' | 'reject'
     }
@@ -151,6 +151,189 @@ export async function POST(req: Request, { params }: Params) {
         'features'
       )
 
+      const payload = await buildIdeaDetail(id)
+      return NextResponse.json(payload)
+    }
+
+    // ---------- Gate 3: start the engineering track ----------
+    if (body.gate === 'engineering_start' && body.action === 'approve') {
+      if (idea.stage !== 'baseline') {
+        return NextResponse.json({ error: 'The engineering track starts from an approved baseline.' }, { status: 409 })
+      }
+      await db.idea.update({ where: { id }, data: { stage: 'requirements' } })
+      await logDecision(
+        id,
+        'Engineering track started',
+        'The client moved from the discovery baseline to requirements engineering',
+        'baseline'
+      )
+      const payload = await buildIdeaDetail(id)
+      return NextResponse.json(payload)
+    }
+
+    // ---------- Gate 4: requirements approved ----------
+    if (body.gate === 'requirements' && body.action === 'approve') {
+      if (idea.stage !== 'requirements') {
+        return NextResponse.json({ error: 'This gate was already passed.' }, { status: 409 })
+      }
+      const requirements = await db.requirement.findMany({ where: { ideaId: id } })
+      if (requirements.length === 0) {
+        return NextResponse.json({ error: 'Generate the requirements specification first.' }, { status: 409 })
+      }
+
+      const unreviewed = requirements.filter((r) => r.status === 'proposed')
+      if (unreviewed.length > 0 && !body.unreviewedAction) {
+        return NextResponse.json(
+          {
+            error: `${unreviewed.length} requirement(s) are still unreviewed. Decide what to do with them before approving.`,
+            unreviewedCount: unreviewed.length,
+          },
+          { status: 409 }
+        )
+      }
+      const map: Record<string, string> = { accept: 'confirmed', defer: 'unresolved', reject: 'rejected' }
+      if (unreviewed.length > 0 && body.unreviewedAction && map[body.unreviewedAction]) {
+        await db.requirement.updateMany({
+          where: { ideaId: id, status: 'proposed' },
+          data: { status: map[body.unreviewedAction] },
+        })
+      }
+
+      // Re-read AFTER the bulk decision so the confirmation check is accurate
+      const finalRequirements = await db.requirement.findMany({ where: { ideaId: id } })
+      const confirmed = finalRequirements.filter((r) => r.status === 'confirmed').length
+      if (confirmed === 0) {
+        return NextResponse.json(
+          { error: 'At least one requirement must be confirmed before design can start.' },
+          { status: 409 }
+        )
+      }
+
+      await db.idea.update({ where: { id }, data: { stage: 'design' } })
+      await logDecision(
+        id,
+        'Requirements specification approved',
+        `${confirmed} confirmed, ${finalRequirements.filter((r) => r.status === 'unresolved').length} unresolved (tracked), ${finalRequirements.filter((r) => r.status === 'rejected').length} rejected`,
+        'requirements'
+      )
+      const payload = await buildIdeaDetail(id)
+      return NextResponse.json(payload)
+    }
+
+    // ---------- Gate 5: system design approved ----------
+    if (body.gate === 'design' && body.action === 'approve') {
+      if (idea.stage !== 'design') {
+        return NextResponse.json({ error: 'This gate was already passed.' }, { status: 409 })
+      }
+      const [processes, entities, apis, screens, architecture] = await Promise.all([
+        db.processFlow.findMany({ where: { ideaId: id } }),
+        db.dataEntity.findMany({ where: { ideaId: id } }),
+        db.apiEndpoint.findMany({ where: { ideaId: id } }),
+        db.screenSpec.findMany({ where: { ideaId: id } }),
+        db.architectureDoc.findUnique({ where: { ideaId: id } }),
+      ])
+
+      const checks = [
+        { list: processes, label: 'business processes' },
+        { list: entities, label: 'data entities' },
+        { list: apis, label: 'API endpoints' },
+        { list: screens, label: 'screens' },
+      ]
+      for (const { list, label } of checks) {
+        if (list.length === 0) {
+          return NextResponse.json({ error: `Generate the ${label} first.` }, { status: 409 })
+        }
+        const unreviewed = list.filter((x) => x.status === 'proposed' || x.status === 'needs_revision')
+        if (unreviewed.length > 0) {
+          return NextResponse.json(
+            { error: `${unreviewed.length} ${label} still unreviewed — every design artifact needs an explicit decision.` },
+            { status: 409 }
+          )
+        }
+      }
+      if (!architecture) {
+        return NextResponse.json({ error: 'Generate the architecture recommendation first.' }, { status: 409 })
+      }
+      if (architecture.status !== 'confirmed') {
+        return NextResponse.json({ error: 'The architecture recommendation must be confirmed.' }, { status: 409 })
+      }
+
+      await db.idea.update({ where: { id }, data: { stage: 'planning' } })
+      await logDecision(
+        id,
+        'System design approved',
+        `${processes.filter((p) => p.status === 'confirmed').length} processes, ${entities.filter((e) => e.status === 'confirmed').length} entities, ${apis.filter((a) => a.status === 'confirmed').length} APIs, ${screens.filter((s) => s.status === 'confirmed').length} screens confirmed`,
+        'design'
+      )
+      const payload = await buildIdeaDetail(id)
+      return NextResponse.json(payload)
+    }
+
+    // ---------- Gate 6: implementation plan approved ----------
+    if (body.gate === 'planning' && body.action === 'approve') {
+      if (idea.stage !== 'planning') {
+        return NextResponse.json({ error: 'This gate was already passed.' }, { status: 409 })
+      }
+      const [tasks, risks] = await Promise.all([
+        db.implTask.findMany({ where: { ideaId: id } }),
+        db.riskItem.findMany({ where: { ideaId: id } }),
+      ])
+      if (tasks.length === 0) {
+        return NextResponse.json({ error: 'Generate the implementation plan first.' }, { status: 409 })
+      }
+      const unreviewedTasks = tasks.filter((t) => t.status === 'proposed' || t.status === 'needs_revision')
+      if (unreviewedTasks.length > 0) {
+        return NextResponse.json(
+          { error: `${unreviewedTasks.length} task(s) still unreviewed — every task needs an explicit decision.` },
+          { status: 409 }
+        )
+      }
+      if (risks.length === 0) {
+        return NextResponse.json({ error: 'Generate the risk register first.' }, { status: 409 })
+      }
+      const unreviewedRisks = risks.filter((r) => r.status === 'proposed')
+      if (unreviewedRisks.length > 0) {
+        return NextResponse.json(
+          { error: `${unreviewedRisks.length} risk(s) still unreviewed — decide mitigate or accept for each.` },
+          { status: 409 }
+        )
+      }
+
+      await db.idea.update({ where: { id }, data: { stage: 'readiness' } })
+      await logDecision(
+        id,
+        'Implementation plan approved',
+        `${tasks.filter((t) => t.status === 'confirmed').length} tasks, ${risks.length} risks reviewed`,
+        'planning'
+      )
+      const payload = await buildIdeaDetail(id)
+      return NextResponse.json(payload)
+    }
+
+    // ---------- Gate 7: readiness gate — lock the package ----------
+    if (body.gate === 'package' && body.action === 'approve') {
+      if (idea.stage !== 'readiness') {
+        return NextResponse.json({ error: 'This gate was already passed.' }, { status: 409 })
+      }
+      const { computeReadiness } = await import('@/lib/readiness')
+      const report = await computeReadiness(id)
+      if (!report.lockable) {
+        return NextResponse.json(
+          {
+            error: 'The engineering package cannot be locked while critical issues remain unresolved.',
+            blockers: report.blockers,
+            score: report.score,
+          },
+          { status: 409 }
+        )
+      }
+      await db.idea.update({ where: { id }, data: { stage: 'package' } })
+      await logDecision(
+        id,
+        'Readiness gate passed — engineering package locked',
+        `Readiness score ${report.score}% with all hard blockers cleared`,
+        'readiness'
+      )
       const payload = await buildIdeaDetail(id)
       return NextResponse.json(payload)
     }

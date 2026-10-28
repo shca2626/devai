@@ -20,33 +20,44 @@ import {
   StatusBadge,
 } from '@/components/app/bits'
 import type { IdeaDetail } from '@/lib/types'
-import {
-  Check,
-  CheckCircle2,
-  Download,
-  FileJson,
-  FileText,
-  History,
-  Lock,
-  Radar,
-  ScrollText,
-  Telescope,
-  X,
-} from 'lucide-react'
+import { Check, CheckCircle2, FileJson, FileText, History, Lock, ScrollText, Telescope, X } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import { useToast } from '@/hooks/use-toast'
+import { useState } from 'react'
 
 // ============================================================
 // Stage 4 — Baseline: the approved P0 blueprint. Export as
-// Markdown / JSON, manage the assumption register, and review
-// the full decision history (the audit trail).
+// Markdown / JSON, manage the assumption register, review
+// the full decision history (the audit trail), and continue
+// into the engineering track (requirements → design → plan
+// → readiness → package).
 // ============================================================
 
 export function BaselineStage({ detail }: { detail: IdeaDetail }) {
-  const { t, setDetail, refreshIdeas } = useApp()
+  const { t, setDetail, refreshIdeas, setView } = useApp()
   const { toast } = useToast()
   const { idea, features, assumptions, decisions } = detail
   const approved = idea.stage === 'baseline'
+  const engineeringStarted = ['requirements', 'design', 'planning', 'readiness', 'package'].includes(idea.stage)
+  const [starting, setStarting] = useState(false)
+
+  async function startEngineering() {
+    setStarting(true)
+    const res = await fetch(`/api/ideas/${idea.id}/gate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ gate: 'engineering_start', action: 'approve' }),
+    })
+    const data = await res.json()
+    setStarting(false)
+    if (!res.ok) {
+      toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
+      return
+    }
+    setDetail(data as IdeaDetail)
+    refreshIdeas()
+    setView('requirements')
+  }
 
   async function setAssumption(id: string, status: 'confirmed' | 'rejected') {
     const res = await fetch(`/api/assumptions/${id}`, {
@@ -73,11 +84,33 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
     a.remove()
   }
 
-  if (!approved) {
+  if (!approved && !engineeringStarted) {
     return (
       <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
         <Lock className="h-8 w-8 text-muted-foreground mx-auto" />
         <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockedBaselineTeaser')}</p>
+      </div>
+    )
+  }
+
+  if (engineeringStarted && !approved) {
+    return (
+      <div className="space-y-4">
+        <Alert className="border-emerald-300 bg-emerald-50/70">
+          <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+          <AlertTitle className="text-sm font-semibold text-emerald-800">{t('baselineApprovedTitle')}</AlertTitle>
+          <AlertDescription className="text-xs text-emerald-700 leading-6">{t('phaseEngineering')} ✓ — {t('startEngineeringBody')}</AlertDescription>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Button size="sm" onClick={() => exportFile('md')} className="gap-1.5">
+              <FileText className="h-3.5 w-3.5" />
+              {t('exportMarkdown')}
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => exportFile('json')} className="gap-1.5">
+              <FileJson className="h-3.5 w-3.5" />
+              {t('exportJson')}
+            </Button>
+          </div>
+        </Alert>
       </div>
     )
   }
@@ -89,7 +122,7 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
 
   return (
     <div className="space-y-4">
-      {/* Approval banner */}
+      {/* P0 exports + engineering track entry */}
       <Alert className="border-emerald-300 bg-emerald-50/70">
         <CheckCircle2 className="h-4 w-4 text-emerald-600" />
         <AlertTitle className="text-sm font-semibold text-emerald-800">{t('baselineApprovedTitle')}</AlertTitle>
@@ -104,6 +137,21 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
             {t('exportJson')}
           </Button>
         </div>
+        {!engineeringStarted && (
+          <div className="mt-4 border-t border-emerald-200 pt-3 space-y-2">
+            <p className="text-xs text-emerald-800 leading-6">{t('startEngineeringBody')}</p>
+            <Button size="sm" onClick={startEngineering} disabled={starting} className="gap-1.5">
+              <Telescope className="h-3.5 w-3.5" />
+              {t('startEngineering')}
+            </Button>
+          </div>
+        )}
+        {engineeringStarted && (
+          <div className="mt-3 border-t border-emerald-200 pt-2 text-[11px] text-emerald-700 flex items-center gap-1.5">
+            <CheckCircle2 className="h-3.5 w-3.5" />
+            {t('phaseEngineering')} ✓
+          </div>
+        )}
       </Alert>
 
       {/* Discovery summary */}
@@ -252,25 +300,6 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
           </div>
         </TabsContent>
       </Tabs>
-
-      {/* P1 roadmap teaser */}
-      <div className="rounded-xl border border-dashed border-primary/30 bg-primary/[0.02] p-4">
-        <div className="flex items-center gap-2 mb-1.5">
-          <Telescope className="h-4 w-4 text-primary" />
-          <span className="text-sm font-semibold">{t('roadmapTeaserTitle')}</span>
-        </div>
-        <p className="text-xs text-muted-foreground leading-6">{t('roadmapTeaserBody')}</p>
-        <div className="mt-2 flex flex-wrap gap-1.5">
-          <Badge variant="outline" className="text-[10px] gap-1 bg-card">
-            <Radar className="h-3 w-3" />
-            Market research · بحث السوق
-          </Badge>
-          <Badge variant="outline" className="text-[10px] gap-1 bg-card">
-            <Download className="h-3 w-3" />
-            SRS · Architecture
-          </Badge>
-        </div>
-      </div>
     </div>
   )
 

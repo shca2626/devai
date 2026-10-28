@@ -10,6 +10,17 @@ import type { IdeaDetail, IdeaListItem, Stage } from '@/lib/types'
 // currently selected idea, and API helpers with error surfacing.
 // ============================================================
 
+export type ViewName =
+  | 'understand'
+  | 'discover'
+  | 'features'
+  | 'baseline'
+  | 'requirements'
+  | 'design'
+  | 'planning'
+  | 'readiness'
+  | 'package'
+
 export interface AppState {
   lang: UiLang
   setLang: (lang: UiLang) => void
@@ -21,19 +32,24 @@ export interface AppState {
   detail: IdeaDetail | null
   setDetail: (d: IdeaDetail | null) => void
   loadingDetail: boolean
-  loadDetail: (id: string) => Promise<void>
-  view: 'understand' | 'discover' | 'features' | 'baseline'
-  setView: (v: AppState['view']) => void
+  loadDetail: (id: string) => Promise<IdeaDetail | null>
+  view: ViewName
+  setView: (v: ViewName) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
 
 // Stage names and view names differ for the first two stages
-const VIEW_BY_STAGE: Record<Stage, AppState['view']> = {
+const VIEW_BY_STAGE: Record<Stage, ViewName> = {
   understanding: 'understand',
   discovery: 'discover',
   features: 'features',
   baseline: 'baseline',
+  requirements: 'requirements',
+  design: 'design',
+  planning: 'planning',
+  readiness: 'readiness',
+  package: 'package',
 }
 
 export function useApp(): AppState {
@@ -48,7 +64,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [detail, setDetail] = useState<IdeaDetail | null>(null)
   const [loadingDetail, setLoadingDetail] = useState(false)
-  const [view, setView] = useState<AppState['view']>('understand')
+  const [view, setView] = useState<ViewName>('understand')
 
   // Keep <html lang/dir> in sync with the UI language
   useEffect(() => {

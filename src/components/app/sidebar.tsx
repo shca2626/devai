@@ -143,7 +143,7 @@ function IdeaRow({ idea }: { idea: IdeaListItem }) {
           <AlertDialogFooter>
             <AlertDialogCancel onClick={(e) => e.stopPropagation()}>{t('cancel')}</AlertDialogCancel>
             <AlertDialogAction
-              variant="destructive"
+              className="bg-red-600 text-white hover:bg-red-700"
               onClick={(e) => {
                 e.stopPropagation()
                 doDelete()

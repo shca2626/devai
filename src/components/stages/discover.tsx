@@ -88,12 +88,12 @@ export function DiscoverStage({ detail }: { detail: IdeaDetail }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ force }),
       })
-      const data = (await res.json()) as NextResponse
+      const data = (await res.json()) as { error?: string; suggestDone?: boolean } & IdeaDetail
       if (!res.ok) {
         toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
         return
       }
-      setDetail({ idea: data.idea, questions: data.questions, features: data.features, assumptions: data.assumptions, decisions: data.decisions })
+      setDetail({ idea: data.idea, questions: data.questions, features: data.features, assumptions: data.assumptions, decisions: data.decisions, roles: data.roles ?? null, requirements: data.requirements ?? [], processes: data.processes ?? [], entities: data.entities ?? [], apis: data.apis ?? [], screens: data.screens ?? [], tasks: data.tasks ?? [], risks: data.risks ?? [], issues: data.issues ?? [], architecture: data.architecture ?? null, readiness: data.readiness ?? null })
       setSuggestDone(Boolean(data.suggestDone))
     } catch {
       toast({ description: t('aiError'), variant: 'destructive' })

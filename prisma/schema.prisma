@@ -8,9 +8,12 @@ datasource db {
 }
 
 // ============================================================
-// Blueprint Assistant P0 — data model
+// AI Software Engineer — data model (Project Contract core)
 // Workflow stages: understanding -> discovery -> features -> baseline
+//                  -> requirements -> design -> planning -> readiness -> package
 // Approval gates are enforced by the application, never by the model.
+// Every artifact carries provenance + approval status; downstream
+// engines must never treat unapproved assumptions as facts.
 // ============================================================
 
 model Idea {
@@ -23,13 +26,23 @@ model Idea {
   summary        String? // JSON { summaryMarkdown, openRisks[] }
   featuresMeta   String? // JSON { missingFeatures[], dependencies[], releaseNote }
   baseline       String? // JSON snapshot of the approved baseline
+  roles          String? // JSON roles matrix [{name, description, permissions[]}]
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  questions   Question[]
-  features    Feature[]
-  assumptions Assumption[]
-  decisions   Decision[]
+  questions       Question[]
+  features        Feature[]
+  assumptions     Assumption[]
+  decisions       Decision[]
+  requirements    Requirement[]
+  processes       ProcessFlow[]
+  entities        DataEntity[]
+  apiEndpoints    ApiEndpoint[]
+  screens         ScreenSpec[]
+  tasks           ImplTask[]
+  risks           RiskItem[]
+  issues          ConsistencyIssue[]
+  architecture    ArchitectureDoc?
 }
 
 model Question {
@@ -90,4 +103,185 @@ model Decision {
   createdAt DateTime @default(now())
 
   @@index([ideaId])
+}
+
+// ============================================================
+// Engineering track — the Project Contract registry.
+// Requirement statuses: proposed | confirmed | rejected | unresolved
+// Provenance: client (from approved features/answers) | ai (engine suggestion)
+// ============================================================
+
+model Requirement {
+  id                String   @id @default(cuid())
+  ideaId            String
+  idea              Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code              String // FR-001 | NFR-001
+  type              String // functional | non_functional
+  category          String? // NFR category: security | performance | usability | privacy | availability | maintainability
+  title             String
+  titleAr           String?
+  description       String
+  acceptanceCriteria String // JSON array of testable criteria strings
+  provenance        String   @default("ai") // client | ai
+  evidence          String? // where it came from (feature / answer)
+  featureId         String? // source Feature id when derived from an accepted feature
+  priority          String   @default("must") // must | should | could
+  status            String   @default("proposed")
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([ideaId])
+}
+
+model ProcessFlow {
+  id                String   @id @default(cuid())
+  ideaId            String
+  idea              Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code              String // PF-01
+  name              String
+  nameAr            String?
+  trigger           String?
+  actors            String? // JSON array of role names
+  steps             String // JSON [{n, actor, action, input?, output?, decision?, exception?}]
+  businessRules     String? // JSON [{rule, linkedRequirements[]}]
+  exceptions        String? // JSON array of edge/failure scenarios
+  linkedRequirements String? // JSON array of requirement codes
+  rationale         String?
+  status            String   @default("proposed") // proposed | confirmed | rejected | needs_revision
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model DataEntity {
+  id            String   @id @default(cuid())
+  ideaId        String
+  idea          Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code          String // ENT-01
+  name          String
+  nameAr        String?
+  description   String?
+  fields        String // JSON [{name, type, required, unique, description, refEntity?}]
+  relationships String? // JSON [{target, type, description}] type: one-to-one | one-to-many | many-to-many
+  constraints   String? // JSON array of constraints
+  rationale     String?
+  status        String   @default("proposed")
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model ApiEndpoint {
+  id                String   @id @default(cuid())
+  ideaId            String
+  idea              Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code              String // API-01
+  method            String // GET | POST | PATCH | DELETE
+  path              String
+  purpose           String
+  auth              String? // e.g. "merchant role"
+  request           String? // JSON [{field, type, required, notes}]
+  response          String? // JSON {ok: [...], errorCodes: [...]}
+  errors            String? // JSON [{code, when}]
+  linkedRequirements String? // JSON array of requirement codes
+  linkedEntities    String? // JSON array of entity codes
+  status            String   @default("proposed")
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model ScreenSpec {
+  id                String   @id @default(cuid())
+  ideaId            String
+  idea              Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code              String // SCR-01
+  name              String
+  nameAr            String?
+  route             String?
+  purpose           String?
+  roles             String? // JSON array of roles that access the screen
+  elements          String? // JSON [{element, behavior}]
+  states            String? // JSON {loading, empty, error}
+  rtlNote           String? // Arabic RTL consideration
+  linkedRequirements String? // JSON array of requirement codes
+  status            String   @default("proposed")
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model ImplTask {
+  id                String   @id @default(cuid())
+  ideaId            String
+  idea              Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code              String // T-01
+  title             String
+  titleAr           String?
+  description       String
+  phase             Int      @default(1)
+  priority          String   @default("should") // must | should | could
+  dependsOn         String? // JSON array of task codes
+  acceptanceCriteria String // JSON array
+  deliverable       String? // defined outcome of the task
+  requirementCodes  String? // JSON array of requirement codes (traceability)
+  estimate         String? // S | M | L
+  status            String   @default("proposed")
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model RiskItem {
+  id          String   @id @default(cuid())
+  ideaId      String
+  idea        Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code        String // RSK-01
+  category    String // security | privacy | performance | operational | financial | scalability | business
+  description String
+  likelihood  String   @default("medium") // low | medium | high
+  impact      String   @default("medium") // low | medium | high | critical
+  mitigation  String?
+  basis       String   @default("professional_judgment") // verified_fact | professional_judgment
+  status      String   @default("proposed") // proposed | mitigated | accepted
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model ConsistencyIssue {
+  id          String   @id @default(cuid())
+  ideaId      String
+  idea        Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  kind        String // contradiction | omission | duplicate | broken_link | incomplete | change_impact
+  severity    String   @default("major") // critical | major | minor
+  description String
+  affected    String? // JSON array of artifact codes
+  suggestion  String?
+  detectedBy  String   @default("engine") // engine | ai
+  status      String   @default("open") // open | resolved | dismissed
+  createdAt   DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model ArchitectureDoc {
+  id           String   @id @default(cuid())
+  ideaId       String   @unique
+  idea         Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  components   String? // JSON [{name, responsibility}]
+  integrations String? // JSON [{system, purpose, necessity}]
+  techStack    String? // JSON [{area, choice, rationale, tradeOffs, simplestOption}]
+  notes        String? // prose explanation, trade-offs, reasoning
+  basis        String   @default("professional_judgment")
+  status       String   @default("proposed")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

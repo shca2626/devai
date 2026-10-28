@@ -535,7 +535,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
             <AlertDialogFooter>
               <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
               <AlertDialogAction
-                variant="destructive"
+                className="bg-red-600 text-white hover:bg-red-700"
                 onClick={() => {
                   if (confirmRemove) removeFeature(confirmRemove.id)
                   setConfirmRemove(null)

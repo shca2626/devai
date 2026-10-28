@@ -1,0 +1,554 @@
+import { db } from '@/lib/db'
+import { parseInterpretation, parseSummary } from '@/lib/payload'
+
+// ============================================================
+// The final deliverable — the implementation-ready engineering
+// package. Available only after the readiness gate is passed:
+// six interconnected sections plus a traceability appendix, so
+// a programmer who never saw the original conversation can
+// implement the system correctly.
+// ============================================================
+
+type Params = { params: Promise<{ id: string }> }
+
+function esc(v: string | null | undefined): string {
+  return (v ?? '').replace(/\|/g, '\\|').replace(/\n/g, ' ')
+}
+
+function parse<T>(raw: string | null | undefined, fallback: T): T {
+  if (!raw) return fallback
+  try {
+    return JSON.parse(raw) as T
+  } catch {
+    return fallback
+  }
+}
+
+function mermaidErd(entities: Array<{ name: string; relationships: string | null }>): string {
+  const rels = entities.flatMap((e) =>
+    parse<Array<{ target: string; type: string }>>(e.relationships, []).map((r) => ({ from: e.name, ...r }))
+  )
+  const sanitize = (n: string) => n.replace(/[^a-zA-Z0-9]/g, '_')
+  const lines = ['erDiagram']
+  for (const e of entities) {
+    lines.push(`  ${sanitize(e.name)} {`)
+    lines.push('    string id PK')
+    lines.push('  }')
+  }
+  for (const r of rels) {
+    const cardinality =
+      r.type.includes('many-to-many')
+        ? '}o..o{'
+        : r.type.includes('one-to-many')
+          ? '||--o{'
+          : r.type.includes('one-to-one')
+            ? '||--||'
+            : '||--o{'
+    lines.push(`  ${sanitize(r.from)} ${cardinality} ${sanitize(r.target)} : "${r.type}"`)
+  }
+  return lines.join('\n')
+}
+
+export async function GET(req: Request, { params }: Params) {
+  try {
+    const { id } = await params
+    const format = new URL(req.url).searchParams.get('format') === 'json' ? 'json' : 'md'
+
+    const idea = await db.idea.findUnique({
+      where: { id },
+      include: {
+        questions: { where: { status: 'answered' }, orderBy: [{ order: 'asc' }] },
+        features: { orderBy: [{ order: 'asc' }] },
+        assumptions: { orderBy: { createdAt: 'asc' } },
+        decisions: { orderBy: { createdAt: 'asc' } },
+        requirements: { orderBy: [{ order: 'asc' }] },
+        processes: { orderBy: [{ order: 'asc' }] },
+        entities: { orderBy: [{ order: 'asc' }] },
+        apiEndpoints: { orderBy: [{ order: 'asc' }] },
+        screens: { orderBy: [{ order: 'asc' }] },
+        tasks: { orderBy: [{ order: 'asc' }] },
+        risks: { orderBy: [{ order: 'asc' }] },
+        issues: { orderBy: { createdAt: 'desc' } },
+        architecture: true,
+      },
+    })
+    if (!idea) {
+      return Response.json({ error: 'Idea not found' }, { status: 404 })
+    }
+    if (idea.stage !== 'package') {
+      return Response.json(
+        { error: 'The engineering package is exported after the readiness gate is passed.' },
+        { status: 409 }
+      )
+    }
+
+    const interpretation = parseInterpretation(idea.interpretation)
+    const summary = parseSummary(idea.summary)
+    const roles = parse<Array<{ name: string; description: string; permissions: string[] }>>(idea.roles, [])
+    const slug = (interpretation?.title ?? idea.title)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '')
+      .slice(0, 50) || 'project'
+
+    const frs = idea.requirements.filter((r) => r.type === 'functional' && r.status === 'confirmed')
+    const nfrs = idea.requirements.filter((r) => r.type === 'non_functional' && r.status === 'confirmed')
+    const unresolved = idea.requirements.filter((r) => r.status === 'unresolved')
+    const confirmedProcesses = idea.processes.filter((p) => p.status === 'confirmed')
+    const confirmedEntities = idea.entities.filter((e) => e.status === 'confirmed')
+    const confirmedApis = idea.apiEndpoints.filter((a) => a.status === 'confirmed')
+    const confirmedScreens = idea.screens.filter((s) => s.status === 'confirmed')
+    const confirmedTasks = idea.tasks.filter((t) => t.status === 'confirmed')
+    const reviewedRisks = idea.risks.filter((r) => r.status !== 'proposed')
+
+    // ---------- Traceability matrix ----------
+    const procLinks = new Map<string, string[]>()
+    for (const p of confirmedProcesses) {
+      for (const code of parse<string[]>(p.linkedRequirements, [])) {
+        procLinks.set(code, [...(procLinks.get(code) ?? []), p.code])
+      }
+    }
+    const apiLinks = new Map<string, string[]>()
+    for (const a of confirmedApis) {
+      for (const code of parse<string[]>(a.linkedRequirements, [])) {
+        apiLinks.set(code, [...(apiLinks.get(code) ?? []), a.code])
+      }
+    }
+    const screenLinks = new Map<string, string[]>()
+    for (const s of confirmedScreens) {
+      for (const code of parse<string[]>(s.linkedRequirements, [])) {
+        screenLinks.set(code, [...(screenLinks.get(code) ?? []), s.code])
+      }
+    }
+    const taskLinks = new Map<string, string[]>()
+    for (const t of confirmedTasks) {
+      for (const code of parse<string[]>(t.requirementCodes, [])) {
+        taskLinks.set(code, [...(taskLinks.get(code) ?? []), t.code])
+      }
+    }
+
+    if (format === 'json') {
+      const payload = {
+        product: 'AI Software Engineer — engineering package',
+        exportedAt: new Date().toISOString(),
+        readiness: 'locked',
+        productDefinition: {
+          title: idea.title,
+          originalText: idea.originalText,
+          interpretation,
+          discoverySummary: summary,
+          discoveryQA: idea.questions.map((q) => ({ area: q.area, question: q.questionEn, answer: q.answer })),
+          roles,
+          featureBaseline: idea.features
+            .filter((f) => f.status === 'accepted')
+            .map((f) => ({ module: f.module, feature: f.feature, user: f.user, priority: f.priority })),
+        },
+        functionalAnalysis: {
+          processes: confirmedProcesses.map((p) => ({
+            code: p.code,
+            name: p.name,
+            trigger: p.trigger,
+            actors: parse<string[]>(p.actors, []),
+            steps: parse<unknown[]>(p.steps, []),
+            businessRules: parse<unknown[]>(p.businessRules, []),
+            exceptions: parse<string[]>(p.exceptions, []),
+            linkedRequirements: parse<string[]>(p.linkedRequirements, []),
+          })),
+        },
+        dataAndApi: {
+          erd: mermaidErd(confirmedEntities),
+          entities: confirmedEntities.map((e) => ({
+            code: e.code,
+            name: e.name,
+            fields: parse<unknown[]>(e.fields, []),
+            relationships: parse<unknown[]>(e.relationships, []),
+            constraints: parse<string[]>(e.constraints, []),
+          })),
+          apis: confirmedApis.map((a) => ({
+            code: a.code,
+            method: a.method,
+            path: a.path,
+            purpose: a.purpose,
+            auth: a.auth,
+            request: parse<unknown[]>(a.request, []),
+            errors: parse<unknown[]>(a.errors, []),
+            linkedRequirements: parse<string[]>(a.linkedRequirements, []),
+          })),
+        },
+        uiUx: confirmedScreens.map((s) => ({
+          code: s.code,
+          name: s.name,
+          route: s.route,
+          roles: parse<string[]>(s.roles, []),
+          elements: parse<unknown[]>(s.elements, []),
+          states: parse<Record<string, string>>(s.states, {}),
+          rtlNote: s.rtlNote,
+          linkedRequirements: parse<string[]>(s.linkedRequirements, []),
+        })),
+        qualityAndOperations: {
+          nonFunctionalRequirements: nfrs.map((r) => ({ code: r.code, title: r.title, description: r.description, acceptanceCriteria: parse<string[]>(r.acceptanceCriteria, []) })),
+          risks: reviewedRisks.map((r) => ({
+            code: r.code,
+            category: r.category,
+            description: r.description,
+            likelihood: r.likelihood,
+            impact: r.impact,
+            mitigation: r.mitigation,
+            decision: r.status,
+            basis: r.basis,
+          })),
+        },
+        implementationPlan: confirmedTasks.map((t) => ({
+          code: t.code,
+          title: t.title,
+          phase: t.phase,
+          priority: t.priority,
+          dependsOn: parse<string[]>(t.dependsOn, []),
+          description: t.description,
+          acceptanceCriteria: parse<string[]>(t.acceptanceCriteria, []),
+          deliverable: t.deliverable,
+          requirementCodes: parse<string[]>(t.requirementCodes, []),
+          estimate: t.estimate,
+        })),
+        traceability: idea.requirements
+          .filter((r) => r.status === 'confirmed')
+          .map((r) => ({
+            code: r.code,
+            title: r.title,
+            processes: procLinks.get(r.code) ?? [],
+            apis: apiLinks.get(r.code) ?? [],
+            screens: screenLinks.get(r.code) ?? [],
+            tasks: taskLinks.get(r.code) ?? [],
+          })),
+        registers: {
+          assumptions: idea.assumptions.map((a) => ({ text: a.text, kind: a.kind, status: a.status })),
+          unresolvedRequirements: unresolved.map((r) => ({ code: r.code, title: r.title, evidence: r.evidence })),
+          decisionHistory: idea.decisions.map((d) => ({ at: d.createdAt.toISOString(), action: d.action, detail: d.detail })),
+        },
+      }
+      return new Response(JSON.stringify(payload, null, 2), {
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'Content-Disposition': `attachment; filename="engineering-package-${slug}.json"`,
+        },
+      })
+    }
+
+    // ---------- Markdown package (English, professional) ----------
+    const L: string[] = []
+    L.push(`# Engineering Package — ${idea.title}`)
+    L.push('')
+    L.push(`> Implementation-ready specification produced by the AI Software Engineer on ${new Date().toDateString()}. Readiness gate passed; every requirement below is client-approved with traceable provenance.`)
+    L.push('')
+
+    // 01 — Product Definition
+    L.push('## 01 — Product Definition')
+    L.push('')
+    L.push('### Original idea')
+    L.push('')
+    L.push(`> ${idea.originalText.replace(/\n/g, '\n> ')}`)
+    L.push('')
+    if (interpretation) {
+      L.push('### Problem statement')
+      L.push('')
+      L.push(interpretation.problemStatement)
+      L.push('')
+      L.push('### English interpretation')
+      L.push('')
+      L.push(interpretation.englishInterpretation)
+      L.push('')
+    }
+    if (summary) {
+      L.push('### Discovery summary')
+      L.push('')
+      L.push(summary.summaryMarkdown)
+      L.push('')
+    }
+    if (roles.length) {
+      L.push('### Users and roles')
+      L.push('')
+      L.push('| Role | Description | Key permissions |')
+      L.push('| --- | --- | --- |')
+      for (const r of roles) L.push(`| ${esc(r.name)} | ${esc(r.description)} | ${esc(r.permissions.join(', '))} |`)
+      L.push('')
+    }
+    L.push('### Approved feature scope')
+    L.push('')
+    L.push('| Module | Feature | User | Priority |')
+    L.push('| --- | --- | --- | --- |')
+    for (const f of idea.features.filter((f) => f.status === 'accepted')) {
+      L.push(`| ${esc(f.module)} | ${esc(f.feature)} | ${esc(f.user)} | ${f.priority} |`)
+    }
+    L.push('')
+
+    // 02 — Functional Analysis
+    L.push('## 02 — Functional Analysis')
+    L.push('')
+    L.push('### Confirmed functional requirements')
+    L.push('')
+    L.push('| Code | Requirement | Priority | Provenance |')
+    L.push('| --- | --- | --- | --- |')
+    for (const r of frs) {
+      L.push(`| ${r.code} | ${esc(r.title)} | ${r.priority} | ${r.provenance === 'client' ? 'client' : 'AI-suggested, client-approved'} |`)
+    }
+    L.push('')
+    L.push('### Business processes')
+    L.push('')
+    for (const p of confirmedProcesses) {
+      L.push(`#### ${p.code} — ${p.name}${p.nameAr ? ` (${p.nameAr})` : ''}`)
+      L.push('')
+      if (p.trigger) L.push(`**Trigger:** ${p.trigger}`)
+      const actors = parse<string[]>(p.actors, [])
+      if (actors.length) L.push(`**Actors:** ${actors.join(', ')}`)
+      L.push('')
+      L.push('| # | Actor | Action | Input | Output | Decision / Exception |')
+      L.push('| --- | --- | --- | --- | --- | --- |')
+      for (const s of parse<Array<Record<string, string>>>(p.steps, [])) {
+        L.push(
+          `| ${s.n ?? ''} | ${esc(s.actor) ?? ''} | ${esc(s.action)} | ${esc(s.input) ?? '—'} | ${esc(s.output) ?? '—'} | ${esc(s.decision ?? s.exception) ?? '—'} |`
+        )
+      }
+      L.push('')
+      const rules = parse<Array<{ rule: string; linkedRequirements: string[] }>>(p.businessRules, [])
+      if (rules.length) {
+        L.push('**Business rules:**')
+        L.push('')
+        for (const b of rules) {
+          L.push(`- ${b.rule}${b.linkedRequirements.length ? ` _(${b.linkedRequirements.join(', ')})_` : ''}`)
+        }
+        L.push('')
+      }
+      const exceptions = parse<string[]>(p.exceptions, [])
+      if (exceptions.length) {
+        L.push('**Edge / failure scenarios:**')
+        L.push('')
+        for (const e of exceptions) L.push(`- ${e}`)
+        L.push('')
+      }
+    }
+    if (unresolved.length) {
+      L.push('### Open decisions (deliberately unresolved at lock time)')
+      L.push('')
+      L.push('These were NOT silently decided. They are excluded from the confirmed scope above and must be decided before the corresponding parts are implemented:')
+      L.push('')
+      for (const r of unresolved) L.push(`- **${r.code}** ${r.title} — ${r.evidence ?? 'needs a client decision'}`)
+      L.push('')
+    }
+
+    // 03 — Data & API Design
+    L.push('## 03 — Data & API Design')
+    L.push('')
+    L.push('### Entity-relationship diagram')
+    L.push('')
+    L.push('```mermaid')
+    L.push(mermaidErd(confirmedEntities))
+    L.push('```')
+    L.push('')
+    L.push('### Data dictionary')
+    L.push('')
+    for (const e of confirmedEntities) {
+      L.push(`#### ${e.code} — ${e.name}`)
+      L.push('')
+      if (e.description) L.push(`${e.description}`)
+      L.push('')
+      L.push('| Field | Type | Required | Unique | Description |')
+      L.push('| --- | --- | --- | --- | --- |')
+      for (const f of parse<Array<Record<string, unknown>>>(e.fields, [])) {
+        L.push(
+          `| ${esc(String(f.name ?? ''))} | ${esc(String(f.type ?? ''))} | ${f.required ? 'yes' : 'no'} | ${f.unique ? 'yes' : 'no'} | ${esc(String(f.description ?? ''))}${f.refEntity ? ` (→ ${f.refEntity})` : ''} |`
+        )
+      }
+      L.push('')
+      const rels = parse<Array<{ target: string; type: string; description: string }>>(e.relationships, [])
+      if (rels.length) {
+        L.push(`**Relationships:** ${rels.map((r) => `${r.type} → ${r.target} (${r.description})`).join('; ')}`)
+        L.push('')
+      }
+      const constraints = parse<string[]>(e.constraints, [])
+      if (constraints.length) {
+        L.push(`**Constraints:** ${constraints.join('; ')}`)
+        L.push('')
+      }
+    }
+    L.push('### API contracts')
+    L.push('')
+    for (const a of confirmedApis) {
+      L.push(`#### ${a.code} — ${a.method} \`${a.path}\``)
+      L.push('')
+      L.push(`${a.purpose}`)
+      L.push('')
+      L.push(`**Auth:** ${a.auth ?? 'any authenticated user'}`)
+      L.push('')
+      const request = parse<Array<Record<string, unknown>>>(a.request, [])
+      if (request.length) {
+        L.push('| Request field | Type | Required | Validation |')
+        L.push('| --- | --- | --- | --- |')
+        for (const f of request) {
+          L.push(`| ${esc(String(f.field ?? ''))} | ${esc(String(f.type ?? ''))} | ${f.required ? 'yes' : 'no'} | ${esc(String(f.notes ?? ''))} |`)
+        }
+        L.push('')
+      }
+      const errors = parse<Array<{ code: string; when: string }>>(a.errors, [])
+      if (errors.length) {
+        L.push(`**Errors:** ${errors.map((e) => `\`${e.code}\` — ${e.when}`).join(' · ')}`)
+        L.push('')
+      }
+      const linkedReqs = parse<string[]>(a.linkedRequirements, [])
+      if (linkedReqs.length) L.push(`**Serves:** ${linkedReqs.join(', ')}`)
+      L.push('')
+    }
+    if (idea.architecture) {
+      const arch = idea.architecture
+      L.push('### Architecture')
+      L.push('')
+      const components = parse<Array<{ name: string; responsibility: string }>>(arch.components, [])
+      if (components.length) {
+        L.push('| Component | Responsibility |')
+        L.push('| --- | --- |')
+        for (const c of components) L.push(`| ${esc(c.name)} | ${esc(c.responsibility)} |`)
+        L.push('')
+      }
+      const tech = parse<Array<{ area: string; choice: string; rationale: string; tradeOffs: string; simplestOption: boolean }>>(arch.techStack, [])
+      if (tech.length) {
+        L.push('| Area | Recommendation | Rationale | Trade-offs | Simplest option |')
+        L.push('| --- | --- | --- | --- | --- |')
+        for (const t of tech) {
+          L.push(`| ${esc(t.area)} | ${esc(t.choice)} | ${esc(t.rationale)} | ${esc(t.tradeOffs)} | ${t.simplestOption ? 'yes' : 'no'} |`)
+        }
+        L.push('')
+      }
+      const integrations = parse<Array<{ system: string; purpose: string; necessity: string }>>(arch.integrations, [])
+      if (integrations.length) {
+        L.push(`**Integrations:** ${integrations.map((i) => `${i.system} — ${i.purpose} (${i.necessity})`).join(' · ')}`)
+        L.push('')
+      }
+      if (arch.notes) {
+        L.push(`**Notes:** ${arch.notes}`)
+        L.push('')
+      }
+    }
+
+    // 04 — UI/UX Specification
+    L.push('## 04 — UI/UX Specification')
+    L.push('')
+    for (const s of confirmedScreens) {
+      L.push(`#### ${s.code} — ${s.name}${s.nameAr ? ` (${s.nameAr})` : ''}`)
+      L.push('')
+      if (s.route) L.push(`**Route:** \`${s.route}\` · **Roles:** ${parse<string[]>(s.roles, []).join(', ') || 'all'}`)
+      if (s.purpose) L.push(`**Purpose:** ${s.purpose}`)
+      L.push('')
+      const elements = parse<Array<{ element: string; behavior: string }>>(s.elements, [])
+      if (elements.length) {
+        L.push('| Element | Behavior |')
+        L.push('| --- | --- |')
+        for (const el of elements) L.push(`| ${esc(el.element)} | ${esc(el.behavior)} |`)
+        L.push('')
+      }
+      const states = parse<{ loading?: string; empty?: string; error?: string }>(s.states, {})
+      L.push(`**States** — Loading: ${states.loading ?? '—'} · Empty: ${states.empty ?? '—'} · Error: ${states.error ?? '—'}`)
+      L.push('')
+      if (s.rtlNote) L.push(`**RTL:** ${s.rtlNote}`)
+      const linkedReqs = parse<string[]>(s.linkedRequirements, [])
+      if (linkedReqs.length) L.push(`**Implements:** ${linkedReqs.join(', ')}`)
+      L.push('')
+    }
+
+    // 05 — Quality & Operations
+    L.push('## 05 — Quality & Operations')
+    L.push('')
+    L.push('### Non-functional requirements')
+    L.push('')
+    L.push('| Code | Requirement | Category | Acceptance criteria |')
+    L.push('| --- | --- | --- | --- |')
+    for (const r of nfrs) {
+      L.push(`| ${r.code} | ${esc(r.title)} | ${esc(r.category)} | ${esc(parse<string[]>(r.acceptanceCriteria, []).join(' · '))} |`)
+    }
+    L.push('')
+    L.push('### Risk register (with mitigation decisions)')
+    L.push('')
+    L.push('| Code | Category | Risk | Likelihood | Impact | Mitigation | Decision | Basis |')
+    L.push('| --- | --- | --- | --- | --- | --- | --- | --- |')
+    for (const r of reviewedRisks) {
+      L.push(`| ${r.code} | ${r.category} | ${esc(r.description)} | ${r.likelihood} | ${r.impact} | ${esc(r.mitigation)} | ${r.status} | ${r.basis === 'verified_fact' ? 'fact' : 'judgment'} |`)
+    }
+    L.push('')
+    L.push('### Verification strategy')
+    L.push('')
+    L.push('Every confirmed requirement ships with testable acceptance criteria; the implementation is complete only when each passes:')
+    L.push('')
+    for (const r of idea.requirements.filter((x) => x.status === 'confirmed')) {
+      L.push(`- **${r.code} — ${r.title}**`)
+      for (const c of parse<string[]>(r.acceptanceCriteria, [])) L.push(`  - ${c}`)
+    }
+    L.push('')
+
+    // 06 — Implementation Plan
+    L.push('## 06 — Implementation Plan')
+    L.push('')
+    const phases = [...new Set(confirmedTasks.map((t) => t.phase))].sort((a, b) => a - b)
+    for (const phase of phases) {
+      L.push(`### Phase ${phase}`)
+      L.push('')
+      const tasks = confirmedTasks.filter((t) => t.phase === phase)
+      for (const t of tasks) {
+        const deps = parse<string[]>(t.dependsOn, [])
+        L.push(`#### ${t.code} — ${t.title}`)
+        L.push('')
+        L.push(t.description)
+        L.push('')
+        L.push(`**Priority:** ${t.priority} · **Estimate:** ${t.estimate ?? 'M'} · **Deliverable:** ${t.deliverable ?? '—'}${deps.length ? ` · **Depends on:** ${deps.join(', ')}` : ''}`)
+        L.push('')
+        const criteria = parse<string[]>(t.acceptanceCriteria, [])
+        if (criteria.length) {
+          L.push('**Done when:**')
+          L.push('')
+          for (const c of criteria) L.push(`- ${c}`)
+          L.push('')
+        }
+        const reqs = parse<string[]>(t.requirementCodes, [])
+        if (reqs.length) L.push(`**Implements:** ${reqs.join(', ')}`)
+        L.push('')
+      }
+    }
+
+    // Appendix — traceability
+    L.push('## Appendix A — Requirements traceability matrix')
+    L.push('')
+    L.push('| Requirement | Processes | APIs | Screens | Tasks |')
+    L.push('| --- | --- | --- | --- | --- |')
+    for (const r of idea.requirements.filter((x) => x.status === 'confirmed')) {
+      L.push(
+        `| ${r.code} ${esc(r.title)} | ${(procLinks.get(r.code) ?? []).join(', ') || '—'} | ${(apiLinks.get(r.code) ?? []).join(', ') || '—'} | ${(screenLinks.get(r.code) ?? []).join(', ') || '—'} | ${(taskLinks.get(r.code) ?? []).join(', ') || '—'} |`
+      )
+    }
+    L.push('')
+
+    // Appendix — registers
+    L.push('## Appendix B — Assumption register')
+    L.push('')
+    if (idea.assumptions.length === 0) {
+      L.push('No assumptions were tracked for this project.')
+    } else {
+      L.push('| Assumption | Kind | Status |')
+      L.push('| --- | --- | --- |')
+      for (const a of idea.assumptions) L.push(`| ${esc(a.text)} | ${a.kind} | ${a.status} |`)
+    }
+    L.push('')
+    L.push('## Appendix C — Decision history (audit trail)')
+    L.push('')
+    for (const d of idea.decisions) {
+      L.push(`- **${d.action}** — ${d.createdAt.toISOString().slice(0, 16).replace('T', ' ')}${d.detail ? ` — _${d.detail}_` : ''}`)
+    }
+    L.push('')
+
+    return new Response(L.join('\n'), {
+      headers: {
+        'Content-Type': 'text/markdown; charset=utf-8',
+        'Content-Disposition': `attachment; filename="engineering-package-${slug}.md"`,
+      },
+    })
+  } catch (error) {
+    console.error('[api/ideas/[id]/package/export GET]', error)
+    return Response.json({ error: 'Failed to export the engineering package.' }, { status: 500 })
+  }
+}

@@ -11,6 +11,11 @@ import { UnderstandStage } from '@/components/stages/understand'
 import { DiscoverStage } from '@/components/stages/discover'
 import { FeaturesStage } from '@/components/stages/features'
 import { BaselineStage } from '@/components/stages/baseline'
+import { RequirementsStage } from '@/components/stages/requirements'
+import { DesignStage } from '@/components/stages/design'
+import { PlanningStage } from '@/components/stages/planning'
+import { ReadinessStage } from '@/components/stages/readiness'
+import { PackageStage } from '@/components/stages/package'
 import { t as translate } from '@/lib/i18n'
 import {
   Compass,
@@ -109,6 +114,11 @@ function IdeaView() {
         {view === 'discover' && <DiscoverStage detail={detail} />}
         {view === 'features' && <FeaturesStage detail={detail} />}
         {view === 'baseline' && <BaselineStage detail={detail} />}
+        {view === 'requirements' && <RequirementsStage detail={detail} />}
+        {view === 'design' && <DesignStage detail={detail} />}
+        {view === 'planning' && <PlanningStage detail={detail} />}
+        {view === 'readiness' && <ReadinessStage detail={detail} />}
+        {view === 'package' && <PackageStage detail={detail} />}
       </main>
       <p className="sr-only">{t('loading')}</p>
     </div>
@@ -202,9 +212,9 @@ function Shell() {
       <footer className="mt-auto border-t bg-background">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-1 px-4 py-3 text-[11px] text-muted-foreground">
           <span className="font-arabic" dir="rtl">
-            مساعد المخطط — من فكرة إلى مخطط برمجي معتمد
+            مساعد المهندس — لا يُبنى أي شيء على افتراض غير معتمد
           </span>
-          <span dir="ltr">Blueprint Assistant · P0 core · {new Date().getFullYear()}</span>
+          <span dir="ltr">AI Software Engineer · من فكرة إلى حزمة هندسية جاهزة للتنفيذ · {new Date().getFullYear()}</span>
         </div>
       </footer>
 

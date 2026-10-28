@@ -1,8 +1,13 @@
 import { db } from '@/lib/db'
 import { safeParseJson, isProbablyArabic } from '@/lib/json-utils'
+import { computeReadiness } from '@/lib/readiness'
 import type {
+  ApiEndpoint,
+  Architecture,
   Assumption,
   BaselineSnapshot,
+  ConsistencyIssue,
+  DataEntity,
   Decision,
   Feature,
   FeatureStatus,
@@ -10,9 +15,15 @@ import type {
   IdeaListItem,
   IdeaRecord,
   IdeaSummaryData,
+  ImplTask,
   Interpretation,
   Priority,
+  ProcessFlow,
   Question,
+  Requirement,
+  RiskItem,
+  Role,
+  ScreenSpec,
   Stage,
   FeaturesMeta,
 } from '@/lib/types'
@@ -83,6 +94,15 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
       features: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
       assumptions: { orderBy: { createdAt: 'asc' } },
       decisions: { orderBy: { createdAt: 'desc' } },
+      requirements: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      processes: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      entities: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      apiEndpoints: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      screens: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      tasks: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      risks: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      issues: { orderBy: { createdAt: 'desc' } },
+      architecture: true,
     },
   })
   if (!idea) return null
@@ -149,7 +169,178 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
     createdAt: d.createdAt.toISOString(),
   }))
 
-  return { idea: record, questions, features, assumptions, decisions }
+  // ---------- Engineering track ----------
+  const parseJsonArray = <T>(raw: string | null | undefined, fallback: T): T => {
+    if (!raw) return fallback
+    try {
+      return safeParseJson<T>(raw)
+    } catch {
+      return fallback
+    }
+  }
+
+  let roles: Role[] | null = null
+  if (idea.roles) {
+    try {
+      const parsed = safeParseJson<Role[]>(idea.roles)
+      roles = Array.isArray(parsed) ? parsed : null
+    } catch {
+      roles = null
+    }
+  }
+
+  const requirements: Requirement[] = idea.requirements.map((r) => ({
+    id: r.id,
+    code: r.code,
+    type: r.type === 'non_functional' ? 'non_functional' : 'functional',
+    category: r.category,
+    title: r.title,
+    titleAr: r.titleAr,
+    description: r.description,
+    acceptanceCriteria: parseJsonArray<string[]>(r.acceptanceCriteria, []),
+    provenance: r.provenance === 'client' ? 'client' : 'ai',
+    evidence: r.evidence,
+    featureId: r.featureId,
+    priority: r.priority as Priority,
+    status: r.status as Requirement['status'],
+    order: r.order,
+  }))
+
+  const processes: ProcessFlow[] = idea.processes.map((p) => ({
+    id: p.id,
+    code: p.code,
+    name: p.name,
+    nameAr: p.nameAr,
+    trigger: p.trigger,
+    actors: parseJsonArray<string[]>(p.actors, []),
+    steps: parseJsonArray<ProcessFlow['steps']>(p.steps, []),
+    businessRules: parseJsonArray<ProcessFlow['businessRules']>(p.businessRules, []),
+    exceptions: parseJsonArray<string[]>(p.exceptions, []),
+    linkedRequirements: parseJsonArray<string[]>(p.linkedRequirements, []),
+    rationale: p.rationale,
+    status: p.status as ProcessFlow['status'],
+    order: p.order,
+  }))
+
+  const entities: DataEntity[] = idea.entities.map((e) => ({
+    id: e.id,
+    code: e.code,
+    name: e.name,
+    nameAr: e.nameAr,
+    description: e.description,
+    fields: parseJsonArray<DataEntity['fields']>(e.fields, []),
+    relationships: parseJsonArray<DataEntity['relationships']>(e.relationships, []),
+    constraints: parseJsonArray<string[]>(e.constraints, []),
+    rationale: e.rationale,
+    status: e.status as DataEntity['status'],
+    order: e.order,
+  }))
+
+  const apis: ApiEndpoint[] = idea.apiEndpoints.map((a) => ({
+    id: a.id,
+    code: a.code,
+    method: a.method,
+    path: a.path,
+    purpose: a.purpose,
+    auth: a.auth,
+    request: parseJsonArray<ApiEndpoint['request']>(a.request, []),
+    errors: parseJsonArray<ApiEndpoint['errors']>(a.errors, []),
+    linkedRequirements: parseJsonArray<string[]>(a.linkedRequirements, []),
+    linkedEntities: parseJsonArray<string[]>(a.linkedEntities, []),
+    status: a.status as ApiEndpoint['status'],
+    order: a.order,
+  }))
+
+  const screens: ScreenSpec[] = idea.screens.map((s) => ({
+    id: s.id,
+    code: s.code,
+    name: s.name,
+    nameAr: s.nameAr,
+    route: s.route,
+    purpose: s.purpose,
+    roles: parseJsonArray<string[]>(s.roles, []),
+    elements: parseJsonArray<ScreenSpec['elements']>(s.elements, []),
+    states: parseJsonArray<ScreenSpec['states']>(s.states, { loading: '', empty: '', error: '' }),
+    rtlNote: s.rtlNote,
+    linkedRequirements: parseJsonArray<string[]>(s.linkedRequirements, []),
+    status: s.status as ScreenSpec['status'],
+    order: s.order,
+  }))
+
+  const tasks: ImplTask[] = idea.tasks.map((t) => ({
+    id: t.id,
+    code: t.code,
+    title: t.title,
+    titleAr: t.titleAr,
+    description: t.description,
+    phase: t.phase,
+    priority: t.priority as Priority,
+    dependsOn: parseJsonArray<string[]>(t.dependsOn, []),
+    acceptanceCriteria: parseJsonArray<string[]>(t.acceptanceCriteria, []),
+    deliverable: t.deliverable,
+    requirementCodes: parseJsonArray<string[]>(t.requirementCodes, []),
+    estimate: t.estimate,
+    status: t.status as ImplTask['status'],
+    order: t.order,
+  }))
+
+  const risks: RiskItem[] = idea.risks.map((r) => ({
+    id: r.id,
+    code: r.code,
+    category: r.category as RiskItem['category'],
+    description: r.description,
+    likelihood: r.likelihood as RiskItem['likelihood'],
+    impact: r.impact as RiskItem['impact'],
+    mitigation: r.mitigation,
+    basis: r.basis === 'verified_fact' ? 'verified_fact' : 'professional_judgment',
+    status: r.status as RiskItem['status'],
+    order: r.order,
+  }))
+
+  const issues: ConsistencyIssue[] = idea.issues.map((i) => ({
+    id: i.id,
+    kind: i.kind as ConsistencyIssue['kind'],
+    severity: i.severity as ConsistencyIssue['severity'],
+    description: i.description,
+    affected: parseJsonArray<string[]>(i.affected, []),
+    suggestion: i.suggestion,
+    detectedBy: i.detectedBy === 'ai' ? 'ai' : 'engine',
+    status: i.status as ConsistencyIssue['status'],
+    createdAt: i.createdAt.toISOString(),
+  }))
+
+  const architecture: Architecture | null = idea.architecture
+    ? {
+        id: idea.architecture.id,
+        components: parseJsonArray<Architecture['components']>(idea.architecture.components, []),
+        integrations: parseJsonArray<Architecture['integrations']>(idea.architecture.integrations, []),
+        techStack: parseJsonArray<Architecture['techStack']>(idea.architecture.techStack, []),
+        notes: idea.architecture.notes,
+        basis: idea.architecture.basis === 'verified_fact' ? 'verified_fact' : 'professional_judgment',
+        status: idea.architecture.status as Architecture['status'],
+      }
+    : null
+
+  const readiness = await computeReadiness(ideaId)
+
+  return {
+    idea: record,
+    questions,
+    features,
+    assumptions,
+    decisions,
+    roles,
+    requirements,
+    processes,
+    entities,
+    apis,
+    screens,
+    tasks,
+    risks,
+    issues,
+    architecture,
+    readiness,
+  }
 }
 
 export async function buildIdeaList(): Promise<IdeaListItem[]> {

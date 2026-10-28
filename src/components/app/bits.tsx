@@ -3,7 +3,7 @@
 import { Badge } from '@/components/ui/badge'
 import { useApp } from '@/components/app/context'
 import { AREA_LABELS } from '@/lib/i18n'
-import type { FeatureStatus, Priority, Stage } from '@/lib/types'
+import type { FeatureStatus, Priority, ReqStatus, ReviewStatus, Stage } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
 // ============================================================
@@ -29,18 +29,24 @@ export function EnglishText({ children, className }: { children: React.ReactNode
 
 export function StageBadge({ stage }: { stage: Stage }) {
   const { t } = useApp()
-  const label =
-    stage === 'understanding'
-      ? t('stageUnderstanding')
-      : stage === 'discovery'
-        ? t('stageDiscovery')
-        : stage === 'features'
-          ? t('stageFeatures')
-          : t('stageBaseline')
+  const keys: Record<Stage, string> = {
+    understanding: t('stageUnderstanding'),
+    discovery: t('stageDiscovery'),
+    features: t('stageFeatures'),
+    baseline: t('stageBaseline'),
+    requirements: t('stageRequirements'),
+    design: t('stageDesign'),
+    planning: t('stagePlanning'),
+    readiness: t('stageReadiness'),
+    package: t('stagePackage'),
+  }
+  const label = keys[stage] ?? stage
   const tone =
-    stage === 'baseline'
+    stage === 'package'
       ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
-      : 'bg-violet-50 text-violet-700 border-violet-200'
+      : ['requirements', 'design', 'planning', 'readiness'].includes(stage)
+        ? 'bg-teal-50 text-teal-700 border-teal-200'
+        : 'bg-violet-50 text-violet-700 border-violet-200'
   return (
     <Badge variant="outline" className={cn('text-[11px] font-medium', tone)}>
       {label}
@@ -163,5 +169,100 @@ export function WorkingPanel({ steps, className }: { steps: string[]; className?
         ))}
       </div>
     </div>
+  )
+}
+
+// ============================================================
+// Engineering track badges
+// ============================================================
+
+const REVIEW_STYLES: Record<ReviewStatus, string> = {
+  proposed: 'bg-slate-50 text-slate-600 border-slate-200',
+  confirmed: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  rejected: 'bg-red-50 text-red-600 border-red-200',
+  needs_revision: 'bg-amber-50 text-amber-700 border-amber-200',
+}
+
+const REVIEW_KEYS: Record<ReviewStatus, Parameters<ReturnType<typeof useApp>['t']>[0]> = {
+  proposed: 'statusProposed',
+  confirmed: 'statusConfirmed',
+  rejected: 'statusRejected',
+  needs_revision: 'statusNeedsRevision',
+}
+
+export function ReviewBadge({ status }: { status: ReviewStatus }) {
+  const { t } = useApp()
+  return (
+    <Badge variant="outline" className={cn('text-[11px] font-medium whitespace-nowrap', REVIEW_STYLES[status])}>
+      {t(REVIEW_KEYS[status])}
+    </Badge>
+  )
+}
+
+const REQ_STYLES: Record<ReqStatus, string> = {
+  proposed: 'bg-slate-50 text-slate-600 border-slate-200',
+  confirmed: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  rejected: 'bg-red-50 text-red-600 border-red-200',
+  unresolved: 'bg-amber-50 text-amber-700 border-amber-200',
+}
+
+const REQ_KEYS: Record<ReqStatus, Parameters<ReturnType<typeof useApp>['t']>[0]> = {
+  proposed: 'statusProposed',
+  confirmed: 'statusConfirmed',
+  rejected: 'statusRejected',
+  unresolved: 'statusUnresolved',
+}
+
+export function ReqStatusBadge({ status }: { status: ReqStatus }) {
+  const { t } = useApp()
+  return (
+    <Badge variant="outline" className={cn('text-[11px] font-medium whitespace-nowrap', REQ_STYLES[status])}>
+      {t(REQ_KEYS[status])}
+    </Badge>
+  )
+}
+
+export function ProvenanceBadge({ provenance }: { provenance: 'client' | 'ai' }) {
+  const { t } = useApp()
+  return (
+    <Badge
+      variant="outline"
+      className={cn(
+        'text-[10px] font-medium whitespace-nowrap',
+        provenance === 'client' ? 'bg-teal-50 text-teal-700 border-teal-200' : 'bg-violet-50 text-violet-700 border-violet-200'
+      )}
+    >
+      {provenance === 'client' ? t('provenanceClient') : t('provenanceAi')}
+    </Badge>
+  )
+}
+
+export function CodeChip({ code, className }: { code: string; className?: string }) {
+  return (
+    <span
+      dir="ltr"
+      className={cn(
+        'inline-flex items-center rounded-md bg-muted/70 border px-1.5 py-0.5 font-mono text-[10px] font-semibold text-muted-foreground whitespace-nowrap',
+        className
+      )}
+    >
+      {code}
+    </span>
+  )
+}
+
+export function SeverityBadge({ severity }: { severity: 'critical' | 'major' | 'minor' }) {
+  const { t } = useApp()
+  const key = severity === 'critical' ? 'severityCritical' : severity === 'major' ? 'severityMajor' : 'severityMinor'
+  const style =
+    severity === 'critical'
+      ? 'bg-red-50 text-red-600 border-red-200'
+      : severity === 'major'
+        ? 'bg-amber-50 text-amber-700 border-amber-200'
+        : 'bg-slate-50 text-slate-600 border-slate-200'
+  return (
+    <Badge variant="outline" className={cn('text-[10px] font-medium whitespace-nowrap', style)}>
+      {t(key)}
+    </Badge>
   )
 }
