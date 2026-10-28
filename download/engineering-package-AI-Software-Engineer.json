@@ -1,0 +1,3488 @@
+{
+  "product": "AI Software Engineer — engineering package",
+  "exportedAt": "2026-10-28T22:17:20.205Z",
+  "readiness": "locked",
+  "productDefinition": {
+    "title": "AI Software Engineer",
+    "originalText": "The problem i want to solve is not writing code. It is preventing software from being built incorrectly because of incomplete analysis, missing requirements, misunderstood business rules, or poor architecture — and then having to rebuild it from scratch.\n\n### 1\\. The Product We Want to Build\n\n### AI Software Engineer\n\nFrom an idea to an implementation-ready engineering package\n\nUnderstand the Client\n\nEven when they cannot articulate their idea\n\nAnalyze the Problem\n\nDiscover gaps and contradictions\n\nDesign the System\n\nData, processes, and relationships\n\nPrepare for Implementation\n\nDocuments and testable tasks\n\nFinal deliverable\n\n### Software Engineering Package\n\nApproved requirements + architecture + database design + API contracts + UI specifications + implementation plan + tests\n\nThis platform does not need access to my existing projects or code repositories. It acts as a virtual software engineer who sits with a client, understands their needs, analyzes the system, and prepares the complete project specification from scratch.\n\n### 2\\. How Should the Virtual Software Engineer Work?\n\nIt must not treat the user as a programmer. It should treat them as someone who has a problem and wants a software solution.\n\nImagine a user says:\n\n> I want an application that connects merchants with suppliers and helps merchants obtain the best prices.\n\nThis sentence is nowhere near sufficient to build an application. The virtual engineer must not immediately create database tables or choose Laravel, React, or another technology. It must first understand the actual business.\n\n### 01\n\nUnderstand the Problem and Objective\n\nWhat problem does the merchant face today? How do they currently solve it? Who is affected? What outcome do they want to achieve?\n\n### 02\n\nDiscover the Real Business Workflow\n\nHow does a merchant register? How do they find a supplier? How do they request a quotation? What happens if a supplier rejects the request, changes the price, or does not respond? Who makes each decision?\n\n### 03\n\nDiscover Hidden Requirements\n\nAsk about permissions, exceptions, notifications, payments, cancellations, errors, modifications, reporting, privacy, and other scenarios that users may not think to mention.\n\n### 04\n\nTransform the Understanding into a System\n\nDefine users and roles, inputs and outputs, processes, business rules, data entities, relationships, interfaces, and integrations.\n\n### 05\n\nReview and Approve the Analysis\n\nPresent the system understanding to the client in plain language. Let them correct misunderstandings and approve decisions before proceeding to the final design.\n\n### 06\n\nDeliver an Engineering Package\n\nConvert the approved specifications into interconnected documents, dependency-ordered implementation tasks, acceptance criteria, and tests that demonstrate whether each task is complete.\n\n### 3\\. The Core Engines Inside the Platform\n\nI recommend building specialized engines that work together through one unified workflow, rather than creating a collection of disconnected tools.\n\n| Engine                                  | Primary responsibility                                                                                         | Output                                      |\n| --------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |\n| 1. Idea Understanding Engine            | Understand natural language, including dialects, and translate it into precise Arabic and English descriptions | Unified problem and idea definition         |\n| 2. Requirements Discovery Engine        | Conduct interactive interviews and identify missing information                                                | Approved requirements and decision register |\n| 3. Business Process Analysis Engine     | Analyze workflows, inputs, outputs, states, and exceptions",
+    "interpretation": {
+      "title": "AI Software Engineer",
+      "englishInterpretation": "A virtual software engineering platform that translates client ideas into complete project specifications. It conducts thorough business analysis to prevent incorrect software development due to incomplete requirements or misunderstood business rules.",
+      "problemStatement": "Software is often built incorrectly due to incomplete analysis, missing requirements, misunderstood business rules, or poor architecture, leading to costly rebuilds from scratch.",
+      "understood": [
+        "Platform creates complete software engineering packages",
+        "Does not need access to existing code repositories",
+        "Treats users as clients with problems, not programmers",
+        "Uses specialized engines through unified workflow",
+        "Focuses on business understanding before technical design",
+        "Handles natural language understanding with suggestion solutions as options",
+        "Delivers engineering packages in multiple formats (.md, .json)",
+        "Validates client approval through agree/correct buttons"
+      ],
+      "unclear": [
+        "How will complex business rules and exceptions be handled as files?",
+        "What specific formats will be used for different document types?",
+        "How will the platform differentiate between user types (business stakeholders vs engineers)?"
+      ],
+      "assumed": [
+        "Target users include both non-technical business stakeholders and technical staff",
+        "Platform will provide technology recommendations as core response",
+        "Business model is B2B SaaS",
+        "Client interactions will be primarily through chat",
+        "Complex business rules and exceptions will be stored as files"
+      ]
+    },
+    "discoverySummary": {
+      "summaryMarkdown": "## Business problem\nSoftware is often built incorrectly due to incomplete analysis, missing requirements, misunderstood business rules, or poor architecture, leading to costly rebuilds from scratch. All business outcomes are equally affected by incorrect software development.\n\n## Target users\nPrimary decision-makers and influencers in the software development process at target companies are AI agents.\n\n## Product format\nWeb application with responsive design.\n\n## Business model\nFreemium model with premium features.\n\n## User journeys\nNon-technical business stakeholders will interact with the platform through a hybrid approach: structured framework with conversational AI for exceptions.\n\n## Scope\nEnd-to-end specification generation with validation workflow.\n\n## Constraints\nBootstrapped approach with flexible timeline, prioritizing revenue generation early.\n\n## Success criteria\nTechnical performance metrics - accuracy of specifications generated, processing time, and system reliability.",
+      "openRisks": [
+        "Unclear how primary decision-makers and influencers can be 'AI agents' in real business contexts",
+        "No specific details about which premium features will be included in the freemium model",
+        "No information about how the hybrid structured/conversational approach will be implemented",
+        "No technical details about the validation workflow"
+      ]
+    },
+    "discoveryQA": [
+      {
+        "area": "business_problem",
+        "question": "What specific business outcomes are affected by incorrect software development in your target market?",
+        "answer": "All of the above equally"
+      },
+      {
+        "area": "target_users",
+        "question": "Who are the primary decision-makers and influencers in the software development process at your target companies?",
+        "answer": "ai agent"
+      },
+      {
+        "area": "product_format",
+        "question": "What platform format would best serve your users' needs for interacting with the AI Software Engineer?",
+        "answer": "Web application with responsive design"
+      },
+      {
+        "area": "business_model",
+        "question": "How do you envision generating revenue from your AI Software Engineer platform?",
+        "answer": "Freemium model with premium features"
+      },
+      {
+        "area": "user_journeys",
+        "question": "How would a non-technical business stakeholder interact with the platform from initial problem statement to receiving engineering specifications?",
+        "answer": "Hybrid approach: structured framework with conversational AI for exceptions"
+      },
+      {
+        "area": "scope",
+        "question": "What specific components should be included in the first MVP of the AI Software Engineer platform?",
+        "answer": "End-to-end specification generation with validation workflow"
+      },
+      {
+        "area": "constraints",
+        "question": "What are the key technical, budget, and timeline constraints for developing and launching the AI Software Engineer platform?",
+        "answer": "Bootstrapped approach with flexible timeline, prioritizing revenue generation early"
+      },
+      {
+        "area": "success_criteria",
+        "question": "How will you measure the success of the AI Software Engineer platform after launch?",
+        "answer": "Technical performance metrics - accuracy of specifications generated, processing time, and system reliability"
+      }
+    ],
+    "roles": [
+      {
+        "name": "Business Stakeholder",
+        "description": "Non-technical users who define business problems and validate specifications",
+        "permissions": [
+          "Create new projects",
+          "Participate in business rule clarification",
+          "Validate and approve specifications",
+          "Access project dashboards",
+          "Export specifications"
+        ]
+      },
+      {
+        "name": "Administrator",
+        "description": "Users responsible for platform management and oversight",
+        "permissions": [
+          "Manage user accounts",
+          "Access system monitoring dashboard",
+          "Manage subscription plans"
+        ]
+      },
+      {
+        "name": "AI Agent",
+        "description": "Primary decision-makers and influencers in the software development process",
+        "permissions": [
+          "All Business Stakeholder permissions",
+          "Access to technology recommendations",
+          "Full project history access"
+        ]
+      }
+    ],
+    "featureBaseline": [
+      {
+        "module": "Authentication",
+        "feature": "User registration with email verification",
+        "user": "All users",
+        "priority": "must"
+      },
+      {
+        "module": "Authentication",
+        "feature": "Secure login system",
+        "user": "All users",
+        "priority": "must"
+      },
+      {
+        "module": "Project Creation",
+        "feature": "Initialize new project from business problem statement",
+        "user": "Business stakeholders",
+        "priority": "must"
+      },
+      {
+        "module": "Business Analysis",
+        "feature": "Interactive business rule clarification",
+        "user": "Business stakeholders",
+        "priority": "must"
+      },
+      {
+        "module": "Business Analysis",
+        "feature": "Exception handling framework",
+        "user": "Business stakeholders",
+        "priority": "should"
+      },
+      {
+        "module": "Specification Generation",
+        "feature": "Convert business requirements to technical specifications",
+        "user": "All users",
+        "priority": "must"
+      },
+      {
+        "module": "Specification Generation",
+        "feature": "Technology recommendation engine",
+        "user": "All users",
+        "priority": "should"
+      },
+      {
+        "module": "Validation",
+        "feature": "Specification approval workflow",
+        "user": "Business stakeholders",
+        "priority": "must"
+      },
+      {
+        "module": "Validation",
+        "feature": "Correction suggestion interface",
+        "user": "Business stakeholders",
+        "priority": "should"
+      },
+      {
+        "module": "Export",
+        "feature": "Download specifications in markdown format",
+        "user": "All users",
+        "priority": "must"
+      },
+      {
+        "module": "Export",
+        "feature": "Download specifications in JSON format",
+        "user": "All users",
+        "priority": "must"
+      },
+      {
+        "module": "Dashboard",
+        "feature": "Project overview with status tracking",
+        "user": "All users",
+        "priority": "should"
+      },
+      {
+        "module": "Dashboard",
+        "feature": "Access to project history",
+        "user": "All users",
+        "priority": "could"
+      },
+      {
+        "module": "Subscription",
+        "feature": "Freemium account limitations",
+        "user": "All users",
+        "priority": "must"
+      },
+      {
+        "module": "Subscription",
+        "feature": "Premium feature upgrade flow",
+        "user": "All users",
+        "priority": "should"
+      },
+      {
+        "module": "Administration",
+        "feature": "User management interface",
+        "user": "Administrators",
+        "priority": "should"
+      },
+      {
+        "module": "Administration",
+        "feature": "System monitoring dashboard",
+        "user": "Administrators",
+        "priority": "could"
+      }
+    ]
+  },
+  "functionalAnalysis": {
+    "processes": [
+      {
+        "code": "PF-01",
+        "name": "User Registration and Onboarding",
+        "trigger": "User visits the platform for the first time",
+        "actors": [
+          "Business Stakeholder",
+          "Administrator"
+        ],
+        "steps": [
+          {
+            "n": 1,
+            "actor": "Business Stakeholder",
+            "action": "Submit registration information including email and password",
+            "input": "User registration details",
+            "output": "Registration confirmation",
+            "decision": "Is email valid?",
+            "exception": "Invalid email format - prompt user to correct"
+          },
+          {
+            "n": 2,
+            "actor": "System",
+            "action": "Verify email address and create user account",
+            "input": "Registration details",
+            "output": "Verified user account",
+            "decision": "Email verification successful?",
+            "exception": "Email verification timeout - prompt user to resend verification"
+          },
+          {
+            "n": 3,
+            "actor": "Business Stakeholder",
+            "action": "Complete profile setup and select subscription plan",
+            "input": "User preferences",
+            "output": "Completed user profile",
+            "decision": "Is user selecting premium features?",
+            "exception": "Insufficient privileges for premium features - redirect to freemium options"
+          },
+          {
+            "n": 4,
+            "actor": "Administrator",
+            "action": "Review and approve user account (if required)",
+            "input": "New user information",
+            "output": "Approved user account",
+            "decision": "Manual approval required?",
+            "exception": "Suspicious activity flag - initiate additional verification"
+          }
+        ],
+        "businessRules": [
+          {
+            "rule": "Users must verify email before accessing platform features",
+            "linkedRequirements": [
+              "FR-003",
+              "NFR-001"
+            ]
+          },
+          {
+            "rule": "Freemium users have access to basic project creation features only",
+            "linkedRequirements": [
+              "FR-014"
+            ]
+          }
+        ],
+        "exceptions": [
+          "Email verification failure",
+          "Account suspension due to suspicious activity",
+          "Payment processing failure for premium upgrade"
+        ],
+        "linkedRequirements": [
+          "FR-003",
+          "FR-014",
+          "NFR-001",
+          "NFR-002"
+        ]
+      },
+      {
+        "code": "PF-02",
+        "name": "Project Initialization and Business Analysis",
+        "trigger": "User creates a new project",
+        "actors": [
+          "Business Stakeholder",
+          "AI Agent"
+        ],
+        "steps": [
+          {
+            "n": 1,
+            "actor": "Business Stakeholder",
+            "action": "Submit business problem statement",
+            "input": "Business problem description",
+            "output": "Project initialization record",
+            "decision": "Is problem statement clear and complete?",
+            "exception": "Ambiguous problem statement - request clarification"
+          },
+          {
+            "n": 2,
+            "actor": "AI Agent",
+            "action": "Analyze problem statement and identify key requirements",
+            "input": "Business problem statement",
+            "output": "Initial requirements draft",
+            "decision": "Requirements sufficiently identified?",
+            "exception": "Insufficient information - request additional business context"
+          },
+          {
+            "n": 3,
+            "actor": "Business Stakeholder",
+            "action": "Review and clarify business rules through interactive interface",
+            "input": "Initial requirements draft",
+            "output": "Refined business requirements",
+            "decision": "Business rules clearly defined?",
+            "exception": "Unclear business rules - initiate clarification workflow"
+          },
+          {
+            "n": 4,
+            "actor": "AI Agent",
+            "action": "Identify potential exceptions and edge cases",
+            "input": "Business requirements",
+            "output": "Exception scenarios report",
+            "decision": "Critical exceptions identified?",
+            "exception": "Unforeseen exceptions flagged - escalate to stakeholder for review"
+          },
+          {
+            "n": 5,
+            "actor": "Business Stakeholder",
+            "action": "Validate and approve business requirements",
+            "input": "Complete business requirements document",
+            "output": "Approved business requirements",
+            "decision": "Requirements approved?",
+            "exception": "Requirements rejected - initiate revision process"
+          }
+        ],
+        "businessRules": [
+          {
+            "rule": "All projects must undergo business rule clarification before technical specification",
+            "linkedRequirements": [
+              "FR-004",
+              "FR-005"
+            ]
+          },
+          {
+            "rule": "Business stakeholders must approve requirements before proceeding to technical specification",
+            "linkedRequirements": [
+              "FR-008"
+            ]
+          }
+        ],
+        "exceptions": [
+          "Requirements clarification needed",
+          "Business rule conflict resolution required",
+          "Project scope expansion request"
+        ],
+        "linkedRequirements": [
+          "FR-003",
+          "FR-004",
+          "FR-005",
+          "FR-008",
+          "NFR-003"
+        ]
+      },
+      {
+        "code": "PF-03",
+        "name": "Technical Specification Generation",
+        "trigger": "Business requirements approved",
+        "actors": [
+          "AI Agent",
+          "Business Stakeholder"
+        ],
+        "steps": [
+          {
+            "n": 1,
+            "actor": "AI Agent",
+            "action": "Transform business requirements into technical specifications",
+            "input": "Approved business requirements",
+            "output": "Technical specification draft",
+            "decision": "Technical specifications complete?",
+            "exception": "Ambiguous technical requirements - request stakeholder clarification"
+          },
+          {
+            "n": 2,
+            "actor": "AI Agent",
+            "action": "Generate technology recommendations based on requirements",
+            "input": "Technical specification draft",
+            "output": "Technology recommendations report",
+            "decision": "Recommendations aligned with requirements?",
+            "exception": "Technology constraints identified - recommend alternative approaches"
+          },
+          {
+            "n": 3,
+            "actor": "Business Stakeholder",
+            "action": "Review technical specifications and technology recommendations",
+            "input": "Technical specifications and recommendations",
+            "output": "Review feedback",
+            "decision": "Specifications acceptable?",
+            "exception": "Specifications require modification - initiate correction workflow"
+          },
+          {
+            "n": 4,
+            "actor": "AI Agent",
+            "action": "Incorporate feedback and finalize specifications",
+            "input": "Review feedback",
+            "output": "Final technical specifications",
+            "decision": "Specifications approved?",
+            "exception": "Unresolved issues - escalate to stakeholder for decision"
+          },
+          {
+            "n": 5,
+            "actor": "System",
+            "action": "Generate project documentation in multiple formats",
+            "input": "Final technical specifications",
+            "output": "Documentation in markdown and JSON formats",
+            "decision": "Documentation generated successfully?",
+            "exception": "Format conversion error - retry with alternative method"
+          }
+        ],
+        "businessRules": [
+          {
+            "rule": "Technical specifications must be validated by business stakeholders before finalization",
+            "linkedRequirements": [
+              "FR-006",
+              "FR-007",
+              "FR-008"
+            ]
+          },
+          {
+            "rule": "All final specifications must be available in both markdown and JSON formats",
+            "linkedRequirements": [
+              "FR-010",
+              "FR-011"
+            ]
+          }
+        ],
+        "exceptions": [
+          "Specification clarification needed",
+          "Technology recommendation conflicts",
+          "Format conversion failure"
+        ],
+        "linkedRequirements": [
+          "FR-006",
+          "FR-007",
+          "FR-008",
+          "FR-009",
+          "FR-010",
+          "FR-011",
+          "NFR-003"
+        ]
+      },
+      {
+        "code": "PF-04",
+        "name": "Project Management and Monitoring",
+        "trigger": "Project creation or status change",
+        "actors": [
+          "Business Stakeholder",
+          "Administrator",
+          "AI Agent"
+        ],
+        "steps": [
+          {
+            "n": 1,
+            "actor": "System",
+            "action": "Track project progress and status updates",
+            "input": "Project data and milestones",
+            "output": "Project status report",
+            "decision": "Project on track?",
+            "exception": "Project delays detected - notify stakeholders"
+          },
+          {
+            "n": 2,
+            "actor": "Business Stakeholder",
+            "action": "Access project dashboard and review status",
+            "input": "Project status report",
+            "output": "Stakeholder review",
+            "decision": "Status update required?",
+            "exception": "Unusual activity flagged - request additional information"
+          },
+          {
+            "n": 3,
+            "actor": "AI Agent",
+            "action": "Maintain project history and version control",
+            "input": "Project updates and changes",
+            "output": "Project history log",
+            "decision": "History maintained successfully?",
+            "exception": "Version conflict detected - initiate resolution workflow"
+          },
+          {
+            "n": 4,
+            "actor": "Administrator",
+            "action": "Monitor system performance and resource usage",
+            "input": "System metrics",
+            "output": "System performance report",
+            "decision": "System performance within acceptable parameters?",
+            "exception": "Performance issues detected - initiate optimization process"
+          },
+          {
+            "n": 5,
+            "actor": "Administrator",
+            "action": "Manage user accounts and subscription plans",
+            "input": "User activity data",
+            "output": "Account management actions",
+            "decision": "Account modifications required?",
+            "exception": "Suspicious account activity - initiate review process"
+          }
+        ],
+        "businessRules": [
+          {
+            "rule": "Project status must be visible to all stakeholders in real-time",
+            "linkedRequirements": [
+              "FR-012",
+              "FR-013"
+            ]
+          },
+          {
+            "rule": "System administrators must monitor platform performance and user activity",
+            "linkedRequirements": [
+              "FR-016",
+              "FR-017"
+            ]
+          }
+        ],
+        "exceptions": [
+          "Project deadline extension request",
+          "System performance degradation",
+          "User access violation"
+        ],
+        "linkedRequirements": [
+          "FR-012",
+          "FR-013",
+          "FR-016",
+          "FR-017",
+          "NFR-005",
+          "NFR-006"
+        ]
+      },
+      {
+        "code": "PF-05",
+        "name": "Specification Validation and Approval",
+        "trigger": "Technical specifications generated",
+        "actors": [
+          "Business Stakeholder",
+          "AI Agent"
+        ],
+        "steps": [
+          {
+            "n": 1,
+            "actor": "Business Stakeholder",
+            "action": "Review generated specifications against original requirements",
+            "input": "Technical specifications and business requirements",
+            "output": "Review feedback",
+            "decision": "Specifications meet requirements?",
+            "exception": "Specifications incomplete - request revisions"
+          },
+          {
+            "n": 2,
+            "actor": "AI Agent",
+            "action": "Provide correction suggestions for identified issues",
+            "input": "Review feedback",
+            "output": "Correction suggestions",
+            "decision": "Suggestions acceptable?",
+            "exception": "Unresolvable issues - escalate to stakeholder"
+          },
+          {
+            "n": 3,
+            "actor": "Business Stakeholder",
+            "action": "Accept or reject specifications with feedback",
+            "input": "Correction suggestions",
+            "output": "Approval decision",
+            "decision": "Specifications approved?",
+            "exception": "Specifications rejected - initiate revision process"
+          },
+          {
+            "n": 4,
+            "actor": "AI Agent",
+            "action": "Finalize specifications based on approval decision",
+            "input": "Approval decision",
+            "output": "Final approved specifications",
+            "decision": "Finalization successful?",
+            "exception": "Finalization error - retry with alternative approach"
+          },
+          {
+            "n": 5,
+            "actor": "System",
+            "action": "Update project status and notify stakeholders",
+            "input": "Final approved specifications",
+            "output": "Project status update",
+            "decision": "Notification successful?",
+            "exception": "Notification failure - retry through alternative channel"
+          }
+        ],
+        "businessRules": [
+          {
+            "rule": "Business stakeholders must explicitly approve specifications before project completion",
+            "linkedRequirements": [
+              "FR-008",
+              "FR-009"
+            ]
+          },
+          {
+            "rule": "All specification changes must be tracked and documented",
+            "linkedRequirements": [
+              "FR-013"
+            ]
+          }
+        ],
+        "exceptions": [
+          "Specification revision required",
+          "Approval escalation needed",
+          "Notification delivery failure"
+        ],
+        "linkedRequirements": [
+          "FR-008",
+          "FR-009",
+          "FR-013",
+          "NFR-003"
+        ]
+      }
+    ]
+  },
+  "dataAndApi": {
+    "erd": "erDiagram\n  User {\n    string id PK\n  }\n  Project {\n    string id PK\n  }\n  BusinessRule {\n    string id PK\n  }\n  Specification {\n    string id PK\n  }\n  Approval {\n    string id PK\n  }\n  Exception {\n    string id PK\n  }\n  Export {\n    string id PK\n  }\n  SystemLog {\n    string id PK\n  }\n  User ||--o{ Project : \"one-to-many\"\n  User ||--o{ Approval : \"one-to-many\"\n  Project ||--o{ BusinessRule : \"one-to-many\"\n  Project ||--o{ Specification : \"one-to-many\"\n  Project ||--o{ Approval : \"one-to-many\"\n  Project ||--o{ Exception : \"one-to-many\"\n  BusinessRule ||--o{ Project : \"many-to-one\"\n  Specification ||--o{ Project : \"many-to-one\"\n  Specification ||--o{ Approval : \"one-to-many\"\n  Specification ||--o{ Export : \"one-to-many\"\n  Approval ||--o{ User : \"many-to-one\"\n  Approval ||--o{ Specification : \"many-to-one\"\n  Exception ||--o{ Project : \"many-to-one\"\n  Export ||--o{ Specification : \"many-to-one\"\n  Export ||--o{ User : \"many-to-one\"",
+    "entities": [
+      {
+        "code": "ENT-01",
+        "name": "User",
+        "fields": [
+          {
+            "name": "email",
+            "type": "string",
+            "required": true,
+            "unique": true,
+            "description": "Primary email address for user account and communication."
+          },
+          {
+            "name": "passwordHash",
+            "type": "string",
+            "required": true,
+            "unique": false,
+            "description": "Securely hashed password for authentication."
+          },
+          {
+            "name": "role",
+            "type": "enum",
+            "required": true,
+            "unique": false,
+            "description": "Defines user permissions: business_stakeholder, administrator, ai_agent."
+          },
+          {
+            "name": "subscriptionTier",
+            "type": "enum",
+            "required": true,
+            "unique": false,
+            "description": "Account subscription level: freemium or premium."
+          },
+          {
+            "name": "isVerified",
+            "type": "boolean",
+            "required": false,
+            "unique": false,
+            "description": "Flag indicating if the user's email has been verified."
+          },
+          {
+            "name": "company_name",
+            "type": "string",
+            "required": true,
+            "unique": false,
+            "description": "Name of the user's company"
+          }
+        ],
+        "relationships": [
+          {
+            "target": "Project",
+            "type": "one-to-many",
+            "description": "A user can create and manage multiple projects."
+          },
+          {
+            "target": "Approval",
+            "type": "one-to-many",
+            "description": "A user can provide approvals for multiple specification documents."
+          }
+        ],
+        "constraints": [
+          "A user must have a unique email address.",
+          "A user's subscription tier must be either 'freemium' or 'premium'."
+        ]
+      },
+      {
+        "code": "ENT-02",
+        "name": "Project",
+        "fields": [
+          {
+            "name": "title",
+            "type": "string",
+            "required": true,
+            "unique": false,
+            "description": "A descriptive name for the software engineering project."
+          },
+          {
+            "name": "businessProblem",
+            "type": "text",
+            "required": true,
+            "unique": false,
+            "description": "The initial problem statement from the business stakeholder."
+          },
+          {
+            "name": "status",
+            "type": "enum",
+            "required": true,
+            "unique": false,
+            "description": "Current state of the project: draft, analysis, specification, approved, completed."
+          },
+          {
+            "name": "ownerId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "ID of the user who owns the project.",
+            "refEntity": "User"
+          }
+        ],
+        "relationships": [
+          {
+            "target": "BusinessRule",
+            "type": "one-to-many",
+            "description": "A project contains multiple business rules that define its requirements."
+          },
+          {
+            "target": "Specification",
+            "type": "one-to-many",
+            "description": "A project can have multiple versions of technical specifications."
+          },
+          {
+            "target": "Approval",
+            "type": "one-to-many",
+            "description": "A project can have multiple approval records for its specifications."
+          },
+          {
+            "target": "Exception",
+            "type": "one-to-many",
+            "description": "A project can have multiple exceptions handled during its lifecycle."
+          }
+        ],
+        "constraints": [
+          "A project must have exactly one owner.",
+          "A project's status must transition through defined stages."
+        ]
+      },
+      {
+        "code": "ENT-03",
+        "name": "BusinessRule",
+        "fields": [
+          {
+            "name": "statement",
+            "type": "text",
+            "required": true,
+            "unique": false,
+            "description": "The clear, formal statement of the business rule."
+          },
+          {
+            "name": "clarification",
+            "type": "text",
+            "required": false,
+            "unique": false,
+            "description": "Additional context or clarification provided by the AI or user."
+          },
+          {
+            "name": "projectId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "The project this business rule belongs to.",
+            "refEntity": "Project"
+          }
+        ],
+        "relationships": [
+          {
+            "target": "Project",
+            "type": "many-to-one",
+            "description": "Multiple business rules belong to a single project."
+          }
+        ],
+        "constraints": [
+          "A business rule must be associated with exactly one project."
+        ]
+      },
+      {
+        "code": "ENT-04",
+        "name": "Specification",
+        "fields": [
+          {
+            "name": "version",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "Version number of the specification, incremented on each update."
+          },
+          {
+            "name": "content",
+            "type": "json",
+            "required": true,
+            "unique": false,
+            "description": "The structured technical specification content."
+          },
+          {
+            "name": "format",
+            "type": "enum",
+            "required": true,
+            "unique": false,
+            "description": "The format of the specification: 'markdown' or 'json'."
+          },
+          {
+            "name": "projectId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "The project this specification belongs to.",
+            "refEntity": "Project"
+          },
+          {
+            "name": "recommendedTechnology",
+            "type": "string",
+            "required": false,
+            "unique": false,
+            "description": "Technology stack recommended by the AI engine."
+          }
+        ],
+        "relationships": [
+          {
+            "target": "Project",
+            "type": "many-to-one",
+            "description": "Multiple specification versions can belong to a single project."
+          },
+          {
+            "target": "Approval",
+            "type": "one-to-many",
+            "description": "A specification can have multiple approval attempts or corrections."
+          },
+          {
+            "target": "Export",
+            "type": "one-to-many",
+            "description": "A specification can be exported in multiple formats."
+          }
+        ],
+        "constraints": [
+          "A specification must be associated with exactly one project.",
+          "A specification version must be unique within its project."
+        ]
+      },
+      {
+        "code": "ENT-05",
+        "name": "Approval",
+        "fields": [
+          {
+            "name": "status",
+            "type": "enum",
+            "required": true,
+            "unique": false,
+            "description": "The outcome of the approval action: 'agreed' or 'correct'."
+          },
+          {
+            "name": "comment",
+            "type": "text",
+            "required": false,
+            "unique": false,
+            "description": "Optional feedback or correction suggestion from the user."
+          },
+          {
+            "name": "userId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "The user who provided the approval or correction.",
+            "refEntity": "User"
+          },
+          {
+            "name": "specificationId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "The specification being approved.",
+            "refEntity": "Specification"
+          }
+        ],
+        "relationships": [
+          {
+            "target": "User",
+            "type": "many-to-one",
+            "description": "An approval is given by one user."
+          },
+          {
+            "target": "Specification",
+            "type": "many-to-one",
+            "description": "An approval is for one specific specification."
+          }
+        ],
+        "constraints": [
+          "An approval must reference exactly one user and one specification."
+        ]
+      },
+      {
+        "code": "ENT-06",
+        "name": "Exception",
+        "fields": [
+          {
+            "name": "description",
+            "type": "text",
+            "required": true,
+            "unique": false,
+            "description": "Detailed description of the exceptional case."
+          },
+          {
+            "name": "scenario",
+            "type": "text",
+            "required": true,
+            "unique": false,
+            "description": "The specific scenario in which the exception occurs."
+          },
+          {
+            "name": "resolution",
+            "type": "text",
+            "required": false,
+            "unique": false,
+            "description": "The proposed or implemented resolution for the exception."
+          },
+          {
+            "name": "projectId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "The project this exception belongs to.",
+            "refEntity": "Project"
+          }
+        ],
+        "relationships": [
+          {
+            "target": "Project",
+            "type": "many-to-one",
+            "description": "Multiple exceptions can belong to a single project."
+          }
+        ],
+        "constraints": [
+          "An exception must be associated with exactly one project."
+        ]
+      },
+      {
+        "code": "ENT-07",
+        "name": "Export",
+        "fields": [
+          {
+            "name": "format",
+            "type": "enum",
+            "required": true,
+            "unique": false,
+            "description": "The format of the exported file: 'markdown' or 'json'."
+          },
+          {
+            "name": "downloadUrl",
+            "type": "string",
+            "required": true,
+            "unique": false,
+            "description": "The URL to access the downloaded file."
+          },
+          {
+            "name": "timestamp",
+            "type": "datetime",
+            "required": true,
+            "unique": false,
+            "description": "The date and time of the export."
+          },
+          {
+            "name": "specificationId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "The specification that was exported.",
+            "refEntity": "Specification"
+          },
+          {
+            "name": "userId",
+            "type": "integer",
+            "required": true,
+            "unique": false,
+            "description": "The user who initiated the export.",
+            "refEntity": "User"
+          }
+        ],
+        "relationships": [
+          {
+            "target": "Specification",
+            "type": "many-to-one",
+            "description": "An export is for one specific specification version."
+          },
+          {
+            "target": "User",
+            "type": "many-to-one",
+            "description": "An export action is performed by one user."
+          }
+        ],
+        "constraints": [
+          "An export must reference exactly one user and one specification."
+        ]
+      },
+      {
+        "code": "ENT-08",
+        "name": "SystemLog",
+        "fields": [
+          {
+            "name": "event",
+            "type": "string",
+            "required": true,
+            "unique": false,
+            "description": "The name of the event that occurred (e.g., 'user_login', 'specification_generated')."
+          },
+          {
+            "name": "details",
+            "type": "json",
+            "required": false,
+            "unique": false,
+            "description": "Additional data about the event, such as user ID, project ID, or error message."
+          },
+          {
+            "name": "severity",
+            "type": "enum",
+            "required": true,
+            "unique": false,
+            "description": "The severity level of the event: 'info', 'warning', 'error'."
+          },
+          {
+            "name": "timestamp",
+            "type": "datetime",
+            "required": true,
+            "unique": false,
+            "description": "The exact time the event was logged."
+          }
+        ],
+        "relationships": [],
+        "constraints": [
+          "A system log entry must have a valid severity level."
+        ]
+      }
+    ],
+    "apis": [
+      {
+        "code": "API-01",
+        "method": "POST",
+        "path": "/api/v1/users",
+        "purpose": "Register a new user account with email verification",
+        "auth": "any authenticated user",
+        "request": [
+          {
+            "field": "email",
+            "type": "string",
+            "required": true,
+            "notes": "Valid email address"
+          },
+          {
+            "field": "password",
+            "type": "string",
+            "required": true,
+            "notes": "Min 8 chars, must include uppercase, lowercase, number"
+          },
+          {
+            "field": "company_name",
+            "type": "string",
+            "required": true,
+            "notes": "Name of the user's company"
+          }
+        ],
+        "errors": [
+          {
+            "code": "400 VALIDATION",
+            "when": "Invalid email or password format"
+          },
+          {
+            "code": "409 EMAIL_EXISTS",
+            "when": "Email already registered"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-003"
+        ]
+      },
+      {
+        "code": "API-02",
+        "method": "POST",
+        "path": "/api/v1/auth/login",
+        "purpose": "Secure user authentication and session creation",
+        "auth": "any authenticated user",
+        "request": [
+          {
+            "field": "email",
+            "type": "string",
+            "required": true,
+            "notes": "Valid email address"
+          },
+          {
+            "field": "password",
+            "type": "string",
+            "required": true,
+            "notes": "User's password"
+          }
+        ],
+        "errors": [
+          {
+            "code": "401 INVALID_CREDENTIALS",
+            "when": "Email or password is incorrect"
+          },
+          {
+            "code": "401 ACCOUNT_VERIFICATION_REQUIRED",
+            "when": "User email not verified"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-003"
+        ]
+      },
+      {
+        "code": "API-03",
+        "method": "POST",
+        "path": "/api/v1/projects",
+        "purpose": "Initialize a new project from business problem statement",
+        "auth": "business stakeholder",
+        "request": [
+          {
+            "field": "title",
+            "type": "string",
+            "required": true,
+            "notes": "Project title"
+          },
+          {
+            "field": "business_problem",
+            "type": "string",
+            "required": true,
+            "notes": "Detailed description of the business problem"
+          },
+          {
+            "field": "industry",
+            "type": "string",
+            "required": true,
+            "notes": "Client's industry sector"
+          }
+        ],
+        "errors": [
+          {
+            "code": "400 VALIDATION",
+            "when": "Missing required fields or invalid data"
+          },
+          {
+            "code": "403 SUBSCRIPTION_LIMIT",
+            "when": "Free tier reached project limit"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-003",
+          "FR-014"
+        ]
+      },
+      {
+        "code": "API-04",
+        "method": "GET",
+        "path": "/api/v1/projects/{project_id}/business-rules",
+        "purpose": "Retrieve interactive business rules for a project",
+        "auth": "business stakeholder",
+        "request": [],
+        "errors": [
+          {
+            "code": "404 PROJECT_NOT_FOUND",
+            "when": "Project does not exist or user lacks access"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-004"
+        ]
+      },
+      {
+        "code": "API-05",
+        "method": "PATCH",
+        "path": "/api/v1/projects/{project_id}/business-rules",
+        "purpose": "Update business rules based on clarification",
+        "auth": "business stakeholder",
+        "request": [
+          {
+            "field": "rules",
+            "type": "array",
+            "required": true,
+            "notes": "Array of updated business rule objects"
+          }
+        ],
+        "errors": [
+          {
+            "code": "400 VALIDATION",
+            "when": "Invalid rule format or structure"
+          },
+          {
+            "code": "404 PROJECT_NOT_FOUND",
+            "when": "Project does not exist or user lacks access"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-004",
+          "FR-005"
+        ]
+      },
+      {
+        "code": "API-06",
+        "method": "POST",
+        "path": "/api/v1/projects/{project_id}/specifications",
+        "purpose": "Generate technical specifications from business requirements",
+        "auth": "business stakeholder",
+        "request": [
+          {
+            "field": "technology_preferences",
+            "type": "array",
+            "required": false,
+            "notes": "Optional preferred technologies"
+          }
+        ],
+        "errors": [
+          {
+            "code": "400 VALIDATION",
+            "when": "Invalid technology preference format"
+          },
+          {
+            "code": "422 INSUFFICIENT_DATA",
+            "when": "Business rules are incomplete for generation"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-006",
+          "FR-007"
+        ]
+      },
+      {
+        "code": "API-07",
+        "method": "POST",
+        "path": "/api/v1/projects/{project_id}/approvals",
+        "purpose": "Submit specification for approval with agree/correct",
+        "auth": "business stakeholder",
+        "request": [
+          {
+            "field": "action",
+            "type": "string",
+            "required": true,
+            "notes": "Must be 'agree' or 'correct'"
+          },
+          {
+            "field": "corrections",
+            "type": "string",
+            "required": false,
+            "notes": "Required if action is 'correct', describing changes"
+          },
+          {
+            "field": "new_version",
+            "type": "integer",
+            "required": true,
+            "notes": "The new version number for the specification after approval"
+          }
+        ],
+        "errors": [
+          {
+            "code": "400 VALIDATION",
+            "when": "Invalid action or missing corrections when required"
+          },
+          {
+            "code": "409 ALREADY_APPROVED",
+            "when": "Specification already approved"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-008",
+          "FR-009"
+        ]
+      },
+      {
+        "code": "API-08",
+        "method": "GET",
+        "path": "/api/v1/projects/{project_id}/specifications/export/{format}",
+        "purpose": "Download specifications in markdown or JSON format",
+        "auth": "any authenticated user",
+        "request": [],
+        "errors": [
+          {
+            "code": "404 PROJECT_NOT_FOUND",
+            "when": "Project does not exist or user lacks access"
+          },
+          {
+            "code": "422 NO_SPECIFICATIONS",
+            "when": "No specifications generated for the project"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-010",
+          "FR-011"
+        ]
+      },
+      {
+        "code": "API-09",
+        "method": "GET",
+        "path": "/api/v1/dashboard",
+        "purpose": "Project overview with status tracking",
+        "auth": "any authenticated user",
+        "request": [],
+        "errors": [
+          {
+            "code": "404 USER_NOT_FOUND",
+            "when": "User account does not exist"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-012"
+        ]
+      },
+      {
+        "code": "API-10",
+        "method": "GET",
+        "path": "/api/v1/projects/{project_id}/history",
+        "purpose": "Access to project history and changes",
+        "auth": "any authenticated user",
+        "request": [
+          {
+            "field": "version",
+            "type": "string",
+            "required": false,
+            "notes": "Optional version to retrieve"
+          }
+        ],
+        "errors": [
+          {
+            "code": "404 PROJECT_NOT_FOUND",
+            "when": "Project does not exist or user lacks access"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-013"
+        ]
+      },
+      {
+        "code": "API-11",
+        "method": "PATCH",
+        "path": "/api/v1/subscription",
+        "purpose": "Upgrade account to premium features",
+        "auth": "any authenticated user",
+        "request": [
+          {
+            "field": "plan",
+            "type": "string",
+            "required": true,
+            "notes": "Must be 'premium'"
+          }
+        ],
+        "errors": [
+          {
+            "code": "400 VALIDATION",
+            "when": "Invalid plan selection"
+          },
+          {
+            "code": "402 PAYMENT_REQUIRED",
+            "when": "Payment processing failed"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-014"
+        ]
+      },
+      {
+        "code": "API-12",
+        "method": "GET",
+        "path": "/api/v1/admin/users",
+        "purpose": "User management interface for administrators",
+        "auth": "administrator",
+        "request": [
+          {
+            "field": "status",
+            "type": "string",
+            "required": false,
+            "notes": "Filter by user status (active, suspended)"
+          }
+        ],
+        "errors": [
+          {
+            "code": "403 INSUFFICIENT_PRIVILEGES",
+            "when": "User is not an administrator"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-016"
+        ]
+      },
+      {
+        "code": "API-13",
+        "method": "GET",
+        "path": "/api/v1/admin/system/monitoring",
+        "purpose": "System monitoring dashboard for administrators",
+        "auth": "administrator",
+        "request": [],
+        "errors": [
+          {
+            "code": "403 INSUFFICIENT_PRIVILEGES",
+            "when": "User is not an administrator"
+          }
+        ],
+        "linkedRequirements": [
+          "FR-017"
+        ]
+      }
+    ]
+  },
+  "uiUx": [
+    {
+      "code": "SCR-01",
+      "name": "Login",
+      "route": "/login",
+      "roles": [
+        "Business Stakeholder",
+        "Administrator",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Email Input",
+          "behavior": "User enters email address; triggers validation on blur"
+        },
+        {
+          "element": "Password Input",
+          "behavior": "User enters password; shows/hides password toggle"
+        },
+        {
+          "element": "Login Button",
+          "behavior": "Submits credentials; validates and redirects to dashboard on success"
+        },
+        {
+          "element": "Forgot Password Link",
+          "behavior": "Navigates to password recovery page"
+        }
+      ],
+      "states": {
+        "loading": "Login button shows spinner while credentials are being verified",
+        "empty": "Form shows empty fields with placeholder text",
+        "error": "Error message appears below email input for invalid credentials"
+      },
+      "rtlNote": "Form layout mirrors for RTL, with email/password fields aligned to the right",
+      "linkedRequirements": [
+        "NFR-001",
+        "NFR-002"
+      ]
+    },
+    {
+      "code": "SCR-02",
+      "name": "Project Creation",
+      "route": "/projects/create",
+      "roles": [
+        "Business Stakeholder",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Business Problem Textarea",
+          "behavior": "User enters problem description; AI provides contextual suggestions"
+        },
+        {
+          "element": "Project Name Input",
+          "behavior": "User enters project title; validates for uniqueness"
+        },
+        {
+          "element": "Industry Selector",
+          "behavior": "User selects industry from dropdown; filters relevant templates"
+        },
+        {
+          "element": "Create Project Button",
+          "behavior": "Submits project details; initializes business analysis workflow"
+        }
+      ],
+      "states": {
+        "loading": "Create button shows spinner while project is being initialized",
+        "empty": "Form shows placeholder text in all fields",
+        "error": "Error message appears below invalid fields with specific feedback"
+      },
+      "rtlNote": "Text area supports RTL text input, dropdown options display mirrored",
+      "linkedRequirements": [
+        "FR-003",
+        "FR-004"
+      ]
+    },
+    {
+      "code": "SCR-03",
+      "name": "Business Analysis",
+      "route": "/projects/:id/analysis",
+      "roles": [
+        "Business Stakeholder",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Rule Clarification Card",
+          "behavior": "AI presents rule interpretation; user can confirm or request modification"
+        },
+        {
+          "element": "Exception Input",
+          "behavior": "User defines exceptions to rules; AI suggests edge cases"
+        },
+        {
+          "element": "Clarification History",
+          "behavior": "Shows previous clarifications with timestamps"
+        },
+        {
+          "element": "Next Phase Button",
+          "behavior": "Advances to specification generation when all rules are clarified"
+        }
+      ],
+      "states": {
+        "loading": "Cards show skeleton loaders while AI generates clarifications",
+        "empty": "No rules displayed; prompt to add business requirements",
+        "error": "Error message appears when AI clarification fails"
+      },
+      "rtlNote": "Card layout mirrors, text fields support bidirectional content",
+      "linkedRequirements": [
+        "FR-004",
+        "FR-005"
+      ]
+    },
+    {
+      "code": "SCR-04",
+      "name": "Specification Generation",
+      "route": "/projects/:id/specifications",
+      "roles": [
+        "Business Stakeholder",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Specification Preview",
+          "behavior": "Shows generated specs in expandable sections; user can expand/collapse"
+        },
+        {
+          "element": "Technology Recommendation",
+          "behavior": "Presents tech stack with justification; user can request alternatives"
+        },
+        {
+          "element": "Regenerate Button",
+          "behavior": "Triggers re-generation with different parameters or focus"
+        },
+        {
+          "element": "Approve Button",
+          "behavior": "Submits for validation workflow; locks editing"
+        }
+      ],
+      "states": {
+        "loading": "Preview area shows skeleton while specs are being generated",
+        "empty": "No specifications generated; prompt to complete business analysis",
+        "error": "Error message appears when generation fails with retry option"
+      },
+      "rtlNote": "Code blocks maintain original direction, UI elements mirror",
+      "linkedRequirements": [
+        "FR-006",
+        "FR-007",
+        "FR-008"
+      ]
+    },
+    {
+      "code": "SCR-05",
+      "name": "Validation",
+      "route": "/projects/:id/validation",
+      "roles": [
+        "Business Stakeholder",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Approval Status Indicator",
+          "behavior": "Shows current approval status with progress bar"
+        },
+        {
+          "element": "Correction Suggestion",
+          "behavior": "Highlights suggested corrections with accept/reject options"
+        },
+        {
+          "element": "Comment Section",
+          "behavior": "Allows stakeholders to add approval comments"
+        },
+        {
+          "element": "Final Approval Button",
+          "behavior": "Confirms all corrections; enables export options"
+        }
+      ],
+      "states": {
+        "loading": "Status indicator shows spinner while validation is in progress",
+        "empty": "No suggestions displayed; prompt to review specifications",
+        "error": "Error message appears when validation process fails"
+      },
+      "rtlNote": "Comments support bidirectional text, layout mirrors for approval flow",
+      "linkedRequirements": [
+        "FR-008",
+        "FR-009"
+      ]
+    },
+    {
+      "code": "SCR-06",
+      "name": "Export",
+      "route": "/projects/:id/export",
+      "roles": [
+        "Business Stakeholder",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Format Selector",
+          "behavior": "User chooses between .md and .json formats"
+        },
+        {
+          "element": "Download Button",
+          "behavior": "Triggers file download based on selected format"
+        },
+        {
+          "element": "Preview Panel",
+          "behavior": "Shows live preview of selected format"
+        }
+      ],
+      "states": {
+        "loading": "Download button shows spinner while file is being prepared",
+        "empty": "No project specifications available for export",
+        "error": "Error message appears when export fails"
+      },
+      "rtlNote": "Preview panel maintains original content direction, UI elements mirror",
+      "linkedRequirements": [
+        "FR-010",
+        "FR-011"
+      ]
+    },
+    {
+      "code": "SCR-07",
+      "name": "Dashboard",
+      "route": "/dashboard",
+      "roles": [
+        "Business Stakeholder",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Project List",
+          "behavior": "Shows all projects with status indicators; filters by status"
+        },
+        {
+          "element": "Status Timeline",
+          "behavior": "Visual representation of project progress stages"
+        },
+        {
+          "element": "Quick Actions",
+          "behavior": "Direct access to create new project or view history"
+        },
+        {
+          "element": "Subscription Banner",
+          "behavior": "Shows upgrade options for free tier users"
+        }
+      ],
+      "states": {
+        "loading": "Project list shows skeleton loaders while data is fetched",
+        "empty": "No projects created; prompt to start new project",
+        "error": "Error message appears when dashboard fails to load"
+      },
+      "rtlNote": "List items mirror, timeline flows from right to left in RTL",
+      "linkedRequirements": [
+        "FR-012",
+        "FR-013",
+        "FR-014"
+      ]
+    },
+    {
+      "code": "SCR-08",
+      "name": "Subscription",
+      "route": "/subscription",
+      "roles": [
+        "Business Stakeholder",
+        "AI Agent"
+      ],
+      "elements": [
+        {
+          "element": "Plan Comparison",
+          "behavior": "Side-by-side comparison of free vs premium features"
+        },
+        {
+          "element": "Upgrade Button",
+          "behavior": "Initiates premium subscription checkout process"
+        },
+        {
+          "element": "Usage Tracker",
+          "behavior": "Shows current usage vs free tier limits"
+        },
+        {
+          "element": "Feature Preview",
+          "behavior": "Interactive demo of premium features"
+        }
+      ],
+      "states": {
+        "loading": "Upgrade button shows spinner while processing payment",
+        "empty": "No subscription data; prompt to choose a plan",
+        "error": "Error message appears when upgrade process fails"
+      },
+      "rtlNote": "Comparison table mirrors, currency symbols remain on right",
+      "linkedRequirements": [
+        "FR-014"
+      ]
+    },
+    {
+      "code": "SCR-09",
+      "name": "Admin Dashboard",
+      "route": "/admin",
+      "roles": [
+        "Administrator"
+      ],
+      "elements": [
+        {
+          "element": "User Management Table",
+          "behavior": "Lists all users with role assignment and status controls"
+        },
+        {
+          "element": "System Metrics",
+          "behavior": "Displays real-time performance and usage statistics"
+        },
+        {
+          "element": "Alert Center",
+          "behavior": "Shows system notifications and issues requiring attention"
+        },
+        {
+          "element": "Settings Panel",
+          "behavior": "Allows configuration of system parameters"
+        }
+      ],
+      "states": {
+        "loading": "Metrics show skeleton loaders while data is being fetched",
+        "empty": "No users or alerts; system is in optimal state",
+        "error": "Error message appears when system monitoring fails"
+      },
+      "rtlNote": "Table headers and controls mirror, metrics display unchanged",
+      "linkedRequirements": [
+        "FR-016",
+        "FR-017",
+        "NFR-005"
+      ]
+    }
+  ],
+  "qualityAndOperations": {
+    "nonFunctionalRequirements": [
+      {
+        "code": "NFR-001",
+        "title": "Data Protection",
+        "description": "The platform must protect all user data, including business problem statements and generated specifications, from unauthorized access, breaches, and misuse.",
+        "acceptanceCriteria": [
+          "All user data must be encrypted both in transit (TLS 1.2+) and at rest (AES-256)",
+          "System must undergo annual penetration testing with a maximum of 2 critical vulnerabilities allowed"
+        ]
+      },
+      {
+        "code": "NFR-002",
+        "title": "User Privacy",
+        "description": "The platform must ensure user privacy by collecting only necessary data and providing clear controls over personal information.",
+        "acceptanceCriteria": [
+          "Platform must comply with GDPR and CCPA privacy regulations",
+          "Users must be able to delete their account and all associated data with a single request"
+        ]
+      },
+      {
+        "code": "NFR-003",
+        "title": "Response Performance",
+        "description": "The platform must deliver fast and responsive interactions to maintain user engagement and productivity.",
+        "acceptanceCriteria": [
+          "Average response time for business analysis and specification generation must be under 3 seconds for 95% of requests",
+          "Page load time for initial dashboard must be under 2 seconds on a standard broadband connection"
+        ]
+      },
+      {
+        "code": "NFR-004",
+        "title": "Accessibility",
+        "description": "The platform must be accessible to users with diverse abilities and support multiple languages including Arabic with proper RTL rendering.",
+        "acceptanceCriteria": [
+          "Platform must meet WCAG 2.1 AA accessibility standards",
+          "Arabic interface must display correctly with proper RTL text alignment and support for Arabic characters in all input fields and generated documents"
+        ]
+      },
+      {
+        "code": "NFR-005",
+        "title": "Service Availability",
+        "description": "The platform must be consistently available to users, especially during business hours, to support their software engineering workflows.",
+        "acceptanceCriteria": [
+          "Platform must maintain 99.5% uptime during core business hours (9 AM - 5 PM EST, Monday-Friday)",
+          "System must have automated failover capabilities with a recovery time objective (RTO) of under 15 minutes"
+        ]
+      },
+      {
+        "code": "NFR-006",
+        "title": "Scalability",
+        "description": "The platform must scale to handle increasing user loads and growing project complexity without degradation in service quality.",
+        "acceptanceCriteria": [
+          "System must support a minimum of 10,000 concurrent users without performance degradation",
+          "Architecture must allow horizontal scaling to handle 5x the expected peak load within 30 minutes"
+        ]
+      },
+      {
+        "code": "NFR-007",
+        "title": "Maintainable Architecture",
+        "description": "The platform's codebase and architecture must be designed for long-term maintainability to support continuous improvement and feature additions.",
+        "acceptanceCriteria": [
+          "Code must maintain a test coverage of at least 80% for all critical business logic",
+          "System must support zero-downtime deployments for non-critical updates"
+        ]
+      },
+      {
+        "code": "NFR-008",
+        "title": "Intuitive User Experience",
+        "description": "The platform must provide an intuitive interface that guides non-technical users through the software engineering process without requiring technical expertise.",
+        "acceptanceCriteria": [
+          "Onboarding completion rate for new users must be above 70%",
+          "User satisfaction score (CSAT) for the specification generation workflow must be above 4.0 on a 5-point scale"
+        ]
+      }
+    ],
+    "risks": [
+      {
+        "code": "RSK-01",
+        "category": "security",
+        "description": "The platform handles sensitive business information but lacks explicit data encryption standards for both data at rest and in transit.",
+        "likelihood": "high",
+        "impact": "high",
+        "mitigation": "Implement AES-256 encryption for all stored data and TLS 1.3 for all data transmission, with mandatory key rotation every 90 days.",
+        "decision": "mitigated",
+        "basis": "professional_judgment"
+      },
+      {
+        "code": "RSK-02",
+        "category": "privacy",
+        "description": "User data collected during business analysis could be inadvertently used to train AI models without explicit user consent, violating privacy expectations.",
+        "likelihood": "medium",
+        "impact": "high",
+        "mitigation": "Implement a clear privacy policy with opt-in consent for data usage in model training, and create strict data governance policies preventing unauthorized use.",
+        "decision": "mitigated",
+        "basis": "professional_judgment"
+      },
+      {
+        "code": "RSK-03",
+        "category": "performance",
+        "description": "The hybrid approach of structured framework with conversational AI could lead to unpredictable response times, especially during peak usage.",
+        "likelihood": "high",
+        "impact": "medium",
+        "mitigation": "Implement load testing with simulated user traffic and establish auto-scaling mechanisms for the conversational AI component based on predefined thresholds.",
+        "decision": "mitigated",
+        "basis": "professional_judgment"
+      },
+      {
+        "code": "RSK-04",
+        "category": "operational",
+        "description": "The freemium model with premium features creates complexity in user management and access control that could lead to privilege escalation vulnerabilities.",
+        "likelihood": "medium",
+        "impact": "high",
+        "mitigation": "Implement role-based access control (RBAC) with regular audits of user permissions, especially during subscription upgrades and downgrades.",
+        "decision": "mitigated",
+        "basis": "verified_fact"
+      },
+      {
+        "code": "RSK-05",
+        "category": "financial",
+        "description": "The bootstrapped approach with early revenue prioritization may lead to underinvestment in security infrastructure, creating long-term financial risk from potential breaches.",
+        "likelihood": "high",
+        "impact": "high",
+        "mitigation": "Allocate a minimum of 15% of development resources specifically to security testing and infrastructure hardening, regardless of revenue pressures.",
+        "decision": "mitigated",
+        "basis": "professional_judgment"
+      },
+      {
+        "code": "RSK-06",
+        "category": "scalability",
+        "description": "The unified workflow for specialized engines may become a bottleneck as user numbers grow, limiting the platform's ability to scale horizontally.",
+        "likelihood": "medium",
+        "impact": "high",
+        "mitigation": "Design the workflow engine with a microservices architecture from the outset, allowing individual components to scale independently.",
+        "decision": "mitigated",
+        "basis": "professional_judgment"
+      },
+      {
+        "code": "RSK-07",
+        "category": "business",
+        "description": "The platform's success depends on specification accuracy, but there's no clear validation process beyond client approval buttons, potentially leading to undetected errors in critical specifications.",
+        "likelihood": "high",
+        "impact": "high",
+        "mitigation": "Implement a mandatory validation step where generated specifications are cross-checked against industry-standard templates before being presented to the user.",
+        "decision": "mitigated",
+        "basis": "verified_fact"
+      },
+      {
+        "code": "RSK-08",
+        "category": "business",
+        "description": "Targeting AI agents as primary users creates uncertainty about adoption, as these agents may not have the authority to approve specifications or commit to subscriptions.",
+        "likelihood": "high",
+        "impact": "medium",
+        "mitigation": "Develop a separate onboarding workflow specifically for AI agents that includes integration with existing enterprise systems and clear value propositions for human stakeholders.",
+        "decision": "mitigated",
+        "basis": "verified_fact"
+      }
+    ]
+  },
+  "implementationPlan": [
+    {
+      "code": "T-01",
+      "title": "Project Setup and Infrastructure",
+      "phase": 1,
+      "priority": "must",
+      "dependsOn": [],
+      "description": "Set up the project repository with initial configuration files, establish development environment, and configure CI/CD pipeline. Include setup for database, authentication system, and basic project structure.",
+      "acceptanceCriteria": [
+        "Repository is initialized with proper configuration files",
+        "Development environment is documented and set up",
+        "CI/CD pipeline is configured for automated testing and deployment"
+      ],
+      "deliverable": "Configured project repository with development environment documentation",
+      "requirementCodes": [
+        "NFR-007"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-02",
+      "title": "Database Schema Design",
+      "phase": 1,
+      "priority": "must",
+      "dependsOn": [],
+      "description": "Design and implement database schema for approved entities: User, Project, BusinessRule, Specification, Approval, Exception, Export, SystemLog. Create migration files and define relationships between entities.",
+      "acceptanceCriteria": [
+        "All approved entities are defined with proper relationships",
+        "Migration files are generated and tested",
+        "Database schema documentation is created"
+      ],
+      "deliverable": "Database schema with migrations and documentation",
+      "requirementCodes": [
+        "NFR-001",
+        "NFR-002"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-03",
+      "title": "User Authentication System",
+      "phase": 1,
+      "priority": "must",
+      "dependsOn": [
+        "T-01"
+      ],
+      "description": "Implement user registration with email verification and secure login system. Create API endpoints for POST /api/v1/users and POST /api/v1/auth/login with proper validation and security measures.",
+      "acceptanceCriteria": [
+        "Users can register with email verification",
+        "Users can securely login and receive authentication tokens",
+        "All authentication endpoints have proper validation and error handling"
+      ],
+      "deliverable": "Working authentication system with registration and login endpoints",
+      "requirementCodes": [
+        "FR-003",
+        "NFR-001",
+        "NFR-002"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-04",
+      "title": "Project Creation Interface",
+      "phase": 1,
+      "priority": "must",
+      "dependsOn": [
+        "T-02",
+        "T-03"
+      ],
+      "description": "Create the Project Creation screen and implement the POST /api/v1/projects endpoint. Include form for business problem statement input and basic project initialization.",
+      "acceptanceCriteria": [
+        "Users can create new projects through the web interface",
+        "Project creation API endpoint works with proper validation",
+        "New projects are stored in the database with correct status"
+      ],
+      "deliverable": "Project creation screen and API endpoint with database integration",
+      "requirementCodes": [
+        "FR-003"
+      ],
+      "estimate": "S"
+    },
+    {
+      "code": "T-05",
+      "title": "Business Analysis Framework",
+      "phase": 2,
+      "priority": "must",
+      "dependsOn": [
+        "T-04"
+      ],
+      "description": "Implement the Business Analysis screen with interactive business rule clarification features. Create API endpoints for GET and PATCH /api/v1/projects/{project_id}/business-rules.",
+      "acceptanceCriteria": [
+        "Users can view and interact with business rules",
+        "Business rules can be updated through the interface",
+        "API endpoints properly handle business rule data"
+      ],
+      "deliverable": "Business analysis screen with API endpoints for business rules",
+      "requirementCodes": [
+        "FR-004"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-06",
+      "title": "Exception Handling Implementation",
+      "phase": 2,
+      "priority": "should",
+      "dependsOn": [
+        "T-05"
+      ],
+      "description": "Add exception handling framework to the Business Analysis screen. Implement logic for handling conversational AI exceptions in the business rule clarification process.",
+      "acceptanceCriteria": [
+        "System can identify and handle exceptions in business rules",
+        "Users can provide clarification through conversational AI",
+        "Exceptions are logged and properly managed in the database"
+      ],
+      "deliverable": "Exception handling functionality integrated with business analysis",
+      "requirementCodes": [
+        "FR-005"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-07",
+      "title": "Specification Generation Engine",
+      "phase": 2,
+      "priority": "must",
+      "dependsOn": [
+        "T-05"
+      ],
+      "description": "Implement the Specification Generation screen and POST /api/v1/projects/{project_id}/specifications endpoint. Create logic to convert business requirements to technical specifications.",
+      "acceptanceCriteria": [
+        "Users can trigger specification generation from business requirements",
+        "Generated specifications are stored in the database",
+        "API endpoint properly handles specification generation requests"
+      ],
+      "deliverable": "Specification generation screen and API endpoint",
+      "requirementCodes": [
+        "FR-006"
+      ],
+      "estimate": "L"
+    },
+    {
+      "code": "T-08",
+      "title": "Technology Recommendation System",
+      "phase": 2,
+      "priority": "should",
+      "dependsOn": [
+        "T-07"
+      ],
+      "description": "Add technology recommendation engine to the Specification Generation screen. Implement logic to suggest appropriate technologies based on project requirements.",
+      "acceptanceCriteria": [
+        "System provides technology recommendations for specifications",
+        "Users can review and adjust recommendations",
+        "Recommendations are included in generated specifications"
+      ],
+      "deliverable": "Technology recommendation functionality integrated with specification generation",
+      "requirementCodes": [
+        "FR-007"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-09",
+      "title": "Validation Workflow Implementation",
+      "phase": 2,
+      "priority": "must",
+      "dependsOn": [
+        "T-07"
+      ],
+      "description": "Create the Validation screen and implement POST /api/v1/projects/{project_id}/approvals endpoint. Add agree/correct buttons for specification approval workflow.",
+      "acceptanceCriteria": [
+        "Users can review specifications and provide approval or corrections",
+        "Approval workflow properly tracks specification status",
+        "API endpoint handles approval and correction requests"
+      ],
+      "deliverable": "Validation screen with approval workflow API endpoint",
+      "requirementCodes": [
+        "FR-008"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-10",
+      "title": "Correction Suggestion Interface",
+      "phase": 2,
+      "priority": "should",
+      "dependsOn": [
+        "T-09"
+      ],
+      "description": "Add correction suggestion interface to the Validation screen. Implement functionality to suggest specific corrections to specifications.",
+      "acceptanceCriteria": [
+        "System can suggest specific corrections to specifications",
+        "Users can review and apply suggested corrections",
+        "Correction suggestions are properly tracked in the workflow"
+      ],
+      "deliverable": "Correction suggestion functionality integrated with validation",
+      "requirementCodes": [
+        "FR-009"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-11",
+      "title": "Export Functionality",
+      "phase": 3,
+      "priority": "must",
+      "dependsOn": [
+        "T-07"
+      ],
+      "description": "Implement the Export screen and GET /api/v1/projects/{project_id}/specifications/export/{format} endpoint. Support download of specifications in markdown and JSON formats.",
+      "acceptanceCriteria": [
+        "Users can download specifications in markdown format",
+        "Users can download specifications in JSON format",
+        "Export API endpoints generate correct file formats"
+      ],
+      "deliverable": "Export screen with API endpoints for markdown and JSON downloads",
+      "requirementCodes": [
+        "FR-010",
+        "FR-011"
+      ],
+      "estimate": "S"
+    },
+    {
+      "code": "T-12",
+      "title": "Dashboard Development",
+      "phase": 3,
+      "priority": "should",
+      "dependsOn": [
+        "T-04"
+      ],
+      "description": "Create the Dashboard screen and implement GET /api/v1/dashboard endpoint. Include project overview with status tracking and basic project history.",
+      "acceptanceCriteria": [
+        "Users can view overview of their projects",
+        "Project status is properly displayed and tracked",
+        "Dashboard API endpoint provides correct project data"
+      ],
+      "deliverable": "Dashboard screen with project overview API endpoint",
+      "requirementCodes": [
+        "FR-012"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-13",
+      "title": "Project History Access",
+      "phase": 3,
+      "priority": "could",
+      "dependsOn": [
+        "T-12"
+      ],
+      "description": "Add project history functionality to the Dashboard screen. Implement GET /api/v1/projects/{project_id}/history endpoint to show project evolution over time.",
+      "acceptanceCriteria": [
+        "Users can view history of their projects",
+        "Project history shows evolution of requirements and specifications",
+        "History API endpoint provides correct historical data"
+      ],
+      "deliverable": "Project history functionality integrated with dashboard",
+      "requirementCodes": [
+        "FR-013"
+      ],
+      "estimate": "S"
+    },
+    {
+      "code": "T-14",
+      "title": "Subscription System Implementation",
+      "phase": 3,
+      "priority": "must",
+      "dependsOn": [
+        "T-03"
+      ],
+      "description": "Implement freemium account limitations and premium feature upgrade flow. Create PATCH /api/v1/subscription endpoint and subscription management interface.",
+      "acceptanceCriteria": [
+        "Free users experience appropriate limitations",
+        "Users can upgrade to premium features",
+        "Subscription API endpoint properly handles upgrades"
+      ],
+      "deliverable": "Subscription system with limitations and upgrade flow",
+      "requirementCodes": [
+        "FR-014"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-15",
+      "title": "Admin Dashboard Development",
+      "phase": 4,
+      "priority": "should",
+      "dependsOn": [
+        "T-03"
+      ],
+      "description": "Create the Admin Dashboard screen and implement GET /api/v1/admin/users and GET /api/v1/admin/system/monitoring endpoints. Include user management interface and system monitoring capabilities.",
+      "acceptanceCriteria": [
+        "Administrators can manage users through the interface",
+        "System monitoring dashboard displays relevant metrics",
+        "Admin API endpoints provide correct data and functionality"
+      ],
+      "deliverable": "Admin dashboard with user management and system monitoring",
+      "requirementCodes": [
+        "FR-016",
+        "FR-017"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-16",
+      "title": "Performance Optimization",
+      "phase": 4,
+      "priority": "must",
+      "dependsOn": [
+        "T-07",
+        "T-09"
+      ],
+      "description": "Optimize system performance to meet NFR-003 (Response Performance) requirements. Implement caching, database optimization, and API response improvements.",
+      "acceptanceCriteria": [
+        "System meets response time requirements",
+        "API endpoints perform efficiently under load",
+        "Database queries are optimized for performance"
+      ],
+      "deliverable": "Performance-optimized system with documented improvements",
+      "requirementCodes": [
+        "NFR-003"
+      ],
+      "estimate": "L"
+    },
+    {
+      "code": "T-17",
+      "title": "Security Hardening",
+      "phase": 4,
+      "priority": "must",
+      "dependsOn": [
+        "T-03",
+        "T-15"
+      ],
+      "description": "Implement security measures to meet NFR-001 (Data Protection) and NFR-002 (User Privacy) requirements. Add data encryption, access controls, and security testing.",
+      "acceptanceCriteria": [
+        "Sensitive data is properly encrypted",
+        "User access is properly controlled",
+        "System passes security testing"
+      ],
+      "deliverable": "Security-hardened system with documentation",
+      "requirementCodes": [
+        "NFR-001",
+        "NFR-002"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-18",
+      "title": "Accessibility Implementation",
+      "phase": 4,
+      "priority": "must",
+      "dependsOn": [
+        "T-01",
+        "T-04",
+        "T-05",
+        "T-07",
+        "T-09",
+        "T-11",
+        "T-12"
+      ],
+      "description": "Implement accessibility features to meet NFR-004 (Accessibility) requirements. Add screen reader support, keyboard navigation, and WCAG compliance.",
+      "acceptanceCriteria": [
+        "All screens support screen readers",
+        "Interface is fully navigable via keyboard",
+        "System meets WCAG accessibility standards"
+      ],
+      "deliverable": "Accessible interface with WCAG compliance",
+      "requirementCodes": [
+        "NFR-004"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-19",
+      "title": "Testing and Quality Assurance",
+      "phase": 4,
+      "priority": "must",
+      "dependsOn": [
+        "T-07",
+        "T-09",
+        "T-11"
+      ],
+      "description": "Implement comprehensive testing strategy including unit tests, integration tests, and end-to-end tests. Ensure all functionality meets requirements and NFRs.",
+      "acceptanceCriteria": [
+        "All critical functionality has test coverage",
+        "Automated tests are integrated into CI/CD pipeline",
+        "Test results meet quality standards"
+      ],
+      "deliverable": "Comprehensive test suite with automated testing",
+      "requirementCodes": [
+        "NFR-005",
+        "NFR-006",
+        "NFR-007"
+      ],
+      "estimate": "L"
+    },
+    {
+      "code": "T-20",
+      "title": "Documentation and Deployment",
+      "phase": 5,
+      "priority": "should",
+      "dependsOn": [
+        "T-16",
+        "T-17",
+        "T-18",
+        "T-19"
+      ],
+      "description": "Create comprehensive documentation for the system including API documentation, user guides, and technical architecture. Prepare deployment configuration and documentation.",
+      "acceptanceCriteria": [
+        "All documentation is complete and accurate",
+        "Deployment process is documented and tested",
+        "User guides provide clear instructions"
+      ],
+      "deliverable": "Complete documentation and deployment configuration",
+      "requirementCodes": [
+        "NFR-007"
+      ],
+      "estimate": "M"
+    },
+    {
+      "code": "T-21",
+      "title": "User Authentication System",
+      "phase": 1,
+      "priority": "must",
+      "dependsOn": [],
+      "description": "Implement user registration with email verification (FR-001) and secure login system (FR-002). Create JWT-based authentication with secure password hashing. Implement password reset functionality.",
+      "acceptanceCriteria": [
+        "Users can register with email verification",
+        "Users can securely login with JWT tokens",
+        "Password reset functionality works correctly"
+      ],
+      "deliverable": "Complete authentication system with registration and login endpoints",
+      "requirementCodes": [
+        "FR-001",
+        "FR-002",
+        "NFR-001",
+        "NFR-002"
+      ],
+      "estimate": "L"
+    }
+  ],
+  "traceability": [
+    {
+      "code": "FR-001",
+      "title": "User registration with email verification",
+      "processes": [],
+      "apis": [],
+      "screens": [],
+      "tasks": [
+        "T-21"
+      ]
+    },
+    {
+      "code": "FR-002",
+      "title": "Secure login system",
+      "processes": [],
+      "apis": [],
+      "screens": [],
+      "tasks": [
+        "T-21"
+      ]
+    },
+    {
+      "code": "FR-003",
+      "title": "Initialize new project from business problem statement",
+      "processes": [
+        "PF-01",
+        "PF-02"
+      ],
+      "apis": [
+        "API-01",
+        "API-02",
+        "API-03"
+      ],
+      "screens": [
+        "SCR-02"
+      ],
+      "tasks": [
+        "T-03",
+        "T-04"
+      ]
+    },
+    {
+      "code": "FR-004",
+      "title": "Interactive business rule clarification",
+      "processes": [
+        "PF-02"
+      ],
+      "apis": [
+        "API-04",
+        "API-05"
+      ],
+      "screens": [
+        "SCR-02",
+        "SCR-03"
+      ],
+      "tasks": [
+        "T-05"
+      ]
+    },
+    {
+      "code": "FR-005",
+      "title": "Exception handling framework",
+      "processes": [
+        "PF-02"
+      ],
+      "apis": [
+        "API-05"
+      ],
+      "screens": [
+        "SCR-03"
+      ],
+      "tasks": [
+        "T-06"
+      ]
+    },
+    {
+      "code": "FR-006",
+      "title": "Convert business requirements to technical specifications",
+      "processes": [
+        "PF-03"
+      ],
+      "apis": [
+        "API-06"
+      ],
+      "screens": [
+        "SCR-04"
+      ],
+      "tasks": [
+        "T-07"
+      ]
+    },
+    {
+      "code": "FR-007",
+      "title": "Technology recommendation engine",
+      "processes": [
+        "PF-03"
+      ],
+      "apis": [
+        "API-06"
+      ],
+      "screens": [
+        "SCR-04"
+      ],
+      "tasks": [
+        "T-08"
+      ]
+    },
+    {
+      "code": "FR-008",
+      "title": "Specification approval workflow",
+      "processes": [
+        "PF-02",
+        "PF-03",
+        "PF-05"
+      ],
+      "apis": [
+        "API-07"
+      ],
+      "screens": [
+        "SCR-04",
+        "SCR-05"
+      ],
+      "tasks": [
+        "T-09"
+      ]
+    },
+    {
+      "code": "FR-009",
+      "title": "Correction suggestion interface",
+      "processes": [
+        "PF-03",
+        "PF-05"
+      ],
+      "apis": [
+        "API-07"
+      ],
+      "screens": [
+        "SCR-05"
+      ],
+      "tasks": [
+        "T-10"
+      ]
+    },
+    {
+      "code": "FR-010",
+      "title": "Download specifications in markdown format",
+      "processes": [
+        "PF-03"
+      ],
+      "apis": [
+        "API-08"
+      ],
+      "screens": [
+        "SCR-06"
+      ],
+      "tasks": [
+        "T-11"
+      ]
+    },
+    {
+      "code": "FR-011",
+      "title": "Download specifications in JSON format",
+      "processes": [
+        "PF-03"
+      ],
+      "apis": [
+        "API-08"
+      ],
+      "screens": [
+        "SCR-06"
+      ],
+      "tasks": [
+        "T-11"
+      ]
+    },
+    {
+      "code": "FR-012",
+      "title": "Project overview with status tracking",
+      "processes": [
+        "PF-04"
+      ],
+      "apis": [
+        "API-09"
+      ],
+      "screens": [
+        "SCR-07"
+      ],
+      "tasks": [
+        "T-12"
+      ]
+    },
+    {
+      "code": "FR-013",
+      "title": "Access to project history",
+      "processes": [
+        "PF-04",
+        "PF-05"
+      ],
+      "apis": [
+        "API-10"
+      ],
+      "screens": [
+        "SCR-07"
+      ],
+      "tasks": [
+        "T-13"
+      ]
+    },
+    {
+      "code": "FR-014",
+      "title": "Freemium account limitations",
+      "processes": [
+        "PF-01"
+      ],
+      "apis": [
+        "API-03",
+        "API-11"
+      ],
+      "screens": [
+        "SCR-07",
+        "SCR-08"
+      ],
+      "tasks": [
+        "T-14"
+      ]
+    },
+    {
+      "code": "FR-016",
+      "title": "User management interface",
+      "processes": [
+        "PF-04"
+      ],
+      "apis": [
+        "API-12"
+      ],
+      "screens": [
+        "SCR-09"
+      ],
+      "tasks": [
+        "T-15"
+      ]
+    },
+    {
+      "code": "FR-017",
+      "title": "System monitoring dashboard",
+      "processes": [
+        "PF-04"
+      ],
+      "apis": [
+        "API-13"
+      ],
+      "screens": [
+        "SCR-09"
+      ],
+      "tasks": [
+        "T-15"
+      ]
+    },
+    {
+      "code": "NFR-001",
+      "title": "Data Protection",
+      "processes": [
+        "PF-01"
+      ],
+      "apis": [],
+      "screens": [
+        "SCR-01"
+      ],
+      "tasks": [
+        "T-02",
+        "T-03",
+        "T-17",
+        "T-21"
+      ]
+    },
+    {
+      "code": "NFR-002",
+      "title": "User Privacy",
+      "processes": [
+        "PF-01"
+      ],
+      "apis": [],
+      "screens": [
+        "SCR-01"
+      ],
+      "tasks": [
+        "T-02",
+        "T-03",
+        "T-17",
+        "T-21"
+      ]
+    },
+    {
+      "code": "NFR-003",
+      "title": "Response Performance",
+      "processes": [
+        "PF-02",
+        "PF-03",
+        "PF-05"
+      ],
+      "apis": [],
+      "screens": [],
+      "tasks": [
+        "T-16"
+      ]
+    },
+    {
+      "code": "NFR-004",
+      "title": "Accessibility",
+      "processes": [],
+      "apis": [],
+      "screens": [],
+      "tasks": [
+        "T-18"
+      ]
+    },
+    {
+      "code": "NFR-005",
+      "title": "Service Availability",
+      "processes": [
+        "PF-04"
+      ],
+      "apis": [],
+      "screens": [
+        "SCR-09"
+      ],
+      "tasks": [
+        "T-19"
+      ]
+    },
+    {
+      "code": "NFR-006",
+      "title": "Scalability",
+      "processes": [
+        "PF-04"
+      ],
+      "apis": [],
+      "screens": [],
+      "tasks": [
+        "T-19"
+      ]
+    },
+    {
+      "code": "NFR-007",
+      "title": "Maintainable Architecture",
+      "processes": [],
+      "apis": [],
+      "screens": [],
+      "tasks": [
+        "T-01",
+        "T-19",
+        "T-20"
+      ]
+    },
+    {
+      "code": "NFR-008",
+      "title": "Intuitive User Experience",
+      "processes": [],
+      "apis": [],
+      "screens": [],
+      "tasks": []
+    }
+  ],
+  "registers": {
+    "assumptions": [
+      {
+        "text": "Target users include both non-technical business stakeholders and technical staff",
+        "kind": "suggested",
+        "status": "confirmed"
+      },
+      {
+        "text": "Platform will provide technology recommendations as core response",
+        "kind": "suggested",
+        "status": "confirmed"
+      },
+      {
+        "text": "Business model is B2B SaaS",
+        "kind": "suggested",
+        "status": "confirmed"
+      },
+      {
+        "text": "Client interactions will be primarily through chat",
+        "kind": "suggested",
+        "status": "confirmed"
+      },
+      {
+        "text": "Complex business rules and exceptions will be stored as files",
+        "kind": "suggested",
+        "status": "confirmed"
+      },
+      {
+        "text": "Unclear how primary decision-makers and influencers can be 'AI agents' in real business contexts",
+        "kind": "uncertain",
+        "status": "rejected"
+      },
+      {
+        "text": "No specific details about which premium features will be included in the freemium model",
+        "kind": "uncertain",
+        "status": "rejected"
+      },
+      {
+        "text": "No information about how the hybrid structured/conversational approach will be implemented",
+        "kind": "uncertain",
+        "status": "rejected"
+      },
+      {
+        "text": "No technical details about the validation workflow",
+        "kind": "uncertain",
+        "status": "rejected"
+      },
+      {
+        "text": "The platform will need to differentiate between business stakeholders and technical users in its interface",
+        "kind": "suggested",
+        "status": "confirmed"
+      },
+      {
+        "text": "Business rules and exceptions will likely need specialized file formats for storage",
+        "kind": "suggested",
+        "status": "confirmed"
+      },
+      {
+        "text": "The freemium model will likely have usage limitations on specification generation",
+        "kind": "suggested",
+        "status": "confirmed"
+      }
+    ],
+    "unresolvedRequirements": [
+      {
+        "code": "FR-015",
+        "title": "Premium feature upgrade flow",
+        "evidence": "[Subscription] Premium feature upgrade flow (user: All users, priority: should)"
+      }
+    ],
+    "decisionHistory": [
+      {
+        "at": "2026-10-28T20:17:37.471Z",
+        "action": "Idea submitted and interpreted",
+        "detail": "Detected language: English"
+      },
+      {
+        "at": "2026-10-28T20:29:02.875Z",
+        "action": "Interpretation corrected by user",
+        "detail": "How will the platform handle natural language understanding? sugition solutions as options \nWhat format will the final engineering package take? all needed format , for documents .md files, for packages .json files, \nHow will the platform validate client approval? \"agree, start button\", else correct understanding button \nWhat technologies will be recommended for implementation? based on project\nHow will it handle complex business rules and exceptions? as afiles\n\n\nTarget users are non-technical b"
+      },
+      {
+        "at": "2026-10-28T20:30:10.580Z",
+        "action": "Interpretation approved — discovery started",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T20:30:52.783Z",
+        "action": "Answered question (business_problem)",
+        "detail": "What specific business outcomes are affected by incorrect software development in your target market? → All of the above equally"
+      },
+      {
+        "at": "2026-10-28T20:31:44.742Z",
+        "action": "Answered question (target_users)",
+        "detail": "Who are the primary decision-makers and influencers in the software development process at your target companies? → ai agent"
+      },
+      {
+        "at": "2026-10-28T20:32:17.250Z",
+        "action": "Answered question (product_format)",
+        "detail": "What platform format would best serve your users' needs for interacting with the AI Software Engineer? → Web application with responsive design"
+      },
+      {
+        "at": "2026-10-28T20:32:47.238Z",
+        "action": "Answered question (business_model)",
+        "detail": "How do you envision generating revenue from your AI Software Engineer platform? → Freemium model with premium features"
+      },
+      {
+        "at": "2026-10-28T20:33:33.152Z",
+        "action": "Answered question (user_journeys)",
+        "detail": "How would a non-technical business stakeholder interact with the platform from initial problem statement to receiving engineering specifications? → Hybrid approach: structured framework with conversational AI for exceptions"
+      },
+      {
+        "at": "2026-10-28T20:33:55.083Z",
+        "action": "Answered question (scope)",
+        "detail": "What specific components should be included in the first MVP of the AI Software Engineer platform? → End-to-end specification generation with validation workflow"
+      },
+      {
+        "at": "2026-10-28T20:35:18.223Z",
+        "action": "Answered question (constraints)",
+        "detail": "What are the key technical, budget, and timeline constraints for developing and launching the AI Software Engineer platform? → Bootstrapped approach with flexible timeline, prioritizing revenue generation early"
+      },
+      {
+        "at": "2026-10-28T20:35:54.469Z",
+        "action": "Answered question (success_criteria)",
+        "detail": "How will you measure the success of the AI Software Engineer platform after launch? → Technical performance metrics - accuracy of specifications generated, processing time, and system reliability"
+      },
+      {
+        "at": "2026-10-28T20:36:13.115Z",
+        "action": "Discovery finished — summary compiled",
+        "detail": "8 questions answered"
+      },
+      {
+        "at": "2026-10-28T20:36:33.337Z",
+        "action": "Feature inventory generated",
+        "detail": "17 features proposed by AI — none are accepted until the user decides."
+      },
+      {
+        "at": "2026-10-28T20:39:03.828Z",
+        "action": "Feature baseline approved",
+        "detail": "Accepted 17, deferred 0, rejected 0. Unreviewed features were bulk-accepted."
+      },
+      {
+        "at": "2026-10-28T20:39:33.892Z",
+        "action": "Assumption confirmed: Target users include both non-technical business stakeholders and technical staff",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:39:35.804Z",
+        "action": "Assumption confirmed: Target users include both non-technical business stakeholders and technical staff",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:39:41.509Z",
+        "action": "Assumption confirmed: Platform will provide technology recommendations as core response",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:39:45.635Z",
+        "action": "Assumption confirmed: Business model is B2B SaaS",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:39:51.152Z",
+        "action": "Assumption confirmed: Client interactions will be primarily through chat",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:40:31.533Z",
+        "action": "Assumption confirmed: Complex business rules and exceptions will be stored as files",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:40:45.051Z",
+        "action": "Assumption confirmed: The freemium model will likely have usage limitations on specification generation",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:40:51.765Z",
+        "action": "Assumption confirmed: Business rules and exceptions will likely need specialized file formats for storage",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:41:01.111Z",
+        "action": "Assumption confirmed: The platform will need to differentiate between business stakeholders and technical users in its interface",
+        "detail": "Tentative interpretation"
+      },
+      {
+        "at": "2026-10-28T20:41:06.245Z",
+        "action": "Assumption rejected: No technical details about the validation workflow",
+        "detail": "Open risk from discovery"
+      },
+      {
+        "at": "2026-10-28T20:41:13.177Z",
+        "action": "Assumption rejected: No information about how the hybrid structured/conversational approach will be implemented",
+        "detail": "Open risk from discovery"
+      },
+      {
+        "at": "2026-10-28T20:41:21.771Z",
+        "action": "Assumption rejected: No specific details about which premium features will be included in the freemium model",
+        "detail": "Open risk from discovery"
+      },
+      {
+        "at": "2026-10-28T20:41:25.581Z",
+        "action": "Assumption rejected: Unclear how primary decision-makers and influencers can be 'AI agents' in real business contexts",
+        "detail": "Open risk from discovery"
+      },
+      {
+        "at": "2026-10-28T20:44:01.681Z",
+        "action": "Engineering track started",
+        "detail": "The client moved from the discovery baseline to requirements engineering"
+      },
+      {
+        "at": "2026-10-28T20:44:47.479Z",
+        "action": "Requirements specification generated",
+        "detail": "17 functional + 8 non-functional requirements proposed; 3 roles defined"
+      },
+      {
+        "at": "2026-10-28T21:08:54.732Z",
+        "action": "Requirement FR-001 → unresolved",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:09:01.854Z",
+        "action": "Requirement FR-002 → unresolved",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:09:25.092Z",
+        "action": "Requirement FR-003 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:09:48.092Z",
+        "action": "Requirement FR-004 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:10:05.430Z",
+        "action": "Requirement FR-005 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:10:22.275Z",
+        "action": "Requirement FR-006 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:10:31.134Z",
+        "action": "Requirement FR-007 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:10:45.915Z",
+        "action": "Requirement FR-008 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:10:54.913Z",
+        "action": "Requirement FR-009 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:10:58.899Z",
+        "action": "Requirement FR-010 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:11:04.313Z",
+        "action": "Requirement FR-011 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:11:17.946Z",
+        "action": "Requirement FR-012 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:11:22.677Z",
+        "action": "Requirement FR-013 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:11:31.232Z",
+        "action": "Requirement FR-014 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:11:43.507Z",
+        "action": "Requirement FR-015 → unresolved",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:11:52.125Z",
+        "action": "Requirement FR-016 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:11:57.925Z",
+        "action": "Requirement FR-017 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:17.645Z",
+        "action": "Requirement NFR-001 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:19.408Z",
+        "action": "Requirement NFR-002 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:28.346Z",
+        "action": "Requirement NFR-003 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:32.539Z",
+        "action": "Requirement NFR-004 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:37.995Z",
+        "action": "Requirement NFR-005 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:39.404Z",
+        "action": "Requirement NFR-006 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:41.345Z",
+        "action": "Requirement NFR-007 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:12:59.421Z",
+        "action": "Requirement NFR-008 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:13:04.395Z",
+        "action": "Requirements specification approved",
+        "detail": "22 confirmed, 3 unresolved (tracked), 0 rejected"
+      },
+      {
+        "at": "2026-10-28T21:14:24.752Z",
+        "action": "Business processes analyzed",
+        "detail": "5 process flows proposed"
+      },
+      {
+        "at": "2026-10-28T21:14:51.185Z",
+        "action": "Process PF-01 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:14:51.744Z",
+        "action": "Process PF-02 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:14:52.359Z",
+        "action": "Process PF-03 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:14:52.976Z",
+        "action": "Process PF-04 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:14:53.495Z",
+        "action": "Process PF-05 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:15:58.445Z",
+        "action": "Data model designed",
+        "detail": "9 entities proposed"
+      },
+      {
+        "at": "2026-10-28T21:27:27.234Z",
+        "action": "Entity ENT-01 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:28.318Z",
+        "action": "Entity ENT-02 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:29.670Z",
+        "action": "Entity ENT-03 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:31.102Z",
+        "action": "Entity ENT-04 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:33.283Z",
+        "action": "Entity ENT-05 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:36.780Z",
+        "action": "Entity ENT-06 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:38.903Z",
+        "action": "Entity ENT-07 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:42.367Z",
+        "action": "Entity ENT-08 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:27:43.323Z",
+        "action": "Entity ENT-09 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:28:21.843Z",
+        "action": "API contracts defined",
+        "detail": "13 endpoints proposed"
+      },
+      {
+        "at": "2026-10-28T21:30:02.084Z",
+        "action": "API endpoint API-01 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:03.373Z",
+        "action": "API endpoint API-02 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:05.390Z",
+        "action": "API endpoint API-03 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:07.513Z",
+        "action": "API endpoint API-04 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:09.726Z",
+        "action": "API endpoint API-05 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:11.105Z",
+        "action": "API endpoint API-06 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:13.607Z",
+        "action": "API endpoint API-07 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:14.957Z",
+        "action": "API endpoint API-08 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:25.128Z",
+        "action": "API endpoint API-09 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:27.384Z",
+        "action": "API endpoint API-10 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:28.747Z",
+        "action": "API endpoint API-11 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:30.438Z",
+        "action": "API endpoint API-12 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:30:32.389Z",
+        "action": "API endpoint API-13 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:31:06.171Z",
+        "action": "UX/UI specification drafted",
+        "detail": "9 screens proposed"
+      },
+      {
+        "at": "2026-10-28T21:32:44.236Z",
+        "action": "Screen SCR-01 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:32:49.917Z",
+        "action": "Screen SCR-02 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:32:51.252Z",
+        "action": "Screen SCR-03 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:32:53.634Z",
+        "action": "Screen SCR-04 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:32:54.856Z",
+        "action": "Screen SCR-05 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:32:58.311Z",
+        "action": "Screen SCR-06 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:33:00.103Z",
+        "action": "Screen SCR-07 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:33:01.870Z",
+        "action": "Screen SCR-08 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:33:03.486Z",
+        "action": "Screen SCR-09 → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:33:23.526Z",
+        "action": "Architecture recommendation drafted",
+        "detail": "Simplest-first recommendation with trade-offs"
+      },
+      {
+        "at": "2026-10-28T21:34:13.735Z",
+        "action": "Architecture recommendation → rejected",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:36:57.953Z",
+        "action": "Entity ENT-09 → rejected",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T21:50:12.629Z",
+        "action": "Architecture recommendation regenerated",
+        "detail": "Previous rejected proposal replaced — client feedback: Use SQLite instead of PostgreSQL — I want a single server with no database operations team. Keep everything else simple."
+      },
+      {
+        "at": "2026-10-28T22:01:59.953Z",
+        "action": "Architecture recommendation → confirmed",
+        "detail": null
+      },
+      {
+        "at": "2026-10-28T22:02:04.170Z",
+        "action": "System design approved",
+        "detail": "5 processes, 8 entities, 13 APIs, 9 screens confirmed"
+      },
+      {
+        "at": "2026-10-28T22:03:05.728Z",
+        "action": "Implementation plan drafted",
+        "detail": "20 dependency-ordered tasks across phases"
+      },
+      {
+        "at": "2026-10-28T22:09:51.256Z",
+        "action": "Express: tasks confirmed",
+        "detail": "20 confirmed by delegation"
+      },
+      {
+        "at": "2026-10-28T22:10:00.067Z",
+        "action": "Express: risk register generated",
+        "detail": "8 risks"
+      },
+      {
+        "at": "2026-10-28T22:10:00.141Z",
+        "action": "Express: risks mitigated",
+        "detail": "8 mitigated by delegation"
+      },
+      {
+        "at": "2026-10-28T22:10:00.207Z",
+        "action": "Express: implementation plan approved",
+        "detail": "Tasks and risks reviewed"
+      },
+      {
+        "at": "2026-10-28T22:10:06.315Z",
+        "action": "Express: consistency validation executed",
+        "detail": "5 issue(s) detected (1 critical, 3 major)"
+      },
+      {
+        "at": "2026-10-28T22:11:31.146Z",
+        "action": "Express: critical issues auto-fixed",
+        "detail": "ENT-01: added field — Added missing company_name field to User entity to match API registration requirements."
+      },
+      {
+        "at": "2026-10-28T22:11:31.227Z",
+        "action": "Express: minor issues dismissed",
+        "detail": "1 dismissed by delegation (major issues stay visible)"
+      },
+      {
+        "at": "2026-10-28T22:11:59.694Z",
+        "action": "Consistency issue incomplete → resolved",
+        "detail": "The Technology Recommendation Engine (FR-007) is confirmed as a must-have feature, but there's no corresponding entity or API endpoint to st"
+      },
+      {
+        "at": "2026-10-28T22:12:01.629Z",
+        "action": "Consistency issue contradiction → resolved",
+        "detail": "The User entity (ENT-01) includes a 'role' field with possible values including 'ai_agent', but the target users are described as AI agents "
+      },
+      {
+        "at": "2026-10-28T22:12:09.133Z",
+        "action": "Consistency issue broken_link → resolved",
+        "detail": "The Project entity (ENT-02) has a 'status' field with possible values including 'approved', but there's no explicit process or API endpoint "
+      },
+      {
+        "at": "2026-10-28T22:12:10.665Z",
+        "action": "Consistency issue omission → resolved",
+        "detail": "The Approval entity (ENT-05) and approval workflow (PF-05) reference specification versions, but there's no clear mechanism to track or mana"
+      },
+      {
+        "at": "2026-10-28T22:12:13.290Z",
+        "action": "Express: must-have FR-001 → confirmed",
+        "detail": "Essential for user identity management and aligns with NFR-001 and NFR-002."
+      },
+      {
+        "at": "2026-10-28T22:12:13.292Z",
+        "action": "Express: must-have FR-002 → confirmed",
+        "detail": "Required for secure user access and supports the confirmed user management interface."
+      },
+      {
+        "at": "2026-10-28T22:12:46.166Z",
+        "action": "Consistency validation executed",
+        "detail": "11 issue(s) detected (1 critical, 8 major)"
+      },
+      {
+        "at": "2026-10-28T22:12:57.674Z",
+        "action": "Express: critical issues auto-fixed",
+        "detail": "API-07: added request field — Added required field to specify the new version when approving a specification"
+      },
+      {
+        "at": "2026-10-28T22:12:57.748Z",
+        "action": "Express: minor issues dismissed",
+        "detail": "2 dismissed by delegation (major issues stay visible)"
+      },
+      {
+        "at": "2026-10-28T22:13:18.429Z",
+        "action": "Consistency issue omission → resolved",
+        "detail": "Confirmed requirement FR-001 (User registration with email verification) is not realized by any confirmed business process."
+      },
+      {
+        "at": "2026-10-28T22:13:19.574Z",
+        "action": "Consistency issue omission → resolved",
+        "detail": "Requirement FR-001 has no confirmed screen covering its user-facing surface."
+      },
+      {
+        "at": "2026-10-28T22:13:20.933Z",
+        "action": "Consistency issue omission → resolved",
+        "detail": "Confirmed requirement FR-001 has no confirmed implementation task — it would be silently skipped."
+      },
+      {
+        "at": "2026-10-28T22:13:22.675Z",
+        "action": "Consistency issue omission → resolved",
+        "detail": "Confirmed requirement FR-002 (Secure login system) is not realized by any confirmed business process."
+      },
+      {
+        "at": "2026-10-28T22:13:26.800Z",
+        "action": "Consistency issue omission → resolved",
+        "detail": "Confirmed requirement FR-002 has no confirmed implementation task — it would be silently skipped."
+      },
+      {
+        "at": "2026-10-28T22:13:30.748Z",
+        "action": "Consistency issue contradiction → resolved",
+        "detail": "The User entity requires a 'company_name' field as mandatory, but the Project Creation API endpoint also requires an 'industry' field that d"
+      },
+      {
+        "at": "2026-10-28T22:13:33.119Z",
+        "action": "Consistency issue broken_link → resolved",
+        "detail": "The User entity includes a 'role' field with values including 'ai_agent', but there are no specific features, permissions, or interfaces des"
+      },
+      {
+        "at": "2026-10-28T22:13:35.462Z",
+        "action": "Consistency issue incomplete → resolved",
+        "detail": "The Specification entity includes a 'recommendedTechnology' field, but the Technology Recommendation Engine (FR-007) has no defined process "
+      },
+      {
+        "at": "2026-10-28T22:13:36.529Z",
+        "action": "Consistency issue omission → resolved",
+        "detail": "The system includes a Subscription entity and premium features, but there's no requirement or process for handling subscription limits beyon"
+      },
+      {
+        "at": "2026-10-28T22:14:01.386Z",
+        "action": "Consistency validation executed",
+        "detail": "11 issue(s) detected (1 critical, 8 major)"
+      },
+      {
+        "at": "2026-10-28T22:16:44.053Z",
+        "action": "Express: critical issues auto-fixed",
+        "detail": "API-01: request field \"company_name\" already present — stale issue resolved"
+      },
+      {
+        "at": "2026-10-28T22:16:44.126Z",
+        "action": "Express: minor issues dismissed",
+        "detail": "2 dismissed by delegation (major issues stay visible)"
+      },
+      {
+        "at": "2026-10-28T22:17:03.677Z",
+        "action": "Consistency issue contradiction → dismissed",
+        "detail": "The User entity defines a role enum with values including 'ai_agent', but the target users are specified as 'AI agents' in the discovery sum"
+      },
+      {
+        "at": "2026-10-28T22:17:03.944Z",
+        "action": "Consistency issue contradiction → dismissed",
+        "detail": "The User entity defines a role enum with values including 'ai_agent', but the target users are specified as 'AI agents' in the discovery sum"
+      },
+      {
+        "at": "2026-10-28T22:17:06.566Z",
+        "action": "Consistency issue incomplete → dismissed",
+        "detail": "The API endpoint for generating technical specifications (POST /api/v1/projects/{project_id}/specifications) includes an error case for '422"
+      },
+      {
+        "at": "2026-10-28T22:17:08.028Z",
+        "action": "Consistency issue broken_link → dismissed",
+        "detail": "The Approval entity references a 'specificationId' field that links to the Specification entity, but the Specification entity doesn't have a"
+      },
+      {
+        "at": "2026-10-28T22:17:09.975Z",
+        "action": "Consistency issue omission → dismissed",
+        "detail": "The User entity includes a 'subscriptionTier' field, but there's no corresponding entity or API endpoint to manage subscription details beyo"
+      },
+      {
+        "at": "2026-10-28T22:17:14.850Z",
+        "action": "Express: coverage tasks added",
+        "detail": "1 task(s) drafted and confirmed by delegation to cover FR-001, FR-002"
+      },
+      {
+        "at": "2026-10-28T22:17:14.923Z",
+        "action": "Consistency issue omission → dismissed",
+        "detail": "Confirmed requirement FR-001 (User registration with email verification) is not realized by any confirmed business process."
+      },
+      {
+        "at": "2026-10-28T22:17:15.050Z",
+        "action": "Express: readiness gate passed — package locked",
+        "detail": "Readiness score 82%"
+      },
+      {
+        "at": "2026-10-28T22:17:17.273Z",
+        "action": "Consistency issue omission → dismissed",
+        "detail": "Confirmed requirement FR-001 has no confirmed implementation task — it would be silently skipped."
+      }
+    ]
+  }
+}

@@ -299,6 +299,46 @@ const dict = {
     en: 'Regenerating replaces rejected and unreviewed items; confirmed ones are kept.',
     ar: 'إعادة التوليد تستبدل المرفوض وغير المراجَع، وتحافظ على المعتمد.',
   },
+  feedbackForTab: {
+    en: 'Optional guidance for the engineer — what should change in this set?',
+    ar: 'توجيه اختياري للمهندس — ما الذي يجب تغييره في هذه المجموعة؟',
+  },
+  editArchitecture: { en: 'Edit directly', ar: 'تعديل مباشر' },
+  saveEdits: { en: 'Save changes', ar: 'حفظ التعديلات' },
+  cancelEdits: { en: 'Cancel', ar: 'إلغاء' },
+  addTechRow: { en: 'Add row', ar: 'إضافة سطر' },
+  archEditedNeedsReconfirm: {
+    en: 'Saved — the architecture was edited and needs re-confirmation before the design gate.',
+    ar: 'تم الحفظ — عُدّلت المعمارية وتحتاج إعادة اعتماد قبل بوابة التصميم.',
+  },
+  // Express autopilot
+  expressTitle: { en: 'Express run — finish everything automatically', ar: 'التشغيل السريع — أكمل كل شيء تلقائيًا' },
+  expressBody: {
+    en: 'One click delegates the remaining work to the engineer: he answers, generates, and approves every artifact until the final engineering package. Every delegated decision is recorded and changeable later — nothing restarts.',
+    ar: 'نقرة واحدة تفوّض بقية العمل للمهندس: يجيب ويولّد ويعتمد كل مخرج حتى الحزمة الهندسية النهائية. كل قرار مفوّض يُسجّل وقابل للتغيير لاحقًا — لا شيء يبدأ من جديد.',
+  },
+  expressStart: { en: 'Run express', ar: 'تشغيل سريع' },
+  expressStop: { en: 'Stop', ar: 'إيقاف' },
+  expressWorking: { en: 'The engineer is working…', ar: 'المهندس يعمل…' },
+  expressDone: { en: 'Engineering package ready — opening it…', ar: 'الحزمة الهندسية جاهزة — جارٍ فتحها…' },
+  expressResolveHint: {
+    en: 'This needs your judgment — fix it in the stage view, then run express again from where it stopped.',
+    ar: 'هذا يحتاج قرارك — عالجه في صفحة المرحلة ثم أعد التشغيل السريع من حيث توقف.',
+  },
+  expressContinueManually: { en: 'Continue manually', ar: 'المتابعة يدويًا' },
+  // Reopen package
+  reopenTitle: { en: 'Need a change after locking?', ar: 'تحتاج تغييرًا بعد القفل؟' },
+  reopenBody: {
+    en: 'Reopen the package to edit any artifact. Everything is preserved — history, decisions and artifacts — and you only re-pass the affected gates.',
+    ar: 'أعد فتح الحزمة لتعديل أي مخرج. كل شيء محفوظ — السجل والقرارات والمخرجات — وتعيد اجتياز البوابات المتأثرة فقط.',
+  },
+  reopenToDesign: { en: 'Reopen → design stage', ar: 'إعادة فتح ← مرحلة التصميم' },
+  reopenToPlanning: { en: 'Reopen → planning stage', ar: 'إعادة فتح ← مرحلة التخطيط' },
+  reopenToReadiness: { en: 'Reopen → readiness stage', ar: 'إعادة فتح ← مرحلة الجاهزية' },
+  reopenReasonPlaceholder: {
+    en: 'Why are you reopening? (recorded in the decision history)',
+    ar: 'لماذا تعيد الفتح؟ (يُسجَّل في سجل القرارات)',
+  },
   genProcesses1: { en: 'Reading confirmed requirements…', ar: 'يقرأ المتطلبات المعتمدة…' },
   genProcesses2: { en: 'Modeling workflows, rules and exceptions…', ar: 'ينمذج المسارات والقواعد والاستثناءات…' },
   genEntities1: { en: 'Identifying entities and relationships…', ar: 'يحدد الكيانات والعلاقات…' },

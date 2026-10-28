@@ -1,11 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { useApp } from '@/components/app/context'
 import { CodeChip } from '@/components/app/bits'
 import type { IdeaDetail } from '@/lib/types'
-import { CheckCircle2, FileJson, FileText, Lock } from 'lucide-react'
+import { CheckCircle2, FileJson, FileText, Lock, LockOpen, Loader2 } from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
 
 // ============================================================
 // Stage 9 — The engineering package: the final deliverable.
@@ -23,9 +25,33 @@ const SECTION_KEYS = [
 ]
 
 export function PackageStage({ detail }: { detail: IdeaDetail }) {
-  const { t, lang } = useApp()
+  const { t, lang, setDetail, refreshIdeas, setView } = useApp()
+  const { toast } = useToast()
+  const [reopenOpen, setReopenOpen] = useState(false)
+  const [reopenReason, setReopenReason] = useState('')
+  const [reopenBusy, setReopenBusy] = useState<string | null>(null)
   const { idea, requirements, processes, entities, apis, screens, tasks, risks, decisions } = detail
   const locked = idea.stage === 'package'
+
+  async function reopen(to: 'readiness' | 'planning' | 'design') {
+    setReopenBusy(to)
+    const res = await fetch(`/api/ideas/${idea.id}/reopen`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to, reason: reopenReason }),
+    })
+    const data = await res.json()
+    setReopenBusy(null)
+    if (!res.ok) {
+      toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
+      return
+    }
+    setDetail(data as IdeaDetail)
+    refreshIdeas()
+    setReopenOpen(false)
+    setReopenReason('')
+    setView(to)
+  }
 
   function exportFile(format: 'md' | 'json') {
     const url = `/api/ideas/${idea.id}/package/export?format=${format}`
@@ -97,6 +123,43 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Reopen for changes — nothing ever restarts from zero */}
+      <div className="rounded-xl border border-dashed p-4 space-y-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <LockOpen className="h-4 w-4 text-muted-foreground" />
+          <div className="text-sm font-semibold flex-1">{t('reopenTitle')}</div>
+          <Button size="sm" variant="outline" onClick={() => setReopenOpen((v) => !v)}>
+            {reopenOpen ? t('cancelEdits') : t('reopenTitle')}
+          </Button>
+        </div>
+        {reopenOpen && (
+          <div className="space-y-2.5">
+            <p className="text-xs text-muted-foreground leading-6">{t('reopenBody')}</p>
+            <textarea
+              rows={2}
+              value={reopenReason}
+              onChange={(e) => setReopenReason(e.target.value)}
+              placeholder={t('reopenReasonPlaceholder')}
+              className="w-full rounded-lg border p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-primary/30"
+            />
+            <div className="flex flex-wrap gap-2">
+              <Button size="sm" variant="outline" className="gap-1.5" onClick={() => reopen('readiness')} disabled={reopenBusy !== null}>
+                {reopenBusy === 'readiness' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LockOpen className="h-3.5 w-3.5" />}
+                {t('reopenToReadiness')}
+              </Button>
+              <Button size="sm" variant="outline" className="gap-1.5" onClick={() => reopen('planning')} disabled={reopenBusy !== null}>
+                {reopenBusy === 'planning' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LockOpen className="h-3.5 w-3.5" />}
+                {t('reopenToPlanning')}
+              </Button>
+              <Button size="sm" variant="outline" className="gap-1.5" onClick={() => reopen('design')} disabled={reopenBusy !== null}>
+                {reopenBusy === 'design' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LockOpen className="h-3.5 w-3.5" />}
+                {t('reopenToDesign')}
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

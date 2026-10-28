@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server'
 import { db } from '@/lib/db'
-import { buildIdeaDetail, logDecision, parseInterpretation, parseSummary, parseBaseline } from '@/lib/payload'
+import { buildIdeaDetail, buildBaselineSnapshot, logDecision, parseInterpretation } from '@/lib/payload'
 import { generateQuestions, type AnsweredItem } from '@/lib/engines/discover'
 import { AREAS } from '@/lib/types'
-import type { BaselineSnapshot } from '@/lib/types'
 
 // ============================================================
 // Approval gates — the ONLY way to advance stages.
@@ -112,25 +111,8 @@ export async function POST(req: Request, { params }: Params) {
         where: { ideaId: id },
         orderBy: [{ order: 'asc' }, { createdAt: 'asc' }],
       })
-      const openQuestions = await db.question.findMany({
-        where: { ideaId: id, status: { not: 'answered' } },
-        select: { questionEn: true },
-      })
 
-      const snapshot: BaselineSnapshot = {
-        approvedAt: new Date().toISOString(),
-        interpretation: parseInterpretation(idea.interpretation),
-        summary: parseSummary(idea.summary),
-        features: finalFeatures.map((f) => ({
-          module: f.module,
-          feature: f.feature,
-          user: f.user,
-          priority: f.priority as BaselineSnapshot['features'][number]['priority'],
-          status: f.status as BaselineSnapshot['features'][number]['status'],
-          rationale: f.rationale,
-        })),
-        openQuestions: openQuestions.map((q) => q.questionEn),
-      }
+      const snapshot = await buildBaselineSnapshot(id)
 
       const counts = {
         accepted: finalFeatures.filter((f) => f.status === 'accepted').length,

@@ -371,3 +371,32 @@ export async function logDecision(ideaId: string, action: string, detail?: strin
     data: { ideaId, action, detail: detail ?? null, stage: stage ?? null },
   })
 }
+
+// ------------------------------------------------------------
+// Baseline snapshot — single source of truth for the baseline
+// gate (manual approval) and the express autopilot.
+// ------------------------------------------------------------
+export async function buildBaselineSnapshot(ideaId: string): Promise<BaselineSnapshot> {
+  const idea = await db.idea.findUnique({ where: { id: ideaId } })
+  if (!idea) throw new Error('Idea not found')
+
+  const [finalFeatures, openQuestions] = await Promise.all([
+    db.feature.findMany({ where: { ideaId }, orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] }),
+    db.question.findMany({ where: { ideaId, status: { not: 'answered' } }, select: { questionEn: true } }),
+  ])
+
+  return {
+    approvedAt: new Date().toISOString(),
+    interpretation: parseInterpretation(idea.interpretation),
+    summary: parseSummary(idea.summary),
+    features: finalFeatures.map((f) => ({
+      module: f.module,
+      feature: f.feature,
+      user: f.user,
+      priority: f.priority as BaselineSnapshot['features'][number]['priority'],
+      status: f.status as BaselineSnapshot['features'][number]['status'],
+      rationale: f.rationale,
+    })),
+    openQuestions: openQuestions.map((q) => q.questionEn),
+  }
+}

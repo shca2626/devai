@@ -7,6 +7,7 @@ import { AppProvider, useApp } from '@/components/app/context'
 import { Sidebar } from '@/components/app/sidebar'
 import { NewIdeaDialog } from '@/components/app/new-idea'
 import { Stepper } from '@/components/app/stepper'
+import { ExpressRun } from '@/components/app/express'
 import { UnderstandStage } from '@/components/stages/understand'
 import { DiscoverStage } from '@/components/stages/discover'
 import { FeaturesStage } from '@/components/stages/features'
@@ -109,6 +110,7 @@ function IdeaView() {
         </h1>
         <Stepper currentStage={detail.idea.stage} view={view} />
       </header>
+      {detail.idea.stage !== 'package' && <ExpressRun detail={detail} />}
       <main>
         {view === 'understand' && <UnderstandStage detail={detail} />}
         {view === 'discover' && <DiscoverStage detail={detail} />}

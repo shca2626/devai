@@ -198,7 +198,7 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
                       {expanded === task.id ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
                       {expanded === task.id ? t('viewLess') : t('viewMore')}
                     </button>
-                    {active && task.status !== 'rejected' && (
+                    {(active || task.status === 'needs_revision') && task.status !== 'rejected' && (
                       <div className="mt-2 flex gap-1.5 border-t pt-2">
                         {task.status !== 'confirmed' && (
                           <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50" onClick={() => review('task', task.id, 'confirmed')}>

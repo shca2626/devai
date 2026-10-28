@@ -26,7 +26,7 @@ export async function PATCH(req: Request, { params }: Params) {
     const { kind, id } = await params
     const body = (await req.json().catch(() => ({}))) as {
       status?: string
-      edits?: { title?: string; description?: string; priority?: string; acceptanceCriteria?: string[] }
+      edits?: { title?: string; description?: string; priority?: string; acceptanceCriteria?: string[]; techStack?: Array<{ area: string; choice: string; rationale?: string; tradeOffs?: string; simplestOption?: boolean }>; notes?: string }
       confirmImpact?: boolean
     }
 
@@ -161,6 +161,49 @@ export async function PATCH(req: Request, { params }: Params) {
     if (kind === 'architecture') {
       const arch = await db.architectureDoc.findUnique({ where: { id } })
       if (!arch) return NextResponse.json({ error: 'Architecture not found' }, { status: 404 })
+
+      // Direct client editing — the user is the final authority on the
+      // tech stack. Editing a CONFIRMED architecture marks it needs_revision
+      // (change control: it must be re-confirmed before the design gate);
+      // editing a rejected/needs_revision proposal turns it into a new proposal.
+      const hasArchEdits =
+        body.edits &&
+        (Array.isArray(body.edits.techStack) || typeof body.edits.notes === 'string')
+
+      if (hasArchEdits && body.edits) {
+        let techStack: string | undefined
+        if (Array.isArray(body.edits.techStack)) {
+          const rows = body.edits.techStack
+            .filter((r) => typeof r?.area === 'string' && r.area.trim() && typeof r?.choice === 'string' && r.choice.trim())
+            .slice(0, 14)
+            .map((r) => ({
+              area: r.area.trim(),
+              choice: r.choice.trim(),
+              rationale: typeof r.rationale === 'string' ? r.rationale.trim() : '',
+              tradeOffs: typeof r.tradeOffs === 'string' ? r.tradeOffs.trim() : '',
+              simplestOption: r.simplestOption === true,
+            }))
+          techStack = JSON.stringify(rows)
+        }
+        const nextStatus = arch.status === 'confirmed' ? 'needs_revision' : 'proposed'
+        await db.architectureDoc.update({
+          where: { id },
+          data: {
+            ...(techStack !== undefined ? { techStack } : {}),
+            ...(typeof body.edits.notes === 'string' ? { notes: body.edits.notes.slice(0, 4000) } : {}),
+            status: nextStatus,
+          },
+        })
+        await logDecision(
+          arch.ideaId,
+          'Architecture edited directly by the client',
+          `${techStack !== undefined ? 'tech stack updated' : 'notes updated'}; ${arch.status} → ${nextStatus} (re-confirmation required)`,
+          'design'
+        )
+        const payload = await buildIdeaDetail(arch.ideaId)
+        return NextResponse.json(payload)
+      }
+
       if (!body.status || !REVIEW_STATUSES.includes(body.status)) {
         return NextResponse.json({ error: 'Invalid status.' }, { status: 400 })
       }

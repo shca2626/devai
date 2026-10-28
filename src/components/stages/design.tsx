@@ -16,12 +16,16 @@ import {
   Database,
   GitBranch,
   LayoutTemplate,
+  Loader2,
   MessageSquareWarning,
-  RotateCcw,
+  Pencil,
+  Plus,
   Server,
   Workflow,
   X,
 } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Checkbox } from '@/components/ui/checkbox'
 import { useToast } from '@/hooks/use-toast'
 
 // ============================================================
@@ -52,14 +56,23 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
   const [busyGate, setBusyGate] = useState(false)
   const [expanded, setExpanded] = useState<string | null>(null)
   const [tab, setTab] = useState('processes')
-  const [archFeedback, setArchFeedback] = useState('')
+  const [feedback, setFeedback] = useState<Record<Kind, string>>({
+    processes: '',
+    entities: '',
+    apis: '',
+    screens: '',
+    architecture: '',
+  })
+  const [editingArch, setEditingArch] = useState(false)
+  const [draftStack, setDraftStack] = useState<Array<{ area: string; choice: string; rationale: string; tradeOffs: string; simplestOption: boolean }>>([])
+  const [draftNotes, setDraftNotes] = useState('')
 
-  async function generate(kind: Kind, feedback?: string) {
+  async function generate(kind: Kind, kindFeedback?: string) {
     setBusyKind(kind)
     const res = await fetch(`/api/ideas/${idea.id}/design/generate`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ kind, feedback }),
+      body: JSON.stringify({ kind, feedback: kindFeedback }),
     })
     const data = await res.json()
     setBusyKind(null)
@@ -67,9 +80,36 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
       toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
       return
     }
-    if (kind === 'architecture') setArchFeedback('')
+    setFeedback((f) => ({ ...f, [kind]: '' }))
     setDetail(data as IdeaDetail)
     refreshIdeas()
+  }
+
+  function startEditArch() {
+    if (!architecture) return
+    setDraftStack(architecture.techStack.map((s) => ({ ...s })))
+    setDraftNotes(architecture.notes ?? '')
+    setEditingArch(true)
+  }
+
+  async function saveArchEdits() {
+    if (!architecture) return
+    setBusyKind('architecture')
+    const res = await fetch(`/api/artifacts/architecture/${architecture.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ edits: { techStack: draftStack, notes: draftNotes } }),
+    })
+    const data = await res.json()
+    setBusyKind(null)
+    if (!res.ok) {
+      toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
+      return
+    }
+    setEditingArch(false)
+    setDetail(data as IdeaDetail)
+    refreshIdeas()
+    toast({ description: t('archEditedNeedsReconfirm') })
   }
 
   async function review(kind: string, id: string, status: string) {
@@ -162,7 +202,15 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- Processes ---------- */}
         <TabsContent value="processes" className="mt-3 space-y-3">
-          <GenerateBar kind="processes" count={processes.length} unreviewed={processes.filter((p) => p.status === 'proposed' || p.status === 'needs_revision').length} rejected={processes.filter((p) => p.status === 'rejected').length} active={active} busy={busyKind === 'processes'} t={t} onGenerate={() => generate('processes')} onConfirmAll={() => confirmAll('processes')} />
+          <GenerateBar kind="processes" count={processes.length} unreviewed={processes.filter((p) => p.status === 'proposed' || p.status === 'needs_revision').length} rejected={processes.filter((p) => p.status === 'rejected').length} active={active} busy={busyKind === 'processes'} t={t} onGenerate={() => generate('processes', feedback.processes)} onConfirmAll={() => confirmAll('processes')} />
+          <FeedbackPanel
+            active={active && processes.length > 0}
+            busy={busyKind === 'processes'}
+            value={feedback.processes}
+            onChange={(v) => setFeedback((f) => ({ ...f, processes: v }))}
+            t={t}
+            onRun={() => generate('processes', feedback.processes)}
+          />
           {processes.map((p) => (
             <div key={p.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${p.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -242,7 +290,15 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- Entities ---------- */}
         <TabsContent value="entities" className="mt-3 space-y-3">
-          <GenerateBar kind="entities" count={entities.length} unreviewed={entities.filter((e) => e.status === 'proposed' || e.status === 'needs_revision').length} rejected={entities.filter((e) => e.status === 'rejected').length} active={active} busy={busyKind === 'entities'} t={t} onGenerate={() => generate('entities')} onConfirmAll={() => confirmAll('entities')} />
+          <GenerateBar kind="entities" count={entities.length} unreviewed={entities.filter((e) => e.status === 'proposed' || e.status === 'needs_revision').length} rejected={entities.filter((e) => e.status === 'rejected').length} active={active} busy={busyKind === 'entities'} t={t} onGenerate={() => generate('entities', feedback.entities)} onConfirmAll={() => confirmAll('entities')} />
+          <FeedbackPanel
+            active={active && entities.length > 0}
+            busy={busyKind === 'entities'}
+            value={feedback.entities}
+            onChange={(v) => setFeedback((f) => ({ ...f, entities: v }))}
+            t={t}
+            onRun={() => generate('entities', feedback.entities)}
+          />
           {entities.map((e) => (
             <div key={e.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${e.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -307,7 +363,15 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- APIs ---------- */}
         <TabsContent value="apis" className="mt-3 space-y-3">
-          <GenerateBar kind="apis" count={apis.length} unreviewed={apis.filter((a) => a.status === 'proposed' || a.status === 'needs_revision').length} rejected={apis.filter((a) => a.status === 'rejected').length} active={active} busy={busyKind === 'apis'} t={t} onGenerate={() => generate('apis')} onConfirmAll={() => confirmAll('apis')} />
+          <GenerateBar kind="apis" count={apis.length} unreviewed={apis.filter((a) => a.status === 'proposed' || a.status === 'needs_revision').length} rejected={apis.filter((a) => a.status === 'rejected').length} active={active} busy={busyKind === 'apis'} t={t} onGenerate={() => generate('apis', feedback.apis)} onConfirmAll={() => confirmAll('apis')} />
+          <FeedbackPanel
+            active={active && apis.length > 0}
+            busy={busyKind === 'apis'}
+            value={feedback.apis}
+            onChange={(v) => setFeedback((f) => ({ ...f, apis: v }))}
+            t={t}
+            onRun={() => generate('apis', feedback.apis)}
+          />
           {apis.map((a) => (
             <div key={a.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${a.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -375,7 +439,15 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 
         {/* ---------- Screens ---------- */}
         <TabsContent value="screens" className="mt-3 space-y-3">
-          <GenerateBar kind="screens" count={screens.length} unreviewed={screens.filter((s) => s.status === 'proposed' || s.status === 'needs_revision').length} rejected={screens.filter((s) => s.status === 'rejected').length} active={active} busy={busyKind === 'screens'} t={t} onGenerate={() => generate('screens')} onConfirmAll={() => confirmAll('screens')} />
+          <GenerateBar kind="screens" count={screens.length} unreviewed={screens.filter((s) => s.status === 'proposed' || s.status === 'needs_revision').length} rejected={screens.filter((s) => s.status === 'rejected').length} active={active} busy={busyKind === 'screens'} t={t} onGenerate={() => generate('screens', feedback.screens)} onConfirmAll={() => confirmAll('screens')} />
+          <FeedbackPanel
+            active={active && screens.length > 0}
+            busy={busyKind === 'screens'}
+            value={feedback.screens}
+            onChange={(v) => setFeedback((f) => ({ ...f, screens: v }))}
+            t={t}
+            onRun={() => generate('screens', feedback.screens)}
+          />
           {screens.map((s) => (
             <div key={s.id} className={`rounded-xl border bg-card p-3 sm:p-4 ${s.status === 'rejected' ? 'opacity-60' : ''}`}>
               <div className="flex items-start gap-2 flex-wrap">
@@ -436,41 +508,19 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
             active={active}
             busy={busyKind === 'architecture'}
             t={t}
-            onGenerate={() => generate('architecture', archFeedback)}
+            onGenerate={() => generate('architecture', feedback.architecture)}
             onConfirmAll={null}
           />
-          {active && architecture?.status === 'rejected' && (
-            <div className="rounded-xl border border-amber-300/80 bg-amber-50 p-4 space-y-3">
-              <div className="flex items-start gap-2">
-                <MessageSquareWarning className="h-4.5 w-4.5 text-amber-600 shrink-0 mt-0.5" />
-                <p className="text-sm text-amber-900 leading-6">{t('rejectedArchNotice')}</p>
-              </div>
-              <div>
-                <label className="text-xs font-semibold text-amber-900 block mb-1.5" htmlFor="arch-feedback">{t('feedbackLabel')}</label>
-                <textarea
-                  id="arch-feedback"
-                  rows={3}
-                  value={archFeedback}
-                  onChange={(ev) => setArchFeedback(ev.target.value)}
-                  placeholder={t('feedbackPlaceholder')}
-                  className="w-full rounded-lg border border-amber-300 bg-white p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
-                />
-              </div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Button
-                  size="sm"
-                  className="gap-1.5"
-                  onClick={() => generate('architecture', archFeedback)}
-                  disabled={busyKind === 'architecture'}
-                >
-                  <RotateCcw className="h-3.5 w-3.5" />
-                  {t('regenerateWithFeedback')}
-                </Button>
-                <span className="text-xs text-amber-800">{t('regenReplacesRejected')}</span>
-              </div>
-            </div>
-          )}
-          {busyKind === 'architecture' && (
+          <FeedbackPanel
+            active={active && !!architecture}
+            busy={busyKind === 'architecture'}
+            value={feedback.architecture}
+            onChange={(v) => setFeedback((f) => ({ ...f, architecture: v }))}
+            t={t}
+            onRun={() => generate('architecture', feedback.architecture)}
+            notice={architecture?.status === 'rejected' ? t('rejectedArchNotice') : undefined}
+          />
+          {busyKind === 'architecture' && !editingArch && (
             <WorkingPanel steps={[t('genArch1'), t('genArch2')]} />
           )}
           {architecture && (
@@ -478,52 +528,141 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
               <div className="flex items-start gap-2 flex-wrap">
                 <Boxes className="h-4.5 w-4.5 text-primary mt-0.5" />
                 <div className="text-sm font-semibold flex-1">{t('tabArchitecture')}</div>
+                {active && !editingArch && (
+                  <Button size="sm" variant="outline" className="gap-1.5" onClick={startEditArch}>
+                    <Pencil className="h-3.5 w-3.5" />
+                    {t('editArchitecture')}
+                  </Button>
+                )}
                 <ReviewBadge status={architecture.status} />
               </div>
-              <div className="mt-3 space-y-3" dir="ltr">
-                {architecture.components.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5">
-                    {architecture.components.map((c) => (
-                      <Badge key={c.name} variant="outline" className="text-[10px] bg-muted/40 max-w-[260px] whitespace-normal h-auto py-1" title={c.responsibility}>
-                        {c.name}
-                      </Badge>
+
+              {editingArch ? (
+                <div className="mt-3 space-y-3" dir="ltr">
+                  <div className="space-y-2">
+                    {draftStack.map((row, i) => (
+                      <div key={i} className="rounded-lg border p-2.5 space-y-2 bg-muted/20">
+                        <div className="flex flex-wrap gap-2">
+                          <Input
+                            value={row.area}
+                            onChange={(e) => setDraftStack((s) => s.map((r, j) => (j === i ? { ...r, area: e.target.value } : r)))}
+                            placeholder="area"
+                            className="h-8 text-xs font-medium w-32"
+                          />
+                          <Input
+                            value={row.choice}
+                            onChange={(e) => setDraftStack((s) => s.map((r, j) => (j === i ? { ...r, choice: e.target.value } : r)))}
+                            placeholder="choice"
+                            className="h-8 text-xs flex-1 min-w-[160px]"
+                          />
+                          <label className="flex items-center gap-1.5 text-[11px] text-muted-foreground px-1">
+                            <Checkbox
+                              checked={row.simplestOption}
+                              onCheckedChange={(v) => setDraftStack((s) => s.map((r, j) => (j === i ? { ...r, simplestOption: v === true } : r)))}
+                            />
+                            {t('simplestOption')}
+                          </label>
+                          <Button
+                            size="icon"
+                            variant="ghost"
+                            className="h-7 w-7 text-red-500"
+                            aria-label="remove"
+                            onClick={() => setDraftStack((s) => s.filter((_, j) => j !== i))}
+                          >
+                            <X className="h-3.5 w-3.5" />
+                          </Button>
+                        </div>
+                        <div className="grid sm:grid-cols-2 gap-2">
+                          <Input
+                            value={row.rationale}
+                            onChange={(e) => setDraftStack((s) => s.map((r, j) => (j === i ? { ...r, rationale: e.target.value } : r)))}
+                            placeholder="rationale"
+                            className="h-8 text-xs"
+                          />
+                          <Input
+                            value={row.tradeOffs}
+                            onChange={(e) => setDraftStack((s) => s.map((r, j) => (j === i ? { ...r, tradeOffs: e.target.value } : r)))}
+                            placeholder="trade-offs"
+                            className="h-8 text-xs"
+                          />
+                        </div>
+                      </div>
                     ))}
                   </div>
-                )}
-                <div className="overflow-x-auto nice-scroll">
-                  <table className="w-full text-xs">
-                    <thead>
-                      <tr className="text-muted-foreground border-b">
-                        <th className="py-1.5 text-start font-medium pe-2">Area</th>
-                        <th className="py-1.5 text-start font-medium pe-2">Choice</th>
-                        <th className="py-1.5 text-start font-medium pe-2">Rationale</th>
-                        <th className="py-1.5 text-start font-medium">Trade-offs</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {architecture.techStack.map((tech) => (
-                        <tr key={tech.area} className="border-b last:border-0 align-top">
-                          <td className="py-1.5 pe-2 font-medium whitespace-nowrap">
-                            {tech.area}
-                            {tech.simplestOption && <Badge variant="outline" className="ms-1 text-[9px] bg-emerald-50 text-emerald-700 border-emerald-200 whitespace-nowrap">{t('simplestOption')}</Badge>}
-                          </td>
-                          <td className="py-1.5 pe-2">{tech.choice}</td>
-                          <td className="py-1.5 pe-2 text-muted-foreground">{tech.rationale}</td>
-                          <td className="py-1.5 text-muted-foreground">{tech.tradeOffs}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setDraftStack((s) => [...s, { area: '', choice: '', rationale: '', tradeOffs: '', simplestOption: false }])}
+                    >
+                      <Plus className="h-3.5 w-3.5 me-1" />
+                      {t('addTechRow')}
+                    </Button>
+                    <div className="flex-1" />
+                    <Button size="sm" variant="outline" onClick={() => setEditingArch(false)}>
+                      {t('cancelEdits')}
+                    </Button>
+                    <Button size="sm" className="gap-1.5" onClick={saveArchEdits} disabled={busyKind === 'architecture'}>
+                      {busyKind === 'architecture' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+                      {t('saveEdits')}
+                    </Button>
+                  </div>
+                  <div>
+                    <textarea
+                      rows={3}
+                      value={draftNotes}
+                      onChange={(e) => setDraftNotes(e.target.value)}
+                      placeholder={t('architectureNotes')}
+                      className="w-full rounded-lg border p-2.5 text-xs leading-6 outline-none focus:ring-2 focus:ring-primary/30"
+                    />
+                  </div>
                 </div>
-                {architecture.integrations.length > 0 && (
-                  <div className="text-xs text-muted-foreground">
-                    {architecture.integrations.map((i, idx) => (
-                      <span key={idx}>{idx > 0 && ' · '}<span className="font-medium text-foreground">{i.system}</span> — {i.purpose} <span className="text-muted-foreground/70">({i.necessity})</span></span>
-                    ))}
+              ) : (
+                <div className="mt-3 space-y-3" dir="ltr">
+                  {architecture.components.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5">
+                      {architecture.components.map((c) => (
+                        <Badge key={c.name} variant="outline" className="text-[10px] bg-muted/40 max-w-[260px] whitespace-normal h-auto py-1" title={c.responsibility}>
+                          {c.name}
+                        </Badge>
+                      ))}
+                    </div>
+                  )}
+                  <div className="overflow-x-auto nice-scroll">
+                    <table className="w-full text-xs">
+                      <thead>
+                        <tr className="text-muted-foreground border-b">
+                          <th className="py-1.5 text-start font-medium pe-2">Area</th>
+                          <th className="py-1.5 text-start font-medium pe-2">Choice</th>
+                          <th className="py-1.5 text-start font-medium pe-2">Rationale</th>
+                          <th className="py-1.5 text-start font-medium">Trade-offs</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {architecture.techStack.map((tech) => (
+                          <tr key={tech.area} className="border-b last:border-0 align-top">
+                            <td className="py-1.5 pe-2 font-medium whitespace-nowrap">
+                              {tech.area}
+                              {tech.simplestOption && <Badge variant="outline" className="ms-1 text-[9px] bg-emerald-50 text-emerald-700 border-emerald-200 whitespace-nowrap">{t('simplestOption')}</Badge>}
+                            </td>
+                            <td className="py-1.5 pe-2">{tech.choice}</td>
+                            <td className="py-1.5 pe-2 text-muted-foreground">{tech.rationale}</td>
+                            <td className="py-1.5 text-muted-foreground">{tech.tradeOffs}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                )}
-                {architecture.notes && <p className="text-xs leading-6 text-muted-foreground bg-muted/30 rounded-lg p-3">{architecture.notes}</p>}
-              </div>
+                  {architecture.integrations.length > 0 && (
+                    <div className="text-xs text-muted-foreground">
+                      {architecture.integrations.map((i, idx) => (
+                        <span key={idx}>{idx > 0 && ' · '}<span className="font-medium text-foreground">{i.system}</span> — {i.purpose} <span className="text-muted-foreground/70">({i.necessity})</span></span>
+                      ))}
+                    </div>
+                  )}
+                  {architecture.notes && <p className="text-xs leading-6 text-muted-foreground bg-muted/30 rounded-lg p-3">{architecture.notes}</p>}
+                </div>
+              )}
               <ReviewActions kind="architecture" id={architecture.id} status={architecture.status} active={active} t={t} onReview={review} />
             </div>
           )}
@@ -544,6 +683,52 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
 }
 
 // ---------- Module-level shared pieces (no components inside render) ----------
+
+function FeedbackPanel({
+  active,
+  busy,
+  value,
+  onChange,
+  t,
+  onRun,
+  notice,
+}: {
+  active: boolean
+  busy: boolean
+  value: string
+  onChange: (v: string) => void
+  t: (key: Parameters<ReturnType<typeof useApp>['t']>[0]) => string
+  onRun: () => void
+  notice?: string
+}) {
+  if (!active) return null
+  return (
+    <details className="rounded-xl border border-amber-300/70 bg-amber-50/60">
+      <summary className="flex cursor-pointer items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-amber-900 min-h-11">
+        <MessageSquareWarning className="h-4 w-4 text-amber-600" />
+        {t('feedbackLabel')}
+      </summary>
+      <div className="px-3.5 pb-3.5 space-y-2.5">
+        {notice && <p className="text-xs text-amber-900 leading-6">{notice}</p>}
+        <p className="text-[11px] text-amber-800 leading-5">{t('feedbackForTab')}</p>
+        <textarea
+          rows={2}
+          value={value}
+          onChange={(ev) => onChange(ev.target.value)}
+          placeholder={t('feedbackPlaceholder')}
+          className="w-full rounded-lg border border-amber-300 bg-white p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
+        />
+        <div className="flex flex-wrap items-center gap-2">
+          <Button size="sm" className="gap-1.5" onClick={onRun} disabled={busy}>
+            {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <MessageSquareWarning className="h-3.5 w-3.5" />}
+            {t('regenerateWithFeedback')}
+          </Button>
+          <span className="text-[11px] text-amber-800">{t('regenReplacesRejected')}</span>
+        </div>
+      </div>
+    </details>
+  )
+}
 
 function GenerateBar({
   kind,
@@ -609,7 +794,10 @@ function ReviewActions({
   t: (key: Parameters<ReturnType<typeof useApp>['t']>[0]) => string
   onReview: (kind: string, id: string, status: string) => void
 }) {
-  if (!active || status === 'rejected') return null
+  // needs_revision items stay decidable even after the stage advanced —
+  // change-impact control must never become a dead end.
+  const decidable = active || status === 'needs_revision'
+  if (!decidable || status === 'rejected') return null
   return (
     <div className="mt-2 flex gap-1.5 border-t pt-2">
       {status !== 'confirmed' && (
