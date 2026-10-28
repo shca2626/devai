@@ -6,6 +6,9 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { AppProvider, useApp } from '@/components/app/context'
 import { Sidebar } from '@/components/app/sidebar'
 import { NewIdeaDialog } from '@/components/app/new-idea'
+import { ConstitutionDialog } from '@/components/app/constitution'
+import { ContextPackDialog } from '@/components/app/context-pack'
+import { PlaybookDialog } from '@/components/app/playbook'
 import { Stepper } from '@/components/app/stepper'
 import { ExpressRun } from '@/components/app/express'
 import { UnderstandStage } from '@/components/stages/understand'
@@ -19,6 +22,7 @@ import { ReadinessStage } from '@/components/stages/readiness'
 import { PackageStage } from '@/components/stages/package'
 import { t as translate } from '@/lib/i18n'
 import {
+  BookOpen,
   Compass,
   DraftingCompass,
   Languages,
@@ -26,6 +30,8 @@ import {
   ListChecks,
   Menu,
   MessagesSquare,
+  Package,
+  ScrollText,
   ShieldCheck,
   Sparkles,
 } from 'lucide-react'
@@ -128,13 +134,20 @@ function IdeaView() {
 }
 
 function Shell() {
-  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas } = useApp()
+  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen } = useApp()
   const [newIdeaOpen, setNewIdeaOpen] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [prefill, setPrefill] = useState<string | undefined>(undefined)
+  const [playbookOpen, setPlaybookOpen] = useState(false)
+  const [labPrompt, setLabPrompt] = useState<string | undefined>(undefined)
 
   function openNewIdea(prefillText?: string) {
     setPrefill(prefillText)
+    setNewIdeaOpen(true)
+  }
+
+  function sendToLab(prompt: string) {
+    setLabPrompt(prompt)
     setNewIdeaOpen(true)
   }
 
@@ -177,6 +190,41 @@ function Shell() {
           </span>
 
           <div className="ms-auto flex items-center gap-1.5">
+            {selectedId && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setContextPackOpen(true)}
+                className="gap-1.5 min-h-9"
+                aria-label={t('openContextPack')}
+                title={t('openContextPack')}
+              >
+                <Package className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openContextPack')}</span>
+              </Button>
+            )}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setPlaybookOpen(true)}
+              className="gap-1.5 min-h-9"
+              aria-label={t('openPlaybook')}
+              title={t('openPlaybook')}
+            >
+              <BookOpen className="h-4 w-4 text-primary" />
+              <span className="hidden xl:inline text-xs font-medium">{t('openPlaybook')}</span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setConstitutionOpen(true)}
+              className="gap-1.5 min-h-9"
+              aria-label={t('openConstitution')}
+              title={t('openConstitution')}
+            >
+              <ScrollText className="h-4 w-4 text-primary" />
+              <span className="hidden xl:inline text-xs font-medium">{t('openConstitution')}</span>
+            </Button>
             <Button
               variant="ghost"
               size="sm"
@@ -225,15 +273,22 @@ function Shell() {
           open={newIdeaOpen}
           onOpenChange={(v) => {
             setNewIdeaOpen(v)
-            if (!v) setPrefill(undefined)
+            if (!v) {
+              setPrefill(undefined)
+              setLabPrompt(undefined)
+            }
           }}
           onCreated={(ideaId) => {
             refreshIdeas()
             selectIdea(ideaId)
           }}
-          prefill={prefill}
+          prefill={labPrompt ?? prefill}
         />
       )}
+
+      <ConstitutionDialog open={constitutionOpen} onOpenChange={setConstitutionOpen} />
+      <ContextPackDialog open={contextPackOpen} onOpenChange={setContextPackOpen} />
+      <PlaybookDialog open={playbookOpen} onOpenChange={setPlaybookOpen} onSendToLab={sendToLab} />
     </div>
   )
 }

@@ -428,6 +428,90 @@ export interface TranslationResult {
   alreadyInTarget: boolean
 }
 
+// ============================================================
+// AI Constitution + Context Pack (vibe-coding handoff armor)
+// ============================================================
+
+export const CONSTITUTION_CATEGORIES = [
+  'stack',
+  'coding',
+  'security',
+  'design',
+  'quality',
+  'workflow',
+] as const
+export type ConstitutionCategory = (typeof CONSTITUTION_CATEGORIES)[number]
+
+export interface ConstitutionRule {
+  id: string
+  scope: 'global' | 'project'
+  category: ConstitutionCategory
+  text: string
+  origin: 'ai' | 'user'
+  enabled: boolean
+  order: number
+}
+
+// Context Pack target tools — each gets its own framing so the
+// brief reads natively in the AI builder it is pasted into.
+export const CONTEXT_TARGETS = ['bolt', 'cursor', 'claude', 'chatgpt', 'generic'] as const
+export type ContextTarget = (typeof CONTEXT_TARGETS)[number]
+
+export interface ContextPackOptions {
+  target: ContextTarget
+  lang: 'ar' | 'en'
+  includeConstitution: boolean
+  includeRequirements: boolean
+  includeArchitecture: boolean
+  includeDataModel: boolean
+  includeScreens: boolean
+  includeTasks: boolean
+  includeRisks: boolean
+  includeDecisions: boolean
+}
+
+export interface ContextPackResult {
+  markdown: string
+  stats: {
+    characters: number
+    words: number
+    lines: number
+    sections: number
+    rulesApplied: number
+  }
+  generatedAt: string
+}
+
+// ============================================================
+// Prompt Playbook — reusable prompt templates
+// ============================================================
+
+export const PLAYBOOK_CATEGORIES = [
+  'new_feature',
+  'bug_fix',
+  'refactor',
+  'tests',
+  'review',
+  'planning',
+  'general',
+] as const
+export type PlaybookCategory = (typeof PLAYBOOK_CATEGORIES)[number]
+
+export interface PromptTemplate {
+  id: string
+  title: string
+  titleAr: string | null
+  description: string
+  descriptionAr: string | null
+  category: PlaybookCategory
+  body: string
+  tags: string[]
+  isBuiltin: boolean
+  useCount: number
+  isFavorite: boolean
+  updatedAt: string
+}
+
 export interface TraceRow {
   code: string
   title: string

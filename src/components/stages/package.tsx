@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { useApp } from '@/components/app/context'
 import { CodeChip } from '@/components/app/bits'
 import type { IdeaDetail } from '@/lib/types'
-import { CheckCircle2, FileJson, FileText, Lock, LockOpen, Loader2 } from 'lucide-react'
+import { CheckCircle2, FileJson, FileText, Lock, LockOpen, Loader2, Package, ScrollText, Zap } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 // ============================================================
@@ -25,7 +25,7 @@ const SECTION_KEYS = [
 ]
 
 export function PackageStage({ detail }: { detail: IdeaDetail }) {
-  const { t, lang, setDetail, refreshIdeas, setView } = useApp()
+  const { t, lang, setDetail, refreshIdeas, setView, setContextPackOpen, setConstitutionOpen } = useApp()
   const { toast } = useToast()
   const [reopenOpen, setReopenOpen] = useState(false)
   const [reopenReason, setReopenReason] = useState('')
@@ -122,6 +122,25 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Vibe-coding handoff — the Context Pack */}
+      <div className="rounded-xl border border-primary/30 bg-primary/[0.04] p-4 space-y-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <Zap className="h-4 w-4 text-primary" />
+          <div className="text-sm font-semibold flex-1">{t('handoffTitle')}</div>
+        </div>
+        <p className="text-xs text-muted-foreground leading-6">{t('handoffBody')}</p>
+        <div className="flex flex-wrap gap-2">
+          <Button size="sm" onClick={() => setContextPackOpen(true)} className="gap-1.5">
+            <Package className="h-3.5 w-3.5" />
+            {t('openContextPack')}
+          </Button>
+          <Button size="sm" variant="outline" onClick={() => setConstitutionOpen(true)} className="gap-1.5">
+            <ScrollText className="h-3.5 w-3.5" />
+            {t('openConstitution')}
+          </Button>
         </div>
       </div>
 

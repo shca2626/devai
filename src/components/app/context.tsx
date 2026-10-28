@@ -35,6 +35,11 @@ export interface AppState {
   loadDetail: (id: string) => Promise<IdeaDetail | null>
   view: ViewName
   setView: (v: ViewName) => void
+  // Vibe-coding handoff dialogs (openable from any stage)
+  constitutionOpen: boolean
+  setConstitutionOpen: (open: boolean) => void
+  contextPackOpen: boolean
+  setContextPackOpen: (open: boolean) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
@@ -65,6 +70,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [detail, setDetail] = useState<IdeaDetail | null>(null)
   const [loadingDetail, setLoadingDetail] = useState(false)
   const [view, setView] = useState<ViewName>('understand')
+  const [constitutionOpen, setConstitutionOpen] = useState(false)
+  const [contextPackOpen, setContextPackOpen] = useState(false)
 
   // Keep <html lang/dir> in sync with the UI language
   useEffect(() => {
@@ -137,6 +144,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
     loadDetail,
     view,
     setView,
+    constitutionOpen,
+    setConstitutionOpen,
+    contextPackOpen,
+    setContextPackOpen,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

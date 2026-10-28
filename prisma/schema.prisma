@@ -44,6 +44,7 @@ model Idea {
   risks           RiskItem[]
   issues          ConsistencyIssue[]
   architecture    ArchitectureDoc?
+  constitutionRules ConstitutionRule[]
 }
 
 model Question {
@@ -285,4 +286,53 @@ model ArchitectureDoc {
   status       String   @default("proposed")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+// ============================================================
+// AI Constitution — the developer's non-negotiable rules for
+// vibe-coding handoffs. Rules are scoped:
+//   ideaId = null  -> GLOBAL (apply to every project)
+//   ideaId = set   -> PROJECT (apply to one idea only)
+// The Context Pack compiler injects the merged rule set at the
+// top of every generated brief so AI builders never "meet" the
+// project cold and can never silently violate standing rules.
+// ============================================================
+
+model ConstitutionRule {
+  id        String   @id @default(cuid())
+  ideaId    String? // null = global workspace rule
+  idea      Idea?    @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  category  String // stack | coding | security | design | quality | workflow
+  text      String
+  origin    String   @default("user") // ai | user
+  enabled   Boolean  @default(true)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+// ============================================================
+// Prompt Playbook — saved, reusable prompt templates with
+// {{variables}}. Categories map to the recurring tasks of
+// vibe-coding (new feature, bug fix, refactor, tests, review,
+// planning). Templates are either built-in (isBuiltin, seeded
+// once) or user-authored / AI-drafted. useCount tracks what
+// actually gets reused so the list can sort by value.
+// ============================================================
+
+model PromptTemplate {
+  id          String   @id @default(cuid())
+  title       String
+  titleAr     String?
+  description String
+  descriptionAr String?
+  category    String // new_feature | bug_fix | refactor | tests | review | planning | general
+  body        String // template with {{variables}}
+  tags        String? // JSON array of strings
+  isBuiltin   Boolean  @default(false)
+  useCount    Int      @default(0)
+  isFavorite  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
