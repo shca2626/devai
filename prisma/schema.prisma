@@ -46,6 +46,8 @@ model Idea {
   architecture    ArchitectureDoc?
   constitutionRules ConstitutionRule[]
   verificationRuns VerificationRun[]
+  decisionEntries DecisionEntry[]
+  driftChecks    DriftCheck[]
 }
 
 model Question {
@@ -356,6 +358,59 @@ model VerificationRun {
   codeChars Int
   result    String // JSON VerificationResult
   score     Int // deterministic coverage score 0-100
+  createdAt DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+// ============================================================
+// Decision Log — the project's standing APPROVED decisions.
+// Different from the Decision audit trail (which records what
+// happened): a DecisionEntry records what was CHOSEN and must
+// hold — "SQLite via Prisma, no other ORM", "Arabic-first RTL",
+// "no dark mode", "REST, never GraphQL". Active entries are
+// injected into the Context Pack and checked by the Drift
+// Detector, which warns when an AI build contradicts them.
+// ============================================================
+
+model DecisionEntry {
+  id           String   @id @default(cuid())
+  ideaId       String
+  idea         Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code         String // DEC-01
+  title        String
+  titleAr      String?
+  choice       String // the standing choice — one imperative line
+  rationale    String? // why it was chosen
+  alternatives String? // options considered and rejected
+  category     String   @default("architecture") // architecture | stack | data | api | ux | scope | naming | process
+  status       String   @default("active") // active | superseded
+  origin       String   @default("user") // user | ai
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([ideaId])
+}
+
+// ============================================================
+// Drift Detector — paste an AI build, get an honest verdict per
+// approved decision: ✅ respected / 🟡 partial / ❌ drift / ⚪ not
+// in pasted code. The alignment score and drift count are
+// computed deterministically by the application — never trusted
+// to the model.
+// ============================================================
+
+model DriftCheck {
+  id        String   @id @default(cuid())
+  ideaId    String
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  label     String?
+  code      String // pasted build snapshot (unlimited)
+  codeChars Int
+  result    String // JSON DriftResult
+  drifts    Int // deterministic count of drift verdicts
+  alignment Int // deterministic decision-alignment score 0-100
   createdAt DateTime @default(now())
 
   @@index([ideaId])

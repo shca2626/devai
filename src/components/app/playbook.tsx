@@ -143,7 +143,6 @@ export function PlaybookDialog({
       })
       .catch(() => toast({ description: t('toolsError'), variant: 'destructive' }))
       .finally(() => setLoading(false))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open])
 
   const selected = useMemo(
@@ -196,7 +195,7 @@ export function PlaybookDialog({
     }
   }
 
-  async function useTemplate(copy: boolean) {
+  async function applyTemplate(copy: boolean) {
     if (!selected) return
     setBusy(true)
     try {
@@ -506,11 +505,11 @@ export function PlaybookDialog({
             </pre>
 
             <div className="flex flex-wrap justify-end gap-1.5">
-              <Button size="sm" variant="outline" onClick={() => useTemplate(true)} disabled={busy} className="gap-1.5">
+              <Button size="sm" variant="outline" onClick={() => applyTemplate(true)} disabled={busy} className="gap-1.5">
                 <Copy className="h-3.5 w-3.5" />
                 {t('copyPrompt')}
               </Button>
-              <Button size="sm" onClick={() => useTemplate(false)} disabled={busy} className="gap-1.5">
+              <Button size="sm" onClick={() => applyTemplate(false)} disabled={busy} className="gap-1.5">
                 <Sparkles className="h-3.5 w-3.5" />
                 {t('sendToLab')}
               </Button>

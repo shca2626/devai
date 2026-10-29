@@ -1,11 +1,13 @@
 import { db } from '@/lib/db'
 import { chatJson } from '@/lib/ai'
 import { buildIdeaDetail, logDecision } from '@/lib/payload'
+import { listDecisions } from '@/lib/engines/drift'
 import type {
   ConstitutionCategory,
   ConstitutionRule,
   ContextPackOptions,
   ContextPackResult,
+  DecisionEntry,
   IdeaDetail,
 } from '@/lib/types'
 
@@ -75,7 +77,8 @@ const L = (lang: 'ar' | 'en') => ({
   screens: lang === 'ar' ? 'الشاشات' : 'Screens',
   tasks: lang === 'ar' ? 'خطة التنفيذ' : 'Implementation plan',
   risks: lang === 'ar' ? 'المخاطر والتخفيفات' : 'Risks & mitigations',
-  decisions: lang === 'ar' ? 'سجل القرارات' : 'Decision log',
+  activity: lang === 'ar' ? 'سجل النشاط' : 'Activity log',
+  approvedDecisions: lang === 'ar' ? 'القرارات المعتمدة — اختيارات ثابتة' : 'Approved decisions — standing choices',
   agreements: lang === 'ar' ? 'اتفاقيات العمل — كيف نتعامل معًا' : 'Working agreements — how we work together',
   problem: lang === 'ar' ? 'المشكلة' : 'Problem',
   concept: lang === 'ar' ? 'الفكرة' : 'Concept',
@@ -266,7 +269,8 @@ export async function buildContextPack(ideaId: string, options: ContextPackOptio
 
   const rules = options.includeConstitution ? await listRules(ideaId) : []
   const activeRules = rules.filter((r) => r.enabled)
-  const markdown = compilePack(detail, activeRules, options)
+  const decisions = (await listDecisions(ideaId)).filter((d) => d.status === 'active')
+  const markdown = compilePack(detail, activeRules, decisions, options)
 
   return {
     markdown,
@@ -281,7 +285,7 @@ export async function buildContextPack(ideaId: string, options: ContextPackOptio
   }
 }
 
-function compilePack(d: IdeaDetail, rules: ConstitutionRule[], o: ContextPackOptions): string {
+function compilePack(d: IdeaDetail, rules: ConstitutionRule[], decisions: DecisionEntry[], o: ContextPackOptions): string {
   const s = L(o.lang)
   const out: string[] = []
   const h2 = (title: string) => out.push('', `## ${title}`, '')
@@ -317,6 +321,21 @@ function compilePack(d: IdeaDetail, rules: ConstitutionRule[], o: ContextPackOpt
     }
     if (global.length) emit(global, s.globalRules)
     if (project.length) emit(project, s.projectRules)
+  }
+
+  // ---------- Approved decisions (standing choices) ----------
+  if (decisions.length > 0) {
+    h2(s.approvedDecisions)
+    out.push(
+      o.lang === 'ar'
+        ? 'هذه اختيارات معتمدة لا يجوز لأي أداة بناء تجاوزها أو تغييرها بصمت. تعديل أي منها يتطلب موافقة صريحة من المطوّر.'
+        : 'These are approved choices no AI builder may silently override or change. Revising any of them requires explicit approval from the developer.'
+    )
+    for (const dec of decisions) {
+      out.push(`- \`${dec.code}\` **${dec.title}:** ${dec.choice}`)
+      if (dec.rationale) out.push(`  - ${o.lang === 'ar' ? 'لماذا' : 'Why'}: ${dec.rationale}`)
+      if (dec.alternatives) out.push(`  - ${o.lang === 'ar' ? 'مرفوض' : 'Rejected'}: ${dec.alternatives}`)
+    }
   }
 
   // ---------- Requirements ----------
@@ -424,9 +443,9 @@ function compilePack(d: IdeaDetail, rules: ConstitutionRule[], o: ContextPackOpt
     }
   }
 
-  // ---------- Decisions ----------
+  // ---------- Activity log (audit trail) ----------
   if (o.includeDecisions && d.decisions.length) {
-    h2(s.decisions)
+    h2(s.activity)
     for (const dec of d.decisions.slice(0, 25))
       out.push(`- ${dec.createdAt.slice(0, 10)} — **${dec.action}**${dec.detail ? `: ${dec.detail}` : ''}`)
   }

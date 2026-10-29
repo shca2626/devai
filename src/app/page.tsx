@@ -10,6 +10,7 @@ import { ConstitutionDialog } from '@/components/app/constitution'
 import { ContextPackDialog } from '@/components/app/context-pack'
 import { PlaybookDialog } from '@/components/app/playbook'
 import { VerifyDialog } from '@/components/app/verify'
+import { DecisionsDialog } from '@/components/app/decisions'
 import { Stepper } from '@/components/app/stepper'
 import { ExpressRun } from '@/components/app/express'
 import { UnderstandStage } from '@/components/stages/understand'
@@ -33,6 +34,7 @@ import {
   Menu,
   MessagesSquare,
   Package,
+  Scale,
   ScrollText,
   ShieldCheck,
   Sparkles,
@@ -136,7 +138,7 @@ function IdeaView() {
 }
 
 function Shell() {
-  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen, verifyOpen, setVerifyOpen } = useApp()
+  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen, verifyOpen, setVerifyOpen, decisionsOpen, setDecisionsOpen } = useApp()
   const [newIdeaOpen, setNewIdeaOpen] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [prefill, setPrefill] = useState<string | undefined>(undefined)
@@ -218,9 +220,22 @@ function Shell() {
                 <span className="hidden xl:inline text-xs font-medium">{t('openVerifier')}</span>
               </Button>
             )}
+            {selectedId && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setDecisionsOpen(true)}
+                className="gap-1.5 min-h-9"
+                aria-label={t('openDecisions')}
+                title={t('decisionsTitle')}
+              >
+                <Scale className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openDecisions')}</span>
+              </Button>
+            )}
             <Button
               variant="ghost"
-              size="sm"
+                size="sm"
               onClick={() => setPlaybookOpen(true)}
               className="gap-1.5 min-h-9"
               aria-label={t('openPlaybook')}
@@ -304,6 +319,7 @@ function Shell() {
       <ConstitutionDialog open={constitutionOpen} onOpenChange={setConstitutionOpen} />
       <ContextPackDialog open={contextPackOpen} onOpenChange={setContextPackOpen} />
       <VerifyDialog open={verifyOpen} onOpenChange={setVerifyOpen} />
+      <DecisionsDialog open={decisionsOpen} onOpenChange={setDecisionsOpen} />
       <PlaybookDialog open={playbookOpen} onOpenChange={setPlaybookOpen} onSendToLab={sendToLab} />
     </div>
   )

@@ -186,7 +186,6 @@ export function ConstitutionDialog({
   // Reload whenever the dialog opens or the selected idea changes
   useEffect(() => {
     if (open) void load(ideaId)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, ideaId])
 
   async function addRule() {

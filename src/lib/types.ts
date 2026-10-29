@@ -585,3 +585,92 @@ export interface VerificationRunSummary {
   counts: VerificationCounts
   createdAt: string
 }
+
+// ============================================================
+// Decision Log — standing approved decisions per project.
+// Active entries are injected into the Context Pack and become
+// the targets of the Drift Detector.
+// ============================================================
+
+export const DECISION_CATEGORIES = [
+  'architecture',
+  'stack',
+  'data',
+  'api',
+  'ux',
+  'scope',
+  'naming',
+  'process',
+] as const
+export type DecisionCategory = (typeof DECISION_CATEGORIES)[number]
+
+export type DecisionStatus = 'active' | 'superseded'
+
+export interface DecisionEntry {
+  id: string
+  code: string // DEC-01
+  title: string
+  titleAr: string | null
+  choice: string // the standing choice
+  rationale: string | null
+  alternatives: string | null
+  category: DecisionCategory
+  status: DecisionStatus
+  origin: 'user' | 'ai'
+  createdAt: string
+  updatedAt: string
+}
+
+// ============================================================
+// Drift Detector — paste AI code, check it against the active
+// decision log. Verdicts are per-decision; the alignment score
+// and drift count are computed by the application, never by the
+// model.
+// ============================================================
+
+export type DriftStatus = 'respected' | 'partial' | 'drift' | 'unknown'
+
+export interface DriftCheckItem {
+  code: string // DEC-01
+  title: string
+  category: string
+  status: DriftStatus
+  evidence: string // what in the code proves the decision was honored
+  drift: string // where the build contradicts the decision (partial/drift)
+  realign: string // one concrete instruction to bring the build back in line
+}
+
+export interface DriftResult {
+  checks: DriftCheckItem[]
+  summary: string
+  violations: string[] // the worst contradictions and their consequences
+  realignments: string[] // concrete steps to realign the build
+}
+
+export interface DriftCounts {
+  respected: number
+  partial: number
+  drift: number
+  unknown: number
+}
+
+export interface DriftCheckRunItem {
+  id: string
+  label: string | null
+  codeChars: number
+  drifts: number
+  alignment: number
+  counts: DriftCounts
+  result: DriftResult
+  createdAt: string
+}
+
+export interface DriftCheckSummary {
+  id: string
+  label: string | null
+  codeChars: number
+  drifts: number
+  alignment: number
+  counts: DriftCounts
+  createdAt: string
+}
