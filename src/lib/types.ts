@@ -531,3 +531,57 @@ export interface ImpactPreview {
   affected: Array<{ kind: string; code: string; name: string; why: string }>
   openIssues: number
 }
+
+// ============================================================
+// Traceability Verifier — paste AI code, verify it against the
+// Project Contract. Verdicts are per-check; the score is
+// computed by the application, never by the model.
+// ============================================================
+
+export type VerifyStatus = 'pass' | 'partial' | 'fail' | 'unknown'
+export type VerifyCheckKind = 'requirement' | 'feature' | 'rule'
+
+export interface VerificationCheck {
+  kind: VerifyCheckKind
+  code: string // FR-001 | AF-1 | RULE-<ruleId suffix>
+  title: string
+  priority: 'must' | 'should' | 'could' | 'rule'
+  status: VerifyStatus
+  evidence: string // what in the code proves it (or its absence)
+  gap: string // exactly what is missing (partial/fail)
+  fix: string // one concrete instruction to close the gap
+}
+
+export interface VerificationResult {
+  source: 'requirements' | 'features' // what the code was verified against
+  checks: VerificationCheck[]
+  summary: string
+  strengths: string[]
+  risks: string[]
+}
+
+export interface VerificationCounts {
+  pass: number
+  partial: number
+  fail: number
+  unknown: number
+}
+
+export interface VerificationRunItem {
+  id: string
+  label: string | null
+  codeChars: number
+  score: number
+  counts: VerificationCounts
+  result: VerificationResult
+  createdAt: string
+}
+
+export interface VerificationRunSummary {
+  id: string
+  label: string | null
+  codeChars: number
+  score: number
+  counts: VerificationCounts
+  createdAt: string
+}

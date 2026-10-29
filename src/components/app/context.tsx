@@ -40,6 +40,8 @@ export interface AppState {
   setConstitutionOpen: (open: boolean) => void
   contextPackOpen: boolean
   setContextPackOpen: (open: boolean) => void
+  verifyOpen: boolean
+  setVerifyOpen: (open: boolean) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
@@ -72,6 +74,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [view, setView] = useState<ViewName>('understand')
   const [constitutionOpen, setConstitutionOpen] = useState(false)
   const [contextPackOpen, setContextPackOpen] = useState(false)
+  const [verifyOpen, setVerifyOpen] = useState(false)
 
   // Keep <html lang/dir> in sync with the UI language
   useEffect(() => {
@@ -148,6 +151,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setConstitutionOpen,
     contextPackOpen,
     setContextPackOpen,
+    verifyOpen,
+    setVerifyOpen,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

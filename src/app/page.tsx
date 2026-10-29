@@ -9,6 +9,7 @@ import { NewIdeaDialog } from '@/components/app/new-idea'
 import { ConstitutionDialog } from '@/components/app/constitution'
 import { ContextPackDialog } from '@/components/app/context-pack'
 import { PlaybookDialog } from '@/components/app/playbook'
+import { VerifyDialog } from '@/components/app/verify'
 import { Stepper } from '@/components/app/stepper'
 import { ExpressRun } from '@/components/app/express'
 import { UnderstandStage } from '@/components/stages/understand'
@@ -25,6 +26,7 @@ import {
   BookOpen,
   Compass,
   DraftingCompass,
+  FileSearch,
   Languages,
   Lightbulb,
   ListChecks,
@@ -134,7 +136,7 @@ function IdeaView() {
 }
 
 function Shell() {
-  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen } = useApp()
+  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen, verifyOpen, setVerifyOpen } = useApp()
   const [newIdeaOpen, setNewIdeaOpen] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [prefill, setPrefill] = useState<string | undefined>(undefined)
@@ -201,6 +203,19 @@ function Shell() {
               >
                 <Package className="h-4 w-4 text-primary" />
                 <span className="hidden xl:inline text-xs font-medium">{t('openContextPack')}</span>
+              </Button>
+            )}
+            {selectedId && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setVerifyOpen(true)}
+                className="gap-1.5 min-h-9"
+                aria-label={t('openVerifier')}
+                title={t('verifierTitle')}
+              >
+                <FileSearch className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openVerifier')}</span>
               </Button>
             )}
             <Button
@@ -288,6 +303,7 @@ function Shell() {
 
       <ConstitutionDialog open={constitutionOpen} onOpenChange={setConstitutionOpen} />
       <ContextPackDialog open={contextPackOpen} onOpenChange={setContextPackOpen} />
+      <VerifyDialog open={verifyOpen} onOpenChange={setVerifyOpen} />
       <PlaybookDialog open={playbookOpen} onOpenChange={setPlaybookOpen} onSendToLab={sendToLab} />
     </div>
   )

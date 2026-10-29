@@ -45,6 +45,7 @@ model Idea {
   issues          ConsistencyIssue[]
   architecture    ArchitectureDoc?
   constitutionRules ConstitutionRule[]
+  verificationRuns VerificationRun[]
 }
 
 model Question {
@@ -335,4 +336,27 @@ model PromptTemplate {
   isFavorite  Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// ============================================================
+// Traceability Verifier — paste AI-generated code, get an
+// honest ✅/🟡/❌/⚪ matrix against the project's confirmed
+// requirements (or accepted features before the requirements
+// stage) and enabled constitution rules. The score is computed
+// deterministically by the application from the per-check
+// verdicts — never trusted to the model.
+// ============================================================
+
+model VerificationRun {
+  id        String   @id @default(cuid())
+  ideaId    String
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  label     String? // optional user label, e.g. "Bolt build v2"
+  code      String // pasted code snapshot (unlimited)
+  codeChars Int
+  result    String // JSON VerificationResult
+  score     Int // deterministic coverage score 0-100
+  createdAt DateTime @default(now())
+
+  @@index([ideaId])
 }

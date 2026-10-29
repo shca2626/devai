@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { useApp } from '@/components/app/context'
 import { CodeChip } from '@/components/app/bits'
 import type { IdeaDetail } from '@/lib/types'
-import { CheckCircle2, FileJson, FileText, Lock, LockOpen, Loader2, Package, ScrollText, Zap } from 'lucide-react'
+import { CheckCircle2, FileJson, FileText, Lock, LockOpen, Loader2, Package, ScrollText, ShieldCheck, Zap } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 // ============================================================
@@ -25,7 +25,7 @@ const SECTION_KEYS = [
 ]
 
 export function PackageStage({ detail }: { detail: IdeaDetail }) {
-  const { t, lang, setDetail, refreshIdeas, setView, setContextPackOpen, setConstitutionOpen } = useApp()
+  const { t, lang, setDetail, refreshIdeas, setView, setContextPackOpen, setConstitutionOpen, setVerifyOpen } = useApp()
   const { toast } = useToast()
   const [reopenOpen, setReopenOpen] = useState(false)
   const [reopenReason, setReopenReason] = useState('')
@@ -136,6 +136,10 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
           <Button size="sm" onClick={() => setContextPackOpen(true)} className="gap-1.5">
             <Package className="h-3.5 w-3.5" />
             {t('openContextPack')}
+          </Button>
+          <Button size="sm" variant="outline" onClick={() => setVerifyOpen(true)} className="gap-1.5">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            {t('verifyAiCode')}
           </Button>
           <Button size="sm" variant="outline" onClick={() => setConstitutionOpen(true)} className="gap-1.5">
             <ScrollText className="h-3.5 w-3.5" />
