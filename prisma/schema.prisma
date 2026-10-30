@@ -48,6 +48,7 @@ model Idea {
   verificationRuns VerificationRun[]
   decisionEntries DecisionEntry[]
   driftChecks    DriftCheck[]
+  siteAnalyses   SiteAnalysis[]
 }
 
 model Question {
@@ -412,6 +413,35 @@ model DriftCheck {
   drifts    Int // deterministic count of drift verdicts
   alignment Int // deterministic decision-alignment score 0-100
   createdAt DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+// ============================================================
+// Site Intelligence — deep static analysis of any live web
+// platform from a single URL. REA-style discipline, embedded:
+// constrained tools, robots-aware crawling, no JS execution of
+// the target, and every claim carries evidence + method. Seven
+// gated stages (recon → surface → bundles → APIs → data models
+// → audit → synthesis) produce a downloadable file pack (the
+// "clone pack") for build agents. The completeness score is
+// computed deterministically by the application from what was
+// actually collected — never trusted to the model.
+// ============================================================
+
+model SiteAnalysis {
+  id        String   @id @default(cuid())
+  ideaId    String
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  url       String
+  domain    String
+  status    String   @default("running") // running | complete | failed
+  stageDone Int      @default(0) // 0..7 — how many stages completed
+  score     Int      @default(0) // deterministic completeness 0-100
+  error     String?
+  data      String // JSON SiteIntelData — stages, evidence, unknowns, pack
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([ideaId])
 }

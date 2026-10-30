@@ -11,6 +11,7 @@ import { ContextPackDialog } from '@/components/app/context-pack'
 import { PlaybookDialog } from '@/components/app/playbook'
 import { VerifyDialog } from '@/components/app/verify'
 import { DecisionsDialog } from '@/components/app/decisions'
+import { SiteIntelDialog } from '@/components/app/site-intel'
 import { Stepper } from '@/components/app/stepper'
 import { ExpressRun } from '@/components/app/express'
 import { UnderstandStage } from '@/components/stages/understand'
@@ -34,6 +35,7 @@ import {
   Menu,
   MessagesSquare,
   Package,
+  Radar,
   Scale,
   ScrollText,
   ShieldCheck,
@@ -138,7 +140,7 @@ function IdeaView() {
 }
 
 function Shell() {
-  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen, verifyOpen, setVerifyOpen, decisionsOpen, setDecisionsOpen } = useApp()
+  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen, verifyOpen, setVerifyOpen, decisionsOpen, setDecisionsOpen, siteIntelOpen, setSiteIntelOpen } = useApp()
   const [newIdeaOpen, setNewIdeaOpen] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [prefill, setPrefill] = useState<string | undefined>(undefined)
@@ -233,6 +235,19 @@ function Shell() {
                 <span className="hidden xl:inline text-xs font-medium">{t('openDecisions')}</span>
               </Button>
             )}
+            {selectedId && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSiteIntelOpen(true)}
+                className="gap-1.5 min-h-9"
+                aria-label={t('openSiteIntel')}
+                title={t('siteIntelTitle')}
+              >
+                <Radar className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openSiteIntel')}</span>
+              </Button>
+            )}
             <Button
               variant="ghost"
                 size="sm"
@@ -320,6 +335,7 @@ function Shell() {
       <ContextPackDialog open={contextPackOpen} onOpenChange={setContextPackOpen} />
       <VerifyDialog open={verifyOpen} onOpenChange={setVerifyOpen} />
       <DecisionsDialog open={decisionsOpen} onOpenChange={setDecisionsOpen} />
+      <SiteIntelDialog open={siteIntelOpen} onOpenChange={setSiteIntelOpen} />
       <PlaybookDialog open={playbookOpen} onOpenChange={setPlaybookOpen} onSendToLab={sendToLab} />
     </div>
   )

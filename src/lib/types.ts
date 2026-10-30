@@ -674,3 +674,207 @@ export interface DriftCheckSummary {
   counts: DriftCounts
   createdAt: string
 }
+
+// ============================================================
+// Site Intelligence — deep static analysis of a live web
+// platform from a URL. Seven gated stages; the target's code is
+// NEVER executed (fetch + static analysis only). Every claim
+// carries evidence; what could not be determined lands in
+// unknowns instead of being guessed. The completeness score is
+// computed by the application, never by the model.
+// ============================================================
+
+export type SiteIntelStage = 'recon' | 'surface' | 'bundles' | 'apis' | 'models' | 'audit' | 'synthesis'
+
+export const SITE_INTEL_STAGES: readonly SiteIntelStage[] = [
+  'recon',
+  'surface',
+  'bundles',
+  'apis',
+  'models',
+  'audit',
+  'synthesis',
+]
+
+export interface SiteEvidence {
+  claim: string // what we assert
+  source: string // URL / header / file it came from
+  method: string // how it was determined
+  confidence: 'high' | 'medium' | 'low'
+}
+
+export interface SiteRecon {
+  finalUrl: string
+  httpStatus: number
+  redirected: boolean
+  https: boolean
+  server: string | null
+  poweredBy: string | null
+  title: string | null
+  description: string | null
+  generator: string | null
+  headers: Record<string, string>
+  robots: { found: boolean; sitemaps: string[]; disallows: string[] }
+  techSignals: string[] // raw fingerprints observed in headers + HTML
+  blocked: boolean // anti-bot wall / 403 / challenge detected
+  blockedReason: string | null
+  fetchMs: number
+}
+
+export interface SitePageForm {
+  action: string
+  method: string
+}
+
+export interface SitePageInfo {
+  url: string
+  status: number
+  title: string | null
+  description: string | null
+  h1: string[]
+  forms: SitePageForm[]
+  linkCount: number
+  imgCount: number
+  imgNoAlt: number
+  hasJsonLd: boolean
+  jsonLdTypes: string[]
+  canonical: string | null
+  ogTitle: string | null
+}
+
+export interface SiteSurface {
+  pages: SitePageInfo[]
+  routePatterns: string[] // normalized /users/:id style patterns
+  sitemapUrls: number
+  skippedByRobots: number
+  failedPages: string[]
+}
+
+export interface SiteAssetInfo {
+  url: string
+  sizeKb: number
+}
+
+export interface SiteBundles {
+  js: SiteAssetInfo[]
+  css: SiteAssetInfo[]
+  frameworks: { name: string; evidence: string }[]
+  libraries: string[]
+  routesInBundles: string[]
+  designTokens: {
+    colors: { hex: string; count: number }[]
+    fonts: string[]
+    spacingVars: string[]
+    radiusVars: string[]
+    breakpoints: string[]
+  }
+  sourceMaps: string[]
+  renderingModel: string // static | spa | ssr | ssg-hybrid — deterministic verdict
+  renderingEvidence: string
+  totalJsKb: number
+  totalCssKb: number
+}
+
+export interface SiteEndpointFound {
+  method: string
+  path: string
+  kind: 'rest' | 'graphql' | 'ws' | 'sse'
+  evidence: string
+  purpose: string
+}
+
+export interface SiteApiSurface {
+  endpoints: SiteEndpointFound[]
+  graphqlOps: string[]
+  websockets: string[]
+  authPattern: string
+}
+
+export interface SiteEntityFound {
+  name: string
+  fields: string[]
+  relations: string[]
+}
+
+export interface SiteModels {
+  markdown: string
+  entities: SiteEntityFound[]
+}
+
+export interface SiteAuditFinding {
+  finding: string
+  severity: 'critical' | 'major' | 'minor' | 'good'
+  evidence: string
+}
+
+export interface SiteAudit {
+  security: SiteAuditFinding[]
+  seo: SiteAuditFinding[]
+  a11y: SiteAuditFinding[]
+  performance: SiteAuditFinding[]
+  notes: string
+}
+
+export interface SiteSynthesis {
+  overview: string // markdown
+  architecture: string // markdown
+  componentMap: string // markdown
+  techStack: string // markdown
+  summary: string
+}
+
+export interface SitePackFile {
+  name: string
+  content: string
+}
+
+// Raw, pre-AI material statically mined from bundles + inline
+// scripts during the bundles stage. Kept so the APIs stage can
+// structure it without re-fetching assets.
+export interface SiteMinedData {
+  apiCalls: { method: string; url: string; kind: 'rest' | 'graphql' | 'ws' | 'sse'; snippet: string; file: string }[]
+  secrets: { pattern: string; snippet: string; file: string }[]
+  inlineScriptChars: number
+}
+
+export interface SiteIntelData {
+  recon?: SiteRecon
+  surface?: SiteSurface
+  bundles?: SiteBundles
+  mined?: SiteMinedData
+  apis?: SiteApiSurface
+  models?: SiteModels
+  audit?: SiteAudit
+  synthesis?: SiteSynthesis
+  evidence: SiteEvidence[]
+  unknowns: string[]
+  pack: SitePackFile[]
+  // Internal handoff fields (surface stage → bundles stage); persisted
+  // with the row so the stage-by-stage pipeline can pass them along.
+  assetJsUrls?: string[]
+  assetCssUrls?: string[]
+  inlineScriptsText?: string
+}
+
+export interface SiteAnalysisItem {
+  id: string
+  url: string
+  domain: string
+  status: 'running' | 'complete' | 'failed'
+  stageDone: number // 0..7
+  score: number // deterministic completeness 0-100
+  error: string | null
+  data: SiteIntelData
+  createdAt: string
+}
+
+export interface SiteAnalysisSummary {
+  id: string
+  url: string
+  domain: string
+  status: 'running' | 'complete' | 'failed'
+  stageDone: number
+  score: number
+  pagesCrawled: number
+  createdAt: string
+}

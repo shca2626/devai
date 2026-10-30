@@ -10,3 +10,5 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+// site-intel: prisma client regen marker (touching this file restarts the dev worker safely)
+
