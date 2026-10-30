@@ -213,6 +213,42 @@ export async function PATCH(req: Request, { params }: Params) {
       return NextResponse.json(payload)
     }
 
+    // ---------- Architect Lab artifacts ----------
+    if (['tradeStudy', 'adr', 'threatModel', 'scaleReport'].includes(kind)) {
+      const record =
+        kind === 'tradeStudy'
+          ? await db.archTradeStudy.findUnique({ where: { id } })
+          : kind === 'adr'
+            ? await db.archDecisionRecord.findUnique({ where: { id } })
+            : kind === 'threatModel'
+              ? await db.threatModelDoc.findUnique({ where: { id } })
+              : await db.scaleReport.findUnique({ where: { id } })
+      if (!record) return NextResponse.json({ error: 'Artifact not found' }, { status: 404 })
+      const ideaId = (record as { ideaId: string }).ideaId
+      const status = body.status ?? ''
+      const ADR_STATUSES = ['proposed', 'confirmed', 'superseded', 'rejected']
+      const allowed = kind === 'adr' ? ADR_STATUSES : REVIEW_STATUSES
+      if (!allowed.includes(status)) {
+        return NextResponse.json({ error: 'Invalid status.' }, { status: 400 })
+      }
+      if (kind === 'tradeStudy') await db.archTradeStudy.update({ where: { id }, data: { status } })
+      else if (kind === 'adr') await db.archDecisionRecord.update({ where: { id }, data: { status } })
+      else if (kind === 'threatModel') await db.threatModelDoc.update({ where: { id }, data: { status } })
+      else await db.scaleReport.update({ where: { id }, data: { status } })
+
+      const label =
+        kind === 'tradeStudy'
+          ? 'Trade-off study'
+          : kind === 'adr'
+            ? `ADR ${(record as { code: string }).code}`
+            : kind === 'threatModel'
+              ? 'Threat model'
+              : 'Scale report'
+      await logDecision(ideaId, `${label} → ${status}`, undefined, 'design')
+      const payload = await buildIdeaDetail(ideaId)
+      return NextResponse.json(payload)
+    }
+
     return NextResponse.json({ error: 'Unknown artifact kind.' }, { status: 400 })
   } catch (error) {
     console.error('[api/artifacts/[kind]/[id] PATCH]', error)

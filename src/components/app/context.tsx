@@ -51,7 +51,7 @@ export interface AppState {
 const AppContext = createContext<AppState | null>(null)
 
 // Stage names and view names differ for the first two stages
-const VIEW_BY_STAGE: Record<Stage, ViewName> = {
+export const VIEW_BY_STAGE: Record<Stage, ViewName> = {
   understanding: 'understand',
   discovery: 'discover',
   features: 'features',

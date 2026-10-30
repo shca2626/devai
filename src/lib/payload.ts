@@ -2,8 +2,11 @@ import { db } from '@/lib/db'
 import { safeParseJson, isProbablyArabic } from '@/lib/json-utils'
 import { computeReadiness } from '@/lib/readiness'
 import type {
+  AdrAlternative,
+  AdrConsequences,
   ApiEndpoint,
   Architecture,
+  ArchDecisionRecord,
   Assumption,
   BaselineSnapshot,
   ConsistencyIssue,
@@ -24,9 +27,18 @@ import type {
   Requirement,
   RiskItem,
   Role,
+  ScaleAssumption,
+  ScaleBottleneck,
+  ScaleReport,
+  ScaleScenario,
   ScreenSpec,
   Stage,
   FeaturesMeta,
+  StrideCategory,
+  ThreatFinding,
+  ThreatModelDoc,
+  TradeCandidate,
+  TradeStudy,
 } from '@/lib/types'
 
 // ============================================================
@@ -104,6 +116,10 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
       risks: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
       issues: { orderBy: { createdAt: 'desc' } },
       architecture: true,
+      tradeStudy: true,
+      adrs: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      threatModel: true,
+      scaleReport: true,
     },
   })
   if (!idea) return null
@@ -326,6 +342,63 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
       }
     : null
 
+  // ---------- Architect Lab ----------
+  const tradeStudy: TradeStudy | null = idea.tradeStudy
+    ? {
+        id: idea.tradeStudy.id,
+        candidates: parseJsonArray<TradeCandidate[]>(idea.tradeStudy.candidates, []),
+        recommended: idea.tradeStudy.recommended,
+        rationale: idea.tradeStudy.rationale,
+        linkedRequirements: parseJsonArray<string[]>(idea.tradeStudy.linkedRequirements, []),
+        status: idea.tradeStudy.status as TradeStudy['status'],
+      }
+    : null
+
+  const adrs: ArchDecisionRecord[] = idea.adrs.map((a) => ({
+    id: a.id,
+    code: a.code,
+    title: a.title,
+    titleAr: a.titleAr,
+    context: a.context,
+    decision: a.decision,
+    alternatives: parseJsonArray<AdrAlternative[]>(a.alternatives, []),
+    consequences: parseJsonArray<AdrConsequences>(a.consequences, { positive: [], negative: [], risks: [] }),
+    linkedRequirements: parseJsonArray<string[]>(a.linkedRequirements, []),
+    status: a.status as ArchDecisionRecord['status'],
+    order: a.order,
+  }))
+
+  const STRIDE_ALL: StrideCategory[] = [
+    'spoofing',
+    'tampering',
+    'repudiation',
+    'information_disclosure',
+    'denial_of_service',
+    'elevation_of_privilege',
+  ]
+  const threatModel: ThreatModelDoc | null = idea.threatModel
+    ? {
+        id: idea.threatModel.id,
+        findings: parseJsonArray<ThreatFinding[]>(idea.threatModel.findings, []).filter(
+          (f) => typeof f?.category === 'string' && (STRIDE_ALL as string[]).includes(f.category)
+        ),
+        summary: idea.threatModel.summary,
+        residual: idea.threatModel.residual,
+        status: idea.threatModel.status as ThreatModelDoc['status'],
+      }
+    : null
+
+  const scaleReport: ScaleReport | null = idea.scaleReport
+    ? {
+        id: idea.scaleReport.id,
+        assumptions: parseJsonArray<ScaleAssumption[]>(idea.scaleReport.assumptions, []),
+        bottlenecks: parseJsonArray<ScaleBottleneck[]>(idea.scaleReport.bottlenecks, []),
+        scenarios: parseJsonArray<ScaleScenario[]>(idea.scaleReport.scenarios, []),
+        plan: idea.scaleReport.plan,
+        status: idea.scaleReport.status as ScaleReport['status'],
+      }
+    : null
+
   const readiness = await computeReadiness(ideaId)
 
   return {
@@ -344,6 +417,10 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
     risks,
     issues,
     architecture,
+    tradeStudy,
+    adrs,
+    threatModel,
+    scaleReport,
     readiness,
   }
 }

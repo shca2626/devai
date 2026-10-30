@@ -208,6 +208,22 @@ export const SCHEMA_MODELS: SchemaModel[] = [
         "type": "ArchitectureDoc"
       },
       {
+        "name": "tradeStudy",
+        "type": "ArchTradeStudy"
+      },
+      {
+        "name": "adrs",
+        "type": "ArchDecisionRecord[]"
+      },
+      {
+        "name": "threatModel",
+        "type": "ThreatModelDoc"
+      },
+      {
+        "name": "scaleReport",
+        "type": "ScaleReport"
+      },
+      {
         "name": "constitutionRules",
         "type": "ConstitutionRule[]"
       },
@@ -1977,6 +1993,444 @@ export const SCHEMA_MODELS: SchemaModel[] = [
     "description": "One per idea: components, integrations, tech stack JSON and notes."
   },
   {
+    "name": "ArchTradeStudy",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": true,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "candidates",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "recommended",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "rationale",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "linkedRequirements",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": "Architect Lab — trade-off study: 2-3 candidate architectures (pros/cons/cost/complexity/teamFit/risks) + the reasoned recommendation."
+  },
+  {
+    "name": "ArchDecisionRecord",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "code",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "title",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "titleAr",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "context",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "decision",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "alternatives",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "consequences",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "linkedRequirements",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "order",
+        "type": "Int",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": "Architect Lab — Architecture Decision Records (ADR-01…): context → decision → consequences, with rejected alternatives and requirement traceability."
+  },
+  {
+    "name": "ThreatModelDoc",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": true,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "findings",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "summary",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "residual",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": "Architect Lab — STRIDE threat model: findings per category (Spoofing/Tampering/Repudiation/Info disclosure/DoS/Elevation) with attack path, risk and mitigation."
+  },
+  {
+    "name": "ScaleReport",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": true,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "assumptions",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "bottlenecks",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "scenarios",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "plan",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": "Architect Lab — scale report: load assumptions, bottlenecks ordered by what breaks first, and 10x/100x what-if scenarios with actions."
+  },
+  {
     "name": "ConstitutionRule",
     "fields": [
       {
@@ -2675,7 +3129,7 @@ export const SCHEMA_MODELS: SchemaModel[] = [
   }
 ]
 
-export const MODEL_NAMES = SCHEMA_MODELS.map((m) => m.name) as const
+export const MODEL_NAMES = ['Idea', 'Question', 'Feature', 'Assumption', 'Decision', 'Requirement', 'ProcessFlow', 'DataEntity', 'ApiEndpoint', 'ScreenSpec', 'ImplTask', 'RiskItem', 'ConsistencyIssue', 'ArchitectureDoc', 'ArchTradeStudy', 'ArchDecisionRecord', 'ThreatModelDoc', 'ScaleReport', 'ConstitutionRule', 'PromptTemplate', 'VerificationRun', 'DecisionEntry', 'DriftCheck', 'SiteAnalysis'] as const
 export type ModelName = (typeof MODEL_NAMES)[number]
 
 export function getModelMeta(name: string): SchemaModel | undefined {

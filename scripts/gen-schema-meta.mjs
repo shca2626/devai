@@ -77,6 +77,10 @@ const DESCRIPTIONS = {
   RiskItem: 'The risk register: category, likelihood, impact, mitigation, status.',
   ConsistencyIssue: 'Issues found by the consistency engine/AI: contradiction, omission, broken link… with severity and open/resolved/dismissed status.',
   ArchitectureDoc: 'One per idea: components, integrations, tech stack JSON and notes.',
+  ArchTradeStudy: 'Architect Lab — trade-off study: 2-3 candidate architectures (pros/cons/cost/complexity/teamFit/risks) + the reasoned recommendation.',
+  ArchDecisionRecord: 'Architect Lab — Architecture Decision Records (ADR-01…): context → decision → consequences, with rejected alternatives and requirement traceability.',
+  ThreatModelDoc: 'Architect Lab — STRIDE threat model: findings per category (Spoofing/Tampering/Repudiation/Info disclosure/DoS/Elevation) with attack path, risk and mitigation.',
+  ScaleReport: 'Architect Lab — scale report: load assumptions, bottlenecks ordered by what breaks first, and 10x/100x what-if scenarios with actions.',
   ConstitutionRule: 'AI Constitution — global (ideaId null) or per-project non-negotiable rules injected into every Context Pack.',
   PromptTemplate: 'Prompt Playbook templates with {{variables}}; builtin or user-authored, useCount, favorite.',
   VerificationRun: 'Traceability Verifier runs: pasted code snapshot, per-check verdicts JSON, deterministic score 0-100.',
@@ -112,7 +116,7 @@ export const SCHEMA_MODELS: SchemaModel[] = ${JSON.stringify(
   2
 )}
 
-export const MODEL_NAMES = SCHEMA_MODELS.map((m) => m.name) as const
+export const MODEL_NAMES = [${models.map((m) => `'${m.name}'`).join(', ')}] as const
 export type ModelName = (typeof MODEL_NAMES)[number]
 
 export function getModelMeta(name: string): SchemaModel | undefined {

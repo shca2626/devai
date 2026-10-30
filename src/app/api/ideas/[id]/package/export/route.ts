@@ -70,6 +70,10 @@ export async function GET(req: Request, { params }: Params) {
         risks: { orderBy: [{ order: 'asc' }] },
         issues: { orderBy: { createdAt: 'desc' } },
         architecture: true,
+        tradeStudy: true,
+        adrs: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+        threatModel: true,
+        scaleReport: true,
       },
     })
     if (!idea) {
@@ -94,6 +98,7 @@ export async function GET(req: Request, { params }: Params) {
     const confirmedScreens = idea.screens.filter((s) => s.status === 'confirmed')
     const confirmedTasks = idea.tasks.filter((t) => t.status === 'confirmed')
     const reviewedRisks = idea.risks.filter((r) => r.status !== 'proposed')
+    const confirmedAdrs = idea.adrs.filter((a) => a.status === 'confirmed')
 
     // ---------- Traceability matrix ----------
     const procLinks = new Map<string, string[]>()
@@ -168,6 +173,42 @@ export async function GET(req: Request, { params }: Params) {
             errors: parse<unknown[]>(a.errors, []),
             linkedRequirements: parse<string[]>(a.linkedRequirements, []),
           })),
+        },
+        architectureLab: {
+          tradeStudy:
+            idea.tradeStudy && idea.tradeStudy.status === 'confirmed'
+              ? {
+                  recommended: idea.tradeStudy.recommended,
+                  rationale: idea.tradeStudy.rationale,
+                  candidates: parse<unknown[]>(idea.tradeStudy.candidates, []),
+                }
+              : null,
+          decisionRecords: confirmedAdrs.map((a) => ({
+            code: a.code,
+            title: a.title,
+            context: a.context,
+            decision: a.decision,
+            alternatives: parse<unknown[]>(a.alternatives, []),
+            consequences: parse<unknown>(a.consequences, {}),
+            linkedRequirements: parse<string[]>(a.linkedRequirements, []),
+          })),
+          threatModel:
+            idea.threatModel && idea.threatModel.status === 'confirmed'
+              ? {
+                  summary: idea.threatModel.summary,
+                  residual: idea.threatModel.residual,
+                  findings: parse<unknown[]>(idea.threatModel.findings, []),
+                }
+              : null,
+          scaleReport:
+            idea.scaleReport && idea.scaleReport.status === 'confirmed'
+              ? {
+                  assumptions: parse<unknown[]>(idea.scaleReport.assumptions, []),
+                  bottlenecks: parse<unknown[]>(idea.scaleReport.bottlenecks, []),
+                  scenarios: parse<unknown[]>(idea.scaleReport.scenarios, []),
+                  plan: idea.scaleReport.plan,
+                }
+              : null,
         },
         uiUx: confirmedScreens.map((s) => ({
           code: s.code,
@@ -421,6 +462,49 @@ export async function GET(req: Request, { params }: Params) {
         L.push('')
       }
     }
+    if (idea.tradeStudy && idea.tradeStudy.status === 'confirmed') {
+      const ts = idea.tradeStudy
+      L.push('### Architecture trade-off study')
+      L.push('')
+      L.push(`**Recommended: ${ts.recommended}**${ts.rationale ? ` — ${ts.rationale}` : ''}`)
+      L.push('')
+      const candidates = parse<Array<{ name: string; style: string; summary: string; pros: string[]; cons: string[]; cost: string; complexity: string; teamFit: string; risks: string[]; fit: string }>>(ts.candidates, [])
+      L.push('| Candidate | Style | Cost | Complexity | Pros | Cons |')
+      L.push('| --- | --- | --- | --- | --- | --- |')
+      for (const c of candidates) {
+        L.push(`| ${c.name === ts.recommended ? `**${esc(c.name)}**` : esc(c.name)} | ${esc(c.style)} | ${esc(c.cost)} | ${esc(c.complexity)} | ${c.pros.map(esc).join(' · ')} | ${c.cons.map(esc).join(' · ')} |`)
+      }
+      L.push('')
+    }
+    if (confirmedAdrs.length) {
+      L.push('### Architecture decision records (ADRs)')
+      L.push('')
+      for (const a of confirmedAdrs) {
+        L.push(`#### ${a.code} — ${a.title}`)
+        L.push('')
+        L.push(`**Context.** ${a.context}`)
+        L.push('')
+        L.push(`**Decision.** ${a.decision}`)
+        L.push('')
+        const alts = parse<Array<{ option: string; whyNot: string }>>(a.alternatives, [])
+        if (alts.length) {
+          L.push(`**Alternatives rejected:** ${alts.map((x) => `${x.option} (${x.whyNot})`).join(' · ')}`)
+          L.push('')
+        }
+        const conseq = parse<{ positive?: string[]; negative?: string[]; risks?: string[] }>(a.consequences, {})
+        const conseqParts: string[] = []
+        if (conseq.positive?.length) conseqParts.push(`positive: ${conseq.positive.join(' · ')}`)
+        if (conseq.negative?.length) conseqParts.push(`negative: ${conseq.negative.join(' · ')}`)
+        if (conseq.risks?.length) conseqParts.push(`risks: ${conseq.risks.join(' · ')}`)
+        if (conseqParts.length) {
+          L.push(`**Consequences.** ${conseqParts.join(' — ')}`)
+          L.push('')
+        }
+        const linked = parse<string[]>(a.linkedRequirements, [])
+        if (linked.length) L.push(`**Serves:** ${linked.join(', ')}`)
+        L.push('')
+      }
+    }
 
     // 04 — UI/UX Specification
     L.push('## 04 — UI/UX Specification')
@@ -475,6 +559,62 @@ export async function GET(req: Request, { params }: Params) {
       for (const c of parse<string[]>(r.acceptanceCriteria, [])) L.push(`  - ${c}`)
     }
     L.push('')
+    if (idea.threatModel && idea.threatModel.status === 'confirmed') {
+      const tm = idea.threatModel
+      L.push('### STRIDE threat model')
+      L.push('')
+      if (tm.summary) {
+        L.push(`**Security posture.** ${tm.summary}`)
+        L.push('')
+      }
+      const findings = parse<Array<{ category: string; threat: string; component: string; attackPath: string; likelihood: string; impact: string; risk: string; mitigation: string }>>(tm.findings, [])
+      if (findings.length) {
+        L.push('| STRIDE | Threat | Component | Attack path | Risk | Mitigation |')
+        L.push('| --- | --- | --- | --- | --- | --- |')
+        for (const f of findings) {
+          L.push(`| ${f.category} | ${esc(f.threat)} | ${esc(f.component)} | ${esc(f.attackPath)} | ${f.likelihood}/${f.impact} → ${f.risk} | ${esc(f.mitigation)} |`)
+        }
+        L.push('')
+      }
+      if (tm.residual) {
+        L.push(`**Residual risk.** ${tm.residual}`)
+        L.push('')
+      }
+    }
+    if (idea.scaleReport && idea.scaleReport.status === 'confirmed') {
+      const sr = idea.scaleReport
+      L.push('### Scale simulation (10x / 100x)')
+      L.push('')
+      const assumptions = parse<Array<{ assumption: string; basis: string }>>(sr.assumptions, [])
+      if (assumptions.length) {
+        L.push(`**Load assumptions:** ${assumptions.map((a) => `${a.assumption} (${a.basis})`).join(' · ')}`)
+        L.push('')
+      }
+      const bottlenecks = parse<Array<{ component: string; limit: string; why: string; symptom: string; firstFix: string }>>(sr.bottlenecks, [])
+      if (bottlenecks.length) {
+        L.push('| # | Bottleneck | Ceiling | Why | Symptom | First fix |')
+        L.push('| --- | --- | --- | --- | --- | --- |')
+        bottlenecks.forEach((b, i) => {
+          L.push(`| ${i + 1} | ${esc(b.component)} | ${esc(b.limit)} | ${esc(b.why)} | ${esc(b.symptom)} | ${esc(b.firstFix)} |`)
+        })
+        L.push('')
+      }
+      const scenarios = parse<Array<{ label: string; load: string; expected: string; breaks: string; actions: string[] }>>(sr.scenarios, [])
+      for (const s of scenarios) {
+        L.push(`#### ${s.label}`)
+        L.push('')
+        L.push(`**Load:** ${s.load} · **Still works:** ${s.expected} · **Breaks:** ${s.breaks}`)
+        L.push('')
+        if (s.actions?.length) {
+          for (const [i, a] of s.actions.entries()) L.push(`${i + 1}. ${a}`)
+          L.push('')
+        }
+      }
+      if (sr.plan) {
+        L.push(`**Scaling plan.** ${sr.plan}`)
+        L.push('')
+      }
+    }
 
     // 06 — Implementation Plan
     L.push('## 06 — Implementation Plan')

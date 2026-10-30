@@ -163,6 +163,11 @@ export interface IdeaDetail {
   risks: RiskItem[]
   issues: ConsistencyIssue[]
   architecture: Architecture | null
+  // Architect Lab
+  tradeStudy: TradeStudy | null
+  adrs: ArchDecisionRecord[]
+  threatModel: ThreatModelDoc | null
+  scaleReport: ScaleReport | null
   readiness: ReadinessReport | null
 }
 
@@ -391,6 +396,118 @@ export interface Architecture {
   techStack: TechChoice[]
   notes: string | null
   basis: 'verified_fact' | 'professional_judgment'
+  status: ReviewStatus
+}
+
+// ---------- Architect Lab (the complete Architect toolset) ----------
+
+export interface TradeCandidate {
+  name: string
+  style: string
+  summary: string
+  pros: string[]
+  cons: string[]
+  cost: string
+  complexity: string
+  teamFit: string
+  risks: string[]
+  fit: string
+}
+
+export interface TradeStudy {
+  id: string
+  candidates: TradeCandidate[]
+  recommended: string
+  rationale: string | null
+  linkedRequirements: string[]
+  status: ReviewStatus
+}
+
+export interface AdrAlternative {
+  option: string
+  whyNot: string
+}
+
+export interface AdrConsequences {
+  positive: string[]
+  negative: string[]
+  risks: string[]
+}
+
+export type AdrStatus = 'proposed' | 'confirmed' | 'superseded' | 'rejected'
+
+export interface ArchDecisionRecord {
+  id: string
+  code: string
+  title: string
+  titleAr: string | null
+  context: string
+  decision: string
+  alternatives: AdrAlternative[]
+  consequences: AdrConsequences
+  linkedRequirements: string[]
+  status: AdrStatus
+  order: number
+}
+
+export type StrideCategory = 'spoofing' | 'tampering' | 'repudiation' | 'information_disclosure' | 'denial_of_service' | 'elevation_of_privilege'
+
+export const STRIDE_CATEGORIES: StrideCategory[] = [
+  'spoofing',
+  'tampering',
+  'repudiation',
+  'information_disclosure',
+  'denial_of_service',
+  'elevation_of_privilege',
+]
+
+export interface ThreatFinding {
+  category: StrideCategory
+  threat: string
+  component: string
+  attackPath: string
+  likelihood: 'low' | 'medium' | 'high'
+  impact: 'low' | 'medium' | 'high' | 'critical'
+  risk: 'low' | 'medium' | 'high' | 'critical'
+  mitigation: string
+  linkedRequirements: string[]
+}
+
+export interface ThreatModelDoc {
+  id: string
+  findings: ThreatFinding[]
+  summary: string | null
+  residual: string | null
+  status: ReviewStatus
+}
+
+export interface ScaleAssumption {
+  assumption: string
+  basis: string
+}
+
+export interface ScaleBottleneck {
+  component: string
+  limit: string
+  why: string
+  symptom: string
+  firstFix: string
+}
+
+export interface ScaleScenario {
+  label: string
+  load: string
+  expected: string
+  breaks: string
+  actions: string[]
+}
+
+export interface ScaleReport {
+  id: string
+  assumptions: ScaleAssumption[]
+  bottlenecks: ScaleBottleneck[]
+  scenarios: ScaleScenario[]
+  plan: string | null
   status: ReviewStatus
 }
 

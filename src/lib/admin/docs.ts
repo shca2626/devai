@@ -65,9 +65,9 @@ export const STAGE_DOCS: StageDoc[] = [
     n: 6,
     title: 'Design',
     titleAr: 'التصميم',
-    what: 'Five design engines produce business processes (PF), the data model (ENT with fields/relationships), API contracts (API), screen specs (SCR with RTL notes) and the architecture recommendation. Each set is reviewed item by item.',
-    engine: 'engines/design.ts — generateProcesses/Entities/Apis/Screens/Architecture',
-    apis: ['POST /api/ideas/[id]/design/generate { kind }', 'PATCH /api/artifacts/{process|entity|api|screen|architecture}/[id]'],
+    what: 'Five design engines produce business processes (PF), the data model (ENT with fields/relationships), API contracts (API), screen specs (SCR with RTL notes) and the architecture recommendation — PLUS the Architect Lab: trade-off study (3 candidates compared honestly), ADRs (context → decision → consequences, promotable to standing decisions), STRIDE threat model and the 10x/100x scale simulation. Each set is reviewed item by item.',
+    engine: 'engines/design.ts — generateProcesses/Entities/Apis/Screens/Architecture; engines/architect.ts — generateTradeStudy/Adrs/ThreatModel/ScaleReport',
+    apis: ['POST /api/ideas/[id]/design/generate { kind }', 'POST /api/ideas/[id]/architect/generate { kind: tradeoffs|adrs|threats|scale }', 'PATCH /api/artifacts/{process|entity|api|screen|architecture|tradeStudy|adr|threatModel|scaleReport}/[id]'],
   },
   {
     key: 'planning',
@@ -107,6 +107,19 @@ export interface ToolDoc {
 }
 
 export const TOOL_DOCS: ToolDoc[] = [
+  {
+    name: 'Architect Lab',
+    icon: 'Landmark',
+    what: 'The complete Architect toolset inside the Design stage: trade-off study, Architecture Decision Records, STRIDE threat model and the scale simulation.',
+    details: [
+      'Trade-off study: 3 materially different candidates compared on pros/cons/cost/complexity/teamFit/risks + a reasoned recommendation',
+      'ADRs: context → decision → consequences with rejected alternatives; confirmed ADRs can be promoted to the standing decision log (the Drift Detector then guards them)',
+      'STRIDE threat model: findings across the 6 categories with attack paths, risk ratings and concrete mitigations + honest residual risk',
+      'Scale simulation: bottlenecks ordered by what breaks first + 10x/100x what-if scenarios with prioritized actions',
+      'All four run from any stage (no-limits) and feed the engineering package export',
+    ],
+    apis: ['POST /api/ideas/[id]/architect/generate { kind: tradeoffs|adrs|threats|scale, feedback? }', 'PATCH /api/artifacts/{tradeStudy|adr|threatModel|scaleReport}/[id] { status }'],
+  },
   {
     name: 'Express Autopilot',
     icon: 'Zap',
@@ -216,6 +229,7 @@ export const ENGINE_DOCS: EngineDoc[] = [
   { file: 'src/lib/engines/features.ts', what: 'Engine 3 — feature inventory generation (module/feature/user/priority + meta: missing, dependencies, release note).' },
   { file: 'src/lib/engines/requirements.ts', what: 'Engine 4 — the SRS generator (FR/NFR with acceptance criteria, provenance, roles matrix).' },
   { file: 'src/lib/engines/design.ts', what: 'Engines 5a-5e — processes, data entities, API contracts, screen specs, architecture recommendation.' },
+  { file: 'src/lib/engines/architect.ts', what: 'Engines 5f-5i (Architect Lab) — trade-off study, ADRs, STRIDE threat model, scale simulation.' },
   { file: 'src/lib/engines/plan.ts', what: 'Engines 6a-6b — dependency-ordered implementation tasks + the risk register.' },
   { file: 'src/lib/engines/consistency.ts', what: 'Engine 7 — deterministic coverage checks + AI cross-artifact consistency review (contradiction, omission, duplicate, broken link).' },
   { file: 'src/lib/engines/verify.ts', what: 'Traceability Verifier — per-check verdicts + deterministic coverage score.' },
@@ -285,7 +299,8 @@ export const API_DOCS: ApiDocGroup[] = [
       { method: 'PATCH', path: '/api/artifacts/requirement/[id]', desc: 'Decide/edit a requirement; changing a confirmed one triggers the change-impact flow (confirmImpact).' },
       { method: 'POST', path: '/api/ideas/[id]/impact', desc: 'Preview what a requirement change affects { requirementId, change }.' },
       { method: 'POST', path: '/api/ideas/[id]/design/generate', desc: 'Generate design artifacts { kind: processes|entities|apis|screens|architecture, feedback? } — any stage.' },
-      { method: 'PATCH', path: '/api/artifacts/[kind]/[id]', desc: 'Review decisions for process|entity|api|screen|architecture|task|risk|issue artifacts { status } or architecture edits.' },
+      { method: 'POST', path: '/api/ideas/[id]/architect/generate', desc: 'Architect Lab { kind: tradeoffs|adrs|threats|scale, feedback? } — trade-off study, ADRs, STRIDE threat model, scale simulation. Any stage.' },
+      { method: 'PATCH', path: '/api/artifacts/[kind]/[id]', desc: 'Review decisions for process|entity|api|screen|architecture|task|risk|issue|tradeStudy|adr|threatModel|scaleReport artifacts { status } or architecture edits.' },
       { method: 'POST', path: '/api/ideas/[id]/plan/generate', desc: 'Generate { kind: tasks|risks } — any stage.' },
       { method: 'POST', path: '/api/ideas/[id]/consistency', desc: 'Run the consistency validation — any stage.' },
     ],
@@ -331,7 +346,7 @@ export const API_DOCS: ApiDocGroup[] = [
     group: 'Admin (this panel)',
     entries: [
       { method: 'GET', path: '/api/admin/overview', desc: 'Dashboard payload: counts per model, ideas by stage, runtime info, latest activity.', tryable: true },
-      { method: 'GET', path: '/api/admin/table/[model]', desc: 'Browse any table ?page&pageSize&q&schema — all 20 models.', tryable: true },
+      { method: 'GET', path: '/api/admin/table/[model]', desc: 'Browse any table ?page&pageSize&q&schema — all 24 models.', tryable: true },
       { method: 'DELETE', path: '/api/admin/table/[model]', desc: 'Clear every row of a table.' },
       { method: 'PATCH', path: '/api/admin/record/[model]/[id]', desc: 'Edit a record\'s scalar fields (type-cast by schema).' },
       { method: 'DELETE', path: '/api/admin/record/[model]/[id]', desc: 'Delete a single record.' },

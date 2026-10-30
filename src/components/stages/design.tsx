@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useApp } from '@/components/app/context'
 import { CodeChip, ReviewBadge, WorkingPanel } from '@/components/app/bits'
+import { ArchitectLab } from '@/components/stages/architect-lab'
 import type { IdeaDetail } from '@/lib/types'
 import type { DictKey } from '@/lib/i18n'
 import {
@@ -15,6 +16,7 @@ import {
   ChevronUp,
   Database,
   GitBranch,
+  Landmark,
   LayoutTemplate,
   Loader2,
   MessageSquareWarning,
@@ -192,6 +194,10 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
           <TabsTrigger value="architecture" className="gap-1.5 text-xs">
             <Boxes className="h-3.5 w-3.5" />
             {t('tabArchitecture')}
+          </TabsTrigger>
+          <TabsTrigger value="architect" className="gap-1.5 text-xs">
+            <Landmark className="h-3.5 w-3.5" />
+            {t('tabArchitectLab')}
           </TabsTrigger>
         </TabsList>
 
@@ -661,6 +667,11 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
               <ReviewActions kind="architecture" id={architecture.id} status={architecture.status} active={active} t={t} onReview={review} />
             </div>
           )}
+        </TabsContent>
+
+        {/* ---------- Architect Lab (trade-offs · ADRs · STRIDE · scale) ---------- */}
+        <TabsContent value="architect" className="mt-3">
+          <ArchitectLab detail={detail} />
         </TabsContent>
       </Tabs>
 

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { useApp } from '@/components/app/context'
+import { useApp, VIEW_BY_STAGE } from '@/components/app/context'
 import { CodeChip } from '@/components/app/bits'
 import type { IdeaDetail } from '@/lib/types'
 import { CheckCircle2, FileJson, FileText, Lock, LockOpen, Loader2, Package, ScrollText, ShieldCheck, Zap } from 'lucide-react'
@@ -50,7 +50,7 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
     refreshIdeas()
     setReopenOpen(false)
     setReopenReason('')
-    setView(to)
+    setView(VIEW_BY_STAGE[to])
   }
 
   function exportFile(format: 'md' | 'json') {

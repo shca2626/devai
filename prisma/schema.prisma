@@ -44,6 +44,10 @@ model Idea {
   risks           RiskItem[]
   issues          ConsistencyIssue[]
   architecture    ArchitectureDoc?
+  tradeStudy      ArchTradeStudy?
+  adrs            ArchDecisionRecord[]
+  threatModel     ThreatModelDoc?
+  scaleReport     ScaleReport?
   constitutionRules ConstitutionRule[]
   verificationRuns VerificationRun[]
   decisionEntries DecisionEntry[]
@@ -290,6 +294,78 @@ model ArchitectureDoc {
   status       String   @default("proposed")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+// ============================================================
+// Architect Lab — the four deep-architecture engines that
+// complete the Architect role. All follow the same review
+// discipline as every other artifact (proposed -> confirmed /
+// rejected, regeneration with client feedback, full audit).
+//   1. Trade-off study  — 2-3 candidate architectures compared
+//      (pros/cons/cost/complexity/teamFit/risks) + a reasoned pick.
+//   2. ADRs             — Architecture Decision Records with
+//      context -> decision -> consequences; confirmable and
+//      promotable to standing decisions (DecisionEntry).
+//   3. Threat model     — STRIDE analysis over the design.
+//   4. Scale report     — what breaks at 10x/100x and the
+//      first fix for each bottleneck.
+// ============================================================
+
+model ArchTradeStudy {
+  id                 String   @id @default(cuid())
+  ideaId             String   @unique
+  idea               Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  candidates         String // JSON [{name, style, summary, pros[], cons[], cost, complexity, teamFit, risks[], fit}]
+  recommended        String // name of the recommended candidate
+  rationale          String? // why the winner wins — and when to reconsider
+  linkedRequirements String? // JSON array of requirement codes driving the choice
+  status             String   @default("proposed") // proposed | confirmed | rejected | needs_revision
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model ArchDecisionRecord {
+  id                 String   @id @default(cuid())
+  ideaId             String
+  idea               Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code               String // ADR-01
+  title              String
+  titleAr            String?
+  context            String // the forces at play — requirements, constraints, team, deadlines
+  decision           String // the chosen option, one imperative statement
+  alternatives       String? // JSON [{option, whyNot}]
+  consequences       String // JSON {positive[], negative[], risks[]}
+  linkedRequirements String? // JSON array of requirement codes
+  status             String   @default("proposed") // proposed | confirmed | superseded | rejected
+  order              Int      @default(0)
+  createdAt          DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model ThreatModelDoc {
+  id         String   @id @default(cuid())
+  ideaId     String   @unique
+  idea       Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  findings   String // JSON [{category, threat, component, attackPath, likelihood, impact, risk, mitigation, linkedRequirements[]}]
+  summary    String? // overall posture in prose
+  residual   String? // what risk remains after the mitigations
+  status     String   @default("proposed") // proposed | confirmed | rejected | needs_revision
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model ScaleReport {
+  id          String   @id @default(cuid())
+  ideaId      String   @unique
+  idea        Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  assumptions String? // JSON [{assumption, basis}] — load assumptions the analysis stands on
+  bottlenecks String // JSON [{component, limit, why, symptom, firstFix}] — ordered by what breaks first
+  scenarios   String // JSON [{label, load, expected, breaks, actions[]}] — 10x / 100x what-if
+  plan        String? // the short/mid-term scaling plan in prose
+  status      String   @default("proposed") // proposed | confirmed | rejected | needs_revision
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 // ============================================================
