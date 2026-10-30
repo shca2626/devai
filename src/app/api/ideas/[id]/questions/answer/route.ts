@@ -4,8 +4,8 @@ import { buildIdeaDetail, logDecision } from '@/lib/payload'
 
 type Params = { params: Promise<{ id: string }> }
 
-// Answer or skip a discovery question. Allowed only while the
-// idea is in the discovery stage.
+// Answer or skip a discovery question. NO LIMITS: works from any
+// stage — questions can be answered whenever they exist.
 export async function POST(req: Request, { params }: Params) {
   try {
     const { id } = await params
@@ -18,12 +18,6 @@ export async function POST(req: Request, { params }: Params) {
     const idea = await db.idea.findUnique({ where: { id } })
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (idea.stage !== 'discovery') {
-      return NextResponse.json(
-        { error: 'Answers can only be submitted during the discovery stage.' },
-        { status: 409 }
-      )
     }
 
     const question = await db.question.findUnique({ where: { id: body.questionId ?? '' } })

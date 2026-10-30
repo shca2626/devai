@@ -20,7 +20,7 @@ import {
   StatusBadge,
 } from '@/components/app/bits'
 import type { IdeaDetail } from '@/lib/types'
-import { Check, CheckCircle2, FileJson, FileText, History, Lock, ScrollText, Telescope, X } from 'lucide-react'
+import { Check, CheckCircle2, FileJson, FileText, History, ScrollText, Telescope, X } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import { useToast } from '@/hooks/use-toast'
 import { useState } from 'react'
@@ -39,7 +39,27 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
   const { idea, features, assumptions, decisions } = detail
   const approved = idea.stage === 'baseline'
   const engineeringStarted = ['requirements', 'design', 'planning', 'readiness', 'package'].includes(idea.stage)
+  const baselineApproved = approved || engineeringStarted
   const [starting, setStarting] = useState(false)
+
+  // NO LIMITS: the baseline can be approved from ANY stage —
+  // unreviewed features are auto-accepted by the gate.
+  async function approveBaseline() {
+    setStarting(true)
+    const res = await fetch(`/api/ideas/${idea.id}/gate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ gate: 'baseline', action: 'approve' }),
+    })
+    const data = await res.json()
+    setStarting(false)
+    if (!res.ok) {
+      toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
+      return
+    }
+    setDetail(data as IdeaDetail)
+    refreshIdeas()
+  }
 
   async function startEngineering() {
     setStarting(true)
@@ -84,18 +104,38 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
     a.remove()
   }
 
-  if (!approved && !engineeringStarted) {
-    return (
-      <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
-        <Lock className="h-8 w-8 text-muted-foreground mx-auto" />
-        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockedBaselineTeaser')}</p>
-      </div>
-    )
-  }
+  const accepted = features.filter((f) => f.status === 'accepted')
+  const deferred = features.filter((f) => f.status === 'deferred')
+  const openAssumptions = assumptions.filter((a) => a.status === 'open')
+  const settledAssumptions = assumptions.filter((a) => a.status !== 'open')
 
-  if (engineeringStarted && !approved) {
-    return (
-      <div className="space-y-4">
+  return (
+    <div className="space-y-4">
+      {/* P0 exports + engineering track entry — NO LIMITS: the baseline
+          view (and its exports) are available at ANY stage */}
+      {!baselineApproved ? (
+        <Alert className="border-primary/25 bg-primary/[0.03]">
+          <Telescope className="h-4 w-4 text-primary" />
+          <AlertTitle className="text-sm font-semibold">{t('approveBaseline')}</AlertTitle>
+          <AlertDescription className="text-xs text-muted-foreground leading-6">
+            {t('phaseEngineering')} — {t('startEngineeringBody')}
+          </AlertDescription>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Button size="sm" onClick={approveBaseline} disabled={starting} className="gap-1.5">
+              <CheckCircle2 className="h-3.5 w-3.5" />
+              {t('approveBaseline')}
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => exportFile('md')} className="gap-1.5">
+              <FileText className="h-3.5 w-3.5" />
+              {t('exportMarkdown')}
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => exportFile('json')} className="gap-1.5">
+              <FileJson className="h-3.5 w-3.5" />
+              {t('exportJson')}
+            </Button>
+          </div>
+        </Alert>
+      ) : engineeringStarted ? (
         <Alert className="border-emerald-300 bg-emerald-50/70">
           <CheckCircle2 className="h-4 w-4 text-emerald-600" />
           <AlertTitle className="text-sm font-semibold text-emerald-800">{t('baselineApprovedTitle')}</AlertTitle>
@@ -111,33 +151,21 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
             </Button>
           </div>
         </Alert>
-      </div>
-    )
-  }
-
-  const accepted = features.filter((f) => f.status === 'accepted')
-  const deferred = features.filter((f) => f.status === 'deferred')
-  const openAssumptions = assumptions.filter((a) => a.status === 'open')
-  const settledAssumptions = assumptions.filter((a) => a.status !== 'open')
-
-  return (
-    <div className="space-y-4">
-      {/* P0 exports + engineering track entry */}
-      <Alert className="border-emerald-300 bg-emerald-50/70">
-        <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-        <AlertTitle className="text-sm font-semibold text-emerald-800">{t('baselineApprovedTitle')}</AlertTitle>
-        <AlertDescription className="text-xs text-emerald-700 leading-6">{t('baselineApprovedBody')}</AlertDescription>
-        <div className="mt-3 flex flex-wrap gap-2">
-          <Button size="sm" onClick={() => exportFile('md')} className="gap-1.5">
-            <FileText className="h-3.5 w-3.5" />
-            {t('exportMarkdown')}
-          </Button>
-          <Button size="sm" variant="outline" onClick={() => exportFile('json')} className="gap-1.5">
-            <FileJson className="h-3.5 w-3.5" />
-            {t('exportJson')}
-          </Button>
-        </div>
-        {!engineeringStarted && (
+      ) : (
+        <Alert className="border-emerald-300 bg-emerald-50/70">
+          <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+          <AlertTitle className="text-sm font-semibold text-emerald-800">{t('baselineApprovedTitle')}</AlertTitle>
+          <AlertDescription className="text-xs text-emerald-700 leading-6">{t('baselineApprovedBody')}</AlertDescription>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Button size="sm" onClick={() => exportFile('md')} className="gap-1.5">
+              <FileText className="h-3.5 w-3.5" />
+              {t('exportMarkdown')}
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => exportFile('json')} className="gap-1.5">
+              <FileJson className="h-3.5 w-3.5" />
+              {t('exportJson')}
+            </Button>
+          </div>
           <div className="mt-4 border-t border-emerald-200 pt-3 space-y-2">
             <p className="text-xs text-emerald-800 leading-6">{t('startEngineeringBody')}</p>
             <Button size="sm" onClick={startEngineering} disabled={starting} className="gap-1.5">
@@ -145,14 +173,8 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
               {t('startEngineering')}
             </Button>
           </div>
-        )}
-        {engineeringStarted && (
-          <div className="mt-3 border-t border-emerald-200 pt-2 text-[11px] text-emerald-700 flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5" />
-            {t('phaseEngineering')} ✓
-          </div>
-        )}
-      </Alert>
+        </Alert>
+      )}
 
       {/* Discovery summary */}
       {idea.summary && (
@@ -166,7 +188,10 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
 
       {/* Approved feature table */}
       <div className="rounded-xl border overflow-hidden">
-        <div className="border-b bg-muted/50 px-4 py-2.5 text-sm font-semibold">{t('approveBaseline')} ✓</div>
+        <div className="border-b bg-muted/50 px-4 py-2.5 text-sm font-semibold flex items-center gap-1.5">
+          {t('approveBaseline')}
+          {baselineApproved && <Check className="h-4 w-4 text-emerald-600" />}
+        </div>
         <div className="overflow-x-auto nice-scroll">
           <Table>
             <TableHeader>

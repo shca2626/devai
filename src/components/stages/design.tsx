@@ -51,7 +51,8 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
   const { t, setDetail, refreshIdeas } = useApp()
   const { toast } = useToast()
   const { idea, processes, entities, apis, screens, architecture } = detail
-  const active = idea.stage === 'design'
+  // NO LIMITS: design artifacts can be generated, reviewed and approved at ANY stage
+  const active = true
   const [busyKind, setBusyKind] = useState<Kind | null>(null)
   const [busyGate, setBusyGate] = useState(false)
   const [expanded, setExpanded] = useState<string | null>(null)
@@ -163,14 +164,8 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
     refreshIdeas()
   }
 
-  if (!active && processes.length === 0 && entities.length === 0 && apis.length === 0 && screens.length === 0 && !architecture) {
-    return (
-      <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
-        <Boxes className="h-8 w-8 text-muted-foreground mx-auto" />
-        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockedStageTeaser')}</p>
-      </div>
-    )
-  }
+  // NO LIMITS: no locked teaser — the stage renders its generate
+  // bars and full content at ANY stage, even when empty.
 
   return (
     <div className="space-y-4">

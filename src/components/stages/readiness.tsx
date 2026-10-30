@@ -29,7 +29,8 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
   const { t, lang, setDetail, refreshIdeas } = useApp()
   const { toast } = useToast()
   const { idea, readiness, issues, requirements, processes, apis, screens, tasks } = detail
-  const active = idea.stage === 'readiness'
+  // NO LIMITS: the readiness check and the package lock are available at ANY stage
+  const active = true
   const [busy, setBusy] = useState<'check' | 'lock' | null>(null)
   const [showTrace, setShowTrace] = useState(false)
 
@@ -81,11 +82,12 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
     refreshIdeas()
   }
 
+  // readiness is always computed by the API — no locked teaser here.
   if (!readiness) {
     return (
       <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
         <Radar className="h-8 w-8 text-muted-foreground mx-auto" />
-        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockedStageTeaser')}</p>
+        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('readinessIntro')}</p>
       </div>
     )
   }
@@ -126,7 +128,11 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
                 {lang === 'ar' ? 'كل المانعات الصارمة مجتازة — يمكن قفل الحزمة' : 'All hard blockers cleared — the package can be locked'}
               </p>
             ) : (
-              <p className="mt-3 text-xs text-amber-700 leading-6">{t('lockBlocked')}</p>
+              <p className="mt-3 text-xs text-amber-700 leading-6">
+                {lang === 'ar'
+                  ? 'بعض الفحوصات الصارمة لم تُجتز بعد — يمكنك مع ذلك قفل الحزمة (وضع بلا حدود)، وسيُسجَّل الوقت الحالي في سجل القرارات.'
+                  : 'Some hard checks are not cleared yet — you can still lock the package (no-limits mode); the current score will be recorded in the decision log.'}
+              </p>
             )}
           </div>
           <div className="flex flex-col gap-2">
@@ -136,7 +142,8 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
                   <Radar className="h-4 w-4" />
                   {t('runConsistency')}
                 </Button>
-                <Button onClick={lock} disabled={busy !== null || !readiness.lockable} className="gap-1.5">
+                {/* NO LIMITS: the package can be locked regardless of the score */}
+                <Button onClick={lock} disabled={busy !== null} className="gap-1.5">
                   <Lock className="h-4 w-4" />
                   {t('lockPackage')}
                 </Button>

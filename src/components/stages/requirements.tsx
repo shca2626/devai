@@ -30,10 +30,11 @@ import { useToast } from '@/hooks/use-toast'
 // ============================================================
 
 export function RequirementsStage({ detail }: { detail: IdeaDetail }) {
-  const { t, setDetail, refreshIdeas, view } = useApp()
+  const { t, setDetail, refreshIdeas } = useApp()
   const { toast } = useToast()
   const { idea, requirements, roles } = detail
-  const active = idea.stage === 'requirements'
+  // NO LIMITS: requirements can be generated, reviewed and approved at ANY stage
+  const active = true
   const [busy, setBusy] = useState(false)
   const [filter, setFilter] = useState<string>('all')
   const [expanded, setExpanded] = useState<string | null>(null)
@@ -111,15 +112,6 @@ export function RequirementsStage({ detail }: { detail: IdeaDetail }) {
     if (!result.ok) {
       toast({ description: (result.data as { error?: string }).error ?? t('aiError'), variant: 'destructive' })
     }
-  }
-
-  if (view === 'requirements' && idea.stage !== 'requirements' && requirements.length === 0) {
-    return (
-      <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
-        <FileCheck2 className="h-8 w-8 text-muted-foreground mx-auto" />
-        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockedStageTeaser')}</p>
-      </div>
-    )
   }
 
   if (requirements.length === 0) {

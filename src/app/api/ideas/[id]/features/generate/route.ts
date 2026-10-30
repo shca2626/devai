@@ -6,26 +6,14 @@ import type { AnsweredItem } from '@/lib/engines/discover'
 
 type Params = { params: Promise<{ id: string }> }
 
-// Engine 3 — generate the feature inventory. Allowed only in
-// the features stage, and only before any feature was decided.
+// Engine 3 — generate the feature inventory. NO LIMITS: can be
+// (re)generated from ANY stage, any number of times.
 export async function POST(_req: Request, { params }: Params) {
   try {
     const { id } = await params
     const idea = await db.idea.findUnique({ where: { id } })
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (idea.stage !== 'features') {
-      return NextResponse.json({ error: 'Not in the features stage.' }, { status: 409 })
-    }
-
-    const existing = await db.feature.findMany({ where: { ideaId: id } })
-    const decided = existing.filter((f) => ['accepted', 'rejected', 'deferred'].includes(f.status))
-    if (decided.length > 0) {
-      return NextResponse.json(
-        { error: 'Features were already generated and some were decided. The inventory cannot be regenerated.' },
-        { status: 409 }
-      )
     }
 
     const interpretation = parseInterpretation(idea.interpretation)

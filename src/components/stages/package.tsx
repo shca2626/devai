@@ -11,8 +11,9 @@ import { useToast } from '@/hooks/use-toast'
 
 // ============================================================
 // Stage 9 — The engineering package: the final deliverable.
-// Locked by the readiness gate; exportable as a 6-section
-// Markdown document or structured JSON with traceability.
+// NO LIMITS: visible and exportable at ANY stage (it exports
+// whatever is confirmed so far). 6-section Markdown document or
+// structured JSON with traceability.
 // ============================================================
 
 const SECTION_KEYS = [
@@ -32,8 +33,7 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
   const [reopenBusy, setReopenBusy] = useState<string | null>(null)
   const { idea, requirements, processes, entities, apis, screens, tasks, risks, decisions } = detail
   const locked = idea.stage === 'package'
-
-  async function reopen(to: 'readiness' | 'planning' | 'design') {
+  async function reopen(to: 'understanding' | 'discovery' | 'features' | 'baseline' | 'requirements' | 'design' | 'planning' | 'readiness') {
     setReopenBusy(to)
     const res = await fetch(`/api/ideas/${idea.id}/reopen`, {
       method: 'POST',
@@ -63,14 +63,8 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
     a.remove()
   }
 
-  if (!locked) {
-    return (
-      <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
-        <Lock className="h-8 w-8 text-muted-foreground mx-auto" />
-        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockBlocked')}</p>
-      </div>
-    )
-  }
+  // NO LIMITS: no locked teaser — the package view and its exports
+  // are available at EVERY stage; the banner just reflects the state.
 
   const counts = [
     { label: 'FR / NFR', value: `${requirements.filter((r) => r.type === 'functional' && r.status === 'confirmed').length} / ${requirements.filter((r) => r.type === 'non_functional' && r.status === 'confirmed').length}` },
@@ -85,10 +79,16 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
 
   return (
     <div className="space-y-4">
-      <Alert className="border-emerald-300 bg-emerald-50/70">
-        <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-        <AlertTitle className="text-sm font-semibold text-emerald-800">{t('packageLockedTitle')}</AlertTitle>
-        <AlertDescription className="text-xs text-emerald-700 leading-6">{t('packageLockedBody')}</AlertDescription>
+      <Alert className={locked ? 'border-emerald-300 bg-emerald-50/70' : 'border-primary/25 bg-primary/[0.03]'}>
+        {locked ? <CheckCircle2 className="h-4 w-4 text-emerald-600" /> : <Lock className="h-4 w-4 text-primary" />}
+        <AlertTitle className="text-sm font-semibold">{locked ? t('packageLockedTitle') : (lang === 'ar' ? 'معاينة الحزمة الهندسية' : 'Engineering package — preview')}</AlertTitle>
+        <AlertDescription className="text-xs leading-6">
+          {locked
+            ? t('packageLockedBody')
+            : lang === 'ar'
+              ? 'لم تُقفل الحزمة بعد — يمكنك تصدير ما تم اعتماده حتى الآن في أي وقت (وضع بلا حدود).'
+              : 'The package is not locked yet — you can export whatever is confirmed so far at any time (no-limits mode).'}
+        </AlertDescription>
         <div className="mt-3 flex flex-wrap gap-2">
           <Button size="sm" onClick={() => exportFile('md')} className="gap-1.5">
             <FileText className="h-3.5 w-3.5" />
@@ -168,18 +168,28 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
               className="w-full rounded-lg border p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-primary/30"
             />
             <div className="flex flex-wrap gap-2">
-              <Button size="sm" variant="outline" className="gap-1.5" onClick={() => reopen('readiness')} disabled={reopenBusy !== null}>
-                {reopenBusy === 'readiness' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LockOpen className="h-3.5 w-3.5" />}
-                {t('reopenToReadiness')}
-              </Button>
-              <Button size="sm" variant="outline" className="gap-1.5" onClick={() => reopen('planning')} disabled={reopenBusy !== null}>
-                {reopenBusy === 'planning' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LockOpen className="h-3.5 w-3.5" />}
-                {t('reopenToPlanning')}
-              </Button>
-              <Button size="sm" variant="outline" className="gap-1.5" onClick={() => reopen('design')} disabled={reopenBusy !== null}>
-                {reopenBusy === 'design' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LockOpen className="h-3.5 w-3.5" />}
-                {t('reopenToDesign')}
-              </Button>
+              {([
+                { key: 'understanding', label: lang === 'ar' ? '← الفهم' : 'Understanding' },
+                { key: 'discovery', label: lang === 'ar' ? '← الاستكشاف' : 'Discovery' },
+                { key: 'features', label: lang === 'ar' ? '← الميزات' : 'Features' },
+                { key: 'baseline', label: lang === 'ar' ? '← خط الأساس' : 'Baseline' },
+                { key: 'requirements', label: lang === 'ar' ? '← المتطلبات' : 'Requirements' },
+                { key: 'design', label: lang === 'ar' ? '← التصميم' : 'Design' },
+                { key: 'planning', label: lang === 'ar' ? '← التخطيط' : 'Planning' },
+                { key: 'readiness', label: lang === 'ar' ? '← الجاهزية' : 'Readiness' },
+              ] as const).map((target) => (
+                <Button
+                  key={target.key}
+                  size="sm"
+                  variant="outline"
+                  className="gap-1.5"
+                  onClick={() => reopen(target.key)}
+                  disabled={reopenBusy !== null}
+                >
+                  {reopenBusy === target.key ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <LockOpen className="h-3.5 w-3.5" />}
+                  {target.label}
+                </Button>
+              ))}
             </div>
           </div>
         )}

@@ -6,13 +6,11 @@ import { AREAS } from '@/lib/types'
 
 type Params = { params: Promise<{ id: string }> }
 
-const MAX_QUESTIONS = 14
 const STRONG_COVERAGE = 8
 
 // Fetch the next discovery question(s). Pending questions are
-// returned without an AI call. When coverage is strong or the
-// cap is reached, the app suggests finishing instead — the user
-// always decides.
+// returned without an AI call. NO LIMITS: works from ANY stage and
+// there is no question cap — coverage only *suggests* finishing.
 export async function POST(req: Request, { params }: Params) {
   try {
     const { id } = await params
@@ -21,9 +19,6 @@ export async function POST(req: Request, { params }: Params) {
     const idea = await db.idea.findUnique({ where: { id } })
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (idea.stage !== 'discovery') {
-      return NextResponse.json({ error: 'Not in the discovery stage.' }, { status: 409 })
     }
 
     // Return existing pending questions first (no AI call)
@@ -41,10 +36,9 @@ export async function POST(req: Request, { params }: Params) {
     const answeredAreas = new Set(answered.map((q) => q.area))
     const uncovered = [...AREAS].filter((a) => !answeredAreas.has(a))
 
-    const reachedCap = all.length >= MAX_QUESTIONS
     const strongCoverage = answeredAreas.size >= STRONG_COVERAGE
 
-    if (!body.force && (reachedCap || strongCoverage)) {
+    if (!body.force && strongCoverage) {
       const payload = await buildIdeaDetail(id)
       return NextResponse.json({
         ...payload,

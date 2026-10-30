@@ -26,12 +26,6 @@ export async function POST(req: Request) {
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
     }
-    if (idea.stage !== 'features') {
-      return NextResponse.json(
-        { error: 'Features can only be added during the features stage.' },
-        { status: 409 }
-      )
-    }
 
     const priority = PRIORITIES.includes(body.priority as never) ? body.priority! : 'should'
     const count = await db.feature.count({ where: { ideaId } })

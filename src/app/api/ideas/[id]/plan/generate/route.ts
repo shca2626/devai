@@ -16,9 +16,8 @@ function safeArr(raw: string | null): string[] {
 
 // ============================================================
 // Engineering planning — dependency-ordered implementation
-// tasks and the risk register. Tasks trace to confirmed
-// requirements; each task is self-contained for a programmer
-// who never saw the original conversation.
+// tasks and the risk register. NO LIMITS: works from ANY stage;
+// tasks trace to whatever requirements exist.
 // ============================================================
 
 type Params = { params: Promise<{ id: string }> }
@@ -33,9 +32,6 @@ export async function POST(req: Request, { params }: Params) {
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
     }
-    if (idea.stage !== 'planning') {
-      return NextResponse.json({ error: 'Planning artifacts are generated in the planning stage.' }, { status: 409 })
-    }
 
     const ctx = await buildProjectContext(id)
     if (!ctx) {
@@ -43,10 +39,6 @@ export async function POST(req: Request, { params }: Params) {
     }
 
     const requirements = await db.requirement.findMany({ where: { ideaId: id }, orderBy: [{ order: 'asc' }] })
-    const confirmedCount = requirements.filter((r) => r.status === 'confirmed').length
-    if (confirmedCount === 0) {
-      return NextResponse.json({ error: 'No confirmed requirements to plan against.' }, { status: 409 })
-    }
 
     const typedRequirements: Requirement[] = requirements.map((r) => ({
       id: r.id,

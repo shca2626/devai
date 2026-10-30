@@ -10,7 +10,7 @@ import { useApp } from '@/components/app/context'
 import { AreaBadge, WorkingPanel } from '@/components/app/bits'
 import { AREA_LABELS } from '@/lib/i18n'
 import type { IdeaDetail, Question } from '@/lib/types'
-import { AREAS, isLaterStage } from '@/lib/types'
+import { AREAS } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { CheckCircle2, ChevronDown, Flag, Info, SkipForward, Sparkles } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
@@ -38,7 +38,9 @@ export function DiscoverStage({ detail }: { detail: IdeaDetail }) {
   const [suggestDone, setSuggestDone] = useState(false)
 
   const { idea, questions } = detail
-  const locked = isLaterStage(idea.stage, 'discovery')
+  // NO LIMITS: the interview stays live at every stage — questions
+  // can be answered, skipped and generated whenever they exist.
+  const locked = false
   const answeredQuestions = useMemo(() => questions.filter((q) => q.status === 'answered'), [questions])
   const answeredAreas = useMemo(() => new Set(answeredQuestions.map((q) => q.area)), [answeredQuestions])
   const pending = useMemo(() => questions.filter((q) => q.status === 'pending'), [questions])

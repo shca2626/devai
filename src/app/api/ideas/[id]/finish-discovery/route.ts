@@ -5,10 +5,9 @@ import { compileDiscoverySummary, type AnsweredItem } from '@/lib/engines/discov
 
 type Params = { params: Promise<{ id: string }> }
 
-const MIN_ANSWERED = 5
-
 // Compile the discovery summary and move to the features stage.
-// Requires a minimum of real answers — the gate is app-enforced.
+// NO LIMITS: no minimum answer count and no stage check —
+// compiles from whatever answers exist.
 export async function POST(_req: Request, { params }: Params) {
   try {
     const { id } = await params
@@ -16,20 +15,11 @@ export async function POST(_req: Request, { params }: Params) {
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
     }
-    if (idea.stage !== 'discovery') {
-      return NextResponse.json({ error: 'Not in the discovery stage.' }, { status: 409 })
-    }
 
     const answered = await db.question.findMany({
       where: { ideaId: id, status: 'answered' },
       orderBy: [{ order: 'asc' }, { createdAt: 'asc' }],
     })
-    if (answered.length < MIN_ANSWERED) {
-      return NextResponse.json(
-        { error: `Answer at least ${MIN_ANSWERED} questions before finishing discovery (${answered.length} answered so far).` },
-        { status: 409 }
-      )
-    }
 
     const interpretation = parseInterpretation(idea.interpretation)
     if (!interpretation) {

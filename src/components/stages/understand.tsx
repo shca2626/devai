@@ -188,33 +188,30 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
         </div>
       </div>
 
-      {/* Gate actions */}
-      {!locked ? (
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-          <Button onClick={approveGate} disabled={busy !== null} className="gap-1.5 flex-1 sm:flex-none" size="lg">
-            {busy === 'gate' ? <RefreshCw className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
-            {busy === 'gate' ? t('loading') : t('approveInterpretation')}
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => setCorrecting(true)}
-            disabled={busy !== null}
-            className="gap-1.5"
-            size="lg"
-          >
-            <RefreshCw className="h-4 w-4" />
-            {t('correctInterpretation')}
-          </Button>
-          <p className="text-xs text-muted-foreground sm:ms-2">{t('reinterpretationNote')}</p>
-        </div>
-      ) : (
-        <div className="flex items-center gap-2">
-          <Badge variant="outline" className="gap-1 bg-emerald-50 text-emerald-700 border-emerald-200">
+      {/* Gate actions — NO LIMITS: always available, even after approval */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+        {locked && (
+          <Badge variant="outline" className="gap-1 bg-emerald-50 text-emerald-700 border-emerald-200 self-start">
             <CheckCircle2 className="h-3 w-3" />
             {t('approvedBadge')}
           </Badge>
-        </div>
-      )}
+        )}
+        <Button onClick={approveGate} disabled={busy !== null} className="gap-1.5 flex-1 sm:flex-none" size="lg">
+          {busy === 'gate' ? <RefreshCw className="h-4 w-4 animate-spin" /> : <ArrowRight className="h-4 w-4" />}
+          {busy === 'gate' ? t('loading') : t('approveInterpretation')}
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => setCorrecting(true)}
+          disabled={busy !== null}
+          className="gap-1.5"
+          size="lg"
+        >
+          <RefreshCw className="h-4 w-4" />
+          {t('correctInterpretation')}
+        </Button>
+        <p className="text-xs text-muted-foreground sm:ms-2">{t('reinterpretationNote')}</p>
+      </div>
 
       {/* Corrections dialog */}
       <Dialog open={correcting} onOpenChange={(v) => !busy && setCorrecting(v)}>

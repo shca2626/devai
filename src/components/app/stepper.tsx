@@ -33,6 +33,8 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
   const { t, setView } = useApp()
   const currentIdx = stageIndex(currentStage)
   const engineeringStarted = currentIdx >= 4
+  // NO LIMITS: every stage is always navigable — the stepper is a
+  // navigation bar, not a lock. The workflow badge stays for context.
 
   return (
     <nav
@@ -42,7 +44,6 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
       {STAGES.map((stage, idx) => {
         const done = idx < currentIdx
         const isCurrent = idx === currentIdx
-        const accessible = idx <= currentIdx
         const active = view === VIEW_BY_STAGE[stage]
         const isEngineering = idx >= 4
         return (
@@ -58,8 +59,7 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
               ))}
             <button
               type="button"
-              disabled={!accessible}
-              onClick={() => accessible && setView(VIEW_BY_STAGE[stage] as never)}
+              onClick={() => setView(VIEW_BY_STAGE[stage] as never)}
               className={cn(
                 'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors min-h-9',
                 active
@@ -72,7 +72,7 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
                       ? isEngineering
                         ? 'border-teal-400 text-teal-700'
                         : 'border-primary/40 text-primary'
-                      : 'border-border text-muted-foreground opacity-60 cursor-not-allowed'
+                      : 'border-border text-muted-foreground hover:bg-muted/70 hover:border-border'
               )}
               aria-current={isCurrent ? 'step' : undefined}
             >

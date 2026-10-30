@@ -14,9 +14,10 @@ export async function POST(req: Request) {
         ? body.projectType
         : null
 
-    if (text.length < 10) {
+    // NO LIMITS: any non-empty text can be enhanced
+    if (text.length < 1) {
       return NextResponse.json(
-        { error: 'Please describe your idea in at least a sentence or two before enhancing.' },
+        { error: 'Please describe your idea before enhancing.' },
         { status: 400 }
       )
     }

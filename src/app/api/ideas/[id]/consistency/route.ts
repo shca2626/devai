@@ -6,9 +6,9 @@ import { runConsistencyCheck } from '@/lib/engines/consistency'
 
 // ============================================================
 // Consistency validation — deterministic coverage checks plus
-// an AI cross-artifact review. Every run replaces the previous
-// OPEN auto-detected issues; user-dismissed/resolved decisions
-// are preserved.
+// an AI cross-artifact review. NO LIMITS: runs from ANY stage.
+// Every run replaces the previous OPEN auto-detected issues;
+// user-dismissed/resolved decisions are preserved.
 // ============================================================
 
 type Params = { params: Promise<{ id: string }> }
@@ -19,9 +19,6 @@ export async function POST(_req: Request, { params }: Params) {
     const idea = await db.idea.findUnique({ where: { id } })
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (!['readiness', 'planning', 'package'].includes(idea.stage)) {
-      return NextResponse.json({ error: 'The consistency check runs in the readiness stage.' }, { status: 409 })
     }
 
     const ctx = await buildProjectContext(id)

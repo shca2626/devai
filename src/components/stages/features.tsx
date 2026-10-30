@@ -86,8 +86,8 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
   const [confirmRemove, setConfirmRemove] = useState<FeatureType | null>(null)
 
   const { idea, features } = detail
-  const locked = idea.stage === 'baseline'
-  const inStage = idea.stage === 'features'
+  // NO LIMITS: features can be added, edited, decided and deleted at ANY stage.
+  const inStage = true
 
   const counts = useMemo(
     () => ({

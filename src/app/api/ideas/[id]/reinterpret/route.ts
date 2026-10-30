@@ -3,8 +3,9 @@ import { db } from '@/lib/db'
 import { buildIdeaDetail, logDecision, parseInterpretation } from '@/lib/payload'
 import { reinterpretIdea } from '@/lib/engines/understand'
 
-// Re-interpret with user corrections — only allowed before the
-// interpretation approval gate has been passed.
+// Re-interpret with user corrections. NO LIMITS: allowed at ANY
+// stage — the corrected interpretation is logged to the decision
+// history and understanding-stage assumptions are reset.
 type Params = { params: Promise<{ id: string }> }
 
 export async function POST(req: Request, { params }: Params) {
@@ -19,12 +20,6 @@ export async function POST(req: Request, { params }: Params) {
     const idea = await db.idea.findUnique({ where: { id } })
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (idea.stage !== 'understanding') {
-      return NextResponse.json(
-        { error: 'The interpretation was already approved and is locked for this idea.' },
-        { status: 409 }
-      )
     }
 
     const previous = parseInterpretation(idea.interpretation)

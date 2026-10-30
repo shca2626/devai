@@ -15,7 +15,7 @@ const ACTION_LABELS: Record<string, string> = {
 }
 
 // Update a feature (status decision, inline edit) or delete it.
-// Locked once the baseline was approved.
+// NO LIMITS: editable at ANY stage — the baseline is never a lock.
 export async function PATCH(req: Request, { params }: Params) {
   try {
     const { id } = await params
@@ -35,12 +35,6 @@ export async function PATCH(req: Request, { params }: Params) {
     const idea = await db.idea.findUnique({ where: { id: existing.ideaId } })
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (idea.stage === 'baseline') {
-      return NextResponse.json(
-        { error: 'The baseline was approved — the feature list is locked.' },
-        { status: 409 }
-      )
     }
 
     const updates: Record<string, unknown> = {}
@@ -85,13 +79,6 @@ export async function DELETE(_req: Request, { params }: Params) {
     const existing = await db.feature.findUnique({ where: { id } })
     if (!existing) {
       return NextResponse.json({ error: 'Feature not found' }, { status: 404 })
-    }
-    const idea = await db.idea.findUnique({ where: { id: existing.ideaId } })
-    if (idea?.stage === 'baseline') {
-      return NextResponse.json(
-        { error: 'The baseline was approved — the feature list is locked.' },
-        { status: 409 }
-      )
     }
     await db.feature.delete({ where: { id } })
     await logDecision(existing.ideaId, `Removed feature: ${existing.feature}`, undefined, 'features')

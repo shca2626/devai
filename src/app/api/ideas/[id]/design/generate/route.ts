@@ -7,11 +7,11 @@ import type { Requirement } from '@/lib/types'
 
 // ============================================================
 // System design engines — processes, data model, API contracts,
-// screens, architecture. Regeneration replaces unreviewed
-// (proposed / needs_revision) AND rejected artifacts; only
-// confirmed decisions are preserved. A rejected artifact is
-// never a dead end — it can always be regenerated, optionally
-// with client feedback the engines must address.
+// screens, architecture. NO LIMITS: every kind can be generated
+// from ANY stage, any number of times — even after confirmation
+// (the regeneration is logged to the decision history).
+// Confirmed artifacts are preserved unless regeneration replaces
+// them; rejected artifacts are never a dead end.
 // ============================================================
 
 type Params = { params: Promise<{ id: string }> }
@@ -63,9 +63,6 @@ export async function POST(req: Request, { params }: Params) {
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
     }
-    if (idea.stage !== 'design') {
-      return NextResponse.json({ error: 'Design artifacts are generated in the design stage.' }, { status: 409 })
-    }
 
     const ctx = await buildProjectContext(id)
     if (!ctx) {
@@ -73,13 +70,6 @@ export async function POST(req: Request, { params }: Params) {
     }
 
     const requirements = await getRequirements(id)
-    const confirmed = requirements.filter((r) => r.status === 'confirmed')
-    if (confirmed.length === 0) {
-      return NextResponse.json(
-        { error: 'Confirm at least one requirement first — design derives from confirmed requirements only.' },
-        { status: 409 }
-      )
-    }
 
     let roles: Array<{ name: string; description: string; permissions: string[] }> = []
     if (idea.roles) {
@@ -167,9 +157,6 @@ export async function POST(req: Request, { params }: Params) {
         rejected: rejectedRows.map((r) => `${r.method} ${r.path}`),
       })
       if (drafts.length === 0) throw new Error('No endpoints returned')
-      if (entities.length === 0) {
-        return NextResponse.json({ error: 'Confirm the data model first — API contracts reference confirmed entities.' }, { status: 409 })
-      }
       await db.apiEndpoint.deleteMany({ where: { ideaId: id, status: { in: ['proposed', 'needs_revision', 'rejected'] } } })
       order = await nextOrder('apiEndpoint')
       for (const d of drafts) {
@@ -218,13 +205,11 @@ export async function POST(req: Request, { params }: Params) {
       }
       await logDecision(id, 'UX/UI specification drafted', `${count} screens proposed${feedback ? ' — addressing client feedback' : ''}`, 'design')
     } else {
-      // architecture — rejected is NOT a locked decision; only confirmed is protected.
+      // architecture — NO LIMITS: regeneration is always allowed,
+      // even when confirmed (the previous confirmed state is logged).
       const existing = await db.architectureDoc.findUnique({ where: { ideaId: id } })
       if (existing?.status === 'confirmed') {
-        return NextResponse.json(
-          { error: 'Architecture is confirmed — regeneration is disabled to protect decisions. Reject it first if you really want to redo it.' },
-          { status: 409 }
-        )
+        await logDecision(id, 'Architecture regenerated', 'Previously confirmed — regeneration forced in no-limits mode', 'design')
       }
 
       // When regenerating after a rejection, pass the rejected proposal so the

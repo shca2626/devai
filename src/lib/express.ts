@@ -23,13 +23,15 @@ import type { Requirement } from '@/lib/types'
 // remaining workflow to the virtual engineer. One unit of work
 // per call; the UI drives the loop and shows live progress.
 //
-// Philosophy preserved:
-// - Delegation is itself an explicit, logged act (never silence).
+// NO LIMITS MODE:
+// - Delegation is still an explicit, logged act (never silence).
 // - Every auto-decision is written to the decision history with
 //   an Express marker and can be changed afterwards — the
 //   package can be reopened, artifacts edited, nothing restarts.
-// - The autopilot STOPS on genuine human decisions: critical
-//   consistency issues, readiness hard blockers, missing input.
+// - The autopilot NEVER blocks on gates: no minimum answers, no
+//   confirmed-requirements precondition, no readiness blockers.
+//   It only stops with 'blocked' when the AI service itself
+//   fails (genuine missing input that cannot be auto-created).
 // ============================================================
 
 export interface ExpressStepResult {
@@ -393,9 +395,20 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
 
   // ===== Stage: understanding =====
   if (idea.stage === 'understanding') {
-    const interpretation = parseInterpretation(idea.interpretation)
+    let interpretation = parseInterpretation(idea.interpretation)
+    // NO LIMITS: if the interpretation is missing, generate it now
+    // instead of blocking.
     if (!interpretation) {
-      return blocked('There is no interpretation yet — describe the idea and run the understanding step first.')
+      const { interpretIdea } = await import('@/lib/engines/understand')
+      interpretation = await interpretIdea(idea.originalText, (idea.projectType as 'website' | 'app' | 'prototype' | null) ?? 'app')
+      await db.idea.update({
+        where: { id },
+        data: { title: interpretation.title, interpretation: JSON.stringify(interpretation) },
+      })
+      for (const a of interpretation.assumed) {
+        await db.assumption.create({ data: { ideaId: id, text: a, kind: 'suggested', status: 'open', source: 'understanding' } })
+      }
+      await logDecision(id, 'Express: interpretation generated', 'No interpretation existed — created from the original idea text', 'understanding')
     }
     const drafts = await generateQuestions({ interpretation, answered: [], uncoveredAreas: [...AREAS], weakAreas: [] })
     let order = 0
@@ -427,13 +440,18 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
       return running(`Auto-answered ${n} interview questions (each recorded as an open assumption)`, 'Compiling the discovery summary')
     }
 
+    // NO LIMITS: no minimum answer count — compile from whatever
+    // answers exist (zero is acceptable).
     const answered = await db.question.count({ where: { ideaId: id, status: 'answered' } })
-    if (answered < 5) {
-      return blocked('Not enough answered questions to compile a discovery summary (minimum 5).')
-    }
 
     const interpretation = parseInterpretation(idea.interpretation)
-    if (!interpretation) return blocked('No interpretation available.')
+    if (!interpretation) {
+      const { interpretIdea } = await import('@/lib/engines/understand')
+      const regenerated = await interpretIdea(idea.originalText, (idea.projectType as 'website' | 'app' | 'prototype' | null) ?? 'app')
+      await db.idea.update({ where: { id }, data: { title: regenerated.title, interpretation: JSON.stringify(regenerated) } })
+      await logDecision(id, 'Express: interpretation regenerated', 'Missing interpretation — recreated from the original idea text', 'discovery')
+      return running('Interpretation regenerated', 'Compiling the discovery summary')
+    }
     const summary = await compileDiscoverySummary({ interpretation, answered: await answeredItems(id) })
     for (const risk of summary.openRisks) {
       await db.assumption.create({ data: { ideaId: id, text: risk, kind: 'uncertain', status: 'open', source: 'discovery' } })
@@ -451,7 +469,14 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
     const features = await db.feature.findMany({ where: { ideaId: id } })
     if (features.length === 0) {
       const interpretation = parseInterpretation(idea.interpretation)
-      if (!interpretation) return blocked('No interpretation available.')
+      if (!interpretation) {
+        // NO LIMITS: regenerate the interpretation instead of blocking
+        const { interpretIdea } = await import('@/lib/engines/understand')
+        const regenerated = await interpretIdea(idea.originalText, (idea.projectType as 'website' | 'app' | 'prototype' | null) ?? 'app')
+        await db.idea.update({ where: { id }, data: { title: regenerated.title, interpretation: JSON.stringify(regenerated) } })
+        await logDecision(id, 'Express: interpretation regenerated', 'Missing interpretation — recreated from the original idea text', 'features')
+        return running('Interpretation regenerated', 'Generating the feature inventory')
+      }
       const inventory = await generateFeatureInventory({ interpretation, answered: await answeredItems(id) })
       let order = 0
       for (const f of inventory.features) {
@@ -511,9 +536,10 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
     const requirements = await db.requirement.findMany({ where: { ideaId: id } })
     if (requirements.length === 0) {
       const ctx = await buildProjectContext(id)
-      if (!ctx || ctx.acceptedFeatures.length === 0) {
-        return blocked('The feature baseline must be approved before requirements can be generated.')
-      }
+      if (!ctx) return blocked('Idea not found.')
+      // NO LIMITS: generate from whatever context exists — accepted
+      // features are NOT a precondition (the engine also uses the
+      // interpretation and the answered interview questions).
       const result = await generateRequirements(ctx)
       await db.requirement.deleteMany({ where: { ideaId: id, status: 'proposed' } })
       const featureRows = await db.feature.findMany({ where: { ideaId: id, status: 'accepted' } })
@@ -565,7 +591,8 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
     }
 
     const confirmed = requirements.filter((r) => r.status === 'confirmed').length
-    if (confirmed === 0) return blocked('No confirmed requirements — the specification needs at least one.')
+    // NO LIMITS: advance even with zero confirmed requirements —
+    // the count is logged for honesty.
     await db.idea.update({ where: { id }, data: { stage: 'design' } })
     await logDecision(id, 'Express: requirements approved', `${confirmed} confirmed`, 'requirements')
     return running('Requirements approved — design started', 'Designing the business processes')
@@ -902,9 +929,19 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
           'Re-checking critical issues'
         )
       }
-      return blocked(
-        'Critical consistency issues need a human decision before the package can be locked. Resolve or dismiss them in the readiness stage, then re-run express.',
-        openCritical.map((i) => i.description)
+      // NO LIMITS: critical issues that cannot be auto-fixed are
+      // dismissed by delegation (each dismissal logged) instead of
+      // blocking the autopilot.
+      await db.consistencyIssue.updateMany({ where: { ideaId: id, status: 'open', severity: 'critical' }, data: { status: 'dismissed' } })
+      await logDecision(
+        id,
+        'Express: critical issues dismissed (no-limits mode)',
+        `${openCritical.length} critical issue(s) could not be auto-fixed and were dismissed by delegation: ${openCritical.map((i) => i.description.slice(0, 80)).join(' | ')}`,
+        'readiness'
+      )
+      return running(
+        `Dismissed ${openCritical.length} critical issue(s) that could not be auto-fixed (logged)`,
+        'Checking the readiness gate'
       )
     }
 
@@ -954,9 +991,17 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
       })
       const targeted = drafts.filter((d) => d.requirementCodes.some((c) => uncoveredSet.has(c))).slice(0, 8)
       if (targeted.length === 0) {
-        return blocked(
-          'These confirmed requirements have no implementation task and the engineer could not draft one automatically:',
-          uncovered.map((u) => `${u.code}: ${u.title}`)
+        // NO LIMITS: the coverage gap is logged and the autopilot
+        // continues instead of blocking.
+        await logDecision(
+          id,
+          'Express: coverage gap recorded (no-limits mode)',
+          `No implementation task could be drafted for: ${uncovered.map((u) => `${u.code}: ${u.title}`).join(', ')} — continuing anyway`,
+          'readiness'
+        )
+        return running(
+          `Coverage gap logged for ${uncovered.length} requirement(s) — continuing to the readiness gate`,
+          'Checking the readiness gate'
         )
       }
       const existingCount = await db.implTask.count({ where: { ideaId: id } })
@@ -997,15 +1042,16 @@ export async function runExpressStep(ideaId: string): Promise<ExpressStepResult>
     }
 
     const report = await computeReadiness(id)
-    if (!report.lockable) {
-      return blocked(
-        'The readiness gate still has hard blockers. Fix them in the readiness stage, then re-run express.',
-        report.blockers
-      )
-    }
+    // NO LIMITS: the readiness score is logged for honesty but can
+    // never block locking the package.
 
     await db.idea.update({ where: { id }, data: { stage: 'package' } })
-    await logDecision(id, 'Express: readiness gate passed — package locked', `Readiness score ${report.score}%`, 'readiness')
+    await logDecision(
+      id,
+      'Express: readiness gate passed — package locked',
+      `No-limits mode: locked at readiness score ${report.score}%${report.blockers.length > 0 ? ` (${report.blockers.length} blockers bypassed)` : ' with all hard blockers cleared'}`,
+      'readiness'
+    )
     return running(`Readiness gate passed (${report.score}%) — package locked`, 'Done')
   }
 

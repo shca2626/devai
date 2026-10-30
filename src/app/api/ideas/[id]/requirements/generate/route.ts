@@ -5,9 +5,11 @@ import { buildProjectContext } from '@/lib/engines/context'
 import { generateRequirements } from '@/lib/engines/requirements'
 
 // ============================================================
-// Requirements Engineering — generate the SRS from the APPROVED
-// baseline. Replaces previous proposed requirements; confirmed /
-// rejected / unresolved ones are preserved (they are decisions).
+// Requirements Engineering — generate the SRS. NO LIMITS:
+// works from ANY stage and with ANY feature state — the engine
+// uses whatever context exists (interpretation + answers +
+// features). Replaces previous proposed requirements;
+// confirmed / rejected / unresolved ones are preserved.
 // ============================================================
 
 type Params = { params: Promise<{ id: string }> }
@@ -19,16 +21,10 @@ export async function POST(_req: Request, { params }: Params) {
     if (!idea) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
     }
-    if (idea.stage !== 'requirements') {
-      return NextResponse.json({ error: 'Requirements are generated in the requirements stage.' }, { status: 409 })
-    }
 
     const ctx = await buildProjectContext(id)
     if (!ctx) {
       return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (ctx.acceptedFeatures.length === 0) {
-      return NextResponse.json({ error: 'The feature baseline must be approved first.' }, { status: 409 })
     }
 
     const result = await generateRequirements(ctx)

@@ -18,9 +18,10 @@ export async function POST(req: Request) {
   try {
     const body = (await req.json()) as { text?: string; projectType?: string }
     const text = (body.text ?? '').trim()
-    if (text.length < 10) {
+    // NO LIMITS: any non-empty idea text is accepted
+    if (text.length < 1) {
       return NextResponse.json(
-        { error: 'Please describe your idea in at least a sentence or two.' },
+        { error: 'Please describe your idea first.' },
         { status: 400 }
       )
     }

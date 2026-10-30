@@ -21,7 +21,8 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
   const { t, setDetail, refreshIdeas } = useApp()
   const { toast } = useToast()
   const { idea, tasks, risks } = detail
-  const active = idea.stage === 'planning'
+  // NO LIMITS: tasks and risks can be generated, reviewed and approved at ANY stage
+  const active = true
   const [busy, setBusy] = useState<'tasks' | 'risks' | 'gate' | null>(null)
   const [expanded, setExpanded] = useState<string | null>(null)
 
@@ -76,15 +77,6 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
     }
     setDetail(data as IdeaDetail)
     refreshIdeas()
-  }
-
-  if (!active && tasks.length === 0 && risks.length === 0) {
-    return (
-      <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
-        <ClipboardList className="h-8 w-8 text-muted-foreground mx-auto" />
-        <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('lockedStageTeaser')}</p>
-      </div>
-    )
   }
 
   const riskTone = (r: RiskItem) =>

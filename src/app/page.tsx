@@ -259,6 +259,15 @@ function Shell() {
               <BookOpen className="h-4 w-4 text-primary" />
               <span className="hidden xl:inline text-xs font-medium">{t('openPlaybook')}</span>
             </Button>
+            <a
+              href="/admin"
+              className="inline-flex items-center gap-1.5 rounded-md px-2.5 min-h-9 text-xs font-medium text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+              aria-label="Admin panel"
+              title="Admin panel — full control & system documentation"
+            >
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              <span className="hidden xl:inline">Admin</span>
+            </a>
             <Button
               variant="ghost"
               size="sm"

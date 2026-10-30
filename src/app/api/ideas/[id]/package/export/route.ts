@@ -3,10 +3,10 @@ import { parseInterpretation, parseSummary } from '@/lib/payload'
 
 // ============================================================
 // The final deliverable — the implementation-ready engineering
-// package. Available only after the readiness gate is passed:
-// six interconnected sections plus a traceability appendix, so
-// a programmer who never saw the original conversation can
-// implement the system correctly.
+// package. NO LIMITS: exportable at ANY stage (exports whatever
+// is confirmed so far): six interconnected sections plus a
+// traceability appendix, so a programmer who never saw the
+// original conversation can implement the system correctly.
 // ============================================================
 
 type Params = { params: Promise<{ id: string }> }
@@ -74,12 +74,6 @@ export async function GET(req: Request, { params }: Params) {
     })
     if (!idea) {
       return Response.json({ error: 'Idea not found' }, { status: 404 })
-    }
-    if (idea.stage !== 'package') {
-      return Response.json(
-        { error: 'The engineering package is exported after the readiness gate is passed.' },
-        { status: 409 }
-      )
     }
 
     const interpretation = parseInterpretation(idea.interpretation)

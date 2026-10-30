@@ -21,7 +21,8 @@ export async function POST(req: Request, { params }: Params) {
     const label = typeof body.label === 'string' ? body.label : undefined
     const lang = body.lang === 'ar' || body.lang === 'en' ? body.lang : 'ar'
 
-    if (code.trim().length < 30) {
+    // NO LIMITS: any non-empty code can be checked
+    if (code.trim().length < 1) {
       return NextResponse.json({ error: 'CODE_TOO_SHORT' }, { status: 400 })
     }
 
