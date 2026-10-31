@@ -276,6 +276,7 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
     purpose: a.purpose,
     auth: a.auth,
     request: parseJsonArray<ApiEndpoint['request']>(a.request, []),
+    response: parseJsonArray<ApiEndpoint['response']>(a.response, []),
     errors: parseJsonArray<ApiEndpoint['errors']>(a.errors, []),
     linkedRequirements: parseJsonArray<string[]>(a.linkedRequirements, []),
     linkedEntities: parseJsonArray<string[]>(a.linkedEntities, []),

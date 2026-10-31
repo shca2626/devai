@@ -8,10 +8,12 @@ const TARGETS = ['bolt', 'cursor', 'claude', 'chatgpt', 'generic']
 const BOOL_KEYS = [
   'includeConstitution',
   'includeRequirements',
+  'includeProcesses',
   'includeArchitecture',
   'includeDataModel',
   'includeScreens',
   'includeTasks',
+  'includeQa',
   'includeRisks',
   'includeDecisions',
 ] as const
@@ -34,10 +36,12 @@ export async function POST(req: Request, { params }: Params) {
       lang,
       includeConstitution: body.includeConstitution !== false,
       includeRequirements: body.includeRequirements !== false,
+      includeProcesses: body.includeProcesses !== false,
       includeArchitecture: body.includeArchitecture !== false,
       includeDataModel: body.includeDataModel !== false,
       includeScreens: body.includeScreens !== false,
       includeTasks: body.includeTasks === true,
+      includeQa: body.includeQa === true,
       includeRisks: body.includeRisks !== false,
       includeDecisions: body.includeDecisions === true,
     }

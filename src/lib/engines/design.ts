@@ -219,6 +219,7 @@ export interface ApiDraft {
   purpose: string
   auth: string | null
   request: Array<{ field: string; type: string; required: boolean; notes: string }>
+  response: Array<{ field: string; type: string; description: string }>
   errors: Array<{ code: string; when: string }>
   linkedRequirements: string[]
   linkedEntities: string[]
@@ -232,12 +233,13 @@ Rules:
 - "method" one of GET, POST, PATCH, DELETE. "path" in kebab-case starting with /api/v1.
 - "auth": which role can call it (e.g. "merchant", "any authenticated user").
 - "request": up to 8 fields with type, required and notes (validation rules, e.g. "min 8 chars", "must be a future date").
+- "response": the fields the SUCCESS response returns (2-8 items) — the exact contract a frontend consumes: for GET lists include the array field and pagination fields; for POST/PATCH include the created/updated entity fields and status/state fields. Types can be primitives or "object" / "array<object>" when nested.
 - "errors": 2-4 error codes with when they occur (e.g. 409 QUOTATION_ALREADY_RESPONDED).
 - "linkedRequirements": requirement codes this endpoint serves (from the provided list only).
 - "linkedEntities": entity names involved (from the provided list only).
 
 Return STRICT JSON only:
-{"endpoints": [{"method": "POST", "path": "/api/v1/quotations", "purpose": "...", "auth": "merchant", "request": [{"field": "...", "type": "string", "required": true, "notes": "..."}], "errors": [{"code": "400 VALIDATION", "when": "..."}], "linkedRequirements": ["FR-001"], "linkedEntities": ["Quotation"]}]}`
+{"endpoints": [{"method": "POST", "path": "/api/v1/quotations", "purpose": "...", "auth": "merchant", "request": [{"field": "...", "type": "string", "required": true, "notes": "..."}], "response": [{"field": "...", "type": "string", "description": "..."}], "errors": [{"code": "400 VALIDATION", "when": "..."}], "linkedRequirements": ["FR-001"], "linkedEntities": ["Quotation"]}]}`
 
 export async function generateApis(params: {
   ctx: ProjectContext
@@ -280,6 +282,19 @@ export async function generateApis(params: {
             }
           })
           .filter((r): r is ApiDraft['request'][number] => r !== null)
+          .slice(0, 8),
+        response: (Array.isArray(e.response) ? e.response : [])
+          .map((r): ApiDraft['response'][number] | null => {
+            const rm = r as Record<string, unknown>
+            const field = typeof rm.field === 'string' ? rm.field.trim() : ''
+            if (!field) return null
+            return {
+              field,
+              type: typeof rm.type === 'string' ? rm.type.trim() : 'string',
+              description: typeof rm.description === 'string' ? rm.description.trim() : '',
+            }
+          })
+          .filter((r): r is ApiDraft['response'][number] => r !== null)
           .slice(0, 8),
         errors: (Array.isArray(e.errors) ? e.errors : [])
           .map((r): ApiDraft['errors'][number] | null => {

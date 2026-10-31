@@ -441,6 +441,7 @@ const dict = {
   relationshipsTitle: { en: 'Relationships', ar: 'العلاقات' },
   constraintsTitle: { en: 'Constraints', ar: 'القيود' },
   requestFields: { en: 'Request', ar: 'الطلب' },
+  responseFields: { en: 'Response (success contract)', ar: 'الاستجابة (عقد النجاح)' },
   errorCodes: { en: 'Errors', ar: 'الأخطاء' },
   statesTitle: { en: 'States (loading / empty / error)', ar: 'الحالات (تحميل / فراغ / خطأ)' },
   rtlConsideration: { en: 'RTL', ar: 'العربية RTL' },

@@ -72,10 +72,12 @@ const L = (lang: 'ar' | 'en') => ({
   globalRules: lang === 'ar' ? 'قواعد عامة (كل المشاريع)' : 'Global rules (all projects)',
   projectRules: lang === 'ar' ? 'قواعد خاصة بهذا المشروع' : 'Project-specific rules',
   requirements: lang === 'ar' ? 'المتطلبات المعتمدة' : 'Approved requirements',
+  processes: lang === 'ar' ? 'العمليات التجارية' : 'Business processes',
   architecture: lang === 'ar' ? 'المعمارية والتقنيات' : 'Architecture & tech stack',
-  dataModel: lang === 'ar' ? 'نموذج البيانات والواجهات البرمجية' : 'Data model & API surface',
+  dataModel: lang === 'ar' ? 'نموذج البيانات والواجهات البرمجية' : 'Data model & API contracts',
   screens: lang === 'ar' ? 'الشاشات' : 'Screens',
   tasks: lang === 'ar' ? 'خطة التنفيذ' : 'Implementation plan',
+  qa: lang === 'ar' ? 'خطة الاختبار' : 'Test plan',
   risks: lang === 'ar' ? 'المخاطر والتخفيفات' : 'Risks & mitigations',
   activity: lang === 'ar' ? 'سجل النشاط' : 'Activity log',
   approvedDecisions: lang === 'ar' ? 'القرارات المعتمدة — اختيارات ثابتة' : 'Approved decisions — standing choices',
@@ -84,6 +86,8 @@ const L = (lang: 'ar' | 'en') => ({
   concept: lang === 'ar' ? 'الفكرة' : 'Concept',
   type: lang === 'ar' ? 'نوع المشروع' : 'Build target',
   users: lang === 'ar' ? 'المستخدمون' : 'Target users',
+  features: lang === 'ar' ? 'الميزات المعتمدة' : 'Approved features',
+  assumptions: lang === 'ar' ? 'الافتراضات المرصودة' : 'Assumptions register',
   none: lang === 'ar' ? 'لا يوجد' : 'None',
   phase: lang === 'ar' ? 'المرحلة' : 'Phase',
   depends: lang === 'ar' ? 'يعتمد على' : 'depends on',
@@ -96,13 +100,27 @@ const L = (lang: 'ar' | 'en') => ({
   fields: lang === 'ar' ? 'الحقول' : 'fields',
   auth: lang === 'ar' ? 'الصلاحية' : 'auth',
   roles: lang === 'ar' ? 'الأدوار' : 'Roles',
+  permissions: lang === 'ar' ? 'الصلاحيات' : 'permissions',
   techStack: lang === 'ar' ? 'مكدس التقنيات' : 'Tech stack',
   components: lang === 'ar' ? 'المكونات' : 'Components',
   integrations: lang === 'ar' ? 'التكاملات' : 'Integrations',
   likelihood: lang === 'ar' ? 'الاحتمالية' : 'likelihood',
   impact: lang === 'ar' ? 'الأثر' : 'impact',
   mitigation: lang === 'ar' ? 'التخفيف' : 'mitigation',
+  trigger: lang === 'ar' ? 'المُحفّز' : 'Trigger',
+  actors: lang === 'ar' ? 'الفاعلون' : 'Actors',
+  steps: lang === 'ar' ? 'الخطوات' : 'Steps',
+  businessRules: lang === 'ar' ? 'قواعد العمل' : 'Business rules',
+  request: lang === 'ar' ? 'الطلب' : 'Request',
+  response: lang === 'ar' ? 'الاستجابة' : 'Response',
+  errors: lang === 'ar' ? 'الأخطاء' : 'Errors',
+  elements: lang === 'ar' ? 'العناصر' : 'Elements',
+  states: lang === 'ar' ? 'الحالات' : 'States',
   rtl: 'RTL',
+  expected: lang === 'ar' ? 'المتوقع' : 'Expected',
+  given: lang === 'ar' ? 'بفرض' : 'Given',
+  when: lang === 'ar' ? 'عندما' : 'When',
+  then: lang === 'ar' ? 'فإن' : 'Then',
 })
 
 const CATEGORY_LABEL: Record<ConstitutionCategory, Record<'ar' | 'en', string>> = {
@@ -302,8 +320,21 @@ function compilePack(d: IdeaDetail, rules: ConstitutionRule[], decisions: Decisi
     out.push(`- **${s.concept}:** ${d.idea.interpretation.englishInterpretation}`)
     out.push(`- **${s.problem}:** ${d.idea.interpretation.problemStatement}`)
   }
-  const roles = d.roles?.map((r) => r.name).join(', ')
-  if (roles) out.push(`- **${s.users} / ${s.roles}:** ${roles}`)
+  if (d.roles?.length) {
+    out.push(`- **${s.users} / ${s.roles}:**`)
+    for (const r of d.roles)
+      out.push(`  - **${r.name}** — ${r.description}${r.permissions.length ? ` · ${s.permissions}: ${r.permissions.join(', ')}` : ''}`)
+  }
+  const acceptedFeatures = d.features.filter((f) => f.status === 'accepted')
+  if (acceptedFeatures.length) {
+    out.push(`- **${s.features}:**`)
+    for (const f of acceptedFeatures)
+      out.push(`  - [${f.priority}] ${f.module} / ${f.feature}${f.user ? ` (${o.lang === 'ar' ? 'لـ' : 'for'} ${f.user})` : ''}`)
+  }
+  const openAssumptions = d.assumptions.filter((a) => a.status !== 'rejected').slice(0, 10)
+  if (openAssumptions.length) {
+    out.push(`- **${s.assumptions}:** ${openAssumptions.map((a) => a.text).join(' · ')}`)
+  }
 
   // ---------- Constitution ----------
   if (rules.length > 0) {
@@ -365,6 +396,32 @@ function compilePack(d: IdeaDetail, rules: ConstitutionRule[], decisions: Decisi
     }
   }
 
+  // ---------- Business processes (full workflow detail) ----------
+  if (o.includeProcesses) {
+    const procs = d.processes.filter((p) => p.status === 'confirmed' || p.status === 'proposed')
+    if (procs.length) {
+      h2(s.processes)
+      for (const p of procs) {
+        out.push(`- **${p.code} ${p.name}${p.nameAr ? ` (${p.nameAr})` : ''}**${p.trigger ? ` — ${s.trigger}: ${p.trigger}` : ''}`)
+        if (p.actors.length) out.push(`  - ${s.actors}: ${p.actors.join(', ')}`)
+        if (p.steps.length) {
+          out.push(`  - ${s.steps}:`)
+          for (const st of p.steps) {
+            const io = [st.input, st.output].filter(Boolean).join(' → ')
+            out.push(`    ${st.n}. **${st.actor}:** ${st.action}${io ? ` (${io})` : ''}`)
+            if (st.decision) out.push(`       - ${o.lang === 'ar' ? 'قرار' : 'decision'}: ${st.decision}`)
+            if (st.exception) out.push(`       - ${o.lang === 'ar' ? 'استثناء' : 'exception'}: ${st.exception}`)
+          }
+        }
+        if (p.businessRules.length) {
+          out.push(`  - ${s.businessRules}:`)
+          for (const b of p.businessRules)
+            out.push(`    - ${b.rule}${b.linkedRequirements.length ? ` (${b.linkedRequirements.join(', ')})` : ''}`)
+        }
+      }
+    }
+  }
+
   // ---------- Architecture ----------
   if (o.includeArchitecture && d.architecture) {
     h2(s.architecture)
@@ -383,7 +440,7 @@ function compilePack(d: IdeaDetail, rules: ConstitutionRule[], decisions: Decisi
     if (d.architecture.notes) out.push('', d.architecture.notes)
   }
 
-  // ---------- Data model + APIs ----------
+  // ---------- Data model + APIs (full field-level detail) ----------
   if (o.includeDataModel) {
     const ents = d.entities.filter((e) => e.status === 'confirmed' || e.status === 'proposed')
     const apis = d.apis.filter((a) => a.status === 'confirmed' || a.status === 'proposed')
@@ -391,28 +448,50 @@ function compilePack(d: IdeaDetail, rules: ConstitutionRule[], decisions: Decisi
       h2(s.dataModel)
       if (ents.length) {
         h3(s.entities)
+        out.push(o.lang === 'ar' ? 'كل كيان يضم ضمنيًا `id` (مفتاح أساسي) و`created_at` / `updated_at`.' : 'Every entity implicitly has an `id` primary key and `created_at` / `updated_at` timestamps.')
         for (const e of ents) {
-          out.push(`- **${e.name}** (${e.fields.length} ${s.fields}): ${e.fields.map((f) => f.name).join(', ')}`)
-          for (const rel of e.relationships) out.push(`  - ${rel.type} → ${rel.target}${rel.description ? ` (${rel.description})` : ''}`)
+          out.push(`- **${e.code} ${e.name}${e.nameAr ? ` (${e.nameAr})` : ''}**${e.description ? ` — ${e.description}` : ''}`)
+          for (const f of e.fields) {
+            const flags = [f.required ? 'required' : null, f.unique ? 'unique' : null].filter(Boolean).join(', ')
+            out.push(`  - \`${f.name}\`: ${f.type}${flags ? ` (${flags})` : ''}${f.refEntity ? ` → ${f.refEntity}` : ''}${f.description ? ` — ${f.description}` : ''}`)
+          }
+          for (const rel of e.relationships) out.push(`  - ${rel.type} → **${rel.target}**${rel.description ? ` (${rel.description})` : ''}`)
+          for (const c of e.constraints) out.push(`  - ${o.lang === 'ar' ? 'قيد' : 'constraint'}: ${c}`)
         }
       }
       if (apis.length) {
         h3(s.endpoints)
-        for (const a of apis)
-          out.push(`- \`${a.method} ${a.path}\` — ${a.purpose}${a.auth ? ` · ${s.auth}: ${a.auth}` : ''}`)
+        for (const a of apis) {
+          out.push(`- **\`${a.method} ${a.path}\`** — ${a.purpose}${a.auth ? ` · ${s.auth}: ${a.auth}` : ''}`)
+          if (a.request.length)
+            out.push(`  - ${s.request}: ${a.request.map((f) => `\`${f.field}\`: ${f.type}${f.required ? '*' : ''}${f.notes ? ` (${f.notes})` : ''}`).join(' · ')}`)
+          if (a.response.length)
+            out.push(`  - ${s.response}: ${a.response.map((f) => `\`${f.field}\`: ${f.type}${f.description ? ` (${f.description})` : ''}`).join(' · ')}`)
+          if (a.errors.length)
+            out.push(`  - ${s.errors}: ${a.errors.map((e) => `\`${e.code}\` ${e.when}`).join(' · ')}`)
+          if (a.linkedRequirements.length) out.push(`  - ${o.lang === 'ar' ? 'يخدم' : 'serves'}: ${a.linkedRequirements.join(', ')}`)
+        }
       }
     }
   }
 
-  // ---------- Screens ----------
+  // ---------- Screens (elements, states, RTL) ----------
   if (o.includeScreens) {
     const screens = d.screens.filter((x) => x.status === 'confirmed' || x.status === 'proposed')
     if (screens.length) {
       h2(s.screens)
       for (const sc of screens) {
-        out.push(`- **${sc.name}**${sc.route ? ` (\`${sc.route}\`)` : ''} — ${sc.purpose ?? ''}`)
+        out.push(`- **${sc.code} ${sc.name}${sc.nameAr ? ` (${sc.nameAr})` : ''}**${sc.route ? ` (\`${sc.route}\`)` : ''}${sc.purpose ? ` — ${sc.purpose}` : ''}`)
         if (sc.roles.length) out.push(`  - ${s.roles}: ${sc.roles.join(', ')}`)
+        if (sc.elements.length) {
+          out.push(`  - ${s.elements}:`)
+          for (const el of sc.elements) out.push(`    - **${el.element}** — ${el.behavior}`)
+        }
+        if (sc.states.loading || sc.states.empty || sc.states.error) {
+          out.push(`  - ${s.states}: ${o.lang === 'ar' ? 'تحميل' : 'loading'}: ${sc.states.loading || '—'} · ${o.lang === 'ar' ? 'فراغ' : 'empty'}: ${sc.states.empty || '—'} · ${o.lang === 'ar' ? 'خطأ' : 'error'}: ${sc.states.error || '—'}`)
+        }
         if (sc.rtlNote) out.push(`  - ${s.rtl}: ${sc.rtlNote}`)
+        if (sc.linkedRequirements.length) out.push(`  - ${o.lang === 'ar' ? 'يحقق' : 'implements'}: ${sc.linkedRequirements.join(', ')}`)
       }
     }
   }
@@ -427,6 +506,28 @@ function compilePack(d: IdeaDetail, rules: ConstitutionRule[], decisions: Decisi
         out.push('', `**${s.phase} ${phase}**`)
         for (const t of tasks.filter((x) => x.phase === phase))
           out.push(`- \`${t.code}\` **${t.title}** (${L(o.lang)[t.priority]})${t.dependsOn.length ? ` — ${s.depends}: ${t.dependsOn.join(', ')}` : ''}`)
+      }
+    }
+  }
+
+  // ---------- QA plan (test cases + E2E scenarios) ----------
+  if (o.includeQa) {
+    const cases = d.testCases.filter((c) => c.status === 'confirmed' || c.status === 'proposed')
+    const scenarios = d.e2eScenarios.filter((x) => x.status === 'confirmed' || x.status === 'proposed')
+    if (cases.length || scenarios.length) {
+      h2(s.qa)
+      for (const c of cases) {
+        out.push(`- **${c.code} ${c.title}** (${c.level}/${c.kind}${c.linkedRequirement ? `, ${c.linkedRequirement}` : ''})${c.priority === 'high' ? o.lang === 'ar' ? ' — أولوية عالية' : ' — high priority' : ''}`)
+        if (c.preconditions.length) out.push(`  - ${o.lang === 'ar' ? 'شروط مسبقة' : 'Preconditions'}: ${c.preconditions.join(' · ')}`)
+        if (c.steps.length) out.push(`  - ${o.lang === 'ar' ? 'خطوات' : 'Steps'}: ${c.steps.map((x, i) => `${i + 1}. ${x}`).join(' → ')}`)
+        out.push(`  - ${s.expected}: ${c.expected}`)
+      }
+      for (const sc of scenarios) {
+        out.push(`- **${sc.code} ${sc.title}**${sc.priority === 'smoke' ? ' (smoke)' : ''}${sc.persona ? ` — ${sc.persona}` : ''}`)
+        if (sc.given.length) out.push(`  - ${s.given}: ${sc.given.join(' · ')}`)
+        if (sc.when.length) out.push(`  - ${s.when}: ${sc.when.join(' · ')}`)
+        if (sc.then.length) out.push(`  - ${s.then}: ${sc.then.join(' · ')}`)
+        if (sc.screens.length) out.push(`  - ${s.screens}: ${sc.screens.join(' → ')}`)
       }
     }
   }

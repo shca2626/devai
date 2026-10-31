@@ -422,6 +422,31 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
                       </div>
                     </div>
                   )}
+                  {a.response.length > 0 && (
+                    <div>
+                      <div className="text-[11px] font-semibold text-muted-foreground mb-1">{t('responseFields')}</div>
+                      <div className="overflow-x-auto nice-scroll">
+                        <table className="w-full text-xs">
+                          <thead>
+                            <tr className="text-muted-foreground border-b">
+                              <th className="py-1.5 text-start font-medium pe-2">Field</th>
+                              <th className="py-1.5 text-start font-medium pe-2">Type</th>
+                              <th className="py-1.5 text-start font-medium">Description</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {a.response.map((f) => (
+                              <tr key={f.field} className="border-b last:border-0">
+                                <td className="py-1.5 pe-2 font-mono text-emerald-700">{f.field}</td>
+                                <td className="py-1.5 pe-2 text-muted-foreground">{f.type}</td>
+                                <td className="py-1.5 text-muted-foreground">{f.description}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
                   {a.errors.length > 0 && (
                     <div className="text-xs">
                       <span className="font-semibold">{t('errorCodes')}: </span>

@@ -4,9 +4,11 @@ import { parseInterpretation, parseSummary } from '@/lib/payload'
 // ============================================================
 // The final deliverable — the implementation-ready engineering
 // package. NO LIMITS: exportable at ANY stage (exports whatever
-// is confirmed so far): six interconnected sections plus a
-// traceability appendix, so a programmer who never saw the
-// original conversation can implement the system correctly.
+// is confirmed so far): seven interconnected sections plus
+// traceability, OpenAPI, DDL, auth model, setup guide and a
+// bilingual glossary — so a frontend or fullstack developer who
+// never saw the original conversation can start writing code
+// from this document alone.
 // ============================================================
 
 type Params = { params: Promise<{ id: string }> }
@@ -24,29 +26,262 @@ function parse<T>(raw: string | null | undefined, fallback: T): T {
   }
 }
 
-function mermaidErd(entities: Array<{ name: string; relationships: string | null }>): string {
-  const rels = entities.flatMap((e) =>
-    parse<Array<{ target: string; type: string }>>(e.relationships, []).map((r) => ({ from: e.name, ...r }))
-  )
+function mermaidErd(entities: Array<{ name: string; fields?: string | null; relationships: string | null }>): string {
   const sanitize = (n: string) => n.replace(/[^a-zA-Z0-9]/g, '_')
+  const mmType = (t: string) => {
+    const s = (t || 'string').toLowerCase().split(/[<(\s]/)[0]
+    if (['integer', 'int'].includes(s)) return 'int'
+    if (['decimal', 'float', 'money'].includes(s)) return 'float'
+    if (['boolean', 'bool'].includes(s)) return 'boolean'
+    if (['datetime', 'timestamp', 'date'].includes(s)) return 'datetime'
+    if (s === 'json') return 'json'
+    return 'string'
+  }
   const lines = ['erDiagram']
   for (const e of entities) {
+    const fields = parse<Array<{ name: string; type: string; unique?: boolean; refEntity?: string }>>(e.fields, [])
     lines.push(`  ${sanitize(e.name)} {`)
-    lines.push('    string id PK')
+    if (fields.length) {
+      for (const f of fields) {
+        const key = f.refEntity ? 'FK' : f.unique ? 'UK' : ''
+        lines.push(`    ${mmType(f.type)} ${snake(f.name)}${key ? ` ${key}` : ''}`)
+      }
+    } else {
+      lines.push('    string id PK')
+    }
     lines.push('  }')
   }
+  const rels = entities.flatMap((e) =>
+    parse<Array<{ target: string; type: string; description?: string }>>(e.relationships, []).map((r) => ({ from: e.name, ...r }))
+  )
   for (const r of rels) {
     const cardinality =
       r.type.includes('many-to-many')
-        ? '}o..o{'
+        ? '}o--o{'
         : r.type.includes('one-to-many')
           ? '||--o{'
           : r.type.includes('one-to-one')
             ? '||--||'
             : '||--o{'
-    lines.push(`  ${sanitize(r.from)} ${cardinality} ${sanitize(r.target)} : "${r.type}"`)
+    const label =
+      (r.description ?? r.type)
+        .replace(/[^a-zA-Z0-9 ]/g, '')
+        .trim()
+        .split(/\s+/)
+        .slice(0, 3)
+        .join('_') || 'relates'
+    lines.push(`  ${sanitize(r.from)} ${cardinality} ${sanitize(r.target)} : "${label.slice(0, 32)}"`)
   }
+  lines.push('')
   return lines.join('\n')
+}
+
+// ------------------------------------------------------------
+// Developer-handoff compilers — deterministic derivations of
+// everything a coder needs to bootstrap: SQL DDL, OpenAPI,
+// environment variables, and the authorization matrix.
+// ------------------------------------------------------------
+
+function snake(s: string): string {
+  return s
+    .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+    .replace(/[^a-zA-Z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '')
+    .toLowerCase()
+}
+
+function sqlType(t: string): string {
+  const s = (t || 'string').toLowerCase().split(/[<(\s]/)[0]
+  if (s.startsWith('enum')) return 'VARCHAR(64)'
+  switch (s) {
+    case 'text':
+      return 'TEXT'
+    case 'integer':
+    case 'int':
+      return 'INTEGER'
+    case 'decimal':
+    case 'float':
+    case 'money':
+      return 'DECIMAL(12,2)'
+    case 'boolean':
+    case 'bool':
+      return 'BOOLEAN'
+    case 'datetime':
+    case 'timestamp':
+    case 'date':
+      return 'TIMESTAMP'
+    case 'json':
+    case 'jsonb':
+      return 'JSONB'
+    default:
+      return 'VARCHAR(255)'
+  }
+}
+
+function ddlForEntity(e: {
+  code: string
+  name: string
+  nameAr: string | null
+  fields: string | null
+  constraints: string | null
+}): string {
+  const fields = parse<Array<{ name: string; type: string; required?: boolean; unique?: boolean; refEntity?: string }>>(e.fields, [])
+  const table = snake(e.name)
+  const cols: string[] = ['  id            VARCHAR(64)  PRIMARY KEY']
+  const fks: string[] = []
+  for (const f of fields) {
+    const enumNote = (f.type || '').toLowerCase().startsWith('enum') ? `  -- allowed: ${(f.type || '').replace(/^enum:?\s*/i, '') || 'see data dictionary'}` : ''
+    if (f.refEntity) {
+      const col = `${snake(f.refEntity)}_id`
+      cols.push(`  ${col.padEnd(14)} VARCHAR(64)  ${f.required === false ? '' : 'NOT NULL '}REFERENCES ${snake(f.refEntity)}(id)${enumNote}`)
+      fks.push(col)
+    } else {
+      cols.push(`  ${snake(f.name).padEnd(14)} ${sqlType(f.type).padEnd(12)} ${f.required === false ? 'NULL' : 'NOT NULL'}${f.unique ? ' UNIQUE' : ''}${enumNote}`.trimEnd())
+    }
+  }
+  cols.push('  created_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP')
+  cols.push('  updated_at    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP')
+  const constraints = parse<string[]>(e.constraints, [])
+  const out: string[] = []
+  out.push(`-- ${e.code} — ${e.name}${e.nameAr ? ` (${e.nameAr})` : ''}`)
+  out.push(`CREATE TABLE ${table} (`)
+  out.push(cols.join(',\n'))
+  out.push(');')
+  for (const fk of fks) out.push(`CREATE INDEX idx_${table}_${fk} ON ${table} (${fk});`)
+  for (const c of constraints) out.push(`-- constraint: ${c}`)
+  out.push('')
+  return out.join('\n')
+}
+
+function openApiType(t: string): string {
+  const s = (t || 'string').toLowerCase()
+  if (s.startsWith('array') || s === 'array') return 'array'
+  if (s === 'object' || s === 'json' || s === 'jsonb') return 'object'
+  if (['integer', 'int'].includes(s)) return 'integer'
+  if (['decimal', 'float', 'money', 'number'].includes(s)) return 'number'
+  if (['boolean', 'bool'].includes(s)) return 'boolean'
+  return 'string'
+}
+
+function openApiSpec(
+  title: string,
+  apis: Array<{ method: string; path: string; purpose: string; auth: string | null; request: string | null; response: string | null; errors: string | null; linkedEntities: string | null }>
+): string {
+  const y: string[] = []
+  const pad = (n: number) => '  '.repeat(n)
+  y.push('openapi: 3.1.0')
+  y.push('info:')
+  y.push(`${pad(1)}title: ${title}`)
+  y.push(`${pad(1)}version: "${new Date().toISOString().slice(0, 10)}"`)
+  y.push(`${pad(1)}description: Deterministic skeleton generated from the confirmed API contracts. Complete nested schemas and pagination as you implement; section 03 of the package is the source of truth.`)
+  y.push('servers:')
+  y.push(`${pad(1)}- url: http://localhost:3000`)
+  y.push(`${pad(2)}description: local development`)
+  y.push('components:')
+  y.push(`${pad(1)}securitySchemes:`)
+  y.push(`${pad(2)}bearerAuth:`)
+  y.push(`${pad(3)}type: http`)
+  y.push(`${pad(3)}scheme: bearer`)
+  y.push(`${pad(3)}bearerFormat: JWT`)
+  y.push('paths:')
+  for (const a of apis) {
+    y.push(`${pad(1)}${a.path}:`)
+    y.push(`${pad(2)}${a.method.toLowerCase()}:`)
+    y.push(`${pad(3)}summary: ${a.purpose.replace(/[:"]/g, '')}`)
+    y.push(`${pad(3)}operationId: ${a.method.toLowerCase()}${a.path.split('/').filter(Boolean).map((p) => p.replace(/[^a-zA-Z0-9]/g, '_')).map((p) => p.charAt(0).toUpperCase() + p.slice(1)).join('')}`)
+    const tags = parse<string[]>(a.linkedEntities, [])
+    if (tags.length) y.push(`${pad(3)}tags: [${tags.join(', ')}]`)
+    const needsAuth = (a.auth ?? '').toLowerCase() !== 'public'
+    if (needsAuth) {
+      y.push(`${pad(3)}security:`)
+      y.push(`${pad(4)}- bearerAuth: []`)
+    }
+    const pathParams = [...a.path.matchAll(/\{([^}]+)\}/g)].map((m) => m[1])
+    for (const p of pathParams) {
+      y.push(`${pad(3)}parameters:`)
+      y.push(`${pad(4)}- name: ${p}`)
+      y.push(`${pad(5)}in: path`)
+      y.push(`${pad(5)}required: true`)
+      y.push(`${pad(5)}schema:`)
+      y.push(`${pad(6)}type: string`)
+    }
+    const request = parse<Array<{ field: string; type: string; required?: boolean; notes?: string }>>(a.request, [])
+    if (['POST', 'PATCH', 'PUT'].includes(a.method) && request.length) {
+      const req = request.filter((f) => f.required).map((f) => f.field)
+      y.push(`${pad(3)}requestBody:`)
+      y.push(`${pad(4)}required: true`)
+      y.push(`${pad(4)}content:`)
+      y.push(`${pad(5)}application/json:`)
+      y.push(`${pad(6)}schema:`)
+      y.push(`${pad(7)}type: object`)
+      if (req.length) y.push(`${pad(7)}required: [${req.join(', ')}]`)
+      y.push(`${pad(7)}properties:`)
+      for (const f of request) {
+        y.push(`${pad(8)}${f.field}:`)
+        y.push(`${pad(9)}type: ${openApiType(f.type)}`)
+        if ((f.type || '').toLowerCase().includes('datetime')) y.push(`${pad(9)}format: date-time`)
+        if (f.notes) y.push(`${pad(9)}description: "${f.notes.replace(/"/g, "'")}"`)
+      }
+    }
+    y.push(`${pad(3)}responses:`)
+    const successCode = a.method === 'POST' ? '201' : a.method === 'DELETE' ? '204' : '200'
+    const response = parse<Array<{ field: string; type: string; description?: string }>>(a.response, [])
+    y.push(`${pad(4)}'${successCode}':`)
+    if (a.method === 'DELETE') {
+      y.push(`${pad(5)}description: Deleted successfully.`)
+    } else {
+      y.push(`${pad(5)}description: Success.`)
+      if (response.length) {
+        y.push(`${pad(5)}content:`)
+        y.push(`${pad(6)}application/json:`)
+        y.push(`${pad(7)}schema:`)
+        y.push(`${pad(8)}type: object`)
+        y.push(`${pad(8)}properties:`)
+        for (const f of response) {
+          y.push(`${pad(9)}${f.field}:`)
+          y.push(`${pad(10)}type: ${openApiType(f.type)}`)
+          if ((f.type || '').toLowerCase().includes('datetime')) y.push(`${pad(10)}format: date-time`)
+          if (f.description) y.push(`${pad(10)}description: "${f.description.replace(/"/g, "'")}"`)
+        }
+      }
+    }
+    const errors = parse<Array<{ code: string; when: string }>>(a.errors, [])
+    const byStatus = new Map<string, string[]>()
+    for (const e of errors) {
+      const m = e.code.match(/^(\d{3})/)
+      const status = m ? m[1] : '400'
+      byStatus.set(status, [...(byStatus.get(status) ?? []), `${e.code.replace(/^\d{3}\s*/, '')} — ${e.when}`])
+    }
+    if (!byStatus.has('401') && needsAuth) byStatus.set('401', ['UNAUTHORIZED — missing or invalid token'])
+    for (const [status, descs] of [...byStatus.entries()].sort()) {
+      y.push(`${pad(4)}'${status}':`)
+      y.push(`${pad(5)}description: "${descs.join(' | ').replace(/"/g, "'").slice(0, 300)}"`)
+    }
+  }
+  y.push('')
+  return y.join('\n')
+}
+
+function envRows(
+  integrations: Array<{ system: string; purpose: string; necessity: string }>,
+  techStack: Array<{ area: string; choice: string }>
+): Array<{ name: string; required: string; source: string }> {
+  const rows: Array<{ name: string; required: string; source: string }> = [
+    { name: 'DATABASE_URL', required: 'required', source: 'Connection string of the database chosen in the tech stack table' },
+    { name: 'APP_SECRET', required: 'required', source: 'Token/session signing secret — generate with: openssl rand -hex 32' },
+    { name: 'APP_URL', required: 'production', source: 'Public base URL of the deployment (used in links, emails, CORS)' },
+  ]
+  for (const i of integrations) {
+    const slug = i.system.toUpperCase().replace(/[^A-Z0-9]+/g, '_')
+    const required = /required|FR-\d+/i.test(i.necessity) ? 'required' : 'if used'
+    rows.push({ name: `${slug}_API_KEY`, required, source: `Obtain from the ${i.system} provider — ${i.purpose}` })
+  }
+  for (const t of techStack) {
+    if (/notification|sms|email|mail/i.test(t.area) && !rows.some((r) => r.name.startsWith('SMTP'))) {
+      rows.push({ name: 'SMTP_URL', required: 'if used', source: `SMTP connection string for the chosen ${t.area} service (${t.choice})` })
+    }
+  }
+  return rows
 }
 
 export async function GET(req: Request, { params }: Params) {
@@ -105,6 +340,23 @@ export async function GET(req: Request, { params }: Params) {
     const confirmedAdrs = idea.adrs.filter((a) => a.status === 'confirmed')
     const confirmedTestCases = idea.testCases.filter((c) => c.status === 'confirmed')
     const confirmedE2e = idea.e2eScenarios.filter((s) => s.status === 'confirmed')
+
+    // Developer-handoff derivations (deterministic — no AI)
+    const constitutionRules = await db.constitutionRule.findMany({
+      where: { OR: [{ ideaId: id }, { ideaId: null }], enabled: true },
+      orderBy: [{ ideaId: 'desc' }, { order: 'asc' }, { createdAt: 'asc' }],
+    })
+    const techStack = idea.architecture ? parse<Array<{ area: string; choice: string }>>(idea.architecture.techStack, []) : []
+    const integrations = idea.architecture ? parse<Array<{ system: string; purpose: string; necessity: string }>>(idea.architecture.integrations, []) : []
+    const environment = envRows(integrations, techStack)
+    const authChoice = techStack.find((t) => /auth/i.test(t.area))?.choice ?? null
+    const authEndpoints = confirmedApis.filter((a) => /auth|login|session|register|logout|token/i.test(a.path))
+    const openapi = openApiSpec(idea.title, confirmedApis)
+    const glossaryRows: Array<{ en: string; ar: string | null; kind: string }> = [
+      ...confirmedEntities.map((e) => ({ en: e.name, ar: e.nameAr, kind: 'entity' })),
+      ...confirmedProcesses.map((p) => ({ en: p.name, ar: p.nameAr, kind: 'process' })),
+      ...confirmedScreens.map((s) => ({ en: s.name, ar: s.nameAr, kind: 'screen' })),
+    ].filter((g) => g.ar)
 
     // ---------- Traceability matrix ----------
     const procLinks = new Map<string, string[]>()
@@ -176,9 +428,11 @@ export async function GET(req: Request, { params }: Params) {
             purpose: a.purpose,
             auth: a.auth,
             request: parse<unknown[]>(a.request, []),
+            response: parse<unknown[]>(a.response, []),
             errors: parse<unknown[]>(a.errors, []),
             linkedRequirements: parse<string[]>(a.linkedRequirements, []),
           })),
+          referenceDdl: confirmedEntities.map((e) => ddlForEntity(e)).join('\n'),
         },
         architectureLab: {
           tradeStudy:
@@ -298,6 +552,36 @@ export async function GET(req: Request, { params }: Params) {
             screens: screenLinks.get(r.code) ?? [],
             tasks: taskLinks.get(r.code) ?? [],
           })),
+        authModel: {
+          mechanism: authChoice,
+          tokenStrategy: 'JWT bearer tokens (Authorization: Bearer <token>) as modeled in the OpenAPI skeleton; adapt if the chosen auth stack differs',
+          loginEndpoints: authEndpoints.map((a) => `${a.method} ${a.path}`),
+          endpointAccess: confirmedApis.map((a) => ({ code: a.code, method: a.method, path: a.path, allowed: a.auth ?? 'any authenticated user' })),
+          baselinePractices: [
+            'Hash passwords with bcrypt or argon2 — never store plaintext or reversible encodings',
+            'Return the same error for wrong email and wrong password (no user enumeration)',
+            'Rate-limit all authentication endpoints (per IP and per account)',
+            'Enforce the role from the endpoint access matrix in middleware on EVERY protected route — never only in the UI',
+            'Expire tokens reasonably and provide an explicit logout/revocation path',
+          ],
+        },
+        developerSetup: {
+          environment,
+          bootstrap: [
+            'Create the repository with the suggested layout (section 07 of the Markdown package)',
+            'Scaffold the project per the tech stack table',
+            'Install dependencies for the chosen stack',
+            'Create .env from the environment table — never commit secrets',
+            'Create the database and apply the reference DDL through the stack migration tool',
+            'Seed the first admin plus one test account per role (test-only credentials)',
+            'Run the dev server and verify every confirmed screen route renders',
+            'Implement Phase 1 of the plan and run the test suite (section 05)',
+            'Before each merge: re-run the acceptance criteria of the touched requirements (Appendix A)',
+          ],
+        },
+        codingStandards: constitutionRules.map((r) => ({ scope: r.ideaId === null ? 'global' : 'project', category: r.category, text: r.text })),
+        openapi,
+        glossary: glossaryRows,
         registers: {
           assumptions: idea.assumptions.map((a) => ({ text: a.text, kind: a.kind, status: a.status })),
           unresolvedRequirements: unresolved.map((r) => ({ code: r.code, title: r.title, evidence: r.evidence })),
@@ -316,7 +600,7 @@ export async function GET(req: Request, { params }: Params) {
     const L: string[] = []
     L.push(`# Engineering Package — ${idea.title}`)
     L.push('')
-    L.push(`> Implementation-ready specification produced by the AI Software Engineer on ${new Date().toDateString()}. Readiness gate passed; every requirement below is client-approved with traceable provenance.`)
+    L.push(`> Implementation-ready specification produced by the AI Software Engineer on ${new Date().toDateString()}. Seven sections + appendices: a developer who never saw the original conversation can build the system from this document alone — data model with reference DDL, API contracts with request AND response schemas plus an OpenAPI skeleton, auth model, UI spec, test plan, and a bootstrap guide.`)
     L.push('')
 
     // 01 — Product Definition
@@ -448,6 +732,16 @@ export async function GET(req: Request, { params }: Params) {
         L.push('')
       }
     }
+    if (confirmedEntities.length) {
+      L.push('### Reference SQL DDL')
+      L.push('')
+      L.push('> Deterministic translation of the data dictionary above — adapt data types to the exact database chosen in the tech stack (e.g. JSONB → JSON on MySQL, VARCHAR(64) ids → UUID if your stack generates UUIDs). Apply through the stack’s migration tool, never by hand on production.')
+      L.push('')
+      L.push('```sql')
+      for (const e of confirmedEntities) L.push(ddlForEntity(e))
+      L.push('```')
+      L.push('')
+    }
     L.push('### API contracts')
     L.push('')
     for (const a of confirmedApis) {
@@ -466,6 +760,17 @@ export async function GET(req: Request, { params }: Params) {
         }
         L.push('')
       }
+      const response = parse<Array<Record<string, unknown>>>(a.response, [])
+      if (response.length) {
+        L.push(`**Success response (${a.method === 'POST' ? '201' : a.method === 'DELETE' ? '204' : '200'}):**`)
+        L.push('')
+        L.push('| Response field | Type | Description |')
+        L.push('| --- | --- | --- |')
+        for (const f of response) {
+          L.push(`| ${esc(String(f.field ?? ''))} | ${esc(String(f.type ?? ''))} | ${esc(String(f.description ?? ''))} |`)
+        }
+        L.push('')
+      }
       const errors = parse<Array<{ code: string; when: string }>>(a.errors, [])
       if (errors.length) {
         L.push(`**Errors:** ${errors.map((e) => `\`${e.code}\` — ${e.when}`).join(' · ')}`)
@@ -475,6 +780,36 @@ export async function GET(req: Request, { params }: Params) {
       if (linkedReqs.length) L.push(`**Serves:** ${linkedReqs.join(', ')}`)
       L.push('')
     }
+
+    // ---------- Authentication & authorization model ----------
+    L.push('### Authentication & authorization model')
+    L.push('')
+    if (authChoice) {
+      L.push(`**Mechanism (from the tech stack):** ${authChoice}.`)
+      L.push('')
+    }
+    L.push('**Token strategy:** JWT bearer tokens (`Authorization: Bearer <token>`) as modeled in the OpenAPI skeleton (Appendix D). Adapt if the chosen auth stack mandates another flow — the access matrix below is the contract either way.')
+    L.push('')
+    if (authEndpoints.length) {
+      L.push(`**Session endpoints:** ${authEndpoints.map((a) => `\`${a.method} ${a.path}\``).join(' · ')}`)
+      L.push('')
+    }
+    L.push('**Endpoint access matrix — enforce server-side on every route:**')
+    L.push('')
+    L.push('| Endpoint | Method | Allowed |')
+    L.push('| --- | --- | --- |')
+    for (const a of confirmedApis) {
+      L.push(`| \`${a.path}\` | ${a.method} | ${esc(a.auth ?? 'any authenticated user')} |`)
+    }
+    L.push('')
+    L.push('**Baseline practices (non-negotiable):**')
+    L.push('')
+    L.push('- Hash passwords with bcrypt or argon2 — never store plaintext or reversible encodings.')
+    L.push('- Return the same error for a wrong email and a wrong password (no user enumeration).')
+    L.push('- Rate-limit all authentication endpoints (per IP and per account).')
+    L.push('- Check the role in middleware on EVERY protected route — never only in the UI.')
+    L.push('- Expire tokens reasonably and provide an explicit logout/revocation path.')
+    L.push('')
     if (idea.architecture) {
       const arch = idea.architecture
       L.push('### Architecture')
@@ -552,6 +887,16 @@ export async function GET(req: Request, { params }: Params) {
     // 04 — UI/UX Specification
     L.push('## 04 — UI/UX Specification')
     L.push('')
+    if (confirmedScreens.length) {
+      L.push('### Route map')
+      L.push('')
+      L.push('| Screen | Route | Roles |')
+      L.push('| --- | --- | --- |')
+      for (const s of confirmedScreens) {
+        L.push(`| ${esc(s.name)} | \`${s.route ?? '—'}\` | ${esc(parse<string[]>(s.roles, []).join(', ') || 'all')} |`)
+      }
+      L.push('')
+    }
     for (const s of confirmedScreens) {
       L.push(`#### ${s.code} — ${s.name}${s.nameAr ? ` (${s.nameAr})` : ''}`)
       L.push('')
@@ -577,6 +922,20 @@ export async function GET(req: Request, { params }: Params) {
     // 05 — Quality & Operations
     L.push('## 05 — Quality & Operations')
     L.push('')
+    if (constitutionRules.length) {
+      L.push('### Coding standards (project constitution)')
+      L.push('')
+      L.push('Active rules the implementation must obey — global rules apply to every project, project rules were derived from this product’s approved context:')
+      L.push('')
+      for (const scope of ['global', 'project'] as const) {
+        const group = constitutionRules.filter((r) => (r.ideaId === null ? 'global' : 'project') === scope)
+        if (!group.length) continue
+        L.push(`**${scope === 'global' ? 'Global' : 'Project-specific'}:**`)
+        L.push('')
+        for (const r of group) L.push(`- _${r.category}_ — ${esc(r.text)}`)
+        L.push('')
+      }
+    }
     L.push('### Non-functional requirements')
     L.push('')
     L.push('| Code | Requirement | Category | Acceptance criteria |')
@@ -762,6 +1121,69 @@ export async function GET(req: Request, { params }: Params) {
       }
     }
 
+    // 07 — Developer setup & handoff
+    L.push('## 07 — Developer Setup & Handoff')
+    L.push('')
+    L.push('Everything needed to go from this document to a running repository. All items are derived from the confirmed artifacts above — nothing here is a guess.')
+    L.push('')
+    L.push('### Environment variables')
+    L.push('')
+    L.push('| Variable | Needed | Source / notes |')
+    L.push('| --- | --- | --- |')
+    for (const v of environment) {
+      L.push(`| \`${v.name}\` | ${v.required} | ${esc(v.source)} |`)
+    }
+    L.push('')
+    L.push('Create a committed `.env.example` from this table and keep the real `.env` out of version control.')
+    L.push('')
+    L.push('### Bootstrap sequence')
+    L.push('')
+    const bootstrap = [
+      'Create the repository with the suggested layout below.',
+      'Scaffold the project per the tech stack table in section 03 (each area → chosen technology).',
+      'Install the dependencies of the chosen stack.',
+      'Create `.env` from the environment table above — never commit secrets.',
+      'Create the database and apply the reference DDL (section 03) through the stack’s migration tool.',
+      'Seed: the first admin account, then one test account per role (see below).',
+      'Run the dev server and verify every route in the section 04 route map renders in all three UI states (loading / empty / error).',
+      'Implement Phase 1 of the plan (section 06); run the test suite (section 05).',
+      'Before each merge: re-run the acceptance criteria of the touched requirements (Appendix A).',
+    ]
+    bootstrap.forEach((s, i) => L.push(`${i + 1}. ${s}`))
+    L.push('')
+    if (roles.length) {
+      L.push('### Seed & test accounts')
+      L.push('')
+      L.push('| Role | Test account (dev only) | Note |')
+      L.push('| --- | --- | --- |')
+      for (const r of roles) {
+        const slug = r.name.toLowerCase().replace(/[^a-z0-9]+/g, '.')
+        L.push(`| ${esc(r.name)} | \`test.${slug || 'user'}@example.com\` | Strong random password, stored hashed — rotate or delete before production |`)
+      }
+      L.push('')
+    }
+    L.push('### Suggested repository layout')
+    L.push('')
+    L.push('```text')
+    L.push('src/')
+    L.push('  app/            # screens & routes — one entry per row of the section 04 route map')
+    L.push('  components/     # shared UI components (forms, tables, states)')
+    L.push('  lib/            # business logic, services, API client, auth guards')
+    L.push('  db/             # schema, migrations (from the reference DDL), seed script')
+    L.push('tests/')
+    L.push('  unit/           # unit tests derived from section 05 test cases')
+    L.push('  e2e/            # end-to-end runs of the E2E scenarios (section 05)')
+    L.push('docs/')
+    L.push('  engineering-package.md   # this document')
+    L.push('  openapi.yaml             # Appendix D')
+    L.push('.env.example               # environment table (07)')
+    L.push('```')
+    L.push('')
+    L.push('### Definition of done')
+    L.push('')
+    L.push('A phase is complete only when: every task of the phase has its “Done when” criteria passing, the acceptance criteria of every requirement the phase implements (Appendix A) pass, the test cases linked to those requirements pass, and no coding-standard rule (section 05) is violated.')
+    L.push('')
+
     // Appendix — traceability
     L.push('## Appendix A — Requirements traceability matrix')
     L.push('')
@@ -791,6 +1213,30 @@ export async function GET(req: Request, { params }: Params) {
       L.push(`- **${d.action}** — ${d.createdAt.toISOString().slice(0, 16).replace('T', ' ')}${d.detail ? ` — _${d.detail}_` : ''}`)
     }
     L.push('')
+
+    // Appendix D — OpenAPI skeleton
+    if (confirmedApis.length) {
+      L.push('## Appendix D — OpenAPI 3.1 skeleton')
+      L.push('')
+      L.push('Machine-readable contract generated from section 03 — import into Swagger UI / Postman / Insomnia to mock the backend before it exists, or generate the client SDK from it. Keep it in `docs/openapi.yaml` and update it alongside the code.')
+      L.push('')
+      L.push('```yaml')
+      L.push(openapi)
+      L.push('```')
+      L.push('')
+    }
+
+    // Appendix E — Bilingual glossary
+    if (glossaryRows.length) {
+      L.push('## Appendix E — Bilingual glossary (EN ⇄ AR)')
+      L.push('')
+      L.push('| English | العربية | Kind |')
+      L.push('| --- | --- | --- |')
+      for (const g of glossaryRows) {
+        L.push(`| ${esc(g.en)} | ${esc(g.ar ?? '')} | ${g.kind} |`)
+      }
+      L.push('')
+    }
 
     return new Response(L.join('\n'), {
       headers: {

@@ -12,17 +12,21 @@ import { useToast } from '@/hooks/use-toast'
 // ============================================================
 // Stage 9 — The engineering package: the final deliverable.
 // NO LIMITS: visible and exportable at ANY stage (it exports
-// whatever is confirmed so far). 6-section Markdown document or
-// structured JSON with traceability.
+// whatever is confirmed so far). 7-section Markdown document
+// (product → data/API with DDL + auth model → UI → quality →
+// plan → developer setup) plus appendices (traceability,
+// OpenAPI, glossary) or structured JSON.
 // ============================================================
 
 const SECTION_KEYS = [
   { n: '01', en: 'Product definition', ar: 'تعريف المنتج' },
   { n: '02', en: 'Functional analysis', ar: 'التحليل الوظيفي' },
-  { n: '03', en: 'Data & API design', ar: 'تصميم البيانات والواجهات' },
+  { n: '03', en: 'Data & API design (DDL, contracts, auth model)', ar: 'تصميم البيانات والواجهات (DDL، العقود، نموذج الصلاحيات)' },
   { n: '04', en: 'UI/UX specification', ar: 'مواصفة واجهة المستخدم' },
-  { n: '05', en: 'Quality & operations', ar: 'الجودة والتشغيل' },
+  { n: '05', en: 'Quality, standards & operations', ar: 'الجودة والمعايير والتشغيل' },
   { n: '06', en: 'Implementation plan', ar: 'خطة التنفيذ' },
+  { n: '07', en: 'Developer setup & handoff (env, bootstrap)', ar: 'إعداد المطوّر والتسليم (البيئة، خطوات البدء)' },
+  { n: 'A–E', en: 'Appendices: traceability, assumptions, audit, OpenAPI, glossary', ar: 'الملاحق: التتبع، الافتراضات، السجل، OpenAPI، المسرد' },
 ]
 
 export function PackageStage({ detail }: { detail: IdeaDetail }) {

@@ -53,10 +53,12 @@ const TARGETS: Array<{
 const SECTION_TOGGLES = [
   { key: 'includeConstitution', label: { en: 'AI Constitution', ar: 'دستور الذكاء الاصطناعي' } },
   { key: 'includeRequirements', label: { en: 'Requirements', ar: 'المتطلبات' } },
+  { key: 'includeProcesses', label: { en: 'Business processes', ar: 'العمليات التجارية' } },
   { key: 'includeArchitecture', label: { en: 'Architecture & stack', ar: 'المعمارية والتقنيات' } },
-  { key: 'includeDataModel', label: { en: 'Data model & APIs', ar: 'نموذج البيانات والواجهات' } },
-  { key: 'includeScreens', label: { en: 'Screens', ar: 'الشاشات' } },
+  { key: 'includeDataModel', label: { en: 'Data model & API contracts', ar: 'نموذج البيانات وعقود الواجهات' } },
+  { key: 'includeScreens', label: { en: 'Screens (elements & states)', ar: 'الشاشات (العناصر والحالات)' } },
   { key: 'includeTasks', label: { en: 'Implementation plan', ar: 'خطة التنفيذ' } },
+  { key: 'includeQa', label: { en: 'Test plan (QA)', ar: 'خطة الاختبار' } },
   { key: 'includeRisks', label: { en: 'Risks', ar: 'المخاطر' } },
   { key: 'includeDecisions', label: { en: 'Decision log', ar: 'سجل القرارات' } },
 ] as const
@@ -80,10 +82,12 @@ export function ContextPackDialog({
   const [sections, setSections] = useState<Record<SectionKey, boolean>>({
     includeConstitution: true,
     includeRequirements: true,
+    includeProcesses: true,
     includeArchitecture: true,
     includeDataModel: true,
     includeScreens: true,
     includeTasks: false,
+    includeQa: false,
     includeRisks: true,
     includeDecisions: false,
   })

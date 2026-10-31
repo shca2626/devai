@@ -13,7 +13,8 @@ An Arabic-first, bilingual (AR/EN) web application that turns a raw product idea
 - **Full decision audit trail** — every generation, approval, regeneration and override is logged per idea.
 - **Bilingual UI** — Arabic (RTL) and English, with AI translation and prompt-enhance tools.
 - **Site intelligence** — crawl a live site, extract claims/screens/unknowns, and fold them into the engineering package.
-- **Engineering package export** — JSON + Markdown deliverables for downstream implementation, including the confirmed test suite, edge-case register and E2E scenarios.
+- **Engineering package export (implementation-ready)** — JSON + Markdown deliverables a frontend/fullstack developer can build from directly: product definition → functional analysis (processes, rules) → data & API design (full data dictionary, **reference SQL DDL**, API contracts with request **and response** schemas, **auth & authorization access matrix**) → UI/UX spec (route map, elements, states) → quality (coding standards, NFRs, risk register, test suite, edge cases, E2E) → implementation plan → **developer setup (environment variables, bootstrap sequence, seed accounts, repo layout, definition of done)** — plus appendices: requirements traceability matrix, assumption register, audit trail, **OpenAPI 3.1 skeleton**, bilingual EN/AR glossary.
+- **Context Pack (AI-builder handoff)** — one-click deterministic compile of the full spec (roles + permissions, features, requirements, business processes, field-level data model, API contracts, screens with elements/states, optional QA plan) framed for Bolt / Cursor / Claude / ChatGPT with the project's AI Constitution.
 
 ## Admin Control Panel — `/admin`
 

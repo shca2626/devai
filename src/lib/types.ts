@@ -292,6 +292,12 @@ export interface ApiRequestField {
   notes: string
 }
 
+export interface ApiResponseField {
+  field: string
+  type: string
+  description: string
+}
+
 export interface ApiError {
   code: string
   when: string
@@ -305,6 +311,7 @@ export interface ApiEndpoint {
   purpose: string
   auth: string | null
   request: ApiRequestField[]
+  response: ApiResponseField[]
   errors: ApiError[]
   linkedRequirements: string[]
   linkedEntities: string[]
@@ -667,10 +674,12 @@ export interface ContextPackOptions {
   lang: 'ar' | 'en'
   includeConstitution: boolean
   includeRequirements: boolean
+  includeProcesses: boolean
   includeArchitecture: boolean
   includeDataModel: boolean
   includeScreens: boolean
   includeTasks: boolean
+  includeQa: boolean
   includeRisks: boolean
   includeDecisions: boolean
 }

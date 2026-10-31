@@ -169,6 +169,7 @@ export async function POST(req: Request, { params }: Params) {
             purpose: d.purpose,
             auth: d.auth,
             request: JSON.stringify(d.request),
+            response: JSON.stringify(d.response),
             errors: JSON.stringify(d.errors),
             linkedRequirements: JSON.stringify(d.linkedRequirements),
             linkedEntities: JSON.stringify(d.linkedEntities),
