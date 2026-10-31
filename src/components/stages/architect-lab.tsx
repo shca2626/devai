@@ -75,17 +75,17 @@ const STRIDE_LABELS: Record<string, string> = {
 }
 
 const RISK_STYLES: Record<string, string> = {
-  low: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  medium: 'bg-amber-50 text-amber-700 border-amber-200',
-  high: 'bg-orange-50 text-orange-700 border-orange-200',
-  critical: 'bg-red-50 text-red-600 border-red-200',
+  low: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  medium: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
+  high: 'bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-500/25',
+  critical: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
 }
 
 const ADR_STATUS_STYLES: Record<string, string> = {
-  proposed: 'bg-slate-50 text-slate-600 border-slate-200',
-  confirmed: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  superseded: 'bg-violet-50 text-violet-700 border-violet-200',
-  rejected: 'bg-red-50 text-red-600 border-red-200',
+  proposed: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
+  confirmed: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  superseded: 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/25',
+  rejected: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
 }
 
 function RiskBadge({ level, label }: { level: string; label?: string }) {
@@ -426,26 +426,26 @@ function FeedbackBox({
 }) {
   if (!active) return null
   return (
-    <details className="rounded-xl border border-amber-300/70 bg-amber-50/60">
-      <summary className="flex cursor-pointer items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-amber-900 min-h-11">
-        <MessageSquareWarning className="h-4 w-4 text-amber-600" />
+    <details className="rounded-xl border border-amber-300/70 dark:border-amber-500/30 bg-amber-50/60">
+      <summary className="flex cursor-pointer items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-amber-900 dark:text-amber-300 min-h-11">
+        <MessageSquareWarning className="h-4 w-4 text-amber-600 dark:text-amber-400" />
         {t('feedbackLabel')}
       </summary>
       <div className="px-3.5 pb-3.5 space-y-2.5">
-        <p className="text-[11px] text-amber-800 leading-5">{t('feedbackForTab')}</p>
+        <p className="text-[11px] text-amber-800 dark:text-amber-300 leading-5">{t('feedbackForTab')}</p>
         <textarea
           rows={2}
           value={value}
           onChange={(ev) => onChange(ev.target.value)}
           placeholder={t('feedbackPlaceholder')}
-          className="w-full rounded-lg border border-amber-300 bg-white p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
+          className="w-full rounded-lg border border-amber-300 dark:border-amber-500/30 bg-white dark:bg-transparent p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
         />
         <div className="flex flex-wrap items-center gap-2">
           <Button size="sm" className="gap-1.5" onClick={onRun} disabled={busy}>
             {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <MessageSquareWarning className="h-3.5 w-3.5" />}
             {t('regenerateWithFeedback')}
           </Button>
-          <span className="text-[11px] text-amber-800">{t('regenReplacesRejected')}</span>
+          <span className="text-[11px] text-amber-800 dark:text-amber-300">{t('regenReplacesRejected')}</span>
         </div>
       </div>
     </details>
@@ -473,13 +473,13 @@ function ReviewRow({
   return (
     <div className="mt-2 flex flex-wrap gap-1.5 border-t pt-2">
       {status !== 'confirmed' && status !== 'superseded' && (
-        <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50" onClick={() => onReview(id, 'confirmed')}>
+        <Button size="sm" variant="outline" className="gap-1 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10" onClick={() => onReview(id, 'confirmed')}>
           <Check className="h-3.5 w-3.5" />
           {t('confirmArtifact')}
         </Button>
       )}
       {status !== 'rejected' && (
-        <Button size="sm" variant="outline" className="gap-1 border-red-200 text-red-600 hover:bg-red-50" onClick={() => onReview(id, 'rejected')}>
+        <Button size="sm" variant="outline" className="gap-1 border-red-200 dark:border-red-500/25 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10" onClick={() => onReview(id, 'rejected')}>
           <X className="h-3.5 w-3.5" />
           {t('rejectArtifact')}
         </Button>
@@ -522,7 +522,7 @@ function TradeCandidateCard({ candidate, recommended, t }: { candidate: TradeCan
   return (
     <div
       className={`rounded-xl border p-3 sm:p-4 ${
-        recommended ? 'border-emerald-300 bg-emerald-50/30' : 'bg-background'
+        recommended ? 'border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/30 dark:bg-emerald-500/10' : 'bg-background'
       }`}
       dir="ltr"
     >
@@ -532,7 +532,7 @@ function TradeCandidateCard({ candidate, recommended, t }: { candidate: TradeCan
           {candidate.style && <div className="text-[11px] text-muted-foreground mt-0.5">{candidate.style}</div>}
         </div>
         {recommended && (
-          <Badge variant="outline" className="text-[10px] font-semibold bg-emerald-50 text-emerald-700 border-emerald-300">
+          <Badge variant="outline" className="text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-300">
             ★ {t('archRecommended')}
           </Badge>
         )}
@@ -540,9 +540,9 @@ function TradeCandidateCard({ candidate, recommended, t }: { candidate: TradeCan
       {candidate.summary && <p className="text-xs leading-6 text-muted-foreground mt-2">{candidate.summary}</p>}
       <div className="grid sm:grid-cols-2 gap-2 mt-2.5">
         {candidate.pros.length > 0 && (
-          <div className="rounded-lg border border-emerald-200/70 bg-emerald-50/40 p-2.5">
-            <div className="text-[10px] font-semibold text-emerald-700 mb-1">+ {t('archPros')}</div>
-            <ul className="text-[11px] leading-5 text-emerald-900/80 space-y-0.5">
+          <div className="rounded-lg border border-emerald-200/70 dark:border-emerald-500/25 bg-emerald-50/40 dark:bg-emerald-500/10 p-2.5">
+            <div className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-300 mb-1">+ {t('archPros')}</div>
+            <ul className="text-[11px] leading-5 text-emerald-900/80 dark:text-emerald-300 space-y-0.5">
               {candidate.pros.map((p) => (
                 <li key={p}>• {p}</li>
               ))}
@@ -550,9 +550,9 @@ function TradeCandidateCard({ candidate, recommended, t }: { candidate: TradeCan
           </div>
         )}
         {candidate.cons.length > 0 && (
-          <div className="rounded-lg border border-red-200/70 bg-red-50/40 p-2.5">
-            <div className="text-[10px] font-semibold text-red-600 mb-1">− {t('archCons')}</div>
-            <ul className="text-[11px] leading-5 text-red-900/80 space-y-0.5">
+          <div className="rounded-lg border border-red-200/70 dark:border-red-500/25 bg-red-50/40 dark:bg-red-500/10 p-2.5">
+            <div className="text-[10px] font-semibold text-red-600 dark:text-red-400 mb-1">− {t('archCons')}</div>
+            <ul className="text-[11px] leading-5 text-red-900/80 dark:text-red-300 space-y-0.5">
               {candidate.cons.map((c) => (
                 <li key={c}>• {c}</li>
               ))}
@@ -653,21 +653,21 @@ function AdrCard({
               <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide mb-1">{t('adrConsequences')}</div>
               <div className="grid sm:grid-cols-3 gap-2">
                 {conseq.positive.length > 0 && (
-                  <ul className="text-[11px] leading-5 text-emerald-800/90 space-y-0.5 rounded-lg bg-emerald-50/50 border border-emerald-200/60 p-2">
+                  <ul className="text-[11px] leading-5 text-emerald-800/90 dark:text-emerald-300 space-y-0.5 rounded-lg bg-emerald-50/50 dark:bg-emerald-500/10 border border-emerald-200/60 dark:border-emerald-500/25 p-2">
                     {conseq.positive.map((p: string, i: number) => (
                       <li key={i}>+ {p}</li>
                     ))}
                   </ul>
                 )}
                 {conseq.negative.length > 0 && (
-                  <ul className="text-[11px] leading-5 text-red-800/90 space-y-0.5 rounded-lg bg-red-50/50 border border-red-200/60 p-2">
+                  <ul className="text-[11px] leading-5 text-red-800/90 dark:text-red-300 space-y-0.5 rounded-lg bg-red-50/50 dark:bg-red-500/10 border border-red-200/60 dark:border-red-500/25 p-2">
                     {conseq.negative.map((n: string, i: number) => (
                       <li key={i}>− {n}</li>
                     ))}
                   </ul>
                 )}
                 {conseq.risks.length > 0 && (
-                  <ul className="text-[11px] leading-5 text-amber-800/90 space-y-0.5 rounded-lg bg-amber-50/50 border border-amber-200/60 p-2">
+                  <ul className="text-[11px] leading-5 text-amber-800/90 dark:text-amber-300 space-y-0.5 rounded-lg bg-amber-50/50 dark:bg-amber-500/10 border border-amber-200/60 dark:border-amber-500/25 p-2">
                     {conseq.risks.map((r: string, i: number) => (
                       <li key={i}>! {r}</li>
                     ))}
@@ -694,7 +694,7 @@ function AdrCard({
         onReview={onReview}
         extra={
           adr.status === 'confirmed' ? (
-            <Button size="sm" variant="outline" className="gap-1 border-violet-300 text-violet-700 hover:bg-violet-50" onClick={onPromote} disabled={busyPromote}>
+            <Button size="sm" variant="outline" className="gap-1 border-violet-300 dark:border-violet-500/30 text-violet-700 dark:text-violet-300 hover:bg-violet-50 dark:hover:bg-violet-500/10" onClick={onPromote} disabled={busyPromote}>
               {busyPromote ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <ArrowUpRight className="h-3.5 w-3.5" />}
               {t('adrPromote')}
             </Button>
@@ -729,7 +729,7 @@ function ThreatModelView({
       {model.findings.map((f: ThreatFinding, i: number) => (
         <div key={i} className="rounded-xl border bg-background p-3">
           <div className="flex items-start gap-2 flex-wrap">
-            <Badge variant="outline" className="text-[10px] font-semibold bg-violet-50 text-violet-700 border-violet-200 whitespace-nowrap">
+            <Badge variant="outline" className="text-[10px] font-semibold bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/25 whitespace-nowrap">
               {STRIDE_LABELS[f.category] ?? f.category}
             </Badge>
             <div className="flex-1 min-w-[200px]">
@@ -748,9 +748,9 @@ function ThreatModelView({
               </div>
             )}
             {f.mitigation && (
-              <div className="rounded-lg bg-emerald-50/50 border border-emerald-200/60 p-2">
-                <div className="font-semibold text-emerald-700 mb-0.5">{t('threatMitigation')}</div>
-                <div className="text-emerald-900/80">{f.mitigation}</div>
+              <div className="rounded-lg bg-emerald-50/50 dark:bg-emerald-500/10 border border-emerald-200/60 dark:border-emerald-500/25 p-2">
+                <div className="font-semibold text-emerald-700 dark:text-emerald-300 mb-0.5">{t('threatMitigation')}</div>
+                <div className="text-emerald-900/80 dark:text-emerald-300">{f.mitigation}</div>
               </div>
             )}
           </div>
@@ -764,7 +764,7 @@ function ThreatModelView({
         </div>
       ))}
       {model.residual && (
-        <p className="text-xs leading-6 text-amber-800 bg-amber-50/60 border border-amber-200/70 rounded-lg p-3">
+        <p className="text-xs leading-6 text-amber-800 dark:text-amber-300 bg-amber-50/60 dark:bg-amber-500/10 border border-amber-200/70 dark:border-amber-500/25 rounded-lg p-3">
           <span className="font-semibold">{t('threatsResidual')}: </span>
           {model.residual}
         </p>
@@ -844,8 +844,8 @@ function ScaleReportView({
                   <div className="text-sm font-semibold">{s.label}</div>
                 </div>
                 {s.load && <div className="text-[11px] text-muted-foreground">{t('scaleLoad')}: <span className="font-medium text-foreground">{s.load}</span></div>}
-                {s.expected && <div className="text-[11px] leading-5 text-emerald-800">✓ {t('scaleExpected')}: {s.expected}</div>}
-                {s.breaks && <div className="text-[11px] leading-5 text-orange-800">✗ {t('scaleBreaks')}: {s.breaks}</div>}
+                {s.expected && <div className="text-[11px] leading-5 text-emerald-800 dark:text-emerald-300">✓ {t('scaleExpected')}: {s.expected}</div>}
+                {s.breaks && <div className="text-[11px] leading-5 text-orange-800 dark:text-orange-300">✗ {t('scaleBreaks')}: {s.breaks}</div>}
                 {s.actions.length > 0 && (
                   <ol className="text-[11px] leading-5 text-muted-foreground space-y-0.5 mt-1 border-t pt-1.5">
                     {s.actions.map((a, j) => (

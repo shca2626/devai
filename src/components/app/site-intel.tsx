@@ -47,9 +47,9 @@ const STAGE_KEYS: DictKey[] = [
 ]
 
 function scoreTone(score: number): { text: string; bar: string } {
-  if (score >= 70) return { text: 'text-emerald-600', bar: 'bg-emerald-500' }
-  if (score >= 40) return { text: 'text-amber-600', bar: 'bg-amber-500' }
-  return { text: 'text-red-600', bar: 'bg-red-500' }
+  if (score >= 70) return { text: 'text-emerald-600 dark:text-emerald-400', bar: 'bg-emerald-500' }
+  if (score >= 40) return { text: 'text-amber-600 dark:text-amber-400', bar: 'bg-amber-500' }
+  return { text: 'text-red-600 dark:text-red-400', bar: 'bg-red-500' }
 }
 
 function buildMarkdownBundle(analysis: SiteAnalysisItem, t: (k: DictKey) => string): string {
@@ -100,9 +100,9 @@ function StageStepper({ analysis, running }: { analysis: SiteAnalysisItem; runni
             key={key}
             className={`flex items-center gap-2 rounded-lg border px-2.5 py-1.5 ${
               isFailedHere
-                ? 'border-red-300 bg-red-50/50 dark:border-red-900 dark:bg-red-950/20'
+                ? 'border-red-300 dark:border-red-500/30 bg-red-50/50 dark:bg-red-500/10 dark:border-red-900:border-red-500/30 dark:bg-red-950/20'
                 : done
-                  ? 'border-emerald-200 bg-emerald-50/40 dark:border-emerald-900 dark:bg-emerald-950/20'
+                  ? 'border-emerald-200 dark:border-emerald-500/25 bg-emerald-50/40 dark:bg-emerald-500/10 dark:border-emerald-900:border-emerald-500/30 dark:bg-emerald-950/20'
                   : isCurrent && running
                     ? 'border-primary/40 bg-primary/[0.04]'
                     : 'border-border bg-card'
@@ -124,9 +124,9 @@ function EvidenceLedger({ analysis }: { analysis: SiteAnalysisItem }) {
   const { t } = useApp()
   const [open, setOpen] = useState(false)
   const tone: Record<string, string> = {
-    high: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-    medium: 'bg-amber-50 text-amber-700 border-amber-200',
-    low: 'bg-slate-50 text-slate-600 border-slate-200',
+    high: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+    medium: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
+    low: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
   }
   if (analysis.data.evidence.length === 0) return null
   return (
@@ -263,7 +263,7 @@ function AnalysisResult({ analysis }: { analysis: SiteAnalysisItem }) {
                 {models?.entities.length ?? 0} {t('entitiesLabel')}
               </span>
               {recon?.blocked && (
-                <Badge variant="outline" className="text-[9px] bg-amber-50 text-amber-700 border-amber-200">
+                <Badge variant="outline" className="text-[9px] bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200">
                   {t('blockedBadge')}
                 </Badge>
               )}
@@ -281,13 +281,13 @@ function AnalysisResult({ analysis }: { analysis: SiteAnalysisItem }) {
 
       {/* Failure — honest, with what survived */}
       {analysis.status === 'failed' && (
-        <div className="rounded-xl border border-red-200 bg-red-50/50 dark:border-red-900 dark:bg-red-950/20 p-3 space-y-1.5">
-          <div className="flex items-center gap-1.5 text-[13px] font-semibold text-red-700 dark:text-red-400">
+        <div className="rounded-xl border border-red-200 dark:border-red-500/25 bg-red-50/50 dark:bg-red-500/10 dark:border-red-900:border-red-500/30 dark:bg-red-950/20 p-3 space-y-1.5">
+          <div className="flex items-center gap-1.5 text-[13px] font-semibold text-red-700 dark:text-red-300 dark:text-red-400">
             <ShieldAlert className="h-3.5 w-3.5" />
             {t('siteIntelFailedTitle')} — {t('stageFailedAt')} {STAGE_KEYS[Math.min(analysis.stageDone, 6)] && t(STAGE_KEYS[Math.min(analysis.stageDone, 6)])}
           </div>
           {analysis.error && (
-            <p className="text-[11px] leading-5 text-red-700/80 dark:text-red-400/80" dir="auto">
+            <p className="text-[11px] leading-5 text-red-700/80 dark:text-red-300 dark:text-red-400/80" dir="auto">
               {analysis.error}
             </p>
           )}
@@ -296,7 +296,7 @@ function AnalysisResult({ analysis }: { analysis: SiteAnalysisItem }) {
 
       {/* Unknowns — the honesty section */}
       {analysis.data.unknowns.length > 0 && (
-        <div className="rounded-xl border border-amber-200 bg-amber-50/40 dark:border-amber-900 dark:bg-amber-950/20 p-3 space-y-1.5">
+        <div className="rounded-xl border border-amber-200 dark:border-amber-500/25 bg-amber-50/40 dark:bg-amber-500/10 dark:border-amber-900:border-amber-500/30 dark:bg-amber-950/20 p-3 space-y-1.5">
           <div className="text-[13px] font-semibold">{t('unknownsTitle')}</div>
           <ul className="text-[11px] leading-6 text-muted-foreground list-disc ps-4" dir="auto">
             {analysis.data.unknowns.slice(0, 10).map((u, i) => (
@@ -582,7 +582,7 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-6 w-6 shrink-0 text-red-600 hover:text-red-700"
+                      className="h-6 w-6 shrink-0 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
                       onClick={() => removeAnalysis(a.id)}
                       disabled={busyId === a.id}
                       aria-label={t('delete')}

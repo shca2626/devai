@@ -83,8 +83,8 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
 
   return (
     <div className="space-y-4">
-      <Alert className={locked ? 'border-emerald-300 bg-emerald-50/70' : 'border-primary/25 bg-primary/[0.03]'}>
-        {locked ? <CheckCircle2 className="h-4 w-4 text-emerald-600" /> : <Lock className="h-4 w-4 text-primary" />}
+      <Alert className={locked ? 'border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-500/10' : 'border-primary/25 bg-primary/[0.03]'}>
+        {locked ? <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" /> : <Lock className="h-4 w-4 text-primary" />}
         <AlertTitle className="text-sm font-semibold">{locked ? t('packageLockedTitle') : (lang === 'ar' ? 'معاينة الحزمة الهندسية' : 'Engineering package — preview')}</AlertTitle>
         <AlertDescription className="text-xs leading-6">
           {locked
@@ -122,7 +122,7 @@ export function PackageStage({ detail }: { detail: IdeaDetail }) {
               <div key={s.n} className="flex items-center gap-2.5 rounded-lg border bg-card px-3 py-2">
                 <CodeChip code={s.n} />
                 <span className="text-[13px] font-medium">{lang === 'ar' ? s.ar : s.en}</span>
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 ms-auto" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 ms-auto" />
               </div>
             ))}
           </div>

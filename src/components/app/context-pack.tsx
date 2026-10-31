@@ -223,7 +223,7 @@ export function ContextPackDialog({
         {result && (
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-1.5">
-              <Badge variant="outline" className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200">
+              <Badge variant="outline" className="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200">
                 {result.stats.words.toLocaleString()} {t('wordsCount')}
               </Badge>
               <Badge variant="outline" className="text-[10px]">

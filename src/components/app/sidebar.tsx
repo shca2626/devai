@@ -29,8 +29,9 @@ import { StageBadge } from '@/components/app/bits'
 import { useApp } from '@/components/app/context'
 import type { IdeaListItem } from '@/lib/types'
 import { cn } from '@/lib/utils'
-import { AppWindow, FlaskConical, Globe, MoreHorizontal, Pencil, Plus, Search, Trash2 } from 'lucide-react'
+import { AppWindow, FlaskConical, Globe, Lightbulb, MoreHorizontal, Pencil, Plus, Search, Trash2 } from 'lucide-react'
 import { useState } from 'react'
+import { STAGES, stageIndex } from '@/lib/types'
 
 function timeAgo(iso: string, lang: 'ar' | 'en'): string {
   const diff = Date.now() - new Date(iso).getTime()
@@ -80,9 +81,9 @@ function IdeaRow({ idea }: { idea: IdeaListItem }) {
   return (
     <div
       className={cn(
-        'group relative rounded-lg border p-3 cursor-pointer transition-colors',
+        'group relative rounded-lg border p-3 cursor-pointer transition-all',
         active
-          ? 'border-primary/40 bg-primary/[0.04]'
+          ? 'border-primary/50 bg-primary/[0.05] shadow-sm'
           : 'border-transparent hover:border-border hover:bg-muted/50'
       )}
       onClick={() => selectIdea(idea.id)}
@@ -158,7 +159,23 @@ function IdeaRow({ idea }: { idea: IdeaListItem }) {
             )}
           </span>
         )}
-        <span className="text-[11px] text-muted-foreground">{timeAgo(idea.updatedAt, lang)}</span>
+        <span className="text-[11px] text-muted-foreground ms-auto">{timeAgo(idea.updatedAt, lang)}</span>
+      </div>
+      {/* Stage progress — how far through the 9-stage workflow */}
+      <div className="mt-2.5 flex items-center gap-1" aria-hidden>
+        {STAGES.map((s, i) => (
+          <span
+            key={s}
+            className={cn(
+              'h-1 flex-1 rounded-full transition-colors',
+              i < stageIndex(idea.stage)
+                ? 'bg-primary/60'
+                : i === stageIndex(idea.stage)
+                  ? 'bg-primary'
+                  : 'bg-border'
+            )}
+          />
+        ))}
       </div>
 
       <AlertDialog open={confirmDelete} onOpenChange={setConfirmDelete}>
@@ -207,14 +224,18 @@ function IdeaRow({ idea }: { idea: IdeaListItem }) {
 }
 
 export function Sidebar({ onNewIdea }: { onNewIdea: () => void }) {
-  const { t, ideas } = useApp()
+  const { t, ideas, lang } = useApp()
   const [query, setQuery] = useState('')
 
   const filtered = ideas.filter((i) => i.title.toLowerCase().includes(query.toLowerCase()))
 
   return (
     <div className="flex h-full flex-col gap-3 p-3">
-      <Button onClick={onNewIdea} className="w-full gap-2" size="lg">
+      <Button
+        onClick={onNewIdea}
+        className="w-full gap-2 bg-gradient-to-r from-primary to-violet-500 hover:from-primary/90 hover:to-violet-500/90 shadow-md shadow-primary/20"
+        size="lg"
+      >
         <Plus className="h-4 w-4" />
         {t('newIdea')}
       </Button>
@@ -224,16 +245,28 @@ export function Sidebar({ onNewIdea }: { onNewIdea: () => void }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="…"
-          className="ps-8 h-9 bg-muted/50"
+          className="ps-8 h-9 bg-muted/50 focus:bg-background transition-colors"
           aria-label={t('workspace')}
         />
       </div>
-      <div className="px-1 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-        {t('workspace')} · {ideas.length} {t('ideasCount')}
+      <div className="px-1 flex items-center gap-2 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+        <span className="truncate">{t('workspace')}</span>
+        <span className="ms-auto shrink-0 tabular-nums">{ideas.length} {t('ideasCount')}</span>
       </div>
-      <div className="flex-1 min-h-0 overflow-y-auto nice-scroll flex flex-col gap-1 pe-0.5">
-        {filtered.length === 0 ? (
-          <p className="px-3 py-6 text-center text-xs text-muted-foreground">{t('noIdeas')}</p>
+      <div className="flex-1 min-h-0 overflow-y-auto nice-scroll flex flex-col gap-1.5 pe-0.5">
+        {filtered.length === 0 && ideas.length > 0 ? (
+          <p className={cn('px-3 py-6 text-center text-xs text-muted-foreground', lang === 'ar' && 'font-arabic')} dir="auto">
+            {t('noSearchResults')}
+          </p>
+        ) : ideas.length === 0 ? (
+          <div className="px-3 py-10 flex flex-col items-center gap-3 text-center">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 border border-primary/15">
+              <Lightbulb className="h-5 w-5 text-primary" />
+            </span>
+            <p className="text-xs text-muted-foreground leading-6" dir="auto">
+              {t('noIdeas')}
+            </p>
+          </div>
         ) : (
           filtered.map((idea) => <IdeaRow key={idea.id} idea={idea} />)
         )}

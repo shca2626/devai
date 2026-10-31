@@ -92,19 +92,19 @@ export function AdminMaintenance({ onDataChanged }: { onDataChanged: () => void 
       </section>
 
       {/* Danger zone */}
-      <section className="rounded-xl border border-red-200 bg-red-50/30 p-4">
-        <h2 className="text-sm font-semibold text-red-800 mb-1 flex items-center gap-2">
+      <section className="rounded-xl border border-red-200 dark:border-red-500/25 bg-red-50/30 dark:bg-red-500/10 p-4">
+        <h2 className="text-sm font-semibold text-red-800 dark:text-red-300 mb-1 flex items-center gap-2">
           <Trash2 className="h-4 w-4" />
           Danger zone — data deletion
         </h2>
-        <p className="text-xs text-red-700/80 leading-5 mb-4">
+        <p className="text-xs text-red-700/80 dark:text-red-300 leading-5 mb-4">
           These operations permanently delete data. They cannot be undone. Child rows cascade automatically.
         </p>
         <div className="space-y-2">
           {RESET_SCOPES.map((scope) => (
             <div
               key={scope.key}
-              className="rounded-lg border border-red-200 bg-background p-3 flex flex-col sm:flex-row sm:items-center gap-2.5"
+              className="rounded-lg border border-red-200 dark:border-red-500/25 bg-background p-3 flex flex-col sm:flex-row sm:items-center gap-2.5"
             >
               <div className="flex-1">
                 <div className="text-[13px] font-semibold">{scope.title}</div>

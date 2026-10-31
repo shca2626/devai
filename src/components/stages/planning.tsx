@@ -81,9 +81,9 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
 
   const riskTone = (r: RiskItem) =>
     r.impact === 'critical' || (r.impact === 'high' && r.likelihood === 'high')
-      ? 'border-red-200 bg-red-50/60'
+      ? 'border-red-200 dark:border-red-500/25 bg-red-50/60 dark:bg-red-500/10'
       : r.impact === 'high' || r.likelihood === 'high'
-        ? 'border-amber-200 bg-amber-50/50'
+        ? 'border-amber-200 dark:border-amber-500/25 bg-amber-50/50 dark:bg-amber-500/10'
         : ''
 
   return (
@@ -152,7 +152,7 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
                             </span>
                           )}
                           {task.requirementCodes.map((c) => (
-                            <CodeChip key={c} code={c} className="bg-teal-50 border-teal-200 text-teal-700" />
+                            <CodeChip key={c} code={c} className="bg-teal-50 border-teal-200 dark:border-teal-500/25 text-teal-700 dark:text-teal-300" />
                           ))}
                         </div>
                       </div>
@@ -173,7 +173,7 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
                             <ul className="space-y-0.5">
                               {task.acceptanceCriteria.map((c, i) => (
                                 <li key={i} className="text-xs leading-6 flex gap-1.5">
-                                  <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-1" />
+                                  <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-1" />
                                   {c}
                                 </li>
                               ))}
@@ -193,12 +193,12 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
                     {(active || task.status === 'needs_revision') && task.status !== 'rejected' && (
                       <div className="mt-2 flex gap-1.5 border-t pt-2">
                         {task.status !== 'confirmed' && (
-                          <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50" onClick={() => review('task', task.id, 'confirmed')}>
+                          <Button size="sm" variant="outline" className="gap-1 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10" onClick={() => review('task', task.id, 'confirmed')}>
                             <Check className="h-3.5 w-3.5" />
                             {t('confirmArtifact')}
                           </Button>
                         )}
-                        <Button size="sm" variant="outline" className="gap-1 border-red-200 text-red-600 hover:bg-red-50" onClick={() => review('task', task.id, 'rejected')}>
+                        <Button size="sm" variant="outline" className="gap-1 border-red-200 dark:border-red-500/25 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10" onClick={() => review('task', task.id, 'rejected')}>
                           <X className="h-3.5 w-3.5" />
                           {t('rejectArtifact')}
                         </Button>
@@ -241,7 +241,7 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
                     <span className="text-[10px] text-muted-foreground">
                       {t('likelihood')}: {r.likelihood} · {t('impactLabel')}: {r.impact}
                     </span>
-                    <Badge variant="outline" className={`text-[10px] ${r.basis === 'verified_fact' ? 'bg-teal-50 text-teal-700 border-teal-200' : 'bg-violet-50 text-violet-700 border-violet-200'}`}>
+                    <Badge variant="outline" className={`text-[10px] ${r.basis === 'verified_fact' ? 'bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/25' : 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200'}`}>
                       {r.basis === 'verified_fact' ? t('basedOnFact') : t('basedOnJudgment')}
                     </Badge>
                   </div>
@@ -252,13 +252,13 @@ export function PlanningStage({ detail }: { detail: IdeaDetail }) {
                     </p>
                   )}
                 </div>
-                <Badge variant="outline" className={`text-[10px] whitespace-nowrap ${r.status === 'mitigated' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : r.status === 'accepted' ? 'bg-slate-50 text-slate-600 border-slate-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
+                <Badge variant="outline" className={`text-[10px] whitespace-nowrap ${r.status === 'mitigated' ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25' : r.status === 'accepted' ? 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25' : 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200'}`}>
                   {r.status === 'mitigated' ? t('statusMitigated') : r.status === 'accepted' ? t('statusAccepted') : t('statusProposed')}
                 </Badge>
               </div>
               {active && r.status === 'proposed' && (
                 <div className="mt-2 flex gap-1.5 border-t pt-2">
-                  <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50" onClick={() => review('risk', r.id, 'mitigated')}>
+                  <Button size="sm" variant="outline" className="gap-1 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10" onClick={() => review('risk', r.id, 'mitigated')}>
                     <Check className="h-3.5 w-3.5" />
                     {t('mitigate')}
                   </Button>

@@ -287,11 +287,11 @@ export function DiscoverStage({ detail }: { detail: IdeaDetail }) {
             <ReactMarkdown>{idea.summary.summaryMarkdown}</ReactMarkdown>
           </div>
           {idea.summary.openRisks.length > 0 && (
-            <div className="mt-3 rounded-lg border border-amber-200 bg-amber-50/60 p-3">
-              <div className="text-xs font-semibold text-amber-700 mb-1">{t('openRisks')}</div>
+            <div className="mt-3 rounded-lg border border-amber-200 dark:border-amber-500/25 bg-amber-50/60 dark:bg-amber-500/10 p-3">
+              <div className="text-xs font-semibold text-amber-700 dark:text-amber-300 mb-1">{t('openRisks')}</div>
               <ul className="space-y-1">
                 {idea.summary.openRisks.map((r) => (
-                  <li key={r} className="text-xs text-amber-800 leading-5 flex gap-1.5">
+                  <li key={r} className="text-xs text-amber-800 dark:text-amber-300 leading-5 flex gap-1.5">
                     <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500" />
                     {r}
                   </li>

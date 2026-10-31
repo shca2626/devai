@@ -88,12 +88,12 @@ function RuleRow({
           {CATEGORY_KEYS[rule.category][lang === 'ar' ? 'ar' : 'en']}
         </Badge>
         {rule.scope === 'global' ? (
-          <Badge variant="outline" className="text-[10px] shrink-0 gap-1 bg-sky-50 text-sky-700 border-sky-200">
+          <Badge variant="outline" className="text-[10px] shrink-0 gap-1 bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200">
             <Globe2 className="h-2.5 w-2.5" />
             {lang === 'ar' ? 'عام' : 'Global'}
           </Badge>
         ) : (
-          <Badge variant="outline" className="text-[10px] shrink-0 gap-1 bg-violet-50 text-violet-700 border-violet-200">
+          <Badge variant="outline" className="text-[10px] shrink-0 gap-1 bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200">
             <Zap className="h-2.5 w-2.5" />
             {lang === 'ar' ? 'المشروع' : 'Project'}
           </Badge>
@@ -114,7 +114,7 @@ function RuleRow({
           <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setEditing((v) => !v)} disabled={busy} aria-label="edit rule">
             <Pencil className="h-3.5 w-3.5" />
           </Button>
-          <Button variant="ghost" size="icon" className="h-7 w-7 text-red-600 hover:text-red-700" onClick={() => onDelete(rule)} disabled={busy} aria-label="delete rule">
+          <Button variant="ghost" size="icon" className="h-7 w-7 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300" onClick={() => onDelete(rule)} disabled={busy} aria-label="delete rule">
             <Trash2 className="h-3.5 w-3.5" />
           </Button>
         </div>

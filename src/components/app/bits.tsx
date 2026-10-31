@@ -43,10 +43,10 @@ export function StageBadge({ stage }: { stage: Stage }) {
   const label = keys[stage] ?? stage
   const tone =
     stage === 'package'
-      ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25'
       : ['requirements', 'design', 'planning', 'readiness'].includes(stage)
-        ? 'bg-teal-50 text-teal-700 border-teal-200'
-        : 'bg-violet-50 text-violet-700 border-violet-200'
+        ? 'bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/25'
+        : 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/25'
   return (
     <Badge variant="outline" className={cn('text-[11px] font-medium', tone)}>
       {label}
@@ -70,11 +70,11 @@ export function AreaBadge({ area, active }: { area: string; active?: boolean }) 
 }
 
 const STATUS_STYLES: Record<FeatureStatus, string> = {
-  proposed: 'bg-slate-50 text-slate-600 border-slate-200',
-  needs_confirmation: 'bg-amber-50 text-amber-700 border-amber-200',
-  accepted: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  rejected: 'bg-red-50 text-red-600 border-red-200',
-  deferred: 'bg-sky-50 text-sky-700 border-sky-200',
+  proposed: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
+  needs_confirmation: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
+  accepted: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  rejected: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
+  deferred: 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/25',
 }
 
 const STATUS_KEYS: Record<FeatureStatus, Parameters<ReturnType<typeof useApp>['t']>[0]> = {
@@ -95,9 +95,9 @@ export function StatusBadge({ status }: { status: FeatureStatus }) {
 }
 
 const PRIORITY_STYLES: Record<Priority, string> = {
-  must: 'bg-violet-50 text-violet-700 border-violet-200',
-  should: 'bg-slate-50 text-slate-600 border-slate-200',
-  could: 'bg-slate-50 text-slate-400 border-slate-200',
+  must: 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/25',
+  should: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
+  could: 'bg-slate-50 dark:bg-slate-500/10 text-slate-400 border-slate-200 dark:border-slate-500/25',
 }
 
 const PRIORITY_KEYS: Record<Priority, Parameters<ReturnType<typeof useApp>['t']>[0]> = {
@@ -116,9 +116,9 @@ export function PriorityBadge({ priority }: { priority: Priority }) {
 }
 
 const ASSUMPTION_STATUS_STYLES = {
-  open: 'bg-slate-50 text-slate-600 border-slate-200',
-  confirmed: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  rejected: 'bg-red-50 text-red-600 border-red-200',
+  open: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
+  confirmed: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  rejected: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
 }
 
 export function AssumptionStatusBadge({ status }: { status: 'open' | 'confirmed' | 'rejected' }) {
@@ -132,8 +132,8 @@ export function AssumptionStatusBadge({ status }: { status: 'open' | 'confirmed'
 }
 
 const KIND_STYLES = {
-  suggested: 'bg-violet-50 text-violet-700 border-violet-200',
-  uncertain: 'bg-amber-50 text-amber-700 border-amber-200',
+  suggested: 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/25',
+  uncertain: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
 }
 
 export function KindBadge({ kind }: { kind: 'suggested' | 'uncertain' }) {
@@ -177,10 +177,10 @@ export function WorkingPanel({ steps, className }: { steps: string[]; className?
 // ============================================================
 
 const REVIEW_STYLES: Record<ReviewStatus, string> = {
-  proposed: 'bg-slate-50 text-slate-600 border-slate-200',
-  confirmed: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  rejected: 'bg-red-50 text-red-600 border-red-200',
-  needs_revision: 'bg-amber-50 text-amber-700 border-amber-200',
+  proposed: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
+  confirmed: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  rejected: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
+  needs_revision: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
 }
 
 const REVIEW_KEYS: Record<ReviewStatus, Parameters<ReturnType<typeof useApp>['t']>[0]> = {
@@ -200,10 +200,10 @@ export function ReviewBadge({ status }: { status: ReviewStatus }) {
 }
 
 const REQ_STYLES: Record<ReqStatus, string> = {
-  proposed: 'bg-slate-50 text-slate-600 border-slate-200',
-  confirmed: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  rejected: 'bg-red-50 text-red-600 border-red-200',
-  unresolved: 'bg-amber-50 text-amber-700 border-amber-200',
+  proposed: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
+  confirmed: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  rejected: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
+  unresolved: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
 }
 
 const REQ_KEYS: Record<ReqStatus, Parameters<ReturnType<typeof useApp>['t']>[0]> = {
@@ -229,7 +229,7 @@ export function ProvenanceBadge({ provenance }: { provenance: 'client' | 'ai' })
       variant="outline"
       className={cn(
         'text-[10px] font-medium whitespace-nowrap',
-        provenance === 'client' ? 'bg-teal-50 text-teal-700 border-teal-200' : 'bg-violet-50 text-violet-700 border-violet-200'
+        provenance === 'client' ? 'bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200 dark:border-teal-500/25' : 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/25'
       )}
     >
       {provenance === 'client' ? t('provenanceClient') : t('provenanceAi')}
@@ -256,10 +256,10 @@ export function SeverityBadge({ severity }: { severity: 'critical' | 'major' | '
   const key = severity === 'critical' ? 'severityCritical' : severity === 'major' ? 'severityMajor' : 'severityMinor'
   const style =
     severity === 'critical'
-      ? 'bg-red-50 text-red-600 border-red-200'
+      ? 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25'
       : severity === 'major'
-        ? 'bg-amber-50 text-amber-700 border-amber-200'
-        : 'bg-slate-50 text-slate-600 border-slate-200'
+        ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25'
+        : 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25'
   return (
     <Badge variant="outline" className={cn('text-[10px] font-medium whitespace-nowrap', style)}>
       {t(key)}

@@ -69,16 +69,16 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
               type="button"
               onClick={() => setView(VIEW_BY_STAGE[stage] as never)}
               className={cn(
-                'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors min-h-9 whitespace-nowrap',
+                'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-all min-h-9 whitespace-nowrap',
                 active
-                  ? 'border-primary bg-primary text-primary-foreground'
+                  ? 'border-primary bg-primary text-primary-foreground shadow-sm shadow-primary/30'
                   : done
                     ? isEngineering
-                      ? 'border-teal-300 bg-teal-50 text-teal-700 hover:bg-teal-100'
+                      ? 'border-teal-300 dark:border-teal-500/30 bg-teal-50 dark:bg-teal-500/10 text-teal-700 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-500/15'
                       : 'border-primary/30 bg-primary/[0.06] text-primary hover:bg-primary/10'
                     : isCurrent
                       ? isEngineering
-                        ? 'border-teal-400 text-teal-700'
+                        ? 'border-teal-400 dark:border-teal-500/30 text-teal-700 dark:text-teal-300'
                         : 'border-primary/40 text-primary'
                       : 'border-border text-muted-foreground hover:bg-muted/70 hover:border-border'
               )}
@@ -91,11 +91,11 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
                     ? 'bg-primary-foreground/20'
                     : done
                       ? isEngineering
-                        ? 'bg-teal-100'
+                        ? 'bg-teal-100 dark:bg-teal-500/15'
                         : 'bg-primary/15'
                       : isCurrent
                         ? isEngineering
-                          ? 'bg-teal-50'
+                          ? 'bg-teal-50 dark:bg-teal-500/10'
                           : 'bg-primary/10'
                         : 'bg-muted'
                 )}

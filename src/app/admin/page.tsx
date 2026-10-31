@@ -88,7 +88,7 @@ export default function AdminPage() {
               AI Software Engineer · full system control & documentation
             </div>
           </div>
-          <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-emerald-300 bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
+          <span className="hidden sm:inline-flex items-center gap-1 rounded-full border border-emerald-300 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">
             <InfinityIcon className="h-3 w-3" />
             NO LIMITS
           </span>

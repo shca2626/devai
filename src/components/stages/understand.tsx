@@ -93,9 +93,9 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
   return (
     <div className="space-y-4">
       {locked && (
-        <Alert className="border-emerald-200 bg-emerald-50/60">
-          <Lock className="h-4 w-4 text-emerald-600" />
-          <AlertDescription className="text-emerald-800">{t('lockedNote')}</AlertDescription>
+        <Alert className="border-emerald-200 dark:border-emerald-500/25 bg-emerald-50/60 dark:bg-emerald-500/10">
+          <Lock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+          <AlertDescription className="text-emerald-800 dark:text-emerald-300">{t('lockedNote')}</AlertDescription>
         </Alert>
       )}
 
@@ -191,7 +191,7 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
       {/* Gate actions — NO LIMITS: always available, even after approval */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
         {locked && (
-          <Badge variant="outline" className="gap-1 bg-emerald-50 text-emerald-700 border-emerald-200 self-start">
+          <Badge variant="outline" className="gap-1 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25 self-start">
             <CheckCircle2 className="h-3 w-3" />
             {t('approvedBadge')}
           </Badge>

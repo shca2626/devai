@@ -129,7 +129,7 @@ export function ExpressRun({ detail }: { detail: IdeaDetail }) {
           <div className="max-h-52 overflow-y-auto nice-scroll space-y-1.5">
             {steps.map((s, i) => (
               <div key={i} className="flex items-start gap-2 text-xs leading-6">
-                <Check className="h-3.5 w-3.5 text-emerald-600 shrink-0 mt-1" />
+                <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-1" />
                 <span>{s}</span>
               </div>
             ))}
@@ -148,19 +148,19 @@ export function ExpressRun({ detail }: { detail: IdeaDetail }) {
           </div>
 
           {blocked && (
-            <div className="rounded-lg border border-amber-300 bg-amber-50 p-3 space-y-1.5">
+            <div className="rounded-lg border border-amber-300 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10 p-3 space-y-1.5">
               <div className="flex items-start gap-2">
-                <AlertCircle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" />
-                <p className="text-xs text-amber-900 leading-6">{result?.reason}</p>
+                <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                <p className="text-xs text-amber-900 dark:text-amber-300 leading-6">{result?.reason}</p>
               </div>
               {result?.blockers && result.blockers.length > 0 && (
-                <ul className="text-[11px] text-amber-800 leading-6 ps-6 list-disc">
+                <ul className="text-[11px] text-amber-800 dark:text-amber-300 leading-6 ps-6 list-disc">
                   {result.blockers.slice(0, 6).map((b, i) => (
                     <li key={i}>{b}</li>
                   ))}
                 </ul>
               )}
-              <p className="text-[11px] text-amber-700 ps-6">{t('expressResolveHint')}</p>
+              <p className="text-[11px] text-amber-700 dark:text-amber-300 ps-6">{t('expressResolveHint')}</p>
               <div className="ps-6">
                 <Button size="sm" variant="outline" onClick={() => setResult(null)}>
                   {t('expressContinueManually')}

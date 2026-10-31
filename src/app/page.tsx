@@ -42,15 +42,17 @@ import {
   ListChecks,
   Menu,
   MessagesSquare,
+  Moon,
   Package,
   Radar,
   Scale,
   ScrollText,
   ShieldCheck,
   Sparkles,
+  Sun,
   Wrench,
 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const EXAMPLE_IDEA =
   'أريد تطبيق يربط بين أصحاب المحلات والموردين، ويقارن الأسعار، ويخلي التاجر يطلب المنتجات من عدة موردين بسهولة.'
@@ -64,19 +66,39 @@ function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
     { icon: ShieldCheck, title: t('stageBaseline'), desc: t('stepBaselineDesc') },
   ]
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:py-16 space-y-8">
+    <div className="relative mx-auto max-w-3xl px-4 py-10 sm:py-16 space-y-9">
+      {/* Ambient gradient backdrop */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
+        <div className="absolute top-24 -end-16 h-56 w-56 rounded-full bg-violet-400/10 dark:bg-violet-500/10 blur-3xl" />
+        <div className="absolute -bottom-10 -start-16 h-56 w-56 rounded-full bg-teal-400/10 dark:bg-teal-500/10 blur-3xl" />
+      </div>
+
       <div className="text-center space-y-4">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 border border-primary/20">
-          <DraftingCompass className="h-7 w-7 text-primary" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-violet-500 shadow-xl shadow-primary/25">
+          <DraftingCompass className="h-8 w-8 text-white" />
         </div>
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('welcomeTitle')}</h1>
-        <p className="text-muted-foreground text-sm sm:text-base leading-7 max-w-xl mx-auto">{t('welcomeBody')}</p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-2 pt-2">
-          <Button size="lg" onClick={() => onNewIdea()} className="gap-2 w-full sm:w-auto">
+        <h1 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight">
+          {t('welcomeTitle')}
+        </h1>
+        <p className="text-muted-foreground text-sm sm:text-base leading-7 max-w-xl mx-auto">
+          {t('welcomeBody')}
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
+          <Button
+            size="lg"
+            onClick={() => onNewIdea()}
+            className="gap-2 w-full sm:w-auto bg-gradient-to-r from-primary to-violet-500 hover:from-primary/90 hover:to-violet-500/90 shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5"
+          >
             <Sparkles className="h-4 w-4" />
             {t('newIdea')}
           </Button>
-          <Button size="lg" variant="outline" onClick={() => onNewIdea(EXAMPLE_IDEA)} className="w-full sm:w-auto">
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => onNewIdea(EXAMPLE_IDEA)}
+            className="w-full sm:w-auto transition-all hover:-translate-y-0.5"
+          >
             {t('tryExample')}
           </Button>
         </div>
@@ -84,21 +106,24 @@ function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
 
       <div className="grid gap-3 sm:grid-cols-2">
         {steps.map((step, i) => (
-          <div key={step.title} className="rounded-xl border bg-card p-4 flex gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+          <div
+            key={step.title}
+            className="group rounded-xl border bg-card p-4 flex gap-3 transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-primary/30"
+          >
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-violet-500/10 group-hover:from-primary/20 group-hover:to-violet-500/15 transition-colors">
               <step.icon className="h-4.5 w-4.5 text-primary" />
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="text-sm font-semibold flex items-center gap-2">
-                <span className="text-muted-foreground font-mono text-xs">{i + 1}</span>
-                {step.title}
+                <span className="font-mono text-[11px] text-primary/70">0{i + 1}</span>
+                <span className="truncate">{step.title}</span>
               </div>
               <p className="text-xs text-muted-foreground leading-6 mt-1">{step.desc}</p>
             </div>
           </div>
         ))}
       </div>
-      <p className="text-center text-[11px] text-muted-foreground">
+      <p className="text-center text-[11px] text-muted-foreground" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
         {translate(lang, 'appTagline')}
       </p>
     </div>
@@ -111,12 +136,13 @@ function IdeaView() {
   if (loadingDetail && !detail) {
     return (
       <div className="space-y-4 p-4 sm:p-6">
-        <Skeleton className="h-8 w-64" />
-        <Skeleton className="h-40 w-full" />
+        <Skeleton className="shimmer h-8 w-64" />
+        <Skeleton className="shimmer h-10 w-full max-w-xl" />
+        <Skeleton className="shimmer h-40 w-full" />
         <div className="grid grid-cols-3 gap-4">
-          <Skeleton className="h-28" />
-          <Skeleton className="h-28" />
-          <Skeleton className="h-28" />
+          <Skeleton className="shimmer h-28" />
+          <Skeleton className="shimmer h-28" />
+          <Skeleton className="shimmer h-28" />
         </div>
       </div>
     )
@@ -132,7 +158,7 @@ function IdeaView() {
         <Stepper currentStage={detail.idea.stage} view={view} />
       </header>
       {detail.idea.stage !== 'package' && <ExpressRun detail={detail} />}
-      <main>
+      <main key={view} className="animate-in fade-in slide-in-from-bottom-2 duration-300">
         {view === 'understand' && <UnderstandStage detail={detail} />}
         {view === 'discover' && <DiscoverStage detail={detail} />}
         {view === 'features' && <FeaturesStage detail={detail} />}
@@ -155,6 +181,23 @@ function Shell() {
   const [prefill, setPrefill] = useState<string | undefined>(undefined)
   const [playbookOpen, setPlaybookOpen] = useState(false)
   const [labPrompt, setLabPrompt] = useState<string | undefined>(undefined)
+  const [dark, setDark] = useState(false)
+
+  // Sync React state with the pre-paint theme set by the inline script
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains('dark'))
+  }, [])
+
+  function toggleTheme() {
+    const next = !document.documentElement.classList.contains('dark')
+    document.documentElement.classList.toggle('dark', next)
+    try {
+      localStorage.setItem('devai-theme', next ? 'dark' : 'light')
+    } catch {
+      // private mode — theme just won't persist
+    }
+    setDark(next)
+  }
 
   function openNewIdea(prefillText?: string) {
     setPrefill(prefillText)
@@ -177,7 +220,10 @@ function Shell() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side={lang === 'ar' ? 'right' : 'left'} className="p-0 w-80">
+            <SheetContent
+              side={lang === 'ar' ? 'right' : 'left'}
+              className="p-0 w-[290px] max-w-[85vw] rounded-e-2xl shadow-2xl"
+            >
               <SheetTitle className="sr-only">{t('workspace')}</SheetTitle>
               <Sidebar
                 onNewIdea={() => {
@@ -194,8 +240,8 @@ function Shell() {
             onClick={() => selectIdea(null)}
             aria-label={t('appName')}
           >
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Compass className="h-4.5 w-4.5" />
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-violet-500 shadow-md shadow-primary/20">
+              <Compass className="h-4.5 w-4.5 text-white" />
             </span>
             <span className="hidden sm:inline truncate">{t('appName')}</span>
           </button>
@@ -351,6 +397,17 @@ function Shell() {
               </Button>
             </div>
 
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleTheme}
+              className="gap-1.5 min-h-9 px-2 sm:px-3"
+              aria-label={t('themeToggle')}
+              title={t('themeToggle')}
+            >
+              {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              <span className="hidden sm:inline text-xs font-medium">{t('themeToggle')}</span>
+            </Button>
             <Button
               variant="ghost"
               size="sm"

@@ -95,7 +95,7 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
     )
   }
 
-  const scoreColor = readiness.score >= 90 ? 'text-emerald-600' : readiness.score >= 60 ? 'text-amber-600' : 'text-red-500'
+  const scoreColor = readiness.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : readiness.score >= 60 ? 'text-amber-600 dark:text-amber-400' : 'text-red-500'
 
   // Traceability rows
   const traceRows = confirmedReqs.map((r) => ({
@@ -141,12 +141,12 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
               />
             </div>
             {readiness.lockable ? (
-              <p className="mt-3 text-xs text-emerald-700 font-medium flex items-center gap-1.5">
+              <p className="mt-3 text-xs text-emerald-700 dark:text-emerald-300 font-medium flex items-center gap-1.5">
                 <CheckCircle2 className="h-4 w-4" />
                 {lang === 'ar' ? 'كل المانعات الصارمة مجتازة — يمكن قفل الحزمة' : 'All hard blockers cleared — the package can be locked'}
               </p>
             ) : (
-              <p className="mt-3 text-xs text-amber-700 leading-6">
+              <p className="mt-3 text-xs text-amber-700 dark:text-amber-300 leading-6">
                 {lang === 'ar'
                   ? 'بعض الفحوصات الصارمة لم تُجتز بعد — يمكنك مع ذلك قفل الحزمة (وضع بلا حدود)، وسيُسجَّل الوقت الحالي في سجل القرارات.'
                   : 'Some hard checks are not cleared yet — you can still lock the package (no-limits mode); the current score will be recorded in the decision log.'}
@@ -185,19 +185,19 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
             <div key={m.id} className="flex items-start gap-2.5 px-4 py-2.5">
               <span
                 className={`mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full ${
-                  m.pass ? 'bg-emerald-100 text-emerald-700' : m.blocker ? 'bg-red-100 text-red-600' : 'bg-amber-100 text-amber-700'
+                  m.pass ? 'bg-emerald-100 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300' : m.blocker ? 'bg-red-100 dark:bg-red-500/15 text-red-600 dark:text-red-400' : 'bg-amber-100 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300'
                 }`}
               >
                 {m.pass ? <Check className="h-3 w-3" /> : <AlertTriangle className="h-3 w-3" />}
               </span>
               <div className="min-w-0">
                 <div className="text-[13px] font-medium leading-5">{lang === 'ar' ? m.labelAr : m.label}</div>
-                <div className={`text-[11px] leading-5 mt-0.5 ${m.pass ? 'text-muted-foreground' : m.blocker ? 'text-red-600' : 'text-amber-700'}`} dir="auto">
+                <div className={`text-[11px] leading-5 mt-0.5 ${m.pass ? 'text-muted-foreground' : m.blocker ? 'text-red-600 dark:text-red-400' : 'text-amber-700'}`} dir="auto">
                   {m.detail}
                 </div>
               </div>
               {m.blocker && !m.pass && (
-                <Badge variant="outline" className="text-[9px] bg-red-50 text-red-600 border-red-200 shrink-0">
+                <Badge variant="outline" className="text-[9px] bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25 shrink-0">
                   {t('blockersTitle')}
                 </Badge>
               )}
@@ -208,10 +208,10 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
 
       {/* Warnings */}
       {readiness.warnings.length > 0 && (
-        <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-4 space-y-1.5">
-          <div className="text-xs font-semibold text-amber-800">{t('warningsTitle')}</div>
+        <div className="rounded-xl border border-amber-200 dark:border-amber-500/25 bg-amber-50/60 dark:bg-amber-500/10 p-4 space-y-1.5">
+          <div className="text-xs font-semibold text-amber-800 dark:text-amber-300">{t('warningsTitle')}</div>
           {readiness.warnings.map((w, i) => (
-            <p key={i} className="text-xs text-amber-800 leading-6">
+            <p key={i} className="text-xs text-amber-800 dark:text-amber-300 leading-6">
               ⚠ {w}
             </p>
           ))}
@@ -253,7 +253,7 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
                   </div>
                   {i.status === 'open' && active && (
                     <div className="flex gap-1.5 shrink-0">
-                      <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50 min-h-9" onClick={() => resolveIssue(i.id, 'resolved')}>
+                      <Button size="sm" variant="outline" className="gap-1 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 min-h-9" onClick={() => resolveIssue(i.id, 'resolved')}>
                         <Check className="h-3.5 w-3.5" />
                         {t('resolve')}
                       </Button>

@@ -390,7 +390,7 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
                   </p>
                   <div className="flex flex-wrap gap-1 mt-1.5">
                     {a.linkedRequirements.map((c) => <CodeChip key={c} code={c} />)}
-                    {a.linkedEntities.map((c) => <CodeChip key={c} code={c} className="bg-teal-50 border-teal-200 text-teal-700" />)}
+                    {a.linkedEntities.map((c) => <CodeChip key={c} code={c} className="bg-teal-50 border-teal-200 dark:border-teal-500/25 text-teal-700 dark:text-teal-300" />)}
                   </div>
                 </div>
                 <ReviewBadge status={a.status} />
@@ -669,7 +669,7 @@ export function DesignStage({ detail }: { detail: IdeaDetail }) {
                           <tr key={tech.area} className="border-b last:border-0 align-top">
                             <td className="py-1.5 pe-2 font-medium whitespace-nowrap">
                               {tech.area}
-                              {tech.simplestOption && <Badge variant="outline" className="ms-1 text-[9px] bg-emerald-50 text-emerald-700 border-emerald-200 whitespace-nowrap">{t('simplestOption')}</Badge>}
+                              {tech.simplestOption && <Badge variant="outline" className="ms-1 text-[9px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25 whitespace-nowrap">{t('simplestOption')}</Badge>}
                             </td>
                             <td className="py-1.5 pe-2">{tech.choice}</td>
                             <td className="py-1.5 pe-2 text-muted-foreground">{tech.rationale}</td>
@@ -734,27 +734,27 @@ function FeedbackPanel({
 }) {
   if (!active) return null
   return (
-    <details className="rounded-xl border border-amber-300/70 bg-amber-50/60">
-      <summary className="flex cursor-pointer items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-amber-900 min-h-11">
-        <MessageSquareWarning className="h-4 w-4 text-amber-600" />
+    <details className="rounded-xl border border-amber-300/70 dark:border-amber-500/30 bg-amber-50/60">
+      <summary className="flex cursor-pointer items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-amber-900 dark:text-amber-300 min-h-11">
+        <MessageSquareWarning className="h-4 w-4 text-amber-600 dark:text-amber-400" />
         {t('feedbackLabel')}
       </summary>
       <div className="px-3.5 pb-3.5 space-y-2.5">
-        {notice && <p className="text-xs text-amber-900 leading-6">{notice}</p>}
-        <p className="text-[11px] text-amber-800 leading-5">{t('feedbackForTab')}</p>
+        {notice && <p className="text-xs text-amber-900 dark:text-amber-300 leading-6">{notice}</p>}
+        <p className="text-[11px] text-amber-800 dark:text-amber-300 leading-5">{t('feedbackForTab')}</p>
         <textarea
           rows={2}
           value={value}
           onChange={(ev) => onChange(ev.target.value)}
           placeholder={t('feedbackPlaceholder')}
-          className="w-full rounded-lg border border-amber-300 bg-white p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
+          className="w-full rounded-lg border border-amber-300 dark:border-amber-500/30 bg-white dark:bg-transparent p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
         />
         <div className="flex flex-wrap items-center gap-2">
           <Button size="sm" className="gap-1.5" onClick={onRun} disabled={busy}>
             {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <MessageSquareWarning className="h-3.5 w-3.5" />}
             {t('regenerateWithFeedback')}
           </Button>
-          <span className="text-[11px] text-amber-800">{t('regenReplacesRejected')}</span>
+          <span className="text-[11px] text-amber-800 dark:text-amber-300">{t('regenReplacesRejected')}</span>
         </div>
       </div>
     </details>
@@ -832,13 +832,13 @@ function ReviewActions({
   return (
     <div className="mt-2 flex gap-1.5 border-t pt-2">
       {status !== 'confirmed' && (
-        <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50" onClick={() => onReview(kind, id, 'confirmed')}>
+        <Button size="sm" variant="outline" className="gap-1 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10" onClick={() => onReview(kind, id, 'confirmed')}>
           <Check className="h-3.5 w-3.5" />
           {t('confirmArtifact')}
         </Button>
       )}
       {status !== 'rejected' && (
-        <Button size="sm" variant="outline" className="gap-1 border-red-200 text-red-600 hover:bg-red-50" onClick={() => onReview(kind, id, 'rejected')}>
+        <Button size="sm" variant="outline" className="gap-1 border-red-200 dark:border-red-500/25 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10" onClick={() => onReview(kind, id, 'rejected')}>
           <X className="h-3.5 w-3.5" />
           {t('rejectArtifact')}
         </Button>

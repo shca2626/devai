@@ -44,10 +44,10 @@ import { useToast } from '@/hooks/use-toast'
 // ============================================================
 
 const STATUS_META: Record<VerifyStatus, { icon: string; key: DictKey; chip: string; bar: string }> = {
-  pass: { icon: '✅', key: 'statusPass', chip: 'bg-emerald-50 text-emerald-700 border-emerald-200', bar: 'bg-emerald-500' },
-  partial: { icon: '🟡', key: 'statusPartial', chip: 'bg-amber-50 text-amber-700 border-amber-200', bar: 'bg-amber-500' },
-  fail: { icon: '❌', key: 'statusFail', chip: 'bg-red-50 text-red-700 border-red-200', bar: 'bg-red-500' },
-  unknown: { icon: '⚪', key: 'statusUnknown', chip: 'bg-slate-50 text-slate-600 border-slate-200', bar: 'bg-slate-400' },
+  pass: { icon: '✅', key: 'statusPass', chip: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25', bar: 'bg-emerald-500' },
+  partial: { icon: '🟡', key: 'statusPartial', chip: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25', bar: 'bg-amber-500' },
+  fail: { icon: '❌', key: 'statusFail', chip: 'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-500/25', bar: 'bg-red-500' },
+  unknown: { icon: '⚪', key: 'statusUnknown', chip: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25', bar: 'bg-slate-400' },
 }
 
 const KIND_KEYS: Record<VerifyCheckKind, DictKey> = {
@@ -57,9 +57,9 @@ const KIND_KEYS: Record<VerifyCheckKind, DictKey> = {
 }
 
 function scoreTone(score: number): { text: string; bar: string } {
-  if (score >= 80) return { text: 'text-emerald-600', bar: 'bg-emerald-500' }
-  if (score >= 50) return { text: 'text-amber-600', bar: 'bg-amber-500' }
-  return { text: 'text-red-600', bar: 'bg-red-500' }
+  if (score >= 80) return { text: 'text-emerald-600 dark:text-emerald-400', bar: 'bg-emerald-500' }
+  if (score >= 50) return { text: 'text-amber-600 dark:text-amber-400', bar: 'bg-amber-500' }
+  return { text: 'text-red-600 dark:text-red-400', bar: 'bg-red-500' }
 }
 
 // Ready-to-paste fix prompt (English scaffold — AI builders
@@ -321,7 +321,7 @@ function RunResult({ run, projectTitle }: { run: VerificationRunItem; projectTit
             </div>
           )}
           {run.result.risks.length > 0 && (
-            <div className="text-xs leading-6 text-red-700 dark:text-red-400" dir="auto">
+            <div className="text-xs leading-6 text-red-700 dark:text-red-300 dark:text-red-400" dir="auto">
               <span className="font-semibold">{t('risksLabel')}: </span>
               {run.result.risks.join(' · ')}
             </div>
@@ -578,7 +578,7 @@ export function VerifyDialog({ open, onOpenChange }: { open: boolean; onOpenChan
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-6 w-6 shrink-0 text-red-600 hover:text-red-700"
+                      className="h-6 w-6 shrink-0 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
                       onClick={() => removeRun(r.id)}
                       disabled={busyId === r.id}
                       aria-label={t('delete')}

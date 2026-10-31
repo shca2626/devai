@@ -350,7 +350,7 @@ export function NewIdeaDialog({
                   {text.trim().length > 8 && (
                     <Badge
                       variant="outline"
-                      className="bg-emerald-50 text-emerald-700 border-emerald-200 text-[11px]"
+                      className="bg-emerald-50 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25 text-[11px]"
                     >
                       {detectedArabic ? t('arabicDetected') : t('englishDetected')}
                     </Badge>
@@ -472,7 +472,7 @@ export function NewIdeaDialog({
                     <ul className="space-y-0.5">
                       {enhanced.improvements.map((improvement, i) => (
                         <li key={i} className="flex items-start gap-1.5 text-xs text-muted-foreground leading-5">
-                          <Check className="mt-0.5 h-3 w-3 shrink-0 text-emerald-600" />
+                          <Check className="mt-0.5 h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-400" />
                           <span>{improvement}</span>
                         </li>
                       ))}

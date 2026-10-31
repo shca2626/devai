@@ -70,11 +70,11 @@ export function AdminOverview({ data, loading }: { data: OverviewPayload | null;
   return (
     <div className="space-y-6">
       {/* No-limits banner */}
-      <div className="rounded-xl border border-emerald-300 bg-emerald-50/70 p-4 flex flex-col sm:flex-row items-start gap-3">
-        <InfinityIcon className="h-5 w-5 text-emerald-600 mt-0.5" />
+      <div className="rounded-xl border border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-500/10 p-4 flex flex-col sm:flex-row items-start gap-3">
+        <InfinityIcon className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mt-0.5" />
         <div className="flex-1">
-          <div className="text-sm font-semibold text-emerald-800">No-limits mode is ACTIVE</div>
-          <p className="text-xs text-emerald-700 leading-6 mt-1">{data.limits}</p>
+          <div className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">No-limits mode is ACTIVE</div>
+          <p className="text-xs text-emerald-700 dark:text-emerald-300 leading-6 mt-1">{data.limits}</p>
         </div>
       </div>
 
@@ -82,9 +82,9 @@ export function AdminOverview({ data, loading }: { data: OverviewPayload | null;
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
         {[
           { label: 'Ideas', value: data.totals.ideas, icon: Database, color: 'text-primary' },
-          { label: 'Verification runs', value: data.totals.verificationRuns, icon: CheckCircle2, color: 'text-emerald-600' },
-          { label: 'Drift checks', value: data.totals.driftChecks, icon: Activity, color: 'text-amber-600' },
-          { label: 'Site analyses', value: data.totals.siteAnalyses, icon: HardDrive, color: 'text-sky-600' },
+          { label: 'Verification runs', value: data.totals.verificationRuns, icon: CheckCircle2, color: 'text-emerald-600 dark:text-emerald-400' },
+          { label: 'Drift checks', value: data.totals.driftChecks, icon: Activity, color: 'text-amber-600 dark:text-amber-400' },
+          { label: 'Site analyses', value: data.totals.siteAnalyses, icon: HardDrive, color: 'text-sky-600 dark:text-sky-400' },
         ].map((s) => (
           <div key={s.label} className="rounded-xl border bg-card p-4">
             <div className="flex items-center justify-between">

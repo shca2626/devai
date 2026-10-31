@@ -68,16 +68,16 @@ const CATEGORY_KEYS: Record<DecisionCategory, { en: string; ar: string }> = {
 }
 
 const DRIFT_META: Record<DriftStatus, { icon: string; key: DictKey; chip: string; bar: string }> = {
-  respected: { icon: '✅', key: 'statusRespected', chip: 'bg-emerald-50 text-emerald-700 border-emerald-200', bar: 'bg-emerald-500' },
-  partial: { icon: '🟡', key: 'statusPartial', chip: 'bg-amber-50 text-amber-700 border-amber-200', bar: 'bg-amber-500' },
-  drift: { icon: '❌', key: 'statusDrift', chip: 'bg-red-50 text-red-700 border-red-200', bar: 'bg-red-500' },
-  unknown: { icon: '⚪', key: 'statusUnknown', chip: 'bg-slate-50 text-slate-600 border-slate-200', bar: 'bg-slate-400' },
+  respected: { icon: '✅', key: 'statusRespected', chip: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25', bar: 'bg-emerald-500' },
+  partial: { icon: '🟡', key: 'statusPartial', chip: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25', bar: 'bg-amber-500' },
+  drift: { icon: '❌', key: 'statusDrift', chip: 'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-500/25', bar: 'bg-red-500' },
+  unknown: { icon: '⚪', key: 'statusUnknown', chip: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25', bar: 'bg-slate-400' },
 }
 
 function alignmentTone(score: number): { text: string; bar: string } {
-  if (score >= 80) return { text: 'text-emerald-600', bar: 'bg-emerald-500' }
-  if (score >= 50) return { text: 'text-amber-600', bar: 'bg-amber-500' }
-  return { text: 'text-red-600', bar: 'bg-red-500' }
+  if (score >= 80) return { text: 'text-emerald-600 dark:text-emerald-400', bar: 'bg-emerald-500' }
+  if (score >= 50) return { text: 'text-amber-600 dark:text-amber-400', bar: 'bg-amber-500' }
+  return { text: 'text-red-600 dark:text-red-400', bar: 'bg-red-500' }
 }
 
 // Ready-to-paste realign prompt (English scaffold — AI builders
@@ -150,7 +150,7 @@ function DecisionRow({
         <span className={`text-[13px] font-semibold leading-snug flex-1 min-w-0 line-clamp-1 ${retired ? 'line-through' : ''}`} dir="auto">
           {entry.title}
         </span>
-        <Badge variant="outline" className={`text-[10px] shrink-0 ${retired ? 'bg-muted text-muted-foreground' : 'bg-emerald-50 text-emerald-700 border-emerald-200'}`}>
+        <Badge variant="outline" className={`text-[10px] shrink-0 ${retired ? 'bg-muted text-muted-foreground' : 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200'}`}>
           {t(retired ? 'statusSuperseded' : 'statusActive')}
         </Badge>
         <ChevronDown className={`h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform ${open ? 'rotate-180' : ''}`} />
@@ -195,7 +195,7 @@ function DecisionRow({
             <Button
               size="sm"
               variant="ghost"
-              className="gap-1.5 h-7 text-[11px] text-red-600 hover:text-red-700"
+              className="gap-1.5 h-7 text-[11px] text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
               disabled={busy}
               onClick={() => onDelete(entry)}
             >
@@ -287,7 +287,7 @@ function DriftRow({ check, entries }: { check: DriftCheckItem; entries: Decision
             </div>
           )}
           {check.drift && (
-            <div className="text-xs leading-6 text-red-700 dark:text-red-400" dir="auto">
+            <div className="text-xs leading-6 text-red-700 dark:text-red-300 dark:text-red-400" dir="auto">
               <span className="font-semibold">{t('driftPointLabel')}: </span>
               {check.drift}
             </div>
@@ -431,7 +431,7 @@ function DriftResultView({ check, entries, projectTitle }: { check: DriftCheckRu
             {check.result.summary}
           </p>
           {check.result.violations.length > 0 && (
-            <div className="text-xs leading-6 text-red-700 dark:text-red-400" dir="auto">
+            <div className="text-xs leading-6 text-red-700 dark:text-red-300 dark:text-red-400" dir="auto">
               <span className="font-semibold">{t('violationsLabel')}: </span>
               {check.result.violations.join(' · ')}
             </div>
@@ -940,7 +940,7 @@ export function DecisionsDialog({ open, onOpenChange }: { open: boolean; onOpenC
                             <Button
                               variant="ghost"
                               size="icon"
-                              className="h-6 w-6 shrink-0 text-red-600 hover:text-red-700"
+                              className="h-6 w-6 shrink-0 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
                               onClick={() => removeCheck(c.id)}
                               disabled={busyId === c.id}
                               aria-label={t('delete')}

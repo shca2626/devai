@@ -50,6 +50,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${plexArabic.variable} antialiased bg-background text-foreground`}
       >
+        {/* Theme init — runs before first paint to avoid a flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "(function(){try{var t=localStorage.getItem('devai-theme');var d=t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;if(d)document.documentElement.classList.add('dark')}catch(e){}})()",
+          }}
+        />
         {children}
         <Toaster />
       </body>

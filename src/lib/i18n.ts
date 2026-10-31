@@ -41,6 +41,7 @@ const dict = {
   newIdea: { en: 'New idea', ar: 'فكرة جديدة' },
   workspace: { en: 'Idea workspace', ar: 'مساحة الأفكار' },
   noIdeas: { en: 'No ideas yet — start your first one.', ar: 'لا توجد أفكار بعد — ابدأ أول فكرة لك.' },
+  noSearchResults: { en: 'No ideas match your search.', ar: 'لا توجد أفكار تطابق بحثك.' },
   ideasCount: { en: 'ideas', ar: 'فكرة' },
   deleteIdea: { en: 'Delete idea', ar: 'حذف الفكرة' },
   renameIdea: { en: 'Rename', ar: 'إعادة تسمية' },
@@ -615,6 +616,8 @@ const dict = {
   openConstitution: { en: 'Constitution', ar: 'الدستور' },
   openContextPack: { en: 'Context Pack', ar: 'حزمة السياق' },
   toolsMenu: { en: 'Tools & panels', ar: 'الأدوات واللوحات' },
+  themeToggle: { en: 'Theme', ar: 'المظهر' },
+  workspaceCount: { en: 'Workspace', ar: 'المساحة' },
   handoffTitle: { en: 'Vibe-coding handoff', ar: 'التسليم للبرمجة بالذكاء الاصطناعي' },
   handoffBody: {
     en: 'Generate a Context Pack — one Markdown brief with your project definition, AI Constitution rules, requirements, stack, data model and working agreements — framed for Bolt, Cursor, Claude or ChatGPT. Paste it and the AI starts with full context, never from zero.',

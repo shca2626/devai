@@ -466,7 +466,7 @@ export function PlaybookDialog({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-7 w-7 text-red-600 hover:text-red-700"
+                  className="h-7 w-7 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
                   onClick={() => removeTemplate(selected)}
                   disabled={busy}
                   aria-label="delete template"

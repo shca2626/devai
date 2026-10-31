@@ -136,10 +136,10 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
           </div>
         </Alert>
       ) : engineeringStarted ? (
-        <Alert className="border-emerald-300 bg-emerald-50/70">
-          <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-          <AlertTitle className="text-sm font-semibold text-emerald-800">{t('baselineApprovedTitle')}</AlertTitle>
-          <AlertDescription className="text-xs text-emerald-700 leading-6">{t('phaseEngineering')} ✓ — {t('startEngineeringBody')}</AlertDescription>
+        <Alert className="border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-500/10">
+          <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+          <AlertTitle className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">{t('baselineApprovedTitle')}</AlertTitle>
+          <AlertDescription className="text-xs text-emerald-700 dark:text-emerald-300 leading-6">{t('phaseEngineering')} ✓ — {t('startEngineeringBody')}</AlertDescription>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button size="sm" onClick={() => exportFile('md')} className="gap-1.5">
               <FileText className="h-3.5 w-3.5" />
@@ -152,10 +152,10 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
           </div>
         </Alert>
       ) : (
-        <Alert className="border-emerald-300 bg-emerald-50/70">
-          <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-          <AlertTitle className="text-sm font-semibold text-emerald-800">{t('baselineApprovedTitle')}</AlertTitle>
-          <AlertDescription className="text-xs text-emerald-700 leading-6">{t('baselineApprovedBody')}</AlertDescription>
+        <Alert className="border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-500/10">
+          <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+          <AlertTitle className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">{t('baselineApprovedTitle')}</AlertTitle>
+          <AlertDescription className="text-xs text-emerald-700 dark:text-emerald-300 leading-6">{t('baselineApprovedBody')}</AlertDescription>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button size="sm" onClick={() => exportFile('md')} className="gap-1.5">
               <FileText className="h-3.5 w-3.5" />
@@ -166,8 +166,8 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
               {t('exportJson')}
             </Button>
           </div>
-          <div className="mt-4 border-t border-emerald-200 pt-3 space-y-2">
-            <p className="text-xs text-emerald-800 leading-6">{t('startEngineeringBody')}</p>
+          <div className="mt-4 border-t border-emerald-200 dark:border-emerald-500/25 pt-3 space-y-2">
+            <p className="text-xs text-emerald-800 dark:text-emerald-300 leading-6">{t('startEngineeringBody')}</p>
             <Button size="sm" onClick={startEngineering} disabled={starting} className="gap-1.5">
               <Telescope className="h-3.5 w-3.5" />
               {t('startEngineering')}
@@ -190,7 +190,7 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
       <div className="rounded-xl border overflow-hidden">
         <div className="border-b bg-muted/50 px-4 py-2.5 text-sm font-semibold flex items-center gap-1.5">
           {t('approveBaseline')}
-          {baselineApproved && <Check className="h-4 w-4 text-emerald-600" />}
+          {baselineApproved && <Check className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />}
         </div>
         <div className="overflow-x-auto nice-scroll">
           <Table>
@@ -263,7 +263,7 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="gap-1 flex-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50"
+                      className="gap-1 flex-1 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10"
                       onClick={() => setAssumption(a.id, 'confirmed')}
                     >
                       <Check className="h-3.5 w-3.5" />
@@ -272,7 +272,7 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="gap-1 flex-1 border-red-200 text-red-600 hover:bg-red-50"
+                      className="gap-1 flex-1 border-red-200 dark:border-red-500/25 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10"
                       onClick={() => setAssumption(a.id, 'rejected')}
                     >
                       <X className="h-3.5 w-3.5" />

@@ -59,28 +59,28 @@ const WORKING_STEPS: Record<QaKind, [DictKey, DictKey]> = {
 }
 
 const LEVEL_STYLES: Record<string, string> = {
-  unit: 'bg-sky-50 text-sky-700 border-sky-200',
-  integration: 'bg-violet-50 text-violet-700 border-violet-200',
+  unit: 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/25',
+  integration: 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200 dark:border-violet-500/25',
 }
 
 const KIND_STYLES: Record<string, string> = {
-  happy: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  negative: 'bg-amber-50 text-amber-700 border-amber-200',
-  boundary: 'bg-orange-50 text-orange-700 border-orange-200',
-  security: 'bg-red-50 text-red-600 border-red-200',
+  happy: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  negative: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
+  boundary: 'bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-500/25',
+  security: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
 }
 
 const PRIORITY_STYLES: Record<string, string> = {
-  high: 'bg-red-50 text-red-600 border-red-200',
-  medium: 'bg-amber-50 text-amber-700 border-amber-200',
-  low: 'bg-slate-50 text-slate-600 border-slate-200',
-  smoke: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  high: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
+  medium: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
+  low: 'bg-slate-50 dark:bg-slate-500/10 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-500/25',
+  smoke: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
 }
 
 const EDGE_RISK_STYLES: Record<string, string> = {
-  low: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  medium: 'bg-amber-50 text-amber-700 border-amber-200',
-  high: 'bg-red-50 text-red-600 border-red-200',
+  low: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  medium: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
+  high: 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25',
 }
 
 function SmallBadge({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -367,26 +367,26 @@ function FeedbackBox({
 }) {
   if (!active) return null
   return (
-    <details className="rounded-xl border border-amber-300/70 bg-amber-50/60">
-      <summary className="flex cursor-pointer items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-amber-900 min-h-11">
-        <MessageSquareWarning className="h-4 w-4 text-amber-600" />
+    <details className="rounded-xl border border-amber-300/70 dark:border-amber-500/30 bg-amber-50/60">
+      <summary className="flex cursor-pointer items-center gap-2 px-3.5 py-2.5 text-xs font-semibold text-amber-900 dark:text-amber-300 min-h-11">
+        <MessageSquareWarning className="h-4 w-4 text-amber-600 dark:text-amber-400" />
         {t('feedbackLabel')}
       </summary>
       <div className="px-3.5 pb-3.5 space-y-2.5">
-        <p className="text-[11px] text-amber-800 leading-5">{t('feedbackForTab')}</p>
+        <p className="text-[11px] text-amber-800 dark:text-amber-300 leading-5">{t('feedbackForTab')}</p>
         <textarea
           rows={2}
           value={value}
           onChange={(ev) => onChange(ev.target.value)}
           placeholder={t('feedbackPlaceholder')}
-          className="w-full rounded-lg border border-amber-300 bg-white p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
+          className="w-full rounded-lg border border-amber-300 dark:border-amber-500/30 bg-white dark:bg-transparent p-2.5 text-sm leading-6 outline-none focus:ring-2 focus:ring-amber-400/40"
         />
         <div className="flex flex-wrap items-center gap-2">
           <Button size="sm" className="gap-1.5" onClick={onRun} disabled={busy}>
             {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <MessageSquareWarning className="h-3.5 w-3.5" />}
             {t('regenerateWithFeedback')}
           </Button>
-          <span className="text-[11px] text-amber-800">{t('regenKeepsConfirmed')}</span>
+          <span className="text-[11px] text-amber-800 dark:text-amber-300">{t('regenKeepsConfirmed')}</span>
         </div>
       </div>
     </details>
@@ -412,13 +412,13 @@ function ReviewRow({
   return (
     <div className="mt-2 flex flex-wrap gap-1.5 border-t pt-2">
       {status !== 'confirmed' && (
-        <Button size="sm" variant="outline" className="gap-1 border-emerald-300 text-emerald-700 hover:bg-emerald-50" onClick={() => onReview(id, 'confirmed')}>
+        <Button size="sm" variant="outline" className="gap-1 border-emerald-300 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-500/10" onClick={() => onReview(id, 'confirmed')}>
           <Check className="h-3.5 w-3.5" />
           {t('confirmArtifact')}
         </Button>
       )}
       {status !== 'rejected' && (
-        <Button size="sm" variant="outline" className="gap-1 border-red-200 text-red-600 hover:bg-red-50" onClick={() => onReview(id, 'rejected')}>
+        <Button size="sm" variant="outline" className="gap-1 border-red-200 dark:border-red-500/25 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10" onClick={() => onReview(id, 'rejected')}>
           <X className="h-3.5 w-3.5" />
           {t('rejectArtifact')}
         </Button>
@@ -443,7 +443,7 @@ function CoveragePanel({
 }) {
   const criteriaTotal = coverage.covered.reduce((n, r) => n + r.criteriaTotal, 0)
   const criteriaCovered = coverage.covered.reduce((n, r) => n + r.criteriaCovered, 0)
-  const scoreColor = coverage.score >= 90 ? 'text-emerald-600' : coverage.score >= 60 ? 'text-amber-600' : 'text-red-500'
+  const scoreColor = coverage.score >= 90 ? 'text-emerald-600 dark:text-emerald-400' : coverage.score >= 60 ? 'text-amber-600 dark:text-amber-400' : 'text-red-500'
   const barColor = coverage.score >= 90 ? 'bg-emerald-500' : coverage.score >= 60 ? 'bg-amber-500' : 'bg-red-400'
   return (
     <div className={`rounded-xl border bg-background p-3 sm:p-4 space-y-3 ${coverage.status === 'rejected' ? 'opacity-60' : ''}`}>
@@ -473,10 +473,10 @@ function CoveragePanel({
                 title={row.caseCodes.length ? `${row.caseCodes.join(', ')}` : row.requirement}
                 className={`inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 text-[10px] font-medium ${
                   full
-                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                    ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25'
                     : partial
-                      ? 'bg-amber-50 text-amber-700 border-amber-200'
-                      : 'bg-red-50 text-red-600 border-red-200'
+                      ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25'
+                      : 'bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 border-red-200 dark:border-red-500/25'
                 }`}
               >
                 {row.requirement}
@@ -488,9 +488,9 @@ function CoveragePanel({
       )}
 
       {coverage.uncovered.length > 0 && (
-        <div className="rounded-lg border border-amber-200/70 bg-amber-50/50 p-2.5">
-          <div className="text-[10px] font-semibold text-amber-800 mb-1">{t('tcUncovered')}</div>
-          <ul className="text-[11px] leading-5 text-amber-900/85 space-y-0.5">
+        <div className="rounded-lg border border-amber-200/70 dark:border-amber-500/25 bg-amber-50/50 dark:bg-amber-500/10 p-2.5">
+          <div className="text-[10px] font-semibold text-amber-800 dark:text-amber-300 mb-1">{t('tcUncovered')}</div>
+          <ul className="text-[11px] leading-5 text-amber-900/85 dark:text-amber-300 space-y-0.5">
             {coverage.uncovered.map((g) => (
               <li key={g.requirement}>
                 <span className="font-medium font-mono">{g.requirement}</span> — {g.reason}
@@ -665,9 +665,9 @@ function E2eCard({
 
       <div className="grid sm:grid-cols-3 gap-2 mt-2.5">
         {scenario.given.length > 0 && (
-          <div className="rounded-lg border border-sky-200/70 bg-sky-50/40 p-2.5">
-            <div className="text-[10px] font-semibold text-sky-700 mb-1">Given</div>
-            <ul className="text-[11px] leading-5 text-sky-900/80 space-y-0.5">
+          <div className="rounded-lg border border-sky-200/70 dark:border-sky-500/25 bg-sky-50/40 dark:bg-sky-500/10 p-2.5">
+            <div className="text-[10px] font-semibold text-sky-700 dark:text-sky-300 mb-1">Given</div>
+            <ul className="text-[11px] leading-5 text-sky-900/80 dark:text-sky-300 space-y-0.5">
               {scenario.given.map((g, i) => (
                 <li key={i}>• {g}</li>
               ))}
@@ -675,9 +675,9 @@ function E2eCard({
           </div>
         )}
         {scenario.when.length > 0 && (
-          <div className="rounded-lg border border-violet-200/70 bg-violet-50/40 p-2.5">
-            <div className="text-[10px] font-semibold text-violet-700 mb-1">When</div>
-            <ul className="text-[11px] leading-5 text-violet-900/80 space-y-0.5">
+          <div className="rounded-lg border border-violet-200/70 dark:border-violet-500/25 bg-violet-50/40 dark:bg-violet-500/10 p-2.5">
+            <div className="text-[10px] font-semibold text-violet-700 dark:text-violet-300 mb-1">When</div>
+            <ul className="text-[11px] leading-5 text-violet-900/80 dark:text-violet-300 space-y-0.5">
               {scenario.when.map((w, i) => (
                 <li key={i}>• {w}</li>
               ))}
@@ -685,9 +685,9 @@ function E2eCard({
           </div>
         )}
         {scenario.then.length > 0 && (
-          <div className="rounded-lg border border-emerald-200/70 bg-emerald-50/40 p-2.5">
-            <div className="text-[10px] font-semibold text-emerald-700 mb-1">Then</div>
-            <ul className="text-[11px] leading-5 text-emerald-900/80 space-y-0.5">
+          <div className="rounded-lg border border-emerald-200/70 dark:border-emerald-500/25 bg-emerald-50/40 dark:bg-emerald-500/10 p-2.5">
+            <div className="text-[10px] font-semibold text-emerald-700 dark:text-emerald-300 mb-1">Then</div>
+            <ul className="text-[11px] leading-5 text-emerald-900/80 dark:text-emerald-300 space-y-0.5">
               {scenario.then.map((th, i) => (
                 <li key={i}>• {th}</li>
               ))}

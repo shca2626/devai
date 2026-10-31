@@ -202,13 +202,13 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
         {idea.featuresMeta && (idea.featuresMeta.missingFeatures.length > 0 || idea.featuresMeta.dependencies.length > 0) && (
           <div className="grid gap-3 md:grid-cols-2">
             {idea.featuresMeta.missingFeatures.length > 0 && (
-              <Alert className="border-amber-200 bg-amber-50/50">
-                <FileWarning className="h-4 w-4 text-amber-600" />
+              <Alert className="border-amber-200 dark:border-amber-500/25 bg-amber-50/50 dark:bg-amber-500/10">
+                <FileWarning className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                 <AlertTitle className="text-sm">{t('missingFeaturesTitle')}</AlertTitle>
                 <AlertDescription>
                   <ul className="mt-1 space-y-1" dir="ltr">
                     {idea.featuresMeta.missingFeatures.map((m) => (
-                      <li key={m} className="text-xs leading-5 text-amber-800 flex gap-1.5">
+                      <li key={m} className="text-xs leading-5 text-amber-800 dark:text-amber-300 flex gap-1.5">
                         <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-amber-500" />
                         {m}
                       </li>
@@ -218,13 +218,13 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
               </Alert>
             )}
             {idea.featuresMeta.dependencies.length > 0 && (
-              <Alert className="border-sky-200 bg-sky-50/50">
-                <GitBranch className="h-4 w-4 text-sky-600" />
+              <Alert className="border-sky-200 dark:border-sky-500/25 bg-sky-50/50 dark:bg-sky-500/10">
+                <GitBranch className="h-4 w-4 text-sky-600 dark:text-sky-400" />
                 <AlertTitle className="text-sm">{t('dependenciesTitle')}</AlertTitle>
                 <AlertDescription>
                   <ul className="mt-1 space-y-1" dir="ltr">
                     {idea.featuresMeta.dependencies.map((d) => (
-                      <li key={d} className="text-xs leading-5 text-sky-800 flex gap-1.5">
+                      <li key={d} className="text-xs leading-5 text-sky-800 dark:text-sky-300 flex gap-1.5">
                         <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-sky-500" />
                         {d}
                       </li>
@@ -264,17 +264,17 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
             </Button>
           )}
           <div className="ms-auto flex flex-wrap items-center gap-1.5 text-[11px]">
-            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
+            <Badge variant="outline" className="bg-emerald-50 text-emerald-700 dark:text-emerald-300 border-emerald-200">
               {counts.accepted} {t('countsAccepted')}
             </Badge>
-            <Badge variant="outline" className="bg-sky-50 text-sky-700 border-sky-200">
+            <Badge variant="outline" className="bg-sky-50 text-sky-700 dark:text-sky-300 border-sky-200">
               {counts.deferred} {t('countsDeferred')}
             </Badge>
-            <Badge variant="outline" className="bg-red-50 text-red-600 border-red-200">
+            <Badge variant="outline" className="bg-red-50 text-red-600 dark:text-red-400 border-red-200">
               {counts.rejected} {t('countsRejected')}
             </Badge>
             {counts.unreviewed > 0 && (
-              <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200 gap-1">
+              <Badge variant="outline" className="bg-amber-50 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25 gap-1">
                 <AlertTriangle className="h-3 w-3" />
                 {counts.unreviewed} {t('countsUnreviewed')}
               </Badge>
@@ -301,8 +301,8 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
                   <TableRow
                     key={f.id}
                     className={cn(
-                      f.status === 'needs_confirmation' && 'bg-amber-50/40',
-                      f.origin === 'user' && 'bg-emerald-50/30'
+                      f.status === 'needs_confirmation' && 'bg-amber-50/40 dark:bg-amber-500/10',
+                      f.origin === 'user' && 'bg-emerald-50/30 dark:bg-emerald-500/10'
                     )}
                   >
                     <TableCell className="text-xs font-medium whitespace-nowrap">{f.module}</TableCell>
@@ -322,7 +322,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
                         {f.status === 'needs_confirmation' && (
                           <Tooltip>
                             <TooltipTrigger asChild>
-                              <ShieldQuestion className="h-3.5 w-3.5 text-amber-600" />
+                              <ShieldQuestion className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
                             </TooltipTrigger>
                             <TooltipContent side="top" className="max-w-56 text-xs">
                               {t('needsConfirmationNote')}
@@ -330,7 +330,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
                           </Tooltip>
                         )}
                         {f.origin === 'user' && (
-                          <Badge variant="outline" className="text-[10px] bg-emerald-50 text-emerald-700 border-emerald-200">
+                          <Badge variant="outline" className="text-[10px] bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200">
                             {t('confirm') === 'Confirm' ? 'You' : 'أنت'}
                           </Badge>
                         )}
@@ -344,7 +344,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700"
+                                className="h-8 w-8 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 hover:text-emerald-700 dark:hover:text-emerald-300"
                                 disabled={f.status === 'accepted'}
                                 onClick={() => patchFeature(f.id, { status: 'accepted' })}
                                 aria-label={t('accept')}
@@ -359,7 +359,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-red-600 hover:bg-red-50 hover:text-red-700"
+                                className="h-8 w-8 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-700 dark:hover:text-red-300"
                                 disabled={f.status === 'rejected'}
                                 onClick={() => patchFeature(f.id, { status: 'rejected' })}
                                 aria-label={t('reject')}
@@ -374,7 +374,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-sky-600 hover:bg-sky-50 hover:text-sky-700"
+                                className="h-8 w-8 text-sky-600 dark:text-sky-400 hover:bg-sky-50 dark:hover:bg-sky-500/10 hover:text-sky-700 dark:hover:text-sky-300"
                                 disabled={f.status === 'deferred'}
                                 onClick={() => patchFeature(f.id, { status: 'deferred' })}
                                 aria-label={t('defer')}
@@ -403,7 +403,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
                               <Button
                                 variant="ghost"
                                 size="icon"
-                                className="h-8 w-8 text-muted-foreground hover:bg-red-50 hover:text-red-600"
+                                className="h-8 w-8 text-muted-foreground hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400"
                                 onClick={() => setConfirmRemove(f)}
                                 aria-label={t('remove')}
                               >

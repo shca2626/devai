@@ -13,10 +13,10 @@ import { Loader2, Play } from 'lucide-react'
 // ============================================================
 
 const METHOD_STYLES: Record<string, string> = {
-  GET: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-  POST: 'bg-sky-50 text-sky-700 border-sky-200',
-  PATCH: 'bg-amber-50 text-amber-700 border-amber-200',
-  DELETE: 'bg-red-50 text-red-700 border-red-200',
+  GET: 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-500/25',
+  POST: 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200 dark:border-sky-500/25',
+  PATCH: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-500/25',
+  DELETE: 'bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-300 border-red-200 dark:border-red-500/25',
 }
 
 function TryPanel({ path }: { path: string }) {
@@ -50,7 +50,7 @@ function TryPanel({ path }: { path: string }) {
         <pre
           dir="ltr"
           className={`rounded-lg border p-2.5 text-[10px] leading-4 font-mono whitespace-pre-wrap break-all max-h-64 overflow-y-auto nice-scroll ${
-            state === 'error' ? 'bg-red-50/60 border-red-200' : 'bg-muted/40'
+            state === 'error' ? 'bg-red-50/60 dark:bg-red-500/10 border-red-200 dark:border-red-500/25' : 'bg-muted/40'
           }`}
         >
           {result}

@@ -21,12 +21,12 @@ export function AdminEngines() {
         </p>
       </div>
 
-      <div className="rounded-xl border border-emerald-300 bg-emerald-50/70 p-4 space-y-2">
-        <div className="flex items-center gap-2 text-sm font-semibold text-emerald-800">
+      <div className="rounded-xl border border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-500/10 p-4 space-y-2">
+        <div className="flex items-center gap-2 text-sm font-semibold text-emerald-800 dark:text-emerald-300">
           <InfinityIcon className="h-4 w-4" />
           No-limits policy (active)
         </div>
-        <ul className="space-y-1 text-xs text-emerald-800 leading-6">
+        <ul className="space-y-1 text-xs text-emerald-800 dark:text-emerald-300 leading-6">
           <li>• All 9 workflow stages are navigable at any time — the stepper never locks.</li>
           <li>• Every gate passes: unreviewed items are auto-accepted (or bulk-deferred/rejected by choice), missing artifacts never block, the readiness score is advisory.</li>
           <li>• Every engine can run from any stage — generate requirements before features if you want.</li>
