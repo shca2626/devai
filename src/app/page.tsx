@@ -29,6 +29,7 @@ import {
   Compass,
   DraftingCompass,
   FileSearch,
+  Globe,
   Languages,
   Lightbulb,
   ListChecks,
@@ -52,7 +53,7 @@ const EXAMPLE_IDEA =
 const TOOL_CHIP =
   'inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border bg-card px-3 text-xs font-medium text-foreground/75 transition-all hover:border-primary/40 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-45'
 
-function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
+function WelcomeHero({ onNewIdea, onSiteIntel }: { onNewIdea: (prefill?: string) => void; onSiteIntel: () => void }) {
   const { t, lang } = useApp()
   const steps = [
     { icon: MessagesSquare, title: t('stageUnderstanding'), desc: t('stepUnderstandDesc') },
@@ -95,6 +96,17 @@ function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
             className="w-full sm:w-auto transition-all hover:-translate-y-0.5"
           >
             {t('tryExample')}
+          </Button>
+          <Button
+            size="lg"
+            variant="ghost"
+            onClick={onSiteIntel}
+            className="gap-2 w-full sm:w-auto text-muted-foreground hover:text-foreground transition-all hover:-translate-y-0.5"
+            aria-label={t('siteIntelTitle')}
+            title={t('siteIntelBody')}
+          >
+            <Globe className="h-4 w-4 text-primary" />
+            {t('siteIntelTitle')}
           </Button>
         </div>
       </div>
@@ -288,19 +300,18 @@ function Shell() {
                   <span className="hidden xl:inline text-xs font-medium">{t('openDecisions')}</span>
                 </Button>
               )}
-              {selectedId && (
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSiteIntelOpen(true)}
-                  className="gap-1.5 min-h-9 px-2.5 xl:px-3"
-                  aria-label={t('openSiteIntel')}
-                  title={t('siteIntelTitle')}
-                >
-                  <Radar className="h-4 w-4 text-primary" />
-                  <span className="hidden xl:inline text-xs font-medium">{t('openSiteIntel')}</span>
-                </Button>
-              )}
+              {/* Site Intelligence — public tool, works with or without an idea */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSiteIntelOpen(true)}
+                className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                aria-label={t('openSiteIntel')}
+                title={t('siteIntelTitle')}
+              >
+                <Radar className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openSiteIntel')}</span>
+              </Button>
               <Button
                 variant="ghost"
                   size="sm"
@@ -396,11 +407,11 @@ function Shell() {
               <Scale className="h-3.5 w-3.5 text-primary" />
               {t('openDecisions')}
             </button>
+            {/* Site Intelligence — public tool, no idea required */}
             <button
               type="button"
               onClick={() => setSiteIntelOpen(true)}
-              disabled={!selectedId}
-              title={selectedId ? t('openSiteIntel') : t('selectIdeaFirst')}
+              title={t('siteIntelTitle')}
               className={TOOL_CHIP}
             >
               <Radar className="h-3.5 w-3.5 text-primary" />
@@ -446,7 +457,7 @@ function Shell() {
         {/* Main */}
         <div className="flex-1 min-w-0">
           <div className="mx-auto max-w-4xl">
-            {selectedId ? <IdeaView /> : <WelcomeHero onNewIdea={openNewIdea} />}
+            {selectedId ? <IdeaView /> : <WelcomeHero onNewIdea={openNewIdea} onSiteIntel={() => setSiteIntelOpen(true)} />}
           </div>
         </div>
       </div>

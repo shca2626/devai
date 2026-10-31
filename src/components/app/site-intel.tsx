@@ -316,6 +316,10 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
   const { t, lang, selectedId } = useApp()
   const { toast } = useToast()
 
+  // Standalone scope: with no idea selected the study runs against
+  // /api/site-intel and is saved to the workspace (not to an idea).
+  const scope = selectedId ? `/api/ideas/${selectedId}/site-intel` : '/api/site-intel'
+
   const [url, setUrl] = useState('')
   const [running, setRunning] = useState(false)
   const [analysis, setAnalysis] = useState<SiteAnalysisItem | null>(null)
@@ -324,18 +328,24 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
   const [busyId, setBusyId] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!open || !selectedId) return
+    if (!open) return
     setLoadingList(true)
-    fetch(`/api/ideas/${selectedId}/site-intel`)
+    fetch(scope)
       .then((r) => r.json())
       .then((d: { analyses?: SiteAnalysisSummary[] }) => {
         if (d.analyses) setAnalyses(d.analyses)
       })
       .catch(() => {})
       .finally(() => setLoadingList(false))
-  }, [open, selectedId])
+  }, [open, scope])
 
-  const canStart = useMemo(() => url.trim().length >= 4 && !running && !!selectedId, [url, running, selectedId])
+  // Switching between workspace and an idea swaps the history scope —
+  // drop any analysis rendered from the previous scope.
+  useEffect(() => {
+    setAnalysis(null)
+  }, [scope])
+
+  const canStart = useMemo(() => url.trim().length >= 4 && !running, [url, running])
 
   function errorText(err: string | undefined): string {
     if (err === 'INVALID_URL') return t('invalidUrl')
@@ -344,7 +354,7 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
   }
 
   async function advance(id: string): Promise<SiteAnalysisItem | null> {
-    const res = await fetch(`/api/ideas/${selectedId}/site-intel`, {
+    const res = await fetch(scope, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ analysisId: id, lang }),
@@ -359,11 +369,11 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
   }
 
   async function start() {
-    if (!selectedId || !canStart) return
+    if (!canStart) return
     setRunning(true)
     setAnalysis(null)
     try {
-      const res = await fetch(`/api/ideas/${selectedId}/site-intel`, {
+      const res = await fetch(scope, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url, lang }),
@@ -402,10 +412,9 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
   }
 
   async function openAnalysis(id: string) {
-    if (!selectedId) return
     setBusyId(id)
     try {
-      const res = await fetch(`/api/ideas/${selectedId}/site-intel?analysisId=${id}`)
+      const res = await fetch(`${scope}?analysisId=${id}`)
       const data = (await res.json()) as { analysis?: SiteAnalysisItem; error?: string }
       if (!res.ok || !data.analysis) {
         toast({ description: t('toolsError'), variant: 'destructive' })
@@ -420,10 +429,9 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
   }
 
   async function removeAnalysis(id: string) {
-    if (!selectedId) return
     setBusyId(id)
     try {
-      const res = await fetch(`/api/ideas/${selectedId}/site-intel?analysisId=${id}`, { method: 'DELETE' })
+      const res = await fetch(`${scope}?analysisId=${id}`, { method: 'DELETE' })
       if (!res.ok) {
         toast({ description: t('toolsError'), variant: 'destructive' })
         return
@@ -467,6 +475,14 @@ export function SiteIntelDialog({ open, onOpenChange }: { open: boolean; onOpenC
           </DialogTitle>
           <DialogDescription>{t('siteIntelBody')}</DialogDescription>
         </DialogHeader>
+
+        {/* Standalone mode notice — public tool, no idea required */}
+        {!selectedId && (
+          <div className="flex items-start gap-2 rounded-lg border border-primary/25 bg-primary/[0.05] px-3 py-2">
+            <Globe className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+            <p className="text-[11px] leading-5 text-muted-foreground">{t('siteIntelStandalone')}</p>
+          </div>
+        )}
 
         {/* ---------- URL entry ---------- */}
         <div className="space-y-2">

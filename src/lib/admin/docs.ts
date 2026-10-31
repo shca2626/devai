@@ -216,11 +216,12 @@ export const TOOL_DOCS: ToolDoc[] = [
     icon: 'Radar',
     what: 'Deep static analysis of any live website from a single URL: 7 gated stages (recon → surface → bundles → APIs → data models → audit → synthesis) producing a downloadable clone pack.',
     details: [
+      'Public tool — works with or without an idea (standalone studies live in the workspace scope, ideaId = null)',
       'Robots-aware crawling, NO JavaScript execution of the target',
       'Every claim carries evidence + method; unknowns are reported honestly',
       'Deterministic completeness score 0-100; anti-bot walls are detected and reported',
     ],
-    apis: ['POST /api/ideas/[id]/site-intel', 'GET /api/ideas/[id]/site-intel[?analysisId]', 'DELETE /api/ideas/[id]/site-intel?analysisId'],
+    apis: ['POST /api/site-intel (standalone — no idea needed)', 'POST /api/ideas/[id]/site-intel (idea-linked study)', 'GET /api/site-intel | /api/ideas/[id]/site-intel[?analysisId]', 'DELETE …/site-intel?analysisId'],
   },
   {
     name: 'Prompt Lab (Enhance / Translate)',
@@ -343,6 +344,9 @@ export const API_DOCS: ApiDocGroup[] = [
       { method: 'POST', path: '/api/ideas/[id]/site-intel', desc: 'Start a site study { url } → 7-stage analysis + clone pack.' },
       { method: 'GET', path: '/api/ideas/[id]/site-intel', desc: 'List analyses (or ?analysisId).', tryable: true },
       { method: 'DELETE', path: '/api/ideas/[id]/site-intel', desc: 'Delete an analysis ?analysisId.' },
+      { method: 'POST', path: '/api/site-intel', desc: 'Standalone site study — no idea required; saved to the workspace scope.', tryable: true },
+      { method: 'GET', path: '/api/site-intel', desc: 'List standalone workspace analyses (or ?analysisId).', tryable: true },
+      { method: 'DELETE', path: '/api/site-intel', desc: 'Delete a standalone analysis ?analysisId.' },
     ],
   },
   {

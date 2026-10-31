@@ -1628,7 +1628,8 @@ function serialize(row: {
 // Orchestration — one stage per call, progress persisted
 // ============================================================
 
-async function constitutionLine(ideaId: string): Promise<string> {
+async function constitutionLine(ideaId: string | null): Promise<string> {
+  if (!ideaId) return '' // standalone study — no idea constitution to apply
   try {
     const rules = (await listRules(ideaId)).filter((r) => r.enabled)
     if (rules.length === 0) return ''
@@ -1651,9 +1652,12 @@ async function persist(rowId: string, data: SiteIntelData, stageDone: number, st
   await db.siteAnalysis.update({ where: { id: rowId }, data: patch })
 }
 
-export async function startSiteAnalysis(ideaId: string, rawUrl: string): Promise<SiteAnalysisItem> {
-  const idea = await db.idea.findUnique({ where: { id: ideaId }, select: { id: true } })
-  if (!idea) throw new SiteIntelError('NOT_FOUND', 'Idea not found')
+export async function startSiteAnalysis(ideaId: string | null, rawUrl: string): Promise<SiteAnalysisItem> {
+  // ideaId === null -> standalone workspace study, usable without any idea
+  if (ideaId) {
+    const idea = await db.idea.findUnique({ where: { id: ideaId }, select: { id: true } })
+    if (!idea) throw new SiteIntelError('NOT_FOUND', 'Idea not found')
+  }
 
   const seed = normalizeInputUrl(rawUrl)
   const reconResult = await collectRecon(seed)
@@ -1679,12 +1683,14 @@ export async function startSiteAnalysis(ideaId: string, rawUrl: string): Promise
     },
   })
 
-  await logDecision(ideaId, 'Site study started', `${seed.hostname} — recon complete (HTTP ${reconResult.recon.httpStatus}${reconResult.recon.blocked ? ', partially blocked' : ''})`)
+  if (ideaId) {
+    await logDecision(ideaId, 'Site study started', `${seed.hostname} — recon complete (HTTP ${reconResult.recon.httpStatus}${reconResult.recon.blocked ? ', partially blocked' : ''})`)
+  }
   return serialize(row)
 }
 
-export async function advanceSiteAnalysis(ideaId: string, analysisId: string, lang: 'ar' | 'en'): Promise<SiteAnalysisItem> {
-  const row = await db.siteAnalysis.findFirst({ where: { id: analysisId, ideaId } })
+export async function advanceSiteAnalysis(ideaId: string | null, analysisId: string, lang: 'ar' | 'en'): Promise<SiteAnalysisItem> {
+  const row = await db.siteAnalysis.findFirst({ where: { id: analysisId, ideaId: ideaId ?? null } })
   if (!row) throw new SiteIntelError('NOT_FOUND', 'Analysis not found')
   if (row.status !== 'running') return serialize(row)
   if (row.stageDone >= SITE_INTEL_STAGES.length) return serialize(row)
@@ -1756,17 +1762,21 @@ export async function advanceSiteAnalysis(ideaId: string, analysisId: string, la
       await persist(row.id, data, 7, 'complete', null)
 
       const fresh = await db.siteAnalysis.findUnique({ where: { id: row.id } })
-      await logDecision(
-        ideaId,
-        'Site study complete',
-        `${row.domain} — 7/7 stages, completeness ${fresh?.score ?? 0}%, ${data.evidence.length} evidence entries, ${data.pack.length} pack files`
-      )
+      if (ideaId) {
+        await logDecision(
+          ideaId,
+          'Site study complete',
+          `${row.domain} — 7/7 stages, completeness ${fresh?.score ?? 0}%, ${data.evidence.length} evidence entries, ${data.pack.length} pack files`
+        )
+      }
       return serialize(fresh ?? row)
     }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'unknown error'
     await persist(row.id, data, row.stageDone, 'failed', `${stage} stage failed: ${message}`)
-    await logDecision(ideaId, 'Site study failed', `${row.domain} — ${stage} stage: ${message.slice(0, 140)}`)
+    if (ideaId) {
+      await logDecision(ideaId, 'Site study failed', `${row.domain} — ${stage} stage: ${message.slice(0, 140)}`)
+    }
     const fresh = await db.siteAnalysis.findUnique({ where: { id: row.id } })
     return serialize(fresh ?? row)
   }
@@ -1775,13 +1785,13 @@ export async function advanceSiteAnalysis(ideaId: string, analysisId: string, la
   return serialize(fresh ?? row)
 }
 
-export async function getAnalysis(ideaId: string, analysisId: string): Promise<SiteAnalysisItem | null> {
-  const row = await db.siteAnalysis.findFirst({ where: { id: analysisId, ideaId } })
+export async function getAnalysis(ideaId: string | null, analysisId: string): Promise<SiteAnalysisItem | null> {
+  const row = await db.siteAnalysis.findFirst({ where: { id: analysisId, ideaId: ideaId ?? null } })
   return row ? serialize(row) : null
 }
 
-export async function listAnalyses(ideaId: string): Promise<SiteAnalysisSummary[]> {
-  const rows = await db.siteAnalysis.findMany({ where: { ideaId }, orderBy: { createdAt: 'desc' } })
+export async function listAnalyses(ideaId: string | null): Promise<SiteAnalysisSummary[]> {
+  const rows = await db.siteAnalysis.findMany({ where: { ideaId: ideaId ?? null }, orderBy: { createdAt: 'desc' } })
   return rows.map((r) => {
     const data = parseData(r.data)
     return {
@@ -1797,7 +1807,7 @@ export async function listAnalyses(ideaId: string): Promise<SiteAnalysisSummary[
   })
 }
 
-export async function deleteAnalysis(ideaId: string, analysisId: string): Promise<boolean> {
-  const res = await db.siteAnalysis.deleteMany({ where: { id: analysisId, ideaId } })
+export async function deleteAnalysis(ideaId: string | null, analysisId: string): Promise<boolean> {
+  const res = await db.siteAnalysis.deleteMany({ where: { id: analysisId, ideaId: ideaId ?? null } })
   return res.count > 0
 }

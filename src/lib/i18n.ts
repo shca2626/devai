@@ -788,6 +788,10 @@ const dict = {
     en: 'Give a URL — get a deep static study of any live web platform: pages, routes, tech stack, API surface, data models, design tokens and a full audit, as a downloadable file pack for build agents. The target is never executed; robots.txt is respected; every claim carries evidence.',
     ar: 'أعِطِ رابطًا — واحصل على دراسة ساكنة معمّقة لأي منصة ويب: الصفحات والمسارات والتقنيات وسطح الـAPI ونموذج البيانات ورموز التصميم وتدقيق شامل، في حزمة ملفات قابلة للتنزيل لأدوات البناء. لا يُنفَّذ أي كود من الموقع؛ ويُحترم robots.txt؛ وكل استنتاج يحمل دليله.',
   },
+  siteIntelStandalone: {
+    en: 'Public tool — no idea needed. This study runs in your workspace and is not linked to any idea. Select an idea first if you want the study attached to it.',
+    ar: 'أداة عامة — لا تحتاج إلى فكرة. تُنفَّذ هذه الدراسة في مساحة عملك وغير مرتبطة بأي فكرة. اختر فكرة أولًا إن أردت ربط الدراسة بها.',
+  },
   siteIntelUrlLabel: { en: 'Platform URL', ar: 'رابط المنصة' },
   siteIntelUrlPlaceholder: { en: 'https://example.com', ar: 'https://example.com' },
   siteIntelStart: { en: 'Analyze site', ar: 'حلّل الموقع' },

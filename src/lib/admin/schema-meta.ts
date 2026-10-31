@@ -3539,7 +3539,7 @@ export const SCHEMA_MODELS: SchemaModel[] = [
         "unique": false,
         "hasDefault": false,
         "json": false,
-        "optional": false,
+        "optional": true,
         "list": false
       },
       {

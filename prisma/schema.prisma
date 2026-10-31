@@ -593,8 +593,8 @@ model DriftCheck {
 
 model SiteAnalysis {
   id        String   @id @default(cuid())
-  ideaId    String
-  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  ideaId    String? // null = standalone workspace study (no idea required)
+  idea      Idea?    @relation(fields: [ideaId], references: [id], onDelete: Cascade)
   url       String
   domain    String
   status    String   @default("running") // running | complete | failed
