@@ -77,7 +77,7 @@ export function AdminMaintenance({ onDataChanged }: { onDataChanged: () => void 
   return (
     <div className="space-y-6">
       {/* Export */}
-      <section className="rounded-xl border bg-card p-4">
+      <section className="rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-5">
         <h2 className="text-sm font-semibold mb-1">Export</h2>
         <p className="text-xs text-muted-foreground leading-5 mb-3">
           Download the complete database as one JSON file — every model, every row, with a summary header. Perfect for

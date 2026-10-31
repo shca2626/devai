@@ -68,40 +68,40 @@ export function AdminOverview({ data, loading }: { data: OverviewPayload | null;
   const maxStage = Math.max(1, ...stageCounts)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* No-limits banner */}
-      <div className="rounded-xl border border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-500/10 p-4 flex flex-col sm:flex-row items-start gap-3">
-        <InfinityIcon className="h-5 w-5 text-emerald-600 dark:text-emerald-400 mt-0.5" />
-        <div className="flex-1">
-          <div className="text-sm font-semibold text-emerald-800 dark:text-emerald-300">No-limits mode is ACTIVE</div>
-          <p className="text-xs text-emerald-700 dark:text-emerald-300 leading-6 mt-1">{data.limits}</p>
+      <div className="rounded-xl sm:rounded-2xl border border-emerald-300 dark:border-emerald-500/30 bg-emerald-50/70 dark:bg-emerald-500/10 p-3 sm:p-4 flex flex-col sm:flex-row items-start gap-2.5 sm:gap-3">
+        <InfinityIcon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-emerald-600 dark:text-emerald-400 mt-0.5 shrink-0" />
+        <div className="flex-1 min-w-0">
+          <div className="text-[13px] sm:text-sm font-semibold text-emerald-800 dark:text-emerald-300">No-limits mode is ACTIVE</div>
+          <p className="text-[11px] sm:text-xs text-emerald-700 dark:text-emerald-300 leading-5 sm:leading-6 mt-1">{data.limits}</p>
         </div>
       </div>
 
       {/* Stat cards */}
-      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-2.5 sm:gap-3 grid-cols-2 lg:grid-cols-4">
         {[
           { label: 'Ideas', value: data.totals.ideas, icon: Database, color: 'text-primary' },
           { label: 'Verification runs', value: data.totals.verificationRuns, icon: CheckCircle2, color: 'text-emerald-600 dark:text-emerald-400' },
           { label: 'Drift checks', value: data.totals.driftChecks, icon: Activity, color: 'text-amber-600 dark:text-amber-400' },
           { label: 'Site analyses', value: data.totals.siteAnalyses, icon: HardDrive, color: 'text-sky-600 dark:text-sky-400' },
         ].map((s) => (
-          <div key={s.label} className="rounded-xl border bg-card p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{s.label}</span>
-              <s.icon className={`h-4 w-4 ${s.color}`} />
+          <div key={s.label} className="rounded-xl sm:rounded-2xl border bg-card p-3 sm:p-4">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[10px] sm:text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{s.label}</span>
+              <s.icon className={`h-4 w-4 shrink-0 ${s.color}`} />
             </div>
-            <div className="mt-2 text-3xl font-bold tabular-nums">{s.value}</div>
+            <div className="mt-1.5 sm:mt-2 text-2xl sm:text-3xl font-bold tabular-nums">{s.value}</div>
           </div>
         ))}
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
         {/* Ideas by stage */}
-        <div className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2 mb-4">
+        <div className="rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-5">
+          <div className="flex items-center gap-2 mb-3 sm:mb-4">
             <Gauge className="h-4 w-4 text-primary" />
-            <h3 className="text-sm font-semibold">Ideas by workflow stage</h3>
+            <h3 className="text-[13px] sm:text-sm font-semibold">Ideas by workflow stage</h3>
           </div>
           <div className="space-y-2.5">
             {STAGES.map((stage, i) => (
@@ -119,11 +119,11 @@ export function AdminOverview({ data, loading }: { data: OverviewPayload | null;
         </div>
 
         {/* System info */}
-        <div className="space-y-6">
-          <div className="rounded-xl border bg-card p-4">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-5">
             <div className="flex items-center gap-2 mb-3">
               <Database className="h-4 w-4 text-primary" />
-              <h3 className="text-sm font-semibold">Database</h3>
+              <h3 className="text-[13px] sm:text-sm font-semibold">Database</h3>
             </div>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               <dt className="text-muted-foreground">Provider</dt>
@@ -137,10 +137,10 @@ export function AdminOverview({ data, loading }: { data: OverviewPayload | null;
             </dl>
           </div>
 
-          <div className="rounded-xl border bg-card p-4">
+          <div className="rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-5">
             <div className="flex items-center gap-2 mb-3">
               <Cpu className="h-4 w-4 text-primary" />
-              <h3 className="text-sm font-semibold">Runtime & AI</h3>
+              <h3 className="text-[13px] sm:text-sm font-semibold">Runtime & AI</h3>
             </div>
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-xs">
               <dt className="text-muted-foreground">Node</dt>
@@ -166,9 +166,9 @@ export function AdminOverview({ data, loading }: { data: OverviewPayload | null;
       </div>
 
       {/* Recent activity */}
-      <div className="rounded-xl border bg-card overflow-hidden">
-        <div className="border-b bg-muted/50 px-4 py-2.5 text-sm font-semibold flex items-center gap-2">
-          <Activity className="h-4 w-4 text-primary" />
+      <div className="rounded-xl sm:rounded-2xl border bg-card overflow-hidden">
+        <div className="border-b bg-muted/50 px-3 sm:px-4 py-2.5 text-[13px] sm:text-sm font-semibold flex items-center gap-2">
+          <Activity className="h-4 w-4 text-primary shrink-0" />
           Latest activity (audit trail, newest first)
         </div>
         {data.recentActivity.length === 0 ? (
@@ -177,7 +177,7 @@ export function AdminOverview({ data, loading }: { data: OverviewPayload | null;
           <ScrollArea className="max-h-80">
             <div className="divide-y">
               {data.recentActivity.map((a) => (
-                <div key={a.id} className="px-4 py-2.5">
+                <div key={a.id} className="px-3 sm:px-4 py-2.5">
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-[13px] font-medium">{a.action}</span>
                     {a.stage && <Badge variant="outline" className="text-[9px] font-mono">{a.stage}</Badge>}

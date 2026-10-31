@@ -119,7 +119,7 @@ export function RequirementsStage({ detail }: { detail: IdeaDetail }) {
       <div className="space-y-4">
         {active && (
           <>
-            <div className="rounded-xl border bg-card p-4 text-sm text-muted-foreground leading-7">{t('startEngineeringBody')}</div>
+            <div className="rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-5 text-sm text-muted-foreground leading-7">{t('startEngineeringBody')}</div>
             {busy ? (
               <WorkingPanel steps={[t('generatingRequirements1'), t('generatingRequirements2'), t('generatingRequirements3')]} />
             ) : (

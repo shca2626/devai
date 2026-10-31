@@ -1,14 +1,6 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Skeleton } from '@/components/ui/skeleton'
 import { AppProvider, useApp } from '@/components/app/context'
@@ -50,12 +42,15 @@ import {
   ShieldCheck,
   Sparkles,
   Sun,
-  Wrench,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
 const EXAMPLE_IDEA =
   'أريد تطبيق يربط بين أصحاب المحلات والموردين، ويقارن الأسعار، ويخلي التاجر يطلب المنتجات من عدة موردين بسهولة.'
+
+// Mobile tool-strip chip: compact pill, icon + label, springy on tap
+const TOOL_CHIP =
+  'inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border bg-card px-3 text-xs font-medium text-foreground/75 transition-all hover:border-primary/40 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-45'
 
 function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
   const { t, lang } = useApp()
@@ -66,7 +61,7 @@ function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
     { icon: ShieldCheck, title: t('stageBaseline'), desc: t('stepBaselineDesc') },
   ]
   return (
-    <div className="relative mx-auto max-w-3xl px-4 py-10 sm:py-16 space-y-9">
+    <div className="relative mx-auto max-w-3xl px-4 py-8 sm:py-16 space-y-7 sm:space-y-9">
       {/* Ambient gradient backdrop */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/15 blur-3xl" />
@@ -81,7 +76,7 @@ function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
         <h1 className="text-2xl sm:text-4xl font-bold tracking-tight leading-tight">
           {t('welcomeTitle')}
         </h1>
-        <p className="text-muted-foreground text-sm sm:text-base leading-7 max-w-xl mx-auto">
+        <p className="text-muted-foreground text-[13px] leading-6 sm:text-base sm:leading-7 max-w-xl mx-auto">
           {t('welcomeBody')}
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
@@ -108,7 +103,7 @@ function WelcomeHero({ onNewIdea }: { onNewIdea: (prefill?: string) => void }) {
         {steps.map((step, i) => (
           <div
             key={step.title}
-            className="group rounded-xl border bg-card p-4 flex gap-3 transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-primary/30"
+            className="group rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-4 flex gap-3 transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-primary/30"
           >
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-violet-500/10 group-hover:from-primary/20 group-hover:to-violet-500/15 transition-colors">
               <step.icon className="h-4.5 w-4.5 text-primary" />
@@ -135,7 +130,7 @@ function IdeaView() {
 
   if (loadingDetail && !detail) {
     return (
-      <div className="space-y-4 p-4 sm:p-6">
+      <div className="space-y-4 p-3 sm:p-6">
         <Skeleton className="shimmer h-8 w-64" />
         <Skeleton className="shimmer h-10 w-full max-w-xl" />
         <Skeleton className="shimmer h-40 w-full" />
@@ -150,9 +145,9 @@ function IdeaView() {
   if (!detail) return null
 
   return (
-    <div className="space-y-4 p-4 sm:p-6">
-      <header className="space-y-3">
-        <h1 className="text-lg sm:text-xl font-bold tracking-tight line-clamp-2" dir="auto">
+    <div className="space-y-3.5 p-3 sm:space-y-5 sm:p-5 lg:p-6">
+      <header className="space-y-2.5 sm:space-y-3">
+        <h1 className="text-[17px] sm:text-xl lg:text-2xl font-bold tracking-tight line-clamp-2" dir="auto">
           {detail.idea.title}
         </h1>
         <Stepper currentStage={detail.idea.stage} view={view} />
@@ -213,7 +208,7 @@ function Shell() {
     <div className="min-h-screen flex flex-col bg-muted/20">
       {/* Header */}
       <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
-        <div className="flex h-14 items-center gap-2 px-3 sm:px-4">
+        <div className="flex h-12 items-center gap-2 px-3 sm:h-14 sm:px-4">
           <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Menu">
@@ -230,6 +225,7 @@ function Shell() {
                   setMobileNavOpen(false)
                   openNewIdea()
                 }}
+                onNavigate={() => setMobileNavOpen(false)}
               />
             </SheetContent>
           </Sheet>
@@ -251,65 +247,6 @@ function Shell() {
           </span>
 
           <div className="ms-auto flex items-center gap-1 sm:gap-1.5 min-w-0">
-            {/* Compact tools menu — small screens */}
-            <div className="md:hidden">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="min-h-9 px-2.5"
-                    aria-label={t('toolsMenu')}
-                    title={t('toolsMenu')}
-                  >
-                    <Wrench className="h-4 w-4 text-primary" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-60">
-                  <DropdownMenuLabel>{t('toolsMenu')}</DropdownMenuLabel>
-                  {selectedId && (
-                    <DropdownMenuItem onClick={() => setContextPackOpen(true)} className="gap-2">
-                      <Package className="h-4 w-4 text-primary" />
-                      {t('openContextPack')}
-                    </DropdownMenuItem>
-                  )}
-                  {selectedId && (
-                    <DropdownMenuItem onClick={() => setVerifyOpen(true)} className="gap-2">
-                      <FileSearch className="h-4 w-4 text-primary" />
-                      {t('openVerifier')}
-                    </DropdownMenuItem>
-                  )}
-                  {selectedId && (
-                    <DropdownMenuItem onClick={() => setDecisionsOpen(true)} className="gap-2">
-                      <Scale className="h-4 w-4 text-primary" />
-                      {t('openDecisions')}
-                    </DropdownMenuItem>
-                  )}
-                  {selectedId && (
-                    <DropdownMenuItem onClick={() => setSiteIntelOpen(true)} className="gap-2">
-                      <Radar className="h-4 w-4 text-primary" />
-                      {t('openSiteIntel')}
-                    </DropdownMenuItem>
-                  )}
-                  <DropdownMenuItem onClick={() => setPlaybookOpen(true)} className="gap-2">
-                    <BookOpen className="h-4 w-4 text-primary" />
-                    {t('openPlaybook')}
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => setConstitutionOpen(true)} className="gap-2">
-                    <ScrollText className="h-4 w-4 text-primary" />
-                    {t('openConstitution')}
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <a href="/admin" className="gap-2 cursor-pointer">
-                      <ShieldCheck className="h-4 w-4 text-primary" />
-                      Admin
-                    </a>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
             {/* Full tool buttons — md and up */}
             <div className="hidden md:flex items-center gap-1.5">
               {selectedId && (
@@ -423,6 +360,78 @@ function Shell() {
               <Sparkles className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">{t('newIdea')}</span>
             </Button>
+          </div>
+        </div>
+
+        {/* Mobile tool strip — every tool visible and one tap away */}
+        <div className="border-t border-border/70 bg-background/60 md:hidden" role="toolbar" aria-label={t('toolsMenu')}>
+          <div className="nice-scroll flex h-11 items-center gap-1.5 overflow-x-auto px-3">
+            <button
+              type="button"
+              onClick={() => setContextPackOpen(true)}
+              disabled={!selectedId}
+              title={selectedId ? t('openContextPack') : t('selectIdeaFirst')}
+              className={TOOL_CHIP}
+            >
+              <Package className="h-3.5 w-3.5 text-primary" />
+              {t('openContextPack')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setVerifyOpen(true)}
+              disabled={!selectedId}
+              title={selectedId ? t('openVerifier') : t('selectIdeaFirst')}
+              className={TOOL_CHIP}
+            >
+              <FileSearch className="h-3.5 w-3.5 text-primary" />
+              {t('openVerifier')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setDecisionsOpen(true)}
+              disabled={!selectedId}
+              title={selectedId ? t('openDecisions') : t('selectIdeaFirst')}
+              className={TOOL_CHIP}
+            >
+              <Scale className="h-3.5 w-3.5 text-primary" />
+              {t('openDecisions')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setSiteIntelOpen(true)}
+              disabled={!selectedId}
+              title={selectedId ? t('openSiteIntel') : t('selectIdeaFirst')}
+              className={TOOL_CHIP}
+            >
+              <Radar className="h-3.5 w-3.5 text-primary" />
+              {t('openSiteIntel')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setPlaybookOpen(true)}
+              title={t('openPlaybook')}
+              className={TOOL_CHIP}
+            >
+              <BookOpen className="h-3.5 w-3.5 text-primary" />
+              {t('openPlaybook')}
+            </button>
+            <button
+              type="button"
+              onClick={() => setConstitutionOpen(true)}
+              title={t('openConstitution')}
+              className={TOOL_CHIP}
+            >
+              <ScrollText className="h-3.5 w-3.5 text-primary" />
+              {t('openConstitution')}
+            </button>
+            <a
+              href="/admin"
+              className={TOOL_CHIP}
+              title="Admin panel — full control & system documentation"
+            >
+              <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+              Admin
+            </a>
           </div>
         </div>
       </header>

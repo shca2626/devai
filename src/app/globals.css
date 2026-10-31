@@ -175,17 +175,36 @@ html[dir="rtl"] body {
   }
 }
 
-/* Minimal markdown rendering for discovery summaries */
+/* Minimal markdown rendering for discovery summaries —
+   compact scale on phones, standard scale from sm up */
 .md-body {
   line-height: 1.75;
 }
-.md-body h1 { font-size: 1.25rem; font-weight: 700; margin: 1rem 0 0.5rem; }
-.md-body h2 { font-size: 1.05rem; font-weight: 600; margin: 1rem 0 0.4rem; }
-.md-body h3 { font-size: 0.95rem; font-weight: 600; margin: 0.8rem 0 0.3rem; }
+.md-body h1 { font-size: 1.05rem; font-weight: 700; margin: 1rem 0 0.5rem; }
+.md-body h2 { font-size: 0.95rem; font-weight: 600; margin: 1rem 0 0.4rem; }
+.md-body h3 { font-size: 0.9rem; font-weight: 600; margin: 0.8rem 0 0.3rem; }
 .md-body p { margin: 0.4rem 0; }
 .md-body ul { list-style: disc; padding-inline-start: 1.4rem; margin: 0.4rem 0; }
 .md-body li { margin: 0.2rem 0; }
 .md-body strong { font-weight: 600; }
+
+@media (min-width: 640px) {
+  .md-body h1 { font-size: 1.25rem; }
+  .md-body h2 { font-size: 1.05rem; }
+  .md-body h3 { font-size: 0.95rem; }
+}
+
+/* Accessibility: honour reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* Subtle pulse for AI working states */
 @keyframes soft-pulse {

@@ -178,7 +178,7 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
 
       {/* Discovery summary */}
       {idea.summary && (
-        <div className="rounded-xl border p-4" dir="ltr">
+        <div className="rounded-xl sm:rounded-2xl border p-3.5 sm:p-5" dir="ltr">
           <div className="mb-2 text-sm font-semibold">{t('discoverySummaryTitle')}</div>
           <div className="md-body text-sm text-foreground/90">
             <ReactMarkdown>{idea.summary.summaryMarkdown}</ReactMarkdown>
@@ -299,7 +299,7 @@ export function BaselineStage({ detail }: { detail: IdeaDetail }) {
 
         {/* Decision history */}
         <TabsContent value="decisions" className="mt-2">
-          <div className="rounded-xl border p-4">
+          <div className="rounded-xl sm:rounded-2xl border p-3.5 sm:p-5">
             {decisions.length === 0 ? (
               <p className="text-center text-sm text-muted-foreground py-4">{t('noDecisions')}</p>
             ) : (

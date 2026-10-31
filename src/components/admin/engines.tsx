@@ -51,7 +51,7 @@ export function AdminEngines() {
         </div>
       </div>
 
-      <div className="rounded-xl border bg-card p-4">
+      <div className="rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-5">
         <div className="flex items-center gap-2 mb-3 text-sm font-semibold">
           <Cpu className="h-4 w-4 text-primary" />
           AI gateway architecture

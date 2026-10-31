@@ -88,7 +88,7 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
   // readiness is always computed by the API — no locked teaser here.
   if (!readiness) {
     return (
-      <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
+      <div className="rounded-xl sm:rounded-2xl border border-dashed p-6 sm:p-8 text-center space-y-3">
         <Radar className="h-8 w-8 text-muted-foreground mx-auto" />
         <p className="text-sm text-muted-foreground max-w-sm mx-auto leading-6">{t('readinessIntro')}</p>
       </div>

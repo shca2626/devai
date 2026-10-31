@@ -50,7 +50,7 @@ function timeAgo(iso: string, lang: 'ar' | 'en'): string {
   return `${days}d ago`
 }
 
-function IdeaRow({ idea }: { idea: IdeaListItem }) {
+function IdeaRow({ idea, onNavigate }: { idea: IdeaListItem; onNavigate?: () => void }) {
   const { t, lang, selectedId, selectIdea, refreshIdeas } = useApp()
   const [confirmDelete, setConfirmDelete] = useState(false)
   const [renameOpen, setRenameOpen] = useState(false)
@@ -86,13 +86,17 @@ function IdeaRow({ idea }: { idea: IdeaListItem }) {
           ? 'border-primary/50 bg-primary/[0.05] shadow-sm'
           : 'border-transparent hover:border-border hover:bg-muted/50'
       )}
-      onClick={() => selectIdea(idea.id)}
+      onClick={() => {
+        selectIdea(idea.id)
+        onNavigate?.()
+      }}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault()
           selectIdea(idea.id)
+          onNavigate?.()
         }
       }}
       aria-pressed={active}
@@ -223,7 +227,7 @@ function IdeaRow({ idea }: { idea: IdeaListItem }) {
   )
 }
 
-export function Sidebar({ onNewIdea }: { onNewIdea: () => void }) {
+export function Sidebar({ onNewIdea, onNavigate }: { onNewIdea: () => void; onNavigate?: () => void }) {
   const { t, ideas, lang } = useApp()
   const [query, setQuery] = useState('')
 
@@ -268,7 +272,7 @@ export function Sidebar({ onNewIdea }: { onNewIdea: () => void }) {
             </p>
           </div>
         ) : (
-          filtered.map((idea) => <IdeaRow key={idea.id} idea={idea} />)
+          filtered.map((idea) => <IdeaRow key={idea.id} idea={idea} onNavigate={onNavigate} />)
         )}
       </div>
     </div>

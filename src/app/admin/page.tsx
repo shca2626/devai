@@ -78,13 +78,13 @@ export default function AdminPage() {
     <div className="min-h-screen bg-muted/20" dir="ltr">
       {/* Header */}
       <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
-        <div className="mx-auto max-w-7xl flex h-14 items-center gap-3 px-4">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Activity className="h-4.5 w-4.5" />
+        <div className="mx-auto max-w-7xl flex h-12 sm:h-14 items-center gap-2.5 sm:gap-3 px-3 sm:px-4">
+          <span className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm shadow-primary/25">
+            <Activity className="h-4 w-4" />
           </span>
-          <div>
-            <div className="text-[15px] font-bold leading-tight">Admin Control Panel</div>
-            <div className="text-[10px] text-muted-foreground leading-tight">
+          <div className="min-w-0">
+            <div className="text-[13px] sm:text-[15px] font-bold leading-tight truncate">Admin Control Panel</div>
+            <div className="hidden sm:block text-[9px] sm:text-[10px] text-muted-foreground leading-tight truncate">
               AI Software Engineer · full system control & documentation
             </div>
           </div>
@@ -96,10 +96,11 @@ export default function AdminPage() {
             <span className="hidden md:inline text-[11px] text-muted-foreground tabular-nums">
               {SCHEMA_MODELS.length} models · {ideas.length} ideas
             </span>
-            <Button variant="outline" size="sm" className="gap-1.5" asChild>
+            <Button variant="outline" size="sm" className="gap-1.5 px-2.5 sm:px-3" asChild>
               <Link href="/">
                 <ArrowLeft className="h-3.5 w-3.5" />
-                Back to app
+                <span className="hidden sm:inline">Back to app</span>
+                <span className="sr-only sm:hidden">Back to app</span>
               </Link>
             </Button>
           </div>
@@ -129,26 +130,31 @@ export default function AdminPage() {
           </nav>
         </aside>
 
-        {/* Mobile nav */}
-        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t bg-background/95 backdrop-blur flex overflow-x-auto nice-scroll">
-          {NAV.map((item) => (
-            <button
-              key={item.key}
-              type="button"
-              onClick={() => setSection(item.key)}
-              className={cn(
-                'flex flex-col items-center gap-0.5 px-3.5 py-2 text-[10px] font-medium shrink-0',
-                section === item.key ? 'text-primary' : 'text-muted-foreground'
-              )}
-            >
-              <item.icon className="h-4 w-4" />
-              {item.label}
-            </button>
-          ))}
+        {/* Mobile nav — bottom tab bar with active indicator + iOS safe area */}
+        <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t bg-background/95 backdrop-blur pb-[env(safe-area-inset-bottom)]">
+          <div className="flex overflow-x-auto nice-scroll">
+            {NAV.map((item) => (
+              <button
+                key={item.key}
+                type="button"
+                onClick={() => setSection(item.key)}
+                className={cn(
+                  'relative flex flex-1 flex-col items-center gap-0.5 px-3.5 py-2 text-[10px] font-medium shrink-0 transition-colors min-w-[72px]',
+                  section === item.key ? 'text-primary' : 'text-muted-foreground'
+                )}
+              >
+                {section === item.key && (
+                  <span aria-hidden className="absolute top-0 h-0.5 w-7 rounded-full bg-primary" />
+                )}
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Main */}
-        <main className="flex-1 min-w-0 p-4 sm:p-6 pb-24 lg:pb-6">
+        <main className="flex-1 min-w-0 p-3 sm:p-4 lg:p-6 pb-24 lg:pb-6">
           {section === 'overview' && <AdminOverview data={overview} loading={loading} />}
           {section === 'database' && <AdminDatabase counts={counts} />}
           {section === 'ideas' && <AdminIdeas ideas={ideas} onChanged={loadOverview} />}

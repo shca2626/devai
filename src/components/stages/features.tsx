@@ -182,7 +182,7 @@ export function FeaturesStage({ detail }: { detail: IdeaDetail }) {
         {busy === 'generate' ? (
           <WorkingPanel steps={[t('generatingFeatures1'), t('generatingFeatures2'), t('generatingFeatures3')]} />
         ) : (
-          <div className="rounded-xl border border-dashed p-8 text-center space-y-3">
+          <div className="rounded-xl sm:rounded-2xl border border-dashed p-6 sm:p-8 text-center space-y-3">
             <Rocket className="h-8 w-8 text-primary mx-auto" />
             <p className="text-sm text-muted-foreground max-w-md mx-auto leading-6">{t('stepFeaturesDesc')}</p>
             <Button onClick={generate} size="lg" className="gap-1.5">

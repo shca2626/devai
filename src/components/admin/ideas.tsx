@@ -88,7 +88,7 @@ export function AdminIdeas({ ideas, onChanged }: { ideas: AdminIdea[]; onChanged
       </div>
 
       {ideas.length === 0 ? (
-        <div className="rounded-xl border border-dashed p-8 text-center">
+        <div className="rounded-xl sm:rounded-2xl border border-dashed p-6 sm:p-8 text-center">
           <Lightbulb className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
           <p className="text-sm text-muted-foreground">No ideas yet — create one from the main app.</p>
         </div>

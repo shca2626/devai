@@ -128,7 +128,7 @@ export function DiscoverStage({ detail }: { detail: IdeaDetail }) {
   return (
     <div className="space-y-4">
       {/* Coverage panel */}
-      <div className="rounded-xl border p-4">
+      <div className="rounded-xl sm:rounded-2xl border p-3.5 sm:p-5">
         <div className="flex items-center justify-between gap-3 mb-2">
           <span className="text-sm font-semibold">{t('coverage')}</span>
           <span className="text-xs text-muted-foreground">
@@ -281,7 +281,7 @@ export function DiscoverStage({ detail }: { detail: IdeaDetail }) {
 
       {/* Summary (when finished) */}
       {idea.summary && (
-        <div className="rounded-xl border p-4" dir="ltr">
+        <div className="rounded-xl sm:rounded-2xl border p-3.5 sm:p-5" dir="ltr">
           <div className="mb-2 text-sm font-semibold">{t('discoverySummaryTitle')}</div>
           <div className="md-body text-sm text-foreground/90">
             <ReactMarkdown>{idea.summary.summaryMarkdown}</ReactMarkdown>

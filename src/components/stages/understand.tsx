@@ -101,7 +101,7 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
 
       {/* Original + interpretation, side by side */}
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl border bg-muted/30 p-4" dir="rtl">
+        <div className="rounded-xl sm:rounded-2xl border bg-muted/30 p-3.5 sm:p-5" dir="rtl">
           <div className="mb-2 flex items-center gap-2">
             <span className="text-xs font-semibold text-muted-foreground font-arabic">{t('originalIdea')}</span>
             <Badge variant="outline" className="text-[10px] font-arabic bg-background">
@@ -130,7 +130,7 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
             {idea.originalText}
           </p>
         </div>
-        <div className="rounded-xl border bg-card p-4" dir="ltr">
+        <div className="rounded-xl sm:rounded-2xl border bg-card p-3.5 sm:p-5" dir="ltr">
           <div className="mb-2 text-xs font-semibold text-muted-foreground">{t('englishInterpretation')}</div>
           <p className="text-[15px] leading-7 text-foreground">{interpretation.englishInterpretation}</p>
           <div className="mt-4 rounded-lg bg-primary/[0.05] border border-primary/15 p-3">
@@ -142,7 +142,7 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
 
       {/* Facts / unclear / assumed */}
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl border p-4">
+        <div className="rounded-xl sm:rounded-2xl border p-3.5 sm:p-5">
           <div className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-emerald-700">
             <CheckCircle2 className="h-4 w-4" />
             {t('understoodTitle')}
@@ -156,7 +156,7 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
             ))}
           </ul>
         </div>
-        <div className="rounded-xl border p-4">
+        <div className="rounded-xl sm:rounded-2xl border p-3.5 sm:p-5">
           <div className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-amber-600">
             <HelpCircle className="h-4 w-4" />
             {t('unclearTitle')}
@@ -171,7 +171,7 @@ export function UnderstandStage({ detail }: { detail: IdeaDetail }) {
           </ul>
           <p className="mt-2 text-[11px] text-muted-foreground">{t('unclearNote')}</p>
         </div>
-        <div className="rounded-xl border p-4">
+        <div className="rounded-xl sm:rounded-2xl border p-3.5 sm:p-5">
           <div className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-violet-700">
             <Lightbulb className="h-4 w-4" />
             {t('assumedTitle')}
