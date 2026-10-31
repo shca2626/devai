@@ -55,3 +55,6 @@ server.log
 
 # scratch audit outputs
 /tool-results/
+
+# user uploads (session inputs)
+/upload/
