@@ -168,6 +168,11 @@ export interface IdeaDetail {
   adrs: ArchDecisionRecord[]
   threatModel: ThreatModelDoc | null
   scaleReport: ScaleReport | null
+  // QA Lab
+  testCases: TestCaseRecord[]
+  testCoverage: TestCoverageDoc | null
+  edgeCases: EdgeCaseDoc | null
+  e2eScenarios: E2eScenarioRecord[]
   readiness: ReadinessReport | null
 }
 
@@ -509,6 +514,89 @@ export interface ScaleReport {
   scenarios: ScaleScenario[]
   plan: string | null
   status: ReviewStatus
+}
+
+// ---------- QA Lab (the complete Tester toolset) ----------
+
+export type TestLevel = 'unit' | 'integration'
+export type TestKind = 'happy' | 'negative' | 'boundary' | 'security'
+export type TestPriority = 'high' | 'medium' | 'low'
+export type TcStatus = 'proposed' | 'confirmed' | 'rejected'
+
+export interface TestCaseRecord {
+  id: string
+  code: string
+  title: string
+  level: TestLevel
+  kind: TestKind
+  linkedRequirement: string
+  linkedCriterion: number | null
+  preconditions: string[]
+  steps: string[]
+  expected: string
+  priority: TestPriority
+  status: TcStatus
+  order: number
+}
+
+export interface CoverageRow {
+  requirement: string
+  criteriaTotal: number
+  criteriaCovered: number
+  caseCodes: string[]
+}
+
+export interface CoverageGap {
+  requirement: string
+  reason: string
+}
+
+export interface TestCoverageDoc {
+  id: string
+  covered: CoverageRow[]
+  uncovered: CoverageGap[]
+  score: number // deterministic 0-100 — computed by the app from stored cases, never the model
+  note: string | null
+  status: ReviewStatus
+}
+
+export type EdgeRisk = 'low' | 'medium' | 'high'
+
+export interface EdgeCase {
+  scenario: string
+  category: string
+  risk: EdgeRisk
+  howToTest: string
+  linkedRequirement: string | null
+}
+
+export interface EdgeCaseGroup {
+  feature: string
+  cases: EdgeCase[]
+}
+
+export interface EdgeCaseDoc {
+  id: string
+  groups: EdgeCaseGroup[]
+  note: string | null
+  status: ReviewStatus
+}
+
+export type E2ePriority = 'smoke' | 'high' | 'medium'
+
+export interface E2eScenarioRecord {
+  id: string
+  code: string
+  title: string
+  persona: string
+  given: string[]
+  when: string[]
+  then: string[]
+  screens: string[]
+  priority: E2ePriority
+  linkedRequirements: string[]
+  status: TcStatus
+  order: number
 }
 
 // ---------- Readiness gate (honest, non-cosmetic) ----------

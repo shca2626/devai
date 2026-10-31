@@ -48,6 +48,10 @@ model Idea {
   adrs            ArchDecisionRecord[]
   threatModel     ThreatModelDoc?
   scaleReport     ScaleReport?
+  testCases       TestCaseRecord[]
+  testCoverage    TestCoverageDoc?
+  edgeCases       EdgeCaseDoc?
+  e2eScenarios    E2eScenarioRecord[]
   constitutionRules ConstitutionRule[]
   verificationRuns VerificationRun[]
   decisionEntries DecisionEntry[]
@@ -366,6 +370,88 @@ model ScaleReport {
   status      String   @default("proposed") // proposed | confirmed | rejected | needs_revision
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// ============================================================
+// QA Lab — the complete Tester toolset inside the Readiness
+// stage. Three engines, one discipline: every test artifact
+// traces back to a confirmed requirement code, and the
+// coverage score is computed deterministically by the
+// application from the cases actually stored — never trusted
+// to the model.
+//   1. Test Suite    — unit/integration cases derived from
+//      requirements + their acceptance criteria (happy,
+//      negative, boundary, security), reviewed case by case.
+//   2. Edge cases    — the adversarial brainstorm the happy
+//      path always forgets, grouped by feature.
+//   3. E2E scenarios — critical user journeys as
+//      Given/When/Then with personas, screens and smoke
+//      priority.
+// ============================================================
+
+model TestCaseRecord {
+  id               String   @id @default(cuid())
+  ideaId           String
+  idea             Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code             String // TC-01
+  title            String
+  level            String // unit | integration
+  kind             String // happy | negative | boundary | security
+  linkedRequirement String // the confirmed requirement code this case verifies
+  linkedCriterion  Int? // 1-based acceptance criterion index, when the case targets one
+  preconditions    String // JSON string[]
+  steps            String // JSON string[]
+  expected         String // the observable, verifiable outcome
+  priority         String // high | medium | low
+  status           String   @default("proposed") // proposed | confirmed | rejected
+  order            Int      @default(0)
+  createdAt        DateTime @default(now())
+
+  @@index([ideaId])
+}
+
+model TestCoverageDoc {
+  id        String   @id @default(cuid())
+  ideaId    String   @unique
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  covered   String // JSON [{requirement, criteriaTotal, criteriaCovered, caseCodes[]}] — app-computed
+  uncovered String // JSON [{requirement, reason}] — app-computed honest gap list
+  score     Int      @default(0) // deterministic acceptance-criteria coverage 0-100 — never model output
+  note      String?
+  status    String   @default("proposed") // proposed | confirmed | rejected | needs_revision
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model EdgeCaseDoc {
+  id        String   @id @default(cuid())
+  ideaId    String   @unique
+  idea      Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  groups    String // JSON [{feature, cases: [{scenario, category, risk, howToTest, linkedRequirement}]}]
+  note      String? // where the biggest testing gaps are, honestly
+  status    String   @default("proposed") // proposed | confirmed | rejected | needs_revision
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model E2eScenarioRecord {
+  id                String   @id @default(cuid())
+  ideaId            String
+  idea              Idea     @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  code              String // E2E-01
+  title             String
+  persona           String // who walks the journey
+  given             String // JSON string[] — pre-state
+  when              String // JSON string[] — user actions
+  then              String // JSON string[] — observable outcomes
+  screens           String // JSON string[] — screens the journey passes through
+  priority          String // smoke | high | medium
+  linkedRequirements String // JSON requirement codes
+  status            String   @default("proposed") // proposed | confirmed | rejected
+  order             Int      @default(0)
+  createdAt         DateTime @default(now())
+
+  @@index([ideaId])
 }
 
 // ============================================================

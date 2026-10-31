@@ -249,6 +249,42 @@ export async function PATCH(req: Request, { params }: Params) {
       return NextResponse.json(payload)
     }
 
+    // ---------- QA Lab artifacts ----------
+    if (['testCase', 'e2eScenario', 'testCoverage', 'edgeCase'].includes(kind)) {
+      const record =
+        kind === 'testCase'
+          ? await db.testCaseRecord.findUnique({ where: { id } })
+          : kind === 'e2eScenario'
+            ? await db.e2eScenarioRecord.findUnique({ where: { id } })
+            : kind === 'testCoverage'
+              ? await db.testCoverageDoc.findUnique({ where: { id } })
+              : await db.edgeCaseDoc.findUnique({ where: { id } })
+      if (!record) return NextResponse.json({ error: 'Artifact not found' }, { status: 404 })
+      const ideaId = (record as { ideaId: string }).ideaId
+      const status = body.status ?? ''
+      const TC_STATUSES = ['proposed', 'confirmed', 'rejected']
+      const allowed = kind === 'testCase' || kind === 'e2eScenario' ? TC_STATUSES : REVIEW_STATUSES
+      if (!allowed.includes(status)) {
+        return NextResponse.json({ error: 'Invalid status.' }, { status: 400 })
+      }
+      if (kind === 'testCase') await db.testCaseRecord.update({ where: { id }, data: { status } })
+      else if (kind === 'e2eScenario') await db.e2eScenarioRecord.update({ where: { id }, data: { status } })
+      else if (kind === 'testCoverage') await db.testCoverageDoc.update({ where: { id }, data: { status } })
+      else await db.edgeCaseDoc.update({ where: { id }, data: { status } })
+
+      const label =
+        kind === 'testCase'
+          ? `Test case ${(record as { code: string }).code}`
+          : kind === 'e2eScenario'
+            ? `E2E scenario ${(record as { code: string }).code}`
+            : kind === 'testCoverage'
+              ? 'Test coverage report'
+              : 'Edge case brainstorm'
+      await logDecision(ideaId, `${label} → ${status}`, undefined, 'readiness')
+      const payload = await buildIdeaDetail(ideaId)
+      return NextResponse.json(payload)
+    }
+
     return NextResponse.json({ error: 'Unknown artifact kind.' }, { status: 400 })
   } catch (error) {
     console.error('[api/artifacts/[kind]/[id] PATCH]', error)

@@ -224,6 +224,22 @@ export const SCHEMA_MODELS: SchemaModel[] = [
         "type": "ScaleReport"
       },
       {
+        "name": "testCases",
+        "type": "TestCaseRecord[]"
+      },
+      {
+        "name": "testCoverage",
+        "type": "TestCoverageDoc"
+      },
+      {
+        "name": "edgeCases",
+        "type": "EdgeCaseDoc"
+      },
+      {
+        "name": "e2eScenarios",
+        "type": "E2eScenarioRecord[]"
+      },
+      {
         "name": "constitutionRules",
         "type": "ConstitutionRule[]"
       },
@@ -2431,6 +2447,504 @@ export const SCHEMA_MODELS: SchemaModel[] = [
     "description": "Architect Lab — scale report: load assumptions, bottlenecks ordered by what breaks first, and 10x/100x what-if scenarios with actions."
   },
   {
+    "name": "TestCaseRecord",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "code",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "title",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "level",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "kind",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "linkedRequirement",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "linkedCriterion",
+        "type": "Int",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "preconditions",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "steps",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "expected",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "priority",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "order",
+        "type": "Int",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": ""
+  },
+  {
+    "name": "TestCoverageDoc",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": true,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "covered",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "uncovered",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "score",
+        "type": "Int",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "note",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": ""
+  },
+  {
+    "name": "EdgeCaseDoc",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": true,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "groups",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "note",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "updatedAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": ""
+  },
+  {
+    "name": "E2eScenarioRecord",
+    "fields": [
+      {
+        "name": "id",
+        "type": "String",
+        "id": true,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "ideaId",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "code",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "title",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "persona",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "given",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "when",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "then",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "screens",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "priority",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "linkedRequirements",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": false,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "status",
+        "type": "String",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "order",
+        "type": "Int",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      },
+      {
+        "name": "createdAt",
+        "type": "DateTime",
+        "id": false,
+        "unique": false,
+        "hasDefault": true,
+        "json": false,
+        "optional": false,
+        "list": false
+      }
+    ],
+    "relations": [
+      {
+        "name": "idea",
+        "type": "Idea"
+      }
+    ],
+    "description": ""
+  },
+  {
     "name": "ConstitutionRule",
     "fields": [
       {
@@ -3129,7 +3643,7 @@ export const SCHEMA_MODELS: SchemaModel[] = [
   }
 ]
 
-export const MODEL_NAMES = ['Idea', 'Question', 'Feature', 'Assumption', 'Decision', 'Requirement', 'ProcessFlow', 'DataEntity', 'ApiEndpoint', 'ScreenSpec', 'ImplTask', 'RiskItem', 'ConsistencyIssue', 'ArchitectureDoc', 'ArchTradeStudy', 'ArchDecisionRecord', 'ThreatModelDoc', 'ScaleReport', 'ConstitutionRule', 'PromptTemplate', 'VerificationRun', 'DecisionEntry', 'DriftCheck', 'SiteAnalysis'] as const
+export const MODEL_NAMES = ['Idea', 'Question', 'Feature', 'Assumption', 'Decision', 'Requirement', 'ProcessFlow', 'DataEntity', 'ApiEndpoint', 'ScreenSpec', 'ImplTask', 'RiskItem', 'ConsistencyIssue', 'ArchitectureDoc', 'ArchTradeStudy', 'ArchDecisionRecord', 'ThreatModelDoc', 'ScaleReport', 'TestCaseRecord', 'TestCoverageDoc', 'EdgeCaseDoc', 'E2eScenarioRecord', 'ConstitutionRule', 'PromptTemplate', 'VerificationRun', 'DecisionEntry', 'DriftCheck', 'SiteAnalysis'] as const
 export type ModelName = (typeof MODEL_NAMES)[number]
 
 export function getModelMeta(name: string): SchemaModel | undefined {

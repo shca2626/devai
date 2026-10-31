@@ -74,6 +74,10 @@ export async function GET(req: Request, { params }: Params) {
         adrs: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
         threatModel: true,
         scaleReport: true,
+        testCases: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+        testCoverage: true,
+        edgeCases: true,
+        e2eScenarios: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
       },
     })
     if (!idea) {
@@ -99,6 +103,8 @@ export async function GET(req: Request, { params }: Params) {
     const confirmedTasks = idea.tasks.filter((t) => t.status === 'confirmed')
     const reviewedRisks = idea.risks.filter((r) => r.status !== 'proposed')
     const confirmedAdrs = idea.adrs.filter((a) => a.status === 'confirmed')
+    const confirmedTestCases = idea.testCases.filter((c) => c.status === 'confirmed')
+    const confirmedE2e = idea.e2eScenarios.filter((s) => s.status === 'confirmed')
 
     // ---------- Traceability matrix ----------
     const procLinks = new Map<string, string[]>()
@@ -222,6 +228,43 @@ export async function GET(req: Request, { params }: Params) {
         })),
         qualityAndOperations: {
           nonFunctionalRequirements: nfrs.map((r) => ({ code: r.code, title: r.title, description: r.description, acceptanceCriteria: parse<string[]>(r.acceptanceCriteria, []) })),
+          qaLab: {
+            testCoverage:
+              idea.testCoverage && idea.testCoverage.status === 'confirmed'
+                ? {
+                    score: idea.testCoverage.score,
+                    covered: parse<unknown[]>(idea.testCoverage.covered, []),
+                    uncovered: parse<unknown[]>(idea.testCoverage.uncovered, []),
+                  }
+                : null,
+            testCases: confirmedTestCases.map((c) => ({
+              code: c.code,
+              title: c.title,
+              level: c.level,
+              kind: c.kind,
+              linkedRequirement: c.linkedRequirement,
+              linkedCriterion: c.linkedCriterion,
+              preconditions: parse<string[]>(c.preconditions, []),
+              steps: parse<string[]>(c.steps, []),
+              expected: c.expected,
+              priority: c.priority,
+            })),
+            edgeCases:
+              idea.edgeCases && idea.edgeCases.status === 'confirmed'
+                ? { groups: parse<unknown[]>(idea.edgeCases.groups, []), note: idea.edgeCases.note }
+                : null,
+            e2eScenarios: confirmedE2e.map((s) => ({
+              code: s.code,
+              title: s.title,
+              persona: s.persona,
+              given: parse<string[]>(s.given, []),
+              when: parse<string[]>(s.when, []),
+              then: parse<string[]>(s.then, []),
+              screens: parse<string[]>(s.screens, []),
+              priority: s.priority,
+              linkedRequirements: parse<string[]>(s.linkedRequirements, []),
+            })),
+          },
           risks: reviewedRisks.map((r) => ({
             code: r.code,
             category: r.category,
@@ -559,6 +602,80 @@ export async function GET(req: Request, { params }: Params) {
       for (const c of parse<string[]>(r.acceptanceCriteria, [])) L.push(`  - ${c}`)
     }
     L.push('')
+    if (confirmedTestCases.length > 0) {
+      L.push('### Test suite (confirmed cases)')
+      L.push('')
+      if (idea.testCoverage && idea.testCoverage.status === 'confirmed') {
+        L.push(`**Acceptance-criteria coverage: ${idea.testCoverage.score}/100** (computed by the platform from the cases below).`)
+        L.push('')
+      }
+      L.push('| Code | Case | Level | Kind | Requirement | Criterion | Priority | Expected |')
+      L.push('| --- | --- | --- | --- | --- | --- | --- | --- |')
+      for (const c of confirmedTestCases) {
+        L.push(
+          `| ${c.code} | ${esc(c.title)} | ${c.level} | ${c.kind} | ${c.linkedRequirement} | ${c.linkedCriterion ? `#${c.linkedCriterion}` : '—'} | ${c.priority} | ${esc(c.expected)} |`
+        )
+      }
+      L.push('')
+      for (const c of confirmedTestCases) {
+        const steps = parse<string[]>(c.steps, [])
+        const pre = parse<string[]>(c.preconditions, [])
+        if (steps.length || pre.length) {
+          L.push(`#### ${c.code} — ${esc(c.title)}`)
+          L.push('')
+          if (pre.length) {
+            L.push(`**Preconditions:** ${pre.join(' · ')}`)
+            L.push('')
+          }
+          if (steps.length) {
+            steps.forEach((s, i) => L.push(`${i + 1}. ${s}`))
+            L.push('')
+          }
+          L.push(`**Expected:** ${esc(c.expected)}`)
+          L.push('')
+        }
+      }
+    }
+    if (idea.edgeCases && idea.edgeCases.status === 'confirmed') {
+      L.push('### Edge case register')
+      L.push('')
+      if (idea.edgeCases.note) {
+        L.push(`> ${esc(idea.edgeCases.note)}`)
+        L.push('')
+      }
+      const groups = parse<Array<{ feature: string; cases: Array<{ scenario: string; category: string; risk: string; howToTest: string; linkedRequirement: string | null }> }>>(idea.edgeCases.groups, [])
+      for (const g of groups) {
+        L.push(`#### ${esc(g.feature)}`)
+        L.push('')
+        L.push('| Category | Risk | Scenario | How to test | Req |')
+        L.push('| --- | --- | --- | --- | --- |')
+        for (const c of g.cases) {
+          L.push(`| ${esc(c.category.replace(/_/g, ' '))} | ${c.risk} | ${esc(c.scenario)} | ${esc(c.howToTest)} | ${c.linkedRequirement ?? '—'} |`)
+        }
+        L.push('')
+      }
+    }
+    if (confirmedE2e.length > 0) {
+      L.push('### E2E scenarios')
+      L.push('')
+      for (const s of confirmedE2e) {
+        L.push(`#### ${s.code} — ${esc(s.title)}${s.priority === 'smoke' ? ' (smoke)' : ''}`)
+        L.push('')
+        L.push(`**Persona:** ${esc(s.persona)}`)
+        L.push('')
+        const given = parse<string[]>(s.given, [])
+        const when = parse<string[]>(s.when, [])
+        const then = parse<string[]>(s.then, [])
+        const screens = parse<string[]>(s.screens, [])
+        const linked = parse<string[]>(s.linkedRequirements, [])
+        if (given.length) L.push(`- **Given** ${given.join(' · ')}`)
+        if (when.length) L.push(`- **When** ${when.join(' · ')}`)
+        if (then.length) L.push(`- **Then** ${then.join(' · ')}`)
+        if (screens.length) L.push(`- **Screens** ${screens.join(' → ')}`)
+        if (linked.length) L.push(`- **Proves** ${linked.join(', ')}`)
+        L.push('')
+      }
+    }
     if (idea.threatModel && idea.threatModel.status === 'confirmed') {
       const tm = idea.threatModel
       L.push('### STRIDE threat model')

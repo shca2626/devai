@@ -83,9 +83,9 @@ export const STAGE_DOCS: StageDoc[] = [
     n: 8,
     title: 'Readiness',
     titleAr: 'الجاهزية',
-    what: 'The honest completeness gate: a weighted 0-100 score from 10 real checks (reviewed requirements, FR acceptance criteria, process/screen/task coverage, design approved, no critical issues, no unresolved musts, risks reviewed). The consistency engine + AI cross-artifact review detect contradictions, omissions and broken links. In no-limits mode the lock button is always enabled.',
-    engine: 'lib/readiness.ts — computeReadiness; engines/consistency.ts — runConsistencyCheck',
-    apis: ['POST /api/ideas/[id]/consistency', 'POST /api/ideas/[id]/gate { gate: package }', 'PATCH /api/artifacts/issue/[id]'],
+    what: 'The honest completeness gate: a weighted 0-100 score from 10 real checks (reviewed requirements, FR acceptance criteria, process/screen/task coverage, design approved, no critical issues, no unresolved musts, risks reviewed). The consistency engine + AI cross-artifact review detect contradictions, omissions and broken links. In no-limits mode the lock button is always enabled. PLUS the QA Lab: the test suite generator (cases traced to acceptance criteria with an app-computed coverage score), the edge case brainstorm and the E2E journey writer.',
+    engine: 'lib/readiness.ts — computeReadiness; engines/consistency.ts — runConsistencyCheck; engines/qa.ts — generateTestSuite/EdgeCases/E2eScenarios',
+    apis: ['POST /api/ideas/[id]/consistency', 'POST /api/ideas/[id]/gate { gate: package }', 'POST /api/ideas/[id]/qa/generate { kind: suite|edge|e2e }', 'PATCH /api/artifacts/issue/[id]'],
   },
   {
     key: 'package',
@@ -107,6 +107,20 @@ export interface ToolDoc {
 }
 
 export const TOOL_DOCS: ToolDoc[] = [
+  {
+    name: 'QA Lab',
+    icon: 'FlaskConical',
+    what: 'The complete Tester toolset inside the Readiness stage: test suite generation, edge case brainstorm and E2E scenario writing.',
+    details: [
+      'Test suite: unit/integration cases (happy, negative, boundary, security) derived from confirmed requirements + their acceptance criteria, each traced to a requirement code and criterion index, reviewed case by case',
+      'Coverage score 0-100 computed deterministically by the app from stored cases — never the model; gaps are listed honestly per requirement',
+      'Regeneration keeps confirmed cases, focuses the engine on current coverage gaps and never repeats rejected cases',
+      'Edge cases: adversarial brainstorm grouped by feature (boundaries, empty states, permissions, concurrency, network, volume, RTL, payments, time, adversarial) with concrete how-to-test steps',
+      'E2E scenarios: critical journeys as Given/When/Then with personas, real screen names and a smoke test first',
+      'All three run from any stage (no-limits) and confirmed output feeds the engineering package export',
+    ],
+    apis: ['POST /api/ideas/[id]/qa/generate { kind: suite|edge|e2e, feedback? }', 'PATCH /api/artifacts/{testCase|testCoverage|edgeCase|e2eScenario}/[id] { status }'],
+  },
   {
     name: 'Architect Lab',
     icon: 'Landmark',
@@ -230,6 +244,7 @@ export const ENGINE_DOCS: EngineDoc[] = [
   { file: 'src/lib/engines/requirements.ts', what: 'Engine 4 — the SRS generator (FR/NFR with acceptance criteria, provenance, roles matrix).' },
   { file: 'src/lib/engines/design.ts', what: 'Engines 5a-5e — processes, data entities, API contracts, screen specs, architecture recommendation.' },
   { file: 'src/lib/engines/architect.ts', what: 'Engines 5f-5i (Architect Lab) — trade-off study, ADRs, STRIDE threat model, scale simulation.' },
+  { file: 'src/lib/engines/qa.ts', what: 'Engines 8a-8c (QA Lab) — test suite from requirements + acceptance criteria, edge case brainstorm, E2E Given/When/Then scenarios.' },
   { file: 'src/lib/engines/plan.ts', what: 'Engines 6a-6b — dependency-ordered implementation tasks + the risk register.' },
   { file: 'src/lib/engines/consistency.ts', what: 'Engine 7 — deterministic coverage checks + AI cross-artifact consistency review (contradiction, omission, duplicate, broken link).' },
   { file: 'src/lib/engines/verify.ts', what: 'Traceability Verifier — per-check verdicts + deterministic coverage score.' },
@@ -300,7 +315,8 @@ export const API_DOCS: ApiDocGroup[] = [
       { method: 'POST', path: '/api/ideas/[id]/impact', desc: 'Preview what a requirement change affects { requirementId, change }.' },
       { method: 'POST', path: '/api/ideas/[id]/design/generate', desc: 'Generate design artifacts { kind: processes|entities|apis|screens|architecture, feedback? } — any stage.' },
       { method: 'POST', path: '/api/ideas/[id]/architect/generate', desc: 'Architect Lab { kind: tradeoffs|adrs|threats|scale, feedback? } — trade-off study, ADRs, STRIDE threat model, scale simulation. Any stage.' },
-      { method: 'PATCH', path: '/api/artifacts/[kind]/[id]', desc: 'Review decisions for process|entity|api|screen|architecture|task|risk|issue|tradeStudy|adr|threatModel|scaleReport artifacts { status } or architecture edits.' },
+      { method: 'POST', path: '/api/ideas/[id]/qa/generate', desc: 'QA Lab { kind: suite|edge|e2e, feedback? } — test suite (with deterministic coverage), edge case brainstorm, E2E scenarios. Any stage; regeneration keeps confirmed cases.' },
+      { method: 'PATCH', path: '/api/artifacts/[kind]/[id]', desc: 'Review decisions for process|entity|api|screen|architecture|task|risk|issue|tradeStudy|adr|threatModel|scaleReport|testCase|testCoverage|edgeCase|e2eScenario artifacts { status } or architecture edits.' },
       { method: 'POST', path: '/api/ideas/[id]/plan/generate', desc: 'Generate { kind: tasks|risks } — any stage.' },
       { method: 'POST', path: '/api/ideas/[id]/consistency', desc: 'Run the consistency validation — any stage.' },
     ],
@@ -346,7 +362,7 @@ export const API_DOCS: ApiDocGroup[] = [
     group: 'Admin (this panel)',
     entries: [
       { method: 'GET', path: '/api/admin/overview', desc: 'Dashboard payload: counts per model, ideas by stage, runtime info, latest activity.', tryable: true },
-      { method: 'GET', path: '/api/admin/table/[model]', desc: 'Browse any table ?page&pageSize&q&schema — all 24 models.', tryable: true },
+      { method: 'GET', path: '/api/admin/table/[model]', desc: 'Browse any table ?page&pageSize&q&schema — all 28 models.', tryable: true },
       { method: 'DELETE', path: '/api/admin/table/[model]', desc: 'Clear every row of a table.' },
       { method: 'PATCH', path: '/api/admin/record/[model]/[id]', desc: 'Edit a record\'s scalar fields (type-cast by schema).' },
       { method: 'DELETE', path: '/api/admin/record/[model]/[id]', desc: 'Delete a single record.' },

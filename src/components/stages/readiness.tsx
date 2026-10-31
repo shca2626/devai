@@ -3,11 +3,13 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useApp } from '@/components/app/context'
 import { CodeChip, SeverityBadge, WorkingPanel } from '@/components/app/bits'
+import { QaLab } from '@/components/stages/qa-lab'
 import type { IdeaDetail, IssueKind } from '@/lib/types'
 import type { DictKey } from '@/lib/i18n'
-import { AlertTriangle, Check, CheckCircle2, Lock, Radar, ShieldCheck, X } from 'lucide-react'
+import { AlertTriangle, Check, CheckCircle2, FlaskConical, Lock, Radar, ShieldCheck, X } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 // ============================================================
@@ -33,6 +35,7 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
   const active = true
   const [busy, setBusy] = useState<'check' | 'lock' | null>(null)
   const [showTrace, setShowTrace] = useState(false)
+  const [tab, setTab] = useState('gate')
 
   const openIssues = issues.filter((i) => i.status === 'open')
   const confirmedReqs = requirements.filter((r) => r.status === 'confirmed')
@@ -108,6 +111,21 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
     <div className="space-y-4">
       <p className="text-xs text-muted-foreground leading-6">{t('readinessIntro')}</p>
 
+      <Tabs value={tab} onValueChange={setTab}>
+        <TabsList className="w-full justify-start overflow-x-auto nice-scroll h-auto p-1">
+          <TabsTrigger value="gate" className="gap-1.5 text-xs">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            {t('tabReadinessGate')}
+          </TabsTrigger>
+          <TabsTrigger value="qa" className="gap-1.5 text-xs">
+            <FlaskConical className="h-3.5 w-3.5" />
+            {t('tabQaLab')}
+          </TabsTrigger>
+        </TabsList>
+
+        {/* ---------- Readiness gate ---------- */}
+        <TabsContent value="gate" className="mt-3">
+          <div className="space-y-4">
       {/* Score card */}
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <div className="flex items-center gap-4 flex-wrap">
@@ -297,6 +315,14 @@ export function ReadinessStage({ detail }: { detail: IdeaDetail }) {
           </div>
         )}
       </div>
+          </div>
+        </TabsContent>
+
+        {/* ---------- QA Lab (test suite · edge cases · E2E) ---------- */}
+        <TabsContent value="qa" className="mt-3">
+          <QaLab detail={detail} />
+        </TabsContent>
+      </Tabs>
     </div>
   )
 }

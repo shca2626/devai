@@ -6,7 +6,7 @@ import { listAdminTables } from '@/lib/admin/registry'
 
 // ============================================================
 // GET /api/admin/overview — the admin dashboard payload:
-//   - per-table record counts (all 20 models)
+//   - per-table record counts (all 28 models)
 //   - ideas grouped by workflow stage
 //   - database file size + engine info
 //   - environment / runtime info

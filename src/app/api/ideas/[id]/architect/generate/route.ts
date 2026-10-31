@@ -154,13 +154,18 @@ export async function POST(req: Request, { params }: Params) {
       await db.archDecisionRecord.deleteMany({
         where: { ideaId: id, status: { in: ['proposed', 'rejected'] } },
       })
-      const existingCount = await db.archDecisionRecord.count({ where: { ideaId: id } })
-      let order = existingCount
+      const keptRows = await db.archDecisionRecord.findMany({ where: { ideaId: id }, select: { code: true } })
+      let maxCode = 0
+      for (const row of keptRows) {
+        const n = parseInt(row.code.replace(/^ADR-/, ''), 10)
+        if (Number.isInteger(n) && n > maxCode) maxCode = n
+      }
+      let order = keptRows.length
       for (const d of drafts) {
         await db.archDecisionRecord.create({
           data: {
             ideaId: id,
-            code: `ADR-${String(++count).padStart(2, '0')}`,
+            code: `ADR-${String(++maxCode).padStart(2, '0')}`,
             title: d.title,
             titleAr: d.titleAr,
             context: d.context,

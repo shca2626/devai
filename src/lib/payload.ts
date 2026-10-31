@@ -10,8 +10,13 @@ import type {
   Assumption,
   BaselineSnapshot,
   ConsistencyIssue,
+  CoverageGap,
+  CoverageRow,
   DataEntity,
   Decision,
+  E2eScenarioRecord,
+  EdgeCaseDoc,
+  EdgeCaseGroup,
   Feature,
   FeatureStatus,
   IdeaDetail,
@@ -35,6 +40,8 @@ import type {
   Stage,
   FeaturesMeta,
   StrideCategory,
+  TestCaseRecord,
+  TestCoverageDoc,
   ThreatFinding,
   ThreatModelDoc,
   TradeCandidate,
@@ -120,6 +127,10 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
       adrs: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
       threatModel: true,
       scaleReport: true,
+      testCases: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
+      testCoverage: true,
+      edgeCases: true,
+      e2eScenarios: { orderBy: [{ order: 'asc' }, { createdAt: 'asc' }] },
     },
   })
   if (!idea) return null
@@ -399,6 +410,65 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
       }
     : null
 
+  // ---------- QA Lab ----------
+  const TEST_LEVELS = new Set(['unit', 'integration'])
+  const TEST_KINDS = new Set(['happy', 'negative', 'boundary', 'security'])
+  const TEST_PRIORITIES = new Set(['high', 'medium', 'low'])
+  const E2E_PRIORITIES = new Set(['smoke', 'high', 'medium'])
+
+  const testCases: TestCaseRecord[] = idea.testCases.map((c) => ({
+    id: c.id,
+    code: c.code,
+    title: c.title,
+    level: (TEST_LEVELS.has(c.level) ? c.level : 'integration') as TestCaseRecord['level'],
+    kind: (TEST_KINDS.has(c.kind) ? c.kind : 'happy') as TestCaseRecord['kind'],
+    linkedRequirement: c.linkedRequirement,
+    linkedCriterion: typeof c.linkedCriterion === 'number' && c.linkedCriterion >= 1 ? c.linkedCriterion : null,
+    preconditions: parseJsonArray<string[]>(c.preconditions, []),
+    steps: parseJsonArray<string[]>(c.steps, []),
+    expected: c.expected,
+    priority: (TEST_PRIORITIES.has(c.priority) ? c.priority : 'medium') as TestCaseRecord['priority'],
+    status: (c.status === 'confirmed' || c.status === 'rejected' ? c.status : 'proposed') as TestCaseRecord['status'],
+    order: c.order,
+  }))
+
+  const testCoverage: TestCoverageDoc | null = idea.testCoverage
+    ? {
+        id: idea.testCoverage.id,
+        covered: parseJsonArray<CoverageRow[]>(idea.testCoverage.covered, []),
+        uncovered: parseJsonArray<CoverageGap[]>(idea.testCoverage.uncovered, []),
+        score: typeof idea.testCoverage.score === 'number' ? Math.max(0, Math.min(100, Math.round(idea.testCoverage.score))) : 0,
+        note: idea.testCoverage.note,
+        status: idea.testCoverage.status as TestCoverageDoc['status'],
+      }
+    : null
+
+  const edgeCases: EdgeCaseDoc | null = idea.edgeCases
+    ? {
+        id: idea.edgeCases.id,
+        groups: parseJsonArray<EdgeCaseGroup[]>(idea.edgeCases.groups, []).filter(
+          (g) => typeof g?.feature === 'string' && Array.isArray(g.cases)
+        ),
+        note: idea.edgeCases.note,
+        status: idea.edgeCases.status as EdgeCaseDoc['status'],
+      }
+    : null
+
+  const e2eScenarios: E2eScenarioRecord[] = idea.e2eScenarios.map((s) => ({
+    id: s.id,
+    code: s.code,
+    title: s.title,
+    persona: s.persona,
+    given: parseJsonArray<string[]>(s.given, []),
+    when: parseJsonArray<string[]>(s.when, []),
+    then: parseJsonArray<string[]>(s.then, []),
+    screens: parseJsonArray<string[]>(s.screens, []),
+    priority: (E2E_PRIORITIES.has(s.priority) ? s.priority : 'high') as E2eScenarioRecord['priority'],
+    linkedRequirements: parseJsonArray<string[]>(s.linkedRequirements, []),
+    status: (s.status === 'confirmed' || s.status === 'rejected' ? s.status : 'proposed') as E2eScenarioRecord['status'],
+    order: s.order,
+  }))
+
   const readiness = await computeReadiness(ideaId)
 
   return {
@@ -421,6 +491,10 @@ export async function buildIdeaDetail(ideaId: string): Promise<IdeaDetail | null
     adrs,
     threatModel,
     scaleReport,
+    testCases,
+    testCoverage,
+    edgeCases,
+    e2eScenarios,
     readiness,
   }
 }

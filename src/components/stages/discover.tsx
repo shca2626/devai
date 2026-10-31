@@ -95,7 +95,7 @@ export function DiscoverStage({ detail }: { detail: IdeaDetail }) {
         toast({ description: data.error ?? t('aiError'), variant: 'destructive' })
         return
       }
-      setDetail({ idea: data.idea, questions: data.questions, features: data.features, assumptions: data.assumptions, decisions: data.decisions, roles: data.roles ?? null, requirements: data.requirements ?? [], processes: data.processes ?? [], entities: data.entities ?? [], apis: data.apis ?? [], screens: data.screens ?? [], tasks: data.tasks ?? [], risks: data.risks ?? [], issues: data.issues ?? [], architecture: data.architecture ?? null, tradeStudy: data.tradeStudy ?? null, adrs: data.adrs ?? [], threatModel: data.threatModel ?? null, scaleReport: data.scaleReport ?? null, readiness: data.readiness ?? null })
+      setDetail({ idea: data.idea, questions: data.questions, features: data.features, assumptions: data.assumptions, decisions: data.decisions, roles: data.roles ?? null, requirements: data.requirements ?? [], processes: data.processes ?? [], entities: data.entities ?? [], apis: data.apis ?? [], screens: data.screens ?? [], tasks: data.tasks ?? [], risks: data.risks ?? [], issues: data.issues ?? [], architecture: data.architecture ?? null, tradeStudy: data.tradeStudy ?? null, adrs: data.adrs ?? [], threatModel: data.threatModel ?? null, scaleReport: data.scaleReport ?? null, testCases: data.testCases ?? [], testCoverage: data.testCoverage ?? null, edgeCases: data.edgeCases ?? null, e2eScenarios: data.e2eScenarios ?? [], readiness: data.readiness ?? null })
       setSuggestDone(Boolean(data.suggestDone))
     } catch {
       toast({ description: t('aiError'), variant: 'destructive' })
