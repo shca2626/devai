@@ -1,6 +1,14 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Skeleton } from '@/components/ui/skeleton'
 import { AppProvider, useApp } from '@/components/app/context'
@@ -40,6 +48,7 @@ import {
   ScrollText,
   ShieldCheck,
   Sparkles,
+  Wrench,
 } from 'lucide-react'
 import { useState } from 'react'
 
@@ -181,115 +190,179 @@ function Shell() {
 
           <button
             type="button"
-            className="flex items-center gap-2 font-bold text-[15px] hover:opacity-80 transition-opacity"
+            className="flex items-center gap-2 font-bold text-[15px] hover:opacity-80 transition-opacity min-w-0"
             onClick={() => selectIdea(null)}
             aria-label={t('appName')}
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Compass className="h-4.5 w-4.5" />
             </span>
-            <span>{t('appName')}</span>
+            <span className="hidden sm:inline truncate">{t('appName')}</span>
           </button>
 
-          <span className="hidden md:inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] text-muted-foreground font-arabic" dir="rtl">
+          <span className="hidden lg:inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] text-muted-foreground font-arabic" dir="rtl">
             مساعد المخطط
           </span>
 
-          <div className="ms-auto flex items-center gap-1.5">
-            {selectedId && (
+          <div className="ms-auto flex items-center gap-1 sm:gap-1.5 min-w-0">
+            {/* Compact tools menu — small screens */}
+            <div className="md:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="min-h-9 px-2.5"
+                    aria-label={t('toolsMenu')}
+                    title={t('toolsMenu')}
+                  >
+                    <Wrench className="h-4 w-4 text-primary" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-60">
+                  <DropdownMenuLabel>{t('toolsMenu')}</DropdownMenuLabel>
+                  {selectedId && (
+                    <DropdownMenuItem onClick={() => setContextPackOpen(true)} className="gap-2">
+                      <Package className="h-4 w-4 text-primary" />
+                      {t('openContextPack')}
+                    </DropdownMenuItem>
+                  )}
+                  {selectedId && (
+                    <DropdownMenuItem onClick={() => setVerifyOpen(true)} className="gap-2">
+                      <FileSearch className="h-4 w-4 text-primary" />
+                      {t('openVerifier')}
+                    </DropdownMenuItem>
+                  )}
+                  {selectedId && (
+                    <DropdownMenuItem onClick={() => setDecisionsOpen(true)} className="gap-2">
+                      <Scale className="h-4 w-4 text-primary" />
+                      {t('openDecisions')}
+                    </DropdownMenuItem>
+                  )}
+                  {selectedId && (
+                    <DropdownMenuItem onClick={() => setSiteIntelOpen(true)} className="gap-2">
+                      <Radar className="h-4 w-4 text-primary" />
+                      {t('openSiteIntel')}
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem onClick={() => setPlaybookOpen(true)} className="gap-2">
+                    <BookOpen className="h-4 w-4 text-primary" />
+                    {t('openPlaybook')}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setConstitutionOpen(true)} className="gap-2">
+                    <ScrollText className="h-4 w-4 text-primary" />
+                    {t('openConstitution')}
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <a href="/admin" className="gap-2 cursor-pointer">
+                      <ShieldCheck className="h-4 w-4 text-primary" />
+                      Admin
+                    </a>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            {/* Full tool buttons — md and up */}
+            <div className="hidden md:flex items-center gap-1.5">
+              {selectedId && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setContextPackOpen(true)}
+                  className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                  aria-label={t('openContextPack')}
+                  title={t('openContextPack')}
+                >
+                  <Package className="h-4 w-4 text-primary" />
+                  <span className="hidden xl:inline text-xs font-medium">{t('openContextPack')}</span>
+                </Button>
+              )}
+              {selectedId && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setVerifyOpen(true)}
+                  className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                  aria-label={t('openVerifier')}
+                  title={t('verifierTitle')}
+                >
+                  <FileSearch className="h-4 w-4 text-primary" />
+                  <span className="hidden xl:inline text-xs font-medium">{t('openVerifier')}</span>
+                </Button>
+              )}
+              {selectedId && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setDecisionsOpen(true)}
+                  className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                  aria-label={t('openDecisions')}
+                  title={t('decisionsTitle')}
+                >
+                  <Scale className="h-4 w-4 text-primary" />
+                  <span className="hidden xl:inline text-xs font-medium">{t('openDecisions')}</span>
+                </Button>
+              )}
+              {selectedId && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSiteIntelOpen(true)}
+                  className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                  aria-label={t('openSiteIntel')}
+                  title={t('siteIntelTitle')}
+                >
+                  <Radar className="h-4 w-4 text-primary" />
+                  <span className="hidden xl:inline text-xs font-medium">{t('openSiteIntel')}</span>
+                </Button>
+              )}
+              <Button
+                variant="ghost"
+                  size="sm"
+                onClick={() => setPlaybookOpen(true)}
+                className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                aria-label={t('openPlaybook')}
+                title={t('openPlaybook')}
+              >
+                <BookOpen className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openPlaybook')}</span>
+              </Button>
+              <a
+                href="/admin"
+                className="inline-flex items-center gap-1.5 rounded-md px-2.5 min-h-9 text-xs font-medium text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
+                aria-label="Admin panel"
+                title="Admin panel — full control & system documentation"
+              >
+                <ShieldCheck className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline">Admin</span>
+              </a>
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setContextPackOpen(true)}
-                className="gap-1.5 min-h-9"
-                aria-label={t('openContextPack')}
-                title={t('openContextPack')}
+                onClick={() => setConstitutionOpen(true)}
+                className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                aria-label={t('openConstitution')}
+                title={t('openConstitution')}
               >
-                <Package className="h-4 w-4 text-primary" />
-                <span className="hidden xl:inline text-xs font-medium">{t('openContextPack')}</span>
+                <ScrollText className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openConstitution')}</span>
               </Button>
-            )}
-            {selectedId && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setVerifyOpen(true)}
-                className="gap-1.5 min-h-9"
-                aria-label={t('openVerifier')}
-                title={t('verifierTitle')}
-              >
-                <FileSearch className="h-4 w-4 text-primary" />
-                <span className="hidden xl:inline text-xs font-medium">{t('openVerifier')}</span>
-              </Button>
-            )}
-            {selectedId && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setDecisionsOpen(true)}
-                className="gap-1.5 min-h-9"
-                aria-label={t('openDecisions')}
-                title={t('decisionsTitle')}
-              >
-                <Scale className="h-4 w-4 text-primary" />
-                <span className="hidden xl:inline text-xs font-medium">{t('openDecisions')}</span>
-              </Button>
-            )}
-            {selectedId && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setSiteIntelOpen(true)}
-                className="gap-1.5 min-h-9"
-                aria-label={t('openSiteIntel')}
-                title={t('siteIntelTitle')}
-              >
-                <Radar className="h-4 w-4 text-primary" />
-                <span className="hidden xl:inline text-xs font-medium">{t('openSiteIntel')}</span>
-              </Button>
-            )}
-            <Button
-              variant="ghost"
-                size="sm"
-              onClick={() => setPlaybookOpen(true)}
-              className="gap-1.5 min-h-9"
-              aria-label={t('openPlaybook')}
-              title={t('openPlaybook')}
-            >
-              <BookOpen className="h-4 w-4 text-primary" />
-              <span className="hidden xl:inline text-xs font-medium">{t('openPlaybook')}</span>
-            </Button>
-            <a
-              href="/admin"
-              className="inline-flex items-center gap-1.5 rounded-md px-2.5 min-h-9 text-xs font-medium text-muted-foreground hover:bg-muted/60 hover:text-foreground transition-colors"
-              aria-label="Admin panel"
-              title="Admin panel — full control & system documentation"
-            >
-              <ShieldCheck className="h-4 w-4 text-primary" />
-              <span className="hidden xl:inline">Admin</span>
-            </a>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setConstitutionOpen(true)}
-              className="gap-1.5 min-h-9"
-              aria-label={t('openConstitution')}
-              title={t('openConstitution')}
-            >
-              <ScrollText className="h-4 w-4 text-primary" />
-              <span className="hidden xl:inline text-xs font-medium">{t('openConstitution')}</span>
-            </Button>
+            </div>
+
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
-              className="gap-1.5 min-h-9"
+              className="gap-1.5 min-h-9 px-2 sm:px-3"
               aria-label={t('langToggle')}
+              title={t('langToggle')}
             >
               <Languages className="h-4 w-4" />
-              <span className="text-xs font-medium">{t('langToggle')}</span>
+              <span className="hidden sm:inline text-xs font-medium">{t('langToggle')}</span>
             </Button>
-            <Button size="sm" onClick={() => openNewIdea()} className="gap-1.5 min-h-9">
+            <Button size="sm" onClick={() => openNewIdea()} className="gap-1.5 min-h-9 px-2.5 sm:px-3">
               <Sparkles className="h-3.5 w-3.5" />
               <span className="hidden sm:inline">{t('newIdea')}</span>
             </Button>

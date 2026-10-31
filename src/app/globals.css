@@ -144,6 +144,9 @@ html[dir="rtl"] body {
 .nice-scroll {
   scrollbar-width: thin;
   scrollbar-color: oklch(0.87 0 0) transparent;
+  /* Native momentum scrolling on touch devices */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
 }
 .nice-scroll::-webkit-scrollbar {
   width: 6px;
@@ -155,6 +158,16 @@ html[dir="rtl"] body {
 }
 .nice-scroll::-webkit-scrollbar-track {
   background: transparent;
+}
+
+/* Mobile: no visible scrollbar on horizontal scrollers (stepper, tab bars) */
+@media (pointer: coarse) {
+  .nice-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .nice-scroll {
+    scrollbar-width: none;
+  }
 }
 
 /* Minimal markdown rendering for discovery summaries */

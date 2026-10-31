@@ -174,12 +174,12 @@ export function RequirementsStage({ detail }: { detail: IdeaDetail }) {
           </span>
         </div>
         {active && (
-          <div className="flex gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button variant="outline" size="sm" onClick={generate} disabled={busy} className="gap-1.5">
               {t('regenerate')}
             </Button>
             <Select value={filter} onValueChange={setFilter}>
-              <SelectTrigger size="sm" className="w-40 h-9">
+              <SelectTrigger size="sm" className="w-full sm:w-40 h-9">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>

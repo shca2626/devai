@@ -614,6 +614,7 @@ const dict = {
   downloadMd: { en: 'Download .md', ar: 'تنزيل .md' },
   openConstitution: { en: 'Constitution', ar: 'الدستور' },
   openContextPack: { en: 'Context Pack', ar: 'حزمة السياق' },
+  toolsMenu: { en: 'Tools & panels', ar: 'الأدوات واللوحات' },
   handoffTitle: { en: 'Vibe-coding handoff', ar: 'التسليم للبرمجة بالذكاء الاصطناعي' },
   handoffBody: {
     en: 'Generate a Context Pack — one Markdown brief with your project definition, AI Constitution rules, requirements, stack, data model and working agreements — framed for Bolt, Cursor, Claude or ChatGPT. Paste it and the AI starts with full context, never from zero.',

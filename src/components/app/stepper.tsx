@@ -4,6 +4,7 @@ import { useApp } from '@/components/app/context'
 import { cn } from '@/lib/utils'
 import { STAGES, stageIndex, type Stage } from '@/lib/types'
 import { Check, Wrench } from 'lucide-react'
+import { useEffect, useRef } from 'react'
 
 const STAGE_KEYS = {
   understanding: 'stageUnderstanding',
@@ -36,6 +37,12 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
   // NO LIMITS: every stage is always navigable — the stepper is a
   // navigation bar, not a lock. The workflow badge stays for context.
 
+  // Keep the active chip visible when the bar scrolls horizontally (mobile).
+  const activeRef = useRef<HTMLButtonElement | null>(null)
+  useEffect(() => {
+    activeRef.current?.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' })
+  }, [view])
+
   return (
     <nav
       aria-label="Workflow stages"
@@ -58,10 +65,11 @@ export function Stepper({ currentStage, view }: { currentStage: Stage; view: str
                 <div className={cn('h-px w-4 sm:w-8', done ? 'bg-primary/50' : 'bg-border')} />
               ))}
             <button
+              ref={active ? activeRef : undefined}
               type="button"
               onClick={() => setView(VIEW_BY_STAGE[stage] as never)}
               className={cn(
-                'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors min-h-9',
+                'flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors min-h-9 whitespace-nowrap',
                 active
                   ? 'border-primary bg-primary text-primary-foreground'
                   : done
