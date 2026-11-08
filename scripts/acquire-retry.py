@@ -100,7 +100,7 @@ def attempt_flow(browser, try_idx):
     page.close()
     return None
 
-with Camoufox(headless=True, humanize=True, executable_path='/tmp/camoufox/camoufox', i_know_what_im_doing=True) as browser:
+with Camoufox(headless=True, humanize=True) as browser:
     file_url = None
     for i in range(3):
         print(f'[attempt {i + 1}]')
