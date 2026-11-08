@@ -12,6 +12,7 @@ import { PlaybookDialog } from '@/components/app/playbook'
 import { VerifyDialog } from '@/components/app/verify'
 import { DecisionsDialog } from '@/components/app/decisions'
 import { SiteIntelDialog } from '@/components/app/site-intel'
+import { AppIntelDialog } from '@/components/app/app-intel'
 import { Stepper } from '@/components/app/stepper'
 import { ExpressRun } from '@/components/app/express'
 import { UnderstandStage } from '@/components/stages/understand'
@@ -41,6 +42,7 @@ import {
   Scale,
   ScrollText,
   ShieldCheck,
+  Smartphone,
   Sparkles,
   Sun,
 } from 'lucide-react'
@@ -53,7 +55,7 @@ const EXAMPLE_IDEA =
 const TOOL_CHIP =
   'inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border bg-card px-3 text-xs font-medium text-foreground/75 transition-all hover:border-primary/40 hover:text-foreground active:scale-95 disabled:pointer-events-none disabled:opacity-45'
 
-function WelcomeHero({ onNewIdea, onSiteIntel }: { onNewIdea: (prefill?: string) => void; onSiteIntel: () => void }) {
+function WelcomeHero({ onNewIdea, onSiteIntel, onAppIntel }: { onNewIdea: (prefill?: string) => void; onSiteIntel: () => void; onAppIntel: () => void }) {
   const { t, lang } = useApp()
   const steps = [
     { icon: MessagesSquare, title: t('stageUnderstanding'), desc: t('stepUnderstandDesc') },
@@ -107,6 +109,17 @@ function WelcomeHero({ onNewIdea, onSiteIntel }: { onNewIdea: (prefill?: string)
           >
             <Globe className="h-4 w-4 text-primary" />
             {t('siteIntelTitle')}
+          </Button>
+          <Button
+            size="lg"
+            variant="ghost"
+            onClick={onAppIntel}
+            className="gap-2 w-full sm:w-auto text-muted-foreground hover:text-foreground transition-all hover:-translate-y-0.5"
+            aria-label={t('appIntelTitle')}
+            title={t('appIntelBody')}
+          >
+            <Smartphone className="h-4 w-4 text-primary" />
+            {t('appIntelTitle')}
           </Button>
         </div>
       </div>
@@ -182,7 +195,7 @@ function IdeaView() {
 }
 
 function Shell() {
-  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen, verifyOpen, setVerifyOpen, decisionsOpen, setDecisionsOpen, siteIntelOpen, setSiteIntelOpen } = useApp()
+  const { lang, setLang, t, selectedId, selectIdea, refreshIdeas, constitutionOpen, setConstitutionOpen, contextPackOpen, setContextPackOpen, verifyOpen, setVerifyOpen, decisionsOpen, setDecisionsOpen, siteIntelOpen, setSiteIntelOpen, appIntelOpen, setAppIntelOpen } = useApp()
   const [newIdeaOpen, setNewIdeaOpen] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [prefill, setPrefill] = useState<string | undefined>(undefined)
@@ -311,6 +324,18 @@ function Shell() {
               >
                 <Radar className="h-4 w-4 text-primary" />
                 <span className="hidden xl:inline text-xs font-medium">{t('openSiteIntel')}</span>
+              </Button>
+              {/* App Intelligence — public tool, Play Store URL in, clone pack out */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setAppIntelOpen(true)}
+                className="gap-1.5 min-h-9 px-2.5 xl:px-3"
+                aria-label={t('openAppIntel')}
+                title={t('appIntelTitle')}
+              >
+                <Smartphone className="h-4 w-4 text-primary" />
+                <span className="hidden xl:inline text-xs font-medium">{t('openAppIntel')}</span>
               </Button>
               <Button
                 variant="ghost"
@@ -457,7 +482,7 @@ function Shell() {
         {/* Main */}
         <div className="flex-1 min-w-0">
           <div className="mx-auto max-w-4xl">
-            {selectedId ? <IdeaView /> : <WelcomeHero onNewIdea={openNewIdea} onSiteIntel={() => setSiteIntelOpen(true)} />}
+            {selectedId ? <IdeaView /> : <WelcomeHero onNewIdea={openNewIdea} onSiteIntel={() => setSiteIntelOpen(true)} onAppIntel={() => setAppIntelOpen(true)} />}
           </div>
         </div>
       </div>
@@ -495,6 +520,7 @@ function Shell() {
       <VerifyDialog open={verifyOpen} onOpenChange={setVerifyOpen} />
       <DecisionsDialog open={decisionsOpen} onOpenChange={setDecisionsOpen} />
       <SiteIntelDialog open={siteIntelOpen} onOpenChange={setSiteIntelOpen} />
+      <AppIntelDialog open={appIntelOpen} onOpenChange={setAppIntelOpen} />
       <PlaybookDialog open={playbookOpen} onOpenChange={setPlaybookOpen} onSendToLab={sendToLab} />
     </div>
   )

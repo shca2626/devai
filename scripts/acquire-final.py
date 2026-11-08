@@ -237,6 +237,9 @@ def main():
         'originality': match,
     }
     json.dump(out, open(f'{a.out}/meta.json', 'w'), indent=1, default=str)
+    # also persist the full browser-captured listing (permissions/signature/VT)
+    if result.get('apks_api'):
+        json.dump(result['apks_api'], open(f'{a.out}/listing.json', 'w'), indent=1, default=str)
     print('ACQUIRE_RESULT ' + json.dumps(out))
 
 

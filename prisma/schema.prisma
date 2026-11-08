@@ -57,6 +57,7 @@ model Idea {
   decisionEntries DecisionEntry[]
   driftChecks    DriftCheck[]
   siteAnalyses   SiteAnalysis[]
+  appAnalyses    AppAnalysis[]
 }
 
 model Question {
@@ -602,6 +603,24 @@ model SiteAnalysis {
   score     Int      @default(0) // deterministic completeness 0-100
   error     String?
   data      String // JSON SiteIntelData — stages, evidence, unknowns, pack
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ideaId])
+}
+
+model AppAnalysis {
+  id        String   @id @default(cuid())
+  ideaId    String? // null = standalone workspace study (no idea required)
+  idea      Idea?    @relation(fields: [ideaId], references: [id], onDelete: Cascade)
+  inputUrl  String // Play Store URL, market:// link or bare package name
+  pkg       String // normalized android package name
+  appName   String? // display name from the store
+  status    String   @default("running") // running | complete | failed
+  stageDone Int      @default(0) // 0..7 — how many stages completed
+  score     Int      @default(0) // deterministic completeness 0-100
+  error     String?
+  data      String // JSON AppIntelData — stages, evidence, unknowns, pack
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -58,3 +58,6 @@ server.log
 
 # user uploads (session inputs)
 /upload/
+
+# App Intelligence acquired binaries (large, per-analysis workspaces)
+.app-intel/

@@ -1092,3 +1092,134 @@ export interface SiteAnalysisSummary {
   pagesCrawled: number
   createdAt: string
 }
+
+// ============================================================
+// App Intelligence (Android / Play Store)
+// ============================================================
+
+export interface AppStoreIntel {
+  appId: string
+  title: string
+  developer?: string
+  genre?: string
+  contentRating?: string
+  version?: string
+  androidVersion?: string
+  installs?: string
+  score?: number
+  ratings?: number
+  reviews?: number
+  price?: string
+  released?: string
+  updated?: number
+  description: string
+  screenshots: string[]
+  video?: string
+}
+
+export interface AppAcquireIntel {
+  file: string
+  sha256: string
+  sizeBytes: number
+  bundle: string[]
+  versionName?: string
+  versionCode?: number
+  apiSha256?: string
+  originality: 'match' | 'mismatch' | 'unknown'
+}
+
+export interface AppDeepIntel {
+  versions: { versionName?: string; versionCode?: number; sha256?: string; isLatest: boolean; sizeBytes?: number }[]
+  permissions: string[]
+  signature: {
+    present: boolean
+    scheme?: string
+    status?: string
+    certSha256?: string
+    certSubject?: string
+    signerSubjects?: string[]
+    trusted?: boolean
+  }
+  virusTotal: { verdict?: string; scannedByVirusTotal?: boolean; flagged?: number; vendors?: number }
+  fromGooglePlay?: boolean
+  manifest?: {
+    targetSdk?: number
+    compileSdk?: number
+    allowBackup?: boolean
+    usesFeatures?: string[]
+    exportedUnguarded?: string[]
+  }
+  natives: { abis: string[]; nativeLibs: string[]; protectors: string[] }
+  pairipProtected?: boolean
+}
+
+export interface AppUnpackIntel {
+  baseApkPresent: boolean
+  splits: number
+  abis: string[]
+  languages: string[]
+  totalFiles: number
+}
+
+export interface AppDecompileIntel {
+  javaFiles: number
+  topPackages: { name: string; files: number }[]
+  endpoints: string[]
+  keyPatterns: string[]
+}
+
+export interface AppFingerprintIntel {
+  stack: { name: string; confidence: 'high' | 'medium'; because: string }[]
+  nativeLibs: string[]
+  dartPackages: { name: string; refs: number }[]
+  featureMap: { feature: string; package: string; refs: number }[]
+  assetsSample: string[]
+}
+
+export interface AppSynthesis {
+  overview: string
+  features: string
+  architecture: string
+  clonePlan: string
+}
+
+export interface AppPackFile {
+  name: string
+  content: string
+}
+
+export interface AppIntelData {
+  store?: AppStoreIntel
+  acquire?: AppAcquireIntel
+  deep?: AppDeepIntel
+  unpack?: AppUnpackIntel
+  decompile?: AppDecompileIntel
+  fingerprint?: AppFingerprintIntel
+  synthesis?: AppSynthesis
+  evidence: { claim: string; source: string; method: string; confidence: 'high' | 'medium' | 'low' }[]
+  unknowns: string[]
+  pack: AppPackFile[]
+}
+
+export interface AppAnalysisItem {
+  id: string
+  inputUrl: string
+  pkg: string
+  appName?: string
+  status: 'running' | 'complete' | 'failed'
+  stageDone: number // 0..7
+  score: number // deterministic completeness 0-100
+  error: string | null
+  data: AppIntelData
+  createdAt: string
+}
+
+export interface AppAnalysisSummary {
+  id: string
+  pkg: string
+  appName?: string
+  status: 'running' | 'complete' | 'failed'
+  stageDone: number
+  score: number
+  createdAt: string
+}

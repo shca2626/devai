@@ -46,6 +46,8 @@ export interface AppState {
   setDecisionsOpen: (open: boolean) => void
   siteIntelOpen: boolean
   setSiteIntelOpen: (open: boolean) => void
+  appIntelOpen: boolean
+  setAppIntelOpen: (open: boolean) => void
 }
 
 const AppContext = createContext<AppState | null>(null)
@@ -81,6 +83,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [verifyOpen, setVerifyOpen] = useState(false)
   const [decisionsOpen, setDecisionsOpen] = useState(false)
   const [siteIntelOpen, setSiteIntelOpen] = useState(false)
+  const [appIntelOpen, setAppIntelOpen] = useState(false)
 
   // Keep <html lang/dir> in sync with the UI language
   useEffect(() => {
@@ -163,6 +166,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setDecisionsOpen,
     siteIntelOpen,
     setSiteIntelOpen,
+    appIntelOpen,
+    setAppIntelOpen,
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
