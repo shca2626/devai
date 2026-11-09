@@ -190,20 +190,20 @@
  "database": {
   "engines": [
    {
+    "evidence": "package:sqflite_common in libapp.so",
+    "name": "local SQLite database (Flutter sqflite)"
+   },
+   {
     "evidence": "package:flutter_secure_storage in libapp.so",
     "name": "encrypted key-value store (Keystore-backed)"
    },
    {
-    "evidence": "package:sqflite_common in libapp.so",
+    "evidence": "package:sqflite_common_ffi in libapp.so",
     "name": "local SQLite database (Flutter sqflite)"
    },
    {
     "evidence": "package:sqlite3 in libapp.so",
     "name": "SQLite native bindings"
-   },
-   {
-    "evidence": "package:sqflite_common_ffi in libapp.so",
-    "name": "local SQLite database (Flutter sqflite)"
    },
    {
     "evidence": "package:shared_preferences in libapp.so",
@@ -227,30 +227,6 @@
  "sync": {
   "signals": [
    {
-    "signal": "package:sqflite_common",
-    "meaning": "local SQLite database (Flutter sqflite)",
-    "category": "offline storage",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:sqlite3",
-    "meaning": "SQLite native bindings",
-    "category": "offline storage",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:flutter_local_notifications_linux",
-    "meaning": "local notifications",
-    "category": "realtime/push",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:connectivity_plus",
-    "meaning": "network reachability checks (drives online/offline switching)",
-    "category": "sync orchestration",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
     "signal": "package:flutter_local_notifications_windows",
     "meaning": "local notifications",
     "category": "realtime/push",
@@ -263,13 +239,49 @@
     "evidence": "libapp.so Dart AOT string table"
    },
    {
+    "signal": "package:connectivity_plus",
+    "meaning": "network reachability checks (drives online/offline switching)",
+    "category": "sync orchestration",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:sqflite_common",
+    "meaning": "local SQLite database (Flutter sqflite)",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications_platform_interface",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:sqlite3",
+    "meaning": "SQLite native bindings",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:shared_preferences",
+    "meaning": "key-value preferences store",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
     "signal": "package:flutter_secure_storage",
     "meaning": "encrypted key-value store (Keystore-backed)",
     "category": "offline storage / token storage",
     "evidence": "libapp.so Dart AOT string table"
    },
    {
-    "signal": "package:flutter_local_notifications_platform_interface",
+    "signal": "package:flutter_local_notifications_linux",
     "meaning": "local notifications",
     "category": "realtime/push",
     "evidence": "libapp.so Dart AOT string table"
@@ -281,18 +293,6 @@
     "evidence": "libapp.so Dart AOT string table"
    },
    {
-    "signal": "package:flutter_local_notifications",
-    "meaning": "local notifications",
-    "category": "realtime/push",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:shared_preferences",
-    "meaning": "key-value preferences store",
-    "category": "offline storage",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
     "signal": "WorkManager (×1 refs)",
     "meaning": "WorkManager background jobs (deferred sync queues)",
     "category": "sync orchestration",
@@ -300,12 +300,9 @@
    }
   ],
   "realtime": [
-   "local notifications",
-   "local notifications",
-   "local notifications",
    "local notifications"
   ],
-  "offlineStrategy": "Offline-capable: local SQLite database (Flutter sqflite) holds data locally; network reachability checks (drives online/offline switching) drives when sync happens; local notifications, local notifications, local notifications, local notifications for server-initiated updates. Read paths hit local storage first; writes queue and flush to the REST backend when a connection is available."
+  "offlineStrategy": "Offline-capable: local SQLite database (Flutter sqflite) holds data locally; network reachability checks (drives online/offline switching) drives when sync happens; local notifications announce events while backgrounded. Read paths hit local storage first; writes queue and flush to the REST backend when a connection is available."
  },
  "api": {
   "clients": [

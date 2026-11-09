@@ -2,7 +2,7 @@
 
 - Version analyzed: 2.11.4 (3576)
 - Acquired: 197.8 MB, sha256 `b5b4f8e1e94a35c2b5f958ef5d5ec0cd5a630570516b8e076d3db66203289d4a`, originality: unknown
-- Generated: 2026-11-09T21:57:12.075Z
+- Generated: 2026-11-09T21:58:56.078Z
 
 
 
@@ -267,23 +267,23 @@ Framework noise (engine licenses, DTDs, registry links) is separated from real a
 
 ## How sync works (offline / online)
 
-Offline-capable: local SQLite database (Flutter sqflite) holds data locally; network reachability checks (drives online/offline switching) drives when sync happens; local notifications, local notifications, local notifications, local notifications for server-initiated updates. Read paths hit local storage first; writes queue and flush to the REST backend when a connection is available.
+Offline-capable: local SQLite database (Flutter sqflite) holds data locally; network reachability checks (drives online/offline switching) drives when sync happens; local notifications announce events while backgrounded. Read paths hit local storage first; writes queue and flush to the REST backend when a connection is available.
 
 ### Signals
-- **package:sqflite_common** — local SQLite database (Flutter sqflite) (offline storage)
-- **package:sqlite3** — SQLite native bindings (offline storage)
-- **package:flutter_local_notifications_linux** — local notifications (realtime/push)
-- **package:connectivity_plus** — network reachability checks (drives online/offline switching) (sync orchestration)
 - **package:flutter_local_notifications_windows** — local notifications (realtime/push)
 - **package:sqflite_common_ffi** — local SQLite database (Flutter sqflite) (offline storage)
-- **package:flutter_secure_storage** — encrypted key-value store (Keystore-backed) (offline storage / token storage)
-- **package:flutter_local_notifications_platform_interface** — local notifications (realtime/push)
-- **package:http** — Dart http client (api client)
+- **package:connectivity_plus** — network reachability checks (drives online/offline switching) (sync orchestration)
 - **package:flutter_local_notifications** — local notifications (realtime/push)
+- **package:sqflite_common** — local SQLite database (Flutter sqflite) (offline storage)
+- **package:flutter_local_notifications_platform_interface** — local notifications (realtime/push)
+- **package:sqlite3** — SQLite native bindings (offline storage)
 - **package:shared_preferences** — key-value preferences store (offline storage)
+- **package:flutter_secure_storage** — encrypted key-value store (Keystore-backed) (offline storage / token storage)
+- **package:flutter_local_notifications_linux** — local notifications (realtime/push)
+- **package:http** — Dart http client (api client)
 - **WorkManager (×1 refs)** — WorkManager background jobs (deferred sync queues) (sync orchestration)
 
-### Realtime channels: local notifications, local notifications, local notifications, local notifications
+### Realtime channels: local notifications
 
 
 ---
@@ -293,10 +293,10 @@ Offline-capable: local SQLite database (Flutter sqflite) holds data locally; net
 # Local database — chat.fluffy.fluffychat
 
 ## Storage engines
-- **encrypted key-value store (Keystore-backed)** (package:flutter_secure_storage in libapp.so)
 - **local SQLite database (Flutter sqflite)** (package:sqflite_common in libapp.so)
-- **SQLite native bindings** (package:sqlite3 in libapp.so)
+- **encrypted key-value store (Keystore-backed)** (package:flutter_secure_storage in libapp.so)
 - **local SQLite database (Flutter sqflite)** (package:sqflite_common_ffi in libapp.so)
+- **SQLite native bindings** (package:sqlite3 in libapp.so)
 - **key-value preferences store** (package:shared_preferences in libapp.so)
 
 _No CREATE TABLE statements recovered — schema is likely created at runtime or lives server-side._
@@ -436,3 +436,183 @@ _No CREATE TABLE statements recovered — schema is likely created at runtime or
 - RouteInformationProvider
 - FileHandler
 - HTTPRequest
+
+
+---
+
+(from clone-pack/overview.md)
+
+# FluffyChat Matrix Messenger
+
+A secure, decentralized messaging app based on the Matrix protocol.
+
+- **Purpose**: End-to-end encrypted messaging, video calls, and community chats
+- **Target Audience**: Privacy-conscious users and communities
+- **Key Differentiators**: Decentralized architecture, Matrix protocol compatibility, open-source
+- **Platform**: Flutter (Dart) for cross-platform support
+- **Security**: End-to-end encryption (olm/megolm), encrypted backups
+- **Infrastructure**: Self-hostable with compatibility across Matrix clients
+
+FluffyChat provides secure messaging how it should be.
+
+
+---
+
+(from clone-pack/features.md)
+
+# Feature Set
+
+- **Messaging**: Text, media sharing, stickers, polls
+- **Video Calls**: Encrypted direct calls and conferences
+- **Security**: End-to-end encryption, key trust system, biometric unlock
+- **Decentralization**: Matrix protocol compatibility with self-hosting options
+- **Multi-device Support**: Synchronized across devices
+- **Moderation Tools**: For community and group management
+- **Spaces**: Organized chat spaces
+- **Push Notifications**: Local and unified push support
+- **Location Sharing**: Integration with OpenStreetMap
+- **Cross-client Compatibility**: Works with other Matrix clients
+
+All features are built on the open Matrix protocol for true interoperability.
+
+
+---
+
+(from clone-pack/architecture.md)
+
+# Technical Architecture
+
+- **Frontend**: Flutter (Dart) with Provider for state management
+- **Storage**: SQLite (sqflite) for local database, flutter_secure_storage for encrypted data
+- **Networking**: HTTP client for Matrix API calls, UnifiedPush for notifications
+- **Authentication**: Biometric/device credentials with encrypted token storage
+- **Modules**: OlmManager for encryption, PushHelper for notifications, VideoPlayer for calls
+- **Data Flow**: UI → Provider → SQLite/Secure Storage → HTTP API → Matrix homeserver
+- **Background Processing**: WorkManager for deferred sync operations
+- **Platform Integration**: Native Android APIs for camera, contacts, notifications
+
+The architecture prioritizes security and decentralization while maintaining a responsive user experience.
+
+
+---
+
+(from clone-pack/endpoints-analysis.md)
+
+# API Endpoint Analysis
+
+**Matrix Protocol Endpoints**:
+- `https://spec.matrix.org/latest/rooms` - Matrix protocol specification reference
+- `https://matrix.to` - Matrix deep linking protocol
+- `https://matrix.gateway.unifiedpush.org/_matrix/push/v1` - UnifiedPush gateway for notifications
+
+**FluffyChat Backend**:
+- `https://fluffychat.im` - Main backend origin for API calls
+- `https://fluffychat.im/privacy` - Privacy policy endpoint
+- `https://fluffychat.im/tosapplication` - Terms of service endpoint
+- `https://push.fluffychat.im/_matrix/push/v1/notifyv` - Push notification endpoint
+- `https://fluffychat.im/changelog` - App changelog endpoint
+- `https://fluffychat.im/assets/favicon.pngdier` - Asset CDN for media and uploads
+
+**Third-Party Services**:
+- `https://microg.org` - microG integration (Google services replacement)
+- `https://unifiedpush.org` - UnifiedPush documentation
+- `https://www.openstreetmap.org` - Map/location services
+- `https://ko-fi.com/post` - Donation/support page
+- `https://github.com/krille-chan/fluffychat` - Developer repository
+
+**Framework Noise**:
+- Various W3C DTDs and XML namespaces (parser boilerplate)
+- Flutter and Dart documentation links
+- Package registry references (pub.dev)
+
+The app primarily communicates with Matrix homeservers and uses FluffyChat's own backend for push notifications and assets.
+
+
+---
+
+(from clone-pack/data-sync.md)
+
+# Data Synchronization Strategy
+
+- **Local Storage**: SQLite database (sqflite) for message history and metadata
+- **Encrypted Storage**: flutter_secure_storage for authentication tokens and sensitive data
+- **Preferences**: shared_preferences for app settings
+- **Sync Triggers**: Network connectivity checks (connectivity_plus) drive online/offline switching
+- **Background Sync**: WorkManager handles deferred sync operations when connection is available
+- **Push Notifications**: flutter_local_notifications for real-time updates
+- **Conflict Resolution**: Not explicitly detailed in evidence - Matrix protocol typically handles this at the server level
+
+The app is designed to work offline, with local storage as the primary data source. Changes are queued and synchronized when connectivity is restored. The Matrix protocol handles cross-device synchronization at the server level.
+
+
+---
+
+(from clone-pack/api-contract.md)
+
+# Reconstructed API Contract
+
+**Base URL**: `https://fluffychat.im` (primary backend)
+
+**Authentication**:
+- Method: Token-based with encrypted storage
+- Endpoints: `/login` (POST)
+- Security: Biometric/device credential unlock
+
+**Core Endpoints**:
+- `/client/v3/pushers/setVoc` (POST) - Configure push notifications
+- `/settings` (GET/POST) - Retrieve/update app settings
+- `/config` (GET) - Get server configuration
+- `/backup` (GET/POST) - Handle encrypted message backups
+- `/v1` (GET/POST) - General API endpoint (likely Matrix protocol)
+
+**Matrix Protocol Compliance**:
+- Follows Matrix homeserver API specification
+- Uses standard Matrix endpoints for messaging, rooms, and user data
+- Implements Matrix encryption (olm/megolm)
+
+**Data Models**:
+- Message objects with encryption metadata
+- User and room information
+- Push notification configuration
+- Backup and key management data
+
+The API contract is Matrix-compliant with FluffyChat-specific extensions for push notifications and settings.
+
+
+---
+
+(from clone-pack/clone-plan.md)
+
+# Clone Implementation Plan
+
+**Phase 1: Backend Foundation (4-6 weeks)**
+- Set up Matrix homeserver compatibility (Synapse or Dendrite)
+- Implement core Matrix API endpoints (auth, messaging, rooms)
+- Create push notification service (FluffyChat-compatible)
+- Develop media upload/download CDN
+- Implement encryption (olm/megolm) handling
+
+**Phase 2: Data Layer (3-4 weeks)**
+- SQLite schema design for local storage
+- Encrypted storage implementation for tokens and keys
+- Sync queue system for offline operations
+- Conflict resolution mechanisms
+- Migration and backup systems
+
+**Phase 3: Core Features (6-8 weeks)**
+- Authentication and security (biometric unlock)
+- Messaging functionality (text, media, stickers)
+- Room and space management
+- Push notification system (UnifiedPush integration)
+- Video call implementation (Matrix RTC)
+
+**Phase 4: Advanced Features (4-6 weeks)**
+- Polls and reactions
+- Location sharing (OpenStreetMap integration)
+- Moderation tools
+- Multi-device synchronization
+- Cross-client compatibility testing
+
+**Total Estimated Effort**: 17-24 weeks
+
+Prioritize Matrix protocol compliance and security features first, then build out additional functionality.
