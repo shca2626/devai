@@ -1,0 +1,140 @@
+{
+ "endpoints": [
+  {
+   "url": "http://crbug.com/483041824",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "sources/org/chromium/support_lib_boundary/PrefetchOperationCallbackBoundaryInterface.java"
+  },
+  {
+   "url": "https://developer.android.com/guide/topics/media/issues/cleartext-not-permitted",
+   "kind": "docs",
+   "purpose": "Android developer documentation reference",
+   "evidence": "sources/androidx/media3/datasource/HttpDataSource$HttpDataSourceException.java"
+  }
+ ],
+ "database": {
+  "engines": [
+   {
+    "evidence": "androidx.room in decompiled sources",
+    "name": "Room persistence (SQLite ORM)"
+   },
+   {
+    "evidence": "ContentProvider in decompiled sources",
+    "name": "ContentProvider data layer"
+   }
+  ],
+  "tables": [],
+  "sqlEvidence": [],
+  "assetDatabases": []
+ },
+ "sync": {
+  "signals": [
+   {
+    "signal": "ContentProvider (×1 refs)",
+    "meaning": "ContentProvider data layer",
+    "category": "offline storage",
+    "evidence": "decompiled JVM sources"
+   },
+   {
+    "signal": "androidx.room (×1 refs)",
+    "meaning": "Room persistence (SQLite ORM)",
+    "category": "offline storage",
+    "evidence": "decompiled JVM sources"
+   }
+  ],
+  "realtime": [],
+  "offlineStrategy": "Local-first storage (Room persistence (SQLite ORM), ContentProvider data layer) with REST calls to the backend — a classic store-then-sync pattern; no background scheduler detected, so sync happens while the app is open."
+ },
+ "api": {
+  "clients": [],
+  "bases": [],
+  "paths": [],
+  "auth": [],
+  "models": [
+   "WebResourceRequest",
+   "WebResourceResponse",
+   "DownloadRequest",
+   "AwaitingResponse",
+   "IntegrityTokenRequest"
+  ],
+  "screens": [
+   "WebView",
+   "RecycleListView",
+   "WebPage",
+   "ListView",
+   "FirstPage",
+   "OlderPage",
+   "AbsListView",
+   "AssistantDialog",
+   "CardView",
+   "ReadingPage",
+   "FullScreen",
+   "GoToNextPage",
+   "AllowInWebView"
+  ]
+ },
+ "modules": [
+  "InvocationHandler",
+  "WebView",
+  "HttpDataSource",
+  "WebResourceRequest",
+  "PackageManager",
+  "TextUtils",
+  "ActionProvider",
+  "WebResourceResponse",
+  "ContextUtils",
+  "NotificationListenerService",
+  "AlertController",
+  "RecycleListView",
+  "MediaController",
+  "LifecycleUtils",
+  "WebChromeClient",
+  "WebViewClient",
+  "ContentProvider",
+  "CookieManager",
+  "ServiceWorkerController",
+  "RefCountDelegate",
+  "LowLatencyAudioBufferManager",
+  "WebPage",
+  "AudioOutputProvider",
+  "ListView",
+  "MissingProvider",
+  "FirstPage",
+  "OlderPage",
+  "AbsListView",
+  "ContentApi",
+  "WindowManager",
+  "UserManager",
+  "UploadDataProvider",
+  "ApplicationContextProvider",
+  "H264Utils",
+  "PriorityTaskManager",
+  "ContentDataSource",
+  "HttpEngineDataSource",
+  "UdpDataSource",
+  "AssetDataSource",
+  "RawResourceDataSource"
+ ],
+ "stats": {
+  "urlsTotal": 2,
+  "jvmFiles": 8033,
+  "assetCount": 146,
+  "nativeLibs": [
+   "libaic.so",
+   "libandroidx.graphics.path.so",
+   "libaudioconverter.so",
+   "libc++_shared.so",
+   "libdatastore_shared_counter.so",
+   "libimage_processing_util_jni.so",
+   "libjingle_peerconnection_so.so",
+   "libjnidispatch.so",
+   "libmapbox-common.so",
+   "libmapbox-maps.so",
+   "libmultimodal_uniffi.so",
+   "libonnxruntime.so",
+   "libonnxruntime4j_jni.so",
+   "libsurface_util_jni.so"
+  ]
+ }
+}

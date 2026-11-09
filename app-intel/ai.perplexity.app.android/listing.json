@@ -1,0 +1,1871 @@
+{
+ "apks": [
+  {
+   "apkId": "98287",
+   "versionName": "2.103.0",
+   "versionCode": 260673,
+   "arch": "arm64-v8a",
+   "minSdk": 29,
+   "fileSize": 99320332,
+   "sha256": "d17dd8d9804fee88d2c197fb29669bbd3534aad456f2fa8d3e25b50fde2619c4",
+   "format": "apks",
+   "formFactor": null,
+   "isLatest": true,
+   "uploadedAt": "2026-11-01T17:43:58.372Z",
+   "changelog": null
+  },
+  {
+   "apkId": "83602",
+   "versionName": "2.102.0",
+   "versionCode": 260671,
+   "arch": "arm64-v8a",
+   "minSdk": 29,
+   "fileSize": 102540653,
+   "sha256": "53fa56d99be7c9e5b754aea6c88c8702575baaf9eb418e0563bbff3a9c1fac69",
+   "format": "apks",
+   "formFactor": null,
+   "isLatest": false,
+   "uploadedAt": "2026-10-22T17:20:23.258Z",
+   "changelog": null
+  },
+  {
+   "apkId": "71263",
+   "versionName": "2.101.0",
+   "versionCode": 260665,
+   "arch": "arm64-v8a",
+   "minSdk": 29,
+   "fileSize": 121995219,
+   "sha256": "d588fee29a3974373a67c32d85393ee5cc9cd941c8cd850188cf86f9e8a79e76",
+   "format": "apks",
+   "formFactor": null,
+   "isLatest": false,
+   "uploadedAt": "2026-10-14T06:56:44.416Z",
+   "changelog": null
+  },
+  {
+   "apkId": "55557",
+   "versionName": "2.100.0",
+   "versionCode": 260662,
+   "arch": "arm64-v8a",
+   "minSdk": 29,
+   "fileSize": 120850865,
+   "sha256": "409aae35e9c895c600d87f2220649266c8d7b90276d0c9928800e7f343d12946",
+   "format": "apks",
+   "formFactor": null,
+   "isLatest": false,
+   "uploadedAt": "2026-09-29T09:58:45.248Z",
+   "changelog": null
+  },
+  {
+   "apkId": "50309",
+   "versionName": "2.99.0",
+   "versionCode": 260659,
+   "arch": "arm64-v8a",
+   "minSdk": 29,
+   "fileSize": 148976863,
+   "sha256": "adadfe2ea508708bf0e0cab70cb87c85686fcf571d5e581a73c36412a7b09a36",
+   "format": "apks",
+   "formFactor": null,
+   "isLatest": false,
+   "uploadedAt": "2026-09-20T03:52:04.965Z",
+   "changelog": null
+  }
+ ],
+ "security": {
+  "fromGooglePlay": true,
+  "versionName": "2.103.0",
+  "versionCode": 260673,
+  "verdict": "unverified",
+  "scannedByVirusTotal": false,
+  "flagged": 0,
+  "vendors": 0,
+  "scanDate": "2026-11-01T17:44:10.587Z",
+  "sha256": "d17dd8d9804fee88d2c197fb29669bbd3534aad456f2fa8d3e25b50fde2619c4",
+  "sha1": "e2a40bdeb39e3db03478bd07b29fecb33a24eda3",
+  "md5": "a8e0adeb11115b2d8778b61f304d94e1",
+  "flaggedVendors": [],
+  "signature": {
+   "scheme": "v3",
+   "status": "verified",
+   "certSha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+   "certSubject": "CN=Android, O=Google Inc.",
+   "match": "known",
+   "certs": [
+    {
+     "sha1": "b2d86845240080bab5c3a869455b6c540c0a7510",
+     "match": "known",
+     "issuer": "CN=Android, O=Google Inc.",
+     "scheme": "v3",
+     "serial": "0404a836e62f2152c29e69c7ffbc6bef5cbc4c7b",
+     "sha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+     "keySize": 4096,
+     "subject": "CN=Android, O=Google Inc.",
+     "validFrom": "2023-04-30T13:48:16.000Z",
+     "validUntil": "2053-04-30T13:48:16.000Z",
+     "keyAlgorithm": "RSA",
+     "sigAlgorithm": "SHA256withRSA"
+    }
+   ]
+  },
+  "permissions": [
+   "BIND_GET_INSTALL_REFERRER_SERVICE",
+   "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+   "android.permission.ACCESS_ADSERVICES_AD_ID",
+   "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+   "android.permission.ACCESS_COARSE_LOCATION",
+   "android.permission.ACCESS_FINE_LOCATION",
+   "android.permission.ACCESS_NETWORK_STATE",
+   "android.permission.ACCESS_WIFI_STATE",
+   "android.permission.ANSWER_PHONE_CALLS",
+   "android.permission.BLUETOOTH_CONNECT",
+   "android.permission.CALL_PHONE",
+   "android.permission.CAMERA",
+   "android.permission.DETECT_SCREEN_CAPTURE",
+   "android.permission.EXECUTE_APP_FUNCTIONS",
+   "android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED",
+   "android.permission.FOREGROUND_SERVICE",
+   "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+   "android.permission.FOREGROUND_SERVICE_MICROPHONE",
+   "android.permission.INTERNET",
+   "android.permission.MANAGE_ASSISTANT_AUDIO",
+   "android.permission.MANAGE_READ_SCREEN_CONTEXT_REQUEST",
+   "android.permission.MODIFY_AUDIO_SETTINGS",
+   "android.permission.POST_NOTIFICATIONS",
+   "android.permission.QUERY_ALL_PACKAGES",
+   "android.permission.READ_ASSISTANT_APP_SEARCH_DATA",
+   "android.permission.READ_CALENDAR",
+   "android.permission.READ_CONTACTS",
+   "android.permission.READ_EXTERNAL_STORAGE",
+   "android.permission.READ_GLOBAL_APP_SEARCH_DATA",
+   "android.permission.READ_SMS",
+   "android.permission.RECEIVE_BOOT_COMPLETED",
+   "android.permission.RECORD_AUDIO",
+   "android.permission.SCHEDULE_EXACT_ALARM",
+   "android.permission.SEND_SMS",
+   "android.permission.WAKE_LOCK",
+   "android.permission.WRITE_CALENDAR",
+   "android.permission.WRITE_EXTERNAL_STORAGE",
+   "com.android.alarm.permission.SET_ALARM",
+   "com.android.extensions.appfunctions",
+   "com.android.vending.BILLING",
+   "com.android.vending.CHECK_LICENSE",
+   "com.google.android.c2dm.permission.RECEIVE",
+   "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+   "com.google.android.gms.permission.AD_ID",
+   "com.samsung.android.permission.SEC_EYECOMFORT_BROADCAST"
+  ],
+  "pairip": false,
+  "vtMeta": null,
+  "manifest": {
+   "targetSdk": 37,
+   "compileSdk": 37,
+   "allowBackup": false,
+   "packageName": "ai.perplexity.app.android",
+   "versionCode": 260673,
+   "versionName": "2.103.0",
+   "usesFeatures": [
+    "android.hardware.camera",
+    "android.hardware.location",
+    "android.hardware.location.gps",
+    "android.hardware.location.network",
+    "android.hardware.telephony",
+    "android.hardware.wifi",
+    "com.samsung.feature.nowbar"
+   ],
+   "usesLibraries": [
+    "android.ext.adservices",
+    "androidx.window.extensions",
+    "androidx.window.sidecar",
+    "com.android.extensions.appfunctions"
+   ],
+   "exportedUnguarded": [
+    {
+     "kind": "activity",
+     "name": "ai.perplexity.app.android.assistant.AssistantActivity"
+    },
+    {
+     "kind": "activity",
+     "name": "ai.perplexity.app.android.assistant.drag.AssistantDragTrampolineActivity"
+    },
+    {
+     "kind": "activity",
+     "name": "ai.perplexity.app.android.ui.common.TrampolineActivity"
+    },
+    {
+     "kind": "activity",
+     "name": "ai.perplexity.app.android.ui.main.MainActivity"
+    },
+    {
+     "kind": "activity",
+     "name": "ai.perplexity.hotword.impl.enrollment.WakeWordEnrollmentActivity"
+    },
+    {
+     "kind": "activity",
+     "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordPermissionActivity"
+    },
+    {
+     "kind": "activity",
+     "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordSettingsActivity"
+    },
+    {
+     "kind": "activity",
+     "name": "com.spotify.sdk.android.auth.LoginActivity"
+    },
+    {
+     "kind": "activity-alias",
+     "name": "ai.perplexity.app.android.SamsungAiKeyAlias"
+    },
+    {
+     "kind": "provider",
+     "name": "ai.perplexity.app.android.assistant.AssistantSamsungPreloadContentProvider"
+    },
+    {
+     "kind": "receiver",
+     "name": "ai.perplexity.app.android.common.util.DownloadCompletedReceiver"
+    },
+    {
+     "kind": "service",
+     "name": "ai.perplexity.app.android.wearassistant.impl.WearAssistantProxyService"
+    }
+   ],
+   "formFactorMarkers": [],
+   "definesPermissions": [
+    "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+   ],
+   "usesFeaturesOptional": [
+    "android.hardware.camera",
+    "android.hardware.location",
+    "android.hardware.location.gps",
+    "android.hardware.location.network",
+    "android.hardware.telephony",
+    "android.hardware.wifi",
+    "com.samsung.feature.nowbar"
+   ]
+  },
+  "natives": {
+   "abis": [
+    "arm64-v8a"
+   ],
+   "libs": [
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libaic.so",
+     "size": 3889912,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libandroidx.graphics.path.so",
+     "size": 10096,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libaudioconverter.so",
+     "size": 397456,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libc++_shared.so",
+     "size": 1292896,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libdatastore_shared_counter.so",
+     "size": 7112,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libimage_processing_util_jni.so",
+     "size": 32528,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libjingle_peerconnection_so.so",
+     "size": 11278608,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libjnidispatch.so",
+     "size": 165992,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libmapbox-common.so",
+     "size": 6603056,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libmapbox-maps.so",
+     "size": 13081992,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libmultimodal_uniffi.so",
+     "size": 21929048,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libonnxruntime.so",
+     "size": 4779992,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libonnxruntime4j_jni.so",
+     "size": 83248,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    },
+    {
+     "abis": [
+      "arm64-v8a"
+     ],
+     "name": "libsurface_util_jni.so",
+     "size": 4896,
+     "loadAlign": 16384,
+     "zipAligned16k": true
+    }
+   ],
+   "protectors": []
+  },
+  "trackers": null,
+  "knownSignatures": 1,
+  "signatureBlocked": false
+ },
+ "securityByApkId": {
+  "50309": {
+   "fromGooglePlay": true,
+   "versionName": "2.99.0",
+   "versionCode": 260659,
+   "verdict": "unverified",
+   "scannedByVirusTotal": false,
+   "flagged": 0,
+   "vendors": 0,
+   "scanDate": "2026-09-20T03:52:24.773Z",
+   "sha256": "adadfe2ea508708bf0e0cab70cb87c85686fcf571d5e581a73c36412a7b09a36",
+   "sha1": "0030bd9a3bd71c99367864a84c38c95f0953fcf2",
+   "md5": "0ef18ffdb5584db4d4e5a6a393b1c376",
+   "flaggedVendors": [],
+   "signature": {
+    "scheme": "v3",
+    "status": "verified",
+    "certSha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+    "certSubject": "CN=Android, O=Google Inc.",
+    "match": "known",
+    "certs": [
+     {
+      "sha1": "b2d86845240080bab5c3a869455b6c540c0a7510",
+      "match": "known",
+      "issuer": "CN=Android, O=Google Inc.",
+      "scheme": "v3",
+      "serial": "0404a836e62f2152c29e69c7ffbc6bef5cbc4c7b",
+      "sha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+      "keySize": 4096,
+      "subject": "CN=Android, O=Google Inc.",
+      "validFrom": "2023-04-30T13:48:16.000Z",
+      "validUntil": "2053-04-30T13:48:16.000Z",
+      "keyAlgorithm": "RSA",
+      "sigAlgorithm": "SHA256withRSA"
+     }
+    ]
+   },
+   "permissions": [
+    "BIND_GET_INSTALL_REFERRER_SERVICE",
+    "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+    "android.permission.ACCESS_ADSERVICES_AD_ID",
+    "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_WIFI_STATE",
+    "android.permission.ANSWER_PHONE_CALLS",
+    "android.permission.BLUETOOTH_CONNECT",
+    "android.permission.CALL_PHONE",
+    "android.permission.CAMERA",
+    "android.permission.DETECT_SCREEN_CAPTURE",
+    "android.permission.EXECUTE_APP_FUNCTIONS",
+    "android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+    "android.permission.FOREGROUND_SERVICE_MICROPHONE",
+    "android.permission.INTERNET",
+    "android.permission.MANAGE_ASSISTANT_AUDIO",
+    "android.permission.MANAGE_READ_SCREEN_CONTEXT_REQUEST",
+    "android.permission.MODIFY_AUDIO_SETTINGS",
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.QUERY_ALL_PACKAGES",
+    "android.permission.READ_ASSISTANT_APP_SEARCH_DATA",
+    "android.permission.READ_CALENDAR",
+    "android.permission.READ_CONTACTS",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.READ_GLOBAL_APP_SEARCH_DATA",
+    "android.permission.READ_SMS",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.SCHEDULE_EXACT_ALARM",
+    "android.permission.SEND_SMS",
+    "android.permission.WAKE_LOCK",
+    "android.permission.WRITE_CALENDAR",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "com.android.alarm.permission.SET_ALARM",
+    "com.android.extensions.appfunctions",
+    "com.android.vending.BILLING",
+    "com.android.vending.CHECK_LICENSE",
+    "com.google.android.c2dm.permission.RECEIVE",
+    "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+    "com.google.android.gms.permission.AD_ID",
+    "com.samsung.android.permission.SEC_EYECOMFORT_BROADCAST"
+   ],
+   "pairip": false,
+   "vtMeta": null,
+   "manifest": {
+    "targetSdk": 37,
+    "compileSdk": 37,
+    "allowBackup": false,
+    "packageName": "ai.perplexity.app.android",
+    "versionCode": 260659,
+    "versionName": "2.99.0",
+    "usesFeatures": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ],
+    "usesLibraries": [
+     "android.ext.adservices",
+     "androidx.window.extensions",
+     "androidx.window.sidecar",
+     "com.android.extensions.appfunctions",
+     "org.apache.http.legacy"
+    ],
+    "exportedUnguarded": [
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.AssistantActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.drag.AssistantDragTrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.common.TrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.main.MainActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.enrollment.WakeWordEnrollmentActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordPermissionActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordSettingsActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "com.spotify.sdk.android.auth.LoginActivity"
+     },
+     {
+      "kind": "activity-alias",
+      "name": "ai.perplexity.app.android.SamsungAiKeyAlias"
+     },
+     {
+      "kind": "provider",
+      "name": "ai.perplexity.app.android.assistant.AssistantSamsungPreloadContentProvider"
+     },
+     {
+      "kind": "receiver",
+      "name": "ai.perplexity.app.android.common.util.DownloadCompletedReceiver"
+     }
+    ],
+    "formFactorMarkers": [],
+    "definesPermissions": [
+     "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "usesFeaturesOptional": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ]
+   },
+   "natives": {
+    "abis": [
+     "arm64-v8a"
+    ],
+    "libs": [
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaic.so",
+      "size": 3889912
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libandroidx.graphics.path.so",
+      "size": 10096
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaudioconverter.so",
+      "size": 397456
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libc++_shared.so",
+      "size": 1292896
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libdatastore_shared_counter.so",
+      "size": 7112
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libimage_processing_util_jni.so",
+      "size": 32528
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjingle_peerconnection_so.so",
+      "size": 11278608
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjnidispatch.so",
+      "size": 165992
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-common.so",
+      "size": 6937928
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-maps.so",
+      "size": 13496000
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmultimodal_uniffi.so",
+      "size": 25782944
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime.so",
+      "size": 25831632
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime4j_jni.so",
+      "size": 83432
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsherpa-onnx-c-api.so",
+      "size": 4406112
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsurface_util_jni.so",
+      "size": 4896
+     }
+    ],
+    "protectors": []
+   },
+   "trackers": null,
+   "knownSignatures": 1,
+   "signatureBlocked": false
+  },
+  "55557": {
+   "fromGooglePlay": true,
+   "versionName": "2.100.0",
+   "versionCode": 260662,
+   "verdict": "unverified",
+   "scannedByVirusTotal": false,
+   "flagged": 0,
+   "vendors": 0,
+   "scanDate": "2026-09-29T09:59:06.808Z",
+   "sha256": "409aae35e9c895c600d87f2220649266c8d7b90276d0c9928800e7f343d12946",
+   "sha1": "dece66a99f05967b58808442e51cb0450c8db7e9",
+   "md5": "3bc0fb104e1b3a8e2eb3de7e7c12e601",
+   "flaggedVendors": [],
+   "signature": {
+    "scheme": "v3",
+    "status": "verified",
+    "certSha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+    "certSubject": "CN=Android, O=Google Inc.",
+    "match": "known",
+    "certs": [
+     {
+      "sha1": "b2d86845240080bab5c3a869455b6c540c0a7510",
+      "match": "known",
+      "issuer": "CN=Android, O=Google Inc.",
+      "scheme": "v3",
+      "serial": "0404a836e62f2152c29e69c7ffbc6bef5cbc4c7b",
+      "sha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+      "keySize": 4096,
+      "subject": "CN=Android, O=Google Inc.",
+      "validFrom": "2023-04-30T13:48:16.000Z",
+      "validUntil": "2053-04-30T13:48:16.000Z",
+      "keyAlgorithm": "RSA",
+      "sigAlgorithm": "SHA256withRSA"
+     }
+    ]
+   },
+   "permissions": [
+    "BIND_GET_INSTALL_REFERRER_SERVICE",
+    "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+    "android.permission.ACCESS_ADSERVICES_AD_ID",
+    "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_WIFI_STATE",
+    "android.permission.ANSWER_PHONE_CALLS",
+    "android.permission.BLUETOOTH_CONNECT",
+    "android.permission.CALL_PHONE",
+    "android.permission.CAMERA",
+    "android.permission.DETECT_SCREEN_CAPTURE",
+    "android.permission.EXECUTE_APP_FUNCTIONS",
+    "android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+    "android.permission.FOREGROUND_SERVICE_MICROPHONE",
+    "android.permission.INTERNET",
+    "android.permission.MANAGE_ASSISTANT_AUDIO",
+    "android.permission.MANAGE_READ_SCREEN_CONTEXT_REQUEST",
+    "android.permission.MODIFY_AUDIO_SETTINGS",
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.QUERY_ALL_PACKAGES",
+    "android.permission.READ_ASSISTANT_APP_SEARCH_DATA",
+    "android.permission.READ_CALENDAR",
+    "android.permission.READ_CONTACTS",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.READ_GLOBAL_APP_SEARCH_DATA",
+    "android.permission.READ_SMS",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.SCHEDULE_EXACT_ALARM",
+    "android.permission.SEND_SMS",
+    "android.permission.WAKE_LOCK",
+    "android.permission.WRITE_CALENDAR",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "com.android.alarm.permission.SET_ALARM",
+    "com.android.extensions.appfunctions",
+    "com.android.vending.BILLING",
+    "com.android.vending.CHECK_LICENSE",
+    "com.google.android.c2dm.permission.RECEIVE",
+    "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+    "com.google.android.gms.permission.AD_ID",
+    "com.samsung.android.permission.SEC_EYECOMFORT_BROADCAST"
+   ],
+   "pairip": false,
+   "vtMeta": null,
+   "manifest": {
+    "targetSdk": 37,
+    "compileSdk": 37,
+    "allowBackup": false,
+    "packageName": "ai.perplexity.app.android",
+    "versionCode": 260662,
+    "versionName": "2.100.0",
+    "usesFeatures": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ],
+    "usesLibraries": [
+     "android.ext.adservices",
+     "androidx.window.extensions",
+     "androidx.window.sidecar",
+     "com.android.extensions.appfunctions",
+     "org.apache.http.legacy"
+    ],
+    "exportedUnguarded": [
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.AssistantActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.drag.AssistantDragTrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.common.TrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.main.MainActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.enrollment.WakeWordEnrollmentActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordPermissionActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordSettingsActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "com.spotify.sdk.android.auth.LoginActivity"
+     },
+     {
+      "kind": "activity-alias",
+      "name": "ai.perplexity.app.android.SamsungAiKeyAlias"
+     },
+     {
+      "kind": "provider",
+      "name": "ai.perplexity.app.android.assistant.AssistantSamsungPreloadContentProvider"
+     },
+     {
+      "kind": "receiver",
+      "name": "ai.perplexity.app.android.common.util.DownloadCompletedReceiver"
+     }
+    ],
+    "formFactorMarkers": [],
+    "definesPermissions": [
+     "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "usesFeaturesOptional": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ]
+   },
+   "natives": {
+    "abis": [
+     "arm64-v8a"
+    ],
+    "libs": [
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaic.so",
+      "size": 3889912
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libandroidx.graphics.path.so",
+      "size": 10096
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaudioconverter.so",
+      "size": 397456
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libc++_shared.so",
+      "size": 1292896
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libdatastore_shared_counter.so",
+      "size": 7112
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libimage_processing_util_jni.so",
+      "size": 32528
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjingle_peerconnection_so.so",
+      "size": 11278608
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjnidispatch.so",
+      "size": 165992
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-common.so",
+      "size": 6937928
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-maps.so",
+      "size": 13496000
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmultimodal_uniffi.so",
+      "size": 25820608
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime.so",
+      "size": 25831632
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime4j_jni.so",
+      "size": 83432
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsherpa-onnx-c-api.so",
+      "size": 4406112
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsurface_util_jni.so",
+      "size": 4896
+     }
+    ],
+    "protectors": []
+   },
+   "trackers": null,
+   "knownSignatures": 1,
+   "signatureBlocked": false
+  },
+  "71263": {
+   "fromGooglePlay": true,
+   "versionName": "2.101.0",
+   "versionCode": 260665,
+   "verdict": "unverified",
+   "scannedByVirusTotal": false,
+   "flagged": 0,
+   "vendors": 0,
+   "scanDate": "2026-10-14T06:57:09.823Z",
+   "sha256": "d588fee29a3974373a67c32d85393ee5cc9cd941c8cd850188cf86f9e8a79e76",
+   "sha1": "213f5cbee45e8f7f127eb1c7410e57942d7a8039",
+   "md5": "04ae75303cc62723006d6a8c7f63189e",
+   "flaggedVendors": [],
+   "signature": {
+    "scheme": "v3",
+    "status": "verified",
+    "certSha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+    "certSubject": "CN=Android, O=Google Inc.",
+    "match": "known",
+    "certs": [
+     {
+      "sha1": "b2d86845240080bab5c3a869455b6c540c0a7510",
+      "match": "known",
+      "issuer": "CN=Android, O=Google Inc.",
+      "scheme": "v3",
+      "serial": "0404a836e62f2152c29e69c7ffbc6bef5cbc4c7b",
+      "sha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+      "keySize": 4096,
+      "subject": "CN=Android, O=Google Inc.",
+      "validFrom": "2023-04-30T13:48:16.000Z",
+      "validUntil": "2053-04-30T13:48:16.000Z",
+      "keyAlgorithm": "RSA",
+      "sigAlgorithm": "SHA256withRSA"
+     }
+    ]
+   },
+   "permissions": [
+    "BIND_GET_INSTALL_REFERRER_SERVICE",
+    "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+    "android.permission.ACCESS_ADSERVICES_AD_ID",
+    "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_WIFI_STATE",
+    "android.permission.ANSWER_PHONE_CALLS",
+    "android.permission.BLUETOOTH_CONNECT",
+    "android.permission.CALL_PHONE",
+    "android.permission.CAMERA",
+    "android.permission.DETECT_SCREEN_CAPTURE",
+    "android.permission.EXECUTE_APP_FUNCTIONS",
+    "android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+    "android.permission.FOREGROUND_SERVICE_MICROPHONE",
+    "android.permission.INTERNET",
+    "android.permission.MANAGE_ASSISTANT_AUDIO",
+    "android.permission.MANAGE_READ_SCREEN_CONTEXT_REQUEST",
+    "android.permission.MODIFY_AUDIO_SETTINGS",
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.QUERY_ALL_PACKAGES",
+    "android.permission.READ_ASSISTANT_APP_SEARCH_DATA",
+    "android.permission.READ_CALENDAR",
+    "android.permission.READ_CONTACTS",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.READ_GLOBAL_APP_SEARCH_DATA",
+    "android.permission.READ_SMS",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.SCHEDULE_EXACT_ALARM",
+    "android.permission.SEND_SMS",
+    "android.permission.WAKE_LOCK",
+    "android.permission.WRITE_CALENDAR",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "com.android.alarm.permission.SET_ALARM",
+    "com.android.extensions.appfunctions",
+    "com.android.vending.BILLING",
+    "com.android.vending.CHECK_LICENSE",
+    "com.google.android.c2dm.permission.RECEIVE",
+    "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+    "com.google.android.gms.permission.AD_ID",
+    "com.samsung.android.permission.SEC_EYECOMFORT_BROADCAST"
+   ],
+   "pairip": false,
+   "vtMeta": null,
+   "manifest": {
+    "targetSdk": 37,
+    "compileSdk": 37,
+    "allowBackup": false,
+    "packageName": "ai.perplexity.app.android",
+    "versionCode": 260665,
+    "versionName": "2.101.0",
+    "usesFeatures": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ],
+    "usesLibraries": [
+     "android.ext.adservices",
+     "androidx.window.extensions",
+     "androidx.window.sidecar",
+     "com.android.extensions.appfunctions",
+     "org.apache.http.legacy"
+    ],
+    "exportedUnguarded": [
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.AssistantActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.drag.AssistantDragTrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.common.TrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.main.MainActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.enrollment.WakeWordEnrollmentActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordPermissionActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordSettingsActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "com.spotify.sdk.android.auth.LoginActivity"
+     },
+     {
+      "kind": "activity-alias",
+      "name": "ai.perplexity.app.android.SamsungAiKeyAlias"
+     },
+     {
+      "kind": "provider",
+      "name": "ai.perplexity.app.android.assistant.AssistantSamsungPreloadContentProvider"
+     },
+     {
+      "kind": "receiver",
+      "name": "ai.perplexity.app.android.common.util.DownloadCompletedReceiver"
+     },
+     {
+      "kind": "service",
+      "name": "ai.perplexity.app.android.wearassistant.impl.WearAssistantProxyService"
+     }
+    ],
+    "formFactorMarkers": [],
+    "definesPermissions": [
+     "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "usesFeaturesOptional": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ]
+   },
+   "natives": {
+    "abis": [
+     "arm64-v8a"
+    ],
+    "libs": [
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaic.so",
+      "size": 3889912
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libandroidx.graphics.path.so",
+      "size": 10096
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaudioconverter.so",
+      "size": 397456
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libc++_shared.so",
+      "size": 1292896
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libdatastore_shared_counter.so",
+      "size": 7112
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libimage_processing_util_jni.so",
+      "size": 32528
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjingle_peerconnection_so.so",
+      "size": 11278608
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjnidispatch.so",
+      "size": 165992
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-common.so",
+      "size": 6603056
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-maps.so",
+      "size": 13081992
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmultimodal_uniffi.so",
+      "size": 25675856
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime.so",
+      "size": 25831632
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime4j_jni.so",
+      "size": 83432
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsherpa-onnx-c-api.so",
+      "size": 4406112
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsurface_util_jni.so",
+      "size": 4896
+     }
+    ],
+    "protectors": []
+   },
+   "trackers": null,
+   "knownSignatures": 1,
+   "signatureBlocked": false
+  },
+  "83602": {
+   "fromGooglePlay": true,
+   "versionName": "2.102.0",
+   "versionCode": 260671,
+   "verdict": "unverified",
+   "scannedByVirusTotal": false,
+   "flagged": 0,
+   "vendors": 0,
+   "scanDate": "2026-10-22T17:20:48.633Z",
+   "sha256": "53fa56d99be7c9e5b754aea6c88c8702575baaf9eb418e0563bbff3a9c1fac69",
+   "sha1": "89cbb981ac4ba76ee613216c26ebe34692671af2",
+   "md5": "74419fba2587e4044f94d35f0628a085",
+   "flaggedVendors": [],
+   "signature": {
+    "scheme": "v3",
+    "status": "verified",
+    "certSha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+    "certSubject": "CN=Android, O=Google Inc.",
+    "match": "known",
+    "certs": [
+     {
+      "sha1": "b2d86845240080bab5c3a869455b6c540c0a7510",
+      "match": "known",
+      "issuer": "CN=Android, O=Google Inc.",
+      "scheme": "v3",
+      "serial": "0404a836e62f2152c29e69c7ffbc6bef5cbc4c7b",
+      "sha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+      "keySize": 4096,
+      "subject": "CN=Android, O=Google Inc.",
+      "validFrom": "2023-04-30T13:48:16.000Z",
+      "validUntil": "2053-04-30T13:48:16.000Z",
+      "keyAlgorithm": "RSA",
+      "sigAlgorithm": "SHA256withRSA"
+     }
+    ]
+   },
+   "permissions": [
+    "BIND_GET_INSTALL_REFERRER_SERVICE",
+    "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+    "android.permission.ACCESS_ADSERVICES_AD_ID",
+    "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_WIFI_STATE",
+    "android.permission.ANSWER_PHONE_CALLS",
+    "android.permission.BLUETOOTH_CONNECT",
+    "android.permission.CALL_PHONE",
+    "android.permission.CAMERA",
+    "android.permission.DETECT_SCREEN_CAPTURE",
+    "android.permission.EXECUTE_APP_FUNCTIONS",
+    "android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+    "android.permission.FOREGROUND_SERVICE_MICROPHONE",
+    "android.permission.INTERNET",
+    "android.permission.MANAGE_ASSISTANT_AUDIO",
+    "android.permission.MANAGE_READ_SCREEN_CONTEXT_REQUEST",
+    "android.permission.MODIFY_AUDIO_SETTINGS",
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.QUERY_ALL_PACKAGES",
+    "android.permission.READ_ASSISTANT_APP_SEARCH_DATA",
+    "android.permission.READ_CALENDAR",
+    "android.permission.READ_CONTACTS",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.READ_GLOBAL_APP_SEARCH_DATA",
+    "android.permission.READ_SMS",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.SCHEDULE_EXACT_ALARM",
+    "android.permission.SEND_SMS",
+    "android.permission.WAKE_LOCK",
+    "android.permission.WRITE_CALENDAR",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "com.android.alarm.permission.SET_ALARM",
+    "com.android.extensions.appfunctions",
+    "com.android.vending.BILLING",
+    "com.android.vending.CHECK_LICENSE",
+    "com.google.android.c2dm.permission.RECEIVE",
+    "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+    "com.google.android.gms.permission.AD_ID",
+    "com.samsung.android.permission.SEC_EYECOMFORT_BROADCAST"
+   ],
+   "pairip": false,
+   "vtMeta": null,
+   "manifest": {
+    "targetSdk": 37,
+    "compileSdk": 37,
+    "allowBackup": false,
+    "packageName": "ai.perplexity.app.android",
+    "versionCode": 260671,
+    "versionName": "2.102.0",
+    "usesFeatures": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ],
+    "usesLibraries": [
+     "android.ext.adservices",
+     "androidx.window.extensions",
+     "androidx.window.sidecar",
+     "com.android.extensions.appfunctions"
+    ],
+    "exportedUnguarded": [
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.AssistantActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.drag.AssistantDragTrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.common.TrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.main.MainActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.enrollment.WakeWordEnrollmentActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordPermissionActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordSettingsActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "com.spotify.sdk.android.auth.LoginActivity"
+     },
+     {
+      "kind": "activity-alias",
+      "name": "ai.perplexity.app.android.SamsungAiKeyAlias"
+     },
+     {
+      "kind": "provider",
+      "name": "ai.perplexity.app.android.assistant.AssistantSamsungPreloadContentProvider"
+     },
+     {
+      "kind": "receiver",
+      "name": "ai.perplexity.app.android.common.util.DownloadCompletedReceiver"
+     },
+     {
+      "kind": "service",
+      "name": "ai.perplexity.app.android.wearassistant.impl.WearAssistantProxyService"
+     }
+    ],
+    "formFactorMarkers": [],
+    "definesPermissions": [
+     "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "usesFeaturesOptional": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ]
+   },
+   "natives": {
+    "abis": [
+     "arm64-v8a"
+    ],
+    "libs": [
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaic.so",
+      "size": 3889912,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libandroidx.graphics.path.so",
+      "size": 10096,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaudioconverter.so",
+      "size": 397456,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libc++_shared.so",
+      "size": 1292896,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libdatastore_shared_counter.so",
+      "size": 7112,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libimage_processing_util_jni.so",
+      "size": 32528,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjingle_peerconnection_so.so",
+      "size": 11278608,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjnidispatch.so",
+      "size": 165992,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-common.so",
+      "size": 6603056,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-maps.so",
+      "size": 13081992,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmultimodal_uniffi.so",
+      "size": 21929048,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime.so",
+      "size": 4779992,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime4j_jni.so",
+      "size": 83248,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsurface_util_jni.so",
+      "size": 4896,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     }
+    ],
+    "protectors": []
+   },
+   "trackers": null,
+   "knownSignatures": 1,
+   "signatureBlocked": false
+  },
+  "98287": {
+   "fromGooglePlay": true,
+   "versionName": "2.103.0",
+   "versionCode": 260673,
+   "verdict": "unverified",
+   "scannedByVirusTotal": false,
+   "flagged": 0,
+   "vendors": 0,
+   "scanDate": "2026-11-01T17:44:10.587Z",
+   "sha256": "d17dd8d9804fee88d2c197fb29669bbd3534aad456f2fa8d3e25b50fde2619c4",
+   "sha1": "e2a40bdeb39e3db03478bd07b29fecb33a24eda3",
+   "md5": "a8e0adeb11115b2d8778b61f304d94e1",
+   "flaggedVendors": [],
+   "signature": {
+    "scheme": "v3",
+    "status": "verified",
+    "certSha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+    "certSubject": "CN=Android, O=Google Inc.",
+    "match": "known",
+    "certs": [
+     {
+      "sha1": "b2d86845240080bab5c3a869455b6c540c0a7510",
+      "match": "known",
+      "issuer": "CN=Android, O=Google Inc.",
+      "scheme": "v3",
+      "serial": "0404a836e62f2152c29e69c7ffbc6bef5cbc4c7b",
+      "sha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+      "keySize": 4096,
+      "subject": "CN=Android, O=Google Inc.",
+      "validFrom": "2023-04-30T13:48:16.000Z",
+      "validUntil": "2053-04-30T13:48:16.000Z",
+      "keyAlgorithm": "RSA",
+      "sigAlgorithm": "SHA256withRSA"
+     }
+    ]
+   },
+   "permissions": [
+    "BIND_GET_INSTALL_REFERRER_SERVICE",
+    "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+    "android.permission.ACCESS_ADSERVICES_AD_ID",
+    "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_WIFI_STATE",
+    "android.permission.ANSWER_PHONE_CALLS",
+    "android.permission.BLUETOOTH_CONNECT",
+    "android.permission.CALL_PHONE",
+    "android.permission.CAMERA",
+    "android.permission.DETECT_SCREEN_CAPTURE",
+    "android.permission.EXECUTE_APP_FUNCTIONS",
+    "android.permission.EXECUTE_APP_FUNCTIONS_TRUSTED",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+    "android.permission.FOREGROUND_SERVICE_MICROPHONE",
+    "android.permission.INTERNET",
+    "android.permission.MANAGE_ASSISTANT_AUDIO",
+    "android.permission.MANAGE_READ_SCREEN_CONTEXT_REQUEST",
+    "android.permission.MODIFY_AUDIO_SETTINGS",
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.QUERY_ALL_PACKAGES",
+    "android.permission.READ_ASSISTANT_APP_SEARCH_DATA",
+    "android.permission.READ_CALENDAR",
+    "android.permission.READ_CONTACTS",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.READ_GLOBAL_APP_SEARCH_DATA",
+    "android.permission.READ_SMS",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.SCHEDULE_EXACT_ALARM",
+    "android.permission.SEND_SMS",
+    "android.permission.WAKE_LOCK",
+    "android.permission.WRITE_CALENDAR",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "com.android.alarm.permission.SET_ALARM",
+    "com.android.extensions.appfunctions",
+    "com.android.vending.BILLING",
+    "com.android.vending.CHECK_LICENSE",
+    "com.google.android.c2dm.permission.RECEIVE",
+    "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+    "com.google.android.gms.permission.AD_ID",
+    "com.samsung.android.permission.SEC_EYECOMFORT_BROADCAST"
+   ],
+   "pairip": false,
+   "vtMeta": null,
+   "manifest": {
+    "targetSdk": 37,
+    "compileSdk": 37,
+    "allowBackup": false,
+    "packageName": "ai.perplexity.app.android",
+    "versionCode": 260673,
+    "versionName": "2.103.0",
+    "usesFeatures": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ],
+    "usesLibraries": [
+     "android.ext.adservices",
+     "androidx.window.extensions",
+     "androidx.window.sidecar",
+     "com.android.extensions.appfunctions"
+    ],
+    "exportedUnguarded": [
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.AssistantActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.assistant.drag.AssistantDragTrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.common.TrampolineActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.app.android.ui.main.MainActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.enrollment.WakeWordEnrollmentActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordPermissionActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "ai.perplexity.hotword.impl.ui.AssistantWakeWordSettingsActivity"
+     },
+     {
+      "kind": "activity",
+      "name": "com.spotify.sdk.android.auth.LoginActivity"
+     },
+     {
+      "kind": "activity-alias",
+      "name": "ai.perplexity.app.android.SamsungAiKeyAlias"
+     },
+     {
+      "kind": "provider",
+      "name": "ai.perplexity.app.android.assistant.AssistantSamsungPreloadContentProvider"
+     },
+     {
+      "kind": "receiver",
+      "name": "ai.perplexity.app.android.common.util.DownloadCompletedReceiver"
+     },
+     {
+      "kind": "service",
+      "name": "ai.perplexity.app.android.wearassistant.impl.WearAssistantProxyService"
+     }
+    ],
+    "formFactorMarkers": [],
+    "definesPermissions": [
+     "ai.perplexity.app.android.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+    ],
+    "usesFeaturesOptional": [
+     "android.hardware.camera",
+     "android.hardware.location",
+     "android.hardware.location.gps",
+     "android.hardware.location.network",
+     "android.hardware.telephony",
+     "android.hardware.wifi",
+     "com.samsung.feature.nowbar"
+    ]
+   },
+   "natives": {
+    "abis": [
+     "arm64-v8a"
+    ],
+    "libs": [
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaic.so",
+      "size": 3889912,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libandroidx.graphics.path.so",
+      "size": 10096,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libaudioconverter.so",
+      "size": 397456,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libc++_shared.so",
+      "size": 1292896,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libdatastore_shared_counter.so",
+      "size": 7112,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libimage_processing_util_jni.so",
+      "size": 32528,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjingle_peerconnection_so.so",
+      "size": 11278608,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libjnidispatch.so",
+      "size": 165992,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-common.so",
+      "size": 6603056,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmapbox-maps.so",
+      "size": 13081992,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libmultimodal_uniffi.so",
+      "size": 21929048,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime.so",
+      "size": 4779992,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libonnxruntime4j_jni.so",
+      "size": 83248,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     },
+     {
+      "abis": [
+       "arm64-v8a"
+      ],
+      "name": "libsurface_util_jni.so",
+      "size": 4896,
+      "loadAlign": 16384,
+      "zipAligned16k": true
+     }
+    ],
+    "protectors": []
+   },
+   "trackers": null,
+   "knownSignatures": 1,
+   "signatureBlocked": false
+  }
+ },
+ "signers": [
+  {
+   "sha256": "b5c7a5c959b1626fb0e77bc5b72e8c394ab5c2671702a8ddf10b9bdbb0bf6d18",
+   "subject": "CN=Android, O=Google Inc.",
+   "trusted": false,
+   "addedVia": "scan",
+   "firstSeenAt": "2026-07-27T17:58:29.435Z"
+  }
+ ]
+}

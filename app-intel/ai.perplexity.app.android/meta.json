@@ -1,0 +1,55 @@
+{
+ "pkg": "ai.perplexity.app.android",
+ "appName": "Perplexity - Ask Anything",
+ "version": "2.103.0",
+ "analyzedAt": "2026-11-09T23:57:55.347Z",
+ "store": {
+  "appId": "ai.perplexity.app.android",
+  "title": "Perplexity - Ask Anything",
+  "developer": "PerplexityAI",
+  "developerWebsite": "https://www.perplexity.ai/privacy",
+  "privacyPolicy": "https://www.perplexity.ai/privacy",
+  "genre": "Productivity",
+  "contentRating": "Teen",
+  "version": "2.103.0",
+  "androidVersion": "8.0",
+  "installs": "100,000,000+",
+  "score": 4.620744,
+  "ratings": 2230004,
+  "reviews": 15506,
+  "released": "May 24, 2023",
+  "updated": 1793375280000,
+  "description": "Perplexity—Where Knowledge Begins. The answers you need—right at your finger tips.\n\nCut through the clutter and get straight to credible, up-to-date answers. This free app syncs across devices and leverages the power of the top AI models from OpenAI, Anthropic, Meta, and more. \n\nFeatures:\n\n· Perplexity Pro Search: Guided AI search for deeper exploration.\n\n· Thread Follow-Up: Keep the conversation going for a deeper understanding.\n\n· Voice: Instant, up-to-date answers whether you type or say it. \n\n· Trust Built In: Cited sources for every answer.\n\n· Discover: Learn new things from the community.\n\n· Your Library: More than search history, it's a curation of your discoveries.\n\nDownload Perplexity now and continue your journey to better knowledge and understanding.",
+  "screenshots": [
+   "https://play-lh.googleusercontent.com/VEWH_PXFnWpTyEVA4-MoRfel569iFTXx92xJzoCYBQUfUszXEkq730Uoz2f_nY-POG8vXyVU4uqlXVWUbxI0bQ",
+   "https://play-lh.googleusercontent.com/_gVKW9iZRcCxFpX7QMrLLrvdH4kEFjIzdQlC9lGI1qV6KdS8RmaobOMInK0dLszUarmKayZg0ANuEoqFwXDxYg",
+   "https://play-lh.googleusercontent.com/HYGcRUVUgigzXxAxKAHPoUPBEWvnleHUtCUzjD60nHJircOfOy-zgWEgeAgnM7pcY2DIw-7JdXiAcjjWVmdsaCc",
+   "https://play-lh.googleusercontent.com/224Ay6zFblson7LiWAosh7Dul2cHx6fo5q89uVVYMcBRyNY8yrfS1vXC9oMQhzxOCrM5QTUSyzxqHI3cI1BWmw",
+   "https://play-lh.googleusercontent.com/QiSbiv2WsXxoZ4wdCc5vaUcI4PptfyXmmiivT44JW8iLL0KP-YwBjdDz6-oLD6A6vRBOCf2Lx6E8A1iiMl5JcQ",
+   "https://play-lh.googleusercontent.com/gTgxNRzS35iwDk9U9Kd8bT5Cq3F6ol1TswQKW4v4RwlVvfYCpimAfLTGTTpE7_MGc0Sea_4GmsN5r5_K3klG",
+   "https://play-lh.googleusercontent.com/vmb5Q4PKRqMqP6_-w6R8hbdbFHPUe7X0Ydv1CYPeLvqANE74r2Jidxfy64u1P9uSsZQ7dcyG7CMqZ3y2kvAs",
+   "https://play-lh.googleusercontent.com/k_POURtYG5QbWVJ6c3xUmJYBwIKNQBw3N8vbdhFeu1qkx1C7pfU-zs8NfM7-DaDg7W7SqLJtmc1Q5qY__V4mwQ"
+  ],
+  "video": "https://www.youtube.com/embed/3SKVMV2Gots?vq=large&rel=0&autohide=1&showinfo=0"
+ },
+ "acquire": {
+  "file": "/home/z/my-project/.app-intel/cmw9x77am0001tovw32xtz8i3/ai.perplexity.app.android.apks",
+  "sha256": "d17dd8d9804fee88d2c197fb29669bbd3534aad456f2fa8d3e25b50fde2619c4",
+  "sizeBytes": 99320332,
+  "bundle": [
+   "APKCube.txt",
+   "base.apk",
+   "split_config.arm64_v8a.apk",
+   "split_config.ldpi.apk",
+   "split_config.mdpi.apk",
+   "split_config.tvdpi.apk",
+   "split_config.hdpi.apk",
+   "split_config.xhdpi.apk",
+   "split_config.xxhdpi.apk"
+  ],
+  "versionName": "2.103.0",
+  "versionCode": 260673,
+  "apiSha256": "d17dd8d9804fee88d2c197fb29669bbd3534aad456f2fa8d3e25b50fde2619c4",
+  "originality": "match"
+ }
+}
