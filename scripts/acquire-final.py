@@ -136,10 +136,26 @@ def attempt(browser, pkg, deadline):
 
     # ---- turnstile: #cf-turnstile container (light DOM) -> checkbox click ----
     clicked = 0
+    reloads = 0
     last_click = 0.0
     t0 = time.time()
     while time.time() < deadline and not state['dl']:
         txt = modal_text(page)
+        # widget failed to load (error 600010 & friends) -> hit "Try again"
+        # to re-render the challenge, then re-click the checkbox
+        if ('failed to load' in txt or 'try again' in txt or 'error 600' in txt) and reloads < 6:
+            try:
+                again = page.query_selector('button:has-text("Try again")')
+                if again and again.is_visible():
+                    again.click()
+                    reloads += 1
+                    clicked = 0          # widget is fresh: allow a new first click
+                    t0 = time.time()
+                    log('try-again', {'n': reloads})
+                    time.sleep(3.5)
+                    continue
+            except Exception:
+                pass
         if any(c in txt for c in FAIL_CUES):
             log('fail-cue', {'txt': txt[:120]})
             break

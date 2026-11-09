@@ -218,6 +218,213 @@ function PackViewer({ analysis }: { analysis: AppAnalysisItem }) {
   )
 }
 
+const ENDPOINT_KIND_TONE: Record<string, string> = {
+  'api-base': 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200',
+  'third-party-api': 'bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-200',
+  'asset-cdn': 'bg-violet-50 dark:bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-200',
+  'app-site': 'bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-200',
+  social: 'bg-pink-50 dark:bg-pink-500/10 text-pink-700 dark:text-pink-300 border-pink-200',
+  docs: 'bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-200',
+  'framework-noise': 'bg-muted text-muted-foreground border-border',
+  review: 'bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-300 border-orange-200',
+}
+
+function EndpointKindBadge({ kind }: { kind: string }) {
+  return (
+    <Badge variant="outline" className={`text-[9px] px-1.5 shrink-0 ${ENDPOINT_KIND_TONE[kind] ?? ''}`} dir="ltr">
+      {kind}
+    </Badge>
+  )
+}
+
+function DeepIntelSection({ analysis }: { analysis: AppAnalysisItem }) {
+  const { t } = useApp()
+  const cb = analysis.data.codebase
+  if (!cb) return null
+
+  return (
+    <>
+      {/* Classified endpoints — every URL with its purpose */}
+      {cb.endpoints.length > 0 && (
+        <div className="rounded-xl border overflow-hidden">
+          <details>
+            <summary className="cursor-pointer px-3 py-2.5 text-[13px] font-semibold hover:bg-muted/40">
+              {t('appEndpointsClassified')} · {cb.endpoints.length}
+            </summary>
+            <div className="border-t bg-muted/20 px-3 py-2 max-h-72 overflow-y-auto space-y-2">
+              {cb.endpoints.map((e, i) => (
+                <div key={i} className="rounded-lg border bg-card px-2.5 py-2 space-y-1">
+                  <div className="flex items-start gap-2">
+                    <EndpointKindBadge kind={e.kind} />
+                    <span className="text-[11px] font-mono break-all min-w-0 flex-1" dir="ltr">
+                      {e.url}
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-muted-foreground leading-5" dir="auto">
+                    {e.purpose}
+                  </div>
+                  <div className="text-[10px] text-muted-foreground/70" dir="ltr">
+                    ⌕ {e.evidence}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </details>
+        </div>
+      )}
+
+      {/* Sync architecture */}
+      <div className="rounded-xl border p-3 space-y-2">
+        <div className="text-[13px] font-semibold">{t('appSyncTitle')}</div>
+        <p className="text-[12px] leading-6 text-muted-foreground" dir="auto">
+          {cb.sync.offlineStrategy}
+        </p>
+        {cb.sync.signals.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {cb.sync.signals.slice(0, 10).map((s, i) => (
+              <Badge key={i} variant="outline" className="text-[10px]" dir="ltr">
+                {s.signal}
+              </Badge>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Database */}
+      <div className="rounded-xl border overflow-hidden">
+        <details>
+          <summary className="cursor-pointer px-3 py-2.5 text-[13px] font-semibold hover:bg-muted/40">
+            {t('appDbTitle')}
+            {cb.database.tables.length > 0 ? ` · ${cb.database.tables.length} ${t('appTablesLabel')}` : ''}
+          </summary>
+          <div className="border-t bg-muted/20 px-3 py-2 space-y-2 max-h-72 overflow-y-auto">
+            {cb.database.engines.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {cb.database.engines.map((e, i) => (
+                  <Badge key={i} variant="outline" className="text-[10px]" dir="auto">
+                    {e.name}
+                  </Badge>
+                ))}
+              </div>
+            )}
+            {cb.database.tables.map((tb, i) => (
+              <div key={i} className="rounded-lg border bg-card px-2.5 py-2">
+                <div className="text-[12px] font-mono font-semibold" dir="ltr">
+                  {tb.name}
+                </div>
+                <div className="text-[10px] text-muted-foreground font-mono break-all pt-0.5" dir="ltr">
+                  {tb.columns.join(', ')}
+                </div>
+                <div className="text-[10px] text-muted-foreground/70 pt-0.5" dir="auto">
+                  {tb.source}
+                </div>
+              </div>
+            ))}
+            {cb.database.tables.length === 0 && (
+              <div className="text-[11px] text-muted-foreground" dir="auto">
+                {t('appNoTables')}
+              </div>
+            )}
+          </div>
+        </details>
+      </div>
+
+      {/* API surface */}
+      <div className="rounded-xl border overflow-hidden">
+        <details>
+          <summary className="cursor-pointer px-3 py-2.5 text-[13px] font-semibold hover:bg-muted/40">
+            {t('appApiTitle')} · {cb.api.paths.length} {t('appPathsLabel')}
+          </summary>
+          <div className="border-t bg-muted/20 px-3 py-2 space-y-2 max-h-72 overflow-y-auto">
+            {cb.api.bases.length > 0 && (
+              <div className="space-y-1">
+                <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">{t('appBasesLabel')}</div>
+                {cb.api.bases.map((b, i) => (
+                  <div key={i} className="text-[11px] font-mono break-all" dir="ltr">
+                    {b}
+                  </div>
+                ))}
+              </div>
+            )}
+            {cb.api.auth.length > 0 && (
+              <div className="space-y-1">
+                <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">{t('appAuthLabel')}</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {cb.api.auth.map((a, i) => (
+                    <Badge key={i} variant="outline" className="text-[10px]" dir="auto">
+                      {a.method}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            )}
+            {cb.api.paths.length > 0 && (
+              <div className="space-y-1">
+                <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">{t('appPathsLabel')}</div>
+                <div className="flex flex-wrap gap-1">
+                  {cb.api.paths.map((p, i) => (
+                    <code key={i} className="text-[10px] rounded bg-card border px-1.5 py-0.5" dir="ltr">
+                      {p}
+                    </code>
+                  ))}
+                </div>
+              </div>
+            )}
+            {cb.api.screens.length > 0 && (
+              <div className="space-y-1">
+                <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">{t('appScreensLabel')}</div>
+                <div className="flex flex-wrap gap-1">
+                  {cb.api.screens.map((s, i) => (
+                    <code key={i} className="text-[10px] rounded bg-card border px-1.5 py-0.5" dir="ltr">
+                      {s}
+                    </code>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </details>
+      </div>
+    </>
+  )
+}
+
+function DownloadsRow({ analysis }: { analysis: AppAnalysisItem }) {
+  const { t } = useApp()
+  const art = analysis.data.artifacts
+  const href = (type: string) => `${SCOPE}/${analysis.id}/download?type=${type}`
+  return (
+    <div className="rounded-xl border p-3 space-y-2">
+      <div className="text-[13px] font-semibold">{t('appIntelDownloads')}</div>
+      <div className="flex flex-wrap gap-2">
+        {(analysis.data.acquire || art?.apkFile) && (
+          <a href={href('apk')} className="text-[11px] rounded-lg border px-2.5 py-1.5 hover:bg-muted/40 font-semibold" dir="ltr">
+            ⬇ {t('appDlApk')}{art?.apkBytes ? ` (${(art.apkBytes / 1e6).toFixed(1)} MB)` : ''}
+          </a>
+        )}
+        {(analysis.data.decompile?.javaFiles ?? 0) > 0 && (
+          <a href={href('source')} className="text-[11px] rounded-lg border px-2.5 py-1.5 hover:bg-muted/40 font-semibold" dir="ltr">
+            ⬇ {t('appDlSource')}{art?.sourceFiles ? ` (${art.sourceFiles})` : ''}
+          </a>
+        )}
+        <a href={href('report')} className="text-[11px] rounded-lg border px-2.5 py-1.5 hover:bg-muted/40 font-semibold" dir="ltr">
+          ⬇ {t('appDlReport')}
+        </a>
+        {art?.githubUrl && (
+          <a href={art.githubUrl} target="_blank" rel="noreferrer" className="text-[11px] rounded-lg border px-2.5 py-1.5 hover:bg-muted/40 font-semibold" dir="ltr">
+            ↗ {t('appGithubFolder')}
+          </a>
+        )}
+      </div>
+      {art && (
+        <div className="text-[10px] text-muted-foreground" dir="ltr">
+          {art.repoFolder}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function AnalysisResult({ analysis }: { analysis: AppAnalysisItem }) {
   const { t } = useApp()
   const tone = scoreTone(analysis.score)
@@ -277,6 +484,9 @@ function AnalysisResult({ analysis }: { analysis: AppAnalysisItem }) {
           </div>
         )}
       </div>
+
+      {/* Downloads — direct APK / sources / report */}
+      {(analysis.status === 'complete' || analysis.data.acquire) && <DownloadsRow analysis={analysis} />}
 
       {/* Tech stack */}
       {fingerprint && fingerprint.stack.length > 0 && (
@@ -344,8 +554,8 @@ function AnalysisResult({ analysis }: { analysis: AppAnalysisItem }) {
         </div>
       )}
 
-      {/* Endpoints */}
-      {decompile && decompile.endpoints.length > 0 && (
+      {/* Endpoints (raw list, pre-deep-analysis) */}
+      {!analysis.data.codebase && decompile && decompile.endpoints.length > 0 && (
         <div className="rounded-xl border overflow-hidden">
           <details>
             <summary className="cursor-pointer px-3 py-2.5 text-[13px] font-semibold hover:bg-muted/40">
@@ -361,6 +571,9 @@ function AnalysisResult({ analysis }: { analysis: AppAnalysisItem }) {
           </details>
         </div>
       )}
+
+      {/* Deep codebase intel: classified endpoints + sync + database + API */}
+      <DeepIntelSection analysis={analysis} />
 
       {/* Evidence + unknowns */}
       <EvidenceLedger analysis={analysis} />

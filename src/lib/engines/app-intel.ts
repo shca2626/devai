@@ -5,7 +5,7 @@ import path from 'node:path'
 import { chatJson } from '@/lib/ai'
 import { db } from '@/lib/db'
 import { logDecision } from '@/lib/payload'
-import type { AppAnalysisItem, AppIntelData, AppPackFile } from '@/lib/types'
+import type { AppAnalysisItem, AppCodebaseIntel, AppIntelData, AppPackFile } from '@/lib/types'
 
 // ============================================================
 // App Intelligence — study any Android app from a Play Store
@@ -39,11 +39,58 @@ export class AppIntelError extends Error {
 
 const PYTHON = '/home/z/.venv/bin/python3'
 const ACQUIRE_SCRIPT = path.join(process.cwd(), 'scripts', 'acquire-final.py')
+const DEEP_SCRIPT = path.join(process.cwd(), 'scripts', 'deep-analyze.py')
+const BOOTSTRAP_SCRIPT = path.join(process.cwd(), 'scripts', 'bootstrap-appintel.sh')
 const JADX = path.join(process.env.HOME ?? '/home/z', 'tools', 'jadx', 'bin', 'jadx')
 const WORK_ROOT = path.join(process.cwd(), '.app-intel')
+const REPO_ROOT = process.cwd()
+const REPO_INTEL_DIR = path.join(REPO_ROOT, 'app-intel')
 
 const ACQUIRE_TIMEOUT_MS = 420_000
-const JADX_TIMEOUT_MS = 300_000
+const JADX_TIMEOUT_MS = 600_000
+const BOOTSTRAP_TIMEOUT_MS = 420_000
+
+// ------------------------------------------------------------
+// self-healing toolchain — installs venv/camoufox/jadx on ANY host
+// (first analysis on a fresh server bootstraps itself, ~2-4 min)
+// ------------------------------------------------------------
+
+let bootstrapPromise: Promise<boolean> | null = null
+
+async function toolchainReady(): Promise<boolean> {
+  const camoufoxOk = await new Promise<boolean>((resolve) => {
+    const { spawn } = require('node:child_process') as typeof import('node:child_process')
+    const child = spawn(PYTHON, ['-c', 'import camoufox, curl_cffi'], { stdio: 'ignore' })
+      .on('close', (code) => resolve(code === 0))
+      .on('error', () => resolve(false))
+    setTimeout(() => child.kill('SIGKILL'), 10_000)
+  })
+  if (!camoufoxOk) return false
+  try {
+    await fs.access(JADX)
+    return true
+  } catch {
+    return false
+  }
+}
+
+async function ensureToolchain(): Promise<{ ok: boolean; note?: string }> {
+  if (await toolchainReady()) return { ok: true }
+  if (!bootstrapPromise) {
+    bootstrapPromise = (async () => {
+      const res = await run('bash', [BOOTSTRAP_SCRIPT], BOOTSTRAP_TIMEOUT_MS)
+      return res.code === 0
+    })().catch(() => false)
+    // allow a later retry after a failed bootstrap
+    bootstrapPromise.finally(() => {
+      const p = bootstrapPromise
+      setTimeout(() => { if (bootstrapPromise === p) bootstrapPromise = null }, 60_000)
+    })
+  }
+  const ok = await bootstrapPromise
+  if (ok && (await toolchainReady())) return { ok: true }
+  return { ok: false, note: 'analysis toolchain could not be installed on this host (python3/curl/network required)' }
+}
 
 // ------------------------------------------------------------
 // input normalization — accept Play URLs, market:// links, bare ids
@@ -121,6 +168,8 @@ async function collectStore(pkg: string, data: AppIntelData) {
     appId: pkg,
     title: str(app['title']) ?? pkg,
     developer: str(app['developer']) ?? undefined,
+    developerWebsite: str(app['developerWebsite']) ?? undefined,
+    privacyPolicy: str(app['privacyPolicy']) ?? undefined,
     genre: str(app['genre']) ?? undefined,
     contentRating: str(app['contentRating']) ?? undefined,
     version: str(app['version']) ?? undefined,
@@ -149,12 +198,10 @@ async function collectStore(pkg: string, data: AppIntelData) {
 // ------------------------------------------------------------
 
 async function collectAcquire(analysisId: string, pkg: string, data: AppIntelData) {
-  let ok = false
-  try {
-    await fs.access(PYTHON)
-    await fs.access(ACQUIRE_SCRIPT)
-  } catch {
-    data.unknowns.push('Acquisition tooling unavailable in this environment — analysis continues from public metadata only.')
+  // self-healing: on a fresh host the toolchain installs itself on first use
+  const tool = await ensureToolchain()
+  if (!tool.ok) {
+    data.unknowns.push(`${tool.note ?? 'Acquisition tooling unavailable'} — analysis continues from public metadata only.`)
     return
   }
 
@@ -185,7 +232,6 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
     return
   }
 
-  ok = true
   const str = (k: string) => (typeof payload[k] === 'string' ? (payload[k] as string) : undefined)
   const numv = (k: string) => (typeof payload[k] === 'number' ? (payload[k] as number) : undefined)
 
@@ -211,7 +257,6 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
     )
   )
   if (data.acquire.originality !== 'match') data.unknowns.push('Downloaded bundle could not be confirmed bit-identical to the provider listing.')
-  void ok
 }
 
 // ------------------------------------------------------------
@@ -736,13 +781,70 @@ print(json.dumps(out))
 }
 
 // ------------------------------------------------------------
+// stage 6b — codebase intel (deep static analysis)
+// ------------------------------------------------------------
+
+async function collectCodebase(analysisId: string, data: AppIntelData) {
+  const dir = workDir(analysisId)
+  try {
+    await fs.access(path.join(dir, 'unpacked'))
+  } catch {
+    data.unknowns.push('Codebase intel skipped — no unpacked bundle.')
+    return
+  }
+  const developerDomain = data.store?.developerWebsite || data.store?.privacyPolicy || ''
+  const args = [DEEP_SCRIPT, '--dir', dir]
+  if (developerDomain) args.push('--developer-domain', developerDomain)
+  const res = await run('python3', args, 180_000)
+  let parsed: AppCodebaseIntel | null = null
+  try {
+    const text = res.stdout.trim()
+    const start = text.indexOf('{')
+    if (start >= 0) {
+      const candidate = JSON.parse(text.slice(start)) as AppCodebaseIntlFallback
+      if (!candidate.error) parsed = candidate
+    }
+  } catch {
+    parsed = null
+  }
+  if (!parsed || !Array.isArray(parsed.endpoints)) {
+    data.unknowns.push(`Deep codebase analysis did not produce results this run (analyzer exit ${res.code}${res.stderr ? ': ' + res.stderr.trim().slice(0, 160) : ''}).`)
+    return
+  }
+  data.codebase = parsed
+
+  const apiCount = parsed.endpoints.filter((e) => e.kind === 'api-base' || e.kind === 'third-party-api').length
+  const tableCount = parsed.database?.tables?.length ?? 0
+  data.evidence.push(
+    ev(
+      `${parsed.endpoints.length} URLs classified (${apiCount} API origins, ${parsed.endpoints.filter((e) => e.kind === 'framework-noise').length} framework-noise, ${parsed.endpoints.filter((e) => e.kind === 'docs').length} docs) with per-endpoint purpose`,
+      'Dart AOT strings + decompiled sources',
+      'deep static analysis (endpoint classifier)'
+    ),
+    parsed.database?.engines?.length
+      ? ev(`Local storage engines: ${parsed.database.engines.map((e) => e.name).join('; ')}`, parsed.database.engines[0].evidence, 'package + native-lib signal analysis')
+      : ev('No local database engine detected — likely an online-only app', 'deep static analysis', 'absence of storage signals', 'medium'),
+    tableCount
+      ? ev(`${tableCount} database tables reconstructed (e.g. ${parsed.database.tables.slice(0, 4).map((t) => t.name).join(', ')})`, 'CREATE TABLE strings + bundled .db files', 'SQL schema recovery')
+      : ev('No table schemas recovered from static strings', 'deep static analysis', 'SQL string mining', 'low'),
+    ev(`Sync architecture: ${parsed.sync.offlineStrategy.slice(0, 300)}`, 'package/SDK signal analysis', 'sync-signal correlation', 'medium')
+  )
+  if (parsed.api?.paths?.length) {
+    data.evidence.push(ev(`${parsed.api.paths.length} REST-ish API paths recovered (e.g. ${parsed.api.paths.slice(0, 6).join(', ')})`, 'compiled code strings', 'API path mining'))
+  }
+}
+
+type AppCodebaseIntlFallback = AppCodebaseIntel & { error?: string }
+
+// ------------------------------------------------------------
 // stage 7 — synthesis (AI clone pack)
 // ------------------------------------------------------------
 
 async function runSynthesis(pkg: string, data: AppIntelData, lang: 'ar' | 'en'): Promise<void> {
+  const cb = data.codebase
   const digest = [
     `APP: ${data.store?.title ?? pkg} (${pkg}) by ${data.store?.developer ?? '?'} — ${data.store?.installs ?? '?'} installs, rating ${data.store?.score ?? '?'}`,
-    `GENRE: ${data.store?.genre ?? '?'} | CONTENT: ${data.store?.contentRating ?? '?'}`,
+    `GENRE: ${data.store?.genre ?? '?'} | CONTENT: ${data.store?.contentRating ?? '?'} | DEV SITE: ${data.store?.developerWebsite ?? '?'} | PRIVACY: ${data.store?.privacyPolicy ?? '?'}`,
     `DESCRIPTION (truncated): ${(data.store?.description ?? '').slice(0, 1200)}`,
     `VERSIONS: ${(data.deep?.versions ?? []).slice(0, 6).map((v) => `${v.versionName}(${v.versionCode})${v.isLatest ? '*' : ''}`).join(', ')} | acquired: ${data.acquire?.versionName ?? 'none'} (sha256 ${data.acquire?.originality ?? 'n/a'})`,
     `PERMISSIONS (${data.deep?.permissions.length ?? 0}): ${(data.deep?.permissions ?? []).slice(0, 60).join(', ')}`,
@@ -754,17 +856,33 @@ async function runSynthesis(pkg: string, data: AppIntelData, lang: 'ar' | 'en'):
     `CODE MAP: ${(data.decompile?.topPackages ?? []).map((p) => `${p.name}:${p.files}`).join(', ')} (total ${data.decompile?.javaFiles ?? 0} files)`,
     `NATIVE LIBS: ${(data.fingerprint?.nativeLibs ?? []).join(', ')}`,
     `SPLITS: ${data.unpack?.splits ?? 0} | ABIs: ${(data.unpack?.abis ?? []).join(',')} | langs: ${(data.unpack?.languages ?? []).join(',')}`,
-    `VT: ${JSON.stringify(data.deep?.virusTotal ?? {})}`,
+    cb ? `CLASSIFIED ENDPOINTS (${cb.endpoints.length}): ${cb.endpoints.map((e) => `${e.url} [${e.kind}] — ${e.purpose}`).slice(0, 30).join(' | ')}` : '',
+    cb ? `STORAGE ENGINES: ${(cb.database.engines ?? []).map((e) => e.name).join('; ')} | ASSET DBS: ${(cb.database.assetDatabases ?? []).join(', ')}` : '',
+    cb ? `DB TABLES (${(cb.database.tables ?? []).length}): ${(cb.database.tables ?? []).map((t) => `${t.name}(${t.columns.slice(0, 8).join(',')})`).join(' | ')}` : '',
+    cb ? `SQL EVIDENCE: ${(cb.database.sqlEvidence ?? []).slice(0, 8).join(' | ')}` : '',
+    cb ? `SYNC SIGNALS: ${(cb.sync.signals ?? []).map((s) => `${s.signal} -> ${s.meaning} [${s.category}]`).join(' | ')}` : '',
+    cb ? `SYNC STRATEGY VERDICT: ${cb.sync.offlineStrategy}` : '',
+    cb ? `API CLIENTS: ${(cb.api.clients ?? []).join(', ')} | API BASES: ${(cb.api.bases ?? []).join(' | ')} | AUTH: ${(cb.api.auth ?? []).map((x) => x.method).join(', ')}` : '',
+    cb ? `API PATHS (${(cb.api.paths ?? []).length}): ${(cb.api.paths ?? []).slice(0, 40).join(', ')}` : '',
+    cb ? `MODEL CLASSES: ${(cb.api.models ?? []).slice(0, 25).join(', ')}` : '',
+    cb ? `SCREENS/VIEWS: ${(cb.api.screens ?? []).slice(0, 25).join(', ')}` : '',
+    cb ? `MODULES: ${(cb.modules ?? []).slice(0, 30).join(', ')}` : '',
     `UNKNOWNNS: ${data.unknowns.slice(0, 10).join(' | ')}`,
-  ].join('\n')
+  ].filter(Boolean).join('\n')
 
   const langLine = lang === 'ar' ? 'Arabic' : 'English'
-  const result = await chatJson<Record<string, unknown>>(
+  const result = await chatJson<Record<string,unknown>>(
     [
-      'You are a senior mobile architect writing a CLONE PACK for a development team that will rebuild this app from scratch.',
+      'You are a senior mobile architect writing a REPLICATION BLUEPRINT for a development team that will clone this app from scratch.',
       'Base every statement strictly on the collected evidence digest — no invented features, no invented numbers.',
-      'Answer with STRICT JSON: {"overview": markdown, "features": markdown, "architecture": markdown, "clonePlan": markdown}.',
+      'Answer with STRICT JSON: {"overview": markdown, "features": markdown, "architecture": markdown, "endpointsAnalysis": markdown, "dataSync": markdown, "apiContract": markdown, "clonePlan": markdown}.',
       'Each markdown document: concise, heading + bullets, max ~35 lines. The overview must end with one sentence in the UI language the user asked for.',
+      'The documents MUST answer, from the evidence:',
+      '- endpointsAnalysis: for EVERY api-base / third-party-api / asset-cdn endpoint — what it is for, which app feature uses it, and why; explicitly separate framework noise (flutter issue links, DTDs, registry links) from REAL app endpoints.',
+      '- dataSync: how synchronization works end-to-end — offline storage engines, what is cached locally, when/how data reaches the server (queues, background jobs, push triggers), online/offline switching, and conflicts. If evidence shows no sync layer, say so and recommend one for the clone.',
+      '- apiContract: the reconstructed REST contract — base URL(s), auth method, endpoint paths with likely methods and payloads (from API paths + model classes), enough for a backend developer to implement a compatible API.',
+      '- architecture: tech stack, module breakdown (from modules/screens/models), data flow from UI to storage to network.',
+      '- clonePlan: ordered build plan (backend first, then data layer, then features) with effort estimates per component.',
       `UI language for that final sentence: ${langLine}. All documents otherwise in English.`,
     ].join('\n'),
     digest,
@@ -776,6 +894,9 @@ async function runSynthesis(pkg: string, data: AppIntelData, lang: 'ar' | 'en'):
     overview: str('overview', '# Overview\n(synthesis unavailable)'),
     features: str('features', '# Features\n(synthesis unavailable)'),
     architecture: str('architecture', '# Architecture\n(synthesis unavailable)'),
+    endpointsAnalysis: str('endpointsAnalysis', '# Endpoints\n(synthesis unavailable)'),
+    dataSync: str('dataSync', '# Data & sync\n(synthesis unavailable)'),
+    apiContract: str('apiContract', '# API contract\n(synthesis unavailable)'),
     clonePlan: str('clonePlan', '# Clone plan\n(synthesis unavailable)'),
   }
   data.evidence.push(ev('AI clone pack written (overview, features, architecture, clone plan)', 'all collected stage data', 'one structured AI call restricted to the evidence digest', 'medium'))
@@ -905,23 +1026,241 @@ export function buildPack(item: { pkg: string; appName?: string | null; stageDon
       ].join('\n')
     )
   }
+  if (data.codebase) {
+    const cb = data.codebase
+    push(
+      'endpoints-and-sync.md',
+      [
+        `# Endpoints & synchronization — ${pkg}`,
+        '',
+        'Every URL recovered from the compiled app, classified with its purpose.',
+        'Framework noise (engine licenses, DTDs, registry links) is separated from real app endpoints.',
+        '',
+        `## Endpoints (${cb.endpoints.length})`,
+        '',
+        '| Kind | URL | Purpose | Evidence |',
+        '| --- | --- | --- | --- |',
+        ...cb.endpoints.map((e) => `| ${e.kind} | ${e.url} | ${e.purpose} | ${e.evidence.split(';')[0]} |`),
+        '',
+        '## How sync works (offline / online)',
+        '',
+        cb.sync.offlineStrategy,
+        '',
+        '### Signals',
+        ...(cb.sync.signals.map((s) => `- **${s.signal}** — ${s.meaning} (${s.category})`) || ['- (none)']),
+        ...(cb.sync.realtime.length ? ['', `### Realtime channels: ${cb.sync.realtime.join(', ')}`] : []),
+      ].join('\n')
+    )
+    push(
+      'database-schema.md',
+      [
+        `# Local database — ${pkg}`,
+        '',
+        '## Storage engines',
+        ...(cb.database.engines.map((e) => `- **${e.name}** (${e.evidence})`) || ['- (none detected — online-only app)']),
+        ...(cb.database.assetDatabases.length ? ['', '## Bundled database files', ...cb.database.assetDatabases.map((d) => `- \`${d}\``)] : []),
+        ...(cb.database.tables.length
+          ? [
+              '',
+              `## Reconstructed tables (${cb.database.tables.length})`,
+              '',
+              ...cb.database.tables.map(
+                (t) => `### ${t.name}\n- columns: ${t.columns.join(', ')}\n- source: ${t.source}`
+              ),
+            ]
+          : ['', '_No CREATE TABLE statements recovered — schema is likely created at runtime or lives server-side._']),
+        ...(cb.database.sqlEvidence.length ? ['', '## SQL evidence (verbatim, truncated)', ...cb.database.sqlEvidence.map((s) => '- `' + s.replace(/\n/g, ' ') + '`')] : []),
+      ].join('\n')
+    )
+    push(
+      'api-surface.md',
+      [
+        `# API surface — ${pkg}`,
+        '',
+        `## HTTP clients: ${cb.api.clients.join(', ') || 'none detected'}`,
+        `## API base URLs: ${cb.api.bases.join(' | ') || 'none detected'}`,
+        `## Auth: ${cb.api.auth.map((a) => `${a.method} (${a.evidence})`).join('; ') || 'none detected'}`,
+        '',
+        `## Recovered API paths (${cb.api.paths.length})`,
+        ...(cb.api.paths.map((p) => `- \`${p}\``) || ['- (none)']),
+        ...(cb.api.models.length ? ['', `## Model classes (${cb.api.models.length})`, ...cb.api.models.map((m) => `- ${m}`)] : []),
+        ...(cb.api.screens.length ? ['', `## Screens / views (${cb.api.screens.length})`, ...cb.api.screens.map((s) => `- ${s}`)] : []),
+        ...(cb.modules.length ? ['', `## Modules (${cb.modules.length})`, ...cb.modules.map((m) => `- ${m}`)] : []),
+      ].join('\n')
+    )
+  }
   if (data.synthesis) {
     push('clone-pack/overview.md', data.synthesis.overview)
     push('clone-pack/features.md', data.synthesis.features)
     push('clone-pack/architecture.md', data.synthesis.architecture)
+    push('clone-pack/endpoints-analysis.md', data.synthesis.endpointsAnalysis)
+    push('clone-pack/data-sync.md', data.synthesis.dataSync)
+    push('clone-pack/api-contract.md', data.synthesis.apiContract)
     push('clone-pack/clone-plan.md', data.synthesis.clonePlan)
   }
 
-  // deterministic score: stage coverage + richness
-  let score = Math.round((item.stageDone / STAGES.length) * 55)
-  if (data.store?.description) score += 5
-  if (data.acquire?.originality === 'match') score += 10
-  if ((data.deep?.permissions.length ?? 0) > 5) score += 5
-  if ((data.fingerprint?.featureMap.length ?? 0) > 5) score += 10
-  if ((data.decompile?.endpoints.length ?? 0) > 3) score += 5
-  if (data.decompile?.javaFiles) score += 5
-  if (data.synthesis?.overview.includes('#')) score += 5
+  // deterministic score: stage coverage + richness + DEPTH of the intel
+  let score = Math.round((item.stageDone / STAGES.length) * 50)
+  if (data.store?.description) score += 3
+  if (data.acquire?.originality === 'match') score += 8
+  if ((data.deep?.permissions.length ?? 0) > 5) score += 4
+  if ((data.fingerprint?.featureMap.length ?? 0) > 5) score += 6
+  if ((data.decompile?.endpoints.length ?? 0) > 3) score += 3
+  if (data.decompile?.javaFiles) score += 4
+  if (data.synthesis?.overview.includes('#')) score += 2
+  // deep codebase intel is what separates a real replication blueprint from a listing summary
+  const cb = data.codebase
+  if (cb) {
+    if (cb.endpoints.filter((e) => e.kind === 'api-base' || e.kind === 'third-party-api').length >= 1) score += 6
+    if (cb.endpoints.filter((e) => e.kind === 'framework-noise').length >= 2) score += 2 // noise was identified AS noise
+    if ((cb.database.engines ?? []).length) score += 4
+    if ((cb.database.tables ?? []).length) score += 4
+    if ((cb.api.paths ?? []).length >= 3) score += 4
+    if ((cb.api.models ?? []).length >= 3) score += 2
+    if ((cb.sync.signals ?? []).length >= 2) score += 3
+  }
   return { pack: files, score: Math.min(100, score) }
+}
+
+// ------------------------------------------------------------
+// artifact publishing — persist APK + decompiled sources + reports
+// into the repo folder app-intel/<pkg>/ and push to GitHub, so every
+// analysis is durable and browsable/downloadable forever.
+// ------------------------------------------------------------
+
+async function publishArtifacts(analysisId: string, pkg: string, data: AppIntelData) {
+  try {
+    // regenerate the pack first so the report includes the final synthesis
+    const built = buildPack({ pkg, appName: data.store?.title, stageDone: 7 }, data)
+    data.pack = built.pack
+    const dir = workDir(analysisId)
+    const version = data.acquire?.versionName ?? 'unknown'
+    const target = path.join(REPO_INTEL_DIR, pkg)
+    const apkDir = path.join(target, 'apk')
+    const srcDir = path.join(target, 'source')
+    await fs.mkdir(apkDir, { recursive: true })
+    await fs.mkdir(srcDir, { recursive: true })
+
+    // 1. APK bundle (skip if > 90 MB — GitHub per-file limit is 100 MB)
+    let apkFile = ''
+    let apkBytes = 0
+    const apksPath = path.join(dir, `${pkg}.apks`)
+    try {
+      const st = await fs.stat(apksPath)
+      if (st.size <= 90 * 1024 * 1024) {
+        apkFile = `${pkg}-${version}.apks`
+        await fs.copyFile(apksPath, path.join(apkDir, apkFile))
+        apkBytes = st.size
+      } else {
+        data.unknowns.push('APK bundle exceeds 90 MB — kept on server, not pushed to GitHub.')
+      }
+    } catch {
+      /* no bundle */
+    }
+
+    // 2. decompiled sources -> zip (one download, full tree)
+    let sourceZip = ''
+    let sourceFiles = data.decompile?.javaFiles ?? 0
+    const jadxDir = path.join(dir, 'jadx', 'sources')
+    try {
+      await fs.access(jadxDir)
+      sourceZip = 'jadx-source.zip'
+      const zipRes = await run('python3', ['-c', `
+import zipfile, os
+src = ${JSON.stringify(jadxDir)}
+out = ${JSON.stringify(path.join(srcDir, sourceZip))}
+n = 0
+with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as z:
+    for dirpath, _, filenames in os.walk(src):
+        for f in filenames:
+            p = os.path.join(dirpath, f)
+            z.write(p, os.path.relpath(p, src))
+            n += 1
+print(n)
+`], 240_000)
+      const n = parseInt(zipRes.stdout.trim().split('\n').pop() ?? '0', 10)
+      if (n > 0) sourceFiles = n
+    } catch {
+      /* no sources */
+    }
+
+    // 3. deep intel + full report + meta
+    const reportName = `report-${version}.md`
+    await fs.writeFile(
+      path.join(target, reportName),
+      [
+        `# App Intelligence report — ${data.store?.title ?? pkg} (${pkg})`,
+        '',
+        `- Version analyzed: ${version} (${data.acquire?.versionCode ?? '?'})`,
+        `- Acquired: ${data.acquire ? `${(data.acquire.sizeBytes / 1e6).toFixed(1)} MB, sha256 \`${data.acquire.sha256}\`, originality: ${data.acquire.originality}` : 'not acquired this run'}`,
+        `- Generated: ${new Date().toISOString()}`,
+        '',
+        ...data.pack.map((f) => `\n\n---\n\n(from ${f.name})\n\n${f.content}`),
+      ].join('\n')
+    )
+    if (data.codebase) {
+      await fs.writeFile(path.join(target, `deep-intel-${version}.json`), JSON.stringify(data.codebase, null, 1))
+    }
+    await fs.writeFile(
+      path.join(target, 'meta.json'),
+      JSON.stringify(
+        {
+          pkg,
+          appName: data.store?.title,
+          version,
+          analyzedAt: new Date().toISOString(),
+          score: undefined,
+          store: data.store,
+          acquire: data.acquire,
+        },
+        null,
+        1
+      )
+    )
+    await fs.writeFile(
+      path.join(target, 'README.md'),
+      [
+        `# ${data.store?.title ?? pkg} — App Intelligence artifacts`,
+        '',
+        `Package: \`${pkg}\` | version: ${version} | analyzed: ${new Date().toISOString().slice(0, 10)}`,
+        '',
+        '| File | What it is |',
+        '| --- | --- |',
+        apkFile ? `| \`apk/${apkFile}\` | the acquired original Play Store bundle (.apks — all splits) |` : '',
+        sourceZip ? `| \`source/${sourceZip}\` | full jadx-decompiled Java/Kotlin sources (${sourceFiles} files) |` : '',
+        `| \`${reportName}\` | the complete analysis report |`,
+        data.codebase ? `| \`deep-intel-${version}.json\` | structured deep intel (endpoints/DB/sync/API) |` : '',
+        '| `meta.json` | store + acquisition metadata |',
+      ].filter(Boolean).join('\n')
+    )
+
+    // 4. commit + push (best effort — works when the app runs from a git clone)
+    let githubUrl: string | undefined
+    try {
+      await fs.access(path.join(REPO_ROOT, '.git'))
+      const add = await run('git', ['-C', REPO_ROOT, 'add', '-f', path.relative(REPO_ROOT, target)], 60_000)
+      if (add.code === 0) {
+        await run('git', ['-C', REPO_ROOT, '-c', 'user.name=DevAI App Intelligence', '-c', 'user.email=appintel@devai.local', 'commit', '-m', `app-intel: artifacts for ${pkg} v${version}`], 60_000)
+        const push = await run('git', ['-C', REPO_ROOT, 'push', 'origin', 'HEAD'], 180_000)
+        if (push.code === 0) {
+          githubUrl = `https://github.com/shca2626/devai/tree/main/app-intel/${pkg}`
+        }
+      }
+    } catch {
+      /* git not available or no remote — artifacts stay local, still downloadable via API */
+    }
+
+    data.artifacts = { repoFolder: `app-intel/${pkg}`, apkFile, apkBytes, sourceZip, sourceFiles, githubUrl }
+    data.evidence.push(
+      ev(
+        `Artifacts published: ${[apkFile && `APK bundle (${(apkBytes / 1e6).toFixed(1)} MB)`, sourceZip && `decompiled sources (${sourceFiles} files)`, 'full report'].filter(Boolean).join(', ')} → ${data.artifacts.repoFolder}${githubUrl ? ' (pushed to GitHub)' : ''}`,
+        'analysis workdir + repo',
+        'artifact publisher'
+      )
+    )
+  } catch (error) {
+    data.unknowns.push(`Artifact publishing failed: ${error instanceof Error ? error.message : 'unknown error'}`)
+  }
 }
 
 // ------------------------------------------------------------
@@ -938,6 +1277,8 @@ function parseData(raw: string): AppIntelData {
       unpack: parsed.unpack,
       decompile: parsed.decompile,
       fingerprint: parsed.fingerprint,
+      codebase: parsed.codebase,
+      artifacts: parsed.artifacts,
       synthesis: parsed.synthesis,
       evidence: parsed.evidence ?? [],
       unknowns: parsed.unknowns ?? [],
@@ -1047,9 +1388,11 @@ export async function advanceAppAnalysis(ideaId: string | null, analysisId: stri
       await persist(row.id, data, 5)
     } else if (stage === 'fingerprint') {
       await collectFingerprint(row.id, data)
+      await collectCodebase(row.id, data)
       await persist(row.id, data, 6)
     } else if (stage === 'synthesis') {
       await runSynthesis(row.pkg, data, lang)
+      await publishArtifacts(row.id, row.pkg, data)
       await persist(row.id, data, 7, 'complete')
       if (ideaId) {
         await logDecision(ideaId, 'App study complete', `${row.pkg} — clone pack ready (score ${row.score})`)

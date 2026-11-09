@@ -1101,6 +1101,8 @@ export interface AppStoreIntel {
   appId: string
   title: string
   developer?: string
+  developerWebsite?: string
+  privacyPolicy?: string
   genre?: string
   contentRating?: string
   version?: string
@@ -1176,11 +1178,61 @@ export interface AppFingerprintIntel {
   assetsSample: string[]
 }
 
+export interface AppEndpointIntel {
+  url: string
+  kind: 'api-base' | 'third-party-api' | 'asset-cdn' | 'app-site' | 'social' | 'docs' | 'framework-noise' | 'review'
+  purpose: string
+  evidence: string
+}
+
+export interface AppDatabaseIntel {
+  engines: { name: string; evidence: string }[]
+  tables: { name: string; columns: string[]; source: string }[]
+  sqlEvidence: string[]
+  assetDatabases: string[]
+}
+
+export interface AppSyncIntel {
+  signals: { signal: string; meaning: string; category: string; evidence: string }[]
+  realtime: string[]
+  offlineStrategy: string
+}
+
+export interface AppApiIntel {
+  clients: string[]
+  bases: string[]
+  paths: string[]
+  auth: { method: string; evidence: string }[]
+  models: string[]
+  screens: string[]
+}
+
+export interface AppCodebaseIntel {
+  endpoints: AppEndpointIntel[]
+  database: AppDatabaseIntel
+  sync: AppSyncIntel
+  api: AppApiIntel
+  modules: string[]
+  stats: { urlsTotal: number; jvmFiles: number; assetCount: number; nativeLibs: string[] }
+}
+
 export interface AppSynthesis {
   overview: string
   features: string
   architecture: string
+  endpointsAnalysis: string
+  dataSync: string
+  apiContract: string
   clonePlan: string
+}
+
+export interface AppArtifactsIntel {
+  repoFolder: string
+  apkFile: string
+  apkBytes: number
+  sourceZip: string
+  sourceFiles: number
+  githubUrl?: string
 }
 
 export interface AppPackFile {
@@ -1195,6 +1247,8 @@ export interface AppIntelData {
   unpack?: AppUnpackIntel
   decompile?: AppDecompileIntel
   fingerprint?: AppFingerprintIntel
+  codebase?: AppCodebaseIntel
+  artifacts?: AppArtifactsIntel
   synthesis?: AppSynthesis
   evidence: { claim: string; source: string; method: string; confidence: 'high' | 'medium' | 'low' }[]
   unknowns: string[]
