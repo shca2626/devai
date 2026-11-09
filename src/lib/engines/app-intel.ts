@@ -228,7 +228,14 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
     return
   }
   if (payload['ok'] !== true) {
-    data.unknowns.push('APK acquisition failed — continuing with metadata-only analysis.')
+    const errCode = typeof payload['error'] === 'string' ? payload['error'] : ''
+    if (errCode === 'RATE_LIMITED') {
+      data.unknowns.push('The APK provider rate-limited this server address (daily download quota reached). The full binary analysis will succeed on a later run — everything else still works from public metadata.')
+    } else if (errCode === 'fetch_403' || errCode === 'fetch_404') {
+      data.unknowns.push('The provider could not serve this package right now (upstream fetch failed). Retry the analysis later.')
+    } else {
+      data.unknowns.push(`APK acquisition failed${errCode ? ` (${errCode})` : ''} — continuing with metadata-only analysis. Retry later for the full binary study.`)
+    }
     return
   }
 

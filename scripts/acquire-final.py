@@ -48,8 +48,11 @@ def resolve_real_url(pkg):
     return f'https://apkcube.com/apk-downloader?url={pkg}'
 
 
+last_error = [None]
+
+
 def attempt(browser, pkg, deadline):
-    state = {'dl': None, 'apks_api': None}
+    state = {'dl': None, 'apks_api': None, 'dl_error': None}
     page = browser.new_page()
 
     def on_resp(r):
@@ -66,6 +69,10 @@ def attempt(browser, pkg, deadline):
             state['dl'] = body
             log('downloads/request', {'url': ((body or {}).get('url') or '')[:90],
                                       'err': (body or {}).get('error')})
+            err = (body or {}).get('error')
+            if isinstance(err, dict) and err.get('code'):
+                state['dl_error'] = err.get('code')
+                last_error[0] = err.get('code')
 
     page.on('response', on_resp)
 
@@ -215,7 +222,8 @@ def main():
             time.sleep(4)
 
     if not result:
-        print('ACQUIRE_RESULT ' + json.dumps({'ok': False, 'error': 'acquisition_failed'}))
+        code = last_error[0] or 'acquisition_failed'
+        print('ACQUIRE_RESULT ' + json.dumps({'ok': False, 'error': code}))
         raise SystemExit(1)
 
     from curl_cffi import requests as cr
