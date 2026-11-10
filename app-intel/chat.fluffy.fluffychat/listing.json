@@ -1,0 +1,130 @@
+{
+ "apks": [
+  {
+   "apkId": "chat.fluffy.fluffychat:3576",
+   "versionName": "2.11.4",
+   "versionCode": 3576,
+   "sha256": "e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5",
+   "isLatest": true,
+   "fileSize": 197812230,
+   "fromGooglePlay": false
+  }
+ ],
+ "securityByApkId": {
+  "chat.fluffy.fluffychat:3576": {
+   "fromGooglePlay": false,
+   "verdict": "official F-Droid repository build (open-source; signed with the F-Droid key, not the upstream release key); not VT-scanned",
+   "scannedByVirusTotal": false,
+   "flagged": 0,
+   "vendors": 0,
+   "natives": {
+    "abis": [
+     "arm64-v8a",
+     "armeabi-v7a",
+     "x86",
+     "x86_64"
+    ],
+    "libs": [
+     "libImaging.so",
+     "libapp.so",
+     "libdartjni.so",
+     "libdatastore_shared_counter.so",
+     "libflutter.so",
+     "libjingle_peerconnection_so.so",
+     "libnoise.so",
+     "libsqlcipher.so",
+     "libvodozemac_bindings_dart.so",
+     "libwebcrypto.so"
+    ],
+    "protectors": []
+   },
+   "permissions": [
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_NOTIFICATION_POLICY",
+    "android.permission.BLUETOOTH",
+    "android.permission.CAMERA",
+    "android.permission.DISABLE_KEYGUARD",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.FOREGROUND_SERVICE_CAMERA",
+    "android.permission.FOREGROUND_SERVICE_DATA_SYNC",
+    "android.permission.FOREGROUND_SERVICE_MICROPHONE",
+    "android.permission.FOREGROUND_SERVICE_PHONE_CALL",
+    "android.permission.FOREGROUND_SERVICE_SHORT_SERVICE",
+    "android.permission.INTERNET",
+    "android.permission.MANAGE_OWN_CALLS",
+    "android.permission.MODIFY_AUDIO_SETTINGS",
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.READ_APP_BADGE",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.RECORD_AUDIO",
+    "android.permission.TURN_SCREEN_ON",
+    "android.permission.USE_BIOMETRIC",
+    "android.permission.USE_FINGERPRINT",
+    "android.permission.USE_FULL_SCREEN_INTENT",
+    "android.permission.VIBRATE",
+    "android.permission.WAKE_LOCK",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "chat.fluffy.fluffychat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION",
+    "chat.fluffy.fluffychat.PERMISSION_CALL",
+    "com.anddoes.launcher.permission.UPDATE_COUNT",
+    "com.htc.launcher.permission.READ_SETTINGS",
+    "com.htc.launcher.permission.UPDATE_SHORTCUT",
+    "com.huawei.android.launcher.permission.CHANGE_BADGE",
+    "com.huawei.android.launcher.permission.READ_SETTINGS",
+    "com.huawei.android.launcher.permission.WRITE_SETTINGS",
+    "com.majeur.launcher.permission.UPDATE_BADGE",
+    "com.oppo.launcher.permission.READ_SETTINGS",
+    "com.oppo.launcher.permission.WRITE_SETTINGS",
+    "com.sec.android.provider.badge.permission.READ",
+    "com.sec.android.provider.badge.permission.WRITE",
+    "com.sonyericsson.home.permission.BROADCAST_BADGE",
+    "com.sonymobile.home.permission.PROVIDER_INSERT_BADGE",
+    "me.everything.badger.permission.BADGE_COUNT_READ",
+    "me.everything.badger.permission.BADGE_COUNT_WRITE"
+   ],
+   "signature": {
+    "present": true,
+    "scheme": "v3",
+    "status": "verified (computed from the APK signing block)",
+    "certSha256": "057ac45164a2e6e31f6dde555a5f2cccb4d8834cb1852549681b00e34668caf3",
+    "certSubject": "Common Name: FDroid, Organizational Unit: FDroid, Organization: fdroid.org, Locality: ORG, State/Province: ORG, Country: UK"
+   },
+   "manifest": {
+    "targetSdk": "36",
+    "packageName": "chat.fluffy.fluffychat",
+    "allowBackup": false,
+    "usesFeatures": [
+     "android.hardware.camera",
+     "android.hardware.microphone",
+     "android.hardware.camera.front",
+     "android.hardware.camera.autofocus",
+     "android.hardware.camera.flash",
+     "android.hardware.screen.landscape",
+     "android.hardware.wifi"
+    ],
+    "usesLibraries": [
+     "androidx.window.extensions",
+     "androidx.window.sidecar"
+    ],
+    "exportedUnguarded": [
+     "activity:chat.fluffy.fluffychat.MainActivity",
+     "activity:com.linusu.flutter_web_auth_2.CallbackActivity",
+     "receiver:com.pravera.flutter_foreground_task.service.RebootReceiver",
+     "service:org.unifiedpush.android.connector.internal.RaiseToForegroundService",
+     "receiver:org.unifiedpush.android.connector.internal.MessagingReceiverImpl"
+    ]
+   }
+  }
+ },
+ "signers": [
+  {
+   "sha256": "057ac45164a2e6e31f6dde555a5f2cccb4d8834cb1852549681b00e34668caf3",
+   "subject": "Common Name: FDroid, Organizational Unit: FDroid, Organization: fdroid.org, Locality: ORG, State/Province: ORG, Country: UK",
+   "trusted": true
+  }
+ ],
+ "generatedBy": "devai acquire-play (fdroid-open)"
+}

@@ -37,18 +37,6 @@
    "evidence": "libapp.so (Dart AOT string table)"
   },
   {
-   "url": "http://javax.xml.XMLConstants/feature/secure-processing",
-   "kind": "review",
-   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
-   "evidence": "sources/com/fasterxml/jackson/databind/ext/DOMDeserializer.java"
-  },
-  {
-   "url": "http://apache.org/xml/features/disallow-doctype-decl",
-   "kind": "review",
-   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
-   "evidence": "sources/com/fasterxml/jackson/databind/ext/DOMDeserializer.java"
-  },
-  {
    "url": "https://matrix.to/#",
    "kind": "review",
    "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
@@ -127,6 +115,12 @@
    "evidence": "libapp.so (Dart AOT string table)"
   },
   {
+   "url": "https://developer.android.com/reference/android/view",
+   "kind": "docs",
+   "purpose": "Android developer documentation reference",
+   "evidence": "sources/io/flutter/view/k.java"
+  },
+  {
    "url": "http://www.w3.org/2000",
    "kind": "framework-noise",
    "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
@@ -181,33 +175,33 @@
    "evidence": "libapp.so (Dart AOT string table)"
   },
   {
-   "url": "http://schemas.android.com/apk/res/android",
+   "url": "http://ns.adobe.com/xap/1.0/",
    "kind": "framework-noise",
-   "purpose": "Android manifest XML namespace — static manifest reference",
-   "evidence": "sources/N/k.java"
+   "purpose": "XMP metadata namespace (image metadata parser)",
+   "evidence": "sources/p0/C1436a.java"
   }
  ],
  "database": {
   "engines": [
    {
-    "evidence": "package:sqflite_common in libapp.so",
-    "name": "local SQLite database (Flutter sqflite)"
+    "evidence": "package:sqlite3 in libapp.so",
+    "name": "SQLite native bindings"
    },
    {
     "evidence": "package:flutter_secure_storage in libapp.so",
     "name": "encrypted key-value store (Keystore-backed)"
    },
    {
-    "evidence": "package:sqflite_common_ffi in libapp.so",
+    "evidence": "package:shared_preferences in libapp.so",
+    "name": "key-value preferences store"
+   },
+   {
+    "evidence": "package:sqflite_common in libapp.so",
     "name": "local SQLite database (Flutter sqflite)"
    },
    {
-    "evidence": "package:sqlite3 in libapp.so",
-    "name": "SQLite native bindings"
-   },
-   {
-    "evidence": "package:shared_preferences in libapp.so",
-    "name": "key-value preferences store"
+    "evidence": "package:sqflite_common_ffi in libapp.so",
+    "name": "local SQLite database (Flutter sqflite)"
    }
   ],
   "tables": [],
@@ -227,9 +221,9 @@
  "sync": {
   "signals": [
    {
-    "signal": "package:flutter_local_notifications_windows",
-    "meaning": "local notifications",
-    "category": "realtime/push",
+    "signal": "package:flutter_secure_storage",
+    "meaning": "encrypted key-value store (Keystore-backed)",
+    "category": "offline storage / token storage",
     "evidence": "libapp.so Dart AOT string table"
    },
    {
@@ -239,51 +233,9 @@
     "evidence": "libapp.so Dart AOT string table"
    },
    {
-    "signal": "package:connectivity_plus",
-    "meaning": "network reachability checks (drives online/offline switching)",
-    "category": "sync orchestration",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:flutter_local_notifications",
-    "meaning": "local notifications",
-    "category": "realtime/push",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
     "signal": "package:sqflite_common",
     "meaning": "local SQLite database (Flutter sqflite)",
     "category": "offline storage",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:flutter_local_notifications_platform_interface",
-    "meaning": "local notifications",
-    "category": "realtime/push",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:sqlite3",
-    "meaning": "SQLite native bindings",
-    "category": "offline storage",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:shared_preferences",
-    "meaning": "key-value preferences store",
-    "category": "offline storage",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:flutter_secure_storage",
-    "meaning": "encrypted key-value store (Keystore-backed)",
-    "category": "offline storage / token storage",
-    "evidence": "libapp.so Dart AOT string table"
-   },
-   {
-    "signal": "package:flutter_local_notifications_linux",
-    "meaning": "local notifications",
-    "category": "realtime/push",
     "evidence": "libapp.so Dart AOT string table"
    },
    {
@@ -293,10 +245,46 @@
     "evidence": "libapp.so Dart AOT string table"
    },
    {
-    "signal": "WorkManager (×1 refs)",
-    "meaning": "WorkManager background jobs (deferred sync queues)",
+    "signal": "package:connectivity_plus",
+    "meaning": "network reachability checks (drives online/offline switching)",
     "category": "sync orchestration",
-    "evidence": "decompiled JVM sources"
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:shared_preferences",
+    "meaning": "key-value preferences store",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications_windows",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications_platform_interface",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications_linux",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:sqlite3",
+    "meaning": "SQLite native bindings",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
    }
   ],
   "realtime": [
@@ -306,8 +294,8 @@
  },
  "api": {
   "clients": [
-   "package:http_parser",
-   "package:http"
+   "package:http",
+   "package:http_parser"
   ],
   "bases": [],
   "paths": [
@@ -329,9 +317,12 @@
    }
   ],
   "models": [
+   "WebResourceRequest",
    "StreamedRequest",
    "HTTPRequest",
    "AddTrackRequest",
+   "SpatialFrequencyResponse",
+   "LensModel",
    "StoreDataBlobResponse",
    "QuitarTrackPublishedResponse",
    "VGrTrickleRequest",
@@ -355,14 +346,22 @@
    "CreateSystemModel",
    "DualSystemsModel",
    "EllipticFilterModel",
-   "FittedModel",
-   "FromEntity",
-   "GenerateHTTPResponse",
-   "GeoModel"
+   "FittedModel"
   ],
   "screens": [
+   "TextView",
+   "ImageView",
+   "AbsListView",
+   "AdapterView",
+   "WebView",
+   "ListView",
+   "CheckedTextView",
    "DataView",
+   "SearchView",
+   "BiometricFragment",
    "RenderView",
+   "PlatformView",
+   "AlertDialog",
    "MannsetPromptRectRangePageView",
    "SettingsStyleView",
    "AboutDialog",
@@ -371,7 +370,6 @@
    "LicensePage",
    "EmltsSettingsSecurityView",
    "CustomTransitionPage",
-   "ListView",
    "SettingsChatView",
    "RestoreBootstrapView",
    "RenderAndroidView",
@@ -380,64 +378,54 @@
    "CreateDialog",
    "ExitDialog",
    "FlipView",
-   "FormPage",
-   "GalleryView",
-   "HomePage",
-   "MenuView",
-   "MessageDialog",
-   "OpenerView",
-   "PopupView",
-   "SlideView",
-   "TableView",
-   "TabView",
-   "TraceDialog"
+   "FormPage"
   ]
  },
  "modules": [
-  "SerializerProvider",
-  "ClassUtil",
-  "DeserializationProblemHandler",
+  "TextView",
+  "WindowManager",
+  "ImageView",
+  "TextUtils",
   "KeyManager",
-  "NullValueProvider",
+  "PackageManager",
+  "BiometricManager",
+  "AbsListView",
   "SqfliteFfiMethodCallHandler",
-  "VersionUtil",
-  "NullsConstantProvider",
-  "SimpleFilterProvider",
+  "AdapterView",
+  "AccessibilityManager",
+  "DisplayManager",
+  "AssetManager",
+  "UiModeManager",
+  "SuggestionsAdapter",
+  "NewApi",
+  "WebView",
   "TextInputClient",
   "VideoPlayerInstanceApi",
-  "ThreadLocalBufferManager",
   "SharedPreferencesApi",
   "PlatformConfigurationNativeApi",
-  "FilterProvider",
-  "JsonParserDelegate",
+  "ListView",
+  "KeyguardManager",
+  "InputMethodManager",
+  "AccessibilityNodeProvider",
+  "ListAdapter",
+  "CheckedTextView",
+  "WebViewClient",
+  "MediaDataSource",
   "AndroidVideoPlayerApi",
-  "FileSystemProvider",
-  "ISO8601Utils",
+  "ViewUtils",
+  "PlatformViewsController",
+  "TextClassificationManager",
+  "ACTVAutoSizeHelper",
+  "BaseAdapter",
   "PushHelper",
   "TextSelectionDelegate",
   "RTCVideoPlatformController",
   "DataView",
-  "OlmManager",
-  "LocalAuthApi",
-  "BeanUtil",
-  "RmiProvider",
-  "JsonGeneratorDelegate",
-  "StreamedRequest",
-  "ImagePickerApi",
-  "UrlLauncherApi",
-  "QRViewController",
-  "PointerUtils",
-  "RadioClient",
-  "HttpClient",
-  "StatefulWidget",
-  "RenderView",
-  "RouteInformationProvider",
-  "FileHandler",
-  "HTTPRequest"
+  "OlmManager"
  ],
  "stats": {
-  "urlsTotal": 42,
-  "jvmFiles": 4649,
+  "urlsTotal": 41,
+  "jvmFiles": 3962,
   "assetCount": 30,
   "nativeLibs": [
    "libImaging.so",

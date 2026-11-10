@@ -1,0 +1,6 @@
+package com.hiennv.flutter_callkit_incoming;
+
+/* renamed from: com.hiennv.flutter_callkit_incoming.d, reason: case insensitive filesystem */
+/* loaded from: classes.dex */
+public abstract /* synthetic */ class AbstractC0941d {
+}

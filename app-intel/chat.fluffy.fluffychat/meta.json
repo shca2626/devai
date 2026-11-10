@@ -2,7 +2,7 @@
  "pkg": "chat.fluffy.fluffychat",
  "appName": "FluffyChat Matrix Messenger",
  "version": "2.11.4",
- "analyzedAt": "2026-11-09T21:58:56.080Z",
+ "analyzedAt": "2026-11-10T21:51:25.177Z",
  "store": {
   "appId": "chat.fluffy.fluffychat",
   "title": "FluffyChat Matrix Messenger",
@@ -36,14 +36,15 @@
   ]
  },
  "acquire": {
-  "file": "/home/z/my-project/.app-intel/cmw9st6ut0005ksvlzovvp0a1/chat.fluffy.fluffychat.apks",
-  "sha256": "b5b4f8e1e94a35c2b5f958ef5d5ec0cd5a630570516b8e076d3db66203289d4a",
-  "sizeBytes": 197812116,
+  "file": "/home/z/my-project/.app-intel/cmwb82ch90003nfz3tt145kja/chat.fluffy.fluffychat.apks",
+  "sha256": "e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5",
+  "sizeBytes": 197812230,
   "bundle": [
    "base.apk"
   ],
   "versionName": "2.11.4",
   "versionCode": 3576,
+  "apiSha256": "e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5",
   "originality": "unknown"
  }
 }

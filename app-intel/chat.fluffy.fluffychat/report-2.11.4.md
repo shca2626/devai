@@ -1,8 +1,8 @@
 # App Intelligence report — FluffyChat Matrix Messenger (chat.fluffy.fluffychat)
 
 - Version analyzed: 2.11.4 (3576)
-- Acquired: 197.8 MB, sha256 `b5b4f8e1e94a35c2b5f958ef5d5ec0cd5a630570516b8e076d3db66203289d4a`, originality: unknown
-- Generated: 2026-11-09T21:58:56.078Z
+- Acquired: 197.8 MB, sha256 `e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5`, originality: unknown
+- Generated: 2026-11-10T21:51:25.175Z
 
 
 
@@ -52,40 +52,74 @@ FluffyChat is a non-profit project based on open standards and driven entirely b
 
 # Permissions & security — chat.fluffy.fluffychat
 
-## Permissions (14)
+## Permissions (45)
 
-- `android.permission.INTERNET`
+- `android.permission.ACCESS_COARSE_LOCATION`
+- `android.permission.ACCESS_FINE_LOCATION`
 - `android.permission.ACCESS_NETWORK_STATE`
+- `android.permission.ACCESS_NOTIFICATION_POLICY`
+- `android.permission.BLUETOOTH`
 - `android.permission.CAMERA`
-- `android.permission.RECORD_AUDIO`
+- `android.permission.DISABLE_KEYGUARD`
+- `android.permission.FOREGROUND_SERVICE`
+- `android.permission.FOREGROUND_SERVICE_CAMERA`
+- `android.permission.FOREGROUND_SERVICE_DATA_SYNC`
+- `android.permission.FOREGROUND_SERVICE_MICROPHONE`
+- `android.permission.FOREGROUND_SERVICE_PHONE_CALL`
+- `android.permission.FOREGROUND_SERVICE_SHORT_SERVICE`
+- `android.permission.INTERNET`
+- `android.permission.MANAGE_OWN_CALLS`
+- `android.permission.MODIFY_AUDIO_SETTINGS`
 - `android.permission.POST_NOTIFICATIONS`
+- `android.permission.READ_APP_BADGE`
 - `android.permission.READ_EXTERNAL_STORAGE`
-- `android.permission.WRITE_EXTERNAL_STORAGE`
-- `android.permission.VIBRATE`
+- `android.permission.RECEIVE_BOOT_COMPLETED`
+- `android.permission.RECORD_AUDIO`
+- `android.permission.TURN_SCREEN_ON`
 - `android.permission.USE_BIOMETRIC`
 - `android.permission.USE_FINGERPRINT`
-- `android.permission.FOREGROUND_SERVICE`
-- `android.permission.RECEIVE_BOOT_COMPLETED`
+- `android.permission.USE_FULL_SCREEN_INTENT`
+- `android.permission.VIBRATE`
 - `android.permission.WAKE_LOCK`
-- `android.permission.READ_CONTACTS`
+- `android.permission.WRITE_EXTERNAL_STORAGE`
+- `chat.fluffy.fluffychat.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION`
+- `chat.fluffy.fluffychat.PERMISSION_CALL`
+- `com.anddoes.launcher.permission.UPDATE_COUNT`
+- `com.htc.launcher.permission.READ_SETTINGS`
+- `com.htc.launcher.permission.UPDATE_SHORTCUT`
+- `com.huawei.android.launcher.permission.CHANGE_BADGE`
+- `com.huawei.android.launcher.permission.READ_SETTINGS`
+- `com.huawei.android.launcher.permission.WRITE_SETTINGS`
+- `com.majeur.launcher.permission.UPDATE_BADGE`
+- `com.oppo.launcher.permission.READ_SETTINGS`
+- `com.oppo.launcher.permission.WRITE_SETTINGS`
+- `com.sec.android.provider.badge.permission.READ`
+- `com.sec.android.provider.badge.permission.WRITE`
+- `com.sonyericsson.home.permission.BROADCAST_BADGE`
+- `com.sonymobile.home.permission.PROVIDER_INSERT_BADGE`
+- `me.everything.badger.permission.BADGE_COUNT_READ`
+- `me.everything.badger.permission.BADGE_COUNT_WRITE`
 
 ## Signature
-- Present: unknown | status: signed | scheme: v2
-- Certificate: CN=FluffyChat (F-Droid release)
+- Present: yes | status: verified (computed from the APK signing block) | scheme: v3
+- Certificate: Common Name: FDroid, Organizational Unit: FDroid, Organization: fdroid.org, Locality: ORG, State/Province: ORG, Country: UK
+- Cert sha256: `057ac45164a2e6e31f6dde555a5f2cccb4d8834cb1852549681b00e34668caf3`
+- Known signers: Common Name: FDroid, Organizational Unit: FDroid, Organization: fdroid.org, Locality: ORG, State/Province: ORG, Country: UK
 - Provider marks this file as **sourced from Google Play**: no
 
 ## VirusTotal
-- Verdict: clean
+- Verdict: official F-Droid repository build (open-source; signed with the F-Droid key, not the upstream release key); not VT-scanned (0/0 engines)
 
 ## Manifest
-- targetSdk 35 | compileSdk 35
+- targetSdk 36
+- Exported unguarded components (5): activity:chat.fluffy.fluffychat.MainActivity, activity:com.linusu.flutter_web_auth_2.CallbackActivity, receiver:com.pravera.flutter_foreground_task.service.RebootReceiver, service:org.unifiedpush.android.connector.internal.RaiseToForegroundService, receiver:org.unifiedpush.android.connector.internal.MessagingReceiverImpl
 
 ## Versions tracked by the provider (1)
-- 2.11.4 (3576) — latest — sha256 b5b4f8e1e94a35c2…
+- 2.11.4 (3576) — latest — sha256 e0428eb3056b22a0…
 
 ## Native / protectors
-- ABIs: arm64-v8a, armeabi-v7a, x86_64
-- Native libs: libflutter.so, libapp.so, libolm.so, libmatrix_jni.so
+- ABIs: arm64-v8a, armeabi-v7a, x86, x86_64
+- Native libs: libImaging.so, libapp.so, libdartjni.so, libdatastore_shared_counter.so, libflutter.so, libjingle_peerconnection_so.so, libnoise.so, libsqlcipher.so, libvodozemac_bindings_dart.so, libwebcrypto.so
 - Protectors: none detected
 
 
@@ -95,9 +129,9 @@ FluffyChat is a non-profit project based on open standards and driven entirely b
 
 # Original APK acquisition — chat.fluffy.fluffychat
 
-- Acquired: 197812116 bytes (197.81 MB), 1 bundle entries
+- Acquired: 197812230 bytes (197.81 MB), 1 bundle entries
 - Version: 2.11.4 (3576)
-- sha256: `b5b4f8e1e94a35c2b5f958ef5d5ec0cd5a630570516b8e076d3db66203289d4a`
+- sha256: `e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5`
 - Originality vs provider listing: **unknown**
 
 Acquired through the reverse-engineered provider chain (hold-to-verify + turnstile + proof-of-work),
@@ -181,21 +215,21 @@ Mapped from package fingerprints in the compiled app (ref count = string occurre
 
 # Code map — chat.fluffy.fluffychat
 
-- Decompiled Java/Kotlin files: 4649
+- Decompiled Java/Kotlin files: 3962
 
 ## Top-level packages
-- `com` — 592 files
-- `androidx` — 235 files
-- `org` — 228 files
-- `io` — 133 files
-- `W5` — 88 files
-- `Z` — 86 files
-- `q` — 60 files
-- `J0` — 59 files
-- `k3` — 59 files
-- `M` — 54 files
-- `I0` — 54 files
-- `g1` — 44 files
+- `com` — 434 files
+- `org` — 211 files
+- `androidx` — 202 files
+- `io` — 122 files
+- `j$` — 85 files
+- `Z` — 82 files
+- `W5` — 69 files
+- `J0` — 56 files
+- `k3` — 56 files
+- `M` — 53 files
+- `q` — 51 files
+- `I0` — 45 files
 
 ## Non-SDK endpoints (20)
 - https://spec.matrix.org/latest/rooms
@@ -229,7 +263,7 @@ Mapped from package fingerprints in the compiled app (ref count = string occurre
 Every URL recovered from the compiled app, classified with its purpose.
 Framework noise (engine licenses, DTDs, registry links) is separated from real app endpoints.
 
-## Endpoints (31)
+## Endpoints (30)
 
 | Kind | URL | Purpose | Evidence |
 | --- | --- | --- | --- |
@@ -239,8 +273,6 @@ Framework noise (engine licenses, DTDs, registry links) is separated from real a
 | app-site | https://fluffychat.im/tosapplication | developer's own site — app backend origin (REST calls most likely originate here) | libapp.so (Dart AOT string table) |
 | app-site | https://push.fluffychat.im/_matrix/push/v1/notifyv | developer's own site — app backend origin (REST calls most likely originate here) | libapp.so (Dart AOT string table) |
 | app-site | https://fluffychat.im/changelog | developer's own site — app backend origin (REST calls most likely originate here) | libapp.so (Dart AOT string table) |
-| review | http://javax.xml.XMLConstants/feature/secure-processing | possible app resource — verify against decompiled call sites before treating as a backend | sources/com/fasterxml/jackson/databind/ext/DOMDeserializer.java |
-| review | http://apache.org/xml/features/disallow-doctype-decl | possible app resource — verify against decompiled call sites before treating as a backend | sources/com/fasterxml/jackson/databind/ext/DOMDeserializer.java |
 | review | https://matrix.to/# | possible app resource — verify against decompiled call sites before treating as a backend | libapp.so (Dart AOT string table) |
 | review | https://aomediacodec.github.io/av1-rtp-spec | possible app resource — verify against decompiled call sites before treating as a backend | libapp.so (Dart AOT string table) |
 | review | https://fluffychat.imp | possible app resource — verify against decompiled call sites before treating as a backend | libapp.so (Dart AOT string table) |
@@ -254,6 +286,7 @@ Framework noise (engine licenses, DTDs, registry links) is separated from real a
 | docs | https://matrix.gateway.unifiedpush.org/_matrix/push/v1 | UnifiedPush integration reference (FOSS push notifications) | libapp.so (Dart AOT string table) |
 | docs | https://docs.flutter.dev/release/breaking-changes | Flutter documentation reference | libapp.so (Dart AOT string table) |
 | docs | https://unifiedpush.org/.#sink# | UnifiedPush integration reference (FOSS push notifications) | libapp.so (Dart AOT string table) |
+| docs | https://developer.android.com/reference/android/view | Android developer documentation reference | sources/io/flutter/view/k.java |
 | framework-noise | http://www.w3.org/2000 | W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate | libapp.so (Dart AOT string table) |
 | framework-noise | http://www.w3.org/1999/xhtml | W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate | libapp.so (Dart AOT string table) |
 | framework-noise | https://api.flutter.dev/flutter/dart-ui | Flutter framework documentation link (engine/ LICENSE or about strings) | libapp.so (Dart AOT string table) |
@@ -263,25 +296,24 @@ Framework noise (engine licenses, DTDs, registry links) is separated from real a
 | framework-noise | https://github.com/flutter/flutter/issues/30701 | framework/engine repository link from bundled license text — not app code | libapp.so (Dart AOT string table) |
 | framework-noise | http://www.w3.org/1998 | W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate | libapp.so (Dart AOT string table) |
 | framework-noise | https://pub.dev/ | Dart package registry — dependency metadata baked into the release build, not a runtime call | libapp.so (Dart AOT string table) |
-| framework-noise | http://schemas.android.com/apk/res/android | Android manifest XML namespace — static manifest reference | sources/N/k.java |
+| framework-noise | http://ns.adobe.com/xap/1.0/ | XMP metadata namespace (image metadata parser) | sources/p0/C1436a.java |
 
 ## How sync works (offline / online)
 
 Offline-capable: local SQLite database (Flutter sqflite) holds data locally; network reachability checks (drives online/offline switching) drives when sync happens; local notifications announce events while backgrounded. Read paths hit local storage first; writes queue and flush to the REST backend when a connection is available.
 
 ### Signals
-- **package:flutter_local_notifications_windows** — local notifications (realtime/push)
-- **package:sqflite_common_ffi** — local SQLite database (Flutter sqflite) (offline storage)
-- **package:connectivity_plus** — network reachability checks (drives online/offline switching) (sync orchestration)
-- **package:flutter_local_notifications** — local notifications (realtime/push)
-- **package:sqflite_common** — local SQLite database (Flutter sqflite) (offline storage)
-- **package:flutter_local_notifications_platform_interface** — local notifications (realtime/push)
-- **package:sqlite3** — SQLite native bindings (offline storage)
-- **package:shared_preferences** — key-value preferences store (offline storage)
 - **package:flutter_secure_storage** — encrypted key-value store (Keystore-backed) (offline storage / token storage)
-- **package:flutter_local_notifications_linux** — local notifications (realtime/push)
+- **package:sqflite_common_ffi** — local SQLite database (Flutter sqflite) (offline storage)
+- **package:sqflite_common** — local SQLite database (Flutter sqflite) (offline storage)
 - **package:http** — Dart http client (api client)
-- **WorkManager (×1 refs)** — WorkManager background jobs (deferred sync queues) (sync orchestration)
+- **package:connectivity_plus** — network reachability checks (drives online/offline switching) (sync orchestration)
+- **package:shared_preferences** — key-value preferences store (offline storage)
+- **package:flutter_local_notifications_windows** — local notifications (realtime/push)
+- **package:flutter_local_notifications_platform_interface** — local notifications (realtime/push)
+- **package:flutter_local_notifications_linux** — local notifications (realtime/push)
+- **package:flutter_local_notifications** — local notifications (realtime/push)
+- **package:sqlite3** — SQLite native bindings (offline storage)
 
 ### Realtime channels: local notifications
 
@@ -293,11 +325,11 @@ Offline-capable: local SQLite database (Flutter sqflite) holds data locally; net
 # Local database — chat.fluffy.fluffychat
 
 ## Storage engines
-- **local SQLite database (Flutter sqflite)** (package:sqflite_common in libapp.so)
-- **encrypted key-value store (Keystore-backed)** (package:flutter_secure_storage in libapp.so)
-- **local SQLite database (Flutter sqflite)** (package:sqflite_common_ffi in libapp.so)
 - **SQLite native bindings** (package:sqlite3 in libapp.so)
+- **encrypted key-value store (Keystore-backed)** (package:flutter_secure_storage in libapp.so)
 - **key-value preferences store** (package:shared_preferences in libapp.so)
+- **local SQLite database (Flutter sqflite)** (package:sqflite_common in libapp.so)
+- **local SQLite database (Flutter sqflite)** (package:sqflite_common_ffi in libapp.so)
 
 _No CREATE TABLE statements recovered — schema is likely created at runtime or lives server-side._
 
@@ -319,7 +351,7 @@ _No CREATE TABLE statements recovered — schema is likely created at runtime or
 
 # API surface — chat.fluffy.fluffychat
 
-## HTTP clients: package:http_parser, package:http
+## HTTP clients: package:http, package:http_parser
 ## API base URLs: none detected
 ## Auth: biometric / device-credential unlock (package:local_auth present); encrypted token storage (package:flutter_secure_storage present)
 
@@ -332,9 +364,12 @@ _No CREATE TABLE statements recovered — schema is likely created at runtime or
 - `/v1`
 
 ## Model classes (30)
+- WebResourceRequest
 - StreamedRequest
 - HTTPRequest
 - AddTrackRequest
+- SpatialFrequencyResponse
+- LensModel
 - StoreDataBlobResponse
 - QuitarTrackPublishedResponse
 - VGrTrickleRequest
@@ -359,13 +394,21 @@ _No CREATE TABLE statements recovered — schema is likely created at runtime or
 - DualSystemsModel
 - EllipticFilterModel
 - FittedModel
-- FromEntity
-- GenerateHTTPResponse
-- GeoModel
 
 ## Screens / views (30)
+- TextView
+- ImageView
+- AbsListView
+- AdapterView
+- WebView
+- ListView
+- CheckedTextView
 - DataView
+- SearchView
+- BiometricFragment
 - RenderView
+- PlatformView
+- AlertDialog
 - MannsetPromptRectRangePageView
 - SettingsStyleView
 - AboutDialog
@@ -374,7 +417,6 @@ _No CREATE TABLE statements recovered — schema is likely created at runtime or
 - LicensePage
 - EmltsSettingsSecurityView
 - CustomTransitionPage
-- ListView
 - SettingsChatView
 - RestoreBootstrapView
 - RenderAndroidView
@@ -384,235 +426,248 @@ _No CREATE TABLE statements recovered — schema is likely created at runtime or
 - ExitDialog
 - FlipView
 - FormPage
-- GalleryView
-- HomePage
-- MenuView
-- MessageDialog
-- OpenerView
-- PopupView
-- SlideView
-- TableView
-- TabView
-- TraceDialog
 
 ## Modules (40)
-- SerializerProvider
-- ClassUtil
-- DeserializationProblemHandler
+- TextView
+- WindowManager
+- ImageView
+- TextUtils
 - KeyManager
-- NullValueProvider
+- PackageManager
+- BiometricManager
+- AbsListView
 - SqfliteFfiMethodCallHandler
-- VersionUtil
-- NullsConstantProvider
-- SimpleFilterProvider
+- AdapterView
+- AccessibilityManager
+- DisplayManager
+- AssetManager
+- UiModeManager
+- SuggestionsAdapter
+- NewApi
+- WebView
 - TextInputClient
 - VideoPlayerInstanceApi
-- ThreadLocalBufferManager
 - SharedPreferencesApi
 - PlatformConfigurationNativeApi
-- FilterProvider
-- JsonParserDelegate
+- ListView
+- KeyguardManager
+- InputMethodManager
+- AccessibilityNodeProvider
+- ListAdapter
+- CheckedTextView
+- WebViewClient
+- MediaDataSource
 - AndroidVideoPlayerApi
-- FileSystemProvider
-- ISO8601Utils
+- ViewUtils
+- PlatformViewsController
+- TextClassificationManager
+- ACTVAutoSizeHelper
+- BaseAdapter
 - PushHelper
 - TextSelectionDelegate
 - RTCVideoPlatformController
 - DataView
 - OlmManager
-- LocalAuthApi
-- BeanUtil
-- RmiProvider
-- JsonGeneratorDelegate
-- StreamedRequest
-- ImagePickerApi
-- UrlLauncherApi
-- QRViewController
-- PointerUtils
-- RadioClient
-- HttpClient
-- StatefulWidget
-- RenderView
-- RouteInformationProvider
-- FileHandler
-- HTTPRequest
 
 
 ---
 
 (from clone-pack/overview.md)
 
-# FluffyChat Matrix Messenger
+# FluffyChat Replication Blueprint
 
-A secure, decentralized messaging app based on the Matrix protocol.
+FluffyChat is a Matrix-based messaging client that emphasizes security, decentralization, and interoperability. It's built with Flutter and supports end-to-end encryption, video calls, and rich communication features. The app connects to Matrix servers and uses UnifiedPush for notifications. It maintains local SQLite storage for offline functionality and syncs data when connectivity is available. The app is fully open-source and compatible with other Matrix clients.
 
-- **Purpose**: End-to-end encrypted messaging, video calls, and community chats
-- **Target Audience**: Privacy-conscious users and communities
-- **Key Differentiators**: Decentralized architecture, Matrix protocol compatibility, open-source
-- **Platform**: Flutter (Dart) for cross-platform support
-- **Security**: End-to-end encryption (olm/megolm), encrypted backups
-- **Infrastructure**: Self-hostable with compatibility across Matrix clients
-
-FluffyChat provides secure messaging how it should be.
+FluffyChat is a secure, decentralized messaging platform built on the Matrix protocol.
 
 
 ---
 
 (from clone-pack/features.md)
 
-# Feature Set
+# Core Features
 
-- **Messaging**: Text, media sharing, stickers, polls
-- **Video Calls**: Encrypted direct calls and conferences
-- **Security**: End-to-end encryption, key trust system, biometric unlock
-- **Decentralization**: Matrix protocol compatibility with self-hosting options
-- **Multi-device Support**: Synchronized across devices
-- **Moderation Tools**: For community and group management
-- **Spaces**: Organized chat spaces
-- **Push Notifications**: Local and unified push support
-- **Location Sharing**: Integration with OpenStreetMap
-- **Cross-client Compatibility**: Works with other Matrix clients
+- **Matrix Protocol**: Full compatibility with Matrix protocol for decentralized messaging
+- **End-to-End Encryption**: Olm/Megolm encryption for secure communications
+- **Video Calls**: Matrix RTC-compatible encrypted video conferences
+- **Multi-device Support**: Synchronized across multiple devices
+- **Rich Media**: Support for custom stickers, polls, and file sharing
+- **Spaces**: Organized conversations with hierarchical structure
+- **Moderation Tools**: Comprehensive moderation capabilities
+- **Push Notifications**: UnifiedPush integration for notifications
+- **Offline Capability**: Local storage for offline messaging
+- **QR Code Sharing**: Easy contact and room sharing via QR codes
 
-All features are built on the open Matrix protocol for true interoperability.
+# Technical Implementation
+
+- Flutter-based UI with Dart
+- Local SQLite database for message storage
+- Encrypted storage for sensitive data
+- Biometric authentication support
+- Background sync services
 
 
 ---
 
 (from clone-pack/architecture.md)
 
-# Technical Architecture
+# Tech Stack
 
 - **Frontend**: Flutter (Dart) with Provider for state management
 - **Storage**: SQLite (sqflite) for local database, flutter_secure_storage for encrypted data
-- **Networking**: HTTP client for Matrix API calls, UnifiedPush for notifications
-- **Authentication**: Biometric/device credentials with encrypted token storage
-- **Modules**: OlmManager for encryption, PushHelper for notifications, VideoPlayer for calls
-- **Data Flow**: UI → Provider → SQLite/Secure Storage → HTTP API → Matrix homeserver
-- **Background Processing**: WorkManager for deferred sync operations
-- **Platform Integration**: Native Android APIs for camera, contacts, notifications
+- **Networking**: HTTP client for Matrix API communication
+- **Authentication**: Biometric/credential unlock with encrypted token storage
+- **Push Notifications**: UnifiedPush integration
+- **Video**: WebRTC for encrypted video calls
 
-The architecture prioritizes security and decentralization while maintaining a responsive user experience.
+# Data Flow
+
+1. UI components interact with Provider-managed state
+2. State changes trigger local database updates via SQLite
+3. Network requests made through HTTP client to Matrix servers
+4. Incoming data updates local storage and UI state
+5. Background services handle sync and push notifications
+6. Encrypted storage handles sensitive data and authentication tokens
 
 
 ---
 
 (from clone-pack/endpoints-analysis.md)
 
-# API Endpoint Analysis
+# Matrix Protocol Endpoints
 
-**Matrix Protocol Endpoints**:
-- `https://spec.matrix.org/latest/rooms` - Matrix protocol specification reference
-- `https://matrix.to` - Matrix deep linking protocol
+- `https://spec.matrix.org/latest/rooms` - Matrix protocol specification reference for room operations
+- `https://matrix.to/#` - Matrix resource identifier for room/user links
 - `https://matrix.gateway.unifiedpush.org/_matrix/push/v1` - UnifiedPush gateway for notifications
 
-**FluffyChat Backend**:
-- `https://fluffychat.im` - Main backend origin for API calls
+# Application Endpoints
+
+- `https://fluffychat.im` - Primary backend origin for API calls
 - `https://fluffychat.im/privacy` - Privacy policy endpoint
 - `https://fluffychat.im/tosapplication` - Terms of service endpoint
 - `https://push.fluffychat.im/_matrix/push/v1/notifyv` - Push notification endpoint
-- `https://fluffychat.im/changelog` - App changelog endpoint
-- `https://fluffychat.im/assets/favicon.pngdier` - Asset CDN for media and uploads
+- `https://fluffychat.im/changelog` - Application changelog
 
-**Third-Party Services**:
-- `https://microg.org` - microG integration (Google services replacement)
+# Third-party Services
+
+- `https://microg.org` - microG integration (FOSS Google services replacement)
 - `https://unifiedpush.org` - UnifiedPush documentation
-- `https://www.openstreetmap.org` - Map/location services
+- `https://www.openstreetmap.org` - Map/location service integration
 - `https://ko-fi.com/post` - Donation/support page
 - `https://github.com/krille-chan/fluffychat` - Developer repository
 
-**Framework Noise**:
-- Various W3C DTDs and XML namespaces (parser boilerplate)
-- Flutter and Dart documentation links
-- Package registry references (pub.dev)
+# Framework Noise
 
-The app primarily communicates with Matrix homeservers and uses FluffyChat's own backend for push notifications and assets.
+- Various W3C DTDs and XML schemas (parser boilerplate)
+- Flutter and Dart framework documentation links
+- Package registry references (pub.dev)
+- License text repository links
 
 
 ---
 
 (from clone-pack/data-sync.md)
 
-# Data Synchronization Strategy
+# Synchronization Strategy
 
-- **Local Storage**: SQLite database (sqflite) for message history and metadata
-- **Encrypted Storage**: flutter_secure_storage for authentication tokens and sensitive data
-- **Preferences**: shared_preferences for app settings
-- **Sync Triggers**: Network connectivity checks (connectivity_plus) drive online/offline switching
-- **Background Sync**: WorkManager handles deferred sync operations when connection is available
-- **Push Notifications**: flutter_local_notifications for real-time updates
-- **Conflict Resolution**: Not explicitly detailed in evidence - Matrix protocol typically handles this at the server level
+FluffyChat implements an offline-first synchronization strategy:
 
-The app is designed to work offline, with local storage as the primary data source. Changes are queued and synchronized when connectivity is restored. The Matrix protocol handles cross-device synchronization at the server level.
+- **Local Storage**: SQLite database stores messages, rooms, and user data locally
+- **Encrypted Storage**: Sensitive data stored using flutter_secure_storage
+- **Network Awareness**: connectivity_plus package detects online/offline states
+- **Background Sync**: When online, queued changes sync to Matrix servers
+- **Push Notifications**: UnifiedPush handles incoming message notifications
+- **Conflict Resolution**: Matrix protocol handles conflict resolution at the protocol level
+
+# Sync Workflow
+
+1. Messages written to local SQLite database immediately
+2. Changes queued for sync when network is available
+3. Background service periodically syncs with Matrix server
+4. Incoming updates merge with local data
+5. UI reflects changes in real-time when possible
+
+The app is fully offline-capable with automatic sync when connectivity returns.
 
 
 ---
 
 (from clone-pack/api-contract.md)
 
-# Reconstructed API Contract
+# Matrix API Contract
 
-**Base URL**: `https://fluffychat.im` (primary backend)
+**Base URL**: Variable (user-configurable homeserver)
+**Authentication**: Matrix access token stored securely
 
-**Authentication**:
-- Method: Token-based with encrypted storage
-- Endpoints: `/login` (POST)
-- Security: Biometric/device credential unlock
+## Core Endpoints
 
-**Core Endpoints**:
-- `/client/v3/pushers/setVoc` (POST) - Configure push notifications
-- `/settings` (GET/POST) - Retrieve/update app settings
-- `/config` (GET) - Get server configuration
-- `/backup` (GET/POST) - Handle encrypted message backups
-- `/v1` (GET/POST) - General API endpoint (likely Matrix protocol)
+- `/_matrix/client/v3/login` - User authentication (POST)
+- `/_matrix/client/v3/sync` - Event stream synchronization (GET)
+- `/_matrix/client/v3/rooms/{roomId}/messages` - Message history (GET)
+- `/_matrix/client/v3/rooms/{roomId}/send/{eventType}` - Send message (PUT)
+- `/_matrix/client/v3/pushers/set` - Push notification setup (POST)
+- `/_matrix/client/v3/keys/upload` - Upload encryption keys (POST)
+- `/_matrix/client/v3/keys/query` - Query encryption keys (POST)
 
-**Matrix Protocol Compliance**:
-- Follows Matrix homeserver API specification
-- Uses standard Matrix endpoints for messaging, rooms, and user data
-- Implements Matrix encryption (olm/megolm)
+## Custom Endpoints
 
-**Data Models**:
-- Message objects with encryption metadata
-- User and room information
-- Push notification configuration
-- Backup and key management data
+- `/settings` - Application settings (GET/POST)
+- `/config` - Server configuration (GET)
+- `/backup` - Encryption backup (POST)
 
-The API contract is Matrix-compliant with FluffyChat-specific extensions for push notifications and settings.
+# Request/Response Format
+
+Standard Matrix JSON API format with event-based structure. Messages include event IDs, sender info, timestamps, and encrypted content when applicable.
 
 
 ---
 
 (from clone-pack/clone-plan.md)
 
-# Clone Implementation Plan
+# Development Plan
 
-**Phase 1: Backend Foundation (4-6 weeks)**
-- Set up Matrix homeserver compatibility (Synapse or Dendrite)
-- Implement core Matrix API endpoints (auth, messaging, rooms)
-- Create push notification service (FluffyChat-compatible)
-- Develop media upload/download CDN
-- Implement encryption (olm/megolm) handling
+## Phase 1: Backend Foundation (3-4 weeks)
 
-**Phase 2: Data Layer (3-4 weeks)**
-- SQLite schema design for local storage
-- Encrypted storage implementation for tokens and keys
-- Sync queue system for offline operations
-- Conflict resolution mechanisms
-- Migration and backup systems
+- Implement Matrix homeserver API endpoints
+  - Authentication and user management
+  - Room creation and management
+  - Message handling and storage
+  - Event synchronization
+- Set up encryption key management
+- Implement push notification system
 
-**Phase 3: Core Features (6-8 weeks)**
-- Authentication and security (biometric unlock)
-- Messaging functionality (text, media, stickers)
-- Room and space management
-- Push notification system (UnifiedPush integration)
-- Video call implementation (Matrix RTC)
+## Phase 2: Data Layer (2-3 weeks)
 
-**Phase 4: Advanced Features (4-6 weeks)**
-- Polls and reactions
-- Location sharing (OpenStreetMap integration)
-- Moderation tools
-- Multi-device synchronization
-- Cross-client compatibility testing
+- Implement local SQLite database schema
+- Create encrypted storage for sensitive data
+- Develop sync service for online/offline operation
+- Implement conflict resolution for local changes
+- Set up background sync mechanisms
 
-**Total Estimated Effort**: 17-24 weeks
+## Phase 3: Core Features (4-5 weeks)
 
-Prioritize Matrix protocol compliance and security features first, then build out additional functionality.
+- Implement authentication UI (login, registration)
+- Create chat interface with message display
+- Implement message sending and receiving
+- Add end-to-end encryption
+- Develop room management functionality
+- Implement notification system
+
+## Phase 4: Advanced Features (3-4 weeks)
+
+- Add video calling functionality
+- Implement file and media sharing
+- Create spaces and thread support
+- Add moderation tools
+- Implement QR code sharing
+- Add biometric authentication
+
+## Phase 5: Polish & Testing (2-3 weeks)
+
+- UI/UX refinement
+- Performance optimization
+- Comprehensive testing
+- Cross-platform compatibility
+- Documentation and deployment preparation
+
+Total estimated effort: 14-19 weeks for a complete implementation.
