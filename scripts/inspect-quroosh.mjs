@@ -1,0 +1,12 @@
+import { PrismaClient } from '@prisma/client'
+const db = new PrismaClient()
+const r = await db.appAnalysis.findUnique({ where: { id: 'cmwabxttd0001tz3z49g7v4xv' } })
+const d = JSON.parse(r.data)
+console.log('STATUS:', r.status, 'score:', r.score)
+console.log('--- acquire ---')
+console.log(JSON.stringify(d.acquire ?? null, null, 1).slice(0, 800))
+console.log('--- unknowns ---')
+for (const u of (d.unknowns ?? []).slice(0, 8)) console.log('-', typeof u === 'string' ? u : JSON.stringify(u))
+console.log('--- evidence ---')
+for (const e of (d.evidence ?? [])) console.log('-', (e.label ?? e.title ?? JSON.stringify(e)).slice(0, 140))
+await db.$disconnect()
