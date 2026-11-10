@@ -437,7 +437,10 @@ def try_aptoide(pkg, out, attempted):
         r = requests.get(APTOIDE_API.format(pkg=pkg), timeout=25,
                          headers={'User-Agent': UA, 'Accept': 'application/json'})
         if r.status_code != 200:
-            attempted.append({'strategy': 'aptoide-open', 'error': f'provider_http_{r.status_code}'})
+            # the ws hosts answer 404 (HTTP) or 200+APP-1 (JSON) for missing
+            # packages depending on load-balancer routing — normalize both
+            code = 'app_not_found' if r.status_code == 404 else f'provider_http_{r.status_code}'
+            attempted.append({'strategy': 'aptoide-open', 'error': code})
             return None
         d = r.json()
         if (d.get('info') or {}).get('status') != 'OK':
