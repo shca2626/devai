@@ -45,6 +45,10 @@
   "versionName": "2.11.4",
   "versionCode": 3576,
   "apiSha256": "e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5",
-  "originality": "unknown"
+  "originality": "unknown",
+  "source": "fdroid-open",
+  "provider": "official F-Droid repository",
+  "fromGooglePlay": false,
+  "acquiredAt": "2026-11-10T21:50:14Z"
  }
 }

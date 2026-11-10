@@ -360,24 +360,45 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
 
   const play = await run(PYTHON, [ACQUIRE_PLAY_SCRIPT, '--pkg', pkg, '--out', dir], ACQUIRE_TIMEOUT_MS)
   const playPayload = parseLine(lastLine(play.stdout))
-  if (playPayload && consumeResult(playPayload, 'first-party Google Play session (gpapi finsky) — downloaded straight from the Play CDN, no mirror involved')) {
+  const SOURCE_LABELS: Record<string, string> = {
+    'google-play-direct': 'first-party Google Play session (gpapi finsky) — downloaded straight from the Play CDN, no mirror involved',
+    'aptoide-open': 'Aptoide open marketplace — public API + CDN, our own downloader (no mirror, no scraping)',
+    'fdroid-open': 'F-Droid official open repository — public API, our own downloader (no mirror, no scraping)',
+  }
+  const playSource = playPayload ? String(playPayload['source'] ?? '') : ''
+  if (playPayload && consumeResult(playPayload, SOURCE_LABELS[playSource] ?? 'first-party acquisition (open protocol, no mirror involved)')) {
     return
   }
 
-  const playError = playPayload ? (typeof playPayload['error'] === 'string' ? playPayload['error'] : '') : 'no_result'
-  const playDetail = playPayload ? String(playPayload['detail'] ?? '').slice(0, 200) : play.stderr.slice(0, 200)
-  if (playError === 'CONFIG_MISSING') {
-    data.unknowns.push('Play-direct credentials not configured yet (set GP_EMAIL + GP_PASSWORD once — an app password if 2FA; a session is then saved and the password is never needed again).')
-  } else if (playError === 'login_failed') {
-    data.unknowns.push(`Google rejected the Play session credentials (${playDetail}). Fix GP_EMAIL/GP_PASSWORD and retry.`)
-  } else if (playError === 'app_not_found') {
-    data.unknowns.push('Google Play reports no such package — check the app URL/package name.')
-  } else {
-    data.unknowns.push(`First-party Play acquisition did not complete${playDetail ? ` (${playDetail})` : ''}.`)
+  // failure — the payload's `attempted[]` says exactly which strategy failed how
+  const attempted = playPayload && Array.isArray(playPayload['attempted'])
+    ? (playPayload['attempted'] as { strategy?: unknown; error?: unknown; detail?: unknown }[])
+    : []
+  const attemptLines = attempted
+    .map((a) => `${String(a.strategy ?? '?')}: ${String(a.error ?? '?')}${a.detail ? ` (${String(a.detail).slice(0, 90)})` : ''}`)
+    .join('; ')
+  if (attemptLines) data.unknowns.push(`Original APK not acquired — strategies tried: ${attemptLines}.`)
+
+  const playError = String(playPayload?.['error'] ?? '') || 'no_result'
+  const cfgMissing = attempted.some((a) => a.strategy === 'google-play-direct' && a.error === 'CONFIG_MISSING')
+  const loginFailed = attempted.some((a) => a.strategy === 'google-play-direct' && a.error === 'login_failed')
+  const notOnOpenIndexes =
+    attempted.some((a) => a.strategy === 'aptoide-open' && a.error === 'app_not_found') &&
+    attempted.some((a) => a.strategy === 'fdroid-open' && a.error === 'app_not_found')
+  if (loginFailed) {
+    const det = attempted.find((a) => a.strategy === 'google-play-direct' && a.error === 'login_failed')
+    data.unknowns.push(`Google rejected the Play session credentials (${String(det?.detail ?? '').slice(0, 120)}). Fix GP_EMAIL/GP_PASSWORD and retry.`)
+  } else if (cfgMissing) {
+    data.unknowns.push('Direct Google Play credentials not configured yet (set GP_EMAIL + GP_PASSWORD once — an app password if 2FA; a session is then saved and the password is never needed again).')
+    if (notOnOpenIndexes) {
+      data.unknowns.push('This app is not on the open indexes (Aptoide marketplace, F-Droid) — a direct Play session is the only first-party source for it. Add the credentials above and every Play app becomes downloadable.')
+    }
+  } else if (playError === 'no_result') {
+    data.unknowns.push(`First-party acquisition did not complete${play.stderr ? ` (${play.stderr.slice(0, 120)})` : ''}.`)
   }
 
   if (process.env.APP_INTEL_ALLOW_MIRROR !== '1') {
-    data.evidence.push(ev('Acquisition chain: first-party Google Play (no mirror dependency by design)', 'acquire-play.py (gpapi)', 'config: session login + finsky details/download'))
+    data.evidence.push(ev('Acquisition chain: first-party strategies only — google-play-direct → aptoide-open → fdroid-open (no mirror dependency by design)', 'acquire-play.py', 'strategy loop: authenticated Play session, Aptoide public API, F-Droid public API'))
     return
   }
 
@@ -461,25 +482,32 @@ async function collectDeep(analysisId: string, pkg: string, data: AppIntelData) 
   let listing: ApksListing | null = null
   let method = ''
 
-  // direct API attempt (works when the provider's origin gate is open)
-  try {
-    const r = await fetch(`https://apkcube.com/api/apps/${encodeURIComponent(pkg)}/apks`, {
-      headers: { 'Sec-Fetch-Site': 'same-origin', Referer: 'https://apkcube.com/', Accept: 'application/json' },
-      signal: AbortSignal.timeout(20_000),
-    })
-    if (r.ok) {
-      listing = (await r.json()) as ApksListing
-      method = 'direct provider API'
+  // PRIMARY: the self-generated listing written by our own acquisition run —
+  // permissions/signature/manifest computed from the real APK bytes we
+  // downloaded ourselves. No third-party API in the loop.
+  listing = await readListingFromAcquire(workDir(analysisId))
+  if (listing) {
+    method = 'self-generated listing — computed from the real APK bytes by our own acquirer (first-party inspection)'
+  }
+
+  // LEGACY fallback (explicit opt-in): a mirror-site listing for bundles
+  // acquired by the legacy chain or older runs whose listing is missing.
+  if (!listing && process.env.APP_INTEL_ALLOW_MIRROR === '1') {
+    try {
+      const r = await fetch(`https://apkcube.com/api/apps/${encodeURIComponent(pkg)}/apks`, {
+        headers: { 'Sec-Fetch-Site': 'same-origin', Referer: 'https://apkcube.com/', Accept: 'application/json' },
+        signal: AbortSignal.timeout(20_000),
+      })
+      if (r.ok) {
+        listing = (await r.json()) as ApksListing
+        method = 'mirror listing API (explicitly enabled)'
+      }
+    } catch {
+      /* fall through */
     }
-  } catch {
-    /* fall through to browser-captured listing */
   }
   if (!listing) {
-    listing = await readListingFromAcquire(workDir(analysisId))
-    method = 'browser-captured provider API (from acquisition run)'
-  }
-  if (!listing) {
-    data.unknowns.push('Deep listing intel (permissions, signature, VirusTotal) unavailable — provider API gated this run.')
+    data.unknowns.push('Deep listing intel (permissions, signature, VirusTotal) unavailable — no acquired bundle this run.')
     return
   }
 
@@ -1398,6 +1426,20 @@ print(n)
     } catch {
       /* not captured this run */
     }
+    // acquisition provenance — which strategy delivered the bundle. Fresh
+    // runs read it from the acquirer's workdir meta.json; cached reruns keep
+    // what the earlier study recorded in the repo meta.
+    const wdMeta = (await readJsonSafe(path.join(dir, 'meta.json'))) as Record<string, unknown> | null
+    const prevMeta = (await readJsonSafe(path.join(target, 'meta.json'))) as { acquire?: Record<string, unknown> } | null
+    const prov = (k: string): unknown =>
+      wdMeta && wdMeta[k] !== undefined ? wdMeta[k] : prevMeta?.acquire?.[k]
+    const acquirePublished = {
+      ...data.acquire,
+      ...(prov('source') !== undefined ? { source: String(prov('source')) } : {}),
+      ...(prov('provider') !== undefined ? { provider: String(prov('provider')) } : {}),
+      ...(prov('fromGooglePlay') !== undefined ? { fromGooglePlay: Boolean(prov('fromGooglePlay')) } : {}),
+      ...(prov('acquiredAt') !== undefined ? { acquiredAt: String(prov('acquiredAt')) } : {}),
+    }
     await fs.writeFile(
       path.join(target, 'meta.json'),
       JSON.stringify(
@@ -1408,7 +1450,7 @@ print(n)
           analyzedAt: new Date().toISOString(),
           score: undefined,
           store: data.store,
-          acquire: data.acquire,
+          acquire: acquirePublished,
         },
         null,
         1
@@ -1423,7 +1465,7 @@ print(n)
         '',
         '| File | What it is |',
         '| --- | --- |',
-        apkFile ? `| \`apk/${apkFile}\` | the acquired original Play Store bundle (.apks — all splits) |` : '',
+        apkFile ? `| \`apk/${apkFile}\` | the acquired original APK bundle (.apks — all splits), acquired via ${acquirePublished.source ?? 'unrecorded strategy'} |` : '',
         sourceZip ? `| \`source/${sourceZip}\` | full jadx-decompiled Java/Kotlin sources (${sourceFiles} files) |` : '',
         sourceTree ? `| \`sources/\` | the same decompiled sources, unpacked — browsable right on GitHub |` : '',
         `| \`${reportName}\` | the complete analysis report |`,
