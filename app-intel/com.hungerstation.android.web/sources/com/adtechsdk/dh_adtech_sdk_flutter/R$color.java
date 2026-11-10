@@ -1,0 +1,16 @@
+package com.adtechsdk.dh_adtech_sdk_flutter;
+
+/* loaded from: classes7.dex */
+public final class R$color {
+    public static final int androidx_core_ripple_material_light = 2131099716;
+    public static final int androidx_core_secondary_text_default_material_light = 2131099717;
+    public static final int call_notification_answer_color = 2131099808;
+    public static final int call_notification_decline_color = 2131099809;
+    public static final int notification_action_color_filter = 2131100790;
+    public static final int notification_icon_bg_color = 2131100791;
+    public static final int ripple_material_light = 2131101202;
+    public static final int secondary_text_default_material_light = 2131101206;
+
+    private R$color() {
+    }
+}

@@ -1,0 +1,413 @@
+{
+ "endpoints": [
+  {
+   "url": "https://images.dhmedia.io/image/hungerstation/app_cdn/menu//ic_restaurant_closed.png",
+   "kind": "asset-cdn",
+   "purpose": "static/file hosting for media or uploads",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://hungerstation.com",
+   "kind": "app-site",
+   "purpose": "developer's website root (about/support/landing page)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://hungerstation.com/package:hsf/modules/braze/cart/acquisition/manager.dart=",
+   "kind": "app-site",
+   "purpose": "developer's own site — app backend origin (REST calls most likely originate here)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://assets.hungerstation.com/splash-screens/fonts",
+   "kind": "app-site",
+   "purpose": "developer's own site — app backend origin (REST calls most likely originate here)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://images.dhmedia.io/image/hungerstation/app_cdn",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-display-as-stg.deliveryhero.ionullLayermenuButtonThemePath::transformPotentialRewards",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://google.comMagnifierDecorationapplication",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://img.freepik.com/free-photo",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-display-eu.deliveryhero.iohandleValueCallbackget:_effectiveBackButtonDispatcher",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-display.deliveryhero.ioMilestonesWrapperOrderRewardHive_drawCircle",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-display-us.deliveryhero.ioclick5",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://208.67.222.222package:flutter/src/painting",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-display-as.deliveryhero.ioCRC32_handleLongPress",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-stg-display.deliveryhero.ioassets/menu/images/allergens/gluten.svgdart:io",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-display-eu-stg.deliveryhero.io_Summary",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://8.8.8.8hash7",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://1.1.1.1",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://at-display-us-stg.deliveryhero.ioI",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://developer.android.com/google/play/integrity/reference/com/google/android/play/core/integrity/model",
+   "kind": "docs",
+   "purpose": "Android developer documentation reference",
+   "evidence": "sources/com/google/android/play/core/integrity/model/a.java; sources/com/google/android/play/core/integrity/model/b.java"
+  },
+  {
+   "url": "http://www.w3.org",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.ibm.com/data/dtd/v11",
+   "kind": "framework-noise",
+   "purpose": "XHTML transitional DTD fallback bundled inside XML parser stacks — parser boilerplate, never fetched",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://github.com/dart-lang/language/issues/3488",
+   "kind": "framework-noise",
+   "purpose": "framework/engine repository link from bundled license text — not app code",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.w3.org/2000",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.w3.org/1999",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://api.flutter.dev/flutter/dart-ui",
+   "kind": "framework-noise",
+   "purpose": "Flutter framework documentation link (engine/ LICENSE or about strings)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://developer.mozilla.org",
+   "kind": "framework-noise",
+   "purpose": "Bundled Mozilla license text",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.w3.org/1998",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://flutter.dev/docs/release/breaking-changes",
+   "kind": "framework-noise",
+   "purpose": "Flutter framework documentation link (engine/ LICENSE or about strings)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  }
+ ],
+ "database": {
+  "engines": [
+   {
+    "evidence": "package:shared_preferences in libapp.so",
+    "name": "key-value preferences store"
+   },
+   {
+    "evidence": "package:sqflite_android in libapp.so",
+    "name": "local SQLite database (Flutter sqflite)"
+   },
+   {
+    "evidence": "package:hive in libapp.so",
+    "name": "Hive lightweight NoSQL box store"
+   },
+   {
+    "evidence": "ContentProvider in decompiled sources",
+    "name": "ContentProvider data layer"
+   },
+   {
+    "evidence": "androidx.room in decompiled sources",
+    "name": "Room persistence (SQLite ORM)"
+   },
+   {
+    "evidence": "package:sqflite_common in libapp.so",
+    "name": "local SQLite database (Flutter sqflite)"
+   }
+  ],
+  "tables": [],
+  "sqlEvidence": [
+   "update cacheObject\n            set",
+   "DELETE FROM clubs"
+  ],
+  "assetDatabases": []
+ },
+ "sync": {
+  "signals": [
+   {
+    "signal": "package:sqflite_common",
+    "meaning": "local SQLite database (Flutter sqflite)",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:dio",
+    "meaning": "Dart dio HTTP client (interceptors, retries)",
+    "category": "api client",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:hive",
+    "meaning": "Hive lightweight NoSQL box store",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:http",
+    "meaning": "Dart http client",
+    "category": "api client",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:shared_preferences",
+    "meaning": "key-value preferences store",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_cache_manager",
+    "meaning": "file cache manager",
+    "category": "caching",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:sqflite_platform_interface",
+    "meaning": "local SQLite database (Flutter sqflite)",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:sqflite_android",
+    "meaning": "local SQLite database (Flutter sqflite)",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "ContentProvider (×2 refs)",
+    "meaning": "ContentProvider data layer",
+    "category": "offline storage",
+    "evidence": "decompiled JVM sources"
+   },
+   {
+    "signal": "androidx.room (×2 refs)",
+    "meaning": "Room persistence (SQLite ORM)",
+    "category": "offline storage",
+    "evidence": "decompiled JVM sources"
+   }
+  ],
+  "realtime": [],
+  "offlineStrategy": "Local-first storage (local SQLite database (Flutter sqflite), local SQLite database (Flutter sqflite), local SQLite database (Flutter sqflite)) with REST calls to the backend — a classic store-then-sync pattern; no background scheduler detected, so sync happens while the app is open."
+ },
+ "api": {
+  "clients": [
+   "package:dio",
+   "package:http",
+   "package:http_parser"
+  ],
+  "bases": [],
+  "paths": [
+   "/api/v1/loyalty/gamesShapeGroup_quotedString",
+   "/api/v1/loyalty/potential_rp",
+   "/api/v1/loyalty/games",
+   "/api/v2/robotics/orders",
+   "/api/v2/add_voucher_showBottomSheet",
+   "/item"
+  ],
+  "auth": [],
+  "models": [
+   "LocalFileSystemEntity",
+   "ViewTranslationResponse",
+   "ViewTranslationRequest",
+   "AudioFocusRequest",
+   "MultipleChallengesViewModel",
+   "BaseResponse",
+   "UStitleWidgetFileServiceResponse",
+   "UserRewardsResponse",
+   "PTCheckoutDarkStoreImageDto",
+   "ContentViewModel",
+   "GetPreferredNumberResponse",
+   "OntimeGuaranteeResponse",
+   "CristorSingleVendorTesResponse",
+   "HttpGetResponse",
+   "PostTopupInitializeErrorResponse",
+   "OfferItemModel",
+   "TransformerRequest",
+   "VendorsResponse",
+   "MenuVendorRatingDto",
+   "OrderEntityDTO",
+   "SelectPaymentResponseDto",
+   "MMMSetLoopModeResponse",
+   "SelectedOrderModificationDto",
+   "MrhitTestInViewCartItemDto",
+   "WidgetViewModel",
+   "LoadDto",
+   "OrderReviewOptionDTO",
+   "EcircKunjaInitRequest",
+   "AnimatedThemeMenuTrackingDto",
+   "AddVoucherResponseDto"
+  ],
+  "screens": [
+   "ImageView",
+   "CheckedTextView",
+   "ListView",
+   "RecyclerView",
+   "ActionMenuItemView",
+   "ActivityChooserView",
+   "AlertDialog",
+   "AppCompatImageView",
+   "AppCompatTextView",
+   "MenuView",
+   "RecycleListView",
+   "SearchView",
+   "FragmentContainerView",
+   "ActionMenuView",
+   "PreferenceFragment",
+   "CardView",
+   "RenderView",
+   "PreferenceImageView",
+   "ImageFilterView",
+   "MockView",
+   "EdgeInsetsTweenwhiteMountainView",
+   "StoreOTGPage",
+   "IacuteAndroidView",
+   "AnyCharacterParserListView",
+   "DeliveryBorderExpressionshowDialog",
+   "ManagerNewImplWebView",
+   "AlignedGridView",
+   "SectionTextItemView",
+   "ShowCaseView",
+   "HUFContentScreen"
+  ]
+ },
+ "modules": [
+  "ImageView",
+  "FingerprintManager",
+  "TextUtils",
+  "PackageManager",
+  "WebSettingsHostApi",
+  "WebViewHostApi",
+  "WebChromeClientFlutterApi",
+  "ContentProvider",
+  "AppOpsManager",
+  "AndroidVideoPlayerApi",
+  "WebViewClientFlutterApi",
+  "CheckedTextView",
+  "SharedPreferencesApi",
+  "PowerManager",
+  "TextInputClient",
+  "ListView",
+  "RecyclerView",
+  "LocationManager",
+  "ActionMenuItemView",
+  "ActivityChooserView",
+  "AlertDialog",
+  "AppCompatImageView",
+  "AppCompatTextHelper",
+  "AppCompatTextView",
+  "MenuView",
+  "RecycleListView",
+  "SearchView",
+  "ViewBackgroundHelper",
+  "ThemedSpinnerAdapter",
+  "FragmentContainerView",
+  "ActionMenuView",
+  "PreferenceFragment",
+  "LocalFileSystemEntity",
+  "PathProviderApi",
+  "UrlLauncherApi",
+  "CacheManager",
+  "ViewTranslationResponse",
+  "ViewTranslationRequest",
+  "UserManager",
+  "FusedLocationProviderClient"
+ ],
+ "stats": {
+  "urlsTotal": 42,
+  "jvmFiles": 2462,
+  "assetCount": 335,
+  "nativeLibs": [
+   "libandroidx.graphics.path.so",
+   "libapp.so",
+   "libc++_shared.so",
+   "libcashshieldabc-native-lib.so",
+   "libflutter.so",
+   "libibg-native.so",
+   "libjniPdfium.so",
+   "libmodft2.so",
+   "libmodpdfium.so",
+   "libmodpng.so",
+   "libtoolChecker.so"
+  ]
+ }
+}

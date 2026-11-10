@@ -1,0 +1,46 @@
+{
+ "pkg": "com.hungerstation.android.web",
+ "appName": "HungerStation - Food Delivery",
+ "version": "8.0.215",
+ "analyzedAt": "2026-11-10T21:47:38.381Z",
+ "store": {
+  "appId": "com.hungerstation.android.web",
+  "title": "HungerStation - Food Delivery",
+  "developer": "HungerStation Care",
+  "developerWebsite": "http://hungerstation.com",
+  "privacyPolicy": "https://hungerstation.com/sa-en/privacy-policy",
+  "genre": "Food & Drink",
+  "contentRating": "Everyone",
+  "version": "8.0.305",
+  "androidVersion": "7.0",
+  "installs": "10,000,000+",
+  "score": 4.3398695,
+  "ratings": 370414,
+  "reviews": 1204,
+  "released": "Jan 26, 2013",
+  "updated": 1794204362000,
+  "description": "HungerStation – The First and Largest Delivery App in Saudi Arabia\n\nWhatever you need, HungerStation delivers it to you before anyone else. From your favorite restaurants, groceries, and pharmacies, to gifts and flowers. Our coverage reaches over 102 cities and regions across the Kingdom, with more than 65,000 restaurants and stores always ready to serve you.\n\nWhy HungerStation?\nBecause we’re the largest in Saudi Arabia: more than 65,000 restaurants and stores at your fingertips.\n\nA variety that fits every craving: whether it’s Pizza, Shawarma, Burgers, Ice Cream, Coffee, Fast Food, Indian curries, Japanese specialties, Korean flavors, authentic Arabic dishes, Desserts, or Noodles, you’ll always find something that hits the spot. Plus, you can enjoy international cuisines, traditional Saudi meals, healthy food, organic products, and more.\n\nNot just restaurants!\n\nHungerStation Market: groceries, fresh fruits and vegetables, and cleaning products.\n\nPharmacies: from medicine to daily care essentials.\n\nFlowers & Gifts: want to surprise someone? Order now and we’ll deliver their gift wherever they are.\n\nDaily deals and discounts just the way you like them.\n\nHungerStation Plus: unlimited free delivery from over 65,000 restaurants, stores, and pharmacies.\n\n\nHow to order? It’s simple:\n1- Download the HungerStation app and set your location.\n2- Choose a restaurant or store you like.\n3- Browse the menu and add your favorites to the cart.\n4- Pay and relax — your order is on the way.\n\nWhat makes us stand out?\n\n- Track your order step by step until it arrives.\n- Smart filters and search to find the best restaurants and deals.\n- Customer reviews to help you choose right.\n- 24/7 customer support.\n- Schedule your order and get it delivered at the time that suits you.\n\nFor new HungerStation users:\nGet a full year of unlimited free delivery from over 65,000 restaurants and stores as soon as you sign up.\n\nHungerStation is more than just an app — it’s your shortcut to saving time and effort. Order in a few taps and rest assured, everything will arrive quickly and with quality.\n\nDownload HungerStation now and enjoy Saudi favorites, international dishes, and everything from Pizza to Shawarma, Sushi to Noodles — all delivered fast to your door. \n\nHungerStation Before Everyone.",
+  "screenshots": [
+   "https://play-lh.googleusercontent.com/73bIck3kxXB-IRNgviPSKckXXbUbu1kiUtM4lIEFrY7fn-DkU2YGInj-UoujStl8gB5FdNnH7WCiedD1LqwBfQ",
+   "https://play-lh.googleusercontent.com/Gdf3XolBLSp_BjWDUe6MoRSrx6oDyBVzFzQL5HkFlXGFXzhmL3voAryLAiO_7LGVZG7_tHOHmuG7wmDbgdHL",
+   "https://play-lh.googleusercontent.com/P6OoQHdUYI5am5mLvnhhGbESsSl3ZzD0mqWWbLPTuFs3LUfbQOOHy2UZWF-P6QbsTinKzpdqxt1i5KBgRk9n",
+   "https://play-lh.googleusercontent.com/BuY4ePT3Xn9_xabo6MT8Grh65goXtlXMlQc6u0oAo0_tfEoL8vmlFTO06B_5KELOhhWnQMJay5fcfeYHVbXu5ZA",
+   "https://play-lh.googleusercontent.com/PwxJe7LydGmwD8v8qWArQj7u-WLFs0JzQvzwtp3bv6Qu8qpoB_LPQvywM-oy_ausmyJDmp7bmTw1919uoL1c",
+   "https://play-lh.googleusercontent.com/LzAzTugKzPbiFK_aQCyBTc5iZ8IEOq3X26NZWv-CNjYWD0iUHK01dEu3QpuhUy7uuvA851o63vRCq7NkpsLb",
+   "https://play-lh.googleusercontent.com/Z9DTk6rpXIJ1L7Pf-BWfpk0Eqne75oZTxfq9GOW13fClimdNZZRN7IDQn7mLOx7IwnM4O9za35EtrMu48Zyfcw",
+   "https://play-lh.googleusercontent.com/kTv8mkMX9FrF8kUGS5YuamWo2GgcvJVD3prC78SSdv-mcOc3H-IVMhxcJZUZXmM-lHNz4r7avsrOpD_eEJPvb5I"
+  ]
+ },
+ "acquire": {
+  "file": "/home/z/my-project/.app-intel/cmwb7zc8n0001nfz3cpvvx9hm/com.hungerstation.android.web.apks",
+  "sha256": "789f48573ec05fa76db5ad981fcd94dcf2328aa33b3134731147419189a7ded4",
+  "sizeBytes": 83192626,
+  "bundle": [
+   "base.apk"
+  ],
+  "versionName": "8.0.215",
+  "versionCode": 1244,
+  "apiSha256": "789f48573ec05fa76db5ad981fcd94dcf2328aa33b3134731147419189a7ded4",
+  "originality": "match"
+ }
+}

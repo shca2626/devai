@@ -1,0 +1,121 @@
+{
+ "apks": [
+  {
+   "apkId": "com.hungerstation.android.web:1244",
+   "versionName": "8.0.215",
+   "versionCode": 1244,
+   "sha256": "789f48573ec05fa76db5ad981fcd94dcf2328aa33b3134731147419189a7ded4",
+   "isLatest": true,
+   "fileSize": 83192626,
+   "fromGooglePlay": false
+  }
+ ],
+ "securityByApkId": {
+  "com.hungerstation.android.web:1244": {
+   "fromGooglePlay": false,
+   "verdict": "Aptoide open-marketplace file \u2014 md5-verified against the marketplace listing, marketplace malware rank: TRUSTED; not VT-scanned",
+   "scannedByVirusTotal": false,
+   "flagged": 0,
+   "vendors": 0,
+   "natives": {
+    "abis": [
+     "arm64-v8a",
+     "armeabi-v7a",
+     "x86_64"
+    ],
+    "libs": [
+     "libandroidx.graphics.path.so",
+     "libapp.so",
+     "libc++_shared.so",
+     "libcashshieldabc-native-lib.so",
+     "libflutter.so",
+     "libibg-native.so",
+     "libjniPdfium.so",
+     "libmodft2.so",
+     "libmodpdfium.so",
+     "libmodpng.so",
+     "libtoolChecker.so"
+    ],
+    "protectors": []
+   },
+   "permissions": [
+    "android.permission.ACCESS_ADSERVICES_AD_ID",
+    "android.permission.ACCESS_ADSERVICES_ATTRIBUTION",
+    "android.permission.ACCESS_COARSE_LOCATION",
+    "android.permission.ACCESS_FINE_LOCATION",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_WIFI_STATE",
+    "android.permission.CALL_PHONE",
+    "android.permission.CAMERA",
+    "android.permission.CAMERA2",
+    "android.permission.DETECT_SCREEN_CAPTURE",
+    "android.permission.FOREGROUND_SERVICE",
+    "android.permission.INTERNET",
+    "android.permission.POST_NOTIFICATIONS",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.READ_PHONE_STATE",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.REORDER_TASKS",
+    "android.permission.USE_BIOMETRIC",
+    "android.permission.USE_FINGERPRINT",
+    "android.permission.VIBRATE",
+    "android.permission.WAKE_LOCK",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "com.android.launcher.permission.INSTALL_SHORTCUT",
+    "com.google.android.c2dm.permission.RECEIVE",
+    "com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE",
+    "com.google.android.gms.permission.AD_ID",
+    "com.google.android.providers.gsf.permission.READ_GSERVICES",
+    "com.hungerstation.android.web.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+   ],
+   "signature": {
+    "present": true,
+    "scheme": "v2",
+    "status": "verified (computed from the APK signing block)",
+    "certSha256": "ada1ab896aec9de75a56933f3230ede1f552a3be56ad7d621709d9352128a6a4",
+    "certSubject": "Common Name: Hossein Bukhamseen, Organizational Unit: Hungerstation, Organization: Hungerstation, Locality: Dammam, State/Province: Dammam, Country: sa"
+   },
+   "manifest": {
+    "targetSdk": "34",
+    "packageName": "com.hungerstation.android.web",
+    "allowBackup": false,
+    "usesFeatures": [
+     "android.hardware.camera",
+     "android.hardware.telephony"
+    ],
+    "usesLibraries": [
+     "org.apache.http.legacy",
+     "androidx.window.extensions",
+     "androidx.window.sidecar",
+     "android.ext.adservices"
+    ],
+    "exportedUnguarded": [
+     "activity:com.hungerstation.android.web.v6.dialogs.activities.survey.view.SurveyDialogActivity",
+     "activity:com.hungerstation.android.web.hungeractivities.MainActivity",
+     "activity:com.hungerstation.android.web.v6.screens.preorder.MenuAndCheckoutActivity",
+     "activity:com.hungerstation.android.web.v6.screens.restaurantreviews.view.RestaurantReviewsActivity",
+     "activity:com.hungerstation.android.web.v6.screens.needhelp.view.NeedHelpActivity",
+     "activity:com.hungerstation.android.web.v6.screens.support.view.SupportActivity",
+     "activity:com.hungerstation.android.web.v6.screens.checkout.view.CheckoutActivity",
+     "activity:com.google.android.gms.tagmanager.TagManagerPreviewActivity",
+     "activity:androidx.compose.ui.tooling.PreviewActivity",
+     "activity:androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity",
+     "activity:androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity",
+     "activity:androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+    ]
+   },
+   "providerSignature": {
+    "sha1": "35:2C:89:A5:B7:06:EE:A4:E8:A0:B0:8C:16:F0:7B:10:84:4C:F5:11",
+    "owner": "CN=Hossein Bukhamseen, OU=Hungerstation, O=Hungerstation, L=Dammam, ST=Dammam, C=sa"
+   }
+  }
+ },
+ "signers": [
+  {
+   "sha256": "ada1ab896aec9de75a56933f3230ede1f552a3be56ad7d621709d9352128a6a4",
+   "subject": "Common Name: Hossein Bukhamseen, Organizational Unit: Hungerstation, Organization: Hungerstation, Locality: Dammam, State/Province: Dammam, Country: sa",
+   "trusted": true
+  }
+ ],
+ "generatedBy": "devai acquire-play (aptoide-open)"
+}
