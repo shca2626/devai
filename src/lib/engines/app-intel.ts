@@ -197,7 +197,124 @@ async function collectStore(pkg: string, data: AppIntelData) {
 // stage 2 — acquire (the reverse-engineered original-APK chain)
 // ------------------------------------------------------------
 
+// a verified acquisition record — either the fresh one from acquire-final.py
+// (meta.json in the workdir) or the durable copy in app-intel/<pkg>/meta.json
+interface AcquireMeta {
+  sha256: string
+  sizeBytes: number
+  bundle: string[]
+  versionName?: string
+  versionCode?: number
+  apiSha256?: string
+  originality?: string
+}
+
+function normalizeAcquireMeta(raw: unknown): AcquireMeta | null {
+  if (!raw || typeof raw !== 'object') return null
+  const src = ((raw as { acquire?: Record<string, unknown> }).acquire ?? raw) as Record<string, unknown>
+  const str = (k: string) => (typeof src[k] === 'string' ? (src[k] as string) : undefined)
+  const numv = (k: string) => (typeof src[k] === 'number' ? (src[k] as number) : undefined)
+  const sha = str('sha256')
+  if (!sha || !/^[0-9a-f]{64}$/i.test(sha)) return null
+  return {
+    sha256: sha,
+    sizeBytes: numv('sizeBytes') ?? 0,
+    bundle: Array.isArray(src['bundle']) ? (src['bundle'] as string[]) : [],
+    versionName: str('versionName'),
+    versionCode: numv('versionCode'),
+    apiSha256: str('apiSha256'),
+    originality: str('originality'),
+  }
+}
+
+async function readJsonSafe(file: string): Promise<unknown> {
+  try {
+    return JSON.parse(await fs.readFile(file, 'utf8'))
+  } catch {
+    return null
+  }
+}
+
+function pushAcquireEvidence(data: AppIntelData, method: string) {
+  const a = data.acquire!
+  const sameVersion = data.store?.version && a.versionName && data.store.version === a.versionName
+  data.evidence.push(
+    ev(`Original APK bundle acquired: ${a.sizeBytes} bytes, ${a.bundle.length} split files`, 'acquired .apks (sha256 ' + a.sha256.slice(0, 12) + '…)', method),
+    ev(
+      `Originality: sha256 ${a.originality === 'match' ? 'matches' : a.originality === 'mismatch' ? 'DIFFERS from' : 'unverifiable against'} the provider listing for v${a.versionName ?? '?'} (${a.originality === 'match' ? 'bit-identical to the Play-sourced file' : 'check advised'})` + (sameVersion ? ' — matches current Play Store version' : ''),
+      'provider listing API vs downloaded bytes',
+      'sha256 comparison',
+      a.originality === 'match' ? 'high' : 'medium'
+    )
+  )
+  if (a.originality !== 'match') data.unknowns.push('Downloaded bundle could not be confirmed bit-identical to the provider listing.')
+}
+
 async function collectAcquire(analysisId: string, pkg: string, data: AppIntelData) {
+  const dir = workDir(analysisId)
+  await fs.mkdir(dir, { recursive: true })
+  const bundlePath = path.join(dir, `${pkg}.apks`)
+
+  // ---- fast path 1: this workdir already holds a verified bundle
+  // (the analysis was resumed or retried after a restart)
+  let cachedMeta: AcquireMeta | null = null
+  let cachedFrom = ''
+  try {
+    await fs.access(bundlePath)
+    cachedMeta = normalizeAcquireMeta(await readJsonSafe(path.join(dir, 'meta.json')))
+    if (cachedMeta) cachedFrom = 'cached acquisition in this workdir (sha256 verified in a previous run)'
+  } catch {
+    /* no bundle in workdir */
+  }
+
+  // ---- fast path 2: durable repo copy from an earlier study of the same
+  // app — instant, no provider round-trip, no rate-limit exposure
+  if (!cachedMeta) {
+    try {
+      const repoApkDir = path.join(REPO_INTEL_DIR, pkg, 'apk')
+      const files = (await fs.readdir(repoApkDir)).filter((f) => f.endsWith('.apks'))
+      if (files.length) {
+        await fs.copyFile(path.join(repoApkDir, files[0]), bundlePath)
+        cachedMeta = normalizeAcquireMeta(await readJsonSafe(path.join(REPO_INTEL_DIR, pkg, 'meta.json')))
+        if (cachedMeta) {
+          cachedFrom = `reused the verified bundle cached by an earlier study (${files[0]}) — no provider round-trip needed`
+          data.evidence.push(ev('APK bundle served from the local cache of an earlier verified study of this app', `repo copy app-intel/${pkg}/apk/`, 'bundle cache lookup'))
+          // bring the provider listing along so the deep stage (permissions /
+          // signature / VirusTotal) works without another provider round-trip
+          const repoListing = path.join(REPO_INTEL_DIR, pkg, 'listing.json')
+          try {
+            await fs.access(path.join(dir, 'listing.json'))
+          } catch {
+            await fs.copyFile(repoListing, path.join(dir, 'listing.json')).catch(() => undefined)
+          }
+        }
+      }
+    } catch {
+      /* no repo copy */
+    }
+  }
+
+  if (cachedMeta) {
+    try {
+      const st = await fs.stat(bundlePath)
+      data.acquire = {
+        file: bundlePath,
+        sha256: cachedMeta.sha256,
+        sizeBytes: cachedMeta.sizeBytes || st.size,
+        bundle: cachedMeta.bundle,
+        versionName: cachedMeta.versionName,
+        versionCode: cachedMeta.versionCode,
+        apiSha256: cachedMeta.apiSha256,
+        originality: (cachedMeta.originality as 'match' | 'mismatch' | 'unknown') ?? 'unknown',
+      }
+      pushAcquireEvidence(data, cachedFrom)
+      return
+    } catch {
+      /* bundle vanished between the checks — fall through to cold path */
+    }
+  }
+
+  // ---- cold path: the reverse-engineered provider chain
   // self-healing: on a fresh host the toolchain installs itself on first use
   const tool = await ensureToolchain()
   if (!tool.ok) {
@@ -205,11 +322,9 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
     return
   }
 
-  const dir = workDir(analysisId)
-  await fs.mkdir(dir, { recursive: true })
   const res = await run(
     PYTHON,
-    [ACQUIRE_SCRIPT, '--pkg', pkg, '--out', dir, '--timeout', '360', '--attempts', '2'],
+    [ACQUIRE_SCRIPT, '--pkg', pkg, '--out', dir, '--timeout', '360', '--attempts', '3', '--warmup'],
     ACQUIRE_TIMEOUT_MS
   )
 
@@ -252,18 +367,7 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
     apiSha256: str('apiSha256'),
     originality: (str('originality') as 'match' | 'mismatch' | 'unknown') ?? 'unknown',
   }
-
-  const sameVersion = data.store?.version && data.acquire.versionName && data.store.version === data.acquire.versionName
-  data.evidence.push(
-    ev(`Original APK bundle acquired: ${data.acquire.sizeBytes} bytes, ${data.acquire.bundle.length} split files`, 'acquired .apks (sha256 ' + data.acquire.sha256.slice(0, 12) + '…)', 'reverse-engineered apkcube/Evozi chain — hold-to-verify, turnstile, proof-of-work, signed URL'),
-    ev(
-      `Originality: sha256 ${data.acquire.originality === 'match' ? 'matches' : data.acquire.originality === 'mismatch' ? 'DIFFERS from' : 'unverifiable against'} the provider listing for v${data.acquire.versionName ?? '?'} (${data.acquire.originality === 'match' ? 'bit-identical to the Play-sourced file' : 'check advised'})` + (sameVersion ? ' — matches current Play Store version' : ''),
-      'provider listing API vs downloaded bytes',
-      'sha256 comparison',
-      data.acquire.originality === 'match' ? 'high' : 'medium'
-    )
-  )
-  if (data.acquire.originality !== 'match') data.unknowns.push('Downloaded bundle could not be confirmed bit-identical to the provider listing.')
+  pushAcquireEvidence(data, 'reverse-engineered apkcube/Evozi chain — hold-to-verify, turnstile, proof-of-work, signed URL')
 }
 
 // ------------------------------------------------------------
@@ -448,6 +552,28 @@ print(json.dumps({'names': names}))
     /* keep listing from acquire stage */
   }
 
+  // Some providers ship single-file bundles: either one apk named after the
+  // app (no base.apk entry) or a raw apk file (the "bundle" zip IS the apk,
+  // AndroidManifest.xml at its root). Normalize both to base.apk so the
+  // decompile stage always has something to chew on.
+  const unpackedDir = path.join(dir, 'unpacked')
+  const rawApk = names.some((n) => n === 'AndroidManifest.xml' || n === 'classes.dex')
+  if (rawApk) {
+    await fs.copyFile(apksPath, path.join(unpackedDir, 'base.apk')).catch(() => undefined)
+    names = ['base.apk', ...names]
+  } else if (!names.includes('base.apk')) {
+    const solo = names.filter((n) => n.endsWith('.apk') && !n.startsWith('split_'))
+    if (solo.length === 1) {
+      try {
+        await fs.rename(path.join(unpackedDir, solo[0]), path.join(unpackedDir, 'base.apk'))
+        names = names.map((n) => (n === solo[0] ? 'base.apk' : n))
+        data.evidence.push(ev('Single-file bundle normalized: the provider shipped one apk without split naming — treated as base.apk', 'acquired bundle', 'zip structure inspection'))
+      } catch {
+        /* leave as-is */
+      }
+    }
+  }
+
   const baseApk = names.find((n) => n === 'base.apk')
   const splits = names.filter((n) => n.startsWith('split_'))
   const abis = Array.from(new Set(splits.map((s) => (s.match(/split_config\.([a-z0-9_]+)\.apk/)?.[1] ?? '')).filter(Boolean)))
@@ -485,9 +611,10 @@ async function collectDecompile(analysisId: string, data: AppIntelData) {
   const outDir = path.join(dir, 'jadx')
   await fs.mkdir(outDir, { recursive: true })
   const res = await run(JADX, ['-d', outDir, '--no-res', '-j', '4', baseApk], JADX_TIMEOUT_MS, dir)
-  if (res.code !== 0 && !res.stdout.includes('finished')) {
-    data.unknowns.push('jadx pass did not complete cleanly — partial results only.')
-  }
+  // jadx regularly exits non-zero on obfuscated inputs while still emitting
+  // perfectly usable sources — success is judged by what landed on disk
+  // (the file count below), not by the exit code.
+  if (res.code !== 0) console.warn(`[app-intel] jadx exit ${res.code} for ${analysisId} — continuing with emitted sources`)
 
   // inventory of sources
   const list = await run('python3', ['-c', `
@@ -1167,6 +1294,7 @@ async function publishArtifacts(analysisId: string, pkg: string, data: AppIntelD
 
     // 2. decompiled sources -> zip (one download, full tree)
     let sourceZip = ''
+    let sourceTree = ''
     let sourceFiles = data.decompile?.javaFiles ?? 0
     const jadxDir = path.join(dir, 'jadx', 'sources')
     try {
@@ -1187,6 +1315,15 @@ print(n)
 `], 240_000)
       const n = parseInt(zipRes.stdout.trim().split('\n').pop() ?? '0', 10)
       if (n > 0) sourceFiles = n
+
+      // 2b. loose sources — browsable on GitHub for reasonably sized trees
+      // (huge decompilations stay zip-only to keep the repo lean)
+      if (sourceFiles > 0 && sourceFiles <= 5000) {
+        const treeDir = path.join(target, 'sources')
+        await fs.rm(treeDir, { recursive: true, force: true }).catch(() => undefined)
+        const cp = await run('cp', ['-r', jadxDir, treeDir], 240_000)
+        if (cp.code === 0) sourceTree = 'sources/'
+      }
     } catch {
       /* no sources */
     }
@@ -1207,6 +1344,13 @@ print(n)
     )
     if (data.codebase) {
       await fs.writeFile(path.join(target, `deep-intel-${version}.json`), JSON.stringify(data.codebase, null, 1))
+    }
+    // provider listing (permissions/signature/VT) — kept next to the bundle
+    // so future cached studies get full deep intel without a round-trip
+    try {
+      await fs.copyFile(path.join(dir, 'listing.json'), path.join(target, 'listing.json'))
+    } catch {
+      /* not captured this run */
     }
     await fs.writeFile(
       path.join(target, 'meta.json'),
@@ -1235,6 +1379,7 @@ print(n)
         '| --- | --- |',
         apkFile ? `| \`apk/${apkFile}\` | the acquired original Play Store bundle (.apks — all splits) |` : '',
         sourceZip ? `| \`source/${sourceZip}\` | full jadx-decompiled Java/Kotlin sources (${sourceFiles} files) |` : '',
+        sourceTree ? `| \`sources/\` | the same decompiled sources, unpacked — browsable right on GitHub |` : '',
         `| \`${reportName}\` | the complete analysis report |`,
         data.codebase ? `| \`deep-intel-${version}.json\` | structured deep intel (endpoints/DB/sync/API) |` : '',
         '| `meta.json` | store + acquisition metadata |',
@@ -1257,10 +1402,10 @@ print(n)
       /* git not available or no remote — artifacts stay local, still downloadable via API */
     }
 
-    data.artifacts = { repoFolder: `app-intel/${pkg}`, apkFile, apkBytes, sourceZip, sourceFiles, githubUrl }
+    data.artifacts = { repoFolder: `app-intel/${pkg}`, apkFile, apkBytes, sourceZip, sourceFiles, sourceTree, githubUrl }
     data.evidence.push(
       ev(
-        `Artifacts published: ${[apkFile && `APK bundle (${(apkBytes / 1e6).toFixed(1)} MB)`, sourceZip && `decompiled sources (${sourceFiles} files)`, 'full report'].filter(Boolean).join(', ')} → ${data.artifacts.repoFolder}${githubUrl ? ' (pushed to GitHub)' : ''}`,
+        `Artifacts published: ${[apkFile && `APK bundle (${(apkBytes / 1e6).toFixed(1)} MB)`, sourceZip && `decompiled sources (${sourceFiles} files${sourceTree ? ', browsable tree + zip' : ''})`, 'full report'].filter(Boolean).join(', ')} → ${data.artifacts.repoFolder}${githubUrl ? ' (pushed to GitHub)' : ''}`,
         'analysis workdir + repo',
         'artifact publisher'
       )
@@ -1337,10 +1482,85 @@ async function persist(rowId: string, data: AppIntelData, stageDone: number, sta
 }
 
 // ------------------------------------------------------------
+// autopilot — the engine drives itself from stage 2 to 7 in the
+// background. The UI only polls; closing the tab does not stop
+// the study. Orphaned runs (server restart) self-heal on the
+// next GET via resumeOrphanedAnalyses().
+// ------------------------------------------------------------
+
+const activeRuns = new Set<string>()
+let lastOrphanScan = 0
+
+async function runAutopilot(analysisId: string, lang: 'ar' | 'en'): Promise<void> {
+  if (activeRuns.has(analysisId)) return
+  activeRuns.add(analysisId)
+  let acquireRetries = 1 // one full re-run when the acquire stage soft-failed
+  try {
+    for (let guard = 0; guard < 30; guard++) {
+      const row = await db.appAnalysis.findUnique({ where: { id: analysisId } })
+      if (!row || row.status !== 'running') return
+      if (row.stageDone >= STAGES.length) {
+        await persist(row.id, parseData(row.data), STAGES.length, 'complete')
+        return
+      }
+      // soft-failed acquisition (no bundle)? Retry once before moving on —
+      // transient turnstile/provider hiccups are common. Rate-limited
+      // servers are NOT retried (daily quota — pointless and slow).
+      if (row.stageDone === 2 && acquireRetries > 0) {
+        const data = parseData(row.data)
+        if (!data.acquire && !data.unknowns.some((u) => u.toLowerCase().includes('rate-limited'))) {
+          acquireRetries -= 1
+          try {
+            await collectAcquire(row.id, row.pkg, data)
+          } catch {
+            /* keep the soft-fail note */
+          }
+          await persist(row.id, data, 2)
+          continue
+        }
+      }
+      await advanceAppAnalysis(row.ideaId, analysisId, lang)
+    }
+  } catch (error) {
+    // advanceAppAnalysis already persisted the failed status — log for ops
+    console.error('[app-intel autopilot]', analysisId, error)
+  } finally {
+    activeRuns.delete(analysisId)
+  }
+}
+
+// manual kick — resumes a stalled/running study from the UI
+export async function resumeAppAnalysis(analysisId: string, lang: 'ar' | 'en'): Promise<boolean> {
+  const row = await db.appAnalysis.findUnique({ where: { id: analysisId }, select: { id: true, status: true } })
+  if (!row || row.status !== 'running') return false
+  void runAutopilot(analysisId, lang)
+  return true
+}
+
+// self-healing — any GET (list/detail/download) picks up runs orphaned by
+// a server restart and continues them server-side
+export async function resumeOrphanedAnalyses(): Promise<void> {
+  const now = Date.now()
+  if (now - lastOrphanScan < 30_000) return
+  lastOrphanScan = now
+  try {
+    const staleBefore = new Date(now - 5 * 60_000)
+    const rows = await db.appAnalysis.findMany({
+      where: { status: 'running', stageDone: { gte: 1, lt: STAGES.length }, updatedAt: { lt: staleBefore } },
+      select: { id: true },
+      take: 5,
+    })
+    for (const r of rows) void runAutopilot(r.id, 'ar')
+  } catch {
+    /* best effort */
+  }
+}
+
+// ------------------------------------------------------------
 // public API (mirrors site-intel)
 // ------------------------------------------------------------
 
-export async function startAppAnalysis(ideaId: string | null, rawInput: string): Promise<AppAnalysisItem> {
+export async function startAppAnalysis(ideaId: string | null, rawInput: string, lang: 'ar' | 'en' = 'ar'): Promise<AppAnalysisItem> {
   if (ideaId) {
     const idea = await db.idea.findUnique({ where: { id: ideaId }, select: { id: true } })
     if (!idea) throw new AppIntelError('NOT_FOUND', 'Idea not found')
@@ -1368,6 +1588,9 @@ export async function startAppAnalysis(ideaId: string | null, rawInput: string):
   if (ideaId) {
     await logDecision(ideaId, 'App study started', `${seed.pkg} — store recon complete (${data.store?.version ?? 'version unknown'})`)
   }
+
+  // the engine finishes the study on its own, server-side — the UI just polls
+  void runAutopilot(row.id, lang)
   return serialize(row)
 }
 
@@ -1375,7 +1598,13 @@ export async function advanceAppAnalysis(ideaId: string | null, analysisId: stri
   const row = await db.appAnalysis.findFirst({ where: { id: analysisId, ideaId: ideaId ?? null } })
   if (!row) throw new AppIntelError('NOT_FOUND', 'Analysis not found')
   if (row.status !== 'running') return serialize(row)
-  if (row.stageDone >= STAGES.length) return serialize(row)
+  if (row.stageDone >= STAGES.length) {
+    // close out rows that finished stage 7 but never got the final persist
+    // (crash between the last two writes) instead of leaving them running
+    await persist(row.id, parseData(row.data), STAGES.length, 'complete')
+    const fresh = await db.appAnalysis.findUnique({ where: { id: row.id } })
+    return serialize(fresh!)
+  }
 
   const data = parseData(row.data)
   const stage = STAGES[row.stageDone]
@@ -1417,11 +1646,13 @@ export async function advanceAppAnalysis(ideaId: string | null, analysisId: stri
 }
 
 export async function getAppAnalysis(ideaId: string | null, analysisId: string): Promise<AppAnalysisItem | null> {
+  void resumeOrphanedAnalyses()
   const row = await db.appAnalysis.findFirst({ where: { id: analysisId, ideaId: ideaId ?? null } })
   return row ? serialize(row) : null
 }
 
 export async function listAppAnalyses(ideaId: string | null): Promise<AppAnalysisSummary[]> {
+  void resumeOrphanedAnalyses()
   const rows = await db.appAnalysis.findMany({
     where: { ideaId: ideaId ?? null },
     orderBy: { createdAt: 'desc' },

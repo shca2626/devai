@@ -1232,6 +1232,7 @@ export interface AppArtifactsIntel {
   apkBytes: number
   sourceZip: string
   sourceFiles: number
+  sourceTree?: string
   githubUrl?: string
 }
 

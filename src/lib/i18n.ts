@@ -856,6 +856,11 @@ const dict = {
   appStageFingerprint: { en: 'Fingerprint', ar: 'البصمة التقنية' },
   appStageSynthesis: { en: 'Clone pack', ar: 'حزمة الاستنساخ' },
   appIntelWorking: { en: 'Studying the app…', ar: 'يدرس التطبيق…' },
+  appIntelAutoNote: {
+    en: 'The study runs on the server — you can close this dialog or leave the page; it continues and appears in the history below.',
+    ar: 'تعمل الدراسة على الخادم — يمكنك إغلاق هذه النافذة أو مغادرة الصفحة؛ ستستمر وتظهر في السجل أدناه.',
+  },
+  appIntelResume: { en: 'Continue study', ar: 'متابعة الدراسة' },
   appIntelAcquireNote: {
     en: 'Fetching the original APK can take a few minutes (human-verification chain).',
     ar: 'قد يستغرق جلب APK الأصلي بضع دقائق (سلسلة تحقق بشري).',

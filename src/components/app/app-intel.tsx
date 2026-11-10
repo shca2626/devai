@@ -21,6 +21,7 @@ import {
   Eye,
   History,
   Loader2,
+  Play,
   RotateCcw,
   Smartphone,
   Trash2,
@@ -628,24 +629,26 @@ export function AppIntelDialog({ open, onOpenChange }: { open: boolean; onOpenCh
     return t('toolsError')
   }
 
-  async function advance(id: string): Promise<AppAnalysisItem | null> {
-    try {
-      const res = await fetch(SCOPE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ analysisId: id, lang }),
-      })
-      const data = (await res.json()) as { analysis?: AppAnalysisItem; error?: string }
-      if (!res.ok || !data.analysis) {
-        toast({ description: errorText(data.error), variant: 'destructive' })
-        return null
+  // poll until the server-side autopilot finishes the study — the run
+  // survives closing this dialog or navigating away
+  async function pollUntilDone(id: string, started: AppAnalysisItem): Promise<AppAnalysisItem> {
+    let current = started
+    const deadline = Date.now() + 25 * 60_000
+    while (Date.now() < deadline) {
+      await new Promise((r) => setTimeout(r, 3000))
+      try {
+        const res = await fetch(`${SCOPE}?analysisId=${id}`)
+        const data = (await res.json()) as { analysis?: AppAnalysisItem }
+        if (data.analysis) {
+          current = data.analysis
+          setAnalysis(current)
+        }
+      } catch {
+        /* transient network hiccup — keep polling */
       }
-      setAnalysis(data.analysis)
-      return data.analysis
-    } catch {
-      toast({ description: t('toolsError'), variant: 'destructive' })
-      return null
+      if (current.status !== 'running') return current
     }
+    return current
   }
 
   async function start() {
@@ -663,14 +666,8 @@ export function AppIntelDialog({ open, onOpenChange }: { open: boolean; onOpenCh
         toast({ description: errorText(data.error), variant: 'destructive' })
         return
       }
-      let current = data.analysis
-      setAnalysis(current)
-      // Drive stages 2..7 sequentially — the stepper updates live
-      while (current.status === 'running' && current.stageDone < 7) {
-        const next = await advance(current.id)
-        if (!next) break
-        current = next
-      }
+      // the engine's autopilot drives stages 2..7 server-side; we just poll
+      const current = await pollUntilDone(data.analysis.id, data.analysis)
       setAnalyses((prev) => [
         {
           id: current.id,
@@ -687,6 +684,32 @@ export function AppIntelDialog({ open, onOpenChange }: { open: boolean; onOpenCh
       toast({ description: t('toolsError'), variant: 'destructive' })
     } finally {
       setRunning(false)
+    }
+  }
+
+  // resume a stalled run (e.g. the server restarted mid-study) — the
+  // autopilot picks it back up server-side, we poll again
+  async function resumeStudy(id: string) {
+    setBusyId(id)
+    setRunning(true)
+    try {
+      const res = await fetch(SCOPE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ analysisId: id, resume: true, lang }),
+      })
+      const data = (await res.json()) as { analysis?: AppAnalysisItem; error?: string }
+      if (!res.ok || !data.analysis) {
+        toast({ description: errorText(data.error), variant: 'destructive' })
+        return
+      }
+      const current = await pollUntilDone(id, data.analysis)
+      setAnalyses((prev) => prev.map((a) => (a.id === id ? { ...a, status: current.status, stageDone: current.stageDone, score: current.score } : a)))
+    } catch {
+      toast({ description: t('toolsError'), variant: 'destructive' })
+    } finally {
+      setRunning(false)
+      setBusyId(null)
     }
   }
 
@@ -796,6 +819,9 @@ export function AppIntelDialog({ open, onOpenChange }: { open: boolean; onOpenCh
             {t('appIntelWorking')}
           </div>
         )}
+        {running && (
+          <p className="text-[10px] text-muted-foreground text-center">{t('appIntelAutoNote')}</p>
+        )}
         {running && analysis?.stageDone === 1 && (
           <p className="text-[10px] text-muted-foreground text-center">{t('appIntelAcquireNote')}</p>
         )}
@@ -881,6 +907,19 @@ export function AppIntelDialog({ open, onOpenChange }: { open: boolean; onOpenCh
                         {new Date(a.createdAt).toLocaleDateString()}
                       </span>
                     </button>
+                    {a.status === 'running' && !running && (
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-6 w-6 shrink-0 text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300"
+                        onClick={() => resumeStudy(a.id)}
+                        disabled={busyId === a.id}
+                        aria-label={t('appIntelResume')}
+                        title={t('appIntelResume')}
+                      >
+                        <Play className="h-3 w-3" />
+                      </Button>
+                    )}
                     <Button
                       variant="ghost"
                       size="icon"

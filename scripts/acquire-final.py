@@ -81,6 +81,8 @@ def attempt(browser, pkg, deadline):
         if 'just a moment' not in page.title().lower():
             break
         time.sleep(1)
+    # small human-like settle before touching anything
+    time.sleep(random.uniform(1.2, 2.6))
 
     btn = None
     t0 = time.time()
@@ -206,20 +208,47 @@ def main():
     ap.add_argument('--out', default='/tmp/acquired')
     ap.add_argument('--timeout', type=int, default=480)
     ap.add_argument('--attempts', type=int, default=3)
+    ap.add_argument('--warmup', action='store_true',
+                    help='visit the provider homepage first (human-like, helps CF)')
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     deadline = time.time() + a.timeout
 
+    # identity rotation — a FRESH browser profile per attempt with a
+    # different OS/window so Cloudflare fatigue on one fingerprint does
+    # not poison every attempt (Turnstile 600010 = widget refused to load)
+    IDS = [
+        {'os': 'windows', 'window': (1366, 768),  'locale': 'en-US'},
+        {'os': 'macos',   'window': (1440, 900),  'locale': 'en-GB'},
+        {'os': 'windows', 'window': (1536, 864),  'locale': 'en-US'},
+        {'os': 'linux',   'window': (1280, 720),  'locale': 'en-US'},
+        {'os': 'macos',   'window': (1512, 982),  'locale': 'en-US'},
+    ]
+
     result = None
-    with Camoufox(headless=True, humanize=True) as browser:
-        for i in range(a.attempts):
-            if time.time() > deadline - 40:
-                break
-            print(f'[attempt {i + 1}]', flush=True)
-            result = attempt(browser, a.pkg, deadline)
-            if result:
-                break
-            time.sleep(4)
+    for i in range(a.attempts):
+        if time.time() > deadline - 40:
+            break
+        ident = IDS[i % len(IDS)]
+        print(f'[attempt {i + 1}] identity={ident["os"]}/{ident["window"]}', flush=True)
+        try:
+            with Camoufox(headless=True, humanize=True,
+                          i_know_what_im_doing=True, **ident) as browser:
+                if a.warmup:
+                    try:
+                        wp = browser.new_page()
+                        wp.goto('https://apkcube.com/', wait_until='domcontentloaded', timeout=45000)
+                        time.sleep(random.uniform(2.5, 4.5))
+                        wp.close()
+                    except Exception:
+                        pass
+                result = attempt(browser, a.pkg, deadline)
+        except Exception as e:
+            log('browser-error', {'err': str(e)[:140]})
+            result = None
+        if result:
+            break
+        time.sleep(random.uniform(4, 7))
 
     if not result:
         code = last_error[0] or 'acquisition_failed'
