@@ -39,6 +39,7 @@ export class AppIntelError extends Error {
 
 const PYTHON = '/home/z/.venv/bin/python3'
 const ACQUIRE_SCRIPT = path.join(process.cwd(), 'scripts', 'acquire-final.py')
+const ACQUIRE_PLAY_SCRIPT = path.join(process.cwd(), 'scripts', 'acquire-play.py')
 const DEEP_SCRIPT = path.join(process.cwd(), 'scripts', 'deep-analyze.py')
 const BOOTSTRAP_SCRIPT = path.join(process.cwd(), 'scripts', 'bootstrap-appintel.sh')
 const JADX = path.join(process.env.HOME ?? '/home/z', 'tools', 'jadx', 'bin', 'jadx')
@@ -58,14 +59,15 @@ const BOOTSTRAP_TIMEOUT_MS = 420_000
 let bootstrapPromise: Promise<boolean> | null = null
 
 async function toolchainReady(): Promise<boolean> {
-  const camoufoxOk = await new Promise<boolean>((resolve) => {
+  // PRIMARY chain deps (first-party Play): gpapi + pyaxmlparser + jadx
+  const playOk = await new Promise<boolean>((resolve) => {
     const { spawn } = require('node:child_process') as typeof import('node:child_process')
-    const child = spawn(PYTHON, ['-c', 'import camoufox, curl_cffi'], { stdio: 'ignore' })
+    const child = spawn(PYTHON, ['-c', 'import gpapi.googleplay, pyaxmlparser'], { stdio: 'ignore' })
       .on('close', (code) => resolve(code === 0))
       .on('error', () => resolve(false))
     setTimeout(() => child.kill('SIGKILL'), 10_000)
   })
-  if (!camoufoxOk) return false
+  if (!playOk) return false
   try {
     await fs.access(JADX)
     return true
@@ -314,24 +316,82 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
     }
   }
 
-  // ---- cold path: the reverse-engineered provider chain
-  // self-healing: on a fresh host the toolchain installs itself on first use
+  // ---- cold path ------------------------------------------------------------
+  // PRIMARY: our own first-party Google Play session (gpapi/finsky) — the
+  // same chain the "APK downloader" mirror sites run on their servers, run
+  // by us. No third party involved: we download straight from the Play CDN.
+  // The legacy mirror (apkcube class) is ONLY consulted when explicitly
+  // enabled via APP_INTEL_ALLOW_MIRROR=1 — no silent dependency on a
+  // competitor, and no mirror round-trip by default.
   const tool = await ensureToolchain()
   if (!tool.ok) {
     data.unknowns.push(`${tool.note ?? 'Acquisition tooling unavailable'} — analysis continues from public metadata only.`)
     return
   }
 
+  const consumeResult = (payload: Record<string, unknown>, method: string): boolean => {
+    if (payload['ok'] !== true) return false
+    const str = (k: string) => (typeof payload[k] === 'string' ? (payload[k] as string) : undefined)
+    const numv = (k: string) => (typeof payload[k] === 'number' ? (payload[k] as number) : undefined)
+    data.acquire = {
+      file: str('file')!,
+      sha256: str('sha256')!,
+      sizeBytes: numv('sizeBytes') ?? 0,
+      bundle: Array.isArray(payload['bundle']) ? (payload['bundle'] as string[]) : [],
+      versionName: str('versionName'),
+      versionCode: numv('versionCode'),
+      apiSha256: str('apiSha256'),
+      originality: (str('originality') as 'match' | 'mismatch' | 'unknown') ?? 'unknown',
+    }
+    pushAcquireEvidence(data, method)
+    return true
+  }
+
+  const lastLine = (stdout: string) =>
+    stdout.split('\n').map((l) => l.trim()).filter((l) => l.startsWith('ACQUIRE_RESULT ')).pop()
+  const parseLine = (line: string | undefined): Record<string, unknown> | null => {
+    if (!line) return null
+    try {
+      return JSON.parse(line.slice('ACQUIRE_RESULT '.length)) as Record<string, unknown>
+    } catch {
+      return null
+    }
+  }
+
+  const play = await run(PYTHON, [ACQUIRE_PLAY_SCRIPT, '--pkg', pkg, '--out', dir], ACQUIRE_TIMEOUT_MS)
+  const playPayload = parseLine(lastLine(play.stdout))
+  if (playPayload && consumeResult(playPayload, 'first-party Google Play session (gpapi finsky) — downloaded straight from the Play CDN, no mirror involved')) {
+    return
+  }
+
+  const playError = playPayload ? (typeof playPayload['error'] === 'string' ? playPayload['error'] : '') : 'no_result'
+  const playDetail = playPayload ? String(playPayload['detail'] ?? '').slice(0, 200) : play.stderr.slice(0, 200)
+  if (playError === 'CONFIG_MISSING') {
+    data.unknowns.push('Play-direct credentials not configured yet (set GP_EMAIL + GP_PASSWORD once — an app password if 2FA; a session is then saved and the password is never needed again).')
+  } else if (playError === 'login_failed') {
+    data.unknowns.push(`Google rejected the Play session credentials (${playDetail}). Fix GP_EMAIL/GP_PASSWORD and retry.`)
+  } else if (playError === 'app_not_found') {
+    data.unknowns.push('Google Play reports no such package — check the app URL/package name.')
+  } else {
+    data.unknowns.push(`First-party Play acquisition did not complete${playDetail ? ` (${playDetail})` : ''}.`)
+  }
+
+  if (process.env.APP_INTEL_ALLOW_MIRROR !== '1') {
+    data.evidence.push(ev('Acquisition chain: first-party Google Play (no mirror dependency by design)', 'acquire-play.py (gpapi)', 'config: session login + finsky details/download'))
+    return
+  }
+
+  // explicit opt-in legacy mirror chain
   const res = await run(
     PYTHON,
     [ACQUIRE_SCRIPT, '--pkg', pkg, '--out', dir, '--timeout', '360', '--attempts', '3', '--warmup'],
     ACQUIRE_TIMEOUT_MS
   )
 
-  const line = res.stdout.split('\n').map((l) => l.trim()).filter((l) => l.startsWith('ACQUIRE_RESULT ')).pop()
+  const line = lastLine(res.stdout)
   if (!line) {
-    data.unknowns.push('Binary acquisition did not complete (provider busy or verification unsolved) — continuing with metadata-only analysis.')
-    data.evidence.push(ev('APK bundle not acquired this run', 'acquire-final.py', 'camoufox acquisition attempt (see server log)', 'low'))
+    data.unknowns.push('Mirror acquisition did not complete either — continuing with metadata-only analysis.')
+    data.evidence.push(ev('APK bundle not acquired this run', 'acquire-final.py', 'mirror acquisition attempt (explicitly enabled)', 'low'))
     return
   }
 
@@ -345,29 +405,15 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
   if (payload['ok'] !== true) {
     const errCode = typeof payload['error'] === 'string' ? payload['error'] : ''
     if (errCode === 'RATE_LIMITED') {
-      data.unknowns.push('The APK provider rate-limited this server address (daily download quota reached). The full binary analysis will succeed on a later run — everything else still works from public metadata.')
+      data.unknowns.push('The mirror provider rate-limited this server address (daily download quota reached). The full binary analysis will succeed on a later run — everything else still works from public metadata.')
     } else if (errCode === 'fetch_403' || errCode === 'fetch_404') {
-      data.unknowns.push('The provider could not serve this package right now (upstream fetch failed). Retry the analysis later.')
+      data.unknowns.push('The mirror could not serve this package right now (upstream fetch failed). Retry the analysis later.')
     } else {
-      data.unknowns.push(`APK acquisition failed${errCode ? ` (${errCode})` : ''} — continuing with metadata-only analysis. Retry later for the full binary study.`)
+      data.unknowns.push(`Mirror acquisition failed${errCode ? ` (${errCode})` : ''} — continuing with metadata-only analysis. Retry later for the full binary study.`)
     }
     return
   }
-
-  const str = (k: string) => (typeof payload[k] === 'string' ? (payload[k] as string) : undefined)
-  const numv = (k: string) => (typeof payload[k] === 'number' ? (payload[k] as number) : undefined)
-
-  data.acquire = {
-    file: str('file')!,
-    sha256: str('sha256')!,
-    sizeBytes: numv('sizeBytes') ?? 0,
-    bundle: Array.isArray(payload['bundle']) ? (payload['bundle'] as string[]) : [],
-    versionName: str('versionName'),
-    versionCode: numv('versionCode'),
-    apiSha256: str('apiSha256'),
-    originality: (str('originality') as 'match' | 'mismatch' | 'unknown') ?? 'unknown',
-  }
-  pushAcquireEvidence(data, 'reverse-engineered apkcube/Evozi chain — hold-to-verify, turnstile, proof-of-work, signed URL')
+  consumeResult(payload, 'legacy mirror chain (explicitly enabled) — reverse-engineered apkcube/Evozi, hold-to-verify + turnstile + PoW')
 }
 
 // ------------------------------------------------------------

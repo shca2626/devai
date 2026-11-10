@@ -4,7 +4,9 @@
 #
 # Installs everything the acquire/decompile/deep-analyze stages
 # need, on any Linux host with python3 + curl:
-#   1. Python venv + camoufox[geoip] + curl_cffi
+#   1. Python venv + first-party Play client (vendored gpapi) +
+#      pyaxmlparser + protobuf, plus the legacy-mirror deps
+#      (camoufox[geoip] + curl_cffi) for the opt-in mirror path
 #   2. Camoufox browser (locked v158.0.1-beta.41, direct download)
 #   3. jadx 1.5.2
 #
@@ -17,6 +19,7 @@ HOME_DIR="${APPINTEL_HOME:-${HOME:-/home/z}}"
 VENV="$HOME_DIR/.venv"
 JADX_DIR="$HOME_DIR/tools/jadx"
 BROWSER_GLOB="$HOME_DIR/.cache/camoufox/browsers/official/*"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LOCK="/tmp/.appintel-bootstrap.lock"
 LOG="${APPINTEL_BOOTSTRAP_LOG:-/tmp/.appintel-bootstrap.log}"
 
@@ -49,16 +52,22 @@ fi
 if [ "$need_pip" -eq 0 ] && ! "$VENV/bin/python3" -c "import camoufox, curl_cffi" >/dev/null 2>&1; then
   need_pip=1
 fi
+if [ "$need_pip" -eq 0 ] && ! "$VENV/bin/python3" -c "import gpapi.googleplay, pyaxmlparser" >/dev/null 2>&1; then
+  need_pip=1
+fi
 if [ "$need_pip" -eq 1 ]; then
-  log "installing camoufox[geoip] + curl_cffi into venv"
+  log "installing venv deps: first-party Play client (vendored gpapi) + pyaxmlparser + mirror deps"
+  "$VENV/bin/pip" install --quiet --disable-pip-version-check --no-cache-dir \
+    "$SCRIPT_DIR/vendor/googleplay-api" pyaxmlparser protobuf >> "$LOG" 2>&1
+  # legacy mirror chain deps — only used when APP_INTEL_ALLOW_MIRROR=1
   "$VENV/bin/pip" install --quiet --disable-pip-version-check 'camoufox[geoip]' curl_cffi >> "$LOG" 2>&1
-  "$VENV/bin/python3" -c "import camoufox, curl_cffi" >/dev/null 2>&1 || { log "pip install failed"; exit 1; }
+  "$VENV/bin/python3" -c "import gpapi.googleplay, pyaxmlparser" >/dev/null 2>&1 || { log "pip install failed (gpapi/pyaxmlparser)"; exit 1; }
+  "$VENV/bin/python3" -c "import camoufox, curl_cffi" >/dev/null 2>&1 || log "mirror deps not ready (mirror path disabled; Play-direct unaffected)"
 fi
 
 # --- 2. camoufox browser -------------------------------------------------
 if ! ls $BROWSER_GLOB/camoufox >/dev/null 2>&1; then
   log "fetching camoufox browser"
-  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
   if [ -f "$SCRIPT_DIR/fetch-camoufox-direct.py" ]; then
     "$VENV/bin/python3" "$SCRIPT_DIR/fetch-camoufox-direct.py" >> "$LOG" 2>&1 || log "direct fetch failed (will fall back)"
   fi
