@@ -33,6 +33,14 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# app-intel toolchain state (venv, jadx, play session) — lives in-repo so it
+# survives host restarts/sandbox recycles; never commit it
+.tools-home/
+.play-session.json
+
+# app-intel transient workdirs
+/.app-intel/
+
 # vercel
 .vercel
 

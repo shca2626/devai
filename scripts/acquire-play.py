@@ -30,8 +30,12 @@ Outputs (identical contract for every strategy):
   entry per strategy with its error code, so the engine can tell the
   user exactly what is missing.
 
-Credential resolution order:
-  --session file (default ~/.play-session.json) — {gsfId, authSubToken}
+Credential resolution order (first existing wins; a new session is
+written to the repo-local tool home, git-ignored):
+  GP_SESSION file                        (explicit path)
+  APPINTEL_HOME/.play-session.json
+  <repo>/.tools-home/.play-session.json  (default)
+  ~/.play-session.json                   (legacy location)
   GP_GSFID + GP_TOKEN          (session, no password)
   GP_EMAIL + GP_PASSWORD       (first login -> saves session)
 
@@ -58,7 +62,10 @@ os.environ.setdefault('PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION', 'python')
 try:
     from gpapi.googleplay import GooglePlayAPI, LoginError, RequestError, SecurityCheckError
 except ImportError as e:
-    print('ACQUIRE_RESULT ' + json.dumps({'ok': False, 'error': 'CONFIG_MISSING', 'detail': f'gpapi not installed: {e}'}))
+    # toolchain broken (not the same as missing credentials) — the engine
+    # distinguishes the two so it can tell the user exactly what to fix
+    print('ACQUIRE_RESULT ' + json.dumps({'ok': False, 'error': 'tool_missing',
+          'detail': f'gpapi not installed: {e} — run scripts/bootstrap-appintel.sh'}))
     sys.exit(0)
 
 try:
@@ -68,7 +75,33 @@ except ImportError:
     _AXML = False
 
 HOME = os.environ.get('HOME', '/home/z')
-DEFAULT_SESSION = os.path.join(HOME, '.play-session.json')
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _session_candidates():
+    """Where a saved Play session may live, most preferred first."""
+    out = []
+    if os.environ.get('GP_SESSION'):
+        out.append(os.environ['GP_SESSION'])
+    home = os.environ.get('APPINTEL_HOME')
+    if home:
+        out.append(os.path.join(home, '.play-session.json'))
+    out.append(os.path.join(_REPO_ROOT, '.tools-home', '.play-session.json'))
+    out.append(os.path.join(HOME, '.play-session.json'))
+    return out
+
+
+def _default_session():
+    """First existing candidate; a brand-new one goes to the repo-local
+    tool home (survives sandbox recycles, git-ignored)."""
+    for p in _session_candidates():
+        if os.path.exists(p):
+            return p
+    tool_home = os.environ.get('APPINTEL_HOME') or os.path.join(_REPO_ROOT, '.tools-home')
+    return os.path.join(tool_home, '.play-session.json')
+
+
+DEFAULT_SESSION = _default_session()
 
 
 def log(msg):
@@ -458,7 +491,6 @@ def try_aptoide(pkg, out, attempted):
         store = (data.get('store') or {}).get('name') or '?'
         log(f'aptoide listing OK: v{f.get("vername")} ({f.get("vercode")}), '
             f'{round((f.get("filesize") or 0) / 1048576, 1)} MB, store={store}')
-
         with requests.get(path, stream=True, timeout=(15, 240),
                           headers={'User-Agent': UA}) as dl:
             if dl.status_code != 200:
@@ -488,6 +520,11 @@ def try_aptoide(pkg, out, attempted):
         verdict = 'Aptoide open-marketplace file — md5-verified against the marketplace listing'
         if rank:
             verdict += f', marketplace malware rank: {rank}'
+        if store and store != 'apps':
+            # community store upload: the md5 proves the bytes match THAT
+            # store's listing — it does NOT prove they are the Play original
+            verdict += (f'; CAUTION: community store \"{store}\" upload — provenance is the '
+                        'store listing, not the Play original')
         verdict += '; not VT-scanned'
         return finalize(pkg=pkg, out=out, base_bytes=apk_bytes, splits=[],
                         version_name=f.get('vername'), version_code=f.get('vercode'),

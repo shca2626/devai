@@ -13,18 +13,22 @@ CURRENT_DIR = os.path.abspath( os.path.dirname( __file__ ) )
 class ProtobufBuilder(_build):
 
     def run(self):
-        # regenerate the pb2 only when protoc exists; the vendored source
-        # already ships a generated googleplay_pb2.py (grpc_tools protoc),
-        # so a missing protoc is not fatal — devai patch, no upstream raise
-        exec_path = shutil.which(PROTOC_EXEC)
-        if exec_path is not None:
-            print("Building protobuf file")
-            subprocess.run([exec_path,
-                "--proto_path=" + CURRENT_DIR,
-                "--python_out=" + CURRENT_DIR + "/gpapi/",
-                CURRENT_DIR + "/googleplay.proto"])
-        else:
-            print("protoc not on PATH — using the pre-generated googleplay_pb2.py shipped in this source")
+        # regenerate only when missing — a generated googleplay_pb2.py is
+        # committed by bootstrap (grpcio-tools 1.62.x / protoc 25.x gencode,
+        # matched to the protobuf<5 runtime pin). Never regenerate with an
+        # arbitrary system protoc: a too-new one would emit gencode that
+        # requires protobuf>=5 and break the pin.
+        pb2 = os.path.join(CURRENT_DIR, 'gpapi', 'googleplay_pb2.py')
+        if not os.path.exists(pb2):
+            exec_path = shutil.which(PROTOC_EXEC)
+            if exec_path is not None:
+                print("Building protobuf file")
+                subprocess.run([exec_path,
+                    "--proto_path=" + CURRENT_DIR,
+                    "--python_out=" + CURRENT_DIR + "/gpapi/",
+                    CURRENT_DIR + "/googleplay.proto"])
+            else:
+                print("googleplay_pb2.py missing and no protoc — bootstrap generates it via grpcio-tools")
         super().run()
 
 setup(name='gpapi',
@@ -37,11 +41,8 @@ setup(name='gpapi',
       packages=['gpapi'],
       package_data={
           'gpapi': [
-              'config.py'
               'device.properties',
               'googleplay_pb2.py',
-              'googleplay.py',
-              'utils.py'
           ]},
       include_package_data=True,
       cmdclass={'build_py': ProtobufBuilder},

@@ -12,13 +12,19 @@ import type { AppAnalysisItem, AppCodebaseIntel, AppIntelData, AppPackFile } fro
 // URL (or package name), fully automatically:
 //
 //   store     Play Store metadata (google-play-scraper)
-//   acquire   ORIGINAL APK bundle via the reverse-engineered
-//             Evozi/apkcube chain (camoufox: hold-to-verify +
-//             turnstile + PoW -> R2 signed URL) — verified
-//             bit-identical to the Play-sourced file (sha256)
-//   deep      deep listing intel: permissions, manifest,
-//             signature, VirusTotal, native ABIs, protectors
-//   unpack    .apks bundle -> base.apk + splits inventory
+//   acquire   ORIGINAL APK bundle — first-party, no mirror in the
+//             loop: our own authenticated Play session (gpapi/
+//             finsky, downloads straight from the Play CDN), then
+//             the open published repositories (Aptoide, F-Droid).
+//             The legacy apkcube/Evozi mirror is opt-in only
+//             (APP_INTEL_ALLOW_MIRROR=1). Acquisition failure is
+//             LOUD: the run fails instead of emitting a hollow
+//             report (escape hatch: APP_INTEL_ALLOW_META_ONLY=1).
+//   deep      manifest + signature intel computed from the real
+//             APK bytes (self-generated listing; pyaxmlparser),
+//             native ABIs, protectors
+//   unpack    .apks/.apk bundle -> validated base.apk + splits
+//             inventory (zip magic + AndroidManifest.xml checks)
 //   decompile jadx source pass: package map, endpoints, keys
 //   fingerprint  tech stack (Flutter/RN/Kotlin/Cordova),
 //             Dart AOT package fingerprint, feature map
@@ -37,12 +43,16 @@ export class AppIntelError extends Error {
   }
 }
 
-const PYTHON = '/home/z/.venv/bin/python3'
+// Tool state lives INSIDE the repo (./.tools-home) so it survives host
+// restarts and sandbox recycles; APPINTEL_HOME can relocate it. bootstrap-
+// appintel.sh creates/repairs it (venv + vendored gpapi + pyaxmlparser + jadx).
+const TOOLS_HOME = process.env.APPINTEL_HOME ?? path.join(process.cwd(), '.tools-home')
+const PYTHON = path.join(TOOLS_HOME, '.venv', 'bin', 'python3')
 const ACQUIRE_SCRIPT = path.join(process.cwd(), 'scripts', 'acquire-final.py')
 const ACQUIRE_PLAY_SCRIPT = path.join(process.cwd(), 'scripts', 'acquire-play.py')
 const DEEP_SCRIPT = path.join(process.cwd(), 'scripts', 'deep-analyze.py')
 const BOOTSTRAP_SCRIPT = path.join(process.cwd(), 'scripts', 'bootstrap-appintel.sh')
-const JADX = path.join(process.env.HOME ?? '/home/z', 'tools', 'jadx', 'bin', 'jadx')
+const JADX = path.join(TOOLS_HOME, 'tools', 'jadx', 'bin', 'jadx')
 const WORK_ROOT = path.join(process.cwd(), '.app-intel')
 const REPO_ROOT = process.cwd()
 const REPO_INTEL_DIR = path.join(REPO_ROOT, 'app-intel')
@@ -237,6 +247,20 @@ async function readJsonSafe(file: string): Promise<unknown> {
   }
 }
 
+const metaOnlyMode = () => process.env.APP_INTEL_ALLOW_META_ONLY === '1'
+
+// Acquisition failed loudly: record why, then fail the run. With
+// APP_INTEL_ALLOW_META_ONLY=1 the old soft behavior (hollow metadata-only
+// report) is preserved for users who explicitly want it.
+function acquireFailed(data: AppIntelData, reason: string): void {
+  data.unknowns.push(`Original APK not acquired: ${reason}`)
+  if (metaOnlyMode()) {
+    data.evidence.push(ev('APK bundle not acquired — metadata-only analysis continues (APP_INTEL_ALLOW_META_ONLY=1)', 'acquire-play.py', 'acquisition strategies', 'low'))
+    return
+  }
+  throw new AppIntelError('ACQUISITION_FAILED', reason)
+}
+
 function pushAcquireEvidence(data: AppIntelData, method: string) {
   const a = data.acquire!
   const sameVersion = data.store?.version && a.versionName && data.store.version === a.versionName
@@ -325,7 +349,7 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
   // competitor, and no mirror round-trip by default.
   const tool = await ensureToolchain()
   if (!tool.ok) {
-    data.unknowns.push(`${tool.note ?? 'Acquisition tooling unavailable'} — analysis continues from public metadata only.`)
+    acquireFailed(data, `${tool.note ?? 'Acquisition tooling unavailable'} — run scripts/bootstrap-appintel.sh once on this host.`)
     return
   }
 
@@ -342,6 +366,7 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
       versionCode: numv('versionCode'),
       apiSha256: str('apiSha256'),
       originality: (str('originality') as 'match' | 'mismatch' | 'unknown') ?? 'unknown',
+      source: str('source'),
     }
     pushAcquireEvidence(data, method)
     return true
@@ -377,28 +402,32 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
   const attemptLines = attempted
     .map((a) => `${String(a.strategy ?? '?')}: ${String(a.error ?? '?')}${a.detail ? ` (${String(a.detail).slice(0, 90)})` : ''}`)
     .join('; ')
-  if (attemptLines) data.unknowns.push(`Original APK not acquired — strategies tried: ${attemptLines}.`)
-
   const playError = String(playPayload?.['error'] ?? '') || 'no_result'
   const cfgMissing = attempted.some((a) => a.strategy === 'google-play-direct' && a.error === 'CONFIG_MISSING')
+  const toolMissing = attempted.some((a) => a.strategy === 'google-play-direct' && a.error === 'tool_missing')
   const loginFailed = attempted.some((a) => a.strategy === 'google-play-direct' && a.error === 'login_failed')
   const notOnOpenIndexes =
     attempted.some((a) => a.strategy === 'aptoide-open' && a.error === 'app_not_found') &&
     attempted.some((a) => a.strategy === 'fdroid-open' && a.error === 'app_not_found')
+  const reasons: string[] = [`strategies tried: ${attemptLines || 'none'}`]
   if (loginFailed) {
     const det = attempted.find((a) => a.strategy === 'google-play-direct' && a.error === 'login_failed')
-    data.unknowns.push(`Google rejected the Play session credentials (${String(det?.detail ?? '').slice(0, 120)}). Fix GP_EMAIL/GP_PASSWORD and retry.`)
+    reasons.push(`Google rejected the Play session credentials (${String(det?.detail ?? '').slice(0, 120)}). Fix GP_EMAIL/GP_PASSWORD and retry.`)
+  } else if (toolMissing) {
+    const det = attempted.find((a) => a.strategy === 'google-play-direct' && a.error === 'tool_missing')
+    reasons.push(`Play client toolchain incomplete (${String(det?.detail ?? '').slice(0, 120)}) — run scripts/bootstrap-appintel.sh.`)
   } else if (cfgMissing) {
-    data.unknowns.push('Direct Google Play credentials not configured yet (set GP_EMAIL + GP_PASSWORD once — an app password if 2FA; a session is then saved and the password is never needed again).')
+    reasons.push('Direct Google Play credentials not configured (set GP_EMAIL + GP_PASSWORD once — an app password if 2FA; a session is then saved and the password is never needed again).')
     if (notOnOpenIndexes) {
-      data.unknowns.push('This app is not on the open indexes (Aptoide marketplace, F-Droid) — a direct Play session is the only first-party source for it. Add the credentials above and every Play app becomes downloadable.')
+      reasons.push('This app is not on the open indexes (Aptoide marketplace, F-Droid) — a direct Play session is the only first-party source for it. Add the credentials above and every Play app becomes downloadable.')
     }
   } else if (playError === 'no_result') {
-    data.unknowns.push(`First-party acquisition did not complete${play.stderr ? ` (${play.stderr.slice(0, 120)})` : ''}.`)
+    reasons.push(`first-party acquisition did not complete${play.stderr ? ` (${play.stderr.slice(0, 120)})` : ''}`)
   }
 
   if (process.env.APP_INTEL_ALLOW_MIRROR !== '1') {
     data.evidence.push(ev('Acquisition chain: first-party strategies only — google-play-direct → aptoide-open → fdroid-open (no mirror dependency by design)', 'acquire-play.py', 'strategy loop: authenticated Play session, Aptoide public API, F-Droid public API'))
+    acquireFailed(data, reasons.join(' '))
     return
   }
 
@@ -411,8 +440,7 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
 
   const line = lastLine(res.stdout)
   if (!line) {
-    data.unknowns.push('Mirror acquisition did not complete either — continuing with metadata-only analysis.')
-    data.evidence.push(ev('APK bundle not acquired this run', 'acquire-final.py', 'mirror acquisition attempt (explicitly enabled)', 'low'))
+    acquireFailed(data, `mirror acquisition did not complete${res.stderr ? ` (${res.stderr.slice(0, 120)})` : ''}`)
     return
   }
 
@@ -420,17 +448,17 @@ async function collectAcquire(analysisId: string, pkg: string, data: AppIntelDat
   try {
     payload = JSON.parse(line.slice('ACQUIRE_RESULT '.length))
   } catch {
-    data.unknowns.push('Acquisition result could not be parsed.')
+    acquireFailed(data, 'acquisition result could not be parsed')
     return
   }
   if (payload['ok'] !== true) {
     const errCode = typeof payload['error'] === 'string' ? payload['error'] : ''
     if (errCode === 'RATE_LIMITED') {
-      data.unknowns.push('The mirror provider rate-limited this server address (daily download quota reached). The full binary analysis will succeed on a later run — everything else still works from public metadata.')
+      acquireFailed(data, 'the mirror provider rate-limited this server address (daily download quota reached) — retry tomorrow, or acquire first-party (Play credentials / open repositories)')
     } else if (errCode === 'fetch_403' || errCode === 'fetch_404') {
-      data.unknowns.push('The mirror could not serve this package right now (upstream fetch failed). Retry the analysis later.')
+      acquireFailed(data, 'the mirror could not serve this package right now (upstream fetch failed) — retry later')
     } else {
-      data.unknowns.push(`Mirror acquisition failed${errCode ? ` (${errCode})` : ''} — continuing with metadata-only analysis. Retry later for the full binary study.`)
+      acquireFailed(data, `mirror acquisition failed${errCode ? ` (${errCode})` : ''} — retry later, or acquire first-party (Play credentials / open repositories)`)
     }
     return
   }
@@ -593,6 +621,7 @@ async function collectDeep(analysisId: string, pkg: string, data: AppIntelData) 
 
 async function collectUnpack(analysisId: string, pkg: string, data: AppIntelData) {
   if (!data.acquire) {
+    // unreachable in strict mode (acquire fails the run first); kept for metadata-only mode
     data.unknowns.push('No acquired bundle to unpack.')
     return
   }
@@ -601,70 +630,117 @@ async function collectUnpack(analysisId: string, pkg: string, data: AppIntelData
   try {
     await fs.access(apksPath)
   } catch {
-    data.unknowns.push('Acquired bundle file missing on disk.')
-    return
+    throw new AppIntelError('STAGE_FAILED', `Acquired bundle file missing on disk (${apksPath}).`)
   }
 
-  // .apks is a zip; list + extract base.apk + all splits
+  // One python pass over the REAL bytes: detect the container kind (.apks
+  // split bundle vs a bare apk), extract, normalize to base.apk, VALIDATE
+  // (AndroidManifest.xml + classes.dex present) and inventory the splits.
+  // Never trusts the acquire listing — it reads the actual zip. A bundle that
+  // does not yield a valid, code-bearing base.apk fails the run loudly
+  // instead of emitting a hollow report.
   const res = await run('python3', ['-c', `
-import json, zipfile, os, sys
+import json, os, shutil, sys, zipfile
 src = ${JSON.stringify(apksPath)}
 out = ${JSON.stringify(path.join(dir, 'unpacked'))}
+KNOWN_ABIS = ['armeabi_v7a', 'arm64_v8a', 'x86', 'x86_64']
 os.makedirs(out, exist_ok=True)
-with zipfile.ZipFile(src) as z:
-    names = z.namelist()
-    for n in names:
-        if n.endswith('.apk') or n.endswith('.txt'):
-            z.extract(n, out)
-print(json.dumps({'names': names}))
-`], 60_000)
-  let names: string[] = data.acquire.bundle
+try:
+    z = zipfile.ZipFile(src)
+except Exception as e:
+    print(json.dumps({'ok': False, 'error': 'bundle is not a readable zip: %s' % e})); sys.exit(0)
+names = z.namelist()
+raw_apk = 'AndroidManifest.xml' in names  # the file IS an apk, not a container
+split_names, base_path, note = [], None, ''
+if raw_apk:
+    # bare apk delivery (fdroid/aptoide): the acquired file itself is base.apk
+    shutil.copyfile(src, os.path.join(out, 'base.apk'))
+    base_path = os.path.join(out, 'base.apk')
+    note = 'bare apk delivery: the acquired file IS base.apk'
+    inner = names
+else:
+    inner = [n for n in names if n.endswith('.apk')]
+    for n in inner:
+        z.extract(n, out)
+    if 'base.apk' in inner:
+        base_path = os.path.join(out, 'base.apk')
+    else:
+        solo = [n for n in inner if not n.startswith('split_')]
+        if len(solo) == 1:
+            os.rename(os.path.join(out, solo[0]), os.path.join(out, 'base.apk'))
+            base_path = os.path.join(out, 'base.apk')
+            note = 'single inner apk normalized to base.apk (%s)' % solo[0]
+    split_names = [n for n in inner if n.startswith('split_')]
+if not base_path or not os.path.exists(base_path):
+    print(json.dumps({'ok': False, 'error': 'no base.apk in bundle (entries: %s)' % ', '.join(names[:14])})); sys.exit(0)
+bz = zipfile.ZipFile(base_path)
+bnames = bz.namelist()
+manifest_ok = 'AndroidManifest.xml' in bnames
+dex_in_base = any(x == 'classes.dex' for x in bnames)
+dex_in_splits = False
+for s in split_names:
+    try:
+        with zipfile.ZipFile(os.path.join(out, s)) as sz:
+            if any(x == 'classes.dex' for x in sz.namelist()):
+                dex_in_splits = True
+                break
+    except Exception:
+        pass
+base_bytes = os.path.getsize(base_path)
+abis = [a for a in KNOWN_ABIS if any('split_config.%s.apk' % a == s for s in split_names)]
+langs = sorted({s.split('.')[1] for s in split_names
+                if s.startswith('split_config.') and s.count('.') >= 3
+                and s.split('.')[1] not in KNOWN_ABIS
+                and s.split('.')[1].isalpha() and len(s.split('.')[1]) in (2, 3)})
+print(json.dumps({
+    'ok': True, 'kind': 'raw-apk' if raw_apk else 'split-bundle', 'note': note,
+    'names': names, 'baseBytes': base_bytes, 'manifestOk': manifest_ok,
+    'dexInBundle': dex_in_base or dex_in_splits,
+    'splits': len(split_names), 'splitList': split_names[:60],
+    'abis': abis, 'languages': langs, 'totalFiles': len(names),
+}))
+`], 120_000)
+
+  let parsed: {
+    ok?: boolean; error?: string; kind?: 'raw-apk' | 'split-bundle'; note?: string
+    names?: string[]; baseBytes?: number; manifestOk?: boolean; dexInBundle?: boolean
+    splits?: number; splitList?: string[]; abis?: string[]; languages?: string[]; totalFiles?: number
+  } | null = null
   try {
-    const parsed = JSON.parse(res.stdout.trim().split('\n').pop() ?? '{}') as { names?: string[] }
-    if (parsed.names) names = parsed.names
+    parsed = JSON.parse(res.stdout.trim().split('\n').pop() ?? '{}')
   } catch {
-    /* keep listing from acquire stage */
+    parsed = null
   }
-
-  // Some providers ship single-file bundles: either one apk named after the
-  // app (no base.apk entry) or a raw apk file (the "bundle" zip IS the apk,
-  // AndroidManifest.xml at its root). Normalize both to base.apk so the
-  // decompile stage always has something to chew on.
-  const unpackedDir = path.join(dir, 'unpacked')
-  const rawApk = names.some((n) => n === 'AndroidManifest.xml' || n === 'classes.dex')
-  if (rawApk) {
-    await fs.copyFile(apksPath, path.join(unpackedDir, 'base.apk')).catch(() => undefined)
-    names = ['base.apk', ...names]
-  } else if (!names.includes('base.apk')) {
-    const solo = names.filter((n) => n.endsWith('.apk') && !n.startsWith('split_'))
-    if (solo.length === 1) {
-      try {
-        await fs.rename(path.join(unpackedDir, solo[0]), path.join(unpackedDir, 'base.apk'))
-        names = names.map((n) => (n === solo[0] ? 'base.apk' : n))
-        data.evidence.push(ev('Single-file bundle normalized: the provider shipped one apk without split naming — treated as base.apk', 'acquired bundle', 'zip structure inspection'))
-      } catch {
-        /* leave as-is */
-      }
-    }
+  if (!parsed || parsed.ok !== true) {
+    throw new AppIntelError('STAGE_FAILED', `Unpack failed — no valid base APK extracted from the acquired bundle: ${parsed?.error ?? `extractor exit ${res.code}${res.stderr ? ` (${res.stderr.slice(0, 120)})` : ''}`}`)
   }
-
-  const baseApk = names.find((n) => n === 'base.apk')
-  const splits = names.filter((n) => n.startsWith('split_'))
-  const abis = Array.from(new Set(splits.map((s) => (s.match(/split_config\.([a-z0-9_]+)\.apk/)?.[1] ?? '')).filter(Boolean)))
-  const langs = Array.from(new Set(splits.map((s) => (s.match(/split_config\.([a-z]{2,3})\.apk/)?.[1] ?? '')).filter((l) => l.length <= 3)))
+  if (parsed.manifestOk !== true) {
+    throw new AppIntelError('STAGE_FAILED', 'Unpack failed — extracted base.apk has no AndroidManifest.xml (not a valid Android apk).')
+  }
+  if (parsed.dexInBundle !== true) {
+    throw new AppIntelError('STAGE_FAILED', 'Unpack failed — no classes.dex anywhere in the bundle (no executable code to analyze).')
+  }
 
   data.unpack = {
-    baseApkPresent: Boolean(baseApk),
-    splits: splits.length,
-    abis: abis.filter((a) => a.includes('64') || a.includes('x86') || a === 'armeabi-v7a'),
-    languages: langs,
-    totalFiles: names.length,
+    baseApkPresent: true,
+    kind: parsed.kind,
+    splits: parsed.splits ?? 0,
+    abis: parsed.abis ?? [],
+    languages: parsed.languages ?? [],
+    totalFiles: parsed.totalFiles ?? parsed.names?.length ?? 0,
+    baseApkBytes: parsed.baseBytes ?? 0,
+    manifestOk: true,
+    dexInBundle: true,
   }
 
+  const mb = ((parsed.baseBytes ?? 0) / 1e6).toFixed(1)
   data.evidence.push(
-    ev(`Bundle unpacked: ${data.unpack.baseApkPresent ? 'base.apk present' : 'no base.apk'}, ${splits.length} config splits (ABIs: ${data.unpack.abis.join(', ') || 'n/a'}; ${langs.length} languages)`, 'acquired .apks archive', 'zip listing + extraction')
+    ev(
+      `Bundle unpacked (${parsed.kind}${parsed.note ? ` — ${parsed.note}` : ''}): base.apk ${mb} MB, manifest valid, ${parsed.splits ?? 0} config splits (ABIs: ${(parsed.abis ?? []).join(', ') || 'n/a'}; ${(parsed.languages ?? []).length} languages)`,
+      'acquired bundle (real zip layout)',
+      'zip extraction + AndroidManifest.xml/classes.dex validation'
+    )
   )
-  if (!data.unpack.baseApkPresent) data.unknowns.push('base.apk missing from the bundle — decompile stage will be skipped.')
 }
 
 // ------------------------------------------------------------
@@ -674,12 +750,21 @@ print(json.dumps({'names': names}))
 async function collectDecompile(analysisId: string, data: AppIntelData) {
   const dir = workDir(analysisId)
   const baseApk = path.join(dir, 'unpacked', 'base.apk')
+  let basePresent = true
   try {
     await fs.access(baseApk)
+  } catch {
+    basePresent = false
+  }
+  if (!basePresent) {
+    // only reachable in metadata-only mode — strict runs already failed earlier
+    data.unknowns.push('jadx pass skipped (no base.apk this run).')
+    return
+  }
+  try {
     await fs.access(JADX)
   } catch {
-    data.unknowns.push('jadx pass skipped (base.apk or tooling unavailable).')
-    return
+    throw new AppIntelError('TOOLING_MISSING', `jadx not installed at ${JADX} — run scripts/bootstrap-appintel.sh once on this host.`)
   }
 
   const outDir = path.join(dir, 'jadx')
@@ -1183,9 +1268,15 @@ export function buildPack(item: { pkg: string; appName?: string | null; stageDon
         `- Version: ${data.acquire.versionName ?? '?'} (${data.acquire.versionCode ?? '?'})`,
         `- sha256: \`${data.acquire.sha256}\``,
         `- Originality vs provider listing: **${data.acquire.originality}**`,
+        `- Acquired via: **${data.acquire.source ?? 'unrecorded strategy'}**`,
         '',
-        'Acquired through the reverse-engineered provider chain (hold-to-verify + turnstile + proof-of-work),',
-        'the same pipeline the public APK-downloader services use to fetch originals from Google Play.',
+        data.acquire.source === 'google-play-direct'
+          ? 'Acquired through our own authenticated Google Play session (gpapi/finsky) — downloaded straight from the Play CDN, no mirror involved.'
+          : data.acquire.source === 'fdroid-open'
+            ? 'Acquired from the official F-Droid repository — the app\u2019s own open-source distribution channel (public API, no mirror involved).'
+            : data.acquire.source === 'aptoide-open'
+              ? 'Acquired from the Aptoide open marketplace via its public API + CDN (no mirror involved).'
+              : 'Acquisition provenance is recorded in meta.json next to this pack.',
       ].join('\n')
     )
   }

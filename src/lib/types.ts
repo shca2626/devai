@@ -1128,6 +1128,8 @@ export interface AppAcquireIntel {
   versionCode?: number
   apiSha256?: string
   originality: 'match' | 'mismatch' | 'unknown'
+  /** which first-party strategy delivered the bundle (google-play-direct | aptoide-open | fdroid-open | …) */
+  source?: string
 }
 
 export interface AppDeepIntel {
@@ -1161,6 +1163,14 @@ export interface AppUnpackIntel {
   abis: string[]
   languages: string[]
   totalFiles: number
+  /** container kind: split .apks bundle vs a bare apk delivery */
+  kind?: 'raw-apk' | 'split-bundle'
+  /** size of the validated base.apk in bytes */
+  baseApkBytes?: number
+  /** AndroidManifest.xml found inside base.apk (validated this run) */
+  manifestOk?: boolean
+  /** classes.dex present in base or any split */
+  dexInBundle?: boolean
 }
 
 export interface AppDecompileIntel {
