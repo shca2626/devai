@@ -938,6 +938,7 @@ export interface SiteRecon {
 export interface SitePageForm {
   action: string
   method: string
+  fields?: { name: string; type: string; required: boolean }[] // input/select/textarea names — data-model gold
 }
 
 export interface SitePageInfo {
@@ -954,6 +955,7 @@ export interface SitePageInfo {
   jsonLdTypes: string[]
   canonical: string | null
   ogTitle: string | null
+  nextData?: { page: string; propsKeys: string[] } // __NEXT_DATA__ summary when present
 }
 
 export interface SiteSurface {
@@ -962,6 +964,9 @@ export interface SiteSurface {
   sitemapUrls: number
   skippedByRobots: number
   failedPages: string[]
+  privateAreas?: string[] // robots.txt Disallow map — declared-private routes (intel, still public)
+  probedPaths?: { path: string; status: number; note: string }[] // well-known path probe results
+  crawledPrivate?: number // pages fetched despite robots disallow (public URLs, advisory file)
 }
 
 export interface SiteAssetInfo {
@@ -987,6 +992,11 @@ export interface SiteBundles {
   renderingEvidence: string
   totalJsKb: number
   totalCssKb: number
+  buildId?: string // Next.js build id when detected
+  buildManifestPages?: string[] // route list recovered from _buildManifest.js
+  chunkUrlsFound?: number // additional chunk URLs discovered from manifests/preloads
+  sourceMapsRecovered?: { file: string; sources: number; tree: string[]; kb: number }[]
+  recoveredSourceKb?: number
 }
 
 export interface SiteEndpointFound {
@@ -1008,6 +1018,7 @@ export interface SiteEntityFound {
   name: string
   fields: string[]
   relations: string[]
+  fieldTypes?: { name: string; type: string }[] // typed fields when response schemas existed
 }
 
 export interface SiteModels {
@@ -1049,6 +1060,15 @@ export interface SiteMinedData {
   apiCalls: { method: string; url: string; kind: 'rest' | 'graphql' | 'ws' | 'sse'; snippet: string; file: string }[]
   secrets: { pattern: string; snippet: string; file: string }[]
   inlineScriptChars: number
+  envVars?: { key: string; value: string }[] // public client config (NEXT_PUBLIC_* etc.)
+  i18n?: { keys: number; samples: string[]; locales: string[] }
+  storageKeys?: string[] // localStorage / sessionStorage keys — client state map
+  thirdPartyDomains?: string[] // every external host referenced in public code
+  responseSchemas?: { url: string; status: number; entity: string; fields: { name: string; type: string }[]; note: string }[] // live GET probes (keys+types only)
+  graphql?: { endpoint: string; reachable: boolean; queries: string[]; mutations: string[]; subscriptions: string[]; types: { name: string; kind: string; fields: string[] }[] }
+  openApi?: { url: string; title: string; version: string; paths: string[] }
+  sourceMapFiles?: { file: string; recovered: boolean; sources: number }[]
+  modelDefs?: { name: string; kind: string; snippet: string; file: string }[] // model/schema definitions found in recovered source
 }
 
 export interface SiteIntelData {
@@ -1068,6 +1088,8 @@ export interface SiteIntelData {
   assetJsUrls?: string[]
   assetCssUrls?: string[]
   inlineScriptsText?: string
+  sitemapSeeds?: string[] // sitemap URLs enumerated during recon/surface — extra crawl seeds
+  openApiCandidates?: string[] // probed URLs that looked like OpenAPI/Swagger specs
 }
 
 export interface SiteAnalysisItem {

@@ -214,10 +214,11 @@ export const TOOL_DOCS: ToolDoc[] = [
   {
     name: 'Site Intelligence',
     icon: 'Radar',
-    what: 'Deep static analysis of any live website from a single URL: 7 gated stages (recon → surface → bundles → APIs → data models → audit → synthesis) producing a downloadable clone pack.',
+    what: 'Deep static reverse engineering of any live web platform from a single URL: 7 gated stages (recon → surface → bundles → APIs → data models → audit → synthesis) producing a downloadable clone pack with a decompiled frontend and database schema.',
     details: [
       'Public tool — works with or without an idea (standalone studies live in the workspace scope, ideaId = null)',
-      'Robots-aware crawling, NO JavaScript execution of the target',
+      'Full depth: recursive sitemaps, pagination follow, well-known path probes (admin/api/docs/oidc), webpack chunk-graph traversal, source-map recovery (original source), GraphQL introspection, OpenAPI parse, live JSON schema probes',
+      'Public unauthenticated GETs only — no credentials submitted, no forms posted, target JS never executed; auth-gated areas are mapped as architecture, never accessed',
       'Every claim carries evidence + method; unknowns are reported honestly',
       'Deterministic completeness score 0-100; anti-bot walls are detected and reported',
     ],
