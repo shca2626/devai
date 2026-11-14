@@ -1215,7 +1215,7 @@ export function buildPack(item: { pkg: string; appName?: string | null; stageDon
         `- Genre: ${s.genre ?? '—'} | Content rating: ${s.contentRating ?? '—'}`,
         `- Installs: ${s.installs ?? '—'} | Rating: ${s.score ?? '—'} (${s.ratings ?? '—'} ratings)`,
         `- Current version: ${s.version ?? '—'} (Android ${s.androidVersion ?? 'any'})`,
-        `- Released: ${s.released ?? '—'}${s.updated ? ` | Updated: ${new Date(s.updated * 1000).toISOString().slice(0, 10)}` : ''}`,
+        `- Released: ${s.released ?? '—'}${s.updated ? ` | Updated: ${typeof s.updated === 'number' && s.updated > 1e6 ? new Date(s.updated * 1000).toISOString().slice(0, 10) : String(s.updated)}` : ''}`,
         `- Screenshots: ${s.screenshots.length}`,
         '',
         '## Description',
