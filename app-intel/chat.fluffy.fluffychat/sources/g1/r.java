@@ -1,9 +1,9 @@
 package g1;
 
-import B0.InterfaceC0309k;
+import B0.InterfaceC0310k;
 
 /* loaded from: classes.dex */
-public interface r extends InterfaceC0309k {
+public interface r extends InterfaceC0310k {
     int a(int i7);
 
     boolean c(byte[] bArr, int i7, int i8, boolean z7);
@@ -28,7 +28,7 @@ public interface r extends InterfaceC0309k {
 
     boolean q(int i7, boolean z7);
 
-    @Override // B0.InterfaceC0309k
+    @Override // B0.InterfaceC0310k
     int read(byte[] bArr, int i7, int i8);
 
     void readFully(byte[] bArr, int i7, int i8);

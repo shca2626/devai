@@ -10,13 +10,13 @@ public interface Y {
 
     void B(List list);
 
-    AbstractC0775f C();
+    AbstractC0776f C();
 
     void D(List list);
 
     int E();
 
-    void F(List list, Z z7, C0782m c0782m);
+    void F(List list, Z z7, C0783m c0783m);
 
     boolean G();
 
@@ -26,7 +26,7 @@ public interface Y {
 
     void J(List list);
 
-    void K(List list, Z z7, C0782m c0782m);
+    void K(List list, Z z7, C0783m c0783m);
 
     long L();
 
@@ -60,13 +60,13 @@ public interface Y {
 
     void m(List list);
 
-    void n(Object obj, Z z7, C0782m c0782m);
+    void n(Object obj, Z z7, C0783m c0783m);
 
     void o(List list);
 
     void p(List list);
 
-    void q(Map map, D.a aVar, C0782m c0782m);
+    void q(Map map, D.a aVar, C0783m c0783m);
 
     int r();
 
@@ -74,7 +74,7 @@ public interface Y {
 
     float readFloat();
 
-    void s(Object obj, Z z7, C0782m c0782m);
+    void s(Object obj, Z z7, C0783m c0783m);
 
     int t();
 

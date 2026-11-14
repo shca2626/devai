@@ -7,16 +7,26 @@ public final class CryptoOptions {
 
     public static class Builder {
         private boolean enableAes128Sha1_32CryptoCipher;
+        private boolean enableAes128Sha1_80CryptoCipher;
         private boolean enableEncryptedRtpHeaderExtensions;
         private boolean enableGcmCryptoSuites;
         private boolean requireFrameEncryption;
 
         public CryptoOptions createCryptoOptions() {
-            return new CryptoOptions(this.enableGcmCryptoSuites, this.enableAes128Sha1_32CryptoCipher, this.enableEncryptedRtpHeaderExtensions, this.requireFrameEncryption);
+            boolean z7 = this.enableGcmCryptoSuites;
+            if (z7 || this.enableAes128Sha1_32CryptoCipher || this.enableAes128Sha1_80CryptoCipher) {
+                return new CryptoOptions(z7, this.enableAes128Sha1_32CryptoCipher, this.enableAes128Sha1_80CryptoCipher, this.enableEncryptedRtpHeaderExtensions, this.requireFrameEncryption);
+            }
+            throw new IllegalStateException("CryptoOptions: no SRTP crypto suite enabled");
         }
 
         public Builder setEnableAes128Sha1_32CryptoCipher(boolean z7) {
             this.enableAes128Sha1_32CryptoCipher = z7;
+            return this;
+        }
+
+        public Builder setEnableAes128Sha1_80CryptoCipher(boolean z7) {
+            this.enableAes128Sha1_80CryptoCipher = z7;
             return this;
         }
 
@@ -36,6 +46,7 @@ public final class CryptoOptions {
         }
 
         private Builder() {
+            this.enableAes128Sha1_80CryptoCipher = true;
         }
     }
 
@@ -54,12 +65,18 @@ public final class CryptoOptions {
 
     public final class Srtp {
         private final boolean enableAes128Sha1_32CryptoCipher;
+        private final boolean enableAes128Sha1_80CryptoCipher;
         private final boolean enableEncryptedRtpHeaderExtensions;
         private final boolean enableGcmCryptoSuites;
 
         @CalledByNative
         public boolean getEnableAes128Sha1_32CryptoCipher() {
             return this.enableAes128Sha1_32CryptoCipher;
+        }
+
+        @CalledByNative
+        public boolean getEnableAes128Sha1_80CryptoCipher() {
+            return this.enableAes128Sha1_80CryptoCipher;
         }
 
         @CalledByNative
@@ -72,10 +89,11 @@ public final class CryptoOptions {
             return this.enableGcmCryptoSuites;
         }
 
-        private Srtp(CryptoOptions cryptoOptions, boolean z7, boolean z8, boolean z9) {
+        private Srtp(CryptoOptions cryptoOptions, boolean z7, boolean z8, boolean z9, boolean z10) {
             this.enableGcmCryptoSuites = z7;
             this.enableAes128Sha1_32CryptoCipher = z8;
-            this.enableEncryptedRtpHeaderExtensions = z9;
+            this.enableAes128Sha1_80CryptoCipher = z9;
+            this.enableEncryptedRtpHeaderExtensions = z10;
         }
     }
 
@@ -93,8 +111,8 @@ public final class CryptoOptions {
         return this.srtp;
     }
 
-    private CryptoOptions(boolean z7, boolean z8, boolean z9, boolean z10) {
-        this.srtp = new Srtp(z7, z8, z9);
-        this.sframe = new SFrame(z10);
+    private CryptoOptions(boolean z7, boolean z8, boolean z9, boolean z10, boolean z11) {
+        this.srtp = new Srtp(z7, z8, z9, z10);
+        this.sframe = new SFrame(z11);
     }
 }

@@ -4,7 +4,7 @@ package v2;
 public final class d extends v {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final d f22916a = new d();
+    public static final d f22922a = new d();
 
     public d() {
         super(null);

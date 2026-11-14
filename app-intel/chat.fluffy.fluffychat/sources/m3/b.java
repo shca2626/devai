@@ -6,49 +6,49 @@ import java.math.RoundingMode;
 public abstract class b {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final double f19735a = Math.log(2.0d);
+    public static final double f19734a = Math.log(2.0d);
 
     /* renamed from: b, reason: collision with root package name */
-    public static final double[] f19736b = {1.0d, 2.0922789888E13d, 2.631308369336935E35d, 1.2413915592536073E61d, 1.2688693218588417E89d, 7.156945704626381E118d, 9.916779348709496E149d, 1.974506857221074E182d, 3.856204823625804E215d, 5.5502938327393044E249d, 4.7147236359920616E284d};
+    public static final double[] f19735b = {1.0d, 2.0922789888E13d, 2.631308369336935E35d, 1.2413915592536073E61d, 1.2688693218588417E89d, 7.156945704626381E118d, 9.916779348709496E149d, 1.974506857221074E182d, 3.856204823625804E215d, 5.5502938327393044E249d, 4.7147236359920616E284d};
 
     public static /* synthetic */ class a {
 
         /* renamed from: a, reason: collision with root package name */
-        public static final /* synthetic */ int[] f19737a;
+        public static final /* synthetic */ int[] f19736a;
 
         static {
             int[] iArr = new int[RoundingMode.values().length];
-            f19737a = iArr;
+            f19736a = iArr;
             try {
                 iArr[RoundingMode.UNNECESSARY.ordinal()] = 1;
             } catch (NoSuchFieldError unused) {
             }
             try {
-                f19737a[RoundingMode.FLOOR.ordinal()] = 2;
+                f19736a[RoundingMode.FLOOR.ordinal()] = 2;
             } catch (NoSuchFieldError unused2) {
             }
             try {
-                f19737a[RoundingMode.CEILING.ordinal()] = 3;
+                f19736a[RoundingMode.CEILING.ordinal()] = 3;
             } catch (NoSuchFieldError unused3) {
             }
             try {
-                f19737a[RoundingMode.DOWN.ordinal()] = 4;
+                f19736a[RoundingMode.DOWN.ordinal()] = 4;
             } catch (NoSuchFieldError unused4) {
             }
             try {
-                f19737a[RoundingMode.UP.ordinal()] = 5;
+                f19736a[RoundingMode.UP.ordinal()] = 5;
             } catch (NoSuchFieldError unused5) {
             }
             try {
-                f19737a[RoundingMode.HALF_EVEN.ordinal()] = 6;
+                f19736a[RoundingMode.HALF_EVEN.ordinal()] = 6;
             } catch (NoSuchFieldError unused6) {
             }
             try {
-                f19737a[RoundingMode.HALF_UP.ordinal()] = 7;
+                f19736a[RoundingMode.HALF_UP.ordinal()] = 7;
             } catch (NoSuchFieldError unused7) {
             }
             try {
-                f19737a[RoundingMode.HALF_DOWN.ordinal()] = 8;
+                f19736a[RoundingMode.HALF_DOWN.ordinal()] = 8;
             } catch (NoSuchFieldError unused8) {
             }
         }
@@ -111,7 +111,7 @@ public abstract class b {
             int r5 = r5 + (-52)
             return r5
         L2a:
-            int[] r3 = m3.b.a.f19737a
+            int[] r3 = m3.b.a.f19736a
             int r7 = r7.ordinal()
             r7 = r3[r7]
             switch(r7) {
@@ -172,7 +172,7 @@ public abstract class b {
         if (!c.b(d7)) {
             throw new ArithmeticException("input is infinite or NaN");
         }
-        switch (a.f19737a[roundingMode.ordinal()]) {
+        switch (a.f19736a[roundingMode.ordinal()]) {
             case 1:
                 f.g(b(d7));
                 return d7;

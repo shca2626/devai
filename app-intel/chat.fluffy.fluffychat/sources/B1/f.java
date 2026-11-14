@@ -2,7 +2,7 @@ package B1;
 
 import B0.A;
 import E0.E;
-import g1.AbstractC1089t;
+import g1.AbstractC1090t;
 import g1.r;
 
 /* loaded from: classes.dex */
@@ -44,7 +44,7 @@ public final class f {
     public boolean a(r rVar, boolean z7) throws A {
         b();
         this.f1099k.b0(27);
-        if (!AbstractC1089t.c(rVar, this.f1099k.f(), 0, 27, z7) || this.f1099k.S() != 1332176723) {
+        if (!AbstractC1090t.c(rVar, this.f1099k.f(), 0, 27, z7) || this.f1099k.S() != 1332176723) {
             return false;
         }
         int iQ = this.f1099k.Q();
@@ -64,7 +64,7 @@ public final class f {
         this.f1095g = iQ2;
         this.f1096h = iQ2 + 27;
         this.f1099k.b0(iQ2);
-        if (!AbstractC1089t.c(rVar, this.f1099k.f(), 0, this.f1095g, z7)) {
+        if (!AbstractC1090t.c(rVar, this.f1099k.f(), 0, this.f1095g, z7)) {
             return false;
         }
         for (int i7 = 0; i7 < this.f1095g; i7++) {
@@ -140,7 +140,7 @@ public final class f {
         L2b:
             E0.E r4 = r8.f1099k
             byte[] r4 = r4.f()
-            boolean r4 = g1.AbstractC1089t.c(r9, r4, r1, r3, r2)
+            boolean r4 = g1.AbstractC1090t.c(r9, r4, r1, r3, r2)
             if (r4 == 0) goto L51
             E0.E r0 = r8.f1099k
             r0.f0(r1)

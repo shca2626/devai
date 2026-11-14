@@ -86,7 +86,7 @@ public interface m0 {
 
     void v(int i7, List list, boolean z7);
 
-    void w(int i7, AbstractC0775f abstractC0775f);
+    void w(int i7, AbstractC0776f abstractC0776f);
 
     void x(int i7, long j7);
 

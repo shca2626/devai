@@ -350,8 +350,8 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
         return new PlatformAudioProcessingState(PlatformAudioProcessingTopology.INDEPENDENT, new PlatformAudioProcessingComponentState(this.audioInput.isAcousticEchoCancelerSupported(), Boolean.valueOf(builtInAudioEffectsState.isAecRequested), builtInAudioEffectsState.aecActive), new PlatformAudioProcessingComponentState(this.audioInput.isNoiseSuppressorSupported(), Boolean.valueOf(builtInAudioEffectsState.isNsRequested), builtInAudioEffectsState.nsActive), new PlatformAudioProcessingComponentState(false, null, null));
     }
 
-    public void prewarmRecording() {
-        prewarmRecording(null);
+    public boolean prewarmRecording() {
+        return prewarmRecording(null);
     }
 
     @Override // org.webrtc.audio.AudioDeviceModule
@@ -369,8 +369,8 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
         }
     }
 
-    public void requestStartRecording() {
-        requestStartRecording(null);
+    public boolean requestStartRecording() {
+        return requestStartRecording(null);
     }
 
     public void requestStopRecording() {
@@ -416,15 +416,21 @@ public class JavaAudioDeviceModule implements AudioDeviceModule {
         this.useStereoOutput = z8;
     }
 
-    public void prewarmRecording(AudioProcessingOptions audioProcessingOptions) {
+    public boolean prewarmRecording(AudioProcessingOptions audioProcessingOptions) {
         this.audioInput.applyPlatformAudioProcessingOptions(audioProcessingOptions);
-        this.audioInput.initRecordingIfNeeded();
-        this.audioInput.prewarmRecordingIfNeeded();
+        if (this.audioInput.initRecordingIfNeeded()) {
+            return this.audioInput.prewarmRecordingIfNeeded();
+        }
+        Logging.w(TAG, "prewarmRecording: recorder initialization failed, skipping prewarm");
+        return false;
     }
 
-    public void requestStartRecording(AudioProcessingOptions audioProcessingOptions) {
+    public boolean requestStartRecording(AudioProcessingOptions audioProcessingOptions) {
         this.audioInput.applyPlatformAudioProcessingOptions(audioProcessingOptions);
-        this.audioInput.initRecordingIfNeeded();
-        this.audioInput.startRecordingIfNeeded();
+        if (this.audioInput.initRecordingIfNeeded()) {
+            return this.audioInput.startRecordingIfNeeded();
+        }
+        Logging.w(TAG, "requestStartRecording: recorder initialization failed");
+        return false;
     }
 }

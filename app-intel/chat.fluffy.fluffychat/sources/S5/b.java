@@ -1,10 +1,10 @@
 package S5;
 
 import java.util.NoSuchElementException;
-import z5.AbstractC1860D;
+import z5.AbstractC1863D;
 
 /* loaded from: classes.dex */
-public final class b extends AbstractC1860D {
+public final class b extends AbstractC1863D {
 
     /* renamed from: l, reason: collision with root package name */
     public final int f8208l;
@@ -34,7 +34,7 @@ public final class b extends AbstractC1860D {
         return this.f8210n;
     }
 
-    @Override // z5.AbstractC1860D
+    @Override // z5.AbstractC1863D
     public int nextInt() {
         int i7 = this.f8211o;
         if (i7 != this.f8209m) {

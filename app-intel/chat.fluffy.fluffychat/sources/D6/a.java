@@ -8,7 +8,7 @@ import java.security.PublicKey;
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECPublicKeySpec;
 import java.security.spec.InvalidKeySpecException;
-import t3.AbstractC1630b;
+import t3.AbstractC1629b;
 
 /* loaded from: classes3.dex */
 public abstract class a {
@@ -28,15 +28,15 @@ public abstract class a {
 
     public static final ECPublicKey c(String str) throws InvalidKeySpecException, NoSuchAlgorithmException {
         m.e(str, "<this>");
-        AbstractC1630b.a aVar = AbstractC1630b.a.NIST_P256;
-        PublicKey publicKeyGeneratePublic = KeyFactory.getInstance("EC").generatePublic(new ECPublicKeySpec(AbstractC1630b.l(aVar, AbstractC1630b.EnumC0270b.UNCOMPRESSED, a(str)), AbstractC1630b.e(aVar)));
+        AbstractC1629b.a aVar = AbstractC1629b.a.NIST_P256;
+        PublicKey publicKeyGeneratePublic = KeyFactory.getInstance("EC").generatePublic(new ECPublicKeySpec(AbstractC1629b.l(aVar, AbstractC1629b.EnumC0270b.UNCOMPRESSED, a(str)), AbstractC1629b.e(aVar)));
         m.c(publicKeyGeneratePublic, "null cannot be cast to non-null type java.security.interfaces.ECPublicKey");
         return (ECPublicKey) publicKeyGeneratePublic;
     }
 
     public static final String d(ECPublicKey eCPublicKey) {
         m.e(eCPublicKey, "<this>");
-        byte[] bArrN = AbstractC1630b.n(AbstractC1630b.a.NIST_P256, AbstractC1630b.EnumC0270b.UNCOMPRESSED, eCPublicKey.getW());
+        byte[] bArrN = AbstractC1629b.n(AbstractC1629b.a.NIST_P256, AbstractC1629b.EnumC0270b.UNCOMPRESSED, eCPublicKey.getW());
         m.d(bArrN, "pointEncode(...)");
         return b(bArrN);
     }

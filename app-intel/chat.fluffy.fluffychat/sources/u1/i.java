@@ -6,13 +6,13 @@ import B0.y;
 public abstract class i implements y.a {
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f22766a;
+    public final String f22772a;
 
     public i(String str) {
-        this.f22766a = str;
+        this.f22772a = str;
     }
 
     public String toString() {
-        return this.f22766a;
+        return this.f22772a;
     }
 }

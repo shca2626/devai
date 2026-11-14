@@ -1,7 +1,7 @@
 package com.dexterous.flutterlocalnotifications.models;
 
 import android.graphics.Color;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class NotificationAction implements Serializable {
     private static final String ALLOW_GENERATED_REPLIES = "allowGeneratedReplies";

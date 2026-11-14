@@ -1,19 +1,19 @@
 package p5;
 
 import java.util.List;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class P {
 
     /* renamed from: c, reason: collision with root package name */
-    public static final a f20983c = new a(null);
+    public static final a f20989c = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f20984a;
+    public final String f20990a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final N f20985b;
+    public final N f20991b;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -34,12 +34,12 @@ public final class P {
 
     public P(String str, N n7) {
         M5.m.e(n7, "type");
-        this.f20984a = str;
-        this.f20985b = n7;
+        this.f20990a = str;
+        this.f20991b = n7;
     }
 
     public final List a() {
-        return C1881o.l(this.f20984a, this.f20985b);
+        return C1884o.l(this.f20990a, this.f20991b);
     }
 
     public boolean equals(Object obj) {
@@ -48,8 +48,8 @@ public final class P {
                 return true;
             }
             P p7 = (P) obj;
-            C1450d c1450d = C1450d.f20989a;
-            if (c1450d.a(this.f20984a, p7.f20984a) && c1450d.a(this.f20985b, p7.f20985b)) {
+            C1449d c1449d = C1449d.f20995a;
+            if (c1449d.a(this.f20990a, p7.f20990a) && c1449d.a(this.f20991b, p7.f20991b)) {
                 return true;
             }
         }
@@ -58,11 +58,11 @@ public final class P {
 
     public int hashCode() {
         int iHashCode = P.class.hashCode() * 31;
-        C1450d c1450d = C1450d.f20989a;
-        return ((iHashCode + c1450d.b(this.f20984a)) * 31) + c1450d.b(this.f20985b);
+        C1449d c1449d = C1449d.f20995a;
+        return ((iHashCode + c1449d.b(this.f20990a)) * 31) + c1449d.b(this.f20991b);
     }
 
     public String toString() {
-        return "StringListResult(jsonEncodedValue=" + this.f20984a + ", type=" + this.f20985b + ")";
+        return "StringListResult(jsonEncodedValue=" + this.f20990a + ", type=" + this.f20991b + ")";
     }
 }

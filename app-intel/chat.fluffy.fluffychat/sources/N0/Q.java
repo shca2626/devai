@@ -20,8 +20,8 @@ public abstract class Q {
         }
     }
 
-    public static Pair b(InterfaceC0542m interfaceC0542m) {
-        Map mapE = interfaceC0542m.e();
+    public static Pair b(InterfaceC0543m interfaceC0543m) {
+        Map mapE = interfaceC0543m.e();
         if (mapE == null) {
             return null;
         }

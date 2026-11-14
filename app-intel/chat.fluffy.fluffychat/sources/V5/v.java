@@ -12,7 +12,7 @@ public class v extends u {
         int i8;
         int i9;
         M5.m.e(str, "<this>");
-        C0607a.a(i7);
+        C0608a.a(i7);
         int length = str.length();
         if (length == 0) {
             return null;
@@ -40,7 +40,7 @@ public class v extends u {
         }
         int i12 = -59652323;
         while (i8 < length) {
-            int iB = C0607a.b(str.charAt(i8), i7);
+            int iB = C0608a.b(str.charAt(i8), i7);
             if (iB < 0) {
                 return null;
             }
@@ -61,7 +61,7 @@ public class v extends u {
     public static final Long o(String str, int i7) {
         boolean z7;
         M5.m.e(str, "<this>");
-        C0607a.a(i7);
+        C0608a.a(i7);
         int length = str.length();
         Long l7 = null;
         if (length == 0) {
@@ -91,7 +91,7 @@ public class v extends u {
         long j8 = 0;
         long j9 = -256204778801521550L;
         while (i8 < length) {
-            int iB = C0607a.b(str.charAt(i8), i7);
+            int iB = C0608a.b(str.charAt(i8), i7);
             if (iB < 0) {
                 return l7;
             }

@@ -6,16 +6,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import z5.AbstractC1860D;
-import z5.C1878l;
-import z5.C1880n;
-import z5.C1881o;
+import z5.AbstractC1863D;
+import z5.C1881l;
+import z5.C1883n;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class s {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final s f20479a = new s();
+    public static final s f20478a = new s();
 
     public final boolean a(Object obj, Object obj2) {
         if ((obj instanceof byte[]) && (obj2 instanceof byte[])) {
@@ -34,12 +34,12 @@ public final class s {
             Object[] objArr = (Object[]) obj;
             Object[] objArr2 = (Object[]) obj2;
             if (objArr.length == objArr2.length) {
-                Iterable iterableX = C1878l.x(objArr);
+                Iterable iterableX = C1881l.x(objArr);
                 if (!(iterableX instanceof Collection) || !((Collection) iterableX).isEmpty()) {
                     Iterator it = iterableX.iterator();
                     while (it.hasNext()) {
-                        int iNextInt = ((AbstractC1860D) it).nextInt();
-                        if (!f20479a.a(objArr[iNextInt], objArr2[iNextInt])) {
+                        int iNextInt = ((AbstractC1863D) it).nextInt();
+                        if (!f20478a.a(objArr[iNextInt], objArr2[iNextInt])) {
                         }
                     }
                 }
@@ -51,12 +51,12 @@ public final class s {
             List list = (List) obj;
             List list2 = (List) obj2;
             if (list.size() == list2.size()) {
-                Iterable iterableJ = C1881o.j((Collection) obj);
+                Iterable iterableJ = C1884o.j((Collection) obj);
                 if (!(iterableJ instanceof Collection) || !((Collection) iterableJ).isEmpty()) {
                     Iterator it2 = iterableJ.iterator();
                     while (it2.hasNext()) {
-                        int iNextInt2 = ((AbstractC1860D) it2).nextInt();
-                        if (!f20479a.a(list.get(iNextInt2), list2.get(iNextInt2))) {
+                        int iNextInt2 = ((AbstractC1863D) it2).nextInt();
+                        if (!f20478a.a(list.get(iNextInt2), list2.get(iNextInt2))) {
                         }
                     }
                 }
@@ -72,7 +72,7 @@ public final class s {
         if (map.size() == map2.size()) {
             if (!map.isEmpty()) {
                 for (Map.Entry entry : map.entrySet()) {
-                    if (!map2.containsKey(entry.getKey()) || !f20479a.a(entry.getValue(), map2.get(entry.getKey()))) {
+                    if (!map2.containsKey(entry.getKey()) || !f20478a.a(entry.getValue(), map2.get(entry.getKey()))) {
                     }
                 }
             }
@@ -83,10 +83,10 @@ public final class s {
 
     public final List b(Throwable th) {
         M5.m.e(th, "exception");
-        return C1881o.l(th.getClass().getSimpleName(), th.toString(), "Cause: " + th.getCause() + ", Stacktrace: " + Log.getStackTraceString(th));
+        return C1884o.l(th.getClass().getSimpleName(), th.toString(), "Cause: " + th.getCause() + ", Stacktrace: " + Log.getStackTraceString(th));
     }
 
     public final List c(Object obj) {
-        return C1880n.d(obj);
+        return C1883n.d(obj);
     }
 }

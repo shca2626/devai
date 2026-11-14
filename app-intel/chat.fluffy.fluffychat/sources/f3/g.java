@@ -20,7 +20,7 @@ import android.os.Build;
 import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
-import e3.C1032a;
+import e3.C1033a;
 import f3.k;
 import f3.l;
 import f3.m;
@@ -36,7 +36,7 @@ public class g extends Drawable implements n {
     public static final Paint f15721J;
 
     /* renamed from: A, reason: collision with root package name */
-    public final C1032a f15722A;
+    public final C1033a f15722A;
 
     /* renamed from: B, reason: collision with root package name */
     public final l.b f15723B;
@@ -703,7 +703,7 @@ public class g extends Drawable implements n {
         this.f15743y = paint;
         Paint paint2 = new Paint(1);
         this.f15744z = paint2;
-        this.f15722A = new C1032a();
+        this.f15722A = new C1033a();
         if (Looper.getMainLooper().getThread() == Thread.currentThread()) {
             lVar = l.k();
         } else {

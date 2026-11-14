@@ -4,9 +4,9 @@ import M5.m;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
-import z5.AbstractC1860D;
-import z5.C1878l;
-import z5.C1882p;
+import z5.AbstractC1863D;
+import z5.C1881l;
+import z5.C1885p;
 
 /* loaded from: classes.dex */
 public abstract class h {
@@ -23,11 +23,11 @@ public abstract class h {
             }
         }
         if (i7 != iArr[i8]) {
-            S5.c cVarW = C1878l.w(iArr);
-            ArrayList arrayList = new ArrayList(C1882p.o(cVarW, 10));
+            S5.c cVarW = C1881l.w(iArr);
+            ArrayList arrayList = new ArrayList(C1885p.o(cVarW, 10));
             Iterator it = cVarW.iterator();
             while (it.hasNext()) {
-                arrayList.add(Integer.valueOf(iArr[((AbstractC1860D) it).nextInt()]));
+                arrayList.add(Integer.valueOf(iArr[((AbstractC1863D) it).nextInt()]));
             }
             Log.d("nearestValue", "Available values: " + arrayList);
             Log.d("nearestValue", "Adjusted to: " + iArr[i8]);

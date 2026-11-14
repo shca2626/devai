@@ -1,6 +1,6 @@
 package k3;
 
-import j3.AbstractC1237k;
+import j3.AbstractC1236k;
 import k3.N;
 
 /* loaded from: classes.dex */
@@ -10,7 +10,7 @@ public abstract class O {
         public boolean equals(Object obj) {
             if (obj instanceof N.a) {
                 N.a aVar = (N.a) obj;
-                if (getCount() == aVar.getCount() && AbstractC1237k.a(a(), aVar.a())) {
+                if (getCount() == aVar.getCount() && AbstractC1236k.a(a(), aVar.a())) {
                     return true;
                 }
             }

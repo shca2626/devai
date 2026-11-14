@@ -8,14 +8,14 @@ public final class t implements m {
     public static final t CE;
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ t[] f18251a;
+    public static final /* synthetic */ t[] f18259a;
 
     public static t valueOf(String str) {
         return (t) Enum.valueOf(t.class, str);
     }
 
     public static t[] values() {
-        return (t[]) f18251a.clone();
+        return (t[]) f18259a.clone();
     }
 
     static {
@@ -23,7 +23,7 @@ public final class t implements m {
         BCE = tVar;
         t tVar2 = new t("CE", 1);
         CE = tVar2;
-        f18251a = new t[]{tVar, tVar2};
+        f18259a = new t[]{tVar, tVar2};
     }
 
     @Override // j$.time.chrono.m

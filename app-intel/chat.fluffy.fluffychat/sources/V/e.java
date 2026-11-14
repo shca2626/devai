@@ -8,15 +8,15 @@ import android.util.Size;
 import android.util.SizeF;
 import com.fasterxml.jackson.core.JsonFactory;
 import java.io.Serializable;
-import y5.C1813h;
+import y5.C1812h;
 
 /* loaded from: classes.dex */
 public abstract class e {
-    public static final Bundle a(C1813h... c1813hArr) {
-        Bundle bundle = new Bundle(c1813hArr.length);
-        for (C1813h c1813h : c1813hArr) {
-            String str = (String) c1813h.a();
-            Object objB = c1813h.b();
+    public static final Bundle a(C1812h... c1812hArr) {
+        Bundle bundle = new Bundle(c1812hArr.length);
+        for (C1812h c1812h : c1812hArr) {
+            String str = (String) c1812h.a();
+            Object objB = c1812h.b();
             if (objB == null) {
                 bundle.putString(str, null);
             } else if (objB instanceof Boolean) {

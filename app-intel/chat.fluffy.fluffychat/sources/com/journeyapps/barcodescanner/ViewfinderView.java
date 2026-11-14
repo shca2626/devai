@@ -155,8 +155,8 @@ public class ViewfinderView extends View {
             int iHeight = (rect.height() / 2) + rect.top;
             canvas.drawRect(rect.left + 2, iHeight - 1, rect.right - 1, iHeight + 2, this.f14890l);
         }
-        float width2 = getWidth() / sVar.f19100l;
-        float height2 = getHeight() / sVar.f19101m;
+        float width2 = getWidth() / sVar.f19099l;
+        float height2 = getHeight() / sVar.f19100m;
         if (!this.f14899u.isEmpty()) {
             this.f14890l.setAlpha(80);
             this.f14890l.setColor(this.f14895q);

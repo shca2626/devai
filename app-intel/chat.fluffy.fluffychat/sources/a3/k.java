@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import c3.C0902b;
+import c3.C0903b;
 import q.d0;
 
 /* loaded from: classes.dex */
@@ -75,7 +75,7 @@ public abstract class k {
     }
 
     public static boolean g(Context context) {
-        return C0902b.b(context, O2.a.f6754q, false);
+        return C0903b.b(context, O2.a.f6754q, false);
     }
 
     public static boolean h(Context context, int[] iArr) {

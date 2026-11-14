@@ -1,23 +1,23 @@
 package g2;
 
-import Z.C0701j0;
+import Z.C0702j0;
 import android.graphics.Rect;
-import d2.C0978b;
+import d2.C0979b;
 
 /* loaded from: classes.dex */
 public final class k {
 
     /* renamed from: a, reason: collision with root package name */
-    public final C0978b f16208a;
+    public final C0979b f16208a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final C0701j0 f16209b;
+    public final C0702j0 f16209b;
 
-    public k(C0978b c0978b, C0701j0 c0701j0) {
-        M5.m.e(c0978b, "_bounds");
-        M5.m.e(c0701j0, "_windowInsetsCompat");
-        this.f16208a = c0978b;
-        this.f16209b = c0701j0;
+    public k(C0979b c0979b, C0702j0 c0702j0) {
+        M5.m.e(c0979b, "_bounds");
+        M5.m.e(c0702j0, "_windowInsetsCompat");
+        this.f16208a = c0979b;
+        this.f16209b = c0702j0;
     }
 
     public final Rect a() {
@@ -45,18 +45,18 @@ public final class k {
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
-    public /* synthetic */ k(Rect rect, C0701j0 c0701j0, int i7, M5.g gVar) {
+    public /* synthetic */ k(Rect rect, C0702j0 c0702j0, int i7, M5.g gVar) {
         if ((i7 & 2) != 0) {
-            c0701j0 = new C0701j0.a().a();
-            M5.m.d(c0701j0, "Builder().build()");
+            c0702j0 = new C0702j0.a().a();
+            M5.m.d(c0702j0, "Builder().build()");
         }
-        this(rect, c0701j0);
+        this(rect, c0702j0);
     }
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
-    public k(Rect rect, C0701j0 c0701j0) {
-        this(new C0978b(rect), c0701j0);
+    public k(Rect rect, C0702j0 c0702j0) {
+        this(new C0979b(rect), c0702j0);
         M5.m.e(rect, "bounds");
-        M5.m.e(c0701j0, "insets");
+        M5.m.e(c0702j0, "insets");
     }
 }

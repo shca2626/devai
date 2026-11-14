@@ -6,19 +6,19 @@ import java.util.Map;
 
 /* loaded from: classes2.dex */
 public interface q {
-    u A(TemporalAccessor temporalAccessor);
+    u H();
 
-    u I();
+    long O(TemporalAccessor temporalAccessor);
 
-    long P(TemporalAccessor temporalAccessor);
-
-    m V(m mVar, long j7);
+    m U(m mVar, long j7);
 
     boolean isDateBased();
 
-    boolean s(TemporalAccessor temporalAccessor);
+    boolean r(TemporalAccessor temporalAccessor);
 
-    default TemporalAccessor F(Map map, w wVar, x xVar) {
+    u z(TemporalAccessor temporalAccessor);
+
+    default TemporalAccessor E(Map map, w wVar, x xVar) {
         return null;
     }
 }

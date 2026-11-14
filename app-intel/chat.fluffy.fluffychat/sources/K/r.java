@@ -19,7 +19,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.Log;
-import b.InterfaceC0816a;
+import b.InterfaceC0817a;
 import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.HashMap;
@@ -101,8 +101,8 @@ public final class r {
         }
 
         @Override // K.r.g
-        public void a(InterfaceC0816a interfaceC0816a) {
-            interfaceC0816a.c(this.f4964a, this.f4965b, this.f4966c, this.f4967d);
+        public void a(InterfaceC0817a interfaceC0817a) {
+            interfaceC0817a.c(this.f4964a, this.f4965b, this.f4966c, this.f4967d);
         }
 
         public String toString() {
@@ -147,7 +147,7 @@ public final class r {
             public final ComponentName f4975a;
 
             /* renamed from: c, reason: collision with root package name */
-            public InterfaceC0816a f4977c;
+            public InterfaceC0817a f4977c;
 
             /* renamed from: b, reason: collision with root package name */
             public boolean f4976b = false;
@@ -212,7 +212,7 @@ public final class r {
         public final void e(ComponentName componentName, IBinder iBinder) {
             a aVar = (a) this.f4973o.get(componentName);
             if (aVar != null) {
-                aVar.f4977c = InterfaceC0816a.AbstractBinderC0128a.e(iBinder);
+                aVar.f4977c = InterfaceC0817a.AbstractBinderC0128a.e(iBinder);
                 aVar.f4979e = 0;
                 g(aVar);
             }
@@ -365,7 +365,7 @@ public final class r {
     }
 
     public interface g {
-        void a(InterfaceC0816a interfaceC0816a);
+        void a(InterfaceC0817a interfaceC0817a);
     }
 
     public r(Context context) {

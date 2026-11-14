@@ -4,14 +4,14 @@ package j3;
 public abstract class n {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final InterfaceC1239m f18720a = a();
+    public static final InterfaceC1238m f18719a = a();
 
-    public static final class b implements InterfaceC1239m {
+    public static final class b implements InterfaceC1238m {
         public b() {
         }
     }
 
-    public static InterfaceC1239m a() {
+    public static InterfaceC1238m a() {
         return new b();
     }
 

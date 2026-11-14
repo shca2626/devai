@@ -4,103 +4,58 @@ package j$.time;
 public abstract /* synthetic */ class k {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ int[] f18350a;
-
-    /* renamed from: b, reason: collision with root package name */
-    public static final /* synthetic */ int[] f18351b;
+    public static final /* synthetic */ int[] f18355a;
 
     static {
-        int[] iArr = new int[j$.time.temporal.b.values().length];
-        f18351b = iArr;
+        int[] iArr = new int[l.values().length];
+        f18355a = iArr;
         try {
-            iArr[j$.time.temporal.b.NANOS.ordinal()] = 1;
+            iArr[l.FEBRUARY.ordinal()] = 1;
         } catch (NoSuchFieldError unused) {
         }
         try {
-            f18351b[j$.time.temporal.b.MICROS.ordinal()] = 2;
+            f18355a[l.APRIL.ordinal()] = 2;
         } catch (NoSuchFieldError unused2) {
         }
         try {
-            f18351b[j$.time.temporal.b.MILLIS.ordinal()] = 3;
+            f18355a[l.JUNE.ordinal()] = 3;
         } catch (NoSuchFieldError unused3) {
         }
         try {
-            f18351b[j$.time.temporal.b.SECONDS.ordinal()] = 4;
+            f18355a[l.SEPTEMBER.ordinal()] = 4;
         } catch (NoSuchFieldError unused4) {
         }
         try {
-            f18351b[j$.time.temporal.b.MINUTES.ordinal()] = 5;
+            f18355a[l.NOVEMBER.ordinal()] = 5;
         } catch (NoSuchFieldError unused5) {
         }
         try {
-            f18351b[j$.time.temporal.b.HOURS.ordinal()] = 6;
+            f18355a[l.JANUARY.ordinal()] = 6;
         } catch (NoSuchFieldError unused6) {
         }
         try {
-            f18351b[j$.time.temporal.b.HALF_DAYS.ordinal()] = 7;
+            f18355a[l.MARCH.ordinal()] = 7;
         } catch (NoSuchFieldError unused7) {
         }
-        int[] iArr2 = new int[j$.time.temporal.a.values().length];
-        f18350a = iArr2;
         try {
-            iArr2[j$.time.temporal.a.NANO_OF_SECOND.ordinal()] = 1;
+            f18355a[l.MAY.ordinal()] = 8;
         } catch (NoSuchFieldError unused8) {
         }
         try {
-            f18350a[j$.time.temporal.a.NANO_OF_DAY.ordinal()] = 2;
+            f18355a[l.JULY.ordinal()] = 9;
         } catch (NoSuchFieldError unused9) {
         }
         try {
-            f18350a[j$.time.temporal.a.MICRO_OF_SECOND.ordinal()] = 3;
+            f18355a[l.AUGUST.ordinal()] = 10;
         } catch (NoSuchFieldError unused10) {
         }
         try {
-            f18350a[j$.time.temporal.a.MICRO_OF_DAY.ordinal()] = 4;
+            f18355a[l.OCTOBER.ordinal()] = 11;
         } catch (NoSuchFieldError unused11) {
         }
         try {
-            f18350a[j$.time.temporal.a.MILLI_OF_SECOND.ordinal()] = 5;
+            f18355a[l.DECEMBER.ordinal()] = 12;
         } catch (NoSuchFieldError unused12) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.MILLI_OF_DAY.ordinal()] = 6;
-        } catch (NoSuchFieldError unused13) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.SECOND_OF_MINUTE.ordinal()] = 7;
-        } catch (NoSuchFieldError unused14) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.SECOND_OF_DAY.ordinal()] = 8;
-        } catch (NoSuchFieldError unused15) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.MINUTE_OF_HOUR.ordinal()] = 9;
-        } catch (NoSuchFieldError unused16) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.MINUTE_OF_DAY.ordinal()] = 10;
-        } catch (NoSuchFieldError unused17) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.HOUR_OF_AMPM.ordinal()] = 11;
-        } catch (NoSuchFieldError unused18) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.CLOCK_HOUR_OF_AMPM.ordinal()] = 12;
-        } catch (NoSuchFieldError unused19) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.HOUR_OF_DAY.ordinal()] = 13;
-        } catch (NoSuchFieldError unused20) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.CLOCK_HOUR_OF_DAY.ordinal()] = 14;
-        } catch (NoSuchFieldError unused21) {
-        }
-        try {
-            f18350a[j$.time.temporal.a.AMPM_OF_DAY.ordinal()] = 15;
-        } catch (NoSuchFieldError unused22) {
         }
     }
 }

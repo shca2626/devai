@@ -187,7 +187,7 @@ public abstract class l0 {
         DOUBLE(Double.valueOf(0.0d)),
         BOOLEAN(Boolean.FALSE),
         STRING(""),
-        BYTE_STRING(AbstractC0775f.f12025m),
+        BYTE_STRING(AbstractC0776f.f12025m),
         ENUM(null),
         MESSAGE(null);
 

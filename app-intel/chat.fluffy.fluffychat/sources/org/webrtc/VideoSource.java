@@ -85,10 +85,10 @@ public class VideoSource extends MediaSource {
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$setVideoProcessor$1(final VideoFrame videoFrame) {
-        runWithReference(new Runnable() { // from class: org.webrtc.n0
+        runWithReference(new Runnable() { // from class: org.webrtc.u0
             @Override // java.lang.Runnable
             public final void run() {
-                this.f20591l.lambda$setVideoProcessor$0(videoFrame);
+                this.f20619l.lambda$setVideoProcessor$0(videoFrame);
             }
         });
     }
@@ -129,10 +129,10 @@ public class VideoSource extends MediaSource {
                 }
                 this.videoProcessor = videoProcessor;
                 if (videoProcessor != null) {
-                    videoProcessor.setSink(new VideoSink() { // from class: org.webrtc.o0
+                    videoProcessor.setSink(new VideoSink() { // from class: org.webrtc.v0
                         @Override // org.webrtc.VideoSink
                         public final void onFrame(VideoFrame videoFrame) {
-                            this.f20598l.lambda$setVideoProcessor$1(videoFrame);
+                            this.f20621l.lambda$setVideoProcessor$1(videoFrame);
                         }
                     });
                     if (this.isCapturerRunning) {

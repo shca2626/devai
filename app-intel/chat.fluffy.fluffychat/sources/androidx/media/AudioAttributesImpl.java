@@ -1,9 +1,9 @@
 package androidx.media;
 
-import b2.InterfaceC0841c;
+import b2.InterfaceC0842c;
 
 /* loaded from: classes.dex */
-public interface AudioAttributesImpl extends InterfaceC0841c {
+public interface AudioAttributesImpl extends InterfaceC0842c {
 
     public interface a {
         a a(int i7);

@@ -2,7 +2,7 @@ package v2;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import y5.C1824s;
+import y5.C1823s;
 
 /* loaded from: classes.dex */
 public abstract class v {
@@ -11,11 +11,11 @@ public abstract class v {
     }
 
     public static /* synthetic */ Object c(v vVar, x2.f fVar, C5.e eVar) {
-        return C1824s.f24014a;
+        return C1823s.f24020a;
     }
 
     public static /* synthetic */ Object g(v vVar, x2.n nVar, C5.e eVar) {
-        return C1824s.f24014a;
+        return C1823s.f24020a;
     }
 
     public Object b(x2.f fVar, C5.e eVar) {

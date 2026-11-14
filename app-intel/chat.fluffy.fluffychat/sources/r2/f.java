@@ -6,23 +6,23 @@ import android.graphics.drawable.Drawable;
 public final class f {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Drawable f22123a;
+    public final Drawable f22129a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final boolean f22124b;
+    public final boolean f22130b;
 
     public f(Drawable drawable, boolean z7) {
         M5.m.e(drawable, "drawable");
-        this.f22123a = drawable;
-        this.f22124b = z7;
+        this.f22129a = drawable;
+        this.f22130b = z7;
     }
 
     public final Drawable a() {
-        return this.f22123a;
+        return this.f22129a;
     }
 
     public final boolean b() {
-        return this.f22124b;
+        return this.f22130b;
     }
 
     public boolean equals(Object obj) {
@@ -33,13 +33,13 @@ public final class f {
             return false;
         }
         f fVar = (f) obj;
-        return M5.m.a(this.f22123a, fVar.f22123a) && this.f22124b == fVar.f22124b;
+        return M5.m.a(this.f22129a, fVar.f22129a) && this.f22130b == fVar.f22130b;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        int iHashCode = this.f22123a.hashCode() * 31;
-        boolean z7 = this.f22124b;
+        int iHashCode = this.f22129a.hashCode() * 31;
+        boolean z7 = this.f22130b;
         int i7 = z7;
         if (z7 != 0) {
             i7 = 1;
@@ -48,6 +48,6 @@ public final class f {
     }
 
     public String toString() {
-        return "DecodeResult(drawable=" + this.f22123a + ", isSampled=" + this.f22124b + ')';
+        return "DecodeResult(drawable=" + this.f22129a + ", isSampled=" + this.f22130b + ')';
     }
 }

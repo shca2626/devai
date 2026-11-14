@@ -4,7 +4,7 @@ import C5.e;
 import x2.f;
 import x2.j;
 import x2.n;
-import y5.C1824s;
+import y5.C1823s;
 
 /* loaded from: classes.dex */
 public final class a implements b {
@@ -19,7 +19,7 @@ public final class a implements b {
         } else if (jVar instanceof f) {
             cVar.onError(jVar.a());
         }
-        return C1824s.f24014a;
+        return C1823s.f24020a;
     }
 
     public String toString() {

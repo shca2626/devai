@@ -11,54 +11,54 @@ import okhttp3.internal.publicsuffix.PublicSuffixDatabase;
 public final class l {
 
     /* renamed from: j, reason: collision with root package name */
-    public static final Pattern f19368j = Pattern.compile("(\\d{2,4})[^\\d]*");
+    public static final Pattern f19367j = Pattern.compile("(\\d{2,4})[^\\d]*");
 
     /* renamed from: k, reason: collision with root package name */
-    public static final Pattern f19369k = Pattern.compile("(?i)(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec).*");
+    public static final Pattern f19368k = Pattern.compile("(?i)(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec).*");
 
     /* renamed from: l, reason: collision with root package name */
-    public static final Pattern f19370l = Pattern.compile("(\\d{1,2})[^\\d]*");
+    public static final Pattern f19369l = Pattern.compile("(\\d{1,2})[^\\d]*");
 
     /* renamed from: m, reason: collision with root package name */
-    public static final Pattern f19371m = Pattern.compile("(\\d{1,2}):(\\d{1,2}):(\\d{1,2})[^\\d]*");
+    public static final Pattern f19370m = Pattern.compile("(\\d{1,2}):(\\d{1,2}):(\\d{1,2})[^\\d]*");
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f19372a;
+    public final String f19371a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f19373b;
+    public final String f19372b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final long f19374c;
+    public final long f19373c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final String f19375d;
+    public final String f19374d;
 
     /* renamed from: e, reason: collision with root package name */
-    public final String f19376e;
+    public final String f19375e;
 
     /* renamed from: f, reason: collision with root package name */
-    public final boolean f19377f;
+    public final boolean f19376f;
 
     /* renamed from: g, reason: collision with root package name */
-    public final boolean f19378g;
+    public final boolean f19377g;
 
     /* renamed from: h, reason: collision with root package name */
-    public final boolean f19379h;
+    public final boolean f19378h;
 
     /* renamed from: i, reason: collision with root package name */
-    public final boolean f19380i;
+    public final boolean f19379i;
 
     public l(String str, String str2, long j7, String str3, String str4, boolean z7, boolean z8, boolean z9, boolean z10) {
-        this.f19372a = str;
-        this.f19373b = str2;
-        this.f19374c = j7;
-        this.f19375d = str3;
-        this.f19376e = str4;
-        this.f19377f = z7;
-        this.f19378g = z8;
-        this.f19380i = z9;
-        this.f19379h = z10;
+        this.f19371a = str;
+        this.f19372b = str2;
+        this.f19373c = j7;
+        this.f19374d = str3;
+        this.f19375e = str4;
+        this.f19376f = z7;
+        this.f19377g = z8;
+        this.f19379i = z9;
+        this.f19378h = z10;
     }
 
     public static int a(String str, int i7, int i8, boolean z7) {
@@ -224,7 +224,7 @@ public final class l {
     }
 
     public String c() {
-        return this.f19372a;
+        return this.f19371a;
     }
 
     public boolean equals(Object obj) {
@@ -232,48 +232,48 @@ public final class l {
             return false;
         }
         l lVar = (l) obj;
-        return lVar.f19372a.equals(this.f19372a) && lVar.f19373b.equals(this.f19373b) && lVar.f19375d.equals(this.f19375d) && lVar.f19376e.equals(this.f19376e) && lVar.f19374c == this.f19374c && lVar.f19377f == this.f19377f && lVar.f19378g == this.f19378g && lVar.f19379h == this.f19379h && lVar.f19380i == this.f19380i;
+        return lVar.f19371a.equals(this.f19371a) && lVar.f19372b.equals(this.f19372b) && lVar.f19374d.equals(this.f19374d) && lVar.f19375e.equals(this.f19375e) && lVar.f19373c == this.f19373c && lVar.f19376f == this.f19376f && lVar.f19377g == this.f19377g && lVar.f19378h == this.f19378h && lVar.f19379i == this.f19379i;
     }
 
     public int hashCode() {
-        int iHashCode = (((((((527 + this.f19372a.hashCode()) * 31) + this.f19373b.hashCode()) * 31) + this.f19375d.hashCode()) * 31) + this.f19376e.hashCode()) * 31;
-        long j7 = this.f19374c;
-        return ((((((((iHashCode + ((int) (j7 ^ (j7 >>> 32)))) * 31) + (!this.f19377f ? 1 : 0)) * 31) + (!this.f19378g ? 1 : 0)) * 31) + (!this.f19379h ? 1 : 0)) * 31) + (!this.f19380i ? 1 : 0);
+        int iHashCode = (((((((527 + this.f19371a.hashCode()) * 31) + this.f19372b.hashCode()) * 31) + this.f19374d.hashCode()) * 31) + this.f19375e.hashCode()) * 31;
+        long j7 = this.f19373c;
+        return ((((((((iHashCode + ((int) (j7 ^ (j7 >>> 32)))) * 31) + (!this.f19376f ? 1 : 0)) * 31) + (!this.f19377g ? 1 : 0)) * 31) + (!this.f19378h ? 1 : 0)) * 31) + (!this.f19379i ? 1 : 0);
     }
 
     public String j(boolean z7) {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.f19372a);
+        sb.append(this.f19371a);
         sb.append('=');
-        sb.append(this.f19373b);
-        if (this.f19379h) {
-            if (this.f19374c == Long.MIN_VALUE) {
+        sb.append(this.f19372b);
+        if (this.f19378h) {
+            if (this.f19373c == Long.MIN_VALUE) {
                 sb.append("; max-age=0");
             } else {
                 sb.append("; expires=");
-                sb.append(o6.d.a(new Date(this.f19374c)));
+                sb.append(o6.d.a(new Date(this.f19373c)));
             }
         }
-        if (!this.f19380i) {
+        if (!this.f19379i) {
             sb.append("; domain=");
             if (z7) {
                 sb.append(".");
             }
-            sb.append(this.f19375d);
+            sb.append(this.f19374d);
         }
         sb.append("; path=");
-        sb.append(this.f19376e);
-        if (this.f19377f) {
+        sb.append(this.f19375e);
+        if (this.f19376f) {
             sb.append("; secure");
         }
-        if (this.f19378g) {
+        if (this.f19377g) {
             sb.append("; httponly");
         }
         return sb.toString();
     }
 
     public String k() {
-        return this.f19373b;
+        return this.f19372b;
     }
 
     public String toString() {

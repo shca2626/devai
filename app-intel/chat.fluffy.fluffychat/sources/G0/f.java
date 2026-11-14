@@ -1,12 +1,12 @@
 package G0;
 
-import B0.InterfaceC0309k;
+import B0.InterfaceC0310k;
 import android.net.Uri;
 import java.util.Collections;
 import java.util.Map;
 
 /* loaded from: classes.dex */
-public interface f extends InterfaceC0309k {
+public interface f extends InterfaceC0310k {
 
     public interface a {
         f a();

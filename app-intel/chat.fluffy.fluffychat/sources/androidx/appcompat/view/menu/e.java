@@ -1,6 +1,6 @@
 package androidx.appcompat.view.menu;
 
-import Z.AbstractC0684b;
+import Z.AbstractC0685b;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -221,8 +221,8 @@ public class e implements R.a {
             return false;
         }
         boolean zK = gVar.k();
-        AbstractC0684b abstractC0684bB = gVar.b();
-        boolean z7 = abstractC0684bB != null && abstractC0684bB.a();
+        AbstractC0685b abstractC0685bB = gVar.b();
+        boolean z7 = abstractC0685bB != null && abstractC0685bB.a();
         if (gVar.j()) {
             boolean zExpandActionView = gVar.expandActionView() | zK;
             if (zExpandActionView) {
@@ -244,7 +244,7 @@ public class e implements R.a {
         }
         l lVar = (l) gVar.getSubMenu();
         if (z7) {
-            abstractC0684bB.e(lVar);
+            abstractC0685bB.e(lVar);
         }
         boolean zJ = j(lVar, iVar) | zK;
         if (!zJ) {

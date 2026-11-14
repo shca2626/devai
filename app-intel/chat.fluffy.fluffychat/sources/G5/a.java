@@ -3,7 +3,7 @@ package G5;
 import M5.m;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import z5.C1878l;
+import z5.C1881l;
 
 /* loaded from: classes.dex */
 public class a {
@@ -38,7 +38,7 @@ public class a {
                 if (m.a(method2.getName(), "addSuppressed")) {
                     Class<?>[] parameterTypes = method2.getParameterTypes();
                     m.d(parameterTypes, "getParameterTypes(...)");
-                    if (m.a(C1878l.H(parameterTypes), Throwable.class)) {
+                    if (m.a(C1881l.H(parameterTypes), Throwable.class)) {
                         break;
                     }
                 }

@@ -3,22 +3,22 @@ package io.flutter.view;
 import android.graphics.SurfaceTexture;
 import android.media.Image;
 import android.view.Surface;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 
 /* loaded from: classes.dex */
 public interface TextureRegistry {
 
-    @InterfaceC1116a
+    @InterfaceC1117a
     public interface GLTextureConsumer {
         SurfaceTexture getSurfaceTexture();
     }
 
-    @InterfaceC1116a
+    @InterfaceC1117a
     public interface ImageConsumer {
         Image acquireLatestImage();
     }
 
-    @InterfaceC1116a
+    @InterfaceC1117a
     public interface ImageTextureEntry {
         /* synthetic */ long id();
 
@@ -27,7 +27,7 @@ public interface TextureRegistry {
         /* synthetic */ void release();
     }
 
-    @InterfaceC1116a
+    @InterfaceC1117a
     public interface SurfaceProducer {
 
         public interface a {
@@ -63,7 +63,7 @@ public interface TextureRegistry {
         void setSize(int i7, int i8);
     }
 
-    @InterfaceC1116a
+    @InterfaceC1117a
     public interface SurfaceTextureEntry {
         /* synthetic */ long id();
 

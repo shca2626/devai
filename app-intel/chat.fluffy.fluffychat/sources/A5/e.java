@@ -33,7 +33,7 @@ public final class e extends a {
         return this.f310l.n(collection);
     }
 
-    @Override // z5.AbstractC1872f
+    @Override // z5.AbstractC1875f
     public int f() {
         return this.f310l.size();
     }

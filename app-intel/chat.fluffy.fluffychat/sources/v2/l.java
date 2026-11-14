@@ -6,16 +6,16 @@ import java.io.File;
 public final class l extends h {
 
     /* renamed from: d, reason: collision with root package name */
-    public static volatile int f22939d;
+    public static volatile int f22945d;
 
     /* renamed from: b, reason: collision with root package name */
-    public static final l f22937b = new l();
+    public static final l f22943b = new l();
 
     /* renamed from: c, reason: collision with root package name */
-    public static final File f22938c = new File("/proc/self/fd");
+    public static final File f22944c = new File("/proc/self/fd");
 
     /* renamed from: e, reason: collision with root package name */
-    public static volatile boolean f22940e = true;
+    public static volatile boolean f22946e = true;
 
     public l() {
         super(null);
@@ -35,23 +35,23 @@ public final class l extends h {
 
     public final synchronized boolean b(C2.l lVar) {
         try {
-            int i7 = f22939d;
-            f22939d = i7 + 1;
+            int i7 = f22945d;
+            f22945d = i7 + 1;
             if (i7 >= 50) {
-                f22939d = 0;
-                String[] list = f22938c.list();
+                f22945d = 0;
+                String[] list = f22944c.list();
                 if (list == null) {
                     list = new String[0];
                 }
                 int length = list.length;
-                f22940e = length < 750;
-                if (!f22940e && lVar != null && lVar.a() <= 5) {
+                f22946e = length < 750;
+                if (!f22946e && lVar != null && lVar.a() <= 5) {
                     lVar.b("LimitedFileDescriptorHardwareBitmapService", 5, M5.m.j("Unable to allocate more hardware bitmaps. Number of used file descriptors: ", Integer.valueOf(length)), null);
                 }
             }
         } catch (Throwable th) {
             throw th;
         }
-        return f22940e;
+        return f22946e;
     }
 }

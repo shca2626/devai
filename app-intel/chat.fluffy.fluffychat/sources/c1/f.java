@@ -2,13 +2,13 @@ package c1;
 
 import E0.O;
 import android.net.Uri;
-import j3.C1234h;
+import j3.C1233h;
 
 /* loaded from: classes.dex */
 public abstract class f {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final C1234h f13873a = C1234h.h(",");
+    public static final C1233h f13873a = C1233h.h(",");
 
     public static final class a {
         public abstract f a();

@@ -2,7 +2,7 @@ package S4;
 
 import M5.m;
 import java.util.List;
-import z5.C1880n;
+import z5.C1883n;
 
 /* loaded from: classes.dex */
 public final class b {
@@ -37,7 +37,7 @@ public final class b {
     }
 
     public final List b() {
-        return C1880n.d(this.f8194a);
+        return C1883n.d(this.f8194a);
     }
 
     public boolean equals(Object obj) {

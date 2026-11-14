@@ -3,7 +3,7 @@ package a3;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.text.TextPaint;
-import c3.C0904d;
+import c3.C0905d;
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
@@ -13,7 +13,7 @@ public class i {
     public float f10763c;
 
     /* renamed from: f, reason: collision with root package name */
-    public C0904d f10766f;
+    public C0905d f10766f;
 
     /* renamed from: a, reason: collision with root package name */
     public final TextPaint f10761a = new TextPaint(1);
@@ -72,7 +72,7 @@ public class i {
         return this.f10761a.measureText(charSequence, 0, charSequence.length());
     }
 
-    public C0904d d() {
+    public C0905d d() {
         return this.f10766f;
     }
 
@@ -94,16 +94,16 @@ public class i {
         this.f10765e = new WeakReference(bVar);
     }
 
-    public void h(C0904d c0904d, Context context) {
-        if (this.f10766f != c0904d) {
-            this.f10766f = c0904d;
-            if (c0904d != null) {
-                c0904d.o(context, this.f10761a, this.f10762b);
+    public void h(C0905d c0905d, Context context) {
+        if (this.f10766f != c0905d) {
+            this.f10766f = c0905d;
+            if (c0905d != null) {
+                c0905d.o(context, this.f10761a, this.f10762b);
                 b bVar = (b) this.f10765e.get();
                 if (bVar != null) {
                     this.f10761a.drawableState = bVar.getState();
                 }
-                c0904d.n(context, this.f10761a, this.f10762b);
+                c0905d.n(context, this.f10761a, this.f10762b);
                 this.f10764d = true;
             }
             b bVar2 = (b) this.f10765e.get();

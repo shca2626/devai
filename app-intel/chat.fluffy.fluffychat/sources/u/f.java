@@ -9,174 +9,174 @@ import java.security.Signature;
 import java.util.concurrent.Executor;
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
-import r0.AbstractC1517J;
-import r0.ActivityC1554v;
+import r0.AbstractC1516J;
+import r0.ActivityC1553v;
 
 /* loaded from: classes.dex */
 public class f {
 
     /* renamed from: a, reason: collision with root package name */
-    public AbstractC1517J f22642a;
+    public AbstractC1516J f22648a;
 
     public static class b {
 
         /* renamed from: a, reason: collision with root package name */
-        public final c f22643a;
+        public final c f22649a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final int f22644b;
+        public final int f22650b;
 
         public b(c cVar, int i7) {
-            this.f22643a = cVar;
-            this.f22644b = i7;
+            this.f22649a = cVar;
+            this.f22650b = i7;
         }
 
         public int a() {
-            return this.f22644b;
+            return this.f22650b;
         }
 
         public c b() {
-            return this.f22643a;
+            return this.f22649a;
         }
     }
 
     public static class d {
 
         /* renamed from: a, reason: collision with root package name */
-        public final CharSequence f22649a;
+        public final CharSequence f22655a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final CharSequence f22650b;
+        public final CharSequence f22656b;
 
         /* renamed from: c, reason: collision with root package name */
-        public final CharSequence f22651c;
+        public final CharSequence f22657c;
 
         /* renamed from: d, reason: collision with root package name */
-        public final CharSequence f22652d;
+        public final CharSequence f22658d;
 
         /* renamed from: e, reason: collision with root package name */
-        public final boolean f22653e;
+        public final boolean f22659e;
 
         /* renamed from: f, reason: collision with root package name */
-        public final boolean f22654f;
+        public final boolean f22660f;
 
         /* renamed from: g, reason: collision with root package name */
-        public final int f22655g;
+        public final int f22661g;
 
         public static class a {
 
             /* renamed from: a, reason: collision with root package name */
-            public CharSequence f22656a = null;
+            public CharSequence f22662a = null;
 
             /* renamed from: b, reason: collision with root package name */
-            public CharSequence f22657b = null;
+            public CharSequence f22663b = null;
 
             /* renamed from: c, reason: collision with root package name */
-            public CharSequence f22658c = null;
+            public CharSequence f22664c = null;
 
             /* renamed from: d, reason: collision with root package name */
-            public CharSequence f22659d = null;
+            public CharSequence f22665d = null;
 
             /* renamed from: e, reason: collision with root package name */
-            public boolean f22660e = true;
+            public boolean f22666e = true;
 
             /* renamed from: f, reason: collision with root package name */
-            public boolean f22661f = false;
+            public boolean f22667f = false;
 
             /* renamed from: g, reason: collision with root package name */
-            public int f22662g = 0;
+            public int f22668g = 0;
 
             public d a() {
-                if (TextUtils.isEmpty(this.f22656a)) {
+                if (TextUtils.isEmpty(this.f22662a)) {
                     throw new IllegalArgumentException("Title must be set and non-empty.");
                 }
-                if (!AbstractC1640b.e(this.f22662g)) {
-                    throw new IllegalArgumentException("Authenticator combination is unsupported on API " + Build.VERSION.SDK_INT + ": " + AbstractC1640b.a(this.f22662g));
+                if (!AbstractC1639b.e(this.f22668g)) {
+                    throw new IllegalArgumentException("Authenticator combination is unsupported on API " + Build.VERSION.SDK_INT + ": " + AbstractC1639b.a(this.f22668g));
                 }
-                int i7 = this.f22662g;
-                boolean zC = i7 != 0 ? AbstractC1640b.c(i7) : this.f22661f;
-                if (TextUtils.isEmpty(this.f22659d) && !zC) {
+                int i7 = this.f22668g;
+                boolean zC = i7 != 0 ? AbstractC1639b.c(i7) : this.f22667f;
+                if (TextUtils.isEmpty(this.f22665d) && !zC) {
                     throw new IllegalArgumentException("Negative text must be set and non-empty.");
                 }
-                if (TextUtils.isEmpty(this.f22659d) || !zC) {
-                    return new d(this.f22656a, this.f22657b, this.f22658c, this.f22659d, this.f22660e, this.f22661f, this.f22662g);
+                if (TextUtils.isEmpty(this.f22665d) || !zC) {
+                    return new d(this.f22662a, this.f22663b, this.f22664c, this.f22665d, this.f22666e, this.f22667f, this.f22668g);
                 }
                 throw new IllegalArgumentException("Negative text must not be set if device credential authentication is allowed.");
             }
 
             public a b(int i7) {
-                this.f22662g = i7;
+                this.f22668g = i7;
                 return this;
             }
 
             public a c(boolean z7) {
-                this.f22660e = z7;
+                this.f22666e = z7;
                 return this;
             }
 
             public a d(CharSequence charSequence) {
-                this.f22658c = charSequence;
+                this.f22664c = charSequence;
                 return this;
             }
 
             public a e(CharSequence charSequence) {
-                this.f22659d = charSequence;
+                this.f22665d = charSequence;
                 return this;
             }
 
             public a f(CharSequence charSequence) {
-                this.f22657b = charSequence;
+                this.f22663b = charSequence;
                 return this;
             }
 
             public a g(CharSequence charSequence) {
-                this.f22656a = charSequence;
+                this.f22662a = charSequence;
                 return this;
             }
         }
 
         public d(CharSequence charSequence, CharSequence charSequence2, CharSequence charSequence3, CharSequence charSequence4, boolean z7, boolean z8, int i7) {
-            this.f22649a = charSequence;
-            this.f22650b = charSequence2;
-            this.f22651c = charSequence3;
-            this.f22652d = charSequence4;
-            this.f22653e = z7;
-            this.f22654f = z8;
-            this.f22655g = i7;
+            this.f22655a = charSequence;
+            this.f22656b = charSequence2;
+            this.f22657c = charSequence3;
+            this.f22658d = charSequence4;
+            this.f22659e = z7;
+            this.f22660f = z8;
+            this.f22661g = i7;
         }
 
         public int a() {
-            return this.f22655g;
+            return this.f22661g;
         }
 
         public CharSequence b() {
-            return this.f22651c;
+            return this.f22657c;
         }
 
         public CharSequence c() {
-            CharSequence charSequence = this.f22652d;
+            CharSequence charSequence = this.f22658d;
             return charSequence != null ? charSequence : "";
         }
 
         public CharSequence d() {
-            return this.f22650b;
+            return this.f22656b;
         }
 
         public CharSequence e() {
-            return this.f22649a;
+            return this.f22655a;
         }
 
         public boolean f() {
-            return this.f22653e;
+            return this.f22659e;
         }
 
         public boolean g() {
-            return this.f22654f;
+            return this.f22660f;
         }
     }
 
-    public f(ActivityC1554v activityC1554v, Executor executor, a aVar) {
-        if (activityC1554v == null) {
+    public f(ActivityC1553v activityC1553v, Executor executor, a aVar) {
+        if (activityC1553v == null) {
             throw new IllegalArgumentException("FragmentActivity must not be null.");
         }
         if (executor == null) {
@@ -185,27 +185,27 @@ public class f {
         if (aVar == null) {
             throw new IllegalArgumentException("AuthenticationCallback must not be null.");
         }
-        g(activityC1554v.T0(), f(activityC1554v), executor, aVar);
+        g(activityC1553v.T0(), f(activityC1553v), executor, aVar);
     }
 
-    public static u.d d(AbstractC1517J abstractC1517J) {
-        return (u.d) abstractC1517J.j0("androidx.biometric.BiometricFragment");
+    public static u.d d(AbstractC1516J abstractC1516J) {
+        return (u.d) abstractC1516J.j0("androidx.biometric.BiometricFragment");
     }
 
-    public static u.d e(AbstractC1517J abstractC1517J) {
-        u.d dVarD = d(abstractC1517J);
+    public static u.d e(AbstractC1516J abstractC1516J) {
+        u.d dVarD = d(abstractC1516J);
         if (dVarD != null) {
             return dVarD;
         }
         u.d dVarX2 = u.d.x2();
-        abstractC1517J.o().d(dVarX2, "androidx.biometric.BiometricFragment").g();
-        abstractC1517J.f0();
+        abstractC1516J.o().d(dVarX2, "androidx.biometric.BiometricFragment").g();
+        abstractC1516J.f0();
         return dVarX2;
     }
 
-    public static g f(ActivityC1554v activityC1554v) {
-        if (activityC1554v != null) {
-            return (g) new N(activityC1554v).b(g.class);
+    public static g f(ActivityC1553v activityC1553v) {
+        if (activityC1553v != null) {
+            return (g) new N(activityC1553v).b(g.class);
         }
         return null;
     }
@@ -218,23 +218,23 @@ public class f {
     }
 
     public final void b(d dVar, c cVar) {
-        AbstractC1517J abstractC1517J = this.f22642a;
-        if (abstractC1517J == null) {
+        AbstractC1516J abstractC1516J = this.f22648a;
+        if (abstractC1516J == null) {
             Log.e("BiometricPromptCompat", "Unable to start authentication. Client fragment manager was null.");
-        } else if (abstractC1517J.Q0()) {
+        } else if (abstractC1516J.Q0()) {
             Log.e("BiometricPromptCompat", "Unable to start authentication. Called after onSaveInstanceState().");
         } else {
-            e(this.f22642a).h2(dVar, cVar);
+            e(this.f22648a).h2(dVar, cVar);
         }
     }
 
     public void c() {
-        AbstractC1517J abstractC1517J = this.f22642a;
-        if (abstractC1517J == null) {
+        AbstractC1516J abstractC1516J = this.f22648a;
+        if (abstractC1516J == null) {
             Log.e("BiometricPromptCompat", "Unable to start authentication. Client fragment manager was null.");
             return;
         }
-        u.d dVarD = d(abstractC1517J);
+        u.d dVarD = d(abstractC1516J);
         if (dVarD == null) {
             Log.e("BiometricPromptCompat", "Unable to cancel authentication. BiometricFragment not found.");
         } else {
@@ -242,8 +242,8 @@ public class f {
         }
     }
 
-    public final void g(AbstractC1517J abstractC1517J, g gVar, Executor executor, a aVar) {
-        this.f22642a = abstractC1517J;
+    public final void g(AbstractC1516J abstractC1516J, g gVar, Executor executor, a aVar) {
+        this.f22648a = abstractC1516J;
         if (gVar != null) {
             if (executor != null) {
                 gVar.N(executor);
@@ -255,59 +255,59 @@ public class f {
     public static class c {
 
         /* renamed from: a, reason: collision with root package name */
-        public final Signature f22645a;
+        public final Signature f22651a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final Cipher f22646b;
+        public final Cipher f22652b;
 
         /* renamed from: c, reason: collision with root package name */
-        public final Mac f22647c;
+        public final Mac f22653c;
 
         /* renamed from: d, reason: collision with root package name */
-        public final IdentityCredential f22648d;
+        public final IdentityCredential f22654d;
 
         public c(Signature signature) {
-            this.f22645a = signature;
-            this.f22646b = null;
-            this.f22647c = null;
-            this.f22648d = null;
+            this.f22651a = signature;
+            this.f22652b = null;
+            this.f22653c = null;
+            this.f22654d = null;
         }
 
         public Cipher a() {
-            return this.f22646b;
+            return this.f22652b;
         }
 
         public IdentityCredential b() {
-            return this.f22648d;
+            return this.f22654d;
         }
 
         public Mac c() {
-            return this.f22647c;
+            return this.f22653c;
         }
 
         public Signature d() {
-            return this.f22645a;
+            return this.f22651a;
         }
 
         public c(Cipher cipher) {
-            this.f22645a = null;
-            this.f22646b = cipher;
-            this.f22647c = null;
-            this.f22648d = null;
+            this.f22651a = null;
+            this.f22652b = cipher;
+            this.f22653c = null;
+            this.f22654d = null;
         }
 
         public c(Mac mac) {
-            this.f22645a = null;
-            this.f22646b = null;
-            this.f22647c = mac;
-            this.f22648d = null;
+            this.f22651a = null;
+            this.f22652b = null;
+            this.f22653c = mac;
+            this.f22654d = null;
         }
 
         public c(IdentityCredential identityCredential) {
-            this.f22645a = null;
-            this.f22646b = null;
-            this.f22647c = null;
-            this.f22648d = identityCredential;
+            this.f22651a = null;
+            this.f22652b = null;
+            this.f22653c = null;
+            this.f22654d = identityCredential;
         }
     }
 

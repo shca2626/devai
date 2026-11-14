@@ -7,13 +7,13 @@ import android.util.Log;
 public class h {
 
     /* renamed from: a, reason: collision with root package name */
-    public final c f22691a = new a();
+    public final c f22697a = new a();
 
     /* renamed from: b, reason: collision with root package name */
-    public CancellationSignal f22692b;
+    public CancellationSignal f22698b;
 
     /* renamed from: c, reason: collision with root package name */
-    public V.f f22693c;
+    public V.f f22699c;
 
     public class a implements c {
         public a() {
@@ -47,37 +47,37 @@ public class h {
     }
 
     public void a() {
-        CancellationSignal cancellationSignal = this.f22692b;
+        CancellationSignal cancellationSignal = this.f22698b;
         if (cancellationSignal != null) {
             try {
                 b.a(cancellationSignal);
             } catch (NullPointerException e7) {
                 Log.e("CancelSignalProvider", "Got NPE while canceling biometric authentication.", e7);
             }
-            this.f22692b = null;
+            this.f22698b = null;
         }
-        V.f fVar = this.f22693c;
+        V.f fVar = this.f22699c;
         if (fVar != null) {
             try {
                 fVar.a();
             } catch (NullPointerException e8) {
                 Log.e("CancelSignalProvider", "Got NPE while canceling fingerprint authentication.", e8);
             }
-            this.f22693c = null;
+            this.f22699c = null;
         }
     }
 
     public CancellationSignal b() {
-        if (this.f22692b == null) {
-            this.f22692b = this.f22691a.b();
+        if (this.f22698b == null) {
+            this.f22698b = this.f22697a.b();
         }
-        return this.f22692b;
+        return this.f22698b;
     }
 
     public V.f c() {
-        if (this.f22693c == null) {
-            this.f22693c = this.f22691a.a();
+        if (this.f22699c == null) {
+            this.f22699c = this.f22697a.a();
         }
-        return this.f22693c;
+        return this.f22699c;
     }
 }

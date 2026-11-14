@@ -1,9 +1,9 @@
 package io.flutter.embedding.engine.renderer;
 
 import android.graphics.SurfaceTexture;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class SurfaceTextureWrapper {
     private boolean attached;

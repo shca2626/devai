@@ -64,7 +64,7 @@ public class i implements Closeable {
         throw new IllegalStateException("Invalid class type!");
     }
 
-    public List e() {
+    public List e() throws IOException {
         long j7;
         this.f6371m.position(0L);
         ArrayList arrayList = new ArrayList();

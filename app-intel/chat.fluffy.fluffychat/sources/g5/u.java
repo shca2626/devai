@@ -2,7 +2,7 @@ package g5;
 
 import android.os.Build;
 import android.util.DisplayMetrics;
-import h5.C1144a;
+import h5.C1145a;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -14,7 +14,7 @@ public class u {
     public final a f16465a = new a();
 
     /* renamed from: b, reason: collision with root package name */
-    public final C1144a f16466b;
+    public final C1145a f16466b;
 
     public static class a {
 
@@ -28,7 +28,7 @@ public class u {
         public b f16469c;
 
         /* renamed from: g5.u$a$a, reason: collision with other inner class name */
-        public class C0182a implements C1144a.e {
+        public class C0182a implements C1145a.e {
 
             /* renamed from: a, reason: collision with root package name */
             public final /* synthetic */ b f16470a;
@@ -37,7 +37,7 @@ public class u {
                 this.f16470a = bVar;
             }
 
-            @Override // h5.C1144a.e
+            @Override // h5.C1145a.e
             public void a(Object obj) {
                 a.this.f16467a.remove(this.f16470a);
                 if (a.this.f16467a.isEmpty()) {
@@ -66,7 +66,7 @@ public class u {
             }
         }
 
-        public C1144a.e a(b bVar) {
+        public C1145a.e a(b bVar) {
             this.f16467a.add(bVar);
             b bVar2 = this.f16469c;
             this.f16469c = bVar;
@@ -119,7 +119,7 @@ public class u {
                 return;
             }
             a.b bVar = new a.b(displayMetrics);
-            C1144a.e eVarA = u.this.f16465a.a(bVar);
+            C1145a.e eVarA = u.this.f16465a.a(bVar);
             this.f16475a.put("configurationId", Integer.valueOf(bVar.f16473a));
             u.this.f16466b.d(this.f16475a, eVarA);
         }
@@ -169,7 +169,7 @@ public class u {
     }
 
     public u(X4.a aVar) {
-        this.f16466b = new C1144a(aVar, "flutter/settings", h5.e.f16893a);
+        this.f16466b = new C1145a(aVar, "flutter/settings", h5.e.f16893a);
     }
 
     public static boolean b() {

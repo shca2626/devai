@@ -4,31 +4,31 @@ package q6;
 public final class c {
 
     /* renamed from: d, reason: collision with root package name */
-    public static final v6.h f21478d = v6.h.i(":");
+    public static final v6.h f21484d = v6.h.i(":");
 
     /* renamed from: e, reason: collision with root package name */
-    public static final v6.h f21479e = v6.h.i(":status");
+    public static final v6.h f21485e = v6.h.i(":status");
 
     /* renamed from: f, reason: collision with root package name */
-    public static final v6.h f21480f = v6.h.i(":method");
+    public static final v6.h f21486f = v6.h.i(":method");
 
     /* renamed from: g, reason: collision with root package name */
-    public static final v6.h f21481g = v6.h.i(":path");
+    public static final v6.h f21487g = v6.h.i(":path");
 
     /* renamed from: h, reason: collision with root package name */
-    public static final v6.h f21482h = v6.h.i(":scheme");
+    public static final v6.h f21488h = v6.h.i(":scheme");
 
     /* renamed from: i, reason: collision with root package name */
-    public static final v6.h f21483i = v6.h.i(":authority");
+    public static final v6.h f21489i = v6.h.i(":authority");
 
     /* renamed from: a, reason: collision with root package name */
-    public final v6.h f21484a;
+    public final v6.h f21490a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final v6.h f21485b;
+    public final v6.h f21491b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final int f21486c;
+    public final int f21492c;
 
     public interface a {
     }
@@ -40,7 +40,7 @@ public final class c {
     public boolean equals(Object obj) {
         if (obj instanceof c) {
             c cVar = (c) obj;
-            if (this.f21484a.equals(cVar.f21484a) && this.f21485b.equals(cVar.f21485b)) {
+            if (this.f21490a.equals(cVar.f21490a) && this.f21491b.equals(cVar.f21491b)) {
                 return true;
             }
         }
@@ -48,11 +48,11 @@ public final class c {
     }
 
     public int hashCode() {
-        return ((527 + this.f21484a.hashCode()) * 31) + this.f21485b.hashCode();
+        return ((527 + this.f21490a.hashCode()) * 31) + this.f21491b.hashCode();
     }
 
     public String toString() {
-        return l6.c.p("%s: %s", this.f21484a.C(), this.f21485b.C());
+        return l6.c.p("%s: %s", this.f21490a.C(), this.f21491b.C());
     }
 
     public c(v6.h hVar, String str) {
@@ -60,8 +60,8 @@ public final class c {
     }
 
     public c(v6.h hVar, v6.h hVar2) {
-        this.f21484a = hVar;
-        this.f21485b = hVar2;
-        this.f21486c = hVar.y() + 32 + hVar2.y();
+        this.f21490a = hVar;
+        this.f21491b = hVar2;
+        this.f21492c = hVar.y() + 32 + hVar2.y();
     }
 }

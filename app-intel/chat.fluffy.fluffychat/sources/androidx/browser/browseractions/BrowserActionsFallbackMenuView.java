@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
-import v.AbstractC1673a;
+import v.AbstractC1672a;
 
 @Deprecated
 /* loaded from: classes.dex */
@@ -18,8 +18,8 @@ public class BrowserActionsFallbackMenuView extends LinearLayout {
 
     public BrowserActionsFallbackMenuView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        this.f11610l = getResources().getDimensionPixelOffset(AbstractC1673a.f22897b);
-        this.f11611m = getResources().getDimensionPixelOffset(AbstractC1673a.f22896a);
+        this.f11610l = getResources().getDimensionPixelOffset(AbstractC1672a.f22903b);
+        this.f11611m = getResources().getDimensionPixelOffset(AbstractC1672a.f22902a);
     }
 
     @Override // android.widget.LinearLayout, android.view.View

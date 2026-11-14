@@ -2,8 +2,8 @@ package B0;
 
 import E0.U;
 import android.text.TextUtils;
-import j3.C1234h;
-import j3.InterfaceC1232f;
+import j3.C1233h;
+import j3.InterfaceC1231f;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -11,7 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 import org.webrtc.PeerConnection;
 
 /* loaded from: classes.dex */
@@ -30,7 +30,7 @@ public final class s {
     public final int f731D;
 
     /* renamed from: E, reason: collision with root package name */
-    public final C0308j f732E;
+    public final C0309j f732E;
 
     /* renamed from: F, reason: collision with root package name */
     public final int f733F;
@@ -123,7 +123,7 @@ public final class s {
     public final List f762r;
 
     /* renamed from: s, reason: collision with root package name */
-    public final C0313o f763s;
+    public final C0314o f763s;
 
     /* renamed from: t, reason: collision with root package name */
     public final long f764t;
@@ -272,7 +272,7 @@ public final class s {
         public int f773C;
 
         /* renamed from: D, reason: collision with root package name */
-        public C0308j f774D;
+        public C0309j f774D;
 
         /* renamed from: E, reason: collision with root package name */
         public int f775E;
@@ -359,7 +359,7 @@ public final class s {
         public List f802q;
 
         /* renamed from: r, reason: collision with root package name */
-        public C0313o f803r;
+        public C0314o f803r;
 
         /* renamed from: s, reason: collision with root package name */
         public long f804s;
@@ -444,8 +444,8 @@ public final class s {
             return this;
         }
 
-        public b V(C0308j c0308j) {
-            this.f774D = c0308j;
+        public b V(C0309j c0309j) {
+            this.f774D = c0309j;
             return this;
         }
 
@@ -479,8 +479,8 @@ public final class s {
             return this;
         }
 
-        public b c0(C0313o c0313o) {
-            this.f803r = c0313o;
+        public b c0(C0314o c0314o) {
+            this.f803r = c0314o;
             return this;
         }
 
@@ -530,7 +530,7 @@ public final class s {
         }
 
         public b m0(List list) {
-            this.f788c = AbstractC1279v.r(list);
+            this.f788c = AbstractC1278v.r(list);
             return this;
         }
 
@@ -600,7 +600,7 @@ public final class s {
         }
 
         public b() {
-            this.f788c = AbstractC1279v.v();
+            this.f788c = AbstractC1278v.v();
             this.f793h = -1;
             this.f794i = -1;
             this.f800o = -1;
@@ -700,7 +700,7 @@ public final class s {
         if (sVar == null) {
             return "null";
         }
-        C1234h c1234hG = C1234h.g(',');
+        C1233h c1233hG = C1233h.g(',');
         StringBuilder sb = new StringBuilder();
         sb.append("id=");
         sb.append(sVar.f745a);
@@ -722,20 +722,20 @@ public final class s {
             LinkedHashSet linkedHashSet = new LinkedHashSet();
             int i7 = 0;
             while (true) {
-                C0313o c0313o = sVar.f763s;
-                if (i7 >= c0313o.f681o) {
+                C0314o c0314o = sVar.f763s;
+                if (i7 >= c0314o.f681o) {
                     break;
                 }
-                UUID uuid = c0313o.g(i7).f683m;
-                if (uuid.equals(AbstractC0307i.f639b)) {
+                UUID uuid = c0314o.g(i7).f683m;
+                if (uuid.equals(AbstractC0308i.f639b)) {
                     linkedHashSet.add("cenc");
-                } else if (uuid.equals(AbstractC0307i.f640c)) {
+                } else if (uuid.equals(AbstractC0308i.f640c)) {
                     linkedHashSet.add("clearkey");
-                } else if (uuid.equals(AbstractC0307i.f642e)) {
+                } else if (uuid.equals(AbstractC0308i.f642e)) {
                     linkedHashSet.add("playready");
-                } else if (uuid.equals(AbstractC0307i.f641d)) {
+                } else if (uuid.equals(AbstractC0308i.f641d)) {
                     linkedHashSet.add("widevine");
-                } else if (uuid.equals(AbstractC0307i.f638a)) {
+                } else if (uuid.equals(AbstractC0308i.f638a)) {
                     linkedHashSet.add("universal");
                 } else {
                     linkedHashSet.add("unknown (" + uuid + ")");
@@ -743,7 +743,7 @@ public final class s {
                 i7++;
             }
             sb.append(", drm=[");
-            c1234hG.c(sb, linkedHashSet);
+            c1233hG.c(sb, linkedHashSet);
             sb.append(']');
         }
         if (sVar.f766v != -1 && sVar.f767w != -1) {
@@ -762,8 +762,8 @@ public final class s {
             sb.append(", par=");
             sb.append(U.G("%.3f", Float.valueOf(sVar.f729B)));
         }
-        C0308j c0308j = sVar.f732E;
-        if (c0308j != null && c0308j.i()) {
+        C0309j c0309j = sVar.f732E;
+        if (c0309j != null && c0309j.i()) {
             sb.append(", color=");
             sb.append(sVar.f732E.m());
         }
@@ -789,8 +789,8 @@ public final class s {
         }
         if (!sVar.f747c.isEmpty()) {
             sb.append(", labels=[");
-            c1234hG.c(sb, k3.G.k(sVar.f747c, new InterfaceC1232f() { // from class: B0.r
-                @Override // j3.InterfaceC1232f
+            c1233hG.c(sb, k3.G.k(sVar.f747c, new InterfaceC1231f() { // from class: B0.r
+                @Override // j3.InterfaceC1231f
                 public final Object apply(Object obj) {
                     return s.a((u) obj);
                 }
@@ -799,12 +799,12 @@ public final class s {
         }
         if (sVar.f749e != 0) {
             sb.append(", selectionFlags=[");
-            c1234hG.c(sb, U.o0(sVar.f749e));
+            c1233hG.c(sb, U.o0(sVar.f749e));
             sb.append("]");
         }
         if (sVar.f750f != 0) {
             sb.append(", roleFlags=[");
-            c1234hG.c(sb, U.n0(sVar.f750f));
+            c1233hG.c(sb, U.n0(sVar.f750f));
             sb.append("]");
         }
         if (sVar.f757m != null) {
@@ -923,7 +923,7 @@ public final class s {
         if (f7 == -1.0f && iK == 2) {
             f7 = sVar.f770z;
         }
-        return b().j0(str2).l0(str3).m0(list).n0(str4).A0(this.f749e | sVar.f749e).w0(this.f750f | sVar.f750f).S(i9).t0(i10).U(str5).r0(yVarB).c0(C0313o.f(sVar.f763s, this.f763s)).f0(f7).D0(i7).E0(i8).P();
+        return b().j0(str2).l0(str3).m0(list).n0(str4).A0(this.f749e | sVar.f749e).w0(this.f750f | sVar.f750f).S(i9).t0(i10).U(str5).r0(yVarB).c0(C0314o.f(sVar.f763s, this.f763s)).f0(f7).D0(i7).E0(i8).P();
     }
 
     public String toString() {
@@ -935,7 +935,7 @@ public final class s {
         String strS0 = U.S0(bVar.f789d);
         this.f748d = strS0;
         if (bVar.f788c.isEmpty() && bVar.f787b != null) {
-            this.f747c = AbstractC1279v.w(new u(strS0, bVar.f787b));
+            this.f747c = AbstractC1278v.w(new u(strS0, bVar.f787b));
             this.f746b = bVar.f787b;
         } else if (bVar.f788c.isEmpty() || bVar.f787b != null) {
             j3.o.v(g(bVar));
@@ -962,8 +962,8 @@ public final class s {
         this.f760p = bVar.f800o;
         this.f761q = bVar.f801p;
         this.f762r = bVar.f802q == null ? Collections.EMPTY_LIST : bVar.f802q;
-        C0313o c0313o = bVar.f803r;
-        this.f763s = c0313o;
+        C0314o c0314o = bVar.f803r;
+        this.f763s = c0314o;
         this.f764t = bVar.f804s;
         this.f765u = bVar.f805t;
         this.f766v = bVar.f806u;
@@ -986,7 +986,7 @@ public final class s {
         this.f740M = bVar.f782L;
         this.f741N = bVar.f783M;
         this.f742O = bVar.f784N;
-        if (bVar.f785O != 0 || c0313o == null) {
+        if (bVar.f785O != 0 || c0314o == null) {
             this.f743P = bVar.f785O;
         } else {
             this.f743P = 1;

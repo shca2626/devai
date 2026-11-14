@@ -13,13 +13,13 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 class SingleViewPresentation extends Presentation {
     private static final String TAG = "PlatformViewsController";
-    private final C1169a accessibilityEventsDelegate;
+    private final C1170a accessibilityEventsDelegate;
     private FrameLayout container;
     private final View.OnFocusChangeListener focusChangeListener;
     private final Context outerContext;
@@ -31,14 +31,14 @@ class SingleViewPresentation extends Presentation {
     public static class a extends FrameLayout {
 
         /* renamed from: l, reason: collision with root package name */
-        public final C1169a f17763l;
+        public final C1170a f17763l;
 
         /* renamed from: m, reason: collision with root package name */
         public final View f17764m;
 
-        public a(Context context, C1169a c1169a, View view) {
+        public a(Context context, C1170a c1170a, View view) {
             super(context);
-            this.f17763l = c1169a;
+            this.f17763l = c1170a;
             this.f17764m = view;
         }
 
@@ -116,7 +116,7 @@ class SingleViewPresentation extends Presentation {
     public static class d {
 
         /* renamed from: a, reason: collision with root package name */
-        public InterfaceC1179k f17769a;
+        public InterfaceC1180k f17769a;
 
         /* renamed from: b, reason: collision with root package name */
         public g0 f17770b;
@@ -125,16 +125,16 @@ class SingleViewPresentation extends Presentation {
         public W f17771c;
     }
 
-    public SingleViewPresentation(Context context, Display display, InterfaceC1179k interfaceC1179k, C1169a c1169a, int i7, View.OnFocusChangeListener onFocusChangeListener) {
+    public SingleViewPresentation(Context context, Display display, InterfaceC1180k interfaceC1180k, C1170a c1170a, int i7, View.OnFocusChangeListener onFocusChangeListener) {
         super(new b(context), display);
         this.startFocused = false;
-        this.accessibilityEventsDelegate = c1169a;
+        this.accessibilityEventsDelegate = c1170a;
         this.viewId = i7;
         this.focusChangeListener = onFocusChangeListener;
         this.outerContext = context;
         d dVar = new d();
         this.state = dVar;
-        dVar.f17769a = interfaceC1179k;
+        dVar.f17769a = interfaceC1180k;
         getWindow().setFlags(8, 8);
         getWindow().setType(2030);
     }
@@ -151,7 +151,7 @@ class SingleViewPresentation extends Presentation {
         return this.state;
     }
 
-    public InterfaceC1179k getView() {
+    public InterfaceC1180k getView() {
         return this.state.f17769a;
     }
 
@@ -190,10 +190,10 @@ class SingleViewPresentation extends Presentation {
         setContentView(this.rootView);
     }
 
-    public SingleViewPresentation(Context context, Display display, C1169a c1169a, d dVar, View.OnFocusChangeListener onFocusChangeListener, boolean z7) {
+    public SingleViewPresentation(Context context, Display display, C1170a c1170a, d dVar, View.OnFocusChangeListener onFocusChangeListener, boolean z7) {
         super(new b(context), display);
         this.startFocused = false;
-        this.accessibilityEventsDelegate = c1169a;
+        this.accessibilityEventsDelegate = c1170a;
         this.state = dVar;
         this.focusChangeListener = onFocusChangeListener;
         this.outerContext = context;

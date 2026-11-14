@@ -10,8 +10,8 @@ import android.os.Build;
 import android.os.Handler;
 import java.util.ArrayList;
 import java.util.Set;
-import y5.C1811f;
-import z5.C1889w;
+import y5.C1810f;
+import z5.C1892w;
 
 /* loaded from: classes.dex */
 public final class a extends AudioDeviceCallback implements h {
@@ -90,7 +90,7 @@ public final class a extends AudioDeviceCallback implements h {
             return audioDeviceInfo.getType() == 2;
         }
         if (!(bVar instanceof b.d)) {
-            throw new C1811f();
+            throw new C1810f();
         }
         if (audioDeviceInfo.getType() == 3 || audioDeviceInfo.getType() == 4) {
             return true;
@@ -109,7 +109,7 @@ public final class a extends AudioDeviceCallback implements h {
                     arrayList.add(bVarC);
                 }
             }
-            Set<I4.b> setB0 = C1889w.b0(arrayList);
+            Set<I4.b> setB0 = C1892w.b0(arrayList);
             if (setB0 != null) {
                 for (I4.b bVar : setB0) {
                     h.a aVar = this.f5479c;
@@ -132,7 +132,7 @@ public final class a extends AudioDeviceCallback implements h {
                     arrayList.add(bVarC);
                 }
             }
-            Set<I4.b> setB0 = C1889w.b0(arrayList);
+            Set<I4.b> setB0 = C1892w.b0(arrayList);
             if (setB0 != null) {
                 for (I4.b bVar : setB0) {
                     h.a aVar = this.f5479c;

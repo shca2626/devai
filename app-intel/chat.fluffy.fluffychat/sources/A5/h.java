@@ -5,10 +5,10 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
-import z5.AbstractC1872f;
+import z5.AbstractC1875f;
 
 /* loaded from: classes.dex */
-public final class h extends AbstractC1872f implements Set, Serializable, N5.b {
+public final class h extends AbstractC1875f implements Set, Serializable, N5.b {
 
     /* renamed from: m, reason: collision with root package name */
     public static final a f313m = new a(null);
@@ -55,7 +55,7 @@ public final class h extends AbstractC1872f implements Set, Serializable, N5.b {
         return this.f315l.containsKey(obj);
     }
 
-    @Override // z5.AbstractC1872f
+    @Override // z5.AbstractC1875f
     public int f() {
         return this.f315l.size();
     }

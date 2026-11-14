@@ -1,5 +1,6 @@
 package org.webrtc;
 
+import android.net.http.X509TrustManagerExtensions;
 import java.io.ByteArrayInputStream;
 import java.security.KeyStore;
 import java.security.cert.CertificateException;
@@ -15,7 +16,7 @@ final class PlatformCertificateVerifier {
     private static final String TAG = "PlatformCertificateVerifier";
     private static CertificateFactory certificateFactory;
     private static boolean initialized;
-    private static X509TrustManager trustManager;
+    private static X509TrustManagerExtensions trustManager;
 
     private PlatformCertificateVerifier() {
     }
@@ -41,7 +42,7 @@ final class PlatformCertificateVerifier {
                 }
                 TrustManager trustManager2 = trustManagers[i7];
                 if (trustManager2 instanceof X509TrustManager) {
-                    trustManager = (X509TrustManager) trustManager2;
+                    trustManager = new X509TrustManagerExtensions((X509TrustManager) trustManager2);
                     break;
                 }
                 i7++;
@@ -59,26 +60,36 @@ final class PlatformCertificateVerifier {
     }
 
     @CalledByNative
-    public static boolean verifyServerChain(byte[][] bArr) throws CertificateException {
+    public static boolean verifyServerChain(byte[][] bArr, String str) {
         if (bArr != null && bArr.length != 0 && initialize()) {
-            X509TrustManager x509TrustManager = trustManager;
+            X509TrustManagerExtensions x509TrustManagerExtensions = trustManager;
             CertificateFactory certificateFactory2 = certificateFactory;
-            if (x509TrustManager != null && certificateFactory2 != null) {
-                try {
-                    ArrayList arrayList = new ArrayList(bArr.length);
-                    for (byte[] bArr2 : bArr) {
-                        arrayList.add((X509Certificate) certificateFactory2.generateCertificate(new ByteArrayInputStream(bArr2)));
-                    }
-                    X509Certificate[] x509CertificateArr = (X509Certificate[]) arrayList.toArray(new X509Certificate[0]);
-                    String algorithm = x509CertificateArr[0].getPublicKey().getAlgorithm();
-                    if (algorithm == null) {
-                        algorithm = "RSA";
-                    }
-                    x509TrustManager.checkServerTrusted(x509CertificateArr, algorithm);
-                    return true;
-                } catch (Exception e7) {
-                    Logging.d(TAG, "Peer certificate chain was rejected by the platform trust store: " + String.valueOf(e7));
+            if (x509TrustManagerExtensions != null && certificateFactory2 != null) {
+                return verifyServerChain(bArr, str, x509TrustManagerExtensions, certificateFactory2);
+            }
+        }
+        return false;
+    }
+
+    public static boolean verifyServerChain(byte[][] bArr, String str, X509TrustManagerExtensions x509TrustManagerExtensions, CertificateFactory certificateFactory2) throws CertificateException {
+        if (bArr != null && bArr.length != 0) {
+            try {
+                ArrayList arrayList = new ArrayList(bArr.length);
+                for (byte[] bArr2 : bArr) {
+                    arrayList.add((X509Certificate) certificateFactory2.generateCertificate(new ByteArrayInputStream(bArr2)));
                 }
+                X509Certificate[] x509CertificateArr = (X509Certificate[]) arrayList.toArray(new X509Certificate[0]);
+                String algorithm = x509CertificateArr[0].getPublicKey().getAlgorithm();
+                if (algorithm == null) {
+                    algorithm = "RSA";
+                }
+                if (str == null || str.isEmpty()) {
+                    str = null;
+                }
+                x509TrustManagerExtensions.checkServerTrusted(x509CertificateArr, algorithm, str);
+                return true;
+            } catch (Exception e7) {
+                Logging.d(TAG, "Peer certificate chain was rejected by the platform trust store: " + String.valueOf(e7));
             }
         }
         return false;

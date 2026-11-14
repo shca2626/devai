@@ -4,7 +4,7 @@ import V1.f;
 import android.os.Bundle;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import u0.C1642b;
+import u0.C1641b;
 
 /* loaded from: classes.dex */
 public final class C {
@@ -16,7 +16,7 @@ public final class C {
     public final Map f12353a;
 
     /* renamed from: b, reason: collision with root package name */
-    public C1642b f12354b;
+    public C1641b f12354b;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -43,7 +43,7 @@ public final class C {
     public C(Map map) {
         M5.m.e(map, "initialState");
         this.f12353a = new LinkedHashMap();
-        this.f12354b = new C1642b(map);
+        this.f12354b = new C1641b(map);
     }
 
     public final f.b a() {
@@ -52,6 +52,6 @@ public final class C {
 
     public C() {
         this.f12353a = new LinkedHashMap();
-        this.f12354b = new C1642b(null, 1, null);
+        this.f12354b = new C1641b(null, 1, null);
     }
 }

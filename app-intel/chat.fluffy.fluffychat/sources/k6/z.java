@@ -6,37 +6,37 @@ public abstract class z {
     public class a extends z {
 
         /* renamed from: a, reason: collision with root package name */
-        public final /* synthetic */ u f19509a;
+        public final /* synthetic */ u f19508a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final /* synthetic */ int f19510b;
+        public final /* synthetic */ int f19509b;
 
         /* renamed from: c, reason: collision with root package name */
-        public final /* synthetic */ byte[] f19511c;
+        public final /* synthetic */ byte[] f19510c;
 
         /* renamed from: d, reason: collision with root package name */
-        public final /* synthetic */ int f19512d;
+        public final /* synthetic */ int f19511d;
 
         public a(u uVar, int i7, byte[] bArr, int i8) {
-            this.f19509a = uVar;
-            this.f19510b = i7;
-            this.f19511c = bArr;
-            this.f19512d = i8;
+            this.f19508a = uVar;
+            this.f19509b = i7;
+            this.f19510c = bArr;
+            this.f19511d = i8;
         }
 
         @Override // k6.z
         public long a() {
-            return this.f19510b;
+            return this.f19509b;
         }
 
         @Override // k6.z
         public u b() {
-            return this.f19509a;
+            return this.f19508a;
         }
 
         @Override // k6.z
         public void e(v6.f fVar) {
-            fVar.write(this.f19511c, this.f19512d, this.f19510b);
+            fVar.write(this.f19510c, this.f19511d, this.f19509b);
         }
     }
 

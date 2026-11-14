@@ -6,11 +6,11 @@ import java.util.Arrays;
 public final class b extends i {
 
     /* renamed from: b, reason: collision with root package name */
-    public final byte[] f22742b;
+    public final byte[] f22748b;
 
     public b(String str, byte[] bArr) {
         super(str);
-        this.f22742b = bArr;
+        this.f22748b = bArr;
     }
 
     public boolean equals(Object obj) {
@@ -19,7 +19,7 @@ public final class b extends i {
         }
         if (obj != null && b.class == obj.getClass()) {
             b bVar = (b) obj;
-            if (this.f22766a.equals(bVar.f22766a) && Arrays.equals(this.f22742b, bVar.f22742b)) {
+            if (this.f22772a.equals(bVar.f22772a) && Arrays.equals(this.f22748b, bVar.f22748b)) {
                 return true;
             }
         }
@@ -27,6 +27,6 @@ public final class b extends i {
     }
 
     public int hashCode() {
-        return ((527 + this.f22766a.hashCode()) * 31) + Arrays.hashCode(this.f22742b);
+        return ((527 + this.f22772a.hashCode()) * 31) + Arrays.hashCode(this.f22748b);
     }
 }

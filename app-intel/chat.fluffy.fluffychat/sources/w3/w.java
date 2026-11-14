@@ -4,7 +4,7 @@ package w3;
 public abstract class w {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final int f23346a = a();
+    public static final int f23352a = a();
 
     public static int a() {
         return e(System.getProperty("java.version"));
@@ -27,7 +27,7 @@ public abstract class w {
     }
 
     public static boolean c() {
-        return f23346a >= 9;
+        return f23352a >= 9;
     }
 
     public static int d(String str) throws NumberFormatException {

@@ -19,20 +19,20 @@ import javax.crypto.spec.SecretKeySpec;
 public class r implements n {
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f18769a;
+    public final String f18768a;
 
     /* renamed from: d, reason: collision with root package name */
-    public final Key f18772d;
+    public final Key f18771d;
 
     /* renamed from: c, reason: collision with root package name */
-    public final SecureRandom f18771c = new SecureRandom();
+    public final SecureRandom f18770c = new SecureRandom();
 
     /* renamed from: b, reason: collision with root package name */
-    public final Cipher f18770b = e();
+    public final Cipher f18769b = e();
 
-    public r(Context context, InterfaceC1241b interfaceC1241b, Cipher cipher, t tVar) {
-        this.f18769a = tVar.e();
-        this.f18772d = g(context, cipher);
+    public r(Context context, InterfaceC1240b interfaceC1240b, Cipher cipher, t tVar) {
+        this.f18768a = tVar.e();
+        this.f18771d = g(context, cipher);
     }
 
     public static boolean f(SharedPreferences sharedPreferences) {
@@ -42,8 +42,8 @@ public class r implements n {
     @Override // j4.n
     public byte[] a(byte[] bArr) throws BadPaddingException, IllegalBlockSizeException, InvalidKeyException, InvalidAlgorithmParameterException {
         byte[] bArrD = d(12);
-        this.f18770b.init(1, this.f18772d, new GCMParameterSpec(128, bArrD));
-        byte[] bArrDoFinal = this.f18770b.doFinal(bArr);
+        this.f18769b.init(1, this.f18771d, new GCMParameterSpec(128, bArrD));
+        byte[] bArrDoFinal = this.f18769b.doFinal(bArr);
         byte[] bArr2 = new byte[bArrD.length + bArrDoFinal.length];
         System.arraycopy(bArrD, 0, bArr2, 0, bArrD.length);
         System.arraycopy(bArrDoFinal, 0, bArr2, bArrD.length, bArrDoFinal.length);
@@ -57,18 +57,18 @@ public class r implements n {
         int length = bArr.length - 12;
         byte[] bArr3 = new byte[length];
         System.arraycopy(bArr, 12, bArr3, 0, length);
-        this.f18770b.init(2, this.f18772d, new GCMParameterSpec(128, bArr2));
-        return this.f18770b.doFinal(bArr3);
+        this.f18769b.init(2, this.f18771d, new GCMParameterSpec(128, bArr2));
+        return this.f18769b.doFinal(bArr3);
     }
 
     @Override // j4.n
     public void c(Context context) {
-        context.getSharedPreferences(this.f18769a, 0).edit().remove("BVGhpcyBpcyB0aGUga2V5IGZvciBhIHNlY3VyZSBzdG9yYWdlIEFFUyBLZXkK").apply();
+        context.getSharedPreferences(this.f18768a, 0).edit().remove("BVGhpcyBpcyB0aGUga2V5IGZvciBhIHNlY3VyZSBzdG9yYWdlIEFFUyBLZXkK").apply();
     }
 
     public byte[] d(int i7) {
         byte[] bArr = new byte[i7];
-        this.f18771c.nextBytes(bArr);
+        this.f18770c.nextBytes(bArr);
         return bArr;
     }
 
@@ -80,7 +80,7 @@ public class r implements n {
         if (cipher == null) {
             cipher = e();
         }
-        SharedPreferences sharedPreferences = context.getSharedPreferences(this.f18769a, 0);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(this.f18768a, 0);
         String string = sharedPreferences.getString("BVGhpcyBpcyB0aGUga2V5IGZvciBhIHNlY3VyZSBzdG9yYWdlIEFFUyBLZXkK", null);
         if (string != null) {
             return new SecretKeySpec(cipher.doFinal(Base64.decode(string, 0)), "AES");

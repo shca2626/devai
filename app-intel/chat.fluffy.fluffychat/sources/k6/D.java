@@ -14,10 +14,10 @@ public enum D {
 
 
     /* renamed from: l, reason: collision with root package name */
-    public final String f19150l;
+    public final String f19149l;
 
     D(String str) {
-        this.f19150l = str;
+        this.f19149l = str;
     }
 
     public static D a(String str) {
@@ -47,6 +47,6 @@ public enum D {
     }
 
     public String e() {
-        return this.f19150l;
+        return this.f19149l;
     }
 }

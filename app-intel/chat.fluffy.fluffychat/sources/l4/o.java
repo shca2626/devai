@@ -11,17 +11,17 @@ public class o extends q {
 
     @Override // l4.q
     public float c(s sVar, s sVar2) {
-        int i7 = sVar.f19100l;
-        if (i7 <= 0 || sVar.f19101m <= 0) {
+        int i7 = sVar.f19099l;
+        if (i7 <= 0 || sVar.f19100m <= 0) {
             return 0.0f;
         }
-        float fE = (1.0f / e((i7 * 1.0f) / sVar2.f19100l)) / e((sVar.f19101m * 1.0f) / sVar2.f19101m);
-        float fE2 = e(((sVar.f19100l * 1.0f) / sVar.f19101m) / ((sVar2.f19100l * 1.0f) / sVar2.f19101m));
+        float fE = (1.0f / e((i7 * 1.0f) / sVar2.f19099l)) / e((sVar.f19100m * 1.0f) / sVar2.f19100m);
+        float fE2 = e(((sVar.f19099l * 1.0f) / sVar.f19100m) / ((sVar2.f19099l * 1.0f) / sVar2.f19100m));
         return fE * (((1.0f / fE2) / fE2) / fE2);
     }
 
     @Override // l4.q
     public Rect d(s sVar, s sVar2) {
-        return new Rect(0, 0, sVar2.f19100l, sVar2.f19101m);
+        return new Rect(0, 0, sVar2.f19099l, sVar2.f19100m);
     }
 }

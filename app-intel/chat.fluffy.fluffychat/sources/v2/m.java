@@ -11,7 +11,7 @@ import java.util.Map;
 public abstract class m implements Parcelable {
 
     /* renamed from: l, reason: collision with root package name */
-    public static final a f22941l = new a(null);
+    public static final a f22947l = new a(null);
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -26,16 +26,16 @@ public abstract class m implements Parcelable {
         public static final Parcelable.Creator<b> CREATOR = new a();
 
         /* renamed from: m, reason: collision with root package name */
-        public final String f22942m;
+        public final String f22948m;
 
         /* renamed from: n, reason: collision with root package name */
-        public final List f22943n;
+        public final List f22949n;
 
         /* renamed from: o, reason: collision with root package name */
-        public final y2.h f22944o;
+        public final y2.h f22950o;
 
         /* renamed from: p, reason: collision with root package name */
-        public final Map f22945p;
+        public final Map f22951p;
 
         public static final class a implements Parcelable.Creator {
             @Override // android.os.Parcelable.Creator
@@ -66,14 +66,14 @@ public abstract class m implements Parcelable {
             M5.m.e(str, "base");
             M5.m.e(list, "transformations");
             M5.m.e(map, "parameters");
-            this.f22942m = str;
-            this.f22943n = list;
-            this.f22944o = hVar;
-            this.f22945p = map;
+            this.f22948m = str;
+            this.f22949n = list;
+            this.f22950o = hVar;
+            this.f22951p = map;
         }
 
         public final y2.h b() {
-            return this.f22944o;
+            return this.f22950o;
         }
 
         @Override // android.os.Parcelable
@@ -89,26 +89,26 @@ public abstract class m implements Parcelable {
                 return false;
             }
             b bVar = (b) obj;
-            return M5.m.a(this.f22942m, bVar.f22942m) && M5.m.a(this.f22943n, bVar.f22943n) && M5.m.a(this.f22944o, bVar.f22944o) && M5.m.a(this.f22945p, bVar.f22945p);
+            return M5.m.a(this.f22948m, bVar.f22948m) && M5.m.a(this.f22949n, bVar.f22949n) && M5.m.a(this.f22950o, bVar.f22950o) && M5.m.a(this.f22951p, bVar.f22951p);
         }
 
         public int hashCode() {
-            int iHashCode = ((this.f22942m.hashCode() * 31) + this.f22943n.hashCode()) * 31;
-            y2.h hVar = this.f22944o;
-            return ((iHashCode + (hVar == null ? 0 : hVar.hashCode())) * 31) + this.f22945p.hashCode();
+            int iHashCode = ((this.f22948m.hashCode() * 31) + this.f22949n.hashCode()) * 31;
+            y2.h hVar = this.f22950o;
+            return ((iHashCode + (hVar == null ? 0 : hVar.hashCode())) * 31) + this.f22951p.hashCode();
         }
 
         public String toString() {
-            return "Complex(base=" + this.f22942m + ", transformations=" + this.f22943n + ", size=" + this.f22944o + ", parameters=" + this.f22945p + ')';
+            return "Complex(base=" + this.f22948m + ", transformations=" + this.f22949n + ", size=" + this.f22950o + ", parameters=" + this.f22951p + ')';
         }
 
         @Override // android.os.Parcelable
         public void writeToParcel(Parcel parcel, int i7) {
             M5.m.e(parcel, "out");
-            parcel.writeString(this.f22942m);
-            parcel.writeStringList(this.f22943n);
-            parcel.writeParcelable(this.f22944o, i7);
-            Map map = this.f22945p;
+            parcel.writeString(this.f22948m);
+            parcel.writeStringList(this.f22949n);
+            parcel.writeParcelable(this.f22950o, i7);
+            Map map = this.f22951p;
             parcel.writeInt(map.size());
             for (Map.Entry entry : map.entrySet()) {
                 parcel.writeString((String) entry.getKey());

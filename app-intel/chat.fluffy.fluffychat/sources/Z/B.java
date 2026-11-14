@@ -35,9 +35,9 @@ public abstract class B {
         }
     }
 
-    public static MenuItem a(MenuItem menuItem, AbstractC0684b abstractC0684b) {
+    public static MenuItem a(MenuItem menuItem, AbstractC0685b abstractC0685b) {
         if (menuItem instanceof R.b) {
-            return ((R.b) menuItem).a(abstractC0684b);
+            return ((R.b) menuItem).a(abstractC0685b);
         }
         Log.w("MenuItemCompat", "setActionProvider: item does not implement SupportMenuItem; ignoring");
         return menuItem;

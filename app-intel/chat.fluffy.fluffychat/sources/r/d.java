@@ -13,18 +13,18 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class d extends e {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Object f21647a = new Object();
+    public final Object f21653a = new Object();
 
     /* renamed from: b, reason: collision with root package name */
-    public final ExecutorService f21648b = Executors.newFixedThreadPool(4, new a());
+    public final ExecutorService f21654b = Executors.newFixedThreadPool(4, new a());
 
     /* renamed from: c, reason: collision with root package name */
-    public volatile Handler f21649c;
+    public volatile Handler f21655c;
 
     public class a implements ThreadFactory {
 
         /* renamed from: a, reason: collision with root package name */
-        public final AtomicInteger f21650a = new AtomicInteger(0);
+        public final AtomicInteger f21656a = new AtomicInteger(0);
 
         public a() {
         }
@@ -32,7 +32,7 @@ public class d extends e {
         @Override // java.util.concurrent.ThreadFactory
         public Thread newThread(Runnable runnable) {
             Thread thread = new Thread(runnable);
-            thread.setName("arch_disk_io_" + this.f21650a.getAndIncrement());
+            thread.setName("arch_disk_io_" + this.f21656a.getAndIncrement());
             return thread;
         }
     }
@@ -58,7 +58,7 @@ public class d extends e {
 
     @Override // r.e
     public void a(Runnable runnable) {
-        this.f21648b.execute(runnable);
+        this.f21654b.execute(runnable);
     }
 
     @Override // r.e
@@ -68,16 +68,16 @@ public class d extends e {
 
     @Override // r.e
     public void c(Runnable runnable) {
-        if (this.f21649c == null) {
-            synchronized (this.f21647a) {
+        if (this.f21655c == null) {
+            synchronized (this.f21653a) {
                 try {
-                    if (this.f21649c == null) {
-                        this.f21649c = d(Looper.getMainLooper());
+                    if (this.f21655c == null) {
+                        this.f21655c = d(Looper.getMainLooper());
                     }
                 } finally {
                 }
             }
         }
-        this.f21649c.post(runnable);
+        this.f21655c.post(runnable);
     }
 }

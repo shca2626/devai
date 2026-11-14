@@ -1,7 +1,7 @@
 package C0;
 
-import E0.InterfaceC0321g;
-import E0.InterfaceC0329o;
+import E0.InterfaceC0322g;
+import E0.InterfaceC0330o;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ public final class c {
     public final b f1213b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final InterfaceC0329o f1214c;
+    public final InterfaceC0330o f1214c;
 
     /* renamed from: d, reason: collision with root package name */
     public boolean f1215d;
@@ -29,7 +29,7 @@ public final class c {
         public final InterfaceC0012c f1216a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final InterfaceC0329o f1217b;
+        public final InterfaceC0330o f1217b;
 
         public final void b() {
             if (c.this.f1215d) {
@@ -49,8 +49,8 @@ public final class c {
             }
         }
 
-        public b(InterfaceC0329o interfaceC0329o, InterfaceC0012c interfaceC0012c) {
-            this.f1217b = interfaceC0329o;
+        public b(InterfaceC0330o interfaceC0330o, InterfaceC0012c interfaceC0012c) {
+            this.f1217b = interfaceC0330o;
             this.f1216a = interfaceC0012c;
         }
     }
@@ -60,10 +60,10 @@ public final class c {
         void C();
     }
 
-    public c(Context context, Looper looper, Looper looper2, InterfaceC0012c interfaceC0012c, InterfaceC0321g interfaceC0321g) {
+    public c(Context context, Looper looper, Looper looper2, InterfaceC0012c interfaceC0012c, InterfaceC0322g interfaceC0322g) {
         this.f1212a = context.getApplicationContext();
-        this.f1214c = interfaceC0321g.c(looper, null);
-        this.f1213b = new b(interfaceC0321g.c(looper2, null), interfaceC0012c);
+        this.f1214c = interfaceC0322g.c(looper, null);
+        this.f1213b = new b(interfaceC0322g.c(looper2, null), interfaceC0012c);
     }
 
     public void d(boolean z7) {

@@ -6,44 +6,44 @@ import java.util.Arrays;
 public final class m {
 
     /* renamed from: a, reason: collision with root package name */
-    public int f21639a;
+    public int f21645a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final int[] f21640b = new int[10];
+    public final int[] f21646b = new int[10];
 
     public void a() {
-        this.f21639a = 0;
-        Arrays.fill(this.f21640b, 0);
+        this.f21645a = 0;
+        Arrays.fill(this.f21646b, 0);
     }
 
     public int b(int i7) {
-        return this.f21640b[i7];
+        return this.f21646b[i7];
     }
 
     public int c() {
-        if ((this.f21639a & 2) != 0) {
-            return this.f21640b[1];
+        if ((this.f21645a & 2) != 0) {
+            return this.f21646b[1];
         }
         return -1;
     }
 
     public int d() {
-        if ((this.f21639a & 128) != 0) {
-            return this.f21640b[7];
+        if ((this.f21645a & 128) != 0) {
+            return this.f21646b[7];
         }
         return 65535;
     }
 
     public int e(int i7) {
-        return (this.f21639a & 16) != 0 ? this.f21640b[4] : i7;
+        return (this.f21645a & 16) != 0 ? this.f21646b[4] : i7;
     }
 
     public int f(int i7) {
-        return (this.f21639a & 32) != 0 ? this.f21640b[5] : i7;
+        return (this.f21645a & 32) != 0 ? this.f21646b[5] : i7;
     }
 
     public boolean g(int i7) {
-        return ((1 << i7) & this.f21639a) != 0;
+        return ((1 << i7) & this.f21645a) != 0;
     }
 
     public void h(m mVar) {
@@ -56,9 +56,9 @@ public final class m {
 
     public m i(int i7, int i8) {
         if (i7 >= 0) {
-            int[] iArr = this.f21640b;
+            int[] iArr = this.f21646b;
             if (i7 < iArr.length) {
-                this.f21639a = (1 << i7) | this.f21639a;
+                this.f21645a = (1 << i7) | this.f21645a;
                 iArr[i7] = i8;
             }
         }
@@ -66,6 +66,6 @@ public final class m {
     }
 
     public int j() {
-        return Integer.bitCount(this.f21639a);
+        return Integer.bitCount(this.f21645a);
     }
 }

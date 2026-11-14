@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
-import k3.AbstractC1268j;
+import k3.AbstractC1267j;
 
 /* loaded from: classes.dex */
 public abstract class d0 {
@@ -16,26 +16,26 @@ public abstract class d0 {
     public class a extends e {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ Set f18965l;
+        public final /* synthetic */ Set f18964l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final /* synthetic */ Set f18966m;
+        public final /* synthetic */ Set f18965m;
 
         /* renamed from: k3.d0$a$a, reason: collision with other inner class name */
-        public class C0216a extends AbstractC1260b {
+        public class C0216a extends AbstractC1259b {
 
             /* renamed from: n, reason: collision with root package name */
-            public final Iterator f18967n;
+            public final Iterator f18966n;
 
             public C0216a() {
-                this.f18967n = a.this.f18965l.iterator();
+                this.f18966n = a.this.f18964l.iterator();
             }
 
-            @Override // k3.AbstractC1260b
+            @Override // k3.AbstractC1259b
             public Object a() {
-                while (this.f18967n.hasNext()) {
-                    Object next = this.f18967n.next();
-                    if (a.this.f18966m.contains(next)) {
+                while (this.f18966n.hasNext()) {
+                    Object next = this.f18966n.next();
+                    if (a.this.f18965m.contains(next)) {
                         return next;
                     }
                 }
@@ -46,18 +46,18 @@ public abstract class d0 {
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
         public a(Set set, Set set2) {
             super(null);
-            this.f18965l = set;
-            this.f18966m = set2;
+            this.f18964l = set;
+            this.f18965m = set2;
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public boolean contains(Object obj) {
-            return this.f18965l.contains(obj) && this.f18966m.contains(obj);
+            return this.f18964l.contains(obj) && this.f18965m.contains(obj);
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public boolean containsAll(Collection collection) {
-            return this.f18965l.containsAll(collection) && this.f18966m.containsAll(collection);
+            return this.f18964l.containsAll(collection) && this.f18965m.containsAll(collection);
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
@@ -68,15 +68,15 @@ public abstract class d0 {
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public boolean isEmpty() {
-            return Collections.disjoint(this.f18966m, this.f18965l);
+            return Collections.disjoint(this.f18965m, this.f18964l);
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public int size() {
-            Iterator it = this.f18965l.iterator();
+            Iterator it = this.f18964l.iterator();
             int i7 = 0;
             while (it.hasNext()) {
-                if (this.f18966m.contains(it.next())) {
+                if (this.f18965m.contains(it.next())) {
                     i7++;
                 }
             }
@@ -84,7 +84,7 @@ public abstract class d0 {
         }
     }
 
-    public static class b extends AbstractC1268j.a implements Set {
+    public static class b extends AbstractC1267j.a implements Set {
         public b(Set set, j3.p pVar) {
             super(set, pVar);
         }
@@ -107,25 +107,25 @@ public abstract class d0 {
 
         @Override // java.util.SortedSet
         public Comparator comparator() {
-            return ((SortedSet) this.f18979l).comparator();
+            return ((SortedSet) this.f18978l).comparator();
         }
 
         @Override // java.util.SortedSet
         public Object first() {
-            return E.j(this.f18979l.iterator(), this.f18980m);
+            return E.j(this.f18978l.iterator(), this.f18979m);
         }
 
         @Override // java.util.SortedSet
         public SortedSet headSet(Object obj) {
-            return new c(((SortedSet) this.f18979l).headSet(obj), this.f18980m);
+            return new c(((SortedSet) this.f18978l).headSet(obj), this.f18979m);
         }
 
         @Override // java.util.SortedSet
         public Object last() {
-            SortedSet sortedSetHeadSet = (SortedSet) this.f18979l;
+            SortedSet sortedSetHeadSet = (SortedSet) this.f18978l;
             while (true) {
                 Object objLast = sortedSetHeadSet.last();
-                if (this.f18980m.apply(objLast)) {
+                if (this.f18979m.apply(objLast)) {
                     return objLast;
                 }
                 sortedSetHeadSet = sortedSetHeadSet.headSet(objLast);
@@ -134,12 +134,12 @@ public abstract class d0 {
 
         @Override // java.util.SortedSet
         public SortedSet subSet(Object obj, Object obj2) {
-            return new c(((SortedSet) this.f18979l).subSet(obj, obj2), this.f18980m);
+            return new c(((SortedSet) this.f18978l).subSet(obj, obj2), this.f18979m);
         }
 
         @Override // java.util.SortedSet
         public SortedSet tailSet(Object obj) {
-            return new c(((SortedSet) this.f18979l).tailSet(obj), this.f18980m);
+            return new c(((SortedSet) this.f18978l).tailSet(obj), this.f18979m);
         }
     }
 
@@ -220,7 +220,7 @@ public abstract class d0 {
             return new b((Set) j3.o.q(set), (j3.p) j3.o.q(pVar));
         }
         b bVar = (b) set;
-        return new b((Set) bVar.f18979l, j3.q.c(bVar.f18980m, pVar));
+        return new b((Set) bVar.f18978l, j3.q.c(bVar.f18979m, pVar));
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -229,7 +229,7 @@ public abstract class d0 {
             return new c((SortedSet) j3.o.q(sortedSet), (j3.p) j3.o.q(pVar));
         }
         b bVar = (b) sortedSet;
-        return new c((SortedSet) bVar.f18979l, j3.q.c(bVar.f18980m, pVar));
+        return new c((SortedSet) bVar.f18978l, j3.q.c(bVar.f18979m, pVar));
     }
 
     public static int d(Set set) {

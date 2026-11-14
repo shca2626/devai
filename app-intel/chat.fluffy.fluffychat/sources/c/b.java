@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
-import c.InterfaceC0888a;
+import c.InterfaceC0889a;
 
 /* loaded from: classes.dex */
 public class b implements Parcelable {
@@ -17,7 +17,7 @@ public class b implements Parcelable {
     public final Handler f13820m = null;
 
     /* renamed from: n, reason: collision with root package name */
-    public InterfaceC0888a f13821n;
+    public InterfaceC0889a f13821n;
 
     public class a implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
@@ -34,11 +34,11 @@ public class b implements Parcelable {
     }
 
     /* renamed from: c.b$b, reason: collision with other inner class name */
-    public class BinderC0134b extends InterfaceC0888a.AbstractBinderC0132a {
+    public class BinderC0134b extends InterfaceC0889a.AbstractBinderC0132a {
         public BinderC0134b() {
         }
 
-        @Override // c.InterfaceC0888a
+        @Override // c.InterfaceC0889a
         public void d(int i7, Bundle bundle) {
             b bVar = b.this;
             Handler handler = bVar.f13820m;
@@ -70,7 +70,7 @@ public class b implements Parcelable {
     }
 
     public b(Parcel parcel) {
-        this.f13821n = InterfaceC0888a.AbstractBinderC0132a.e(parcel.readStrongBinder());
+        this.f13821n = InterfaceC0889a.AbstractBinderC0132a.e(parcel.readStrongBinder());
     }
 
     @Override // android.os.Parcelable

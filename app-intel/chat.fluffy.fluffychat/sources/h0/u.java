@@ -4,6 +4,6 @@ package h0;
 public abstract class u {
     public static final t a(String str) {
         M5.m.e(str, "filePath");
-        return new C1119C(str);
+        return new C1120C(str);
     }
 }

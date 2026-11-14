@@ -3,15 +3,15 @@ package i2;
 import M5.m;
 import android.content.Context;
 import androidx.window.extensions.layout.WindowLayoutComponent;
-import h2.InterfaceC1138a;
+import h2.InterfaceC1139a;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.locks.ReentrantLock;
-import y5.C1824s;
+import y5.C1823s;
 
 /* loaded from: classes.dex */
-public final class e implements InterfaceC1138a {
+public final class e implements InterfaceC1139a {
 
     /* renamed from: a, reason: collision with root package name */
     public final WindowLayoutComponent f17413a;
@@ -33,7 +33,7 @@ public final class e implements InterfaceC1138a {
         this.f17416d = new LinkedHashMap();
     }
 
-    @Override // h2.InterfaceC1138a
+    @Override // h2.InterfaceC1139a
     public void a(Y.a aVar) {
         m.e(aVar, "callback");
         ReentrantLock reentrantLock = this.f17414b;
@@ -55,7 +55,7 @@ public final class e implements InterfaceC1138a {
                 this.f17415c.remove(context);
                 this.f17413a.removeWindowLayoutInfoListener(gVar);
             }
-            C1824s c1824s = C1824s.f24014a;
+            C1823s c1823s = C1823s.f24020a;
             reentrantLock.unlock();
         } catch (Throwable th) {
             reentrantLock.unlock();
@@ -63,9 +63,9 @@ public final class e implements InterfaceC1138a {
         }
     }
 
-    @Override // h2.InterfaceC1138a
+    @Override // h2.InterfaceC1139a
     public void b(Context context, Executor executor, Y.a aVar) {
-        C1824s c1824s;
+        C1823s c1823s;
         m.e(context, "context");
         m.e(executor, "executor");
         m.e(aVar, "callback");
@@ -76,18 +76,18 @@ public final class e implements InterfaceC1138a {
             if (gVar != null) {
                 gVar.b(aVar);
                 this.f17416d.put(aVar, context);
-                c1824s = C1824s.f24014a;
+                c1823s = C1823s.f24020a;
             } else {
-                c1824s = null;
+                c1823s = null;
             }
-            if (c1824s == null) {
+            if (c1823s == null) {
                 g gVar2 = new g(context);
                 this.f17415c.put(context, gVar2);
                 this.f17416d.put(aVar, context);
                 gVar2.b(aVar);
                 this.f17413a.addWindowLayoutInfoListener(context, gVar2);
             }
-            C1824s c1824s2 = C1824s.f24014a;
+            C1823s c1823s2 = C1823s.f24020a;
             reentrantLock.unlock();
         } catch (Throwable th) {
             reentrantLock.unlock();

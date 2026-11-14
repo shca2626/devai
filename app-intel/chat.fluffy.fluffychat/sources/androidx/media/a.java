@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import androidx.media.AudioAttributesCompat;
-import z0.AbstractC1829a;
+import z0.AbstractC1828a;
 
 /* loaded from: classes.dex */
 public class a {
@@ -171,7 +171,7 @@ public class a {
     }
 
     public AudioFocusRequest c() {
-        return AbstractC1829a.a(this.f12488f);
+        return AbstractC1828a.a(this.f12488f);
     }
 
     public int d() {

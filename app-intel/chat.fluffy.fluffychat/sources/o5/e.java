@@ -1,25 +1,25 @@
 package o5;
 
 import java.util.List;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class e {
 
     /* renamed from: e, reason: collision with root package name */
-    public static final a f20446e = new a(null);
+    public static final a f20445e = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f20447a;
+    public final String f20446a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f20448b;
+    public final String f20447b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final String f20449c;
+    public final String f20448c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final String f20450d;
+    public final String f20449d;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -48,30 +48,30 @@ public final class e {
         M5.m.e(str2, "signInHint");
         M5.m.e(str3, "cancelButton");
         M5.m.e(str4, "signInTitle");
-        this.f20447a = str;
-        this.f20448b = str2;
-        this.f20449c = str3;
-        this.f20450d = str4;
+        this.f20446a = str;
+        this.f20447b = str2;
+        this.f20448c = str3;
+        this.f20449d = str4;
     }
 
     public final String a() {
-        return this.f20449c;
+        return this.f20448c;
     }
 
     public final String b() {
-        return this.f20447a;
+        return this.f20446a;
     }
 
     public final String c() {
-        return this.f20448b;
+        return this.f20447b;
     }
 
     public final String d() {
-        return this.f20450d;
+        return this.f20449d;
     }
 
     public final List e() {
-        return C1881o.l(this.f20447a, this.f20448b, this.f20449c, this.f20450d);
+        return C1884o.l(this.f20446a, this.f20447b, this.f20448c, this.f20449d);
     }
 
     public boolean equals(Object obj) {
@@ -81,7 +81,7 @@ public final class e {
         if (this == obj) {
             return true;
         }
-        return s.f20479a.a(e(), ((e) obj).e());
+        return s.f20478a.a(e(), ((e) obj).e());
     }
 
     public int hashCode() {
@@ -89,6 +89,6 @@ public final class e {
     }
 
     public String toString() {
-        return "AuthStrings(reason=" + this.f20447a + ", signInHint=" + this.f20448b + ", cancelButton=" + this.f20449c + ", signInTitle=" + this.f20450d + ")";
+        return "AuthStrings(reason=" + this.f20446a + ", signInHint=" + this.f20447b + ", cancelButton=" + this.f20448c + ", signInTitle=" + this.f20449d + ")";
     }
 }

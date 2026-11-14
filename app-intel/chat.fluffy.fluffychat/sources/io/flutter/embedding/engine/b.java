@@ -1,10 +1,10 @@
 package io.flutter.embedding.engine;
 
 import X4.a;
-import a5.C0765d;
+import a5.C0766d;
 import android.content.Context;
 import io.flutter.embedding.engine.a;
-import io.flutter.plugin.platform.C1190w;
+import io.flutter.plugin.platform.C1191w;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class b {
         public List f17593d;
 
         /* renamed from: e, reason: collision with root package name */
-        public C1190w f17594e;
+        public C1191w f17594e;
 
         /* renamed from: f, reason: collision with root package name */
         public boolean f17595f = true;
@@ -81,7 +81,7 @@ public class b {
             return this.f17592c;
         }
 
-        public C1190w f() {
+        public C1191w f() {
             return this.f17594e;
         }
 
@@ -116,12 +116,12 @@ public class b {
     }
 
     public b(Context context, String[] strArr) {
-        C0765d c0765dC = U4.a.e().c();
-        if (c0765dC.p()) {
+        C0766d c0766dC = U4.a.e().c();
+        if (c0766dC.p()) {
             return;
         }
-        c0765dC.r(context.getApplicationContext());
-        c0765dC.f(context.getApplicationContext(), strArr);
+        c0766dC.r(context.getApplicationContext());
+        c0766dC.f(context.getApplicationContext(), strArr);
     }
 
     public io.flutter.embedding.engine.a a(C0201b c0201b) {
@@ -130,11 +130,11 @@ public class b {
         a.c cVarC = c0201b.c();
         String strE = c0201b.e();
         List listD = c0201b.d();
-        C1190w c1190wF = c0201b.f();
-        if (c1190wF == null) {
-            c1190wF = new C1190w();
+        C1191w c1191wF = c0201b.f();
+        if (c1191wF == null) {
+            c1191wF = new C1191w();
         }
-        C1190w c1190w = c1190wF;
+        C1191w c1191w = c1191wF;
         boolean zA = c0201b.a();
         boolean zG = c0201b.g();
         if (cVarC == null) {
@@ -142,20 +142,20 @@ public class b {
         }
         a.c cVar = cVarC;
         if (this.f17587a.size() == 0) {
-            aVarG = b(contextB, c1190w, zA, zG);
+            aVarG = b(contextB, c1191w, zA, zG);
             if (strE != null) {
                 aVarG.q().c(strE);
             }
             aVarG.l().k(cVar, listD);
         } else {
-            aVarG = ((io.flutter.embedding.engine.a) this.f17587a.get(0)).G(contextB, cVar, strE, listD, c1190w, zA, zG);
+            aVarG = ((io.flutter.embedding.engine.a) this.f17587a.get(0)).G(contextB, cVar, strE, listD, c1191w, zA, zG);
         }
         this.f17587a.add(aVarG);
         aVarG.f(new a(aVarG));
         return aVarG;
     }
 
-    public io.flutter.embedding.engine.a b(Context context, C1190w c1190w, boolean z7, boolean z8) {
-        return new io.flutter.embedding.engine.a(context, null, null, c1190w, null, z7, z8, this);
+    public io.flutter.embedding.engine.a b(Context context, C1191w c1191w, boolean z7, boolean z8) {
+        return new io.flutter.embedding.engine.a(context, null, null, c1191w, null, z7, z8, this);
     }
 }

@@ -7,23 +7,23 @@ import java.util.Objects;
 public final class f extends i {
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f22757b;
+    public final String f22763b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final String f22758c;
+    public final String f22764c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final String f22759d;
+    public final String f22765d;
 
     /* renamed from: e, reason: collision with root package name */
-    public final byte[] f22760e;
+    public final byte[] f22766e;
 
     public f(String str, String str2, String str3, byte[] bArr) {
         super("GEOB");
-        this.f22757b = str;
-        this.f22758c = str2;
-        this.f22759d = str3;
-        this.f22760e = bArr;
+        this.f22763b = str;
+        this.f22764c = str2;
+        this.f22765d = str3;
+        this.f22766e = bArr;
     }
 
     public boolean equals(Object obj) {
@@ -32,7 +32,7 @@ public final class f extends i {
         }
         if (obj != null && f.class == obj.getClass()) {
             f fVar = (f) obj;
-            if (Objects.equals(this.f22757b, fVar.f22757b) && Objects.equals(this.f22758c, fVar.f22758c) && Objects.equals(this.f22759d, fVar.f22759d) && Arrays.equals(this.f22760e, fVar.f22760e)) {
+            if (Objects.equals(this.f22763b, fVar.f22763b) && Objects.equals(this.f22764c, fVar.f22764c) && Objects.equals(this.f22765d, fVar.f22765d) && Arrays.equals(this.f22766e, fVar.f22766e)) {
                 return true;
             }
         }
@@ -40,16 +40,16 @@ public final class f extends i {
     }
 
     public int hashCode() {
-        String str = this.f22757b;
+        String str = this.f22763b;
         int iHashCode = (527 + (str != null ? str.hashCode() : 0)) * 31;
-        String str2 = this.f22758c;
+        String str2 = this.f22764c;
         int iHashCode2 = (iHashCode + (str2 != null ? str2.hashCode() : 0)) * 31;
-        String str3 = this.f22759d;
-        return ((iHashCode2 + (str3 != null ? str3.hashCode() : 0)) * 31) + Arrays.hashCode(this.f22760e);
+        String str3 = this.f22765d;
+        return ((iHashCode2 + (str3 != null ? str3.hashCode() : 0)) * 31) + Arrays.hashCode(this.f22766e);
     }
 
     @Override // u1.i
     public String toString() {
-        return this.f22766a + ": mimeType=" + this.f22757b + ", filename=" + this.f22758c + ", description=" + this.f22759d;
+        return this.f22772a + ": mimeType=" + this.f22763b + ", filename=" + this.f22764c + ", description=" + this.f22765d;
     }
 }

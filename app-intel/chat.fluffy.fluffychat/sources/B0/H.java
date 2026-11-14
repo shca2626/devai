@@ -1,6 +1,6 @@
 package B0;
 
-import B0.C0299a;
+import B0.C0300a;
 import B0.v;
 import E0.U;
 import android.net.Uri;
@@ -90,14 +90,14 @@ public abstract class H {
         public boolean f389f;
 
         /* renamed from: g, reason: collision with root package name */
-        public C0299a f390g = C0299a.f576g;
+        public C0300a f390g = C0300a.f576g;
 
         public int a(int i7) {
             return this.f390g.a(i7).f601b;
         }
 
         public long b(int i7, int i8) {
-            C0299a.C0008a c0008aA = this.f390g.a(i7);
+            C0300a.C0008a c0008aA = this.f390g.a(i7);
             if (c0008aA.f601b != -1) {
                 return c0008aA.f606g[i8];
             }
@@ -138,7 +138,7 @@ public abstract class H {
         }
 
         public int h(int i7, int i8) {
-            C0299a.C0008a c0008aA = this.f390g.a(i7);
+            C0300a.C0008a c0008aA = this.f390g.a(i7);
             if (c0008aA.f601b != -1) {
                 return c0008aA.f605f[i8];
             }
@@ -201,16 +201,16 @@ public abstract class H {
         }
 
         public b t(Object obj, Object obj2, int i7, long j7, long j8) {
-            return u(obj, obj2, i7, j7, j8, C0299a.f576g, false);
+            return u(obj, obj2, i7, j7, j8, C0300a.f576g, false);
         }
 
-        public b u(Object obj, Object obj2, int i7, long j7, long j8, C0299a c0299a, boolean z7) {
+        public b u(Object obj, Object obj2, int i7, long j7, long j8, C0300a c0300a, boolean z7) {
             this.f384a = obj;
             this.f385b = obj2;
             this.f386c = i7;
             this.f387d = j7;
             this.f388e = j8;
-            this.f390g = c0299a;
+            this.f390g = c0300a;
             this.f389f = z7;
             return this;
         }

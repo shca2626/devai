@@ -1,0 +1,56 @@
+package b6;
+
+/* renamed from: b6.H, reason: case insensitive filesystem */
+/* loaded from: classes.dex */
+public abstract /* synthetic */ class AbstractC0856H {
+    public static final int a(String str, int i7, int i8, int i9) {
+        return (int) AbstractC0854F.c(str, i7, i8, i9);
+    }
+
+    public static final long b(String str, long j7, long j8, long j9) {
+        String strD = AbstractC0854F.d(str);
+        if (strD == null) {
+            return j7;
+        }
+        Long lN = V5.v.n(strD);
+        if (lN == null) {
+            throw new IllegalStateException(("System property '" + str + "' has unrecognized value '" + strD + '\'').toString());
+        }
+        long jLongValue = lN.longValue();
+        if (j8 <= jLongValue && jLongValue <= j9) {
+            return jLongValue;
+        }
+        throw new IllegalStateException(("System property '" + str + "' should be in range " + j8 + ".." + j9 + ", but is '" + jLongValue + '\'').toString());
+    }
+
+    public static final String c(String str, String str2) {
+        String strD = AbstractC0854F.d(str);
+        return strD == null ? str2 : strD;
+    }
+
+    public static final boolean d(String str, boolean z7) {
+        String strD = AbstractC0854F.d(str);
+        return strD != null ? Boolean.parseBoolean(strD) : z7;
+    }
+
+    public static /* synthetic */ int e(String str, int i7, int i8, int i9, int i10, Object obj) {
+        if ((i10 & 4) != 0) {
+            i8 = 1;
+        }
+        if ((i10 & 8) != 0) {
+            i9 = Integer.MAX_VALUE;
+        }
+        return AbstractC0854F.b(str, i7, i8, i9);
+    }
+
+    public static /* synthetic */ long f(String str, long j7, long j8, long j9, int i7, Object obj) {
+        if ((i7 & 4) != 0) {
+            j8 = 1;
+        }
+        long j10 = j8;
+        if ((i7 & 8) != 0) {
+            j9 = Long.MAX_VALUE;
+        }
+        return AbstractC0854F.c(str, j7, j10, j9);
+    }
+}

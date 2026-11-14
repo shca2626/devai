@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public final class g implements Closeable {
@@ -111,18 +111,18 @@ public final class g implements Closeable {
             }
         }
 
-        public final AbstractC1279v a(byte[] bArr) {
+        public final AbstractC1278v a(byte[] bArr) {
             o.v(this.f12782b == 3);
             if (bArr.length <= 0 || bArr[bArr.length - 1] != 10) {
                 throw new IllegalArgumentException("Message body is empty or does not end with a LF.");
             }
             this.f12781a.add((bArr.length <= 1 || bArr[bArr.length + (-2)] != 13) ? new String(bArr, 0, bArr.length - 1, g.f12773r) : new String(bArr, 0, bArr.length - 2, g.f12773r));
-            AbstractC1279v abstractC1279vR = AbstractC1279v.r(this.f12781a);
+            AbstractC1278v abstractC1278vR = AbstractC1278v.r(this.f12781a);
             e();
-            return abstractC1279vR;
+            return abstractC1278vR;
         }
 
-        public final AbstractC1279v b(byte[] bArr) throws A {
+        public final AbstractC1278v b(byte[] bArr) throws A {
             o.d(bArr.length >= 2 && bArr[bArr.length - 2] == 13 && bArr[bArr.length - 1] == 10);
             String str = new String(bArr, 0, bArr.length - 2, g.f12773r);
             this.f12781a.add(str);
@@ -148,14 +148,14 @@ public final class g implements Closeable {
                 this.f12782b = 3;
                 return null;
             }
-            AbstractC1279v abstractC1279vR = AbstractC1279v.r(this.f12781a);
+            AbstractC1278v abstractC1278vR = AbstractC1278v.r(this.f12781a);
             e();
-            return abstractC1279vR;
+            return abstractC1278vR;
         }
 
-        public AbstractC1279v c(byte b7, DataInputStream dataInputStream) throws IOException {
-            AbstractC1279v abstractC1279vB = b(d(b7, dataInputStream));
-            while (abstractC1279vB == null) {
+        public AbstractC1278v c(byte b7, DataInputStream dataInputStream) throws IOException {
+            AbstractC1278v abstractC1278vB = b(d(b7, dataInputStream));
+            while (abstractC1278vB == null) {
                 if (this.f12782b == 3) {
                     long j7 = this.f12783c;
                     if (j7 <= 0) {
@@ -165,12 +165,12 @@ public final class g implements Closeable {
                     o.v(iE != -1);
                     byte[] bArr = new byte[iE];
                     dataInputStream.readFully(bArr, 0, iE);
-                    abstractC1279vB = a(bArr);
+                    abstractC1278vB = a(bArr);
                 } else {
-                    abstractC1279vB = b(d(dataInputStream.readByte(), dataInputStream));
+                    abstractC1278vB = b(d(dataInputStream.readByte(), dataInputStream));
                 }
             }
-            return abstractC1279vB;
+            return abstractC1278vB;
         }
 
         public final void e() {

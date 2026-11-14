@@ -1,10 +1,10 @@
 package f6;
 
-import b6.AbstractC0849B;
+import b6.AbstractC0850B;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /* loaded from: classes.dex */
-public final class m extends AbstractC0849B {
+public final class m extends AbstractC0850B {
 
     /* renamed from: e, reason: collision with root package name */
     public final /* synthetic */ AtomicReferenceArray f15909e;
@@ -14,12 +14,12 @@ public final class m extends AbstractC0849B {
         this.f15909e = new AtomicReferenceArray(l.f15908f);
     }
 
-    @Override // b6.AbstractC0849B
+    @Override // b6.AbstractC0850B
     public int r() {
         return l.f15908f;
     }
 
-    @Override // b6.AbstractC0849B
+    @Override // b6.AbstractC0850B
     public void s(int i7, Throwable th, C5.i iVar) {
         v().set(i7, l.f15907e);
         t();

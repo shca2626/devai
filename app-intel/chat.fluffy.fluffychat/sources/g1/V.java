@@ -1,6 +1,6 @@
 package g1;
 
-import B0.InterfaceC0309k;
+import B0.InterfaceC0310k;
 import java.util.Arrays;
 
 /* loaded from: classes.dex */
@@ -49,7 +49,7 @@ public interface V {
         f(e7, i7, 0);
     }
 
-    int b(InterfaceC0309k interfaceC0309k, int i7, boolean z7, int i8);
+    int b(InterfaceC0310k interfaceC0310k, int i7, boolean z7, int i8);
 
     void c(B0.s sVar);
 
@@ -57,8 +57,8 @@ public interface V {
 
     void f(E0.E e7, int i7, int i8);
 
-    default int g(InterfaceC0309k interfaceC0309k, int i7, boolean z7) {
-        return b(interfaceC0309k, i7, z7, 0);
+    default int g(InterfaceC0310k interfaceC0310k, int i7, boolean z7) {
+        return b(interfaceC0310k, i7, z7, 0);
     }
 
     default void e(long j7) {

@@ -17,7 +17,7 @@ import androidx.appcompat.view.menu.i;
 public abstract class d implements f, i, AdapterView.OnItemClickListener {
 
     /* renamed from: l, reason: collision with root package name */
-    public Rect f20655l;
+    public Rect f20661l;
 
     public static int o(ListAdapter listAdapter, ViewGroup viewGroup, Context context, int i7) {
         int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
@@ -80,7 +80,7 @@ public abstract class d implements f, i, AdapterView.OnItemClickListener {
     }
 
     public Rect n() {
-        return this.f20655l;
+        return this.f20661l;
     }
 
     @Override // android.widget.AdapterView.OnItemClickListener
@@ -92,7 +92,7 @@ public abstract class d implements f, i, AdapterView.OnItemClickListener {
     public abstract void p(View view);
 
     public void q(Rect rect) {
-        this.f20655l = rect;
+        this.f20661l = rect;
     }
 
     public abstract void r(boolean z7);

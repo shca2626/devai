@@ -1,9 +1,9 @@
 package io.flutter.view;
 
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import io.flutter.embedding.engine.FlutterJNI;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public final class FlutterCallbackInformation {
     public final String callbackClassName;

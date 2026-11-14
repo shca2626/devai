@@ -4,7 +4,7 @@ import E0.E;
 import g1.M;
 import java.util.ArrayList;
 import java.util.List;
-import v1.C1677c;
+import v1.C1676c;
 
 /* loaded from: classes.dex */
 public final class t {
@@ -60,7 +60,7 @@ public final class t {
         }
     }
 
-    public static C1677c f(E e7, int i7) throws B0.A {
+    public static C1676c f(E e7, int i7) throws B0.A {
         ArrayList arrayList = new ArrayList();
         List listF = f202e.f(e7.N(i7));
         for (int i8 = 0; i8 < listF.size(); i8++) {
@@ -69,12 +69,12 @@ public final class t {
                 throw B0.A.a(null, null);
             }
             try {
-                arrayList.add(new C1677c.a(Long.parseLong((String) listF2.get(0)), Long.parseLong((String) listF2.get(1)), 1 << (Integer.parseInt((String) listF2.get(2)) - 1)));
+                arrayList.add(new C1676c.a(Long.parseLong((String) listF2.get(0)), Long.parseLong((String) listF2.get(1)), 1 << (Integer.parseInt((String) listF2.get(2)) - 1)));
             } catch (NumberFormatException e8) {
                 throw B0.A.a(null, e8);
             }
         }
-        return new C1677c(arrayList);
+        return new C1676c(arrayList);
     }
 
     public final void a(g1.r rVar, M m7) {

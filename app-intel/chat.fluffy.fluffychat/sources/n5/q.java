@@ -14,7 +14,7 @@ import org.webrtc.MediaStreamTrack;
 public class q {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Context f20168a;
+    public final Context f20167a;
 
     public enum a {
         IMAGE,
@@ -22,31 +22,31 @@ public class q {
     }
 
     public q(Context context) {
-        this.f20168a = context;
+        this.f20167a = context;
     }
 
     public void a() {
-        this.f20168a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit().clear().apply();
+        this.f20167a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit().clear().apply();
     }
 
     public Map b() {
         Set<String> stringSet;
         HashMap map = new HashMap();
         boolean z7 = false;
-        SharedPreferences sharedPreferences = this.f20168a.getSharedPreferences("flutter_image_picker_shared_preference", 0);
+        SharedPreferences sharedPreferences = this.f20167a.getSharedPreferences("flutter_image_picker_shared_preference", 0);
         boolean z8 = true;
         if (sharedPreferences.contains("flutter_image_picker_image_path") && (stringSet = sharedPreferences.getStringSet("flutter_image_picker_image_path", null)) != null) {
             map.put("pathList", new ArrayList(stringSet));
             z7 = true;
         }
         if (sharedPreferences.contains("flutter_image_picker_error_code")) {
-            map.put("error", new C1364a(sharedPreferences.getString("flutter_image_picker_error_code", ""), sharedPreferences.getString("flutter_image_picker_error_message", null)));
+            map.put("error", new C1363a(sharedPreferences.getString("flutter_image_picker_error_code", ""), sharedPreferences.getString("flutter_image_picker_error_message", null)));
         } else {
             z8 = z7;
         }
         if (z8) {
             if (sharedPreferences.contains("flutter_image_picker_type")) {
-                map.put("type", sharedPreferences.getString("flutter_image_picker_type", "").equals(MediaStreamTrack.VIDEO_TRACK_KIND) ? EnumC1366c.f20147o : EnumC1366c.f20146n);
+                map.put("type", sharedPreferences.getString("flutter_image_picker_type", "").equals(MediaStreamTrack.VIDEO_TRACK_KIND) ? EnumC1365c.f20146o : EnumC1365c.f20145n);
             }
             if (sharedPreferences.contains("flutter_image_picker_max_width")) {
                 map.put("maxWidth", Double.valueOf(Double.longBitsToDouble(sharedPreferences.getLong("flutter_image_picker_max_width", 0L))));
@@ -60,11 +60,11 @@ public class q {
     }
 
     public String c() {
-        return this.f20168a.getSharedPreferences("flutter_image_picker_shared_preference", 0).getString("flutter_image_picker_pending_image_uri", "");
+        return this.f20167a.getSharedPreferences("flutter_image_picker_shared_preference", 0).getString("flutter_image_picker_pending_image_uri", "");
     }
 
     public void d(F f7) {
-        SharedPreferences.Editor editorEdit = this.f20168a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit();
+        SharedPreferences.Editor editorEdit = this.f20167a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit();
         if (f7.b() != null) {
             editorEdit.putLong("flutter_image_picker_max_width", Double.doubleToRawLongBits(f7.b().doubleValue()));
         }
@@ -76,11 +76,11 @@ public class q {
     }
 
     public void e(Uri uri) {
-        this.f20168a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit().putString("flutter_image_picker_pending_image_uri", uri.getPath()).apply();
+        this.f20167a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit().putString("flutter_image_picker_pending_image_uri", uri.getPath()).apply();
     }
 
     public void f(ArrayList arrayList, String str, String str2) {
-        SharedPreferences.Editor editorEdit = this.f20168a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit();
+        SharedPreferences.Editor editorEdit = this.f20167a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit();
         if (arrayList != null) {
             editorEdit.putStringSet("flutter_image_picker_image_path", new HashSet(arrayList));
         }
@@ -106,6 +106,6 @@ public class q {
     }
 
     public final void h(String str) {
-        this.f20168a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit().putString("flutter_image_picker_type", str).apply();
+        this.f20167a.getSharedPreferences("flutter_image_picker_shared_preference", 0).edit().putString("flutter_image_picker_type", str).apply();
     }
 }

@@ -1,28 +1,28 @@
 package androidx.lifecycle;
 
 /* loaded from: classes.dex */
-public interface DefaultLifecycleObserver extends InterfaceC0807m {
-    default void onCreate(InterfaceC0808n interfaceC0808n) {
-        M5.m.e(interfaceC0808n, "owner");
+public interface DefaultLifecycleObserver extends InterfaceC0808m {
+    default void onCreate(InterfaceC0809n interfaceC0809n) {
+        M5.m.e(interfaceC0809n, "owner");
     }
 
-    default void onDestroy(InterfaceC0808n interfaceC0808n) {
-        M5.m.e(interfaceC0808n, "owner");
+    default void onDestroy(InterfaceC0809n interfaceC0809n) {
+        M5.m.e(interfaceC0809n, "owner");
     }
 
-    default void onPause(InterfaceC0808n interfaceC0808n) {
-        M5.m.e(interfaceC0808n, "owner");
+    default void onPause(InterfaceC0809n interfaceC0809n) {
+        M5.m.e(interfaceC0809n, "owner");
     }
 
-    default void onResume(InterfaceC0808n interfaceC0808n) {
-        M5.m.e(interfaceC0808n, "owner");
+    default void onResume(InterfaceC0809n interfaceC0809n) {
+        M5.m.e(interfaceC0809n, "owner");
     }
 
-    default void onStart(InterfaceC0808n interfaceC0808n) {
-        M5.m.e(interfaceC0808n, "owner");
+    default void onStart(InterfaceC0809n interfaceC0809n) {
+        M5.m.e(interfaceC0809n, "owner");
     }
 
-    default void onStop(InterfaceC0808n interfaceC0808n) {
-        M5.m.e(interfaceC0808n, "owner");
+    default void onStop(InterfaceC0809n interfaceC0809n) {
+        M5.m.e(interfaceC0809n, "owner");
     }
 }

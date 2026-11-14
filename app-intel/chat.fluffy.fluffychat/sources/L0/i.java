@@ -1,18 +1,18 @@
 package L0;
 
-import g1.C1077g;
+import g1.C1078g;
 
 /* loaded from: classes.dex */
 public final class i implements g {
 
     /* renamed from: a, reason: collision with root package name */
-    public final C1077g f5432a;
+    public final C1078g f5432a;
 
     /* renamed from: b, reason: collision with root package name */
     public final long f5433b;
 
-    public i(C1077g c1077g, long j7) {
-        this.f5432a = c1077g;
+    public i(C1078g c1078g, long j7) {
+        this.f5432a = c1078g;
         this.f5433b = j7;
     }
 

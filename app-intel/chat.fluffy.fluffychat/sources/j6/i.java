@@ -7,19 +7,19 @@ import android.app.Application;
 public final class i {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Application f18809a;
+    public final Application f18808a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final Application.ActivityLifecycleCallbacks f18810b;
+    public final Application.ActivityLifecycleCallbacks f18809b;
 
     public i(Application application, Application.ActivityLifecycleCallbacks activityLifecycleCallbacks) {
         m.e(application, "application");
         m.e(activityLifecycleCallbacks, "callback");
-        this.f18809a = application;
-        this.f18810b = activityLifecycleCallbacks;
+        this.f18808a = application;
+        this.f18809b = activityLifecycleCallbacks;
     }
 
     public final void a() {
-        this.f18809a.unregisterActivityLifecycleCallbacks(this.f18810b);
+        this.f18808a.unregisterActivityLifecycleCallbacks(this.f18809b);
     }
 }

@@ -7,18 +7,18 @@ import java.lang.reflect.Method;
 public class j {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Class f22484a;
+    public final Class f22490a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f22485b;
+    public final String f22491b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final Class[] f22486c;
+    public final Class[] f22492c;
 
     public j(Class cls, String str, Class... clsArr) {
-        this.f22484a = cls;
-        this.f22485b = str;
-        this.f22486c = clsArr;
+        this.f22490a = cls;
+        this.f22491b = str;
+        this.f22492c = clsArr;
     }
 
     public static Method b(Class cls, String str, Class[] clsArr) throws NoSuchMethodException, SecurityException {
@@ -39,12 +39,12 @@ public class j {
 
     public final Method a(Class cls) throws NoSuchMethodException, SecurityException {
         Class cls2;
-        String str = this.f22485b;
+        String str = this.f22491b;
         if (str == null) {
             return null;
         }
-        Method methodB = b(cls, str, this.f22486c);
-        if (methodB == null || (cls2 = this.f22484a) == null || cls2.isAssignableFrom(methodB.getReturnType())) {
+        Method methodB = b(cls, str, this.f22492c);
+        if (methodB == null || (cls2 = this.f22490a) == null || cls2.isAssignableFrom(methodB.getReturnType())) {
             return methodB;
         }
         return null;
@@ -53,7 +53,7 @@ public class j {
     public Object c(Object obj, Object... objArr) throws NoSuchMethodException, SecurityException {
         Method methodA = a(obj.getClass());
         if (methodA == null) {
-            throw new AssertionError("Method " + this.f22485b + " not supported for object " + obj);
+            throw new AssertionError("Method " + this.f22491b + " not supported for object " + obj);
         }
         try {
             return methodA.invoke(obj, objArr);

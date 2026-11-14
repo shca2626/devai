@@ -8,14 +8,14 @@ public final class D implements m {
     public static final D ROC;
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ D[] f18209a;
+    public static final /* synthetic */ D[] f18217a;
 
     public static D valueOf(String str) {
         return (D) Enum.valueOf(D.class, str);
     }
 
     public static D[] values() {
-        return (D[]) f18209a.clone();
+        return (D[]) f18217a.clone();
     }
 
     static {
@@ -23,7 +23,7 @@ public final class D implements m {
         BEFORE_ROC = d7;
         D d8 = new D("ROC", 1);
         ROC = d8;
-        f18209a = new D[]{d7, d8};
+        f18217a = new D[]{d7, d8};
     }
 
     @Override // j$.time.chrono.m

@@ -1,6 +1,6 @@
 package P0;
 
-import B0.C0313o;
+import B0.C0314o;
 import P0.f;
 import android.net.Uri;
 import j3.o;
@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import k3.AbstractC1279v;
-import k3.AbstractC1281x;
+import k3.AbstractC1278v;
+import k3.AbstractC1280x;
 import k3.D;
 
 /* loaded from: classes.dex */
@@ -57,7 +57,7 @@ public final class f extends j {
     public final boolean f7359p;
 
     /* renamed from: q, reason: collision with root package name */
-    public final C0313o f7360q;
+    public final C0314o f7360q;
 
     /* renamed from: r, reason: collision with root package name */
     public final List f7361r;
@@ -75,7 +75,7 @@ public final class f extends j {
     public final h f7365v;
 
     /* renamed from: w, reason: collision with root package name */
-    public final AbstractC1279v f7366w;
+    public final AbstractC1278v f7366w;
 
     public static final class c {
 
@@ -113,13 +113,13 @@ public final class f extends j {
         public final long f7381k;
 
         /* renamed from: l, reason: collision with root package name */
-        public final AbstractC1279v f7382l;
+        public final AbstractC1278v f7382l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final AbstractC1279v f7383m;
+        public final AbstractC1278v f7383m;
 
         /* renamed from: n, reason: collision with root package name */
-        public final AbstractC1279v f7384n;
+        public final AbstractC1278v f7384n;
 
         /* renamed from: o, reason: collision with root package name */
         public final boolean f7385o;
@@ -510,9 +510,9 @@ public final class f extends j {
             this.f7379i = z7;
             this.f7380j = j11;
             this.f7381k = j12;
-            this.f7382l = AbstractC1279v.r(list2);
-            this.f7383m = AbstractC1279v.r(list3);
-            this.f7384n = AbstractC1279v.C(new Comparator() { // from class: P0.g
+            this.f7382l = AbstractC1278v.r(list2);
+            this.f7383m = AbstractC1278v.r(list3);
+            this.f7384n = AbstractC1278v.C(new Comparator() { // from class: P0.g
                 @Override // java.util.Comparator
                 public final int compare(Object obj, Object obj2) {
                     return ((f.b) obj).f7367a.compareTo(((f.b) obj2).f7367a);
@@ -550,8 +550,8 @@ public final class f extends j {
         /* renamed from: x, reason: collision with root package name */
         public final boolean f7412x;
 
-        public d(String str, C0059f c0059f, long j7, int i7, long j8, C0313o c0313o, String str2, String str3, long j9, long j10, boolean z7, boolean z8, boolean z9) {
-            super(str, c0059f, j7, i7, j8, c0313o, str2, str3, j9, j10, z7);
+        public d(String str, C0059f c0059f, long j7, int i7, long j8, C0314o c0314o, String str2, String str3, long j9, long j10, boolean z7, boolean z8, boolean z9) {
+            super(str, c0059f, j7, i7, j8, c0314o, str2, str3, j9, j10, z7);
             this.f7411w = z8;
             this.f7412x = z9;
         }
@@ -597,7 +597,7 @@ public final class f extends j {
         public final long f7422p;
 
         /* renamed from: q, reason: collision with root package name */
-        public final C0313o f7423q;
+        public final C0314o f7423q;
 
         /* renamed from: r, reason: collision with root package name */
         public final String f7424r;
@@ -623,13 +623,13 @@ public final class f extends j {
             return this.f7422p < l7.longValue() ? -1 : 0;
         }
 
-        public g(String str, C0059f c0059f, long j7, int i7, long j8, C0313o c0313o, String str2, String str3, long j9, long j10, boolean z7) {
+        public g(String str, C0059f c0059f, long j7, int i7, long j8, C0314o c0314o, String str2, String str3, long j9, long j10, boolean z7) {
             this.f7418l = str;
             this.f7419m = c0059f;
             this.f7420n = j7;
             this.f7421o = i7;
             this.f7422p = j8;
-            this.f7423q = c0313o;
+            this.f7423q = c0314o;
             this.f7424r = str2;
             this.f7425s = str3;
             this.f7426t = j9;
@@ -664,7 +664,7 @@ public final class f extends j {
         }
     }
 
-    public f(int i7, String str, List list, long j7, boolean z7, long j8, boolean z8, int i8, long j9, int i9, long j10, long j11, boolean z9, boolean z10, boolean z11, C0313o c0313o, List list2, List list3, h hVar, Map map, List list4) {
+    public f(int i7, String str, List list, long j7, boolean z7, long j8, boolean z8, int i8, long j9, int i9, long j10, long j11, boolean z9, boolean z10, boolean z11, C0314o c0314o, List list2, List list3, h hVar, Map map, List list4) {
         super(str, list, z9);
         this.f7347d = i7;
         this.f7351h = j8;
@@ -677,11 +677,11 @@ public final class f extends j {
         this.f7357n = j11;
         this.f7358o = z10;
         this.f7359p = z11;
-        this.f7360q = c0313o;
-        this.f7361r = AbstractC1279v.r(list2);
-        this.f7362s = AbstractC1279v.r(list3);
-        this.f7363t = AbstractC1281x.c(map);
-        this.f7366w = AbstractC1279v.r(list4);
+        this.f7360q = c0314o;
+        this.f7361r = AbstractC1278v.r(list2);
+        this.f7362s = AbstractC1278v.r(list3);
+        this.f7363t = AbstractC1280x.c(map);
+        this.f7366w = AbstractC1278v.r(list4);
         if (!list3.isEmpty()) {
             d dVar = (d) D.d(list3);
             this.f7364u = dVar.f7422p + dVar.f7420n;
@@ -740,7 +740,7 @@ public final class f extends j {
         public final List f7417x;
 
         public C0059f(String str, long j7, long j8, String str2, String str3) {
-            this(str, null, "", 0L, -1, -9223372036854775807L, null, str2, str3, j7, j8, false, AbstractC1279v.v());
+            this(str, null, "", 0L, -1, -9223372036854775807L, null, str2, str3, j7, j8, false, AbstractC1278v.v());
         }
 
         public C0059f d(long j7, int i7) {
@@ -754,10 +754,10 @@ public final class f extends j {
             return new C0059f(this.f7418l, this.f7419m, this.f7416w, this.f7420n, i7, j7, this.f7423q, this.f7424r, this.f7425s, this.f7426t, this.f7427u, this.f7428v, arrayList);
         }
 
-        public C0059f(String str, C0059f c0059f, String str2, long j7, int i7, long j8, C0313o c0313o, String str3, String str4, long j9, long j10, boolean z7, List list) {
-            super(str, c0059f, j7, i7, j8, c0313o, str3, str4, j9, j10, z7);
+        public C0059f(String str, C0059f c0059f, String str2, long j7, int i7, long j8, C0314o c0314o, String str3, String str4, long j9, long j10, boolean z7, List list) {
+            super(str, c0059f, j7, i7, j8, c0314o, str3, str4, j9, j10, z7);
             this.f7416w = str2;
-            this.f7417x = AbstractC1279v.r(list);
+            this.f7417x = AbstractC1278v.r(list);
         }
     }
 

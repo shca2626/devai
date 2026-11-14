@@ -5,23 +5,23 @@ import android.graphics.Paint;
 import android.text.TextPaint;
 
 /* loaded from: classes.dex */
-public final class k extends AbstractC1297f {
+public final class k extends AbstractC1296f {
 
     /* renamed from: q, reason: collision with root package name */
-    public static Paint f19536q;
+    public static Paint f19535q;
 
-    public k(C1296e c1296e) {
-        super(c1296e);
+    public k(C1295e c1295e) {
+        super(c1295e);
     }
 
     public static Paint c() {
-        if (f19536q == null) {
+        if (f19535q == null) {
             TextPaint textPaint = new TextPaint();
-            f19536q = textPaint;
+            f19535q = textPaint;
             textPaint.setColor(androidx.emoji2.text.c.b().c());
-            f19536q.setStyle(Paint.Style.FILL);
+            f19535q.setStyle(Paint.Style.FILL);
         }
-        return f19536q;
+        return f19535q;
     }
 
     @Override // android.text.style.ReplacementSpan

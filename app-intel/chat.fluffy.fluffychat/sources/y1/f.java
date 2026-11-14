@@ -7,15 +7,15 @@ import g1.r;
 public final class f {
 
     /* renamed from: a, reason: collision with root package name */
-    public final E f23968a = new E(8);
+    public final E f23974a = new E(8);
 
     /* renamed from: b, reason: collision with root package name */
-    public int f23969b;
+    public int f23975b;
 
     public final long a(r rVar) {
         int i7 = 0;
-        rVar.t(this.f23968a.f(), 0, 1);
-        int i8 = this.f23968a.f()[0] & 255;
+        rVar.t(this.f23974a.f(), 0, 1);
+        int i8 = this.f23974a.f()[0] & 255;
         if (i8 == 0) {
             return Long.MIN_VALUE;
         }
@@ -26,12 +26,12 @@ public final class f {
             i10++;
         }
         int i11 = i8 & (~i9);
-        rVar.t(this.f23968a.f(), 1, i10);
+        rVar.t(this.f23974a.f(), 1, i10);
         while (i7 < i10) {
             i7++;
-            i11 = (this.f23968a.f()[i7] & 255) + (i11 << 8);
+            i11 = (this.f23974a.f()[i7] & 255) + (i11 << 8);
         }
-        this.f23969b += i10 + 1;
+        this.f23975b += i10 + 1;
         return i11;
     }
 
@@ -42,23 +42,23 @@ public final class f {
             j7 = length;
         }
         int i7 = (int) j7;
-        rVar.t(this.f23968a.f(), 0, 4);
-        long jS = this.f23968a.S();
-        this.f23969b = 4;
+        rVar.t(this.f23974a.f(), 0, 4);
+        long jS = this.f23974a.S();
+        this.f23975b = 4;
         while (jS != 440786851) {
-            int i8 = this.f23969b + 1;
-            this.f23969b = i8;
+            int i8 = this.f23975b + 1;
+            this.f23975b = i8;
             if (i8 == i7) {
                 return false;
             }
-            rVar.t(this.f23968a.f(), 0, 1);
-            jS = ((jS << 8) & (-256)) | (this.f23968a.f()[0] & 255);
+            rVar.t(this.f23974a.f(), 0, 1);
+            jS = ((jS << 8) & (-256)) | (this.f23974a.f()[0] & 255);
         }
         long jA = a(rVar);
-        long j8 = this.f23969b;
+        long j8 = this.f23975b;
         if (jA != Long.MIN_VALUE && (length == -1 || j8 + jA < length)) {
             while (true) {
-                int i9 = this.f23969b;
+                int i9 = this.f23975b;
                 long j9 = j8 + jA;
                 if (i9 < j9) {
                     if (a(rVar) == Long.MIN_VALUE) {
@@ -71,7 +71,7 @@ public final class f {
                     if (jA2 != 0) {
                         int i10 = (int) jA2;
                         rVar.k(i10);
-                        this.f23969b += i10;
+                        this.f23975b += i10;
                     }
                 } else if (i9 == j9) {
                     return true;

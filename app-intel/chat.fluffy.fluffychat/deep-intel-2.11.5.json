@@ -1,0 +1,444 @@
+{
+ "endpoints": [
+  {
+   "url": "https://fluffychat.im/assets/favicon.pngdier",
+   "kind": "asset-cdn",
+   "purpose": "developer's own file/upload CDN — where user content and media are stored",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://fluffychat.im",
+   "kind": "app-site",
+   "purpose": "developer's website root (about/support/landing page)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://fluffychat.im/privacy",
+   "kind": "app-site",
+   "purpose": "developer's own site — app backend origin (REST calls most likely originate here)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://fluffychat.im/tosapplication",
+   "kind": "app-site",
+   "purpose": "developer's own site — app backend origin (REST calls most likely originate here)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://push.fluffychat.im/_matrix/push/v1/notifyv",
+   "kind": "app-site",
+   "purpose": "developer's own site — app backend origin (REST calls most likely originate here)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://fluffychat.im/changelog",
+   "kind": "app-site",
+   "purpose": "developer's own site — app backend origin (REST calls most likely originate here)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://matrix.to/#",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://aomediacodec.github.io/av1-rtp-spec",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://fluffychat.imp",
+   "kind": "review",
+   "purpose": "possible app resource — verify against decompiled call sites before treating as a backend",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://ko-fi.com/post",
+   "kind": "social",
+   "purpose": "donation/support page (fundraising link, not a runtime integration)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://github.com/krille-chan/fluffychat",
+   "kind": "social",
+   "purpose": "developer repository link (about/support page)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://spec.matrix.org/latest/rooms",
+   "kind": "docs",
+   "purpose": "Matrix protocol specification reference (the app speaks the Matrix protocol)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://microg.org/",
+   "kind": "docs",
+   "purpose": "microG integration reference (FOSS Google-services replacement)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://unifiedpush.org/",
+   "kind": "docs",
+   "purpose": "UnifiedPush integration reference (FOSS push notifications)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://developer.android.com/guide/components",
+   "kind": "docs",
+   "purpose": "Android developer documentation reference",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://www.openstreetmap.org/?mlat=-60Yx",
+   "kind": "docs",
+   "purpose": "OpenStreetMap map/location link (geo feature)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://matrix.gateway.unifiedpush.org/_matrix/push/v1",
+   "kind": "docs",
+   "purpose": "UnifiedPush integration reference (FOSS push notifications)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://docs.flutter.dev/release/breaking-changes",
+   "kind": "docs",
+   "purpose": "Flutter documentation reference",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://unifiedpush.org/.#sink#",
+   "kind": "docs",
+   "purpose": "UnifiedPush integration reference (FOSS push notifications)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.w3.org/2000",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.w3.org/1999/xhtml",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://api.flutter.dev/flutter/dart-ui",
+   "kind": "framework-noise",
+   "purpose": "Flutter framework documentation link (engine/ LICENSE or about strings)",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.w3.org",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.ibm.com/data/dtd/v11",
+   "kind": "framework-noise",
+   "purpose": "XHTML transitional DTD fallback bundled inside XML parser stacks — parser boilerplate, never fetched",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://github.com/dart-lang/language/issues/3488",
+   "kind": "framework-noise",
+   "purpose": "framework/engine repository link from bundled license text — not app code",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://github.com/flutter/flutter/issues/30701",
+   "kind": "framework-noise",
+   "purpose": "framework/engine repository link from bundled license text — not app code",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "http://www.w3.org/1998",
+   "kind": "framework-noise",
+   "purpose": "W3C DTD/XML-schema namespace referenced by XML parsers — parser boilerplate",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://pub.dev/",
+   "kind": "framework-noise",
+   "purpose": "Dart package registry — dependency metadata baked into the release build, not a runtime call",
+   "evidence": "libapp.so (Dart AOT string table)"
+  },
+  {
+   "url": "https://github.com/google/gson/blob/main",
+   "kind": "framework-noise",
+   "purpose": "framework/engine repository link from bundled license text — not app code",
+   "evidence": "sources/w3/AbstractC1736G.java"
+  }
+ ],
+ "database": {
+  "engines": [
+   {
+    "evidence": "package:flutter_secure_storage in libapp.so",
+    "name": "encrypted key-value store (Keystore-backed)"
+   },
+   {
+    "evidence": "ContentProvider in decompiled sources",
+    "name": "ContentProvider data layer"
+   },
+   {
+    "evidence": "package:shared_preferences in libapp.so",
+    "name": "key-value preferences store"
+   },
+   {
+    "evidence": "package:sqflite_common_ffi in libapp.so",
+    "name": "local SQLite database (Flutter sqflite)"
+   },
+   {
+    "evidence": "package:sqflite_common in libapp.so",
+    "name": "local SQLite database (Flutter sqflite)"
+   },
+   {
+    "evidence": "package:sqlite3 in libapp.so",
+    "name": "SQLite native bindings"
+   }
+  ],
+  "tables": [],
+  "sqlEvidence": [
+   "SELECT END CALL ABORT CLEAR CHANNEL FACTOR LIST NUMBER OVERRIDE SET WEEK DISTRIBUTIONNODE ELSE WHEN THEN OTHERWISE IENUM CSV INCLUDE LEAVE RIDER SAVE DELETE NOV",
+   "select set skip startsas stop title update waitsas where window x systask add and alter as cascade check create delete describe distinct drop foreign from group",
+   "insert into in",
+   "Select push distributor8in if for while finally new do return else break catch instanceof throw try this switch continue typeof delete debugger super yield impo",
+   "DELETE FROM clubs",
+   "insert into replace",
+   "delete from into"
+  ],
+  "assetDatabases": []
+ },
+ "sync": {
+  "signals": [
+   {
+    "signal": "package:sqflite_common",
+    "meaning": "local SQLite database (Flutter sqflite)",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:sqlite3",
+    "meaning": "SQLite native bindings",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications_windows",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:sqflite_common_ffi",
+    "meaning": "local SQLite database (Flutter sqflite)",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications_linux",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_secure_storage",
+    "meaning": "encrypted key-value store (Keystore-backed)",
+    "category": "offline storage / token storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:http",
+    "meaning": "Dart http client",
+    "category": "api client",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:flutter_local_notifications_platform_interface",
+    "meaning": "local notifications",
+    "category": "realtime/push",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:shared_preferences",
+    "meaning": "key-value preferences store",
+    "category": "offline storage",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "package:connectivity_plus",
+    "meaning": "network reachability checks (drives online/offline switching)",
+    "category": "sync orchestration",
+    "evidence": "libapp.so Dart AOT string table"
+   },
+   {
+    "signal": "ContentProvider (×1 refs)",
+    "meaning": "ContentProvider data layer",
+    "category": "offline storage",
+    "evidence": "decompiled JVM sources"
+   }
+  ],
+  "realtime": [
+   "local notifications"
+  ],
+  "offlineStrategy": "Offline-capable: local SQLite database (Flutter sqflite) holds data locally; network reachability checks (drives online/offline switching) drives when sync happens; local notifications announce events while backgrounded. Read paths hit local storage first; writes queue and flush to the REST backend when a connection is available."
+ },
+ "api": {
+  "clients": [
+   "package:http_parser",
+   "package:http"
+  ],
+  "bases": [],
+  "paths": [
+   "/client/v3/pushers/setVoc",
+   "/settings",
+   "/config",
+   "/backup",
+   "/login"
+  ],
+  "auth": [
+   {
+    "method": "biometric / device-credential unlock",
+    "evidence": "package:local_auth present"
+   },
+   {
+    "method": "encrypted token storage",
+    "evidence": "package:flutter_secure_storage present"
+   }
+  ],
+  "models": [
+   "AudioFocusRequest",
+   "StreamedRequest",
+   "HTTPRequest",
+   "StoreDataBlobResponse",
+   "QuitarTrackPublishedResponse",
+   "VGrTrickleRequest",
+   "PublishDataTrackResponse",
+   "SignalRequest",
+   "FileSystemEntity",
+   "GertStreamedRequest",
+   "FfiMethodResponse",
+   "KeyManagerKeyShareRequest",
+   "GetSpaceHierarchyResponse",
+   "SENDTO",
+   "AffineStateSpaceModel",
+   "BesselFilterModel",
+   "BiquadraticFilterModel",
+   "ButterworthFilterModel",
+   "Chebyshev1FilterModel",
+   "Chebyshev2FilterModel",
+   "CoxModel",
+   "CreateDataSystemModel",
+   "CreateSystemModel",
+   "DualSystemsModel",
+   "EllipticFilterModel",
+   "FittedModel",
+   "FromEntity",
+   "GenerateHTTPResponse",
+   "GeoModel",
+   "HTTPErrorResponse"
+  ],
+  "screens": [
+   "DataView",
+   "RenderView",
+   "SettingsStyleView",
+   "AboutDialog",
+   "ShirtblackMountainView",
+   "VideoView",
+   "LicensePage",
+   "EmltsSettingsSecurityView",
+   "CustomTransitionPage",
+   "ListView",
+   "SettingsChatView",
+   "RestoreBootstrapView",
+   "RenderAndroidView",
+   "AuthenticationDialog",
+   "ChoiceDialog",
+   "CreateDialog",
+   "ExitDialog",
+   "FlipView",
+   "FormPage",
+   "GalleryView",
+   "HomePage",
+   "MenuView",
+   "MessageDialog",
+   "OpenerView",
+   "PopupView",
+   "SlideView",
+   "TableView",
+   "TabView",
+   "TraceDialog",
+   "MaterialPage"
+  ]
+ },
+ "modules": [
+  "KeyManager",
+  "SqfliteFfiMethodCallHandler",
+  "ContentProvider",
+  "TextInputClient",
+  "VideoPlayerInstanceApi",
+  "SharedPreferencesApi",
+  "PlatformConfigurationNativeApi",
+  "ExecutorService",
+  "TypeAdapter",
+  "X509TrustManager",
+  "AndroidVideoPlayerApi",
+  "AutofillManager",
+  "BiometricManager",
+  "ShortcutManager",
+  "TextUtils",
+  "KeyboardManager",
+  "PushHelper",
+  "TextSelectionDelegate",
+  "RTCVideoPlatformController",
+  "DataView",
+  "OlmManager",
+  "RouteInformationProvider",
+  "LocalAuthApi",
+  "AudioFocusRequest",
+  "BaseAdapter",
+  "TrustManager",
+  "StreamedRequest",
+  "ImagePickerApi",
+  "UrlLauncherApi",
+  "PointerUtils",
+  "RadioClient",
+  "HttpClient",
+  "StatefulWidget",
+  "RenderView",
+  "HTTPRequest",
+  "ScrollController",
+  "BaseKeyProvider",
+  "UndoManagerClient",
+  "DehydratedDeviceMatrixApi",
+  "SystemContextMenuClient"
+ ],
+ "stats": {
+  "urlsTotal": 40,
+  "jvmFiles": 3707,
+  "assetCount": 30,
+  "nativeLibs": [
+   "libImaging.so",
+   "libapp.so",
+   "libdartjni.so",
+   "libdatastore_shared_counter.so",
+   "libflutter.so",
+   "libjingle_peerconnection_so.so",
+   "libnoise.so",
+   "libsqlcipher.so",
+   "libvodozemac_bindings_dart.so",
+   "libwebcrypto.so"
+  ]
+ }
+}

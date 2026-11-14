@@ -1,6 +1,6 @@
 package X4;
 
-import a5.C0765d;
+import a5.C0766d;
 import android.content.res.AssetManager;
 import h5.b;
 import h5.q;
@@ -8,7 +8,7 @@ import io.flutter.embedding.engine.FlutterJNI;
 import io.flutter.view.FlutterCallbackInformation;
 import java.nio.ByteBuffer;
 import java.util.List;
-import u5.C1669d;
+import u5.C1668d;
 
 /* loaded from: classes.dex */
 public class a implements h5.b {
@@ -164,7 +164,7 @@ public class a implements h5.b {
             U4.b.g("DartExecutor", "Attempted to run a DartExecutor that is already running.");
             return;
         }
-        C1669d c1669dJ = C1669d.j("DartExecutor#executeDartCallback");
+        C1668d c1668dJ = C1668d.j("DartExecutor#executeDartCallback");
         try {
             U4.b.f("DartExecutor", "Executing Dart callback: " + bVar);
             FlutterJNI flutterJNI = this.f9296a;
@@ -172,8 +172,8 @@ public class a implements h5.b {
             FlutterCallbackInformation flutterCallbackInformation = bVar.f9307c;
             flutterJNI.runBundleAndSnapshotFromLibrary(str, flutterCallbackInformation.callbackName, flutterCallbackInformation.callbackLibraryPath, bVar.f9305a, null, this.f9298c);
             this.f9301f = true;
-            if (c1669dJ != null) {
-                c1669dJ.close();
+            if (c1668dJ != null) {
+                c1668dJ.close();
             }
         } finally {
         }
@@ -188,13 +188,13 @@ public class a implements h5.b {
             U4.b.g("DartExecutor", "Attempted to run a DartExecutor that is already running.");
             return;
         }
-        C1669d c1669dJ = C1669d.j("DartExecutor#executeDartEntrypoint");
+        C1668d c1668dJ = C1668d.j("DartExecutor#executeDartEntrypoint");
         try {
             U4.b.f("DartExecutor", "Executing Dart entrypoint: " + cVar);
             this.f9296a.runBundleAndSnapshotFromLibrary(cVar.f9308a, cVar.f9310c, cVar.f9309b, this.f9297b, list, this.f9298c);
             this.f9301f = true;
-            if (c1669dJ != null) {
-                c1669dJ.close();
+            if (c1668dJ != null) {
+                c1668dJ.close();
             }
         } finally {
         }
@@ -242,9 +242,9 @@ public class a implements h5.b {
         }
 
         public static c a() {
-            C0765d c0765dC = U4.a.e().c();
-            if (c0765dC.p()) {
-                return new c(c0765dC.h(), "main");
+            C0766d c0766dC = U4.a.e().c();
+            if (c0766dC.p()) {
+                return new c(c0766dC.h(), "main");
             }
             throw new AssertionError("DartEntrypoints can only be created once a FlutterEngine is created.");
         }

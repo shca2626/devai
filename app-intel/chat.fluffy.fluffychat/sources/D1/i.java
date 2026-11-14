@@ -1,6 +1,6 @@
 package D1;
 
-import E0.InterfaceC0325k;
+import E0.InterfaceC0326k;
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -16,7 +16,7 @@ public abstract class i {
         return (iA <= 0 || kVar.d(iA + (-1)) != j7) ? iA : iA - 1;
     }
 
-    public static void b(k kVar, int i7, InterfaceC0325k interfaceC0325k) {
+    public static void b(k kVar, int i7, InterfaceC0326k interfaceC0326k) {
         long jD = kVar.d(i7);
         List listE = kVar.e(jD);
         if (listE.isEmpty()) {
@@ -27,7 +27,7 @@ public abstract class i {
         }
         long jD2 = kVar.d(i7 + 1) - kVar.d(i7);
         if (jD2 > 0) {
-            interfaceC0325k.accept(new e(listE, jD, jD2));
+            interfaceC0326k.accept(new e(listE, jD, jD2));
         }
     }
 
@@ -36,7 +36,7 @@ public abstract class i {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct add '--show-bad-code' argument
     */
-    public static void c(D1.k r11, D1.s.b r12, E0.InterfaceC0325k r13) {
+    public static void c(D1.k r11, D1.s.b r12, E0.InterfaceC0326k r13) {
         /*
             long r0 = r12.f1640a
             int r0 = a(r11, r0)

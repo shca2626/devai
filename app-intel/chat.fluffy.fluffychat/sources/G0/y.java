@@ -86,7 +86,7 @@ public final class y extends b {
         return this.f3232h;
     }
 
-    @Override // B0.InterfaceC0309k
+    @Override // B0.InterfaceC0310k
     public int read(byte[] bArr, int i7, int i8) throws IOException {
         if (i8 == 0) {
             return 0;

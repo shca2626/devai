@@ -15,10 +15,10 @@ import k6.y;
 public abstract class e {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final v6.h f20486a = v6.h.i("\"\\");
+    public static final v6.h f20485a = v6.h.i("\"\\");
 
     /* renamed from: b, reason: collision with root package name */
-    public static final v6.h f20487b = v6.h.i("\t ,=");
+    public static final v6.h f20486b = v6.h.i("\t ,=");
 
     public static long a(r rVar) {
         return j(rVar.c("Content-Length"));
@@ -60,7 +60,7 @@ public abstract class e {
     }
 
     public static void g(m mVar, s sVar, r rVar) {
-        if (mVar == m.f19381a) {
+        if (mVar == m.f19380a) {
             return;
         }
         List listF = l.f(sVar, rVar);

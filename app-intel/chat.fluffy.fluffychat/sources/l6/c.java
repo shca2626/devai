@@ -42,61 +42,61 @@ import v6.h;
 public abstract class c {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final byte[] f19669a;
+    public static final byte[] f19668a;
 
     /* renamed from: c, reason: collision with root package name */
-    public static final B f19671c;
+    public static final B f19670c;
 
     /* renamed from: d, reason: collision with root package name */
-    public static final z f19672d;
+    public static final z f19671d;
 
     /* renamed from: r, reason: collision with root package name */
-    public static final Method f19686r;
+    public static final Method f19685r;
 
     /* renamed from: s, reason: collision with root package name */
-    public static final Pattern f19687s;
+    public static final Pattern f19686s;
 
     /* renamed from: b, reason: collision with root package name */
-    public static final String[] f19670b = new String[0];
+    public static final String[] f19669b = new String[0];
 
     /* renamed from: e, reason: collision with root package name */
-    public static final h f19673e = h.f("efbbbf");
+    public static final h f19672e = h.f("efbbbf");
 
     /* renamed from: f, reason: collision with root package name */
-    public static final h f19674f = h.f("feff");
+    public static final h f19673f = h.f("feff");
 
     /* renamed from: g, reason: collision with root package name */
-    public static final h f19675g = h.f("fffe");
+    public static final h f19674g = h.f("fffe");
 
     /* renamed from: h, reason: collision with root package name */
-    public static final h f19676h = h.f("0000ffff");
+    public static final h f19675h = h.f("0000ffff");
 
     /* renamed from: i, reason: collision with root package name */
-    public static final h f19677i = h.f("ffff0000");
+    public static final h f19676i = h.f("ffff0000");
 
     /* renamed from: j, reason: collision with root package name */
-    public static final Charset f19678j = Charset.forName("UTF-8");
+    public static final Charset f19677j = Charset.forName("UTF-8");
 
     /* renamed from: k, reason: collision with root package name */
-    public static final Charset f19679k = Charset.forName("ISO-8859-1");
+    public static final Charset f19678k = Charset.forName("ISO-8859-1");
 
     /* renamed from: l, reason: collision with root package name */
-    public static final Charset f19680l = Charset.forName("UTF-16BE");
+    public static final Charset f19679l = Charset.forName("UTF-16BE");
 
     /* renamed from: m, reason: collision with root package name */
-    public static final Charset f19681m = Charset.forName("UTF-16LE");
+    public static final Charset f19680m = Charset.forName("UTF-16LE");
 
     /* renamed from: n, reason: collision with root package name */
-    public static final Charset f19682n = Charset.forName("UTF-32BE");
+    public static final Charset f19681n = Charset.forName("UTF-32BE");
 
     /* renamed from: o, reason: collision with root package name */
-    public static final Charset f19683o = Charset.forName("UTF-32LE");
+    public static final Charset f19682o = Charset.forName("UTF-32LE");
 
     /* renamed from: p, reason: collision with root package name */
-    public static final TimeZone f19684p = DesugarTimeZone.getTimeZone("GMT");
+    public static final TimeZone f19683p = DesugarTimeZone.getTimeZone("GMT");
 
     /* renamed from: q, reason: collision with root package name */
-    public static final Comparator f19685q = new a();
+    public static final Comparator f19684q = new a();
 
     public class a implements Comparator {
         @Override // java.util.Comparator
@@ -109,36 +109,36 @@ public abstract class c {
     public class b implements ThreadFactory {
 
         /* renamed from: a, reason: collision with root package name */
-        public final /* synthetic */ String f19688a;
+        public final /* synthetic */ String f19687a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final /* synthetic */ boolean f19689b;
+        public final /* synthetic */ boolean f19688b;
 
         public b(String str, boolean z7) {
-            this.f19688a = str;
-            this.f19689b = z7;
+            this.f19687a = str;
+            this.f19688b = z7;
         }
 
         @Override // java.util.concurrent.ThreadFactory
         public Thread newThread(Runnable runnable) {
-            Thread thread = new Thread(runnable, this.f19688a);
-            thread.setDaemon(this.f19689b);
+            Thread thread = new Thread(runnable, this.f19687a);
+            thread.setDaemon(this.f19688b);
             return thread;
         }
     }
 
     static {
         byte[] bArr = new byte[0];
-        f19669a = bArr;
+        f19668a = bArr;
         Method declaredMethod = null;
-        f19671c = B.f(null, bArr);
-        f19672d = z.c(null, bArr);
+        f19670c = B.f(null, bArr);
+        f19671d = z.c(null, bArr);
         try {
             declaredMethod = Throwable.class.getDeclaredMethod("addSuppressed", Throwable.class);
         } catch (Exception unused) {
         }
-        f19686r = declaredMethod;
-        f19687s = Pattern.compile("([0-9a-fA-F]*:[0-9a-fA-F:.]*)|([\\d.]+)");
+        f19685r = declaredMethod;
+        f19686s = Pattern.compile("([0-9a-fA-F]*:[0-9a-fA-F:.]*)|([\\d.]+)");
     }
 
     public static X509TrustManager A() throws NoSuchAlgorithmException, KeyStoreException {
@@ -220,7 +220,7 @@ public abstract class c {
         Iterator it = list.iterator();
         while (it.hasNext()) {
             q6.c cVar = (q6.c) it.next();
-            l6.a.f19667a.b(aVar, cVar.f21484a.C(), cVar.f21485b.C());
+            l6.a.f19666a.b(aVar, cVar.f21490a.C(), cVar.f21491b.C());
         }
         return aVar.d();
     }
@@ -231,11 +231,11 @@ public abstract class c {
     }
 
     public static boolean H(String str) {
-        return f19687s.matcher(str).matches();
+        return f19686s.matcher(str).matches();
     }
 
     public static void a(Throwable th, Throwable th2) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Method method = f19686r;
+        Method method = f19685r;
         if (method != null) {
             try {
                 method.invoke(th, th2);

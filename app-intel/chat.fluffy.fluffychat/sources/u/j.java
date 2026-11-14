@@ -10,7 +10,7 @@ public abstract class j {
         if (Build.VERSION.SDK_INT >= 30) {
             return false;
         }
-        return b(context, str, o.f22706a);
+        return b(context, str, o.f22712a);
     }
 
     public static boolean b(Context context, String str, int i7) throws Resources.NotFoundException {
@@ -53,20 +53,20 @@ public abstract class j {
         if (Build.VERSION.SDK_INT != 29) {
             return false;
         }
-        return b(context, str, o.f22709d);
+        return b(context, str, o.f22715d);
     }
 
     public static boolean f(Context context, String str) {
         if (Build.VERSION.SDK_INT != 28) {
             return false;
         }
-        return c(context, str, o.f22710e);
+        return c(context, str, o.f22716e);
     }
 
     public static boolean g(Context context, String str, String str2) {
         if (Build.VERSION.SDK_INT != 28) {
             return false;
         }
-        return d(context, str, o.f22708c) || c(context, str2, o.f22707b);
+        return d(context, str, o.f22714c) || c(context, str2, o.f22713b);
     }
 }

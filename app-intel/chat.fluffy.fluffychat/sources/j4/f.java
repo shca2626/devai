@@ -5,5 +5,5 @@ import i4.t;
 
 /* loaded from: classes.dex */
 public interface f {
-    InterfaceC1241b a(Context context, t tVar);
+    InterfaceC1240b a(Context context, t tVar);
 }

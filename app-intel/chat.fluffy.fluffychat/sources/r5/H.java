@@ -6,37 +6,37 @@ import java.util.ArrayList;
 public final class H {
 
     /* renamed from: a, reason: collision with root package name */
-    public C1570A f22193a;
+    public C1569A f22199a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final ArrayList f22194b = new ArrayList();
+    public final ArrayList f22200b = new ArrayList();
 
     /* renamed from: c, reason: collision with root package name */
-    public boolean f22195c = false;
+    public boolean f22201c = false;
 
     public static class a {
 
         /* renamed from: a, reason: collision with root package name */
-        public String f22196a;
+        public String f22202a;
 
         /* renamed from: b, reason: collision with root package name */
-        public String f22197b;
+        public String f22203b;
 
         /* renamed from: c, reason: collision with root package name */
-        public Object f22198c;
+        public Object f22204c;
 
         public a(String str, String str2, Object obj) {
-            this.f22196a = str;
-            this.f22197b = str2;
-            this.f22198c = obj;
+            this.f22202a = str;
+            this.f22203b = str2;
+            this.f22204c = obj;
         }
     }
 
     public final void a(Object obj) {
-        if (this.f22195c) {
+        if (this.f22201c) {
             return;
         }
-        this.f22194b.add(obj);
+        this.f22200b.add(obj);
     }
 
     public void b(String str, String str2, Object obj) {
@@ -45,10 +45,10 @@ public final class H {
     }
 
     public final void c() {
-        if (this.f22193a == null) {
+        if (this.f22199a == null) {
             return;
         }
-        ArrayList arrayList = this.f22194b;
+        ArrayList arrayList = this.f22200b;
         int size = arrayList.size();
         int i7 = 0;
         while (i7 < size) {
@@ -56,16 +56,16 @@ public final class H {
             i7++;
             if (obj instanceof a) {
                 a aVar = (a) obj;
-                this.f22193a.a(aVar.f22196a, aVar.f22197b, aVar.f22198c);
+                this.f22199a.a(aVar.f22202a, aVar.f22203b, aVar.f22204c);
             } else {
-                this.f22193a.b((C) obj);
+                this.f22199a.b((C) obj);
             }
         }
-        this.f22194b.clear();
+        this.f22200b.clear();
     }
 
-    public void d(C1570A c1570a) {
-        this.f22193a = c1570a;
+    public void d(C1569A c1569a) {
+        this.f22199a = c1569a;
         c();
     }
 

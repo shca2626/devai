@@ -61,7 +61,7 @@ public class a implements G0.f {
         return this.f6482a.r();
     }
 
-    @Override // B0.InterfaceC0309k
+    @Override // B0.InterfaceC0310k
     public final int read(byte[] bArr, int i7, int i8) throws IOException {
         j3.o.q(this.f6485d);
         int i9 = this.f6485d.read(bArr, i7, i8);

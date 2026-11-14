@@ -2,24 +2,24 @@ package v6;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import z5.C1877k;
+import z5.C1880k;
 
 /* loaded from: classes3.dex */
 public final class x extends h {
 
     /* renamed from: q, reason: collision with root package name */
-    public final transient byte[][] f23235q;
+    public final transient byte[][] f23241q;
 
     /* renamed from: r, reason: collision with root package name */
-    public final transient int[] f23236r;
+    public final transient int[] f23242r;
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public x(byte[][] bArr, int[] iArr) {
-        super(h.f23188p.k());
+        super(h.f23194p.k());
         M5.m.e(bArr, "segments");
         M5.m.e(iArr, "directory");
-        this.f23235q = bArr;
-        this.f23236r = iArr;
+        this.f23241q = bArr;
+        this.f23242r = iArr;
     }
 
     @Override // v6.h
@@ -38,7 +38,7 @@ public final class x extends h {
             int i10 = E()[length + i7];
             int i11 = E()[i7];
             int i12 = i11 - i8;
-            C1877k.e(F()[i7], bArr, i9, i10, i10 + i12);
+            C1880k.e(F()[i7], bArr, i9, i10, i10 + i12);
             i9 += i12;
             i7++;
             i8 = i11;
@@ -58,14 +58,14 @@ public final class x extends h {
             int iMin = Math.min(i9, i11 + i10) - i7;
             int i13 = i12 + (i7 - i10);
             v vVar = new v(F()[iB], i13, i13 + iMin, true, false);
-            v vVar2 = eVar.f23178l;
+            v vVar2 = eVar.f23184l;
             if (vVar2 == null) {
-                vVar.f23229g = vVar;
-                vVar.f23228f = vVar;
-                eVar.f23178l = vVar;
+                vVar.f23235g = vVar;
+                vVar.f23234f = vVar;
+                eVar.f23184l = vVar;
             } else {
                 M5.m.b(vVar2);
-                v vVar3 = vVar2.f23229g;
+                v vVar3 = vVar2.f23235g;
                 M5.m.b(vVar3);
                 vVar3.c(vVar);
             }
@@ -76,11 +76,11 @@ public final class x extends h {
     }
 
     public final int[] E() {
-        return this.f23236r;
+        return this.f23242r;
     }
 
     public final byte[][] F() {
-        return this.f23235q;
+        return this.f23241q;
     }
 
     public final h G() {
@@ -168,7 +168,7 @@ public final class x extends h {
 
     @Override // v6.h
     public byte q(int i7) {
-        AbstractC1720b.b(E()[F().length - 1], i7, 1L);
+        AbstractC1719b.b(E()[F().length - 1], i7, 1L);
         int iB = w6.c.b(this, i7);
         return F()[iB][(i7 - (iB == 0 ? 0 : E()[iB - 1])) + E()[F().length + iB]];
     }
@@ -214,7 +214,7 @@ public final class x extends h {
             int i12 = E()[iB] - i11;
             int i13 = E()[F().length + iB];
             int iMin = Math.min(i10, i12 + i11) - i7;
-            if (!AbstractC1720b.a(F()[iB], i13 + (i7 - i11), bArr, i8, iMin)) {
+            if (!AbstractC1719b.a(F()[iB], i13 + (i7 - i11), bArr, i8, iMin)) {
                 return false;
             }
             i8 += iMin;

@@ -10,12 +10,12 @@ public abstract class q {
     public static class b implements p, Serializable {
 
         /* renamed from: l, reason: collision with root package name */
-        public final List f18721l;
+        public final List f18720l;
 
         @Override // j3.p
         public boolean apply(Object obj) {
-            for (int i7 = 0; i7 < this.f18721l.size(); i7++) {
-                if (!((p) this.f18721l.get(i7)).apply(obj)) {
+            for (int i7 = 0; i7 < this.f18720l.size(); i7++) {
+                if (!((p) this.f18720l.get(i7)).apply(obj)) {
                     return false;
                 }
             }
@@ -24,26 +24,26 @@ public abstract class q {
 
         public boolean equals(Object obj) {
             if (obj instanceof b) {
-                return this.f18721l.equals(((b) obj).f18721l);
+                return this.f18720l.equals(((b) obj).f18720l);
             }
             return false;
         }
 
         public int hashCode() {
-            return this.f18721l.hashCode() + 306654252;
+            return this.f18720l.hashCode() + 306654252;
         }
 
         public String toString() {
-            return q.e("and", this.f18721l);
+            return q.e("and", this.f18720l);
         }
 
         public b(List list) {
-            this.f18721l = list;
+            this.f18720l = list;
         }
     }
 
     public static p b() {
-        return c.f18722l.d();
+        return c.f18721l.d();
     }
 
     public static p c(p pVar, p pVar2) {
@@ -75,19 +75,19 @@ public abstract class q {
     public static abstract class c implements p {
 
         /* renamed from: l, reason: collision with root package name */
-        public static final c f18722l = new a("ALWAYS_TRUE", 0);
+        public static final c f18721l = new a("ALWAYS_TRUE", 0);
 
         /* renamed from: m, reason: collision with root package name */
-        public static final c f18723m = new b("ALWAYS_FALSE", 1);
+        public static final c f18722m = new b("ALWAYS_FALSE", 1);
 
         /* renamed from: n, reason: collision with root package name */
-        public static final c f18724n = new C0209c("IS_NULL", 2);
+        public static final c f18723n = new C0209c("IS_NULL", 2);
 
         /* renamed from: o, reason: collision with root package name */
-        public static final c f18725o = new d("NOT_NULL", 3);
+        public static final c f18724o = new d("NOT_NULL", 3);
 
         /* renamed from: p, reason: collision with root package name */
-        public static final /* synthetic */ c[] f18726p = a();
+        public static final /* synthetic */ c[] f18725p = a();
 
         public enum a extends c {
             public a(String str, int i7) {
@@ -158,7 +158,7 @@ public abstract class q {
         }
 
         public static /* synthetic */ c[] a() {
-            return new c[]{f18722l, f18723m, f18724n, f18725o};
+            return new c[]{f18721l, f18722m, f18723n, f18724o};
         }
 
         public static c valueOf(String str) {
@@ -166,7 +166,7 @@ public abstract class q {
         }
 
         public static c[] values() {
-            return (c[]) f18726p.clone();
+            return (c[]) f18725p.clone();
         }
 
         public p d() {

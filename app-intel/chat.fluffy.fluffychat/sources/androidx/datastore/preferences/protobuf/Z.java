@@ -4,7 +4,7 @@ package androidx.datastore.preferences.protobuf;
 public interface Z {
     void a(Object obj, Object obj2);
 
-    void b(Object obj, Y y7, C0782m c0782m);
+    void b(Object obj, Y y7, C0783m c0783m);
 
     void c(Object obj);
 

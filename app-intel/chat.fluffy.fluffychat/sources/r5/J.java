@@ -1,19 +1,19 @@
 package r5;
 
 import java.util.List;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class J {
 
     /* renamed from: c, reason: collision with root package name */
-    public static final a f22199c = new a(null);
+    public static final a f22205c = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final long f22200a;
+    public final long f22206a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final long f22201b;
+    public final long f22207b;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -35,12 +35,12 @@ public final class J {
     }
 
     public J(long j7, long j8) {
-        this.f22200a = j7;
-        this.f22201b = j8;
+        this.f22206a = j7;
+        this.f22207b = j8;
     }
 
     public final List a() {
-        return C1881o.l(Long.valueOf(this.f22200a), Long.valueOf(this.f22201b));
+        return C1884o.l(Long.valueOf(this.f22206a), Long.valueOf(this.f22207b));
     }
 
     public boolean equals(Object obj) {
@@ -49,8 +49,8 @@ public final class J {
                 return true;
             }
             J j7 = (J) obj;
-            C1593x c1593x = C1593x.f22331a;
-            if (c1593x.a(Long.valueOf(this.f22200a), Long.valueOf(j7.f22200a)) && c1593x.a(Long.valueOf(this.f22201b), Long.valueOf(j7.f22201b))) {
+            C1592x c1592x = C1592x.f22337a;
+            if (c1592x.a(Long.valueOf(this.f22206a), Long.valueOf(j7.f22206a)) && c1592x.a(Long.valueOf(this.f22207b), Long.valueOf(j7.f22207b))) {
                 return true;
             }
         }
@@ -59,11 +59,11 @@ public final class J {
 
     public int hashCode() {
         int iHashCode = J.class.hashCode() * 31;
-        C1593x c1593x = C1593x.f22331a;
-        return ((iHashCode + c1593x.b(Long.valueOf(this.f22200a))) * 31) + c1593x.b(Long.valueOf(this.f22201b));
+        C1592x c1592x = C1592x.f22337a;
+        return ((iHashCode + c1592x.b(Long.valueOf(this.f22206a))) * 31) + c1592x.b(Long.valueOf(this.f22207b));
     }
 
     public String toString() {
-        return "TexturePlayerIds(playerId=" + this.f22200a + ", textureId=" + this.f22201b + ")";
+        return "TexturePlayerIds(playerId=" + this.f22206a + ", textureId=" + this.f22207b + ")";
     }
 }

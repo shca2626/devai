@@ -1,7 +1,7 @@
 package L5;
 
-import y5.InterfaceC1807b;
+import y5.InterfaceC1806b;
 
 /* loaded from: classes.dex */
-public interface s extends InterfaceC1807b {
+public interface s extends InterfaceC1806b {
 }

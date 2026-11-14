@@ -6,11 +6,11 @@ import java.io.Serializable;
 public final class P extends U implements Serializable {
 
     /* renamed from: l, reason: collision with root package name */
-    public static final P f18878l = new P();
+    public static final P f18877l = new P();
 
     @Override // k3.U
     public U g() {
-        return a0.f18921l;
+        return a0.f18920l;
     }
 
     @Override // k3.U, java.util.Comparator

@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectStreamClass;
 import java.util.Set;
-import z5.C1865I;
+import z5.C1868I;
 
 /* loaded from: classes.dex */
 public final class O extends ObjectInputStream {
@@ -16,7 +16,7 @@ public final class O extends ObjectInputStream {
 
     @Override // java.io.ObjectInputStream
     public Class resolveClass(ObjectStreamClass objectStreamClass) throws ClassNotFoundException {
-        Set setG = C1865I.g("java.util.Arrays$ArrayList", "java.util.ArrayList", "java.lang.String", "[Ljava.lang.String;");
+        Set setG = C1868I.g("java.util.Arrays$ArrayList", "java.util.ArrayList", "java.lang.String", "[Ljava.lang.String;");
         String name = objectStreamClass != null ? objectStreamClass.getName() : null;
         if (name == null || setG.contains(name)) {
             return super.resolveClass(objectStreamClass);

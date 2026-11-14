@@ -19,7 +19,7 @@ import java.util.List;
 public class XiaomiHomeBadger implements a {
 
     /* renamed from: a, reason: collision with root package name */
-    public ResolveInfo f19832a;
+    public ResolveInfo f19831a;
 
     @Override // g6.a
     public List a() {
@@ -58,14 +58,14 @@ public class XiaomiHomeBadger implements a {
     }
 
     public final void c(Context context, int i7) throws IllegalAccessException, IllegalArgumentException, b, InvocationTargetException {
-        if (this.f19832a == null) {
+        if (this.f19831a == null) {
             Intent intent = new Intent("android.intent.action.MAIN");
             intent.addCategory("android.intent.category.HOME");
-            this.f19832a = context.getPackageManager().resolveActivity(intent, 65536);
+            this.f19831a = context.getPackageManager().resolveActivity(intent, 65536);
         }
-        if (this.f19832a != null) {
+        if (this.f19831a != null) {
             NotificationManager notificationManager = (NotificationManager) context.getSystemService("notification");
-            Notification notificationBuild = new Notification.Builder(context).setContentTitle("").setContentText("").setSmallIcon(this.f19832a.getIconResource()).build();
+            Notification notificationBuild = new Notification.Builder(context).setContentTitle("").setContentText("").setSmallIcon(this.f19831a.getIconResource()).build();
             try {
                 Object obj = notificationBuild.getClass().getDeclaredField("extraNotification").get(notificationBuild);
                 obj.getClass().getDeclaredMethod("setMessageCount", Integer.TYPE).invoke(obj, Integer.valueOf(i7));

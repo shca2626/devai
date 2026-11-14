@@ -1,8 +1,8 @@
 package d;
 
-import androidx.lifecycle.InterfaceC0808n;
+import androidx.lifecycle.InterfaceC0809n;
 
 /* loaded from: classes.dex */
-public interface N extends InterfaceC0808n {
+public interface N extends InterfaceC0809n {
     M k();
 }

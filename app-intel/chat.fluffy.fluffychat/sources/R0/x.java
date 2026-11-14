@@ -1,9 +1,9 @@
 package R0;
 
-import B0.C0308j;
-import E0.AbstractC0322h;
-import E0.AbstractC0332s;
-import I0.C0365f;
+import B0.C0309j;
+import E0.AbstractC0323h;
+import E0.AbstractC0333s;
+import I0.C0366f;
 import android.content.Context;
 import android.graphics.Point;
 import android.media.MediaCodecInfo;
@@ -105,7 +105,7 @@ public final class x {
             return i7;
         }
         int i8 = "audio/ac3".equals(str2) ? 6 : "audio/eac3".equals(str2) ? 16 : 30;
-        AbstractC0332s.h("MediaCodecInfo", "AssumedMaxChannelAdjustment: " + str + ", [" + i7 + " to " + i8 + "]");
+        AbstractC0333s.h("MediaCodecInfo", "AssumedMaxChannelAdjustment: " + str + ", [" + i7 + " to " + i8 + "]");
         return i8;
     }
 
@@ -165,7 +165,7 @@ public final class x {
         return b(videoCapabilities, i7, i8);
     }
 
-    public C0365f e(B0.s sVar, B0.s sVar2) {
+    public C0366f e(B0.s sVar, B0.s sVar2) {
         B0.s sVar3;
         B0.s sVar4;
         int i7;
@@ -178,7 +178,7 @@ public final class x {
             if (!this.f7863e && z7) {
                 i8 |= 512;
             }
-            if ((!C0308j.h(sVar.f732E) || !C0308j.h(sVar2.f732E)) && !Objects.equals(sVar.f732E, sVar2.f732E)) {
+            if ((!C0309j.h(sVar.f732E) || !C0309j.h(sVar2.f732E)) && !Objects.equals(sVar.f732E, sVar2.f732E)) {
                 i8 |= 2048;
             }
             if (A(this.f7859a) && !sVar.f(sVar2)) {
@@ -189,14 +189,14 @@ public final class x {
                 i8 |= 2;
             }
             if (i8 == 0 && Objects.equals(sVar2.f759o, "video/dolby-vision")) {
-                Pair pairU = AbstractC0322h.u(sVar);
-                Pair pairU2 = AbstractC0322h.u(sVar2);
+                Pair pairU = AbstractC0323h.u(sVar);
+                Pair pairU2 = AbstractC0323h.u(sVar2);
                 if (pairU == null || pairU2 == null || !((Integer) pairU.first).equals(pairU2.first)) {
                     i8 |= 2;
                 }
             }
             if (i8 == 0) {
-                return new C0365f(this.f7859a, sVar, sVar2, sVar.f(sVar2) ? 3 : 2, 0);
+                return new C0366f(this.f7859a, sVar, sVar2, sVar.f(sVar2) ? 3 : 2, 0);
             }
             sVar3 = sVar;
             sVar4 = sVar2;
@@ -213,21 +213,21 @@ public final class x {
                 i8 |= 16384;
             }
             if (i8 == 0 && (this.f7860b.equals("audio/mp4a-latm") || this.f7860b.equals("audio/ac4"))) {
-                Pair pairU3 = AbstractC0322h.u(sVar3);
-                Pair pairU4 = AbstractC0322h.u(sVar4);
+                Pair pairU3 = AbstractC0323h.u(sVar3);
+                Pair pairU4 = AbstractC0323h.u(sVar4);
                 if (pairU3 != null && pairU4 != null) {
                     int iIntValue = ((Integer) pairU3.first).intValue();
                     int iIntValue2 = ((Integer) pairU4.first).intValue();
                     if (iIntValue == 42 && iIntValue2 == 42) {
-                        return new C0365f(this.f7859a, sVar3, sVar4, 3, 0);
+                        return new C0366f(this.f7859a, sVar3, sVar4, 3, 0);
                     }
                     if (this.f7860b.equals("audio/ac4") && pairU3.equals(pairU4)) {
-                        return new C0365f(this.f7859a, sVar3, sVar4, 3, 0);
+                        return new C0366f(this.f7859a, sVar3, sVar4, 3, 0);
                     }
                 }
             }
             if (i8 == 0 && (this.f7860b.equals("audio/eac3-joc") || this.f7860b.equals("audio/eac3"))) {
-                return new C0365f(this.f7859a, sVar3, sVar4, 3, 0);
+                return new C0366f(this.f7859a, sVar3, sVar4, 3, 0);
             }
             if (!sVar3.f(sVar4)) {
                 i8 |= 32;
@@ -236,10 +236,10 @@ public final class x {
                 i8 |= 2;
             }
             if (i8 == 0) {
-                return new C0365f(this.f7859a, sVar3, sVar4, 1, 0);
+                return new C0366f(this.f7859a, sVar3, sVar4, 1, 0);
             }
         }
-        return new C0365f(this.f7859a, sVar3, sVar4, 0, i8);
+        return new C0366f(this.f7859a, sVar3, sVar4, 0, i8);
     }
 
     public final float f(int i7, int i8) {
@@ -320,7 +320,7 @@ public final class x {
     }
 
     public final boolean m(Context context, B0.s sVar, boolean z7) {
-        Pair pairU = AbstractC0322h.u(sVar);
+        Pair pairU = AbstractC0323h.u(sVar);
         String str = sVar.f759o;
         if (str != null && str.equals("video/mv-hevc")) {
             String strU = B0.z.u(this.f7861c);
@@ -411,7 +411,7 @@ public final class x {
         if (this.f7870l) {
             return this.f7863e;
         }
-        Pair pairU = AbstractC0322h.u(sVar);
+        Pair pairU = AbstractC0323h.u(sVar);
         return pairU != null && ((Integer) pairU.first).intValue() == 42;
     }
 
@@ -451,10 +451,10 @@ public final class x {
     }
 
     public final void x(String str) {
-        AbstractC0332s.b("MediaCodecInfo", "AssumedSupport [" + str + "] [" + this.f7859a + ", " + this.f7860b + "] [" + E0.U.f2097e + "]");
+        AbstractC0333s.b("MediaCodecInfo", "AssumedSupport [" + str + "] [" + this.f7859a + ", " + this.f7860b + "] [" + E0.U.f2097e + "]");
     }
 
     public final void y(String str) {
-        AbstractC0332s.b("MediaCodecInfo", "NoSupport [" + str + "] [" + this.f7859a + ", " + this.f7860b + "] [" + E0.U.f2097e + "]");
+        AbstractC0333s.b("MediaCodecInfo", "NoSupport [" + str + "] [" + this.f7859a + ", " + this.f7860b + "] [" + E0.U.f2097e + "]");
     }
 }

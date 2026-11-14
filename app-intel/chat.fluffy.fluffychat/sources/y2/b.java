@@ -8,7 +8,7 @@ import android.os.Parcelable;
 public final class b extends h {
 
     /* renamed from: l, reason: collision with root package name */
-    public static final b f23975l = new b();
+    public static final b f23981l = new b();
     public static final Parcelable.Creator<b> CREATOR = new a();
 
     public static final class a implements Parcelable.Creator {
@@ -17,7 +17,7 @@ public final class b extends h {
         public final b createFromParcel(Parcel parcel) {
             m.e(parcel, "parcel");
             parcel.readInt();
-            return b.f23975l;
+            return b.f23981l;
         }
 
         @Override // android.os.Parcelable.Creator

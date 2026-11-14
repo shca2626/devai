@@ -6,22 +6,22 @@ package n5;
 public final class M {
 
     /* renamed from: m, reason: collision with root package name */
-    public static final a f20130m;
+    public static final a f20129m;
 
     /* renamed from: n, reason: collision with root package name */
-    public static final M f20131n = new M("CAMERA", 0, 0);
+    public static final M f20130n = new M("CAMERA", 0, 0);
 
     /* renamed from: o, reason: collision with root package name */
-    public static final M f20132o = new M("GALLERY", 1, 1);
+    public static final M f20131o = new M("GALLERY", 1, 1);
 
     /* renamed from: p, reason: collision with root package name */
-    public static final /* synthetic */ M[] f20133p;
+    public static final /* synthetic */ M[] f20132p;
 
     /* renamed from: q, reason: collision with root package name */
-    public static final /* synthetic */ F5.a f20134q;
+    public static final /* synthetic */ F5.a f20133q;
 
     /* renamed from: l, reason: collision with root package name */
-    public final int f20135l;
+    public final int f20134l;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -43,17 +43,17 @@ public final class M {
 
     static {
         M[] mArrA = a();
-        f20133p = mArrA;
-        f20134q = F5.b.a(mArrA);
-        f20130m = new a(null);
+        f20132p = mArrA;
+        f20133q = F5.b.a(mArrA);
+        f20129m = new a(null);
     }
 
     public M(String str, int i7, int i8) {
-        this.f20135l = i8;
+        this.f20134l = i8;
     }
 
     public static final /* synthetic */ M[] a() {
-        return new M[]{f20131n, f20132o};
+        return new M[]{f20130n, f20131o};
     }
 
     public static M valueOf(String str) {
@@ -61,10 +61,10 @@ public final class M {
     }
 
     public static M[] values() {
-        return (M[]) f20133p.clone();
+        return (M[]) f20132p.clone();
     }
 
     public final int d() {
-        return this.f20135l;
+        return this.f20134l;
     }
 }

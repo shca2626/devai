@@ -2,7 +2,7 @@ package androidx.lifecycle;
 
 import android.app.Application;
 import java.lang.reflect.InvocationTargetException;
-import w0.AbstractC1725a;
+import w0.AbstractC1724a;
 
 /* loaded from: classes.dex */
 public class N {
@@ -11,7 +11,7 @@ public class N {
     public static final b f12376b = new b(null);
 
     /* renamed from: c, reason: collision with root package name */
-    public static final AbstractC1725a.c f12377c;
+    public static final AbstractC1724a.c f12377c;
 
     /* renamed from: a, reason: collision with root package name */
     public final x0.f f12378a;
@@ -21,21 +21,21 @@ public class N {
             this();
         }
 
-        public static /* synthetic */ N b(b bVar, P p7, c cVar, AbstractC1725a abstractC1725a, int i7, Object obj) {
+        public static /* synthetic */ N b(b bVar, P p7, c cVar, AbstractC1724a abstractC1724a, int i7, Object obj) {
             if ((i7 & 2) != 0) {
-                cVar = x0.h.f23451a.b(p7);
+                cVar = x0.h.f23457a.b(p7);
             }
             if ((i7 & 4) != 0) {
-                abstractC1725a = x0.h.f23451a.a(p7);
+                abstractC1724a = x0.h.f23457a.a(p7);
             }
-            return bVar.a(p7, cVar, abstractC1725a);
+            return bVar.a(p7, cVar, abstractC1724a);
         }
 
-        public final N a(P p7, c cVar, AbstractC1725a abstractC1725a) {
+        public final N a(P p7, c cVar, AbstractC1724a abstractC1724a) {
             M5.m.e(p7, "owner");
             M5.m.e(cVar, "factory");
-            M5.m.e(abstractC1725a, "extras");
-            return new N(p7.D(), cVar, abstractC1725a);
+            M5.m.e(abstractC1724a, "extras");
+            return new N(p7.D(), cVar, abstractC1724a);
         }
 
         public b() {
@@ -55,19 +55,19 @@ public class N {
 
         default M a(Class cls) {
             M5.m.e(cls, "modelClass");
-            return x0.h.f23451a.d();
+            return x0.h.f23457a.d();
         }
 
-        default M b(Class cls, AbstractC1725a abstractC1725a) {
+        default M b(Class cls, AbstractC1724a abstractC1724a) {
             M5.m.e(cls, "modelClass");
-            M5.m.e(abstractC1725a, "extras");
+            M5.m.e(abstractC1724a, "extras");
             return a(cls);
         }
 
-        default M c(T5.b bVar, AbstractC1725a abstractC1725a) {
+        default M c(T5.b bVar, AbstractC1724a abstractC1724a) {
             M5.m.e(bVar, "modelClass");
-            M5.m.e(abstractC1725a, "extras");
-            return b(K5.a.a(bVar), abstractC1725a);
+            M5.m.e(abstractC1724a, "extras");
+            return b(K5.a.a(bVar), abstractC1724a);
         }
     }
 
@@ -80,7 +80,7 @@ public class N {
         public static final a f12385b = new a(null);
 
         /* renamed from: d, reason: collision with root package name */
-        public static final AbstractC1725a.c f12387d = N.f12377c;
+        public static final AbstractC1724a.c f12387d = N.f12377c;
 
         public static final class a {
             public /* synthetic */ a(M5.g gVar) {
@@ -103,21 +103,21 @@ public class N {
         @Override // androidx.lifecycle.N.c
         public M a(Class cls) {
             M5.m.e(cls, "modelClass");
-            return x0.c.f23442a.a(cls);
+            return x0.c.f23448a.a(cls);
         }
 
         @Override // androidx.lifecycle.N.c
-        public M b(Class cls, AbstractC1725a abstractC1725a) {
+        public M b(Class cls, AbstractC1724a abstractC1724a) {
             M5.m.e(cls, "modelClass");
-            M5.m.e(abstractC1725a, "extras");
+            M5.m.e(abstractC1724a, "extras");
             return a(cls);
         }
 
         @Override // androidx.lifecycle.N.c
-        public M c(T5.b bVar, AbstractC1725a abstractC1725a) {
+        public M c(T5.b bVar, AbstractC1724a abstractC1724a) {
             M5.m.e(bVar, "modelClass");
-            M5.m.e(abstractC1725a, "extras");
-            return b(K5.a.a(bVar), abstractC1725a);
+            M5.m.e(abstractC1724a, "extras");
+            return b(K5.a.a(bVar), abstractC1724a);
         }
     }
 
@@ -127,11 +127,11 @@ public class N {
         }
     }
 
-    public static final class f implements AbstractC1725a.c {
+    public static final class f implements AbstractC1724a.c {
     }
 
     static {
-        AbstractC1725a.C0283a c0283a = AbstractC1725a.f23251b;
+        AbstractC1724a.C0283a c0283a = AbstractC1724a.f23257b;
         f12377c = new f();
     }
 
@@ -167,7 +167,7 @@ public class N {
         public static a f12380g;
 
         /* renamed from: h, reason: collision with root package name */
-        public static final AbstractC1725a.c f12381h;
+        public static final AbstractC1724a.c f12381h;
 
         /* renamed from: e, reason: collision with root package name */
         public final Application f12382e;
@@ -192,11 +192,11 @@ public class N {
             }
         }
 
-        public static final class b implements AbstractC1725a.c {
+        public static final class b implements AbstractC1724a.c {
         }
 
         static {
-            AbstractC1725a.C0283a c0283a = AbstractC1725a.f23251b;
+            AbstractC1724a.C0283a c0283a = AbstractC1724a.f23257b;
             f12381h = new b();
         }
 
@@ -215,24 +215,24 @@ public class N {
         }
 
         @Override // androidx.lifecycle.N.d, androidx.lifecycle.N.c
-        public M b(Class cls, AbstractC1725a abstractC1725a) {
+        public M b(Class cls, AbstractC1724a abstractC1724a) {
             M5.m.e(cls, "modelClass");
-            M5.m.e(abstractC1725a, "extras");
+            M5.m.e(abstractC1724a, "extras");
             if (this.f12382e != null) {
                 return a(cls);
             }
-            Application application = (Application) abstractC1725a.a(f12381h);
+            Application application = (Application) abstractC1724a.a(f12381h);
             if (application != null) {
                 return h(cls, application);
             }
-            if (AbstractC0795a.class.isAssignableFrom(cls)) {
+            if (AbstractC0796a.class.isAssignableFrom(cls)) {
                 throw new IllegalArgumentException("CreationExtras must have an application by `APPLICATION_KEY`");
             }
             return super.a(cls);
         }
 
         public final M h(Class cls, Application application) {
-            if (!AbstractC0795a.class.isAssignableFrom(cls)) {
+            if (!AbstractC0796a.class.isAssignableFrom(cls)) {
                 return super.a(cls);
             }
             try {
@@ -265,23 +265,23 @@ public class N {
         this.f12378a = fVar;
     }
 
-    public /* synthetic */ N(O o7, c cVar, AbstractC1725a abstractC1725a, int i7, M5.g gVar) {
-        this(o7, cVar, (i7 & 4) != 0 ? AbstractC1725a.b.f23253c : abstractC1725a);
+    public /* synthetic */ N(O o7, c cVar, AbstractC1724a abstractC1724a, int i7, M5.g gVar) {
+        this(o7, cVar, (i7 & 4) != 0 ? AbstractC1724a.b.f23259c : abstractC1724a);
     }
 
     /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
-    public N(O o7, c cVar, AbstractC1725a abstractC1725a) {
-        this(new x0.f(o7, cVar, abstractC1725a));
+    public N(O o7, c cVar, AbstractC1724a abstractC1724a) {
+        this(new x0.f(o7, cVar, abstractC1724a));
         M5.m.e(o7, "store");
         M5.m.e(cVar, "factory");
-        M5.m.e(abstractC1725a, "defaultCreationExtras");
+        M5.m.e(abstractC1724a, "defaultCreationExtras");
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
     public N(P p7) {
         M5.m.e(p7, "owner");
         O oD = p7.D();
-        x0.h hVar = x0.h.f23451a;
+        x0.h hVar = x0.h.f23457a;
         this(oD, hVar.b(p7), hVar.a(p7));
     }
 }

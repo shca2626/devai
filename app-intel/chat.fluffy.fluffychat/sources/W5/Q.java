@@ -1,8 +1,8 @@
 package W5;
 
-import b6.C0873i;
-import y5.AbstractC1815j;
-import y5.C1814i;
+import b6.C0874i;
+import y5.AbstractC1814j;
+import y5.C1813i;
 
 /* loaded from: classes.dex */
 public abstract class Q {
@@ -16,17 +16,17 @@ public abstract class Q {
 
     public static final String c(C5.e eVar) {
         Object objB;
-        if (eVar instanceof C0873i) {
-            return ((C0873i) eVar).toString();
+        if (eVar instanceof C0874i) {
+            return ((C0874i) eVar).toString();
         }
         try {
-            C1814i.a aVar = C1814i.f24004m;
-            objB = C1814i.b(eVar + '@' + b(eVar));
+            C1813i.a aVar = C1813i.f24010m;
+            objB = C1813i.b(eVar + '@' + b(eVar));
         } catch (Throwable th) {
-            C1814i.a aVar2 = C1814i.f24004m;
-            objB = C1814i.b(AbstractC1815j.a(th));
+            C1813i.a aVar2 = C1813i.f24010m;
+            objB = C1813i.b(AbstractC1814j.a(th));
         }
-        if (C1814i.d(objB) != null) {
+        if (C1813i.d(objB) != null) {
             objB = eVar.getClass().getName() + '@' + b(eVar);
         }
         return (String) objB;

@@ -2,7 +2,7 @@ package j$.time.format;
 
 /* loaded from: classes2.dex */
 public interface e {
-    int A(p pVar, CharSequence charSequence, int i7);
+    boolean r(s sVar, StringBuilder sb);
 
-    boolean s(s sVar, StringBuilder sb);
+    int z(p pVar, CharSequence charSequence, int i7);
 }

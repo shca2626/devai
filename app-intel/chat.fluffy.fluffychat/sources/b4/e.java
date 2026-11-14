@@ -38,8 +38,8 @@ public class e {
 
         @Override // java.util.Comparator
         /* renamed from: a, reason: merged with bridge method [inline-methods] */
-        public int compare(C0846d c0846d, C0846d c0846d2) {
-            return Float.compare(c0846d.i(), c0846d2.i());
+        public int compare(C0847d c0847d, C0847d c0847d2) {
+            return Float.compare(c0847d.i(), c0847d2.i());
         }
     }
 
@@ -98,9 +98,9 @@ public class e {
         return Math.abs(f7 - ((float) iArr[0])) < f8 && Math.abs(f7 - ((float) iArr[1])) < f8 && Math.abs((f7 * 3.0f) - ((float) iArr[2])) < 3.0f * f8 && Math.abs(f7 - ((float) iArr[3])) < f8 && Math.abs(f7 - ((float) iArr[4])) < f8;
     }
 
-    public static double o(C0846d c0846d, C0846d c0846d2) {
-        double dC = c0846d.c() - c0846d2.c();
-        double d7 = c0846d.d() - c0846d2.d();
+    public static double o(C0847d c0847d, C0847d c0847d2) {
+        double dC = c0847d.c() - c0847d2.c();
+        double d7 = c0847d.d() - c0847d2.d();
         return (dC * dC) + (d7 * d7);
     }
 
@@ -335,23 +335,23 @@ public class e {
             }
             i8 += i7;
         }
-        C0846d[] c0846dArrN = n();
-        p.e(c0846dArrN);
-        return new f(c0846dArrN);
+        C0847d[] c0847dArrN = n();
+        p.e(c0847dArrN);
+        return new f(c0847dArrN);
     }
 
     public final int h() {
         if (this.f13739b.size() <= 1) {
             return 0;
         }
-        C0846d c0846d = null;
-        for (C0846d c0846d2 : this.f13739b) {
-            if (c0846d2.h() >= 2) {
-                if (c0846d != null) {
+        C0847d c0847d = null;
+        for (C0847d c0847d2 : this.f13739b) {
+            if (c0847d2.h() >= 2) {
+                if (c0847d != null) {
                     this.f13740c = true;
-                    return ((int) (Math.abs(c0846d.c() - c0846d2.c()) - Math.abs(c0846d.d() - c0846d2.d()))) / 2;
+                    return ((int) (Math.abs(c0847d.c() - c0847d2.c()) - Math.abs(c0847d.d() - c0847d2.d()))) / 2;
                 }
-                c0846d = c0846d2;
+                c0847d = c0847d2;
             }
         }
         return 0;
@@ -374,18 +374,18 @@ public class e {
                 float f7 = i10 / 7.0f;
                 while (true) {
                     if (i9 < this.f13739b.size()) {
-                        C0846d c0846d = (C0846d) this.f13739b.get(i9);
-                        if (c0846d.f(f7, fD, fC)) {
-                            this.f13739b.set(i9, c0846d.g(fD, fC, f7));
+                        C0847d c0847d = (C0847d) this.f13739b.get(i9);
+                        if (c0847d.f(f7, fD, fC)) {
+                            this.f13739b.set(i9, c0847d.g(fD, fC, f7));
                             break;
                         }
                         i9++;
                     } else {
-                        C0846d c0846d2 = new C0846d(fC, fD, f7);
-                        this.f13739b.add(c0846d2);
+                        C0847d c0847d2 = new C0847d(fC, fD, f7);
+                        this.f13739b.add(c0847d2);
                         q qVar = this.f13742e;
                         if (qVar != null) {
-                            qVar.a(c0846d2);
+                            qVar.a(c0847d2);
                         }
                     }
                 }
@@ -400,10 +400,10 @@ public class e {
         float fAbs = 0.0f;
         int i7 = 0;
         float fI = 0.0f;
-        for (C0846d c0846d : this.f13739b) {
-            if (c0846d.h() >= 2) {
+        for (C0847d c0847d : this.f13739b) {
+            if (c0847d.h() >= 2) {
                 i7++;
-                fI += c0846d.i();
+                fI += c0847d.i();
             }
         }
         if (i7 < 3) {
@@ -412,7 +412,7 @@ public class e {
         float f7 = fI / size;
         Iterator it = this.f13739b.iterator();
         while (it.hasNext()) {
-            fAbs += Math.abs(((C0846d) it.next()).i() - f7);
+            fAbs += Math.abs(((C0847d) it.next()).i() - f7);
         }
         return fAbs <= fI * 0.05f;
     }
@@ -423,7 +423,7 @@ public class e {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct add '--show-bad-code' argument
     */
-    public final b4.C0846d[] n() throws D3.j {
+    public final b4.C0847d[] n() throws D3.j {
         /*
             Method dump skipped, instructions count: 251
             To view this dump add '--comments-level debug' option

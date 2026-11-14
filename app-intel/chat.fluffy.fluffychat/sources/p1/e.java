@@ -7,24 +7,24 @@ import o3.i;
 public final class e implements y.a {
 
     /* renamed from: a, reason: collision with root package name */
-    public final long f20753a;
+    public final long f20759a;
 
     public e(long j7) {
-        this.f20753a = j7;
+        this.f20759a = j7;
     }
 
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        return obj != null && e.class == obj.getClass() && this.f20753a == ((e) obj).f20753a;
+        return obj != null && e.class == obj.getClass() && this.f20759a == ((e) obj).f20759a;
     }
 
     public int hashCode() {
-        return 527 + i.c(this.f20753a);
+        return 527 + i.c(this.f20759a);
     }
 
     public String toString() {
-        return "ThumbnailMetadata: presentationTimeUs=" + this.f20753a;
+        return "ThumbnailMetadata: presentationTimeUs=" + this.f20759a;
     }
 }

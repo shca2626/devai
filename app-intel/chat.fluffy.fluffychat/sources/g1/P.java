@@ -3,7 +3,7 @@ package g1;
 import B0.s;
 
 /* loaded from: classes.dex */
-public final class P implements InterfaceC1087q {
+public final class P implements InterfaceC1088q {
 
     /* renamed from: a, reason: collision with root package name */
     public final int f15973a;
@@ -21,7 +21,7 @@ public final class P implements InterfaceC1087q {
     public int f15977e;
 
     /* renamed from: f, reason: collision with root package name */
-    public InterfaceC1088s f15978f;
+    public InterfaceC1089s f15978f;
 
     /* renamed from: g, reason: collision with root package name */
     public V f15979g;
@@ -32,7 +32,7 @@ public final class P implements InterfaceC1087q {
         this.f15975c = str;
     }
 
-    @Override // g1.InterfaceC1087q
+    @Override // g1.InterfaceC1088q
     public void a(long j7, long j8) {
         if (j7 == 0 || this.f15977e == 1) {
             this.f15977e = 1;
@@ -40,13 +40,13 @@ public final class P implements InterfaceC1087q {
         }
     }
 
-    @Override // g1.InterfaceC1087q
-    public void b(InterfaceC1088s interfaceC1088s) {
-        this.f15978f = interfaceC1088s;
+    @Override // g1.InterfaceC1088q
+    public void b(InterfaceC1089s interfaceC1089s) {
+        this.f15978f = interfaceC1089s;
         g(this.f15975c);
     }
 
-    @Override // g1.InterfaceC1087q
+    @Override // g1.InterfaceC1088q
     public boolean d(r rVar) {
         j3.o.v((this.f15973a == -1 || this.f15974b == -1) ? false : true);
         E0.E e7 = new E0.E(this.f15974b);
@@ -54,7 +54,7 @@ public final class P implements InterfaceC1087q {
         return e7.Y() == this.f15973a;
     }
 
-    @Override // g1.InterfaceC1087q
+    @Override // g1.InterfaceC1088q
     public int f(r rVar, M m7) {
         int i7 = this.f15977e;
         if (i7 == 1) {
@@ -87,7 +87,7 @@ public final class P implements InterfaceC1087q {
         this.f15976d = 0;
     }
 
-    @Override // g1.InterfaceC1087q
+    @Override // g1.InterfaceC1088q
     public void release() {
     }
 }

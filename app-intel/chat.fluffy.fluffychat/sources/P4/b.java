@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import z5.C1881o;
-import z5.C1882p;
+import z5.C1884o;
+import z5.C1885p;
 
 /* loaded from: classes.dex */
 public final class b implements j.c {
@@ -51,7 +51,7 @@ public final class b implements j.c {
                 arrayList.add(featureInfo);
             }
         }
-        ArrayList arrayList2 = new ArrayList(C1882p.o(arrayList, 10));
+        ArrayList arrayList2 = new ArrayList(C1885p.o(arrayList, 10));
         int size = arrayList.size();
         while (i7 < size) {
             Object obj = arrayList.get(i7);
@@ -155,11 +155,11 @@ public final class b implements j.c {
             map.put("name", string);
         }
         String[] strArr = Build.SUPPORTED_32_BIT_ABIS;
-        map.put("supported32BitAbis", C1881o.l(Arrays.copyOf(strArr, strArr.length)));
+        map.put("supported32BitAbis", C1884o.l(Arrays.copyOf(strArr, strArr.length)));
         String[] strArr2 = Build.SUPPORTED_64_BIT_ABIS;
-        map.put("supported64BitAbis", C1881o.l(Arrays.copyOf(strArr2, strArr2.length)));
+        map.put("supported64BitAbis", C1884o.l(Arrays.copyOf(strArr2, strArr2.length)));
         String[] strArr3 = Build.SUPPORTED_ABIS;
-        map.put("supportedAbis", C1881o.l(Arrays.copyOf(strArr3, strArr3.length)));
+        map.put("supportedAbis", C1884o.l(Arrays.copyOf(strArr3, strArr3.length)));
         map.put("tags", Build.TAGS);
         map.put("type", Build.TYPE);
         map.put("isPhysicalDevice", Boolean.valueOf(!b()));

@@ -5,11 +5,11 @@ import android.app.ActivityManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import c5.InterfaceC0910a;
+import c5.InterfaceC0911a;
 import h5.j;
 
 /* loaded from: classes.dex */
-public final class a implements InterfaceC0910a {
+public final class a implements InterfaceC0911a {
 
     /* renamed from: l, reason: collision with root package name */
     public j f7556l;
@@ -31,8 +31,8 @@ public final class a implements InterfaceC0910a {
         jVar.e(bVar2);
     }
 
-    @Override // c5.InterfaceC0910a
-    public void onAttachedToEngine(InterfaceC0910a.b bVar) {
+    @Override // c5.InterfaceC0911a
+    public void onAttachedToEngine(InterfaceC0911a.b bVar) {
         m.e(bVar, "binding");
         h5.b bVarB = bVar.b();
         m.d(bVarB, "getBinaryMessenger(...)");
@@ -41,8 +41,8 @@ public final class a implements InterfaceC0910a {
         a(bVarB, contextA);
     }
 
-    @Override // c5.InterfaceC0910a
-    public void onDetachedFromEngine(InterfaceC0910a.b bVar) {
+    @Override // c5.InterfaceC0911a
+    public void onDetachedFromEngine(InterfaceC0911a.b bVar) {
         m.e(bVar, "binding");
         j jVar = this.f7556l;
         if (jVar == null) {

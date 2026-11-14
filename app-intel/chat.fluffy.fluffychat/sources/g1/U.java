@@ -3,13 +3,13 @@ package g1;
 import g1.N;
 
 /* loaded from: classes.dex */
-public final class U implements InterfaceC1088s {
+public final class U implements InterfaceC1089s {
 
     /* renamed from: l, reason: collision with root package name */
     public final long f15983l;
 
     /* renamed from: m, reason: collision with root package name */
-    public final InterfaceC1088s f15984m;
+    public final InterfaceC1089s f15984m;
 
     public class a extends B {
 
@@ -32,22 +32,22 @@ public final class U implements InterfaceC1088s {
         }
     }
 
-    public U(long j7, InterfaceC1088s interfaceC1088s) {
+    public U(long j7, InterfaceC1089s interfaceC1089s) {
         this.f15983l = j7;
-        this.f15984m = interfaceC1088s;
+        this.f15984m = interfaceC1089s;
     }
 
-    @Override // g1.InterfaceC1088s
+    @Override // g1.InterfaceC1089s
     public V e(int i7, int i8) {
         return this.f15984m.e(i7, i8);
     }
 
-    @Override // g1.InterfaceC1088s
+    @Override // g1.InterfaceC1089s
     public void o() {
         this.f15984m.o();
     }
 
-    @Override // g1.InterfaceC1088s
+    @Override // g1.InterfaceC1089s
     public void w(N n7) {
         this.f15984m.w(new a(n7, n7));
     }

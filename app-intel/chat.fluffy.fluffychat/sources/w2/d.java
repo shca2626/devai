@@ -11,13 +11,13 @@ import w2.c;
 public final class d implements c {
 
     /* renamed from: b, reason: collision with root package name */
-    public final ConnectivityManager f23297b;
+    public final ConnectivityManager f23303b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final c.b f23298c;
+    public final c.b f23304c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final a f23299d;
+    public final a f23305d;
 
     public static final class a extends ConnectivityManager.NetworkCallback {
         public a() {
@@ -39,16 +39,16 @@ public final class d implements c {
     public d(ConnectivityManager connectivityManager, c.b bVar) {
         m.e(connectivityManager, "connectivityManager");
         m.e(bVar, "listener");
-        this.f23297b = connectivityManager;
-        this.f23298c = bVar;
+        this.f23303b = connectivityManager;
+        this.f23304c = bVar;
         a aVar = new a();
-        this.f23299d = aVar;
+        this.f23305d = aVar;
         connectivityManager.registerNetworkCallback(new NetworkRequest.Builder().addCapability(12).build(), aVar);
     }
 
     @Override // w2.c
     public boolean a() {
-        Network[] allNetworks = this.f23297b.getAllNetworks();
+        Network[] allNetworks = this.f23303b.getAllNetworks();
         m.d(allNetworks, "connectivityManager.allNetworks");
         for (Network network : allNetworks) {
             m.d(network, "it");
@@ -60,13 +60,13 @@ public final class d implements c {
     }
 
     public final boolean c(Network network) {
-        NetworkCapabilities networkCapabilities = this.f23297b.getNetworkCapabilities(network);
+        NetworkCapabilities networkCapabilities = this.f23303b.getNetworkCapabilities(network);
         return networkCapabilities != null && networkCapabilities.hasCapability(12);
     }
 
     public final void d(Network network, boolean z7) {
         boolean zC;
-        Network[] allNetworks = this.f23297b.getAllNetworks();
+        Network[] allNetworks = this.f23303b.getAllNetworks();
         m.d(allNetworks, "connectivityManager.allNetworks");
         int length = allNetworks.length;
         boolean z8 = false;
@@ -88,11 +88,11 @@ public final class d implements c {
             }
             i7++;
         }
-        this.f23298c.a(z8);
+        this.f23304c.a(z8);
     }
 
     @Override // w2.c
     public void shutdown() {
-        this.f23297b.unregisterNetworkCallback(this.f23299d);
+        this.f23303b.unregisterNetworkCallback(this.f23305d);
     }
 }

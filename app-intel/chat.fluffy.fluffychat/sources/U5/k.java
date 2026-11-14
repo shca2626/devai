@@ -6,10 +6,10 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import z5.C1864H;
-import z5.C1865I;
-import z5.C1880n;
-import z5.C1881o;
+import z5.C1867H;
+import z5.C1868I;
+import z5.C1883n;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public class k extends i {
@@ -72,11 +72,11 @@ public class k extends i {
         m.e(dVar, "<this>");
         Iterator it = dVar.iterator();
         if (!it.hasNext()) {
-            return C1881o.i();
+            return C1884o.i();
         }
         Object next = it.next();
         if (!it.hasNext()) {
-            return C1880n.d(next);
+            return C1883n.d(next);
         }
         ArrayList arrayList = new ArrayList();
         arrayList.add(next);
@@ -90,11 +90,11 @@ public class k extends i {
         m.e(dVar, "<this>");
         Iterator it = dVar.iterator();
         if (!it.hasNext()) {
-            return C1865I.d();
+            return C1868I.d();
         }
         Object next = it.next();
         if (!it.hasNext()) {
-            return C1864H.c(next);
+            return C1867H.c(next);
         }
         LinkedHashSet linkedHashSet = new LinkedHashSet();
         linkedHashSet.add(next);

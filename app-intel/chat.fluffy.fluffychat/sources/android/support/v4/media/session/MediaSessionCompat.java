@@ -8,7 +8,7 @@ import android.os.Parcelable;
 import android.os.ResultReceiver;
 import android.support.v4.media.MediaDescriptionCompat;
 import android.util.Log;
-import b2.InterfaceC0841c;
+import b2.InterfaceC0842c;
 
 /* loaded from: classes.dex */
 public abstract class MediaSessionCompat {
@@ -108,7 +108,7 @@ public abstract class MediaSessionCompat {
         public android.support.v4.media.session.a f10949n;
 
         /* renamed from: o, reason: collision with root package name */
-        public InterfaceC0841c f10950o;
+        public InterfaceC0842c f10950o;
 
         public class a implements Parcelable.Creator {
             @Override // android.os.Parcelable.Creator
@@ -169,11 +169,11 @@ public abstract class MediaSessionCompat {
             parcel.writeParcelable((Parcelable) this.f10948m, i7);
         }
 
-        public Token(Object obj, android.support.v4.media.session.a aVar, InterfaceC0841c interfaceC0841c) {
+        public Token(Object obj, android.support.v4.media.session.a aVar, InterfaceC0842c interfaceC0842c) {
             this.f10947l = new Object();
             this.f10948m = obj;
             this.f10949n = aVar;
-            this.f10950o = interfaceC0841c;
+            this.f10950o = interfaceC0842c;
         }
     }
 

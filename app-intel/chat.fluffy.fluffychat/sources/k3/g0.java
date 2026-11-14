@@ -14,7 +14,7 @@ public abstract class g0 extends f0 implements ListIterator {
     }
 
     public final ListIterator b() {
-        return (ListIterator) this.f18976l;
+        return (ListIterator) this.f18975l;
     }
 
     @Override // java.util.ListIterator

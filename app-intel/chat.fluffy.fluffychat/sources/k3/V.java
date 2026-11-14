@@ -17,10 +17,10 @@ public abstract class V {
     }
 
     public static Map c(int i7) {
-        return C1269k.w(i7);
+        return C1268k.w(i7);
     }
 
     public static Map d() {
-        return C1269k.r();
+        return C1268k.r();
     }
 }

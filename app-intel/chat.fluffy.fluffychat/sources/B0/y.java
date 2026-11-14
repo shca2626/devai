@@ -4,7 +4,7 @@ import B0.x;
 import E0.U;
 import java.util.Arrays;
 import java.util.List;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public final class y {
@@ -59,8 +59,8 @@ public final class y {
         return false;
     }
 
-    public AbstractC1279v f(Class cls) {
-        AbstractC1279v.a aVarO = AbstractC1279v.o();
+    public AbstractC1278v f(Class cls) {
+        AbstractC1278v.a aVarO = AbstractC1278v.o();
         for (a aVar : this.f1055a) {
             if (cls.isAssignableFrom(aVar.getClass())) {
                 aVarO.a((a) cls.cast(aVar));
@@ -87,8 +87,8 @@ public final class y {
         return (Arrays.hashCode(this.f1055a) * 31) + o3.i.c(this.f1056b);
     }
 
-    public AbstractC1279v i(Class cls, j3.p pVar) {
-        AbstractC1279v.a aVarO = AbstractC1279v.o();
+    public AbstractC1278v i(Class cls, j3.p pVar) {
+        AbstractC1278v.a aVarO = AbstractC1278v.o();
         for (a aVar : this.f1055a) {
             a aVarD = d(aVar, cls, pVar);
             if (aVarD != null) {

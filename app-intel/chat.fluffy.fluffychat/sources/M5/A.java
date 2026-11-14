@@ -2,7 +2,7 @@ package M5;
 
 import N5.c;
 import java.util.Map;
-import y5.InterfaceC1807b;
+import y5.InterfaceC1806b;
 
 /* loaded from: classes.dex */
 public class A {
@@ -75,7 +75,7 @@ public class A {
     }
 
     public static boolean i(Object obj, int i7) {
-        return (obj instanceof InterfaceC1807b) && h(obj) == i7;
+        return (obj instanceof InterfaceC1806b) && h(obj) == i7;
     }
 
     public static Throwable j(Throwable th) {

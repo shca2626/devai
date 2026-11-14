@@ -4,21 +4,21 @@ package j$.time.chrono;
 public abstract /* synthetic */ class z {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ int[] f18264a;
+    public static final /* synthetic */ int[] f18272a;
 
     static {
         int[] iArr = new int[j$.time.temporal.a.values().length];
-        f18264a = iArr;
+        f18272a = iArr;
         try {
             iArr[j$.time.temporal.a.PROLEPTIC_MONTH.ordinal()] = 1;
         } catch (NoSuchFieldError unused) {
         }
         try {
-            f18264a[j$.time.temporal.a.YEAR_OF_ERA.ordinal()] = 2;
+            f18272a[j$.time.temporal.a.YEAR_OF_ERA.ordinal()] = 2;
         } catch (NoSuchFieldError unused2) {
         }
         try {
-            f18264a[j$.time.temporal.a.YEAR.ordinal()] = 3;
+            f18272a[j$.time.temporal.a.YEAR.ordinal()] = 3;
         } catch (NoSuchFieldError unused3) {
         }
     }

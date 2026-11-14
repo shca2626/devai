@@ -7,18 +7,18 @@ import k6.w;
 public final class k {
 
     /* renamed from: a, reason: collision with root package name */
-    public final w f20508a;
+    public final w f20507a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final int f20509b;
+    public final int f20508b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final String f20510c;
+    public final String f20509c;
 
     public k(w wVar, int i7, String str) {
-        this.f20508a = wVar;
-        this.f20509b = i7;
-        this.f20510c = str;
+        this.f20507a = wVar;
+        this.f20508b = i7;
+        this.f20509c = str;
     }
 
     public static k a(String str) throws ProtocolException, NumberFormatException {
@@ -68,12 +68,12 @@ public final class k {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.f20508a == w.HTTP_1_0 ? "HTTP/1.0" : "HTTP/1.1");
+        sb.append(this.f20507a == w.HTTP_1_0 ? "HTTP/1.0" : "HTTP/1.1");
         sb.append(' ');
-        sb.append(this.f20509b);
-        if (this.f20510c != null) {
+        sb.append(this.f20508b);
+        if (this.f20509c != null) {
             sb.append(' ');
-            sb.append(this.f20510c);
+            sb.append(this.f20509c);
         }
         return sb.toString();
     }

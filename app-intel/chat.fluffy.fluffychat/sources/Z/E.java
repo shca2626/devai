@@ -30,7 +30,7 @@ public class E {
         if (!l() || (viewParentH = h(0)) == null) {
             return false;
         }
-        return AbstractC0687c0.a(viewParentH, this.f9938c, f7, f8, z7);
+        return AbstractC0688c0.a(viewParentH, this.f9938c, f7, f8, z7);
     }
 
     public boolean b(float f7, float f8) {
@@ -38,7 +38,7 @@ public class E {
         if (!l() || (viewParentH = h(0)) == null) {
             return false;
         }
-        return AbstractC0687c0.b(viewParentH, this.f9938c, f7, f8);
+        return AbstractC0688c0.b(viewParentH, this.f9938c, f7, f8);
     }
 
     public boolean c(int i7, int i8, int[] iArr, int[] iArr2) {
@@ -73,7 +73,7 @@ public class E {
         int[] iArr3 = iArr;
         iArr3[0] = 0;
         iArr3[1] = 0;
-        AbstractC0687c0.c(viewParentH, this.f9938c, i7, i8, iArr3, i9);
+        AbstractC0688c0.c(viewParentH, this.f9938c, i7, i8, iArr3, i9);
         if (iArr2 != null) {
             this.f9938c.getLocationInWindow(iArr2);
             iArr2[0] = iArr2[0] - i10;
@@ -121,7 +121,7 @@ public class E {
         } else {
             iArr3 = iArr2;
         }
-        AbstractC0687c0.d(viewParentH, this.f9938c, i7, i8, i9, i10, i11, iArr3);
+        AbstractC0688c0.d(viewParentH, this.f9938c, i7, i8, i9, i10, i11, iArr3);
         if (iArr != null) {
             this.f9938c.getLocationInWindow(iArr);
             iArr[0] = iArr[0] - i12;
@@ -190,9 +190,9 @@ public class E {
         }
         View view = this.f9938c;
         for (ViewParent parent = this.f9938c.getParent(); parent != null; parent = parent.getParent()) {
-            if (AbstractC0687c0.f(parent, view, this.f9938c, i7, i8)) {
+            if (AbstractC0688c0.f(parent, view, this.f9938c, i7, i8)) {
                 n(i8, parent);
-                AbstractC0687c0.e(parent, view, this.f9938c, i7, i8);
+                AbstractC0688c0.e(parent, view, this.f9938c, i7, i8);
                 return true;
             }
             if (parent instanceof View) {
@@ -209,7 +209,7 @@ public class E {
     public void r(int i7) {
         ViewParent viewParentH = h(i7);
         if (viewParentH != null) {
-            AbstractC0687c0.g(viewParentH, this.f9938c, i7);
+            AbstractC0688c0.g(viewParentH, this.f9938c, i7);
             n(i7, null);
         }
     }

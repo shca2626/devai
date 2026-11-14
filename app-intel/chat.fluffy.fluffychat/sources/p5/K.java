@@ -1,19 +1,19 @@
 package p5;
 
 import java.util.List;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class K {
 
     /* renamed from: c, reason: collision with root package name */
-    public static final a f20800c = new a(null);
+    public static final a f20806c = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f20801a;
+    public final String f20807a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final boolean f20802b;
+    public final boolean f20808b;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -33,16 +33,16 @@ public final class K {
     }
 
     public K(String str, boolean z7) {
-        this.f20801a = str;
-        this.f20802b = z7;
+        this.f20807a = str;
+        this.f20808b = z7;
     }
 
     public final String a() {
-        return this.f20801a;
+        return this.f20807a;
     }
 
     public final List b() {
-        return C1881o.l(this.f20801a, Boolean.valueOf(this.f20802b));
+        return C1884o.l(this.f20807a, Boolean.valueOf(this.f20808b));
     }
 
     public boolean equals(Object obj) {
@@ -51,8 +51,8 @@ public final class K {
                 return true;
             }
             K k7 = (K) obj;
-            C1450d c1450d = C1450d.f20989a;
-            if (c1450d.a(this.f20801a, k7.f20801a) && c1450d.a(Boolean.valueOf(this.f20802b), Boolean.valueOf(k7.f20802b))) {
+            C1449d c1449d = C1449d.f20995a;
+            if (c1449d.a(this.f20807a, k7.f20807a) && c1449d.a(Boolean.valueOf(this.f20808b), Boolean.valueOf(k7.f20808b))) {
                 return true;
             }
         }
@@ -61,11 +61,11 @@ public final class K {
 
     public int hashCode() {
         int iHashCode = K.class.hashCode() * 31;
-        C1450d c1450d = C1450d.f20989a;
-        return ((iHashCode + c1450d.b(this.f20801a)) * 31) + c1450d.b(Boolean.valueOf(this.f20802b));
+        C1449d c1449d = C1449d.f20995a;
+        return ((iHashCode + c1449d.b(this.f20807a)) * 31) + c1449d.b(Boolean.valueOf(this.f20808b));
     }
 
     public String toString() {
-        return "SharedPreferencesPigeonOptions(fileName=" + this.f20801a + ", useDataStore=" + this.f20802b + ")";
+        return "SharedPreferencesPigeonOptions(fileName=" + this.f20807a + ", useDataStore=" + this.f20808b + ")";
     }
 }

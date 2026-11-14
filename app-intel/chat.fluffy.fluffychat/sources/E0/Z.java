@@ -12,10 +12,10 @@ public final class Z {
     public final a f2121a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final InterfaceC0329o f2122b;
+    public final InterfaceC0330o f2122b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final InterfaceC0329o f2123c;
+    public final InterfaceC0330o f2123c;
 
     /* renamed from: d, reason: collision with root package name */
     public boolean f2124d;
@@ -57,12 +57,12 @@ public final class Z {
             if (z7) {
                 if (this.f2127b == null) {
                     if (this.f2126a.checkSelfPermission("android.permission.WAKE_LOCK") != 0) {
-                        AbstractC0332s.h("WakeLockManager", "WAKE_LOCK permission not granted, can't acquire wake lock for playback");
+                        AbstractC0333s.h("WakeLockManager", "WAKE_LOCK permission not granted, can't acquire wake lock for playback");
                         return;
                     }
                     PowerManager powerManager = (PowerManager) this.f2126a.getSystemService("power");
                     if (powerManager == null) {
-                        AbstractC0332s.h("WakeLockManager", "PowerManager is null, therefore not creating the WakeLock.");
+                        AbstractC0333s.h("WakeLockManager", "PowerManager is null, therefore not creating the WakeLock.");
                         return;
                     } else {
                         PowerManager.WakeLock wakeLockNewWakeLock = powerManager.newWakeLock(1, "ExoPlayer:WakeLockManager");
@@ -82,10 +82,10 @@ public final class Z {
         }
     }
 
-    public Z(Context context, Looper looper, InterfaceC0321g interfaceC0321g) {
+    public Z(Context context, Looper looper, InterfaceC0322g interfaceC0322g) {
         this.f2121a = new a(context.getApplicationContext());
-        this.f2122b = interfaceC0321g.c(looper, null);
-        this.f2123c = interfaceC0321g.c(Looper.getMainLooper(), null);
+        this.f2122b = interfaceC0322g.c(looper, null);
+        this.f2123c = interfaceC0322g.c(Looper.getMainLooper(), null);
     }
 
     public static /* synthetic */ void a(Z z7, AtomicBoolean atomicBoolean, boolean z8, boolean z9) {

@@ -2,12 +2,12 @@ package b1;
 
 import B0.H;
 import B0.I;
-import E0.AbstractC0332s;
+import E0.AbstractC0333s;
 import Y0.F;
 import java.util.List;
 
 /* loaded from: classes.dex */
-public interface y extends InterfaceC0825C {
+public interface y extends InterfaceC0826C {
 
     public static final class a {
 
@@ -26,7 +26,7 @@ public interface y extends InterfaceC0825C {
 
         public a(I i7, int[] iArr, int i8) {
             if (iArr.length == 0) {
-                AbstractC0332s.d("ETSDefinition", "Empty tracks are not allowed", new IllegalArgumentException());
+                AbstractC0333s.d("ETSDefinition", "Empty tracks are not allowed", new IllegalArgumentException());
             }
             this.f13703a = i7;
             this.f13704b = iArr;

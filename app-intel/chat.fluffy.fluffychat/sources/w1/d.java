@@ -7,79 +7,79 @@ import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes.dex */
-public final class d extends AbstractC1728b {
+public final class d extends AbstractC1727b {
 
     /* renamed from: a, reason: collision with root package name */
-    public final long f23261a;
+    public final long f23267a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final boolean f23262b;
+    public final boolean f23268b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final boolean f23263c;
+    public final boolean f23269c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final boolean f23264d;
+    public final boolean f23270d;
 
     /* renamed from: e, reason: collision with root package name */
-    public final boolean f23265e;
+    public final boolean f23271e;
 
     /* renamed from: f, reason: collision with root package name */
-    public final long f23266f;
+    public final long f23272f;
 
     /* renamed from: g, reason: collision with root package name */
-    public final long f23267g;
+    public final long f23273g;
 
     /* renamed from: h, reason: collision with root package name */
-    public final List f23268h;
+    public final List f23274h;
 
     /* renamed from: i, reason: collision with root package name */
-    public final boolean f23269i;
+    public final boolean f23275i;
 
     /* renamed from: j, reason: collision with root package name */
-    public final long f23270j;
+    public final long f23276j;
 
     /* renamed from: k, reason: collision with root package name */
-    public final int f23271k;
+    public final int f23277k;
 
     /* renamed from: l, reason: collision with root package name */
-    public final int f23272l;
+    public final int f23278l;
 
     /* renamed from: m, reason: collision with root package name */
-    public final int f23273m;
+    public final int f23279m;
 
     public static final class b {
 
         /* renamed from: a, reason: collision with root package name */
-        public final int f23274a;
+        public final int f23280a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final long f23275b;
+        public final long f23281b;
 
         /* renamed from: c, reason: collision with root package name */
-        public final long f23276c;
+        public final long f23282c;
 
         public b(int i7, long j7, long j8) {
-            this.f23274a = i7;
-            this.f23275b = j7;
-            this.f23276c = j8;
+            this.f23280a = i7;
+            this.f23281b = j7;
+            this.f23282c = j8;
         }
     }
 
     public d(long j7, boolean z7, boolean z8, boolean z9, boolean z10, long j8, long j9, List list, boolean z11, long j10, int i7, int i8, int i9) {
-        this.f23261a = j7;
-        this.f23262b = z7;
-        this.f23263c = z8;
-        this.f23264d = z9;
-        this.f23265e = z10;
-        this.f23266f = j8;
-        this.f23267g = j9;
-        this.f23268h = Collections.unmodifiableList(list);
-        this.f23269i = z11;
-        this.f23270j = j10;
-        this.f23271k = i7;
-        this.f23272l = i8;
-        this.f23273m = i9;
+        this.f23267a = j7;
+        this.f23268b = z7;
+        this.f23269c = z8;
+        this.f23270d = z9;
+        this.f23271e = z10;
+        this.f23272f = j8;
+        this.f23273g = j9;
+        this.f23274h = Collections.unmodifiableList(list);
+        this.f23275i = z11;
+        this.f23276j = j10;
+        this.f23277k = i7;
+        this.f23278l = i8;
+        this.f23279m = i9;
     }
 
     public static d d(E e7, long j7, M m7) {
@@ -159,8 +159,8 @@ public final class d extends AbstractC1728b {
         return new d(jS, z12, z7, z8, z9, jS2, m7.b(jS2), list, z10, j8, i7, iQ, iQ2);
     }
 
-    @Override // w1.AbstractC1728b
+    @Override // w1.AbstractC1727b
     public String toString() {
-        return "SCTE-35 SpliceInsertCommand { programSplicePts=" + this.f23266f + ", programSplicePlaybackPositionUs= " + this.f23267g + " }";
+        return "SCTE-35 SpliceInsertCommand { programSplicePts=" + this.f23272f + ", programSplicePlaybackPositionUs= " + this.f23273g + " }";
     }
 }

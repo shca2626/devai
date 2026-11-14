@@ -6,22 +6,22 @@ package n5;
 public final class K {
 
     /* renamed from: m, reason: collision with root package name */
-    public static final a f20121m;
+    public static final a f20120m;
 
     /* renamed from: n, reason: collision with root package name */
-    public static final K f20122n = new K("REAR", 0, 0);
+    public static final K f20121n = new K("REAR", 0, 0);
 
     /* renamed from: o, reason: collision with root package name */
-    public static final K f20123o = new K("FRONT", 1, 1);
+    public static final K f20122o = new K("FRONT", 1, 1);
 
     /* renamed from: p, reason: collision with root package name */
-    public static final /* synthetic */ K[] f20124p;
+    public static final /* synthetic */ K[] f20123p;
 
     /* renamed from: q, reason: collision with root package name */
-    public static final /* synthetic */ F5.a f20125q;
+    public static final /* synthetic */ F5.a f20124q;
 
     /* renamed from: l, reason: collision with root package name */
-    public final int f20126l;
+    public final int f20125l;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -43,17 +43,17 @@ public final class K {
 
     static {
         K[] kArrA = a();
-        f20124p = kArrA;
-        f20125q = F5.b.a(kArrA);
-        f20121m = new a(null);
+        f20123p = kArrA;
+        f20124q = F5.b.a(kArrA);
+        f20120m = new a(null);
     }
 
     public K(String str, int i7, int i8) {
-        this.f20126l = i8;
+        this.f20125l = i8;
     }
 
     public static final /* synthetic */ K[] a() {
-        return new K[]{f20122n, f20123o};
+        return new K[]{f20121n, f20122o};
     }
 
     public static K valueOf(String str) {
@@ -61,10 +61,10 @@ public final class K {
     }
 
     public static K[] values() {
-        return (K[]) f20124p.clone();
+        return (K[]) f20123p.clone();
     }
 
     public final int d() {
-        return this.f20126l;
+        return this.f20125l;
     }
 }

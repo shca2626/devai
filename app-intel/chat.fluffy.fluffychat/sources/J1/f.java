@@ -1,6 +1,6 @@
 package J1;
 
-import E0.AbstractC0332s;
+import E0.AbstractC0333s;
 import E0.U;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -60,7 +60,7 @@ public abstract class f {
             c cVarD = d(cVar, map);
             if (cVarD != null && (cVarE = e(cVarD, map)) != null) {
                 if (cVarE.g() != 1 || cVarE.f(0).f4662b == null) {
-                    AbstractC0332s.f("TtmlRenderUtil", "Skipping rubyText node without exactly one text child.");
+                    AbstractC0333s.f("TtmlRenderUtil", "Skipping rubyText node without exactly one text child.");
                 } else {
                     String str = (String) U.i(cVarE.f(0).f4662b);
                     g gVarF2 = f(cVarE.f4666f, cVarE.l(), map);

@@ -16,15 +16,15 @@ import javax.security.auth.x500.X500Principal;
 public final class b implements e {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Map f22894a = new LinkedHashMap();
+    public final Map f22900a = new LinkedHashMap();
 
     public b(X509Certificate... x509CertificateArr) {
         for (X509Certificate x509Certificate : x509CertificateArr) {
             X500Principal subjectX500Principal = x509Certificate.getSubjectX500Principal();
-            Set linkedHashSet = (Set) this.f22894a.get(subjectX500Principal);
+            Set linkedHashSet = (Set) this.f22900a.get(subjectX500Principal);
             if (linkedHashSet == null) {
                 linkedHashSet = new LinkedHashSet(1);
-                this.f22894a.put(subjectX500Principal, linkedHashSet);
+                this.f22900a.put(subjectX500Principal, linkedHashSet);
             }
             linkedHashSet.add(x509Certificate);
         }
@@ -32,7 +32,7 @@ public final class b implements e {
 
     @Override // u6.e
     public X509Certificate a(X509Certificate x509Certificate) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException, CertificateException, NoSuchProviderException {
-        Set<X509Certificate> set = (Set) this.f22894a.get(x509Certificate.getIssuerX500Principal());
+        Set<X509Certificate> set = (Set) this.f22900a.get(x509Certificate.getIssuerX500Principal());
         if (set == null) {
             return null;
         }
@@ -50,10 +50,10 @@ public final class b implements e {
         if (obj == this) {
             return true;
         }
-        return (obj instanceof b) && ((b) obj).f22894a.equals(this.f22894a);
+        return (obj instanceof b) && ((b) obj).f22900a.equals(this.f22900a);
     }
 
     public int hashCode() {
-        return this.f22894a.hashCode();
+        return this.f22900a.hashCode();
     }
 }

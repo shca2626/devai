@@ -6,19 +6,19 @@ import java.util.Objects;
 public final class e extends i {
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f22754b;
+    public final String f22760b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final String f22755c;
+    public final String f22761c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final String f22756d;
+    public final String f22762d;
 
     public e(String str, String str2, String str3) {
         super("COMM");
-        this.f22754b = str;
-        this.f22755c = str2;
-        this.f22756d = str3;
+        this.f22760b = str;
+        this.f22761c = str2;
+        this.f22762d = str3;
     }
 
     public boolean equals(Object obj) {
@@ -27,7 +27,7 @@ public final class e extends i {
         }
         if (obj != null && e.class == obj.getClass()) {
             e eVar = (e) obj;
-            if (Objects.equals(this.f22755c, eVar.f22755c) && Objects.equals(this.f22754b, eVar.f22754b) && Objects.equals(this.f22756d, eVar.f22756d)) {
+            if (Objects.equals(this.f22761c, eVar.f22761c) && Objects.equals(this.f22760b, eVar.f22760b) && Objects.equals(this.f22762d, eVar.f22762d)) {
                 return true;
             }
         }
@@ -35,16 +35,16 @@ public final class e extends i {
     }
 
     public int hashCode() {
-        String str = this.f22754b;
+        String str = this.f22760b;
         int iHashCode = (527 + (str != null ? str.hashCode() : 0)) * 31;
-        String str2 = this.f22755c;
+        String str2 = this.f22761c;
         int iHashCode2 = (iHashCode + (str2 != null ? str2.hashCode() : 0)) * 31;
-        String str3 = this.f22756d;
+        String str3 = this.f22762d;
         return iHashCode2 + (str3 != null ? str3.hashCode() : 0);
     }
 
     @Override // u1.i
     public String toString() {
-        return this.f22766a + ": language=" + this.f22754b + ", description=" + this.f22755c + ", text=" + this.f22756d;
+        return this.f22772a + ": language=" + this.f22760b + ", description=" + this.f22761c + ", text=" + this.f22762d;
     }
 }

@@ -15,10 +15,10 @@ import java.util.List;
 public class SonyHomeBadger implements g6.a {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Uri f19829a = Uri.parse("content://com.sonymobile.home.resourceprovider/badge");
+    public final Uri f19828a = Uri.parse("content://com.sonymobile.home.resourceprovider/badge");
 
     /* renamed from: b, reason: collision with root package name */
-    public AsyncQueryHandler f19830b;
+    public AsyncQueryHandler f19829b;
 
     public class a extends AsyncQueryHandler {
         public a(ContentResolver contentResolver) {
@@ -70,17 +70,17 @@ public class SonyHomeBadger implements g6.a {
             g(context, contentValuesC);
             return;
         }
-        if (this.f19830b == null) {
-            this.f19830b = new a(context.getApplicationContext().getContentResolver());
+        if (this.f19829b == null) {
+            this.f19829b = new a(context.getApplicationContext().getContentResolver());
         }
         f(contentValuesC);
     }
 
     public final void f(ContentValues contentValues) {
-        this.f19830b.startInsert(0, null, this.f19829a, contentValues);
+        this.f19829b.startInsert(0, null, this.f19828a, contentValues);
     }
 
     public final void g(Context context, ContentValues contentValues) {
-        context.getApplicationContext().getContentResolver().insert(this.f19829a, contentValues);
+        context.getApplicationContext().getContentResolver().insert(this.f19828a, contentValues);
     }
 }

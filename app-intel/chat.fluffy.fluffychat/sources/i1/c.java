@@ -3,7 +3,7 @@ package i1;
 import E0.E;
 
 /* loaded from: classes.dex */
-public final class c implements InterfaceC1150a {
+public final class c implements InterfaceC1151a {
 
     /* renamed from: a, reason: collision with root package name */
     public final int f17376a;
@@ -39,7 +39,7 @@ public final class c implements InterfaceC1150a {
         return (this.f17377b & 16) == 16;
     }
 
-    @Override // i1.InterfaceC1150a
+    @Override // i1.InterfaceC1151a
     public int getType() {
         return 1751742049;
     }

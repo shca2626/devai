@@ -1,12 +1,12 @@
 package com.dexterous.flutterlocalnotifications.models;
 
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import java.lang.reflect.Type;
-import u3.AbstractC1654j;
-import u3.InterfaceC1652h;
-import u3.InterfaceC1653i;
+import u3.AbstractC1653j;
+import u3.InterfaceC1651h;
+import u3.InterfaceC1652i;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public enum ScheduleMode {
     alarmClock,
@@ -15,14 +15,14 @@ public enum ScheduleMode {
     inexact,
     inexactAllowWhileIdle;
 
-    public static class a implements InterfaceC1653i {
-        @Override // u3.InterfaceC1653i
+    public static class a implements InterfaceC1652i {
+        @Override // u3.InterfaceC1652i
         /* renamed from: b, reason: merged with bridge method [inline-methods] */
-        public ScheduleMode a(AbstractC1654j abstractC1654j, Type type, InterfaceC1652h interfaceC1652h) {
+        public ScheduleMode a(AbstractC1653j abstractC1653j, Type type, InterfaceC1651h interfaceC1651h) {
             try {
-                return ScheduleMode.valueOf(abstractC1654j.j());
+                return ScheduleMode.valueOf(abstractC1653j.j());
             } catch (Exception unused) {
-                return abstractC1654j.f() ? ScheduleMode.exactAllowWhileIdle : ScheduleMode.exact;
+                return abstractC1653j.f() ? ScheduleMode.exactAllowWhileIdle : ScheduleMode.exact;
             }
         }
     }

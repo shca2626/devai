@@ -7,7 +7,7 @@ import v2.p;
 public final class e implements y {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final e f22917a = new e();
+    public static final e f22923a = new e();
 
     @Override // v2.y
     public p.a b(m mVar) {

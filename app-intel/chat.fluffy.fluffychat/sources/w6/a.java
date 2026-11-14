@@ -9,10 +9,10 @@ import v6.e;
 public abstract class a {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final byte[] f23418a = C.a("0123456789abcdef");
+    public static final byte[] f23424a = C.a("0123456789abcdef");
 
     public static final byte[] a() {
-        return f23418a;
+        return f23424a;
     }
 
     public static final String b(e eVar, long j7) throws EOFException {

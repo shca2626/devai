@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import p0.C1436a;
+import p0.C1435a;
 
 /* loaded from: classes.dex */
 public abstract class c {
@@ -32,9 +32,9 @@ public abstract class c {
         }
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         try {
-            C1436a c1436a = new C1436a(byteArrayInputStream);
+            C1435a c1435a = new C1435a(byteArrayInputStream);
             byteArrayInputStream.close();
-            int iR = c1436a.r();
+            int iR = c1435a.r();
             if (iR == 0) {
                 return bitmapDecodeByteArray;
             }

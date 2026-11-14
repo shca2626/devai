@@ -6,18 +6,18 @@ import android.graphics.Rect;
 public class p {
 
     /* renamed from: a, reason: collision with root package name */
-    public byte[] f19092a;
+    public byte[] f19091a;
 
     /* renamed from: b, reason: collision with root package name */
-    public int f19093b;
+    public int f19092b;
 
     /* renamed from: c, reason: collision with root package name */
-    public int f19094c;
+    public int f19093c;
 
     public p(byte[] bArr, int i7, int i8) {
-        this.f19092a = bArr;
-        this.f19093b = i7;
-        this.f19094c = i8;
+        this.f19091a = bArr;
+        this.f19092b = i7;
+        this.f19093c = i8;
     }
 
     public static byte[] e(byte[] bArr, int i7, int i8) {
@@ -62,40 +62,40 @@ public class p {
         int i8 = rect.top;
         byte[] bArr = new byte[iWidth * iHeight];
         if (i7 == 1) {
-            int i9 = (i8 * this.f19093b) + rect.left;
+            int i9 = (i8 * this.f19092b) + rect.left;
             for (int i10 = 0; i10 < iHeight; i10++) {
-                System.arraycopy(this.f19092a, i9, bArr, i10 * iWidth, iWidth);
-                i9 += this.f19093b;
+                System.arraycopy(this.f19091a, i9, bArr, i10 * iWidth, iWidth);
+                i9 += this.f19092b;
             }
         } else {
-            int i11 = (i8 * this.f19093b) + rect.left;
+            int i11 = (i8 * this.f19092b) + rect.left;
             for (int i12 = 0; i12 < iHeight; i12++) {
                 int i13 = i12 * iWidth;
                 int i14 = i11;
                 for (int i15 = 0; i15 < iWidth; i15++) {
-                    bArr[i13] = this.f19092a[i14];
+                    bArr[i13] = this.f19091a[i14];
                     i14 += i7;
                     i13++;
                 }
-                i11 += this.f19093b * i7;
+                i11 += this.f19092b * i7;
             }
         }
         return new p(bArr, iWidth, iHeight);
     }
 
     public byte[] b() {
-        return this.f19092a;
+        return this.f19091a;
     }
 
     public int c() {
-        return this.f19094c;
+        return this.f19093c;
     }
 
     public int d() {
-        return this.f19093b;
+        return this.f19092b;
     }
 
     public p h(int i7) {
-        return i7 != 90 ? i7 != 180 ? i7 != 270 ? this : new p(f(this.f19092a, this.f19093b, this.f19094c), this.f19094c, this.f19093b) : new p(e(this.f19092a, this.f19093b, this.f19094c), this.f19093b, this.f19094c) : new p(g(this.f19092a, this.f19093b, this.f19094c), this.f19094c, this.f19093b);
+        return i7 != 90 ? i7 != 180 ? i7 != 270 ? this : new p(f(this.f19091a, this.f19092b, this.f19093c), this.f19093c, this.f19092b) : new p(e(this.f19091a, this.f19092b, this.f19093c), this.f19092b, this.f19093c) : new p(g(this.f19091a, this.f19092b, this.f19093c), this.f19093c, this.f19092b);
     }
 }

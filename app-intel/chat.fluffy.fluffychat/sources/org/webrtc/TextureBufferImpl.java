@@ -122,10 +122,10 @@ public class TextureBufferImpl implements VideoFrame.TextureBuffer {
 
     @Override // org.webrtc.VideoFrame.Buffer
     public VideoFrame.I420Buffer toI420() {
-        return (VideoFrame.I420Buffer) ThreadUtils.invokeAtFrontUninterruptibly(this.toI420Handler, new Callable() { // from class: org.webrtc.f0
+        return (VideoFrame.I420Buffer) ThreadUtils.invokeAtFrontUninterruptibly(this.toI420Handler, new Callable() { // from class: org.webrtc.m0
             @Override // java.util.concurrent.Callable
             public final Object call() {
-                return this.f20576a.lambda$toI420$1();
+                return this.f20584a.lambda$toI420$1();
             }
         });
     }
@@ -149,10 +149,10 @@ public class TextureBufferImpl implements VideoFrame.TextureBuffer {
         this.transformMatrix = matrix;
         this.toI420Handler = handler;
         this.yuvConverter = yuvConverter;
-        this.refCountDelegate = new RefCountDelegate(new Runnable() { // from class: org.webrtc.e0
+        this.refCountDelegate = new RefCountDelegate(new Runnable() { // from class: org.webrtc.l0
             @Override // java.lang.Runnable
             public final void run() {
-                this.f20574l.lambda$new$0(refCountMonitor);
+                this.f20582l.lambda$new$0(refCountMonitor);
             }
         });
         this.refCountMonitor = refCountMonitor;

@@ -9,14 +9,14 @@ public final class x {
     public static final x STRICT;
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ x[] f18338a;
+    public static final /* synthetic */ x[] f18346a;
 
     public static x valueOf(String str) {
         return (x) Enum.valueOf(x.class, str);
     }
 
     public static x[] values() {
-        return (x[]) f18338a.clone();
+        return (x[]) f18346a.clone();
     }
 
     static {
@@ -26,6 +26,6 @@ public final class x {
         SMART = xVar2;
         x xVar3 = new x("LENIENT", 2);
         LENIENT = xVar3;
-        f18338a = new x[]{xVar, xVar2, xVar3};
+        f18346a = new x[]{xVar, xVar2, xVar3};
     }
 }

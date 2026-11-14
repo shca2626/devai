@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import k3.AbstractC1279v;
-import k3.AbstractC1281x;
+import k3.AbstractC1278v;
+import k3.AbstractC1280x;
 
 /* loaded from: classes.dex */
 public final class v {
@@ -86,7 +86,7 @@ public final class v {
         public String f840g;
 
         /* renamed from: h, reason: collision with root package name */
-        public AbstractC1279v f841h;
+        public AbstractC1278v f841h;
 
         /* renamed from: i, reason: collision with root package name */
         public Object f842i;
@@ -142,7 +142,7 @@ public final class v {
         }
 
         public c e(List list) {
-            this.f841h = AbstractC1279v.r(list);
+            this.f841h = AbstractC1278v.r(list);
             return this;
         }
 
@@ -164,7 +164,7 @@ public final class v {
             this.f837d = new d.a();
             this.f838e = new f.a();
             this.f839f = Collections.EMPTY_LIST;
-            this.f841h = AbstractC1279v.v();
+            this.f841h = AbstractC1278v.v();
             this.f845l = new g.a();
             this.f846m = i.f931d;
             this.f843j = -9223372036854775807L;
@@ -373,10 +373,10 @@ public final class v {
         public final Uri f881c;
 
         /* renamed from: d, reason: collision with root package name */
-        public final AbstractC1281x f882d;
+        public final AbstractC1280x f882d;
 
         /* renamed from: e, reason: collision with root package name */
-        public final AbstractC1281x f883e;
+        public final AbstractC1280x f883e;
 
         /* renamed from: f, reason: collision with root package name */
         public final boolean f884f;
@@ -388,10 +388,10 @@ public final class v {
         public final boolean f886h;
 
         /* renamed from: i, reason: collision with root package name */
-        public final AbstractC1279v f887i;
+        public final AbstractC1278v f887i;
 
         /* renamed from: j, reason: collision with root package name */
-        public final AbstractC1279v f888j;
+        public final AbstractC1278v f888j;
 
         /* renamed from: k, reason: collision with root package name */
         public final byte[] f889k;
@@ -434,7 +434,7 @@ public final class v {
             public Uri f891b;
 
             /* renamed from: c, reason: collision with root package name */
-            public AbstractC1281x f892c;
+            public AbstractC1280x f892c;
 
             /* renamed from: d, reason: collision with root package name */
             public boolean f893d;
@@ -446,7 +446,7 @@ public final class v {
             public boolean f895f;
 
             /* renamed from: g, reason: collision with root package name */
-            public AbstractC1279v f896g;
+            public AbstractC1278v f896g;
 
             /* renamed from: h, reason: collision with root package name */
             public byte[] f897h;
@@ -456,9 +456,9 @@ public final class v {
             }
 
             public a() {
-                this.f892c = AbstractC1281x.j();
+                this.f892c = AbstractC1280x.j();
                 this.f894e = true;
-                this.f896g = AbstractC1279v.v();
+                this.f896g = AbstractC1278v.v();
             }
 
             public a(f fVar) {
@@ -670,7 +670,7 @@ public final class v {
         public final String f926e;
 
         /* renamed from: f, reason: collision with root package name */
-        public final AbstractC1279v f927f;
+        public final AbstractC1278v f927f;
 
         /* renamed from: g, reason: collision with root package name */
         public final List f928g;
@@ -703,16 +703,16 @@ public final class v {
             return (int) (((iHashCode4 + (this.f929h != null ? r1.hashCode() : 0)) * 31) + this.f930i);
         }
 
-        public h(Uri uri, String str, f fVar, b bVar, List list, String str2, AbstractC1279v abstractC1279v, Object obj, long j7) {
+        public h(Uri uri, String str, f fVar, b bVar, List list, String str2, AbstractC1278v abstractC1278v, Object obj, long j7) {
             this.f922a = uri;
             this.f923b = z.u(str);
             this.f924c = fVar;
             this.f925d = list;
             this.f926e = str2;
-            this.f927f = abstractC1279v;
-            AbstractC1279v.a aVarO = AbstractC1279v.o();
-            for (int i7 = 0; i7 < abstractC1279v.size(); i7++) {
-                aVarO.a(((k) abstractC1279v.get(i7)).a().b());
+            this.f927f = abstractC1278v;
+            AbstractC1278v.a aVarO = AbstractC1278v.o();
+            for (int i7 = 0; i7 < abstractC1278v.size(); i7++) {
+                aVarO.a(((k) abstractC1278v.get(i7)).a().b());
             }
             this.f928g = aVarO.k();
             this.f929h = obj;

@@ -17,36 +17,36 @@ import android.widget.TextView;
 public class l0 {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Context f21312a;
+    public final Context f21318a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final View f21313b;
+    public final View f21319b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final TextView f21314c;
+    public final TextView f21320c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final WindowManager.LayoutParams f21315d;
+    public final WindowManager.LayoutParams f21321d;
 
     /* renamed from: e, reason: collision with root package name */
-    public final Rect f21316e;
+    public final Rect f21322e;
 
     /* renamed from: f, reason: collision with root package name */
-    public final int[] f21317f;
+    public final int[] f21323f;
 
     /* renamed from: g, reason: collision with root package name */
-    public final int[] f21318g;
+    public final int[] f21324g;
 
     public l0(Context context) {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-        this.f21315d = layoutParams;
-        this.f21316e = new Rect();
-        this.f21317f = new int[2];
-        this.f21318g = new int[2];
-        this.f21312a = context;
+        this.f21321d = layoutParams;
+        this.f21322e = new Rect();
+        this.f21323f = new int[2];
+        this.f21324g = new int[2];
+        this.f21318a = context;
         View viewInflate = LayoutInflater.from(context).inflate(i.g.f17083s, (ViewGroup) null);
-        this.f21313b = viewInflate;
-        this.f21314c = (TextView) viewInflate.findViewById(i.f.f17057s);
+        this.f21319b = viewInflate;
+        this.f21320c = (TextView) viewInflate.findViewById(i.f.f17057s);
         layoutParams.setTitle(getClass().getSimpleName());
         layoutParams.packageName = context.getPackageName();
         layoutParams.type = 1002;
@@ -74,12 +74,12 @@ public class l0 {
         int height;
         int i9;
         layoutParams.token = view.getApplicationWindowToken();
-        int dimensionPixelOffset = this.f21312a.getResources().getDimensionPixelOffset(i.d.f16975k);
+        int dimensionPixelOffset = this.f21318a.getResources().getDimensionPixelOffset(i.d.f16975k);
         if (view.getWidth() < dimensionPixelOffset) {
             i7 = view.getWidth() / 2;
         }
         if (view.getHeight() >= dimensionPixelOffset) {
-            int dimensionPixelOffset2 = this.f21312a.getResources().getDimensionPixelOffset(i.d.f16974j);
+            int dimensionPixelOffset2 = this.f21318a.getResources().getDimensionPixelOffset(i.d.f16974j);
             height = i8 + dimensionPixelOffset2;
             i9 = i8 - dimensionPixelOffset2;
         } else {
@@ -87,34 +87,34 @@ public class l0 {
             i9 = 0;
         }
         layoutParams.gravity = 49;
-        int dimensionPixelOffset3 = this.f21312a.getResources().getDimensionPixelOffset(z7 ? i.d.f16977m : i.d.f16976l);
+        int dimensionPixelOffset3 = this.f21318a.getResources().getDimensionPixelOffset(z7 ? i.d.f16977m : i.d.f16976l);
         View viewB = b(view);
         if (viewB == null) {
             Log.e("TooltipPopup", "Cannot find app view");
             return;
         }
-        viewB.getWindowVisibleDisplayFrame(this.f21316e);
-        Rect rect = this.f21316e;
+        viewB.getWindowVisibleDisplayFrame(this.f21322e);
+        Rect rect = this.f21322e;
         if (rect.left < 0 && rect.top < 0) {
-            Resources resources = this.f21312a.getResources();
+            Resources resources = this.f21318a.getResources();
             int identifier = resources.getIdentifier("status_bar_height", "dimen", "android");
             int dimensionPixelSize = identifier != 0 ? resources.getDimensionPixelSize(identifier) : 0;
             DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-            this.f21316e.set(0, dimensionPixelSize, displayMetrics.widthPixels, displayMetrics.heightPixels);
+            this.f21322e.set(0, dimensionPixelSize, displayMetrics.widthPixels, displayMetrics.heightPixels);
         }
-        viewB.getLocationOnScreen(this.f21318g);
-        view.getLocationOnScreen(this.f21317f);
-        int[] iArr = this.f21317f;
+        viewB.getLocationOnScreen(this.f21324g);
+        view.getLocationOnScreen(this.f21323f);
+        int[] iArr = this.f21323f;
         int i10 = iArr[0];
-        int[] iArr2 = this.f21318g;
+        int[] iArr2 = this.f21324g;
         int i11 = i10 - iArr2[0];
         iArr[0] = i11;
         iArr[1] = iArr[1] - iArr2[1];
         layoutParams.x = (i11 + i7) - (viewB.getWidth() / 2);
         int iMakeMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, 0);
-        this.f21313b.measure(iMakeMeasureSpec, iMakeMeasureSpec);
-        int measuredHeight = this.f21313b.getMeasuredHeight();
-        int i12 = this.f21317f[1];
+        this.f21319b.measure(iMakeMeasureSpec, iMakeMeasureSpec);
+        int measuredHeight = this.f21319b.getMeasuredHeight();
+        int i12 = this.f21323f[1];
         int i13 = ((i9 + i12) - dimensionPixelOffset3) - measuredHeight;
         int i14 = i12 + height + dimensionPixelOffset3;
         if (z7) {
@@ -126,7 +126,7 @@ public class l0 {
                 return;
             }
         }
-        if (measuredHeight + i14 <= this.f21316e.height()) {
+        if (measuredHeight + i14 <= this.f21322e.height()) {
             layoutParams.y = i14;
         } else {
             layoutParams.y = i13;
@@ -135,20 +135,20 @@ public class l0 {
 
     public void c() {
         if (d()) {
-            ((WindowManager) this.f21312a.getSystemService("window")).removeView(this.f21313b);
+            ((WindowManager) this.f21318a.getSystemService("window")).removeView(this.f21319b);
         }
     }
 
     public boolean d() {
-        return this.f21313b.getParent() != null;
+        return this.f21319b.getParent() != null;
     }
 
     public void e(View view, int i7, int i8, boolean z7, CharSequence charSequence) throws Resources.NotFoundException {
         if (d()) {
             c();
         }
-        this.f21314c.setText(charSequence);
-        a(view, i7, i8, z7, this.f21315d);
-        ((WindowManager) this.f21312a.getSystemService("window")).addView(this.f21313b, this.f21315d);
+        this.f21320c.setText(charSequence);
+        a(view, i7, i8, z7, this.f21321d);
+        ((WindowManager) this.f21318a.getSystemService("window")).addView(this.f21319b, this.f21321d);
     }
 }

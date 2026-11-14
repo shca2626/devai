@@ -1,6 +1,6 @@
 package I0;
 
-import E0.InterfaceC0321g;
+import E0.InterfaceC0322g;
 import android.os.Looper;
 
 /* loaded from: classes.dex */
@@ -13,7 +13,7 @@ public final class B1 {
     public final a f3542b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final InterfaceC0321g f3543c;
+    public final InterfaceC0322g f3543c;
 
     /* renamed from: d, reason: collision with root package name */
     public final B0.H f3544d;
@@ -56,12 +56,12 @@ public final class B1 {
         void I(int i7, Object obj);
     }
 
-    public B1(a aVar, b bVar, B0.H h7, int i7, InterfaceC0321g interfaceC0321g, Looper looper) {
+    public B1(a aVar, b bVar, B0.H h7, int i7, InterfaceC0322g interfaceC0322g, Looper looper) {
         this.f3542b = aVar;
         this.f3541a = bVar;
         this.f3544d = h7;
         this.f3547g = looper;
-        this.f3543c = interfaceC0321g;
+        this.f3543c = interfaceC0322g;
         this.f3548h = i7;
     }
 

@@ -16,15 +16,15 @@ public enum b {
 
 
     /* renamed from: l, reason: collision with root package name */
-    public final int f21477l;
+    public final int f21483l;
 
     b(int i7) {
-        this.f21477l = i7;
+        this.f21483l = i7;
     }
 
     public static b a(int i7) {
         for (b bVar : values()) {
-            if (bVar.f21477l == i7) {
+            if (bVar.f21483l == i7) {
                 return bVar;
             }
         }

@@ -43,20 +43,20 @@ public class D {
     }
 
     public static int b(a aVar, Object obj, Object obj2) {
-        return C0786q.b(aVar.f11949a, 1, obj) + C0786q.b(aVar.f11951c, 2, obj2);
+        return C0787q.b(aVar.f11949a, 1, obj) + C0787q.b(aVar.f11951c, 2, obj2);
     }
 
     public static D d(l0.b bVar, Object obj, l0.b bVar2, Object obj2) {
         return new D(bVar, obj, bVar2, obj2);
     }
 
-    public static void e(AbstractC0778i abstractC0778i, a aVar, Object obj, Object obj2) {
-        C0786q.w(abstractC0778i, aVar.f11949a, 1, obj);
-        C0786q.w(abstractC0778i, aVar.f11951c, 2, obj2);
+    public static void e(AbstractC0779i abstractC0779i, a aVar, Object obj, Object obj2) {
+        C0787q.w(abstractC0779i, aVar.f11949a, 1, obj);
+        C0787q.w(abstractC0779i, aVar.f11951c, 2, obj2);
     }
 
     public int a(int i7, Object obj, Object obj2) {
-        return AbstractC0778i.R(i7) + AbstractC0778i.B(b(this.f11946a, obj, obj2));
+        return AbstractC0779i.R(i7) + AbstractC0779i.B(b(this.f11946a, obj, obj2));
     }
 
     public a c() {

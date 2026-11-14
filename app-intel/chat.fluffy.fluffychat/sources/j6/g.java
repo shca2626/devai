@@ -11,18 +11,18 @@ public abstract class g {
     public static final class a implements Application.ActivityLifecycleCallbacks {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ Activity f18803l;
+        public final /* synthetic */ Activity f18802l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final /* synthetic */ L5.a f18804m;
+        public final /* synthetic */ L5.a f18803m;
 
         /* renamed from: n, reason: collision with root package name */
-        public final /* synthetic */ L5.a f18805n;
+        public final /* synthetic */ L5.a f18804n;
 
         public a(Activity activity, L5.a aVar, L5.a aVar2) {
-            this.f18803l = activity;
-            this.f18804m = aVar;
-            this.f18805n = aVar2;
+            this.f18802l = activity;
+            this.f18803m = aVar;
+            this.f18804n = aVar2;
         }
 
         @Override // android.app.Application.ActivityLifecycleCallbacks
@@ -39,7 +39,7 @@ public abstract class g {
         public void onActivityPaused(Activity activity) {
             L5.a aVar;
             m.e(activity, "p0");
-            if (!m.a(activity, this.f18803l) || (aVar = this.f18804m) == null) {
+            if (!m.a(activity, this.f18802l) || (aVar = this.f18803m) == null) {
                 return;
             }
             aVar.d();
@@ -49,7 +49,7 @@ public abstract class g {
         public void onActivityResumed(Activity activity) {
             L5.a aVar;
             m.e(activity, "p0");
-            if (!m.a(activity, this.f18803l) || (aVar = this.f18805n) == null) {
+            if (!m.a(activity, this.f18802l) || (aVar = this.f18804n) == null) {
                 return;
             }
             aVar.d();

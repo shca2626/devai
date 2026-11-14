@@ -1,6 +1,6 @@
 package g5;
 
-import h5.C1144a;
+import h5.C1145a;
 
 /* loaded from: classes.dex */
 public class g {
@@ -15,7 +15,7 @@ public class g {
     public boolean f16329c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final C1144a f16330d;
+    public final C1145a f16330d;
 
     public enum a {
         DETACHED,
@@ -26,7 +26,7 @@ public class g {
     }
 
     public g(X4.a aVar) {
-        this(new C1144a(aVar, "flutter/lifecycle", h5.q.f16913b));
+        this(new C1145a(aVar, "flutter/lifecycle", h5.q.f16913b));
     }
 
     public void a() {
@@ -128,10 +128,10 @@ public class g {
         throw new UnsupportedOperationException("Method not decompiled: g5.g.g(g5.g$a, boolean):void");
     }
 
-    public g(C1144a c1144a) {
+    public g(C1145a c1145a) {
         this.f16327a = null;
         this.f16328b = null;
         this.f16329c = true;
-        this.f16330d = c1144a;
+        this.f16330d = c1145a;
     }
 }

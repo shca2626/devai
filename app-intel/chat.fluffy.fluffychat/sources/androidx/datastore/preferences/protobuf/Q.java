@@ -4,6 +4,6 @@ package androidx.datastore.preferences.protobuf;
 public final class Q implements P {
     @Override // androidx.datastore.preferences.protobuf.P
     public Object a(Object obj) {
-        return ((AbstractC0788t) obj).M();
+        return ((AbstractC0789t) obj).M();
     }
 }

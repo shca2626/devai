@@ -1,7 +1,7 @@
 package androidx.versionedparcelable;
 
-import b2.InterfaceC0841c;
+import b2.InterfaceC0842c;
 
 /* loaded from: classes.dex */
-public abstract class CustomVersionedParcelable implements InterfaceC0841c {
+public abstract class CustomVersionedParcelable implements InterfaceC0842c {
 }

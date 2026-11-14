@@ -22,18 +22,18 @@ import org.xmlpull.v1.XmlPullParserException;
 public class m0 extends W {
 
     /* renamed from: c, reason: collision with root package name */
-    public static boolean f21321c = false;
+    public static boolean f21327c = false;
 
     /* renamed from: b, reason: collision with root package name */
-    public final WeakReference f21322b;
+    public final WeakReference f21328b;
 
     public m0(Context context, Resources resources) {
         super(resources);
-        this.f21322b = new WeakReference(context);
+        this.f21328b = new WeakReference(context);
     }
 
     public static boolean b() {
-        return f21321c;
+        return f21327c;
     }
 
     public static boolean c() {
@@ -228,7 +228,7 @@ public class m0 extends W {
 
     @Override // android.content.res.Resources
     public Drawable getDrawable(int i7) {
-        Context context = (Context) this.f21322b.get();
+        Context context = (Context) this.f21328b.get();
         return context != null ? V.g().s(context, this, i7) : a(i7);
     }
 

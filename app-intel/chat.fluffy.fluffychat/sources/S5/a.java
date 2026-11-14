@@ -1,7 +1,7 @@
 package S5;
 
 import M5.g;
-import z5.AbstractC1860D;
+import z5.AbstractC1863D;
 
 /* loaded from: classes.dex */
 public class a implements Iterable, N5.a {
@@ -76,7 +76,7 @@ public class a implements Iterable, N5.a {
 
     @Override // java.lang.Iterable
     /* renamed from: i, reason: merged with bridge method [inline-methods] */
-    public AbstractC1860D iterator() {
+    public AbstractC1863D iterator() {
         return new b(this.f8205l, this.f8206m, this.f8207n);
     }
 

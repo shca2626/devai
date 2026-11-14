@@ -64,7 +64,7 @@ public class d {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct add '--show-bad-code' argument
         */
-        public void run() {
+        public void run() throws java.lang.Throwable {
             /*
                 r5 = this;
                 r0 = 0
@@ -147,7 +147,7 @@ public class d {
         }
     }
 
-    public final void g(Context context, String str, String str2) {
+    public final void g(Context context, String str, String str2) throws Throwable {
         d dVar;
         Context context2;
         i iVar;

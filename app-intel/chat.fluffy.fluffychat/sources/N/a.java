@@ -1,6 +1,6 @@
 package N;
 
-import O.AbstractC0562a;
+import O.AbstractC0563a;
 
 /* loaded from: classes.dex */
 public class a {
@@ -248,7 +248,7 @@ public class a {
         float[] fArr3 = fArr[1];
         float f18 = (fArr3[0] * f14) + (fArr3[1] * f15) + (fArr3[2] * f16);
         float[] fArr4 = fArr[2];
-        return AbstractC0562a.b(f17, f18, (f14 * fArr4[0]) + (f15 * fArr4[1]) + (f16 * fArr4[2]));
+        return AbstractC0563a.b(f17, f18, (f14 * fArr4[0]) + (f15 * fArr4[1]) + (f16 * fArr4[2]));
     }
 
     public int p() {

@@ -1,7 +1,7 @@
 package k3;
 
-import j3.AbstractC1237k;
-import j3.InterfaceC1232f;
+import j3.AbstractC1236k;
+import j3.InterfaceC1231f;
 import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.AbstractSequentialList;
@@ -18,10 +18,10 @@ public abstract class G {
     public static class a extends AbstractList implements RandomAccess, Serializable {
 
         /* renamed from: l, reason: collision with root package name */
-        public final List f18846l;
+        public final List f18845l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final InterfaceC1232f f18847m;
+        public final InterfaceC1231f f18846m;
 
         /* renamed from: k3.G$a$a, reason: collision with other inner class name */
         public class C0213a extends g0 {
@@ -31,23 +31,23 @@ public abstract class G {
 
             @Override // k3.f0
             public Object a(Object obj) {
-                return a.this.f18847m.apply(obj);
+                return a.this.f18846m.apply(obj);
             }
         }
 
-        public a(List list, InterfaceC1232f interfaceC1232f) {
-            this.f18846l = (List) j3.o.q(list);
-            this.f18847m = (InterfaceC1232f) j3.o.q(interfaceC1232f);
+        public a(List list, InterfaceC1231f interfaceC1231f) {
+            this.f18845l = (List) j3.o.q(list);
+            this.f18846m = (InterfaceC1231f) j3.o.q(interfaceC1231f);
         }
 
         @Override // java.util.AbstractList, java.util.List
         public Object get(int i7) {
-            return this.f18847m.apply(this.f18846l.get(i7));
+            return this.f18846m.apply(this.f18845l.get(i7));
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
         public boolean isEmpty() {
-            return this.f18846l.isEmpty();
+            return this.f18845l.isEmpty();
         }
 
         @Override // java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.List
@@ -57,32 +57,32 @@ public abstract class G {
 
         @Override // java.util.AbstractList, java.util.List
         public ListIterator listIterator(int i7) {
-            return new C0213a(this.f18846l.listIterator(i7));
+            return new C0213a(this.f18845l.listIterator(i7));
         }
 
         @Override // java.util.AbstractList, java.util.List
         public Object remove(int i7) {
-            return this.f18847m.apply(this.f18846l.remove(i7));
+            return this.f18846m.apply(this.f18845l.remove(i7));
         }
 
         @Override // java.util.AbstractList
         public void removeRange(int i7, int i8) {
-            this.f18846l.subList(i7, i8).clear();
+            this.f18845l.subList(i7, i8).clear();
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
         public int size() {
-            return this.f18846l.size();
+            return this.f18845l.size();
         }
     }
 
     public static class b extends AbstractSequentialList implements Serializable {
 
         /* renamed from: l, reason: collision with root package name */
-        public final List f18849l;
+        public final List f18848l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final InterfaceC1232f f18850m;
+        public final InterfaceC1231f f18849m;
 
         public class a extends g0 {
             public a(ListIterator listIterator) {
@@ -91,33 +91,33 @@ public abstract class G {
 
             @Override // k3.f0
             public Object a(Object obj) {
-                return b.this.f18850m.apply(obj);
+                return b.this.f18849m.apply(obj);
             }
         }
 
-        public b(List list, InterfaceC1232f interfaceC1232f) {
-            this.f18849l = (List) j3.o.q(list);
-            this.f18850m = (InterfaceC1232f) j3.o.q(interfaceC1232f);
+        public b(List list, InterfaceC1231f interfaceC1231f) {
+            this.f18848l = (List) j3.o.q(list);
+            this.f18849m = (InterfaceC1231f) j3.o.q(interfaceC1231f);
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
         public boolean isEmpty() {
-            return this.f18849l.isEmpty();
+            return this.f18848l.isEmpty();
         }
 
         @Override // java.util.AbstractSequentialList, java.util.AbstractList, java.util.List
         public ListIterator listIterator(int i7) {
-            return new a(this.f18849l.listIterator(i7));
+            return new a(this.f18848l.listIterator(i7));
         }
 
         @Override // java.util.AbstractList
         public void removeRange(int i7, int i8) {
-            this.f18849l.subList(i7, i8).clear();
+            this.f18848l.subList(i7, i8).clear();
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
         public int size() {
-            return this.f18849l.size();
+            return this.f18848l.size();
         }
     }
 
@@ -126,7 +126,7 @@ public abstract class G {
     }
 
     public static int b(int i7) {
-        AbstractC1267i.b(i7, "arraySize");
+        AbstractC1266i.b(i7, "arraySize");
         return o3.g.n(i7 + 5 + (i7 / 10));
     }
 
@@ -146,7 +146,7 @@ public abstract class G {
             return E.e(list.iterator(), list2.iterator());
         }
         for (int i7 = 0; i7 < size; i7++) {
-            if (!AbstractC1237k.a(list.get(i7), list2.get(i7))) {
+            if (!AbstractC1236k.a(list.get(i7), list2.get(i7))) {
                 return false;
             }
         }
@@ -159,7 +159,7 @@ public abstract class G {
         }
         ListIterator listIterator = list.listIterator();
         while (listIterator.hasNext()) {
-            if (AbstractC1237k.a(obj, listIterator.next())) {
+            if (AbstractC1236k.a(obj, listIterator.next())) {
                 return listIterator.previousIndex();
             }
         }
@@ -193,7 +193,7 @@ public abstract class G {
         }
         ListIterator listIterator = list.listIterator(list.size());
         while (listIterator.hasPrevious()) {
-            if (AbstractC1237k.a(obj, listIterator.previous())) {
+            if (AbstractC1236k.a(obj, listIterator.previous())) {
                 return listIterator.nextIndex();
             }
         }
@@ -234,7 +234,7 @@ public abstract class G {
         return arrayList;
     }
 
-    public static List k(List list, InterfaceC1232f interfaceC1232f) {
-        return list instanceof RandomAccess ? new a(list, interfaceC1232f) : new b(list, interfaceC1232f);
+    public static List k(List list, InterfaceC1231f interfaceC1231f) {
+        return list instanceof RandomAccess ? new a(list, interfaceC1231f) : new b(list, interfaceC1231f);
     }
 }

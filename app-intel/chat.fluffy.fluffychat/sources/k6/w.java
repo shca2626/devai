@@ -13,35 +13,35 @@ public enum w {
 
 
     /* renamed from: l, reason: collision with root package name */
-    public final String f19487l;
+    public final String f19486l;
 
     w(String str) {
-        this.f19487l = str;
+        this.f19486l = str;
     }
 
     public static w a(String str) throws IOException {
         w wVar = HTTP_1_0;
-        if (str.equals(wVar.f19487l)) {
+        if (str.equals(wVar.f19486l)) {
             return wVar;
         }
         w wVar2 = HTTP_1_1;
-        if (str.equals(wVar2.f19487l)) {
+        if (str.equals(wVar2.f19486l)) {
             return wVar2;
         }
         w wVar3 = H2_PRIOR_KNOWLEDGE;
-        if (str.equals(wVar3.f19487l)) {
+        if (str.equals(wVar3.f19486l)) {
             return wVar3;
         }
         w wVar4 = HTTP_2;
-        if (str.equals(wVar4.f19487l)) {
+        if (str.equals(wVar4.f19486l)) {
             return wVar4;
         }
         w wVar5 = SPDY_3;
-        if (str.equals(wVar5.f19487l)) {
+        if (str.equals(wVar5.f19486l)) {
             return wVar5;
         }
         w wVar6 = QUIC;
-        if (str.equals(wVar6.f19487l)) {
+        if (str.equals(wVar6.f19486l)) {
             return wVar6;
         }
         throw new IOException("Unexpected protocol: " + str);
@@ -49,6 +49,6 @@ public enum w {
 
     @Override // java.lang.Enum
     public String toString() {
-        return this.f19487l;
+        return this.f19486l;
     }
 }

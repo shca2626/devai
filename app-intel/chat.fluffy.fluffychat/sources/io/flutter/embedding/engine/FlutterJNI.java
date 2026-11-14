@@ -14,7 +14,7 @@ import android.util.TypedValue;
 import android.view.Surface;
 import android.view.SurfaceControl;
 import g5.u;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import i5.d;
 import io.flutter.embedding.engine.FlutterJNI;
 import io.flutter.embedding.engine.a;
@@ -22,7 +22,7 @@ import io.flutter.embedding.engine.mutatorsstack.FlutterMutatorsStack;
 import io.flutter.embedding.engine.renderer.SurfaceTextureWrapper;
 import io.flutter.embedding.engine.renderer.n;
 import io.flutter.embedding.engine.renderer.o;
-import io.flutter.plugin.platform.C1190w;
+import io.flutter.plugin.platform.C1191w;
 import io.flutter.plugin.platform.U;
 import io.flutter.view.FlutterCallbackInformation;
 import io.flutter.view.TextureRegistry;
@@ -36,9 +36,9 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import u5.AbstractC1668c;
+import u5.AbstractC1667c;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class FlutterJNI {
     private static final String TAG = "FlutterJNI";
@@ -56,7 +56,7 @@ public class FlutterJNI {
     private d localizationPlugin;
     private Long nativeShellHolderId;
     private e platformMessageHandler;
-    private C1190w platformViewsController;
+    private C1191w platformViewsController;
     private U platformViewsController2;
     private u settingsChannel;
     private ReentrantReadWriteLock shellHolderLock = new ReentrantReadWriteLock();
@@ -321,9 +321,9 @@ public class FlutterJNI {
 
     public FlutterOverlaySurface createOverlaySurface() {
         ensureRunningOnMainThread();
-        C1190w c1190w = this.platformViewsController;
-        if (c1190w != null) {
-            return c1190w.J();
+        C1191w c1191w = this.platformViewsController;
+        if (c1191w != null) {
+            return c1191w.J();
         }
         throw new RuntimeException("platformViewsController must be set before attempting to position an overlay surface");
     }
@@ -363,11 +363,11 @@ public class FlutterJNI {
 
     public void destroyOverlaySurfaces() {
         ensureRunningOnMainThread();
-        C1190w c1190w = this.platformViewsController;
-        if (c1190w == null) {
+        C1191w c1191w = this.platformViewsController;
+        if (c1191w == null) {
             throw new RuntimeException("platformViewsController must be set before attempting to destroy an overlay surface");
         }
-        c1190w.M();
+        c1191w.M();
     }
 
     public void detachFromNativeAndReleaseResources() {
@@ -582,29 +582,29 @@ public class FlutterJNI {
 
     public void onBeginFrame() {
         ensureRunningOnMainThread();
-        C1190w c1190w = this.platformViewsController;
-        if (c1190w == null) {
+        C1191w c1191w = this.platformViewsController;
+        if (c1191w == null) {
             throw new RuntimeException("platformViewsController must be set before attempting to begin the frame");
         }
-        c1190w.b0();
+        c1191w.b0();
     }
 
     public void onDisplayOverlaySurface(int i7, int i8, int i9, int i10, int i11) {
         ensureRunningOnMainThread();
-        C1190w c1190w = this.platformViewsController;
-        if (c1190w == null) {
+        C1191w c1191w = this.platformViewsController;
+        if (c1191w == null) {
             throw new RuntimeException("platformViewsController must be set before attempting to position an overlay surface");
         }
-        c1190w.d0(i7, i8, i9, i10, i11);
+        c1191w.d0(i7, i8, i9, i10, i11);
     }
 
     public void onDisplayPlatformView(int i7, int i8, int i9, int i10, int i11, int i12, int i13, FlutterMutatorsStack flutterMutatorsStack) {
         ensureRunningOnMainThread();
-        C1190w c1190w = this.platformViewsController;
-        if (c1190w == null) {
+        C1191w c1191w = this.platformViewsController;
+        if (c1191w == null) {
             throw new RuntimeException("platformViewsController must be set before attempting to position a platform view");
         }
-        c1190w.e0(i7, i8, i9, i10, i11, i12, i13, flutterMutatorsStack);
+        c1191w.e0(i7, i8, i9, i10, i11, i12, i13, flutterMutatorsStack);
     }
 
     @SuppressLint({"NewApi"})
@@ -619,11 +619,11 @@ public class FlutterJNI {
 
     public void onEndFrame() {
         ensureRunningOnMainThread();
-        C1190w c1190w = this.platformViewsController;
-        if (c1190w == null) {
+        C1191w c1191w = this.platformViewsController;
+        if (c1191w == null) {
             throw new RuntimeException("platformViewsController must be set before attempting to end the frame");
         }
-        c1190w.f0();
+        c1191w.f0();
     }
 
     public void onFirstFrame() {
@@ -763,9 +763,9 @@ public class FlutterJNI {
         this.platformMessageHandler = eVar;
     }
 
-    public void setPlatformViewsController(C1190w c1190w) {
+    public void setPlatformViewsController(C1191w c1191w) {
         ensureRunningOnMainThread();
-        this.platformViewsController = c1190w;
+        this.platformViewsController = c1191w;
     }
 
     public void setPlatformViewsController2(U u7) {
@@ -824,7 +824,7 @@ public class FlutterJNI {
         ensureAttachedToNative();
         FlutterJNI flutterJNINativeSpawn = nativeSpawn(this.nativeShellHolderId.longValue(), str, str2, str3, list, j7);
         Long l7 = flutterJNINativeSpawn.nativeShellHolderId;
-        AbstractC1668c.a((l7 == null || l7.longValue() == 0) ? false : true, "Failed to spawn new JNI connected shell from existing shell.");
+        AbstractC1667c.a((l7 == null || l7.longValue() == 0) ? false : true, "Failed to spawn new JNI connected shell from existing shell.");
         return flutterJNINativeSpawn;
     }
 

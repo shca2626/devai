@@ -34,13 +34,13 @@ public final class E extends LinkedHashMap {
     }
 
     public static int b(Object obj) {
-        return obj instanceof byte[] ? AbstractC0789u.d((byte[]) obj) : obj.hashCode();
+        return obj instanceof byte[] ? AbstractC0790u.d((byte[]) obj) : obj.hashCode();
     }
 
     public static void c(Map map) {
         for (Object obj : map.keySet()) {
-            AbstractC0789u.a(obj);
-            AbstractC0789u.a(map.get(obj));
+            AbstractC0790u.a(obj);
+            AbstractC0790u.a(map.get(obj));
         }
     }
 
@@ -117,8 +117,8 @@ public final class E extends LinkedHashMap {
     @Override // java.util.HashMap, java.util.AbstractMap, java.util.Map
     public Object put(Object obj, Object obj2) {
         g();
-        AbstractC0789u.a(obj);
-        AbstractC0789u.a(obj2);
+        AbstractC0790u.a(obj);
+        AbstractC0790u.a(obj2);
         return super.put(obj, obj2);
     }
 

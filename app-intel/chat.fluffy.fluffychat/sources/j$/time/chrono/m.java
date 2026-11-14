@@ -8,7 +8,7 @@ public interface m extends TemporalAccessor, j$.time.temporal.n {
 
     @Override // j$.time.temporal.TemporalAccessor
     default boolean h(j$.time.temporal.q qVar) {
-        return qVar instanceof j$.time.temporal.a ? qVar == j$.time.temporal.a.ERA : qVar != null && qVar.s(this);
+        return qVar instanceof j$.time.temporal.a ? qVar == j$.time.temporal.a.ERA : qVar != null && qVar.r(this);
     }
 
     @Override // j$.time.temporal.TemporalAccessor
@@ -25,17 +25,17 @@ public interface m extends TemporalAccessor, j$.time.temporal.n {
             return getValue();
         }
         if (qVar instanceof j$.time.temporal.a) {
-            throw new j$.time.temporal.t(j$.time.d.a("Unsupported field: ", qVar));
+            throw new j$.time.temporal.t(j$.time.c.a("Unsupported field: ", qVar));
         }
-        return qVar.P(this);
+        return qVar.O(this);
     }
 
     @Override // j$.time.temporal.TemporalAccessor
-    default Object b(j$.time.i iVar) {
-        if (iVar == j$.time.temporal.r.f18400c) {
+    default Object b(j$.time.h hVar) {
+        if (hVar == j$.time.temporal.r.f18399c) {
             return j$.time.temporal.b.ERAS;
         }
-        return super.b(iVar);
+        return super.b(hVar);
     }
 
     @Override // j$.time.temporal.n

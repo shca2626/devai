@@ -2,7 +2,7 @@ package Z4;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import p0.C1436a;
+import p0.C1435a;
 
 /* loaded from: classes.dex */
 public abstract class b {
@@ -10,7 +10,7 @@ public abstract class b {
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
             try {
-                pVar.f10352e = new C1436a(byteArrayInputStream).i("Orientation", 1);
+                pVar.f10352e = new C1435a(byteArrayInputStream).i("Orientation", 1);
                 byteArrayInputStream.close();
             } finally {
             }

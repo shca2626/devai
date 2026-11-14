@@ -9,14 +9,14 @@ public final class d {
     public static final d WALL;
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ d[] f18435a;
+    public static final /* synthetic */ d[] f18434a;
 
     public static d valueOf(String str) {
         return (d) Enum.valueOf(d.class, str);
     }
 
     public static d[] values() {
-        return (d[]) f18435a.clone();
+        return (d[]) f18434a.clone();
     }
 
     static {
@@ -26,6 +26,6 @@ public final class d {
         WALL = dVar2;
         d dVar3 = new d("STANDARD", 2);
         STANDARD = dVar3;
-        f18435a = new d[]{dVar, dVar2, dVar3};
+        f18434a = new d[]{dVar, dVar2, dVar3};
     }
 }

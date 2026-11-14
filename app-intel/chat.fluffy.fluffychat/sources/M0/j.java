@@ -5,7 +5,7 @@ import M0.k;
 import android.net.Uri;
 import java.util.Collections;
 import java.util.List;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public abstract class j {
@@ -17,7 +17,7 @@ public abstract class j {
     public final s f5584b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final AbstractC1279v f5585c;
+    public final AbstractC1278v f5585c;
 
     /* renamed from: d, reason: collision with root package name */
     public final long f5586d;
@@ -101,7 +101,7 @@ public abstract class j {
         j3.o.d(!list.isEmpty());
         this.f5583a = j7;
         this.f5584b = sVar;
-        this.f5585c = AbstractC1279v.r(list);
+        this.f5585c = AbstractC1278v.r(list);
         this.f5587e = list2 == null ? Collections.EMPTY_LIST : Collections.unmodifiableList(list2);
         this.f5588f = list3;
         this.f5589g = list4;

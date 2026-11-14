@@ -1,6 +1,6 @@
 package k3;
 
-import j3.AbstractC1237k;
+import j3.AbstractC1236k;
 import java.util.Arrays;
 import k3.N;
 import k3.O;
@@ -9,62 +9,62 @@ import k3.O;
 public class T {
 
     /* renamed from: a, reason: collision with root package name */
-    public transient Object[] f18879a;
+    public transient Object[] f18878a;
 
     /* renamed from: b, reason: collision with root package name */
-    public transient int[] f18880b;
+    public transient int[] f18879b;
 
     /* renamed from: c, reason: collision with root package name */
-    public transient int f18881c;
+    public transient int f18880c;
 
     /* renamed from: d, reason: collision with root package name */
-    public transient int f18882d;
+    public transient int f18881d;
 
     /* renamed from: e, reason: collision with root package name */
-    public transient int[] f18883e;
+    public transient int[] f18882e;
 
     /* renamed from: f, reason: collision with root package name */
-    public transient long[] f18884f;
+    public transient long[] f18883f;
 
     /* renamed from: g, reason: collision with root package name */
-    public transient float f18885g;
+    public transient float f18884g;
 
     /* renamed from: h, reason: collision with root package name */
-    public transient int f18886h;
+    public transient int f18885h;
 
     public class a extends O.a {
 
         /* renamed from: a, reason: collision with root package name */
-        public final Object f18887a;
+        public final Object f18886a;
 
         /* renamed from: b, reason: collision with root package name */
-        public int f18888b;
+        public int f18887b;
 
         public a(int i7) {
-            this.f18887a = T.this.f18879a[i7];
-            this.f18888b = i7;
+            this.f18886a = T.this.f18878a[i7];
+            this.f18887b = i7;
         }
 
         @Override // k3.N.a
         public Object a() {
-            return this.f18887a;
+            return this.f18886a;
         }
 
         public void b() {
-            int i7 = this.f18888b;
-            if (i7 == -1 || i7 >= T.this.v() || !AbstractC1237k.a(this.f18887a, T.this.f18879a[this.f18888b])) {
-                this.f18888b = T.this.l(this.f18887a);
+            int i7 = this.f18887b;
+            if (i7 == -1 || i7 >= T.this.v() || !AbstractC1236k.a(this.f18886a, T.this.f18878a[this.f18887b])) {
+                this.f18887b = T.this.l(this.f18886a);
             }
         }
 
         @Override // k3.N.a
         public int getCount() {
             b();
-            int i7 = this.f18888b;
+            int i7 = this.f18887b;
             if (i7 == -1) {
                 return 0;
             }
-            return T.this.f18880b[i7];
+            return T.this.f18879b[i7];
         }
     }
 
@@ -105,16 +105,16 @@ public class T {
     }
 
     public void c(int i7) {
-        if (i7 > this.f18884f.length) {
+        if (i7 > this.f18883f.length) {
             s(i7);
         }
-        if (i7 >= this.f18886h) {
+        if (i7 >= this.f18885h) {
             u(Math.max(2, Integer.highestOneBit(i7 - 1) << 1));
         }
     }
 
     public int d() {
-        return this.f18881c == 0 ? -1 : 0;
+        return this.f18880c == 0 ? -1 : 0;
     }
 
     public int e(Object obj) {
@@ -122,34 +122,34 @@ public class T {
         if (iL == -1) {
             return 0;
         }
-        return this.f18880b[iL];
+        return this.f18879b[iL];
     }
 
     public N.a f(int i7) {
-        j3.o.o(i7, this.f18881c);
+        j3.o.o(i7, this.f18880c);
         return new a(i7);
     }
 
     public Object h(int i7) {
-        j3.o.o(i7, this.f18881c);
-        return this.f18879a[i7];
+        j3.o.o(i7, this.f18880c);
+        return this.f18878a[i7];
     }
 
     public int j(int i7) {
-        j3.o.o(i7, this.f18881c);
-        return this.f18880b[i7];
+        j3.o.o(i7, this.f18880c);
+        return this.f18879b[i7];
     }
 
     public final int k() {
-        return this.f18883e.length - 1;
+        return this.f18882e.length - 1;
     }
 
     public int l(Object obj) {
-        int iC = AbstractC1276s.c(obj);
-        int i7 = this.f18883e[k() & iC];
+        int iC = AbstractC1275s.c(obj);
+        int i7 = this.f18882e[k() & iC];
         while (i7 != -1) {
-            long j7 = this.f18884f[i7];
-            if (g(j7) == iC && AbstractC1237k.a(obj, this.f18879a[i7])) {
+            long j7 = this.f18883f[i7];
+            if (g(j7) == iC && AbstractC1236k.a(obj, this.f18878a[i7])) {
                 return i7;
             }
             i7 = i(j7);
@@ -160,45 +160,45 @@ public class T {
     public void m(int i7, float f7) {
         j3.o.e(i7 >= 0, "Initial capacity must be non-negative");
         j3.o.e(f7 > 0.0f, "Illegal load factor");
-        int iA = AbstractC1276s.a(i7, f7);
-        this.f18883e = p(iA);
-        this.f18885g = f7;
-        this.f18879a = new Object[i7];
-        this.f18880b = new int[i7];
-        this.f18884f = o(i7);
-        this.f18886h = Math.max(1, (int) (iA * f7));
+        int iA = AbstractC1275s.a(i7, f7);
+        this.f18882e = p(iA);
+        this.f18884g = f7;
+        this.f18878a = new Object[i7];
+        this.f18879b = new int[i7];
+        this.f18883f = o(i7);
+        this.f18885h = Math.max(1, (int) (iA * f7));
     }
 
     public void n(int i7, Object obj, int i8, int i9) {
-        this.f18884f[i7] = (i9 << 32) | 4294967295L;
-        this.f18879a[i7] = obj;
-        this.f18880b[i7] = i8;
+        this.f18883f[i7] = (i9 << 32) | 4294967295L;
+        this.f18878a[i7] = obj;
+        this.f18879b[i7] = i8;
     }
 
     public int q(int i7) {
         int i8 = i7 + 1;
-        if (i8 < this.f18881c) {
+        if (i8 < this.f18880c) {
             return i8;
         }
         return -1;
     }
 
     public int r(Object obj, int i7) {
-        AbstractC1267i.c(i7, "count");
-        long[] jArr = this.f18884f;
-        Object[] objArr = this.f18879a;
-        int[] iArr = this.f18880b;
-        int iC = AbstractC1276s.c(obj);
+        AbstractC1266i.c(i7, "count");
+        long[] jArr = this.f18883f;
+        Object[] objArr = this.f18878a;
+        int[] iArr = this.f18879b;
+        int iC = AbstractC1275s.c(obj);
         int iK = k() & iC;
-        int i8 = this.f18881c;
-        int[] iArr2 = this.f18883e;
+        int i8 = this.f18880c;
+        int[] iArr2 = this.f18882e;
         int i9 = iArr2[iK];
         if (i9 == -1) {
             iArr2[iK] = i8;
         } else {
             while (true) {
                 long j7 = jArr[i9];
-                if (g(j7) == iC && AbstractC1237k.a(obj, objArr[i9])) {
+                if (g(j7) == iC && AbstractC1236k.a(obj, objArr[i9])) {
                     int i10 = iArr[i9];
                     iArr[i9] = i7;
                     return i10;
@@ -217,28 +217,28 @@ public class T {
         int i12 = i8 + 1;
         t(i12);
         n(i8, obj, i7, iC);
-        this.f18881c = i12;
-        if (i8 >= this.f18886h) {
-            u(this.f18883e.length * 2);
+        this.f18880c = i12;
+        if (i8 >= this.f18885h) {
+            u(this.f18882e.length * 2);
         }
-        this.f18882d++;
+        this.f18881d++;
         return 0;
     }
 
     public void s(int i7) {
-        this.f18879a = Arrays.copyOf(this.f18879a, i7);
-        this.f18880b = Arrays.copyOf(this.f18880b, i7);
-        long[] jArr = this.f18884f;
+        this.f18878a = Arrays.copyOf(this.f18878a, i7);
+        this.f18879b = Arrays.copyOf(this.f18879b, i7);
+        long[] jArr = this.f18883f;
         int length = jArr.length;
         long[] jArrCopyOf = Arrays.copyOf(jArr, i7);
         if (i7 > length) {
             Arrays.fill(jArrCopyOf, length, i7, -1L);
         }
-        this.f18884f = jArrCopyOf;
+        this.f18883f = jArrCopyOf;
     }
 
     public final void t(int i7) {
-        int length = this.f18884f.length;
+        int length = this.f18883f.length;
         if (i7 > length) {
             int iMax = Math.max(1, length >>> 1) + length;
             if (iMax < 0) {
@@ -251,27 +251,27 @@ public class T {
     }
 
     public final void u(int i7) {
-        if (this.f18883e.length >= 1073741824) {
-            this.f18886h = Integer.MAX_VALUE;
+        if (this.f18882e.length >= 1073741824) {
+            this.f18885h = Integer.MAX_VALUE;
             return;
         }
-        int i8 = ((int) (i7 * this.f18885g)) + 1;
+        int i8 = ((int) (i7 * this.f18884g)) + 1;
         int[] iArrP = p(i7);
-        long[] jArr = this.f18884f;
+        long[] jArr = this.f18883f;
         int length = iArrP.length - 1;
-        for (int i9 = 0; i9 < this.f18881c; i9++) {
+        for (int i9 = 0; i9 < this.f18880c; i9++) {
             int iG = g(jArr[i9]);
             int i10 = iG & length;
             int i11 = iArrP[i10];
             iArrP[i10] = i9;
             jArr[i9] = (iG << 32) | (i11 & 4294967295L);
         }
-        this.f18886h = i8;
-        this.f18883e = iArrP;
+        this.f18885h = i8;
+        this.f18882e = iArrP;
     }
 
     public int v() {
-        return this.f18881c;
+        return this.f18880c;
     }
 
     public T(T t7) {

@@ -4,17 +4,17 @@ import E0.U;
 import android.net.Uri;
 import java.util.HashMap;
 import java.util.Objects;
-import k3.AbstractC1279v;
-import k3.AbstractC1281x;
+import k3.AbstractC1278v;
+import k3.AbstractC1280x;
 
 /* loaded from: classes.dex */
 public final class w {
 
     /* renamed from: a, reason: collision with root package name */
-    public final AbstractC1281x f8389a;
+    public final AbstractC1280x f8389a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final AbstractC1279v f8390b;
+    public final AbstractC1278v f8390b;
 
     /* renamed from: c, reason: collision with root package name */
     public final String f8391c;
@@ -52,7 +52,7 @@ public final class w {
         public final HashMap f8401a = new HashMap();
 
         /* renamed from: b, reason: collision with root package name */
-        public final AbstractC1279v.a f8402b = new AbstractC1279v.a();
+        public final AbstractC1278v.a f8402b = new AbstractC1278v.a();
 
         /* renamed from: c, reason: collision with root package name */
         public int f8403c = -1;
@@ -185,7 +185,7 @@ public final class w {
     }
 
     public w(b bVar) {
-        this.f8389a = AbstractC1281x.c(bVar.f8401a);
+        this.f8389a = AbstractC1280x.c(bVar.f8401a);
         this.f8390b = bVar.f8402b.k();
         this.f8391c = (String) U.i(bVar.f8404d);
         this.f8392d = (String) U.i(bVar.f8405e);

@@ -1,6 +1,6 @@
 package q;
 
-import Z.C0691e0;
+import Z.C0692e0;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
@@ -41,7 +41,7 @@ public interface I {
 
     int m();
 
-    C0691e0 n(int i7, long j7);
+    C0692e0 n(int i7, long j7);
 
     void o(int i7);
 

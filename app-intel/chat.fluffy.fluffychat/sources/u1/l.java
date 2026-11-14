@@ -6,27 +6,27 @@ import java.util.Arrays;
 public final class l extends i {
 
     /* renamed from: b, reason: collision with root package name */
-    public final int f22771b;
+    public final int f22777b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final int f22772c;
+    public final int f22778c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final int f22773d;
+    public final int f22779d;
 
     /* renamed from: e, reason: collision with root package name */
-    public final int[] f22774e;
+    public final int[] f22780e;
 
     /* renamed from: f, reason: collision with root package name */
-    public final int[] f22775f;
+    public final int[] f22781f;
 
     public l(int i7, int i8, int i9, int[] iArr, int[] iArr2) {
         super("MLLT");
-        this.f22771b = i7;
-        this.f22772c = i8;
-        this.f22773d = i9;
-        this.f22774e = iArr;
-        this.f22775f = iArr2;
+        this.f22777b = i7;
+        this.f22778c = i8;
+        this.f22779d = i9;
+        this.f22780e = iArr;
+        this.f22781f = iArr2;
     }
 
     public boolean equals(Object obj) {
@@ -35,7 +35,7 @@ public final class l extends i {
         }
         if (obj != null && l.class == obj.getClass()) {
             l lVar = (l) obj;
-            if (this.f22771b == lVar.f22771b && this.f22772c == lVar.f22772c && this.f22773d == lVar.f22773d && Arrays.equals(this.f22774e, lVar.f22774e) && Arrays.equals(this.f22775f, lVar.f22775f)) {
+            if (this.f22777b == lVar.f22777b && this.f22778c == lVar.f22778c && this.f22779d == lVar.f22779d && Arrays.equals(this.f22780e, lVar.f22780e) && Arrays.equals(this.f22781f, lVar.f22781f)) {
                 return true;
             }
         }
@@ -43,6 +43,6 @@ public final class l extends i {
     }
 
     public int hashCode() {
-        return ((((((((527 + this.f22771b) * 31) + this.f22772c) * 31) + this.f22773d) * 31) + Arrays.hashCode(this.f22774e)) * 31) + Arrays.hashCode(this.f22775f);
+        return ((((((((527 + this.f22777b) * 31) + this.f22778c) * 31) + this.f22779d) * 31) + Arrays.hashCode(this.f22780e)) * 31) + Arrays.hashCode(this.f22781f);
     }
 }

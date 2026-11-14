@@ -3,7 +3,7 @@ package E0;
 import android.net.Uri;
 import android.text.TextUtils;
 import com.fasterxml.jackson.core.JsonPointer;
-import j3.AbstractC1229c;
+import j3.AbstractC1228c;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +16,7 @@ public abstract class O {
         }
         String scheme = uri.getScheme();
         String scheme2 = uri2.getScheme();
-        if (scheme != null ? !(scheme2 == null || !AbstractC1229c.a(scheme, scheme2)) : scheme2 == null) {
+        if (scheme != null ? !(scheme2 == null || !AbstractC1228c.a(scheme, scheme2)) : scheme2 == null) {
             if (Objects.equals(uri.getAuthority(), uri2.getAuthority())) {
                 List<String> pathSegments = uri.getPathSegments();
                 List<String> pathSegments2 = uri2.getPathSegments();

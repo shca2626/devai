@@ -1,7 +1,7 @@
 package N0;
 
 import J0.G1;
-import N0.InterfaceC0542m;
+import N0.InterfaceC0543m;
 import N0.t;
 import N0.u;
 import android.os.Looper;
@@ -36,7 +36,7 @@ public interface u {
 
     int c(B0.s sVar);
 
-    InterfaceC0542m d(t.a aVar, B0.s sVar);
+    InterfaceC0543m d(t.a aVar, B0.s sVar);
 
     default void h() {
     }
@@ -51,11 +51,11 @@ public interface u {
         }
 
         @Override // N0.u
-        public InterfaceC0542m d(t.a aVar, B0.s sVar) {
+        public InterfaceC0543m d(t.a aVar, B0.s sVar) {
             if (sVar.f763s == null) {
                 return null;
             }
-            return new z(new InterfaceC0542m.a(new P(1), 6001));
+            return new z(new InterfaceC0543m.a(new P(1), 6001));
         }
 
         @Override // N0.u

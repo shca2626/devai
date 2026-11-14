@@ -24,7 +24,7 @@ import java.util.List;
 import k4.r;
 import k4.s;
 import k4.u;
-import l4.C1312g;
+import l4.C1311g;
 import l4.i;
 import l4.j;
 import l4.l;
@@ -72,7 +72,7 @@ public abstract class a extends ViewGroup {
     public final f f14915K;
 
     /* renamed from: l, reason: collision with root package name */
-    public C1312g f14916l;
+    public C1311g f14916l;
 
     /* renamed from: m, reason: collision with root package name */
     public WindowManager f14917m;
@@ -340,7 +340,7 @@ public abstract class a extends ViewGroup {
         return new TextureViewSurfaceTextureListenerC0148a();
     }
 
-    public C1312g getCameraInstance() {
+    public C1311g getCameraInstance() {
         return this.f14916l;
     }
 
@@ -387,10 +387,10 @@ public abstract class a extends ViewGroup {
             this.f14930z = null;
             throw new IllegalStateException("containerSize or previewSize is not set yet");
         }
-        int i7 = sVar.f19100l;
-        int i8 = sVar.f19101m;
-        int i9 = sVar2.f19100l;
-        int i10 = sVar2.f19101m;
+        int i7 = sVar.f19099l;
+        int i8 = sVar.f19100m;
+        int i9 = sVar2.f19099l;
+        int i10 = sVar2.f19100m;
         Rect rectD = mVar.d(sVar);
         if (rectD.width() <= 0 || rectD.height() <= 0) {
             return;
@@ -415,7 +415,7 @@ public abstract class a extends ViewGroup {
         Rect rect3 = new Rect(rect);
         rect3.intersect(rect2);
         if (this.f14908D != null) {
-            rect3.inset(Math.max(0, (rect3.width() - this.f14908D.f19100l) / 2), Math.max(0, (rect3.height() - this.f14908D.f19101m) / 2));
+            rect3.inset(Math.max(0, (rect3.width() - this.f14908D.f19099l) / 2), Math.max(0, (rect3.height() - this.f14908D.f19100m) / 2));
             return rect3;
         }
         int iMin = (int) Math.min(rect3.width() * this.f14909E, rect3.height() * this.f14909E);
@@ -428,8 +428,8 @@ public abstract class a extends ViewGroup {
 
     public Matrix l(s sVar, s sVar2) {
         float f7;
-        float f8 = sVar.f19100l / sVar.f19101m;
-        float f9 = sVar2.f19100l / sVar2.f19101m;
+        float f8 = sVar.f19099l / sVar.f19100m;
+        float f9 = sVar2.f19099l / sVar2.f19100m;
         float f10 = 1.0f;
         if (f8 < f9) {
             float f11 = f9 / f8;
@@ -440,16 +440,16 @@ public abstract class a extends ViewGroup {
         }
         Matrix matrix = new Matrix();
         matrix.setScale(f10, f7);
-        int i7 = sVar.f19100l;
-        int i8 = sVar.f19101m;
+        int i7 = sVar.f19099l;
+        int i8 = sVar.f19100m;
         matrix.postTranslate((i7 - (i7 * f10)) / 2.0f, (i8 - (i8 * f7)) / 2.0f);
         return matrix;
     }
 
     public final void m(s sVar) {
         this.f14928x = sVar;
-        C1312g c1312g = this.f14916l;
-        if (c1312g == null || c1312g.n() != null) {
+        C1311g c1311g = this.f14916l;
+        if (c1311g == null || c1311g.n() != null) {
             return;
         }
         m mVar = new m(getDisplayRotation(), sVar);
@@ -463,10 +463,10 @@ public abstract class a extends ViewGroup {
         }
     }
 
-    public C1312g n() {
-        C1312g c1312g = new C1312g(getContext());
-        c1312g.t(this.f14927w);
-        return c1312g;
+    public C1311g n() {
+        C1311g c1311g = new C1311g(getContext());
+        c1311g.t(this.f14927w);
+        return c1311g;
     }
 
     public final void o() {
@@ -474,9 +474,9 @@ public abstract class a extends ViewGroup {
             Log.w(f14904L, "initCamera called twice");
             return;
         }
-        C1312g c1312gN = n();
-        this.f14916l = c1312gN;
-        c1312gN.v(this.f14918n);
+        C1311g c1311gN = n();
+        this.f14916l = c1311gN;
+        c1311gN.v(this.f14918n);
         this.f14916l.r();
         this.f14924t = getDisplayRotation();
     }
@@ -561,8 +561,8 @@ public abstract class a extends ViewGroup {
     }
 
     public boolean s() {
-        C1312g c1312g = this.f14916l;
-        return c1312g == null || c1312g.p();
+        C1311g c1311g = this.f14916l;
+        return c1311g == null || c1311g.p();
     }
 
     public void setCameraSettings(i iVar) {
@@ -586,9 +586,9 @@ public abstract class a extends ViewGroup {
 
     public void setTorch(boolean z7) {
         this.f14911G = z7;
-        C1312g c1312g = this.f14916l;
-        if (c1312g != null) {
-            c1312g.x(z7);
+        C1311g c1311g = this.f14916l;
+        if (c1311g != null) {
+            c1311g.x(z7);
         }
     }
 
@@ -606,9 +606,9 @@ public abstract class a extends ViewGroup {
         u.a();
         Log.d(f14904L, "pause()");
         this.f14924t = -1;
-        C1312g c1312g = this.f14916l;
-        if (c1312g != null) {
-            c1312g.l();
+        C1311g c1311g = this.f14916l;
+        if (c1311g != null) {
+            c1311g.l();
             this.f14916l = null;
             this.f14922r = false;
         } else {
@@ -628,7 +628,7 @@ public abstract class a extends ViewGroup {
     }
 
     public void v() throws InterruptedException {
-        C1312g cameraInstance = getCameraInstance();
+        C1311g cameraInstance = getCameraInstance();
         u();
         long jNanoTime = System.nanoTime();
         while (cameraInstance != null && !cameraInstance.p() && System.nanoTime() - jNanoTime <= 2000000000) {

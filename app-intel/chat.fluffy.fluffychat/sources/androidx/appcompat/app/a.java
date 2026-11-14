@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import androidx.appcompat.app.AlertController;
-import i.AbstractC1145a;
+import i.AbstractC1146a;
 import j.p;
 
 /* loaded from: classes.dex */
@@ -139,11 +139,11 @@ public class a extends p implements DialogInterface {
             return i7;
         }
         TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(AbstractC1145a.f16941l, typedValue, true);
+        context.getTheme().resolveAttribute(AbstractC1146a.f16941l, typedValue, true);
         return typedValue.resourceId;
     }
 
-    @Override // j.p, d.DialogC0946B, android.app.Dialog
+    @Override // j.p, d.DialogC0947B, android.app.Dialog
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         this.f11073r.e();

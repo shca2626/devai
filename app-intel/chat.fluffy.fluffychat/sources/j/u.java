@@ -11,7 +11,7 @@ import org.xmlpull.v1.XmlPullParserException;
 public class u {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Deque f18603a = new ArrayDeque();
+    public final Deque f18602a = new ArrayDeque();
 
     public static boolean b(XmlPullParser xmlPullParser) {
         if (xmlPullParser != null) {
@@ -60,8 +60,8 @@ public class u {
         if (xmlPullParser.getDepth() != 1) {
             return false;
         }
-        XmlPullParser xmlPullParserC = c(this.f18603a);
-        this.f18603a.push(new WeakReference(xmlPullParser));
+        XmlPullParser xmlPullParserC = c(this.f18602a);
+        this.f18602a.push(new WeakReference(xmlPullParser));
         return d(xmlPullParser, xmlPullParserC);
     }
 }

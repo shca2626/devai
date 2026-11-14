@@ -2,7 +2,7 @@ package Y0;
 
 import android.net.Uri;
 import java.util.List;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public class r0 extends B0.A {
@@ -11,12 +11,12 @@ public class r0 extends B0.A {
     public final Uri f9803n;
 
     /* renamed from: o, reason: collision with root package name */
-    public final AbstractC1279v f9804o;
+    public final AbstractC1278v f9804o;
 
     public r0(String str, Uri uri, List list) {
         super(str, null, false, 1);
         this.f9803n = uri;
-        this.f9804o = AbstractC1279v.r(list);
+        this.f9804o = AbstractC1278v.r(list);
     }
 
     @Override // B0.A, java.lang.Throwable

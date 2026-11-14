@@ -8,7 +8,7 @@ import java.io.Reader;
 import java.util.Arrays;
 import java.util.Objects;
 import u3.t;
-import w3.AbstractC1737G;
+import w3.AbstractC1736G;
 import w3.x;
 import x3.g;
 
@@ -89,7 +89,7 @@ public class a implements Closeable {
     }
 
     static {
-        x.f23347a = new C0013a();
+        x.f23353a = new C0013a();
     }
 
     public a(Reader reader) {
@@ -1287,11 +1287,11 @@ public class a implements Closeable {
     }
 
     public final d g0(String str) throws d {
-        throw new d(str + F() + "\nSee " + AbstractC1737G.a("malformed-json"));
+        throw new d(str + F() + "\nSee " + AbstractC1736G.a("malformed-json"));
     }
 
     public final IllegalStateException h0(String str) {
-        return new IllegalStateException("Expected " + str + " but was " + V() + F() + "\nSee " + AbstractC1737G.a(V() == b.NULL ? "adapter-not-null-safe" : "unexpected-json-structure"));
+        return new IllegalStateException("Expected " + str + " but was " + V() + F() + "\nSee " + AbstractC1736G.a(V() == b.NULL ? "adapter-not-null-safe" : "unexpected-json-structure"));
     }
 
     public final void i() throws IOException {

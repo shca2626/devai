@@ -120,7 +120,7 @@ class EglBase14Impl implements EglBase14 {
             this.refCountDelegate = new RefCountDelegate(new Runnable() { // from class: org.webrtc.k
                 @Override // java.lang.Runnable
                 public final void run() {
-                    this.f20584l.lambda$new$0();
+                    this.f20578l.lambda$new$0();
                 }
             });
         }

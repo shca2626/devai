@@ -1,19 +1,19 @@
 package o5;
 
 import java.util.List;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class c {
 
     /* renamed from: c, reason: collision with root package name */
-    public static final a f20422c = new a(null);
+    public static final a f20421c = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final d f20423a;
+    public final d f20422a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f20424b;
+    public final String f20423b;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -33,12 +33,12 @@ public final class c {
 
     public c(d dVar, String str) {
         M5.m.e(dVar, "code");
-        this.f20423a = dVar;
-        this.f20424b = str;
+        this.f20422a = dVar;
+        this.f20423b = str;
     }
 
     public final List a() {
-        return C1881o.l(this.f20423a, this.f20424b);
+        return C1884o.l(this.f20422a, this.f20423b);
     }
 
     public boolean equals(Object obj) {
@@ -48,7 +48,7 @@ public final class c {
         if (this == obj) {
             return true;
         }
-        return s.f20479a.a(a(), ((c) obj).a());
+        return s.f20478a.a(a(), ((c) obj).a());
     }
 
     public int hashCode() {
@@ -56,6 +56,6 @@ public final class c {
     }
 
     public String toString() {
-        return "AuthResult(code=" + this.f20423a + ", errorMessage=" + this.f20424b + ")";
+        return "AuthResult(code=" + this.f20422a + ", errorMessage=" + this.f20423b + ")";
     }
 }

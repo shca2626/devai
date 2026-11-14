@@ -1,16 +1,16 @@
 package r5;
 
 import java.util.List;
-import z5.C1880n;
+import z5.C1883n;
 
 /* loaded from: classes.dex */
 public final class G extends C {
 
     /* renamed from: b, reason: collision with root package name */
-    public static final a f22191b = new a(null);
+    public static final a f22197b = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final B f22192a;
+    public final B f22198a;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -32,11 +32,11 @@ public final class G extends C {
     public G(B b7) {
         super(null);
         M5.m.e(b7, "state");
-        this.f22192a = b7;
+        this.f22198a = b7;
     }
 
     public final List a() {
-        return C1880n.d(this.f22192a);
+        return C1883n.d(this.f22198a);
     }
 
     public boolean equals(Object obj) {
@@ -46,14 +46,14 @@ public final class G extends C {
         if (this == obj) {
             return true;
         }
-        return C1593x.f22331a.a(this.f22192a, ((G) obj).f22192a);
+        return C1592x.f22337a.a(this.f22198a, ((G) obj).f22198a);
     }
 
     public int hashCode() {
-        return (G.class.hashCode() * 31) + C1593x.f22331a.b(this.f22192a);
+        return (G.class.hashCode() * 31) + C1592x.f22337a.b(this.f22198a);
     }
 
     public String toString() {
-        return "PlaybackStateChangeEvent(state=" + this.f22192a + ")";
+        return "PlaybackStateChangeEvent(state=" + this.f22198a + ")";
     }
 }

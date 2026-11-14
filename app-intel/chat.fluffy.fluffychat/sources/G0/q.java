@@ -1,6 +1,6 @@
 package G0;
 
-import j3.AbstractC1229c;
+import j3.AbstractC1228c;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.net.SocketTimeoutException;
@@ -29,7 +29,7 @@ public class q extends g {
 
     public static q b(IOException iOException, j jVar, int i7) {
         String message = iOException.getMessage();
-        int i8 = iOException instanceof SocketTimeoutException ? 2002 : iOException instanceof InterruptedIOException ? 1004 : (message == null || !AbstractC1229c.f(message).matches("cleartext.*not permitted.*")) ? 2001 : 2007;
+        int i8 = iOException instanceof SocketTimeoutException ? 2002 : iOException instanceof InterruptedIOException ? 1004 : (message == null || !AbstractC1228c.f(message).matches("cleartext.*not permitted.*")) ? 2001 : 2007;
         return i8 == 2007 ? new p(iOException, jVar) : new q(iOException, jVar, i8, i7);
     }
 

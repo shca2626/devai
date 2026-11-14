@@ -4,7 +4,7 @@ import android.view.Surface;
 import io.flutter.view.TextureRegistry;
 
 /* loaded from: classes.dex */
-public class c0 implements InterfaceC1183o {
+public class c0 implements InterfaceC1184o {
 
     /* renamed from: a, reason: collision with root package name */
     public TextureRegistry.SurfaceProducer f17812a;
@@ -13,38 +13,38 @@ public class c0 implements InterfaceC1183o {
         this.f17812a = surfaceProducer;
     }
 
-    @Override // io.flutter.plugin.platform.InterfaceC1183o
+    @Override // io.flutter.plugin.platform.InterfaceC1184o
     public void a(int i7, int i8) {
         this.f17812a.setSize(i7, i8);
     }
 
-    @Override // io.flutter.plugin.platform.InterfaceC1183o
+    @Override // io.flutter.plugin.platform.InterfaceC1184o
     public int getHeight() {
         return this.f17812a.getHeight();
     }
 
-    @Override // io.flutter.plugin.platform.InterfaceC1183o
+    @Override // io.flutter.plugin.platform.InterfaceC1184o
     public long getId() {
         return this.f17812a.id();
     }
 
-    @Override // io.flutter.plugin.platform.InterfaceC1183o
+    @Override // io.flutter.plugin.platform.InterfaceC1184o
     public Surface getSurface() {
         return this.f17812a.getSurface();
     }
 
-    @Override // io.flutter.plugin.platform.InterfaceC1183o
+    @Override // io.flutter.plugin.platform.InterfaceC1184o
     public int getWidth() {
         return this.f17812a.getWidth();
     }
 
-    @Override // io.flutter.plugin.platform.InterfaceC1183o
+    @Override // io.flutter.plugin.platform.InterfaceC1184o
     public void release() {
         this.f17812a.release();
         this.f17812a = null;
     }
 
-    @Override // io.flutter.plugin.platform.InterfaceC1183o
+    @Override // io.flutter.plugin.platform.InterfaceC1184o
     public void scheduleFrame() {
         this.f17812a.scheduleFrame();
     }

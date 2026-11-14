@@ -8,10 +8,10 @@ import java.util.List;
 public final class h implements PrivilegedAction {
 
     /* renamed from: a, reason: collision with root package name */
-    public final /* synthetic */ List f18457a;
+    public final /* synthetic */ List f18456a;
 
     public h(List list) {
-        this.f18457a = list;
+        this.f18456a = list;
     }
 
     @Override // java.security.PrivilegedAction
@@ -21,7 +21,7 @@ public final class h implements PrivilegedAction {
             try {
                 i iVar = (i) i.class.cast(Class.forName(property, true, i.class.getClassLoader()).newInstance());
                 i.b(iVar);
-                ((ArrayList) this.f18457a).add(iVar);
+                ((ArrayList) this.f18456a).add(iVar);
                 return null;
             } catch (Exception e7) {
                 throw new Error(e7);

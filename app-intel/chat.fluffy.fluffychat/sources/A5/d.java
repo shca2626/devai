@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import z5.AbstractC1869c;
+import z5.AbstractC1872c;
 
 /* loaded from: classes.dex */
 public final class d implements Map, Serializable, N5.c {
@@ -370,7 +370,7 @@ public final class d implements Map, Serializable, N5.c {
             throw new OutOfMemoryError();
         }
         if (i7 > v()) {
-            int iE = AbstractC1869c.f24160l.e(v(), i7);
+            int iE = AbstractC1872c.f24186l.e(v(), i7);
             this.f290l = A5.c.e(this.f290l, iE);
             Object[] objArr = this.f291m;
             this.f291m = objArr != null ? A5.c.e(objArr, iE) : null;

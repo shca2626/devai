@@ -21,38 +21,38 @@ public enum b implements s {
 
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f18382a;
+    public final String f18381a;
 
     static {
-        j$.time.e.F(1L);
-        j$.time.e.F(1000L);
-        j$.time.e.F(1000000L);
-        j$.time.e.A(1L, 0);
-        j$.time.e.A(60L, 0);
-        j$.time.e.A(3600L, 0);
-        j$.time.e.A(43200L, 0);
-        j$.time.e.A(86400L, 0);
-        j$.time.e.A(604800L, 0);
-        j$.time.e.A(2629746L, 0);
-        j$.time.e.A(31556952L, 0);
-        j$.time.e.A(315569520L, 0);
-        j$.time.e.A(3155695200L, 0);
-        j$.time.e.A(31556952000L, 0);
-        j$.time.e.A(31556952000000000L, 0);
-        j$.time.e.A(Math.addExact(Long.MAX_VALUE, Math.floorDiv(999999999L, 1000000000L)), (int) Math.floorMod(999999999L, 1000000000L));
+        j$.time.e.E(1L);
+        j$.time.e.E(1000L);
+        j$.time.e.E(1000000L);
+        j$.time.e.z(1L, 0);
+        j$.time.e.z(60L, 0);
+        j$.time.e.z(3600L, 0);
+        j$.time.e.z(43200L, 0);
+        j$.time.e.z(86400L, 0);
+        j$.time.e.z(604800L, 0);
+        j$.time.e.z(2629746L, 0);
+        j$.time.e.z(31556952L, 0);
+        j$.time.e.z(315569520L, 0);
+        j$.time.e.z(3155695200L, 0);
+        j$.time.e.z(31556952000L, 0);
+        j$.time.e.z(31556952000000000L, 0);
+        j$.time.e.z(Math.addExact(Long.MAX_VALUE, Math.floorDiv(999999999L, 1000000000L)), (int) Math.floorMod(999999999L, 1000000000L));
     }
 
     b(String str) {
-        this.f18382a = str;
+        this.f18381a = str;
     }
 
     @Override // j$.time.temporal.s
-    public final m s(m mVar, long j7) {
+    public final m r(m mVar, long j7) {
         return mVar.d(j7, this);
     }
 
     @Override // java.lang.Enum
     public final String toString() {
-        return this.f18382a;
+        return this.f18381a;
     }
 }

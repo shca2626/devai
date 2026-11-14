@@ -14,27 +14,27 @@ import javax.net.ssl.SSLPeerUnverifiedException;
 public final class g {
 
     /* renamed from: c, reason: collision with root package name */
-    public static final g f19220c = new a().a();
+    public static final g f19219c = new a().a();
 
     /* renamed from: a, reason: collision with root package name */
-    public final Set f19221a;
+    public final Set f19220a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final u6.c f19222b;
+    public final u6.c f19221b;
 
     public static final class a {
 
         /* renamed from: a, reason: collision with root package name */
-        public final List f19223a = new ArrayList();
+        public final List f19222a = new ArrayList();
 
         public g a() {
-            return new g(new LinkedHashSet(this.f19223a), null);
+            return new g(new LinkedHashSet(this.f19222a), null);
         }
     }
 
     public g(Set set, u6.c cVar) {
-        this.f19221a = set;
-        this.f19222b = cVar;
+        this.f19220a = set;
+        this.f19221b = cVar;
     }
 
     public static String c(Certificate certificate) {
@@ -53,7 +53,7 @@ public final class g {
         if (listB.isEmpty()) {
             return;
         }
-        u6.c cVar = this.f19222b;
+        u6.c cVar = this.f19221b;
         if (cVar != null) {
             list = cVar.a(list, str);
         }
@@ -89,7 +89,7 @@ public final class g {
 
     public List b(String str) {
         List list = Collections.EMPTY_LIST;
-        Iterator it = this.f19221a.iterator();
+        Iterator it = this.f19220a.iterator();
         if (!it.hasNext()) {
             return list;
         }
@@ -98,7 +98,7 @@ public final class g {
     }
 
     public g e(u6.c cVar) {
-        return l6.c.o(this.f19222b, cVar) ? this : new g(this.f19221a, cVar);
+        return l6.c.o(this.f19221b, cVar) ? this : new g(this.f19220a, cVar);
     }
 
     public boolean equals(Object obj) {
@@ -109,11 +109,11 @@ public final class g {
             return false;
         }
         g gVar = (g) obj;
-        return l6.c.o(this.f19222b, gVar.f19222b) && this.f19221a.equals(gVar.f19221a);
+        return l6.c.o(this.f19221b, gVar.f19221b) && this.f19220a.equals(gVar.f19220a);
     }
 
     public int hashCode() {
-        u6.c cVar = this.f19222b;
-        return ((cVar != null ? cVar.hashCode() : 0) * 31) + this.f19221a.hashCode();
+        u6.c cVar = this.f19221b;
+        return ((cVar != null ? cVar.hashCode() : 0) * 31) + this.f19220a.hashCode();
     }
 }

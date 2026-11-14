@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.RandomAccess;
 
 /* loaded from: classes.dex */
-public final class W extends AbstractC0772c implements RandomAccess {
+public final class W extends AbstractC0773c implements RandomAccess {
 
     /* renamed from: o, reason: collision with root package name */
     public static final W f11991o = new W(new Object[0], 0, false);
@@ -62,7 +62,7 @@ public final class W extends AbstractC0772c implements RandomAccess {
         return "Index:" + i7 + ", Size:" + this.f11993n;
     }
 
-    @Override // androidx.datastore.preferences.protobuf.AbstractC0789u.b
+    @Override // androidx.datastore.preferences.protobuf.AbstractC0790u.b
     /* renamed from: k, reason: merged with bridge method [inline-methods] */
     public W c(int i7) {
         if (i7 >= this.f11993n) {
@@ -71,7 +71,7 @@ public final class W extends AbstractC0772c implements RandomAccess {
         throw new IllegalArgumentException();
     }
 
-    @Override // androidx.datastore.preferences.protobuf.AbstractC0772c, java.util.AbstractList, java.util.List
+    @Override // androidx.datastore.preferences.protobuf.AbstractC0773c, java.util.AbstractList, java.util.List
     public Object remove(int i7) {
         f();
         i(i7);

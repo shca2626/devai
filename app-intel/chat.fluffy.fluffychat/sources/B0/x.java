@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.deser.std.StdKeyDeserializer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 import org.webrtc.PeerConnectionFactory;
 
 /* loaded from: classes.dex */
@@ -148,7 +148,7 @@ public final class x {
     public final Bundle f993H;
 
     /* renamed from: I, reason: collision with root package name */
-    public final AbstractC1279v f994I;
+    public final AbstractC1278v f994I;
 
     /* renamed from: a, reason: collision with root package name */
     public final CharSequence f995a;
@@ -252,7 +252,7 @@ public final class x {
         public Bundle f1027G;
 
         /* renamed from: H, reason: collision with root package name */
-        public AbstractC1279v f1028H;
+        public AbstractC1278v f1028H;
 
         /* renamed from: a, reason: collision with root package name */
         public CharSequence f1029a;
@@ -639,7 +639,7 @@ public final class x {
         }
 
         public b p0(List list) {
-            this.f1028H = AbstractC1279v.r(list);
+            this.f1028H = AbstractC1278v.r(list);
             return this;
         }
 
@@ -669,7 +669,7 @@ public final class x {
         }
 
         public b() {
-            this.f1028H = AbstractC1279v.v();
+            this.f1028H = AbstractC1278v.v();
         }
 
         public b(x xVar) {

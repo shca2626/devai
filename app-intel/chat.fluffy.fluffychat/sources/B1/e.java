@@ -1,7 +1,7 @@
 package B1;
 
 import E0.E;
-import g1.AbstractC1089t;
+import g1.AbstractC1090t;
 import g1.r;
 import j3.o;
 import java.util.Arrays;
@@ -71,7 +71,7 @@ public final class e {
                 } else {
                     i7 = 0;
                 }
-                if (!AbstractC1089t.f(rVar, iA)) {
+                if (!AbstractC1090t.f(rVar, iA)) {
                     return false;
                 }
                 this.f1086c = i7;
@@ -81,7 +81,7 @@ public final class e {
             if (iA2 > 0) {
                 E e7 = this.f1085b;
                 e7.d(e7.j() + iA2);
-                if (!AbstractC1089t.e(rVar, this.f1085b.f(), this.f1085b.j(), iA2)) {
+                if (!AbstractC1090t.e(rVar, this.f1085b.f(), this.f1085b.j(), iA2)) {
                     return false;
                 }
                 E e8 = this.f1085b;

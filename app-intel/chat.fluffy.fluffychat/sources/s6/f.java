@@ -21,40 +21,40 @@ import javax.net.ssl.X509TrustManager;
 public class f extends k {
 
     /* renamed from: c, reason: collision with root package name */
-    public final Class f22461c;
+    public final Class f22467c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final j f22462d;
+    public final j f22468d;
 
     /* renamed from: e, reason: collision with root package name */
-    public final j f22463e;
+    public final j f22469e;
 
     /* renamed from: f, reason: collision with root package name */
-    public final j f22464f;
+    public final j f22470f;
 
     /* renamed from: g, reason: collision with root package name */
-    public final j f22465g;
+    public final j f22471g;
 
     /* renamed from: h, reason: collision with root package name */
-    public final c f22466h = c.b();
+    public final c f22472h = c.b();
 
     public static final class a extends u6.c {
 
         /* renamed from: a, reason: collision with root package name */
-        public final Object f22467a;
+        public final Object f22473a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final Method f22468b;
+        public final Method f22474b;
 
         public a(Object obj, Method method) {
-            this.f22467a = obj;
-            this.f22468b = method;
+            this.f22473a = obj;
+            this.f22474b = method;
         }
 
         @Override // u6.c
         public List a(List list, String str) throws SSLPeerUnverifiedException {
             try {
-                return (List) this.f22468b.invoke(this.f22467a, (X509Certificate[]) list.toArray(new X509Certificate[list.size()]), "RSA", str);
+                return (List) this.f22474b.invoke(this.f22473a, (X509Certificate[]) list.toArray(new X509Certificate[list.size()]), "RSA", str);
             } catch (IllegalAccessException e7) {
                 throw new AssertionError(e7);
             } catch (InvocationTargetException e8) {
@@ -76,20 +76,20 @@ public class f extends k {
     public static final class b implements u6.e {
 
         /* renamed from: a, reason: collision with root package name */
-        public final X509TrustManager f22469a;
+        public final X509TrustManager f22475a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final Method f22470b;
+        public final Method f22476b;
 
         public b(X509TrustManager x509TrustManager, Method method) {
-            this.f22470b = method;
-            this.f22469a = x509TrustManager;
+            this.f22476b = method;
+            this.f22475a = x509TrustManager;
         }
 
         @Override // u6.e
         public X509Certificate a(X509Certificate x509Certificate) {
             try {
-                TrustAnchor trustAnchor = (TrustAnchor) this.f22470b.invoke(this.f22469a, x509Certificate);
+                TrustAnchor trustAnchor = (TrustAnchor) this.f22476b.invoke(this.f22475a, x509Certificate);
                 if (trustAnchor != null) {
                     return trustAnchor.getTrustedCert();
                 }
@@ -108,29 +108,29 @@ public class f extends k {
                 return false;
             }
             b bVar = (b) obj;
-            return this.f22469a.equals(bVar.f22469a) && this.f22470b.equals(bVar.f22470b);
+            return this.f22475a.equals(bVar.f22475a) && this.f22476b.equals(bVar.f22476b);
         }
 
         public int hashCode() {
-            return this.f22469a.hashCode() + (this.f22470b.hashCode() * 31);
+            return this.f22475a.hashCode() + (this.f22476b.hashCode() * 31);
         }
     }
 
     public static final class c {
 
         /* renamed from: a, reason: collision with root package name */
-        public final Method f22471a;
+        public final Method f22477a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final Method f22472b;
+        public final Method f22478b;
 
         /* renamed from: c, reason: collision with root package name */
-        public final Method f22473c;
+        public final Method f22479c;
 
         public c(Method method, Method method2, Method method3) {
-            this.f22471a = method;
-            this.f22472b = method2;
-            this.f22473c = method3;
+            this.f22477a = method;
+            this.f22478b = method2;
+            this.f22479c = method3;
         }
 
         public static c b() throws NoSuchMethodException, ClassNotFoundException, SecurityException {
@@ -151,11 +151,11 @@ public class f extends k {
         }
 
         public Object a(String str) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-            Method method = this.f22471a;
+            Method method = this.f22477a;
             if (method != null) {
                 try {
                     Object objInvoke = method.invoke(null, null);
-                    this.f22472b.invoke(objInvoke, str);
+                    this.f22478b.invoke(objInvoke, str);
                     return objInvoke;
                 } catch (Exception unused) {
                 }
@@ -168,7 +168,7 @@ public class f extends k {
                 return false;
             }
             try {
-                this.f22473c.invoke(obj, null);
+                this.f22479c.invoke(obj, null);
                 return true;
             } catch (Exception unused) {
                 return false;
@@ -177,11 +177,11 @@ public class f extends k {
     }
 
     public f(Class cls, j jVar, j jVar2, j jVar3, j jVar4) {
-        this.f22461c = cls;
-        this.f22462d = jVar;
-        this.f22463e = jVar2;
-        this.f22464f = jVar3;
-        this.f22465g = jVar4;
+        this.f22467c = cls;
+        this.f22468d = jVar;
+        this.f22469e = jVar2;
+        this.f22470f = jVar3;
+        this.f22471g = jVar4;
     }
 
     public static k x() {
@@ -257,14 +257,14 @@ public class f extends k {
     @Override // s6.k
     public void g(SSLSocket sSLSocket, String str, List list) {
         if (str != null) {
-            this.f22462d.e(sSLSocket, Boolean.TRUE);
-            this.f22463e.e(sSLSocket, str);
+            this.f22468d.e(sSLSocket, Boolean.TRUE);
+            this.f22469e.e(sSLSocket, str);
         }
-        j jVar = this.f22465g;
+        j jVar = this.f22471g;
         if (jVar == null || !jVar.g(sSLSocket)) {
             return;
         }
-        this.f22465g.f(sSLSocket, k.e(list));
+        this.f22471g.f(sSLSocket, k.e(list));
     }
 
     @Override // s6.k
@@ -302,16 +302,16 @@ public class f extends k {
     @Override // s6.k
     public String o(SSLSocket sSLSocket) {
         byte[] bArr;
-        j jVar = this.f22464f;
-        if (jVar == null || !jVar.g(sSLSocket) || (bArr = (byte[]) this.f22464f.f(sSLSocket, new Object[0])) == null) {
+        j jVar = this.f22470f;
+        if (jVar == null || !jVar.g(sSLSocket) || (bArr = (byte[]) this.f22470f.f(sSLSocket, new Object[0])) == null) {
             return null;
         }
-        return new String(bArr, l6.c.f19678j);
+        return new String(bArr, l6.c.f19677j);
     }
 
     @Override // s6.k
     public Object p(String str) {
-        return this.f22466h.a(str);
+        return this.f22472h.a(str);
     }
 
     @Override // s6.k
@@ -362,7 +362,7 @@ public class f extends k {
 
     @Override // s6.k
     public void u(String str, Object obj) {
-        if (this.f22466h.c(obj)) {
+        if (this.f22472h.c(obj)) {
             return;
         }
         t(5, str, null);

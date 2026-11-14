@@ -1,6 +1,6 @@
 package androidx.appcompat.view.menu;
 
-import Z.AbstractC0684b;
+import Z.AbstractC0685b;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,7 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import androidx.appcompat.view.menu.j;
-import k.AbstractC1244a;
+import k.AbstractC1243a;
 
 /* loaded from: classes.dex */
 public final class g implements R.b {
@@ -29,7 +29,7 @@ public final class g implements R.b {
     public View f11203A;
 
     /* renamed from: B, reason: collision with root package name */
-    public AbstractC0684b f11204B;
+    public AbstractC0685b f11204B;
 
     /* renamed from: C, reason: collision with root package name */
     public MenuItem.OnActionExpandListener f11205C;
@@ -118,11 +118,11 @@ public final class g implements R.b {
     /* renamed from: D, reason: collision with root package name */
     public boolean f11206D = false;
 
-    public class a implements AbstractC0684b.InterfaceC0084b {
+    public class a implements AbstractC0685b.InterfaceC0084b {
         public a() {
         }
 
-        @Override // Z.AbstractC0684b.InterfaceC0084b
+        @Override // Z.AbstractC0685b.InterfaceC0084b
         public void onActionProviderVisibilityChanged(boolean z7) {
             g gVar = g.this;
             gVar.f11221n.J(gVar);
@@ -154,23 +154,23 @@ public final class g implements R.b {
     }
 
     @Override // R.b
-    public R.b a(AbstractC0684b abstractC0684b) {
-        AbstractC0684b abstractC0684b2 = this.f11204B;
-        if (abstractC0684b2 != null) {
-            abstractC0684b2.g();
+    public R.b a(AbstractC0685b abstractC0685b) {
+        AbstractC0685b abstractC0685b2 = this.f11204B;
+        if (abstractC0685b2 != null) {
+            abstractC0685b2.g();
         }
         this.f11203A = null;
-        this.f11204B = abstractC0684b;
+        this.f11204B = abstractC0685b;
         this.f11221n.K(true);
-        AbstractC0684b abstractC0684b3 = this.f11204B;
-        if (abstractC0684b3 != null) {
-            abstractC0684b3.i(new a());
+        AbstractC0685b abstractC0685b3 = this.f11204B;
+        if (abstractC0685b3 != null) {
+            abstractC0685b3.i(new a());
         }
         return this;
     }
 
     @Override // R.b
-    public AbstractC0684b b() {
+    public AbstractC0685b b() {
         return this.f11204B;
     }
 
@@ -238,11 +238,11 @@ public final class g implements R.b {
         if (view != null) {
             return view;
         }
-        AbstractC0684b abstractC0684b = this.f11204B;
-        if (abstractC0684b == null) {
+        AbstractC0685b abstractC0685b = this.f11204B;
+        if (abstractC0685b == null) {
             return null;
         }
-        View viewC = abstractC0684b.c(this);
+        View viewC = abstractC0685b.c(this);
         this.f11203A = viewC;
         return viewC;
     }
@@ -276,7 +276,7 @@ public final class g implements R.b {
         if (this.f11220m == 0) {
             return null;
         }
-        Drawable drawableB = AbstractC1244a.b(this.f11221n.u(), this.f11220m);
+        Drawable drawableB = AbstractC1243a.b(this.f11221n.u(), this.f11220m);
         this.f11220m = 0;
         this.f11219l = drawableB;
         return e(drawableB);
@@ -403,15 +403,15 @@ public final class g implements R.b {
 
     @Override // android.view.MenuItem
     public boolean isVisible() {
-        AbstractC0684b abstractC0684b = this.f11204B;
-        return (abstractC0684b == null || !abstractC0684b.f()) ? (this.f11232y & 8) == 0 : (this.f11232y & 8) == 0 && this.f11204B.b();
+        AbstractC0685b abstractC0685b = this.f11204B;
+        return (abstractC0685b == null || !abstractC0685b.f()) ? (this.f11232y & 8) == 0 : (this.f11232y & 8) == 0 && this.f11204B.b();
     }
 
     public boolean j() {
-        AbstractC0684b abstractC0684b;
+        AbstractC0685b abstractC0685b;
         if ((this.f11233z & 8) != 0) {
-            if (this.f11203A == null && (abstractC0684b = this.f11204B) != null) {
-                this.f11203A = abstractC0684b.c(this);
+            if (this.f11203A == null && (abstractC0685b = this.f11204B) != null) {
+                this.f11203A = abstractC0685b.c(this);
             }
             if (this.f11203A != null) {
                 return true;
@@ -442,8 +442,8 @@ public final class g implements R.b {
                 Log.e("MenuItemImpl", "Can't find activity to handle intent; ignoring", e7);
             }
         }
-        AbstractC0684b abstractC0684b = this.f11204B;
-        return abstractC0684b != null && abstractC0684b.d();
+        AbstractC0685b abstractC0685b = this.f11204B;
+        return abstractC0685b != null && abstractC0685b.d();
     }
 
     public boolean l() {

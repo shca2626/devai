@@ -62,7 +62,7 @@ public class k {
     }
 
     public static b c(Context context, int i7, int i8, int i9) {
-        return d(context, i7, i8, new C1052a(i9));
+        return d(context, i7, i8, new C1053a(i9));
     }
 
     public static b d(Context context, int i7, int i8, f3.c cVar) {
@@ -92,7 +92,7 @@ public class k {
     }
 
     public static b f(Context context, AttributeSet attributeSet, int i7, int i8, int i9) {
-        return g(context, attributeSet, i7, i8, new C1052a(i9));
+        return g(context, attributeSet, i7, i8, new C1053a(i9));
     }
 
     public static b g(Context context, AttributeSet attributeSet, int i7, int i8, f3.c cVar) {
@@ -108,7 +108,7 @@ public class k {
         if (typedValuePeekValue != null) {
             int i8 = typedValuePeekValue.type;
             if (i8 == 5) {
-                return new C1052a(TypedValue.complexToDimensionPixelSize(typedValuePeekValue.data, typedArray.getResources().getDisplayMetrics()));
+                return new C1053a(TypedValue.complexToDimensionPixelSize(typedValuePeekValue.data, typedArray.getResources().getDisplayMetrics()));
             }
             if (i8 == 6) {
                 return new i(typedValuePeekValue.getFraction(1.0f, 1.0f));
@@ -245,10 +245,10 @@ public class k {
             this.f15786b = h.b();
             this.f15787c = h.b();
             this.f15788d = h.b();
-            this.f15789e = new C1052a(0.0f);
-            this.f15790f = new C1052a(0.0f);
-            this.f15791g = new C1052a(0.0f);
-            this.f15792h = new C1052a(0.0f);
+            this.f15789e = new C1053a(0.0f);
+            this.f15790f = new C1053a(0.0f);
+            this.f15791g = new C1053a(0.0f);
+            this.f15792h = new C1053a(0.0f);
             this.f15793i = h.c();
             this.f15794j = h.c();
             this.f15795k = h.c();
@@ -266,7 +266,7 @@ public class k {
         }
 
         public b A(float f7) {
-            this.f15789e = new C1052a(f7);
+            this.f15789e = new C1053a(f7);
             return this;
         }
 
@@ -289,7 +289,7 @@ public class k {
         }
 
         public b E(float f7) {
-            this.f15790f = new C1052a(f7);
+            this.f15790f = new C1053a(f7);
             return this;
         }
 
@@ -324,7 +324,7 @@ public class k {
         }
 
         public b s(float f7) {
-            this.f15792h = new C1052a(f7);
+            this.f15792h = new C1053a(f7);
             return this;
         }
 
@@ -347,7 +347,7 @@ public class k {
         }
 
         public b w(float f7) {
-            this.f15791g = new C1052a(f7);
+            this.f15791g = new C1053a(f7);
             return this;
         }
 
@@ -374,10 +374,10 @@ public class k {
             this.f15786b = h.b();
             this.f15787c = h.b();
             this.f15788d = h.b();
-            this.f15789e = new C1052a(0.0f);
-            this.f15790f = new C1052a(0.0f);
-            this.f15791g = new C1052a(0.0f);
-            this.f15792h = new C1052a(0.0f);
+            this.f15789e = new C1053a(0.0f);
+            this.f15790f = new C1053a(0.0f);
+            this.f15791g = new C1053a(0.0f);
+            this.f15792h = new C1053a(0.0f);
             this.f15793i = h.c();
             this.f15794j = h.c();
             this.f15795k = h.c();
@@ -402,10 +402,10 @@ public class k {
         this.f15774b = h.b();
         this.f15775c = h.b();
         this.f15776d = h.b();
-        this.f15777e = new C1052a(0.0f);
-        this.f15778f = new C1052a(0.0f);
-        this.f15779g = new C1052a(0.0f);
-        this.f15780h = new C1052a(0.0f);
+        this.f15777e = new C1053a(0.0f);
+        this.f15778f = new C1053a(0.0f);
+        this.f15779g = new C1053a(0.0f);
+        this.f15780h = new C1053a(0.0f);
         this.f15781i = h.c();
         this.f15782j = h.c();
         this.f15783k = h.c();

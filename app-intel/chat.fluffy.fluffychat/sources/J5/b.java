@@ -3,7 +3,7 @@ package J5;
 import java.io.Closeable;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import y5.C1806a;
+import y5.C1805a;
 
 /* loaded from: classes.dex */
 public abstract class b {
@@ -16,7 +16,7 @@ public abstract class b {
             try {
                 closeable.close();
             } catch (Throwable th2) {
-                C1806a.a(th, th2);
+                C1805a.a(th, th2);
             }
         }
     }

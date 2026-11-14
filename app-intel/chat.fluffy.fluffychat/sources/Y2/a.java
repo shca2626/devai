@@ -1,10 +1,10 @@
 package Y2;
 
-import O.AbstractC0562a;
+import O.AbstractC0563a;
 import V2.b;
 import android.content.Context;
 import android.graphics.Color;
-import c3.C0902b;
+import c3.C0903b;
 
 /* loaded from: classes.dex */
 public class a {
@@ -28,7 +28,7 @@ public class a {
     public final float f9861e;
 
     public a(Context context) {
-        this(C0902b.b(context, O2.a.f6753p, false), b.b(context, O2.a.f6752o, 0), b.b(context, O2.a.f6751n, 0), b.b(context, O2.a.f6748k, 0), context.getResources().getDisplayMetrics().density);
+        this(C0903b.b(context, O2.a.f6753p, false), b.b(context, O2.a.f6752o, 0), b.b(context, O2.a.f6751n, 0), b.b(context, O2.a.f6748k, 0), context.getResources().getDisplayMetrics().density);
     }
 
     public float a(float f7) {
@@ -42,11 +42,11 @@ public class a {
         int i8;
         float fA = a(f7);
         int iAlpha = Color.alpha(i7);
-        int iH = b.h(AbstractC0562a.j(i7, 255), this.f9858b, fA);
+        int iH = b.h(AbstractC0563a.j(i7, 255), this.f9858b, fA);
         if (fA > 0.0f && (i8 = this.f9859c) != 0) {
-            iH = b.g(iH, AbstractC0562a.j(i8, f9856f));
+            iH = b.g(iH, AbstractC0563a.j(i8, f9856f));
         }
-        return AbstractC0562a.j(iH, iAlpha);
+        return AbstractC0563a.j(iH, iAlpha);
     }
 
     public int c(int i7, float f7) {
@@ -58,7 +58,7 @@ public class a {
     }
 
     public final boolean e(int i7) {
-        return AbstractC0562a.j(i7, 255) == this.f9860d;
+        return AbstractC0563a.j(i7, 255) == this.f9860d;
     }
 
     public a(boolean z7, int i7, int i8, int i9, float f7) {

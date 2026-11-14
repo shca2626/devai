@@ -1,6 +1,6 @@
 package G0;
 
-import E0.AbstractC0332s;
+import E0.AbstractC0333s;
 import android.text.TextUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,7 +36,7 @@ public abstract class u {
             try {
                 j7 = Long.parseLong(str);
             } catch (NumberFormatException unused) {
-                AbstractC0332s.c("HttpUtil", "Unexpected Content-Length [" + str + "]");
+                AbstractC0333s.c("HttpUtil", "Unexpected Content-Length [" + str + "]");
             }
         }
         if (TextUtils.isEmpty(str2)) {
@@ -54,10 +54,10 @@ public abstract class u {
             if (j7 == j8) {
                 return j7;
             }
-            AbstractC0332s.h("HttpUtil", "Inconsistent headers [" + str + "] [" + str2 + "]");
+            AbstractC0333s.h("HttpUtil", "Inconsistent headers [" + str + "] [" + str2 + "]");
             return Math.max(j7, j8);
         } catch (NumberFormatException unused2) {
-            AbstractC0332s.c("HttpUtil", "Unexpected Content-Range [" + str2 + "]");
+            AbstractC0333s.c("HttpUtil", "Unexpected Content-Range [" + str2 + "]");
             return j7;
         }
     }

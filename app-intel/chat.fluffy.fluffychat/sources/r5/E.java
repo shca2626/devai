@@ -1,16 +1,16 @@
 package r5;
 
 import java.util.List;
-import z5.C1880n;
+import z5.C1883n;
 
 /* loaded from: classes.dex */
 public final class E {
 
     /* renamed from: b, reason: collision with root package name */
-    public static final a f22186b = new a(null);
+    public static final a f22192b = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final long f22187a;
+    public final long f22193a;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -29,15 +29,15 @@ public final class E {
     }
 
     public E(long j7) {
-        this.f22187a = j7;
+        this.f22193a = j7;
     }
 
     public final long a() {
-        return this.f22187a;
+        return this.f22193a;
     }
 
     public final List b() {
-        return C1880n.d(Long.valueOf(this.f22187a));
+        return C1883n.d(Long.valueOf(this.f22193a));
     }
 
     public boolean equals(Object obj) {
@@ -47,14 +47,14 @@ public final class E {
         if (this == obj) {
             return true;
         }
-        return C1593x.f22331a.a(Long.valueOf(this.f22187a), Long.valueOf(((E) obj).f22187a));
+        return C1592x.f22337a.a(Long.valueOf(this.f22193a), Long.valueOf(((E) obj).f22193a));
     }
 
     public int hashCode() {
-        return (E.class.hashCode() * 31) + C1593x.f22331a.b(Long.valueOf(this.f22187a));
+        return (E.class.hashCode() * 31) + C1592x.f22337a.b(Long.valueOf(this.f22193a));
     }
 
     public String toString() {
-        return "PlatformVideoViewCreationParams(playerId=" + this.f22187a + ")";
+        return "PlatformVideoViewCreationParams(playerId=" + this.f22193a + ")";
     }
 }

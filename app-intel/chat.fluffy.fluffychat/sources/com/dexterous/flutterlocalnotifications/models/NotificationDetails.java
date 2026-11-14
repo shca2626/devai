@@ -9,15 +9,15 @@ import com.dexterous.flutterlocalnotifications.models.styles.DefaultStyleInforma
 import com.dexterous.flutterlocalnotifications.models.styles.InboxStyleInformation;
 import com.dexterous.flutterlocalnotifications.models.styles.MessagingStyleInformation;
 import com.dexterous.flutterlocalnotifications.models.styles.StyleInformation;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import v3.InterfaceC1683c;
+import v3.InterfaceC1682c;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class NotificationDetails implements Serializable {
     private static final String ACTIONS = "actions";
@@ -169,7 +169,7 @@ public class NotificationDetails implements Serializable {
     public Integer repeatIntervalMilliseconds;
     public Time repeatTime;
 
-    @InterfaceC1683c(alternate = {"allowWhileIdle"}, value = SCHEDULE_MODE)
+    @InterfaceC1682c(alternate = {"allowWhileIdle"}, value = SCHEDULE_MODE)
     public ScheduleMode scheduleMode;
     public String scheduledDateTime;
     public ScheduledNotificationRepeatFrequency scheduledNotificationRepeatFrequency;

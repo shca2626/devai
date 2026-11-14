@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 import android.util.Xml;
-import j.AbstractC1214e;
+import j.AbstractC1213e;
 import j.t;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,19 +21,19 @@ public abstract class t {
     public static class a implements Executor {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Object f18599l = new Object();
+        public final Object f18598l = new Object();
 
         /* renamed from: m, reason: collision with root package name */
-        public final Queue f18600m = new ArrayDeque();
+        public final Queue f18599m = new ArrayDeque();
 
         /* renamed from: n, reason: collision with root package name */
-        public final Executor f18601n;
+        public final Executor f18600n;
 
         /* renamed from: o, reason: collision with root package name */
-        public Runnable f18602o;
+        public Runnable f18601o;
 
         public a(Executor executor) {
-            this.f18601n = executor;
+            this.f18600n = executor;
         }
 
         public static /* synthetic */ void a(a aVar, Runnable runnable) {
@@ -46,12 +46,12 @@ public abstract class t {
         }
 
         public void b() {
-            synchronized (this.f18599l) {
+            synchronized (this.f18598l) {
                 try {
-                    Runnable runnable = (Runnable) this.f18600m.poll();
-                    this.f18602o = runnable;
+                    Runnable runnable = (Runnable) this.f18599m.poll();
+                    this.f18601o = runnable;
                     if (runnable != null) {
-                        this.f18601n.execute(runnable);
+                        this.f18600n.execute(runnable);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -61,15 +61,15 @@ public abstract class t {
 
         @Override // java.util.concurrent.Executor
         public void execute(final Runnable runnable) {
-            synchronized (this.f18599l) {
+            synchronized (this.f18598l) {
                 try {
-                    this.f18600m.add(new Runnable() { // from class: j.s
+                    this.f18599m.add(new Runnable() { // from class: j.s
                         @Override // java.lang.Runnable
                         public final void run() {
-                            t.a.a(this.f18597l, runnable);
+                            t.a.a(this.f18596l, runnable);
                         }
                     });
-                    if (this.f18602o == null) {
+                    if (this.f18601o == null) {
                         b();
                     }
                 } catch (Throwable th) {
@@ -214,11 +214,11 @@ public abstract class t {
         if (Build.VERSION.SDK_INT >= 33) {
             ComponentName componentName = new ComponentName(context, "androidx.appcompat.app.AppLocalesMetadataHolderService");
             if (context.getPackageManager().getComponentEnabledSetting(componentName) != 1) {
-                if (AbstractC1214e.k().e()) {
+                if (AbstractC1213e.k().e()) {
                     String strB = b(context);
                     Object systemService = context.getSystemService("locale");
                     if (systemService != null) {
-                        AbstractC1214e.b.b(systemService, AbstractC1214e.a.a(strB));
+                        AbstractC1213e.b.b(systemService, AbstractC1213e.a.a(strB));
                     }
                 }
                 context.getPackageManager().setComponentEnabledSetting(componentName, 1, 1);

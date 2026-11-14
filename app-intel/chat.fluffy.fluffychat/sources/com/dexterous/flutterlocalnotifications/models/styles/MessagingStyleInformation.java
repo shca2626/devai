@@ -2,10 +2,10 @@ package com.dexterous.flutterlocalnotifications.models.styles;
 
 import com.dexterous.flutterlocalnotifications.models.MessageDetails;
 import com.dexterous.flutterlocalnotifications.models.PersonDetails;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import java.util.ArrayList;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class MessagingStyleInformation extends DefaultStyleInformation {
     public String conversationTitle;

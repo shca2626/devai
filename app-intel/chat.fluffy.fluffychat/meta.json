@@ -1,8 +1,8 @@
 {
  "pkg": "chat.fluffy.fluffychat",
  "appName": "FluffyChat Matrix Messenger",
- "version": "2.11.4",
- "analyzedAt": "2026-11-10T21:51:25.177Z",
+ "version": "2.11.5",
+ "analyzedAt": "2026-11-14T18:50:33.583Z",
  "store": {
   "appId": "chat.fluffy.fluffychat",
   "title": "FluffyChat Matrix Messenger",
@@ -15,7 +15,7 @@
   "androidVersion": "7.0",
   "installs": "100,000+",
   "score": 4.07,
-  "ratings": 952,
+  "ratings": 957,
   "reviews": 67,
   "released": "Sep 17, 2020",
   "updated": 1793960931000,
@@ -36,19 +36,19 @@
   ]
  },
  "acquire": {
-  "file": "/home/z/my-project/.app-intel/cmwb82ch90003nfz3tt145kja/chat.fluffy.fluffychat.apks",
-  "sha256": "e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5",
-  "sizeBytes": 197812230,
+  "file": "/home/z/my-project/.app-intel/cmwgrdmay0001rpvibe5odeur/chat.fluffy.fluffychat.apks",
+  "sha256": "a40f3876ec60adec4eb44ee91467b3094708dca0d4a38bb97b725a13367bd833",
+  "sizeBytes": 199696390,
   "bundle": [
    "base.apk"
   ],
-  "versionName": "2.11.4",
-  "versionCode": 3576,
-  "apiSha256": "e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5",
+  "versionName": "2.11.5",
+  "versionCode": 3578,
+  "apiSha256": "a40f3876ec60adec4eb44ee91467b3094708dca0d4a38bb97b725a13367bd833",
   "originality": "unknown",
   "source": "fdroid-open",
   "provider": "official F-Droid repository",
   "fromGooglePlay": false,
-  "acquiredAt": "2026-11-10T21:50:14Z"
+  "acquiredAt": "2026-11-14T18:49:37Z"
  }
 }

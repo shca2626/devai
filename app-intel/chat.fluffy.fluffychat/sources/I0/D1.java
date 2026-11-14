@@ -1,6 +1,6 @@
 package I0;
 
-import E0.InterfaceC0321g;
+import E0.InterfaceC0322g;
 import I0.B1;
 import Y0.F;
 
@@ -19,7 +19,7 @@ public interface D1 extends B1.b {
 
     Y0.e0 J();
 
-    void K(int i7, J0.G1 g12, InterfaceC0321g interfaceC0321g);
+    void K(int i7, J0.G1 g12, InterfaceC0322g interfaceC0322g);
 
     void L();
 
@@ -31,7 +31,7 @@ public interface D1 extends B1.b {
         return false;
     }
 
-    InterfaceC0364e1 R();
+    InterfaceC0365e1 R();
 
     void a();
 

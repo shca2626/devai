@@ -3,7 +3,7 @@ package m6;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import k6.A;
-import k6.C1290d;
+import k6.C1289d;
 import k6.r;
 import k6.y;
 
@@ -11,74 +11,74 @@ import k6.y;
 public final class c {
 
     /* renamed from: a, reason: collision with root package name */
-    public final y f19773a;
+    public final y f19772a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final A f19774b;
+    public final A f19773b;
 
     public static class a {
 
         /* renamed from: a, reason: collision with root package name */
-        public final long f19775a;
+        public final long f19774a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final y f19776b;
+        public final y f19775b;
 
         /* renamed from: c, reason: collision with root package name */
-        public final A f19777c;
+        public final A f19776c;
 
         /* renamed from: d, reason: collision with root package name */
-        public Date f19778d;
+        public Date f19777d;
 
         /* renamed from: e, reason: collision with root package name */
-        public String f19779e;
+        public String f19778e;
 
         /* renamed from: f, reason: collision with root package name */
-        public Date f19780f;
+        public Date f19779f;
 
         /* renamed from: g, reason: collision with root package name */
-        public String f19781g;
+        public String f19780g;
 
         /* renamed from: h, reason: collision with root package name */
-        public Date f19782h;
+        public Date f19781h;
 
         /* renamed from: i, reason: collision with root package name */
-        public long f19783i;
+        public long f19782i;
 
         /* renamed from: j, reason: collision with root package name */
-        public long f19784j;
+        public long f19783j;
 
         /* renamed from: k, reason: collision with root package name */
-        public String f19785k;
+        public String f19784k;
 
         /* renamed from: l, reason: collision with root package name */
-        public int f19786l;
+        public int f19785l;
 
         public a(long j7, y yVar, A a7) {
-            this.f19786l = -1;
-            this.f19775a = j7;
-            this.f19776b = yVar;
-            this.f19777c = a7;
+            this.f19785l = -1;
+            this.f19774a = j7;
+            this.f19775b = yVar;
+            this.f19776c = a7;
             if (a7 != null) {
-                this.f19783i = a7.F();
-                this.f19784j = a7.C();
+                this.f19782i = a7.F();
+                this.f19783j = a7.C();
                 r rVarO = a7.o();
                 int iG = rVarO.g();
                 for (int i7 = 0; i7 < iG; i7++) {
                     String strE = rVarO.e(i7);
                     String strH = rVarO.h(i7);
                     if ("Date".equalsIgnoreCase(strE)) {
-                        this.f19778d = o6.d.b(strH);
-                        this.f19779e = strH;
+                        this.f19777d = o6.d.b(strH);
+                        this.f19778e = strH;
                     } else if ("Expires".equalsIgnoreCase(strE)) {
-                        this.f19782h = o6.d.b(strH);
+                        this.f19781h = o6.d.b(strH);
                     } else if ("Last-Modified".equalsIgnoreCase(strE)) {
-                        this.f19780f = o6.d.b(strH);
-                        this.f19781g = strH;
+                        this.f19779f = o6.d.b(strH);
+                        this.f19780g = strH;
                     } else if ("ETag".equalsIgnoreCase(strE)) {
-                        this.f19785k = strH;
+                        this.f19784k = strH;
                     } else if ("Age".equalsIgnoreCase(strE)) {
-                        this.f19786l = o6.e.f(strH, -1);
+                        this.f19785l = o6.e.f(strH, -1);
                     }
                 }
             }
@@ -89,31 +89,31 @@ public final class c {
         }
 
         public final long a() {
-            Date date = this.f19778d;
-            long jMax = date != null ? Math.max(0L, this.f19784j - date.getTime()) : 0L;
-            int i7 = this.f19786l;
+            Date date = this.f19777d;
+            long jMax = date != null ? Math.max(0L, this.f19783j - date.getTime()) : 0L;
+            int i7 = this.f19785l;
             if (i7 != -1) {
                 jMax = Math.max(jMax, TimeUnit.SECONDS.toMillis(i7));
             }
-            long j7 = this.f19784j;
-            return jMax + (j7 - this.f19783i) + (this.f19775a - j7);
+            long j7 = this.f19783j;
+            return jMax + (j7 - this.f19782i) + (this.f19774a - j7);
         }
 
         public final long b() {
-            if (this.f19777c.d().d() != -1) {
+            if (this.f19776c.d().d() != -1) {
                 return TimeUnit.SECONDS.toMillis(r0.d());
             }
-            if (this.f19782h != null) {
-                Date date = this.f19778d;
-                long time = this.f19782h.getTime() - (date != null ? date.getTime() : this.f19784j);
+            if (this.f19781h != null) {
+                Date date = this.f19777d;
+                long time = this.f19781h.getTime() - (date != null ? date.getTime() : this.f19783j);
                 if (time > 0) {
                     return time;
                 }
                 return 0L;
             }
-            if (this.f19780f != null && this.f19777c.E().i().x() == null) {
-                Date date2 = this.f19778d;
-                long time2 = (date2 != null ? date2.getTime() : this.f19783i) - this.f19780f.getTime();
+            if (this.f19779f != null && this.f19776c.E().i().x() == null) {
+                Date date2 = this.f19777d;
+                long time2 = (date2 != null ? date2.getTime() : this.f19782i) - this.f19779f.getTime();
                 if (time2 > 0) {
                     return time2 / 10;
                 }
@@ -123,39 +123,39 @@ public final class c {
 
         public c c() {
             c cVarD = d();
-            return (cVarD.f19773a == null || !this.f19776b.b().j()) ? cVarD : new c(null, null);
+            return (cVarD.f19772a == null || !this.f19775b.b().j()) ? cVarD : new c(null, null);
         }
 
         public final c d() {
             String str;
-            if (this.f19777c == null) {
-                return new c(this.f19776b, null);
+            if (this.f19776c == null) {
+                return new c(this.f19775b, null);
             }
-            if (this.f19776b.f() && this.f19777c.i() == null) {
-                return new c(this.f19776b, null);
+            if (this.f19775b.f() && this.f19776c.i() == null) {
+                return new c(this.f19775b, null);
             }
-            if (!c.a(this.f19777c, this.f19776b)) {
-                return new c(this.f19776b, null);
+            if (!c.a(this.f19776c, this.f19775b)) {
+                return new c(this.f19775b, null);
             }
-            C1290d c1290dB = this.f19776b.b();
-            if (c1290dB.h() || e(this.f19776b)) {
-                return new c(this.f19776b, null);
+            C1289d c1289dB = this.f19775b.b();
+            if (c1289dB.h() || e(this.f19775b)) {
+                return new c(this.f19775b, null);
             }
-            C1290d c1290dD = this.f19777c.d();
+            C1289d c1289dD = this.f19776c.d();
             long jA = a();
             long jB = b();
-            if (c1290dB.d() != -1) {
-                jB = Math.min(jB, TimeUnit.SECONDS.toMillis(c1290dB.d()));
+            if (c1289dB.d() != -1) {
+                jB = Math.min(jB, TimeUnit.SECONDS.toMillis(c1289dB.d()));
             }
             long millis = 0;
-            long millis2 = c1290dB.f() != -1 ? TimeUnit.SECONDS.toMillis(c1290dB.f()) : 0L;
-            if (!c1290dD.g() && c1290dB.e() != -1) {
-                millis = TimeUnit.SECONDS.toMillis(c1290dB.e());
+            long millis2 = c1289dB.f() != -1 ? TimeUnit.SECONDS.toMillis(c1289dB.f()) : 0L;
+            if (!c1289dD.g() && c1289dB.e() != -1) {
+                millis = TimeUnit.SECONDS.toMillis(c1289dB.e());
             }
-            if (!c1290dD.h()) {
+            if (!c1289dD.h()) {
                 long j7 = millis2 + jA;
                 if (j7 < millis + jB) {
-                    A.a aVarX = this.f19777c.x();
+                    A.a aVarX = this.f19776c.x();
                     if (j7 >= jB) {
                         aVarX.a("Warning", "110 HttpURLConnection \"Response is stale\"");
                     }
@@ -165,33 +165,33 @@ public final class c {
                     return new c(null, aVarX.c());
                 }
             }
-            String str2 = this.f19785k;
+            String str2 = this.f19784k;
             if (str2 != null) {
                 str = "If-None-Match";
             } else {
-                if (this.f19780f != null) {
-                    str2 = this.f19781g;
+                if (this.f19779f != null) {
+                    str2 = this.f19780g;
                 } else {
-                    if (this.f19778d == null) {
-                        return new c(this.f19776b, null);
+                    if (this.f19777d == null) {
+                        return new c(this.f19775b, null);
                     }
-                    str2 = this.f19779e;
+                    str2 = this.f19778e;
                 }
                 str = "If-Modified-Since";
             }
-            r.a aVarF = this.f19776b.e().f();
-            l6.a.f19667a.b(aVarF, str, str2);
-            return new c(this.f19776b.h().e(aVarF.d()).b(), this.f19777c);
+            r.a aVarF = this.f19775b.e().f();
+            l6.a.f19666a.b(aVarF, str, str2);
+            return new c(this.f19775b.h().e(aVarF.d()).b(), this.f19776c);
         }
 
         public final boolean f() {
-            return this.f19777c.d().d() == -1 && this.f19782h == null;
+            return this.f19776c.d().d() == -1 && this.f19781h == null;
         }
     }
 
     public c(y yVar, A a7) {
-        this.f19773a = yVar;
-        this.f19774b = a7;
+        this.f19772a = yVar;
+        this.f19773b = a7;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0056, code lost:

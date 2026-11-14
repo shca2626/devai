@@ -9,21 +9,21 @@ public enum b {
 
 
     /* renamed from: l, reason: collision with root package name */
-    public final boolean f23458l;
+    public final boolean f23464l;
 
     /* renamed from: m, reason: collision with root package name */
-    public final boolean f23459m;
+    public final boolean f23465m;
 
     b(boolean z7, boolean z8) {
-        this.f23458l = z7;
-        this.f23459m = z8;
+        this.f23464l = z7;
+        this.f23465m = z8;
     }
 
     public final boolean d() {
-        return this.f23458l;
+        return this.f23464l;
     }
 
     public final boolean e() {
-        return this.f23459m;
+        return this.f23465m;
     }
 }

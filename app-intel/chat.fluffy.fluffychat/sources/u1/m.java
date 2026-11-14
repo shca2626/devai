@@ -7,15 +7,15 @@ import java.util.Objects;
 public final class m extends i {
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f22776b;
+    public final String f22782b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final byte[] f22777c;
+    public final byte[] f22783c;
 
     public m(String str, byte[] bArr) {
         super("PRIV");
-        this.f22776b = str;
-        this.f22777c = bArr;
+        this.f22782b = str;
+        this.f22783c = bArr;
     }
 
     public boolean equals(Object obj) {
@@ -24,7 +24,7 @@ public final class m extends i {
         }
         if (obj != null && m.class == obj.getClass()) {
             m mVar = (m) obj;
-            if (Objects.equals(this.f22776b, mVar.f22776b) && Arrays.equals(this.f22777c, mVar.f22777c)) {
+            if (Objects.equals(this.f22782b, mVar.f22782b) && Arrays.equals(this.f22783c, mVar.f22783c)) {
                 return true;
             }
         }
@@ -32,12 +32,12 @@ public final class m extends i {
     }
 
     public int hashCode() {
-        String str = this.f22776b;
-        return ((527 + (str != null ? str.hashCode() : 0)) * 31) + Arrays.hashCode(this.f22777c);
+        String str = this.f22782b;
+        return ((527 + (str != null ? str.hashCode() : 0)) * 31) + Arrays.hashCode(this.f22783c);
     }
 
     @Override // u1.i
     public String toString() {
-        return this.f22766a + ": owner=" + this.f22776b;
+        return this.f22772a + ": owner=" + this.f22782b;
     }
 }

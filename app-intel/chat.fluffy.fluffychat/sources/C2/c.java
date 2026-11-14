@@ -5,17 +5,17 @@ import android.content.ContextWrapper;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
-import androidx.lifecycle.AbstractC0804j;
-import androidx.lifecycle.InterfaceC0808n;
+import androidx.lifecycle.AbstractC0805j;
+import androidx.lifecycle.InterfaceC0809n;
 import java.io.IOException;
-import k.AbstractC1244a;
+import k.AbstractC1243a;
 import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public abstract class c {
     public static final Drawable a(Context context, int i7) {
         M5.m.e(context, "<this>");
-        Drawable drawableB = AbstractC1244a.b(context, i7);
+        Drawable drawableB = AbstractC1243a.b(context, i7);
         if (drawableB != null) {
             return drawableB;
         }
@@ -31,15 +31,15 @@ public abstract class c {
         throw new IllegalStateException(M5.m.j("Invalid resource ID: ", Integer.valueOf(i7)).toString());
     }
 
-    public static final AbstractC0804j c(Context context) {
+    public static final AbstractC0805j c(Context context) {
         Object baseContext = context;
-        while (!(baseContext instanceof InterfaceC0808n)) {
+        while (!(baseContext instanceof InterfaceC0809n)) {
             if (!(baseContext instanceof ContextWrapper)) {
                 return null;
             }
             baseContext = ((ContextWrapper) baseContext).getBaseContext();
         }
-        return ((InterfaceC0808n) baseContext).a();
+        return ((InterfaceC0809n) baseContext).a();
     }
 
     public static final Drawable d(Context context, Resources resources, int i7) throws XmlPullParserException, Resources.NotFoundException, IOException {

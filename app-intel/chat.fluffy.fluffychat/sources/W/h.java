@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import y.C1796j;
-import y.C1797k;
+import y.C1795j;
+import y.C1796k;
 
 /* loaded from: classes.dex */
 public abstract class h {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final C1796j f8911a = new C1796j(16);
+    public static final C1795j f8911a = new C1795j(16);
 
     /* renamed from: b, reason: collision with root package name */
     public static final ExecutorService f8912b = j.a("fonts-androidx", 10, 10000);
@@ -27,7 +27,7 @@ public abstract class h {
     public static final Object f8913c = new Object();
 
     /* renamed from: d, reason: collision with root package name */
-    public static final C1797k f8914d = new C1797k();
+    public static final C1796k f8914d = new C1796k();
 
     public class a implements Callable {
 
@@ -122,12 +122,12 @@ public abstract class h {
         public void accept(e eVar) {
             synchronized (h.f8913c) {
                 try {
-                    C1797k c1797k = h.f8914d;
-                    ArrayList arrayList = (ArrayList) c1797k.get(this.f8924a);
+                    C1796k c1796k = h.f8914d;
+                    ArrayList arrayList = (ArrayList) c1796k.get(this.f8924a);
                     if (arrayList == null) {
                         return;
                     }
-                    c1797k.remove(this.f8924a);
+                    c1796k.remove(this.f8924a);
                     for (int i7 = 0; i7 < arrayList.size(); i7++) {
                         ((Y.a) arrayList.get(i7)).accept(eVar);
                     }
@@ -175,8 +175,8 @@ public abstract class h {
     public static e c(String str, Context context, List list, int i7) {
         Y1.a.c("getFontSync");
         try {
-            C1796j c1796j = f8911a;
-            Typeface typeface = (Typeface) c1796j.c(str);
+            C1795j c1795j = f8911a;
+            Typeface typeface = (Typeface) c1795j.c(str);
             if (typeface != null) {
                 return new e(typeface);
             }
@@ -189,7 +189,7 @@ public abstract class h {
             if (typefaceB == null) {
                 return new e(-3);
             }
-            c1796j.e(str, typefaceB);
+            c1795j.e(str, typefaceB);
             return new e(typefaceB);
         } catch (PackageManager.NameNotFoundException unused) {
             return new e(-1);
@@ -208,15 +208,15 @@ public abstract class h {
         b bVar = new b(aVar);
         synchronized (f8913c) {
             try {
-                C1797k c1797k = f8914d;
-                ArrayList arrayList = (ArrayList) c1797k.get(strA);
+                C1796k c1796k = f8914d;
+                ArrayList arrayList = (ArrayList) c1796k.get(strA);
                 if (arrayList != null) {
                     arrayList.add(bVar);
                     return null;
                 }
                 ArrayList arrayList2 = new ArrayList();
                 arrayList2.add(bVar);
-                c1797k.put(strA, arrayList2);
+                c1796k.put(strA, arrayList2);
                 c cVar = new c(strA, context, list, i7);
                 if (executor == null) {
                     executor = f8912b;

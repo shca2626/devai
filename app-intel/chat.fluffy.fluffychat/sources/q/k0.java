@@ -12,82 +12,82 @@ import android.view.accessibility.AccessibilityManager;
 public class k0 implements View.OnLongClickListener, View.OnHoverListener, View.OnAttachStateChangeListener {
 
     /* renamed from: v, reason: collision with root package name */
-    public static k0 f21298v;
+    public static k0 f21304v;
 
     /* renamed from: w, reason: collision with root package name */
-    public static k0 f21299w;
+    public static k0 f21305w;
 
     /* renamed from: l, reason: collision with root package name */
-    public final View f21300l;
+    public final View f21306l;
 
     /* renamed from: m, reason: collision with root package name */
-    public final CharSequence f21301m;
+    public final CharSequence f21307m;
 
     /* renamed from: n, reason: collision with root package name */
-    public final int f21302n;
+    public final int f21308n;
 
     /* renamed from: o, reason: collision with root package name */
-    public final Runnable f21303o = new Runnable() { // from class: q.i0
+    public final Runnable f21309o = new Runnable() { // from class: q.i0
         @Override // java.lang.Runnable
         public final void run() throws Resources.NotFoundException {
-            this.f21280l.h(false);
+            this.f21286l.h(false);
         }
     };
 
     /* renamed from: p, reason: collision with root package name */
-    public final Runnable f21304p = new Runnable() { // from class: q.j0
+    public final Runnable f21310p = new Runnable() { // from class: q.j0
         @Override // java.lang.Runnable
         public final void run() {
-            this.f21290l.d();
+            this.f21296l.d();
         }
     };
 
     /* renamed from: q, reason: collision with root package name */
-    public int f21305q;
+    public int f21311q;
 
     /* renamed from: r, reason: collision with root package name */
-    public int f21306r;
+    public int f21312r;
 
     /* renamed from: s, reason: collision with root package name */
-    public l0 f21307s;
+    public l0 f21313s;
 
     /* renamed from: t, reason: collision with root package name */
-    public boolean f21308t;
+    public boolean f21314t;
 
     /* renamed from: u, reason: collision with root package name */
-    public boolean f21309u;
+    public boolean f21315u;
 
     public k0(View view, CharSequence charSequence) {
-        this.f21300l = view;
-        this.f21301m = charSequence;
-        this.f21302n = Z.Z.g(ViewConfiguration.get(view.getContext()));
+        this.f21306l = view;
+        this.f21307m = charSequence;
+        this.f21308n = Z.Z.g(ViewConfiguration.get(view.getContext()));
         c();
         view.setOnLongClickListener(this);
         view.setOnHoverListener(this);
     }
 
     public static void f(k0 k0Var) {
-        k0 k0Var2 = f21298v;
+        k0 k0Var2 = f21304v;
         if (k0Var2 != null) {
             k0Var2.b();
         }
-        f21298v = k0Var;
+        f21304v = k0Var;
         if (k0Var != null) {
             k0Var.e();
         }
     }
 
     public static void g(View view, CharSequence charSequence) {
-        k0 k0Var = f21298v;
-        if (k0Var != null && k0Var.f21300l == view) {
+        k0 k0Var = f21304v;
+        if (k0Var != null && k0Var.f21306l == view) {
             f(null);
         }
         if (!TextUtils.isEmpty(charSequence)) {
             new k0(view, charSequence);
             return;
         }
-        k0 k0Var2 = f21299w;
-        if (k0Var2 != null && k0Var2.f21300l == view) {
+        k0 k0Var2 = f21305w;
+        if (k0Var2 != null && k0Var2.f21306l == view) {
             k0Var2.d();
         }
         view.setOnLongClickListener(null);
@@ -96,56 +96,56 @@ public class k0 implements View.OnLongClickListener, View.OnHoverListener, View.
     }
 
     public final void b() {
-        this.f21300l.removeCallbacks(this.f21303o);
+        this.f21306l.removeCallbacks(this.f21309o);
     }
 
     public final void c() {
-        this.f21309u = true;
+        this.f21315u = true;
     }
 
     public void d() {
-        if (f21299w == this) {
-            f21299w = null;
-            l0 l0Var = this.f21307s;
+        if (f21305w == this) {
+            f21305w = null;
+            l0 l0Var = this.f21313s;
             if (l0Var != null) {
                 l0Var.c();
-                this.f21307s = null;
+                this.f21313s = null;
                 c();
-                this.f21300l.removeOnAttachStateChangeListener(this);
+                this.f21306l.removeOnAttachStateChangeListener(this);
             } else {
                 Log.e("TooltipCompatHandler", "sActiveHandler.mPopup == null");
             }
         }
-        if (f21298v == this) {
+        if (f21304v == this) {
             f(null);
         }
-        this.f21300l.removeCallbacks(this.f21304p);
+        this.f21306l.removeCallbacks(this.f21310p);
     }
 
     public final void e() {
-        this.f21300l.postDelayed(this.f21303o, ViewConfiguration.getLongPressTimeout());
+        this.f21306l.postDelayed(this.f21309o, ViewConfiguration.getLongPressTimeout());
     }
 
     public void h(boolean z7) throws Resources.NotFoundException {
         long longPressTimeout;
         long j7;
         long j8;
-        if (Z.W.P(this.f21300l)) {
+        if (Z.W.P(this.f21306l)) {
             f(null);
-            k0 k0Var = f21299w;
+            k0 k0Var = f21305w;
             if (k0Var != null) {
                 k0Var.d();
             }
-            f21299w = this;
-            this.f21308t = z7;
-            l0 l0Var = new l0(this.f21300l.getContext());
-            this.f21307s = l0Var;
-            l0Var.e(this.f21300l, this.f21305q, this.f21306r, this.f21308t, this.f21301m);
-            this.f21300l.addOnAttachStateChangeListener(this);
-            if (this.f21308t) {
+            f21305w = this;
+            this.f21314t = z7;
+            l0 l0Var = new l0(this.f21306l.getContext());
+            this.f21313s = l0Var;
+            l0Var.e(this.f21306l, this.f21311q, this.f21312r, this.f21314t, this.f21307m);
+            this.f21306l.addOnAttachStateChangeListener(this);
+            if (this.f21314t) {
                 j8 = 2500;
             } else {
-                if ((Z.W.J(this.f21300l) & 1) == 1) {
+                if ((Z.W.J(this.f21306l) & 1) == 1) {
                     longPressTimeout = ViewConfiguration.getLongPressTimeout();
                     j7 = 3000;
                 } else {
@@ -154,29 +154,29 @@ public class k0 implements View.OnLongClickListener, View.OnHoverListener, View.
                 }
                 j8 = j7 - longPressTimeout;
             }
-            this.f21300l.removeCallbacks(this.f21304p);
-            this.f21300l.postDelayed(this.f21304p, j8);
+            this.f21306l.removeCallbacks(this.f21310p);
+            this.f21306l.postDelayed(this.f21310p, j8);
         }
     }
 
     public final boolean i(MotionEvent motionEvent) {
         int x7 = (int) motionEvent.getX();
         int y7 = (int) motionEvent.getY();
-        if (!this.f21309u && Math.abs(x7 - this.f21305q) <= this.f21302n && Math.abs(y7 - this.f21306r) <= this.f21302n) {
+        if (!this.f21315u && Math.abs(x7 - this.f21311q) <= this.f21308n && Math.abs(y7 - this.f21312r) <= this.f21308n) {
             return false;
         }
-        this.f21305q = x7;
-        this.f21306r = y7;
-        this.f21309u = false;
+        this.f21311q = x7;
+        this.f21312r = y7;
+        this.f21315u = false;
         return true;
     }
 
     @Override // android.view.View.OnHoverListener
     public boolean onHover(View view, MotionEvent motionEvent) {
-        if (this.f21307s != null && this.f21308t) {
+        if (this.f21313s != null && this.f21314t) {
             return false;
         }
-        AccessibilityManager accessibilityManager = (AccessibilityManager) this.f21300l.getContext().getSystemService("accessibility");
+        AccessibilityManager accessibilityManager = (AccessibilityManager) this.f21306l.getContext().getSystemService("accessibility");
         if (accessibilityManager.isEnabled() && accessibilityManager.isTouchExplorationEnabled()) {
             return false;
         }
@@ -186,7 +186,7 @@ public class k0 implements View.OnLongClickListener, View.OnHoverListener, View.
                 c();
                 d();
             }
-        } else if (this.f21300l.isEnabled() && this.f21307s == null && i(motionEvent)) {
+        } else if (this.f21306l.isEnabled() && this.f21313s == null && i(motionEvent)) {
             f(this);
         }
         return false;
@@ -194,8 +194,8 @@ public class k0 implements View.OnLongClickListener, View.OnHoverListener, View.
 
     @Override // android.view.View.OnLongClickListener
     public boolean onLongClick(View view) throws Resources.NotFoundException {
-        this.f21305q = view.getWidth() / 2;
-        this.f21306r = view.getHeight() / 2;
+        this.f21311q = view.getWidth() / 2;
+        this.f21312r = view.getHeight() / 2;
         h(true);
         return true;
     }

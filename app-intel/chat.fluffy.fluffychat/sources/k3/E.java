@@ -1,7 +1,7 @@
 package k3;
 
-import j3.AbstractC1237k;
-import j3.InterfaceC1232f;
+import j3.AbstractC1236k;
+import j3.InterfaceC1231f;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -9,24 +9,24 @@ import java.util.NoSuchElementException;
 /* loaded from: classes.dex */
 public abstract class E {
 
-    public class a extends AbstractC1260b {
+    public class a extends AbstractC1259b {
 
         /* renamed from: n, reason: collision with root package name */
-        public final /* synthetic */ Iterator f18837n;
+        public final /* synthetic */ Iterator f18836n;
 
         /* renamed from: o, reason: collision with root package name */
-        public final /* synthetic */ j3.p f18838o;
+        public final /* synthetic */ j3.p f18837o;
 
         public a(Iterator it, j3.p pVar) {
-            this.f18837n = it;
-            this.f18838o = pVar;
+            this.f18836n = it;
+            this.f18837o = pVar;
         }
 
-        @Override // k3.AbstractC1260b
+        @Override // k3.AbstractC1259b
         public Object a() {
-            while (this.f18837n.hasNext()) {
-                Object next = this.f18837n.next();
-                if (this.f18838o.apply(next)) {
+            while (this.f18836n.hasNext()) {
+                Object next = this.f18836n.next();
+                if (this.f18837o.apply(next)) {
                     return next;
                 }
             }
@@ -37,36 +37,36 @@ public abstract class E {
     public class b extends f0 {
 
         /* renamed from: m, reason: collision with root package name */
-        public final /* synthetic */ InterfaceC1232f f18839m;
+        public final /* synthetic */ InterfaceC1231f f18838m;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public b(Iterator it, InterfaceC1232f interfaceC1232f) {
+        public b(Iterator it, InterfaceC1231f interfaceC1231f) {
             super(it);
-            this.f18839m = interfaceC1232f;
+            this.f18838m = interfaceC1231f;
         }
 
         @Override // k3.f0
         public Object a(Object obj) {
-            return this.f18839m.apply(obj);
+            return this.f18838m.apply(obj);
         }
     }
 
-    public static final class c extends AbstractC1259a {
+    public static final class c extends AbstractC1258a {
 
         /* renamed from: o, reason: collision with root package name */
-        public static final i0 f18840o = new c(new Object[0], 0);
+        public static final i0 f18839o = new c(new Object[0], 0);
 
         /* renamed from: n, reason: collision with root package name */
-        public final Object[] f18841n;
+        public final Object[] f18840n;
 
         public c(Object[] objArr, int i7) {
             super(objArr.length, i7);
-            this.f18841n = objArr;
+            this.f18840n = objArr;
         }
 
-        @Override // k3.AbstractC1259a
+        @Override // k3.AbstractC1258a
         public Object a(int i7) {
-            return this.f18841n[i7];
+            return this.f18840n[i7];
         }
     }
 
@@ -85,34 +85,34 @@ public abstract class E {
 
         @Override // java.util.Iterator
         public void remove() {
-            AbstractC1267i.d(false);
+            AbstractC1266i.d(false);
         }
     }
 
     public static final class e extends h0 {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Object f18844l;
+        public final Object f18843l;
 
         /* renamed from: m, reason: collision with root package name */
-        public boolean f18845m;
+        public boolean f18844m;
 
         public e(Object obj) {
-            this.f18844l = obj;
+            this.f18843l = obj;
         }
 
         @Override // java.util.Iterator
         public boolean hasNext() {
-            return !this.f18845m;
+            return !this.f18844m;
         }
 
         @Override // java.util.Iterator
         public Object next() {
-            if (this.f18845m) {
+            if (this.f18844m) {
                 throw new NoSuchElementException();
             }
-            this.f18845m = true;
-            return this.f18844l;
+            this.f18844m = true;
+            return this.f18843l;
         }
     }
 
@@ -157,7 +157,7 @@ public abstract class E {
 
     public static boolean e(Iterator it, Iterator it2) {
         while (it.hasNext()) {
-            if (!it2.hasNext() || !AbstractC1237k.a(it.next(), it2.next())) {
+            if (!it2.hasNext() || !AbstractC1236k.a(it.next(), it2.next())) {
                 return false;
             }
         }
@@ -169,7 +169,7 @@ public abstract class E {
     }
 
     public static i0 g() {
-        return c.f18840o;
+        return c.f18839o;
     }
 
     public static Iterator h() {
@@ -278,8 +278,8 @@ public abstract class E {
         return new e(obj);
     }
 
-    public static Iterator t(Iterator it, InterfaceC1232f interfaceC1232f) {
-        j3.o.q(interfaceC1232f);
-        return new b(it, interfaceC1232f);
+    public static Iterator t(Iterator it, InterfaceC1231f interfaceC1231f) {
+        j3.o.q(interfaceC1231f);
+        return new b(it, interfaceC1231f);
     }
 }

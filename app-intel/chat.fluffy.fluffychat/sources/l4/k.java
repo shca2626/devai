@@ -7,38 +7,38 @@ import android.os.HandlerThread;
 public class k {
 
     /* renamed from: e, reason: collision with root package name */
-    public static k f19650e;
+    public static k f19649e;
 
     /* renamed from: a, reason: collision with root package name */
-    public Handler f19651a;
+    public Handler f19650a;
 
     /* renamed from: b, reason: collision with root package name */
-    public HandlerThread f19652b;
+    public HandlerThread f19651b;
 
     /* renamed from: c, reason: collision with root package name */
-    public int f19653c = 0;
+    public int f19652c = 0;
 
     /* renamed from: d, reason: collision with root package name */
-    public final Object f19654d = new Object();
+    public final Object f19653d = new Object();
 
     public static k d() {
-        if (f19650e == null) {
-            f19650e = new k();
+        if (f19649e == null) {
+            f19649e = new k();
         }
-        return f19650e;
+        return f19649e;
     }
 
     public final void a() {
-        synchronized (this.f19654d) {
+        synchronized (this.f19653d) {
             try {
-                if (this.f19651a == null) {
-                    if (this.f19653c <= 0) {
+                if (this.f19650a == null) {
+                    if (this.f19652c <= 0) {
                         throw new IllegalStateException("CameraThread is not open");
                     }
                     HandlerThread handlerThread = new HandlerThread("CameraThread");
-                    this.f19652b = handlerThread;
+                    this.f19651b = handlerThread;
                     handlerThread.start();
-                    this.f19651a = new Handler(this.f19652b.getLooper());
+                    this.f19650a = new Handler(this.f19651b.getLooper());
                 }
             } catch (Throwable th) {
                 throw th;
@@ -47,10 +47,10 @@ public class k {
     }
 
     public void b() {
-        synchronized (this.f19654d) {
+        synchronized (this.f19653d) {
             try {
-                int i7 = this.f19653c - 1;
-                this.f19653c = i7;
+                int i7 = this.f19652c - 1;
+                this.f19652c = i7;
                 if (i7 == 0) {
                     f();
                 }
@@ -61,24 +61,24 @@ public class k {
     }
 
     public void c(Runnable runnable) {
-        synchronized (this.f19654d) {
+        synchronized (this.f19653d) {
             a();
-            this.f19651a.post(runnable);
+            this.f19650a.post(runnable);
         }
     }
 
     public void e(Runnable runnable) {
-        synchronized (this.f19654d) {
-            this.f19653c++;
+        synchronized (this.f19653d) {
+            this.f19652c++;
             c(runnable);
         }
     }
 
     public final void f() {
-        synchronized (this.f19654d) {
-            this.f19652b.quit();
-            this.f19652b = null;
-            this.f19651a = null;
+        synchronized (this.f19653d) {
+            this.f19651b.quit();
+            this.f19651b = null;
+            this.f19650a = null;
         }
     }
 }

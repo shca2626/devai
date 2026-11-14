@@ -10,7 +10,7 @@ import java.lang.reflect.Modifier;
 public final class c {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final c f23442a = new c();
+    public static final c f23448a = new c();
 
     public final M a(Class cls) throws IllegalAccessException, NoSuchMethodException, InstantiationException, SecurityException, IllegalArgumentException, InvocationTargetException {
         m.e(cls, "modelClass");

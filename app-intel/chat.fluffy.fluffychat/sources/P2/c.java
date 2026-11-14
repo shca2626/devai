@@ -11,16 +11,16 @@ import android.content.res.TypedArray;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
-import y.C1797k;
+import y.C1796k;
 
 /* loaded from: classes.dex */
 public class c {
 
     /* renamed from: a, reason: collision with root package name */
-    public final C1797k f7547a = new C1797k();
+    public final C1796k f7547a = new C1796k();
 
     /* renamed from: b, reason: collision with root package name */
-    public final C1797k f7548b = new C1797k();
+    public final C1796k f7548b = new C1796k();
 
     public static void a(c cVar, Animator animator) {
         if (animator instanceof ObjectAnimator) {

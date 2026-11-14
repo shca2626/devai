@@ -5,36 +5,36 @@ import java.util.Arrays;
 /* loaded from: classes2.dex */
 public class Base64 {
     public static Decoder getDecoder() {
-        return Decoder.f18464c;
+        return Decoder.f18463c;
     }
 
     public static class Decoder {
 
         /* renamed from: a, reason: collision with root package name */
-        public static final int[] f18462a;
+        public static final int[] f18461a;
 
         /* renamed from: b, reason: collision with root package name */
-        public static final int[] f18463b;
+        public static final int[] f18462b;
 
         /* renamed from: c, reason: collision with root package name */
-        public static final Decoder f18464c;
+        public static final Decoder f18463c;
 
         static {
             int[] iArr = new int[256];
-            f18462a = iArr;
+            f18461a = iArr;
             Arrays.fill(iArr, -1);
             for (int i7 = 0; i7 < 64; i7++) {
-                f18462a[a.f18465a[i7]] = i7;
+                f18461a[a.f18464a[i7]] = i7;
             }
-            f18462a[61] = -2;
+            f18461a[61] = -2;
             int[] iArr2 = new int[256];
-            f18463b = iArr2;
+            f18462b = iArr2;
             Arrays.fill(iArr2, -1);
             for (int i8 = 0; i8 < 64; i8++) {
-                f18463b[a.f18466b[i8]] = i8;
+                f18462b[a.f18465b[i8]] = i8;
             }
-            f18463b[61] = -2;
-            f18464c = new Decoder();
+            f18462b[61] = -2;
+            f18463c = new Decoder();
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:45:0x00bf, code lost:

@@ -7,7 +7,7 @@ import java.util.List;
 public interface m {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final m f19381a = new a();
+    public static final m f19380a = new a();
 
     List a(s sVar);
 

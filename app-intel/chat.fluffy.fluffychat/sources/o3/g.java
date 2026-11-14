@@ -15,13 +15,13 @@ public abstract class g extends h {
     public static class a extends AbstractList implements RandomAccess, Serializable {
 
         /* renamed from: l, reason: collision with root package name */
-        public final int[] f20376l;
+        public final int[] f20375l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final int f20377m;
+        public final int f20376m;
 
         /* renamed from: n, reason: collision with root package name */
-        public final int f20378n;
+        public final int f20377n;
 
         public a(int[] iArr) {
             this(iArr, 0, iArr.length);
@@ -29,7 +29,7 @@ public abstract class g extends h {
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
         public boolean contains(Object obj) {
-            return (obj instanceof Integer) && g.l(this.f20376l, ((Integer) obj).intValue(), this.f20377m, this.f20378n) != -1;
+            return (obj instanceof Integer) && g.l(this.f20375l, ((Integer) obj).intValue(), this.f20376m, this.f20377n) != -1;
         }
 
         @Override // java.util.AbstractList, java.util.Collection, java.util.List
@@ -46,7 +46,7 @@ public abstract class g extends h {
                 return false;
             }
             for (int i7 = 0; i7 < size; i7++) {
-                if (this.f20376l[this.f20377m + i7] != aVar.f20376l[aVar.f20377m + i7]) {
+                if (this.f20375l[this.f20376m + i7] != aVar.f20375l[aVar.f20376m + i7]) {
                     return false;
                 }
             }
@@ -57,29 +57,29 @@ public abstract class g extends h {
         /* renamed from: f, reason: merged with bridge method [inline-methods] */
         public Integer get(int i7) {
             o.o(i7, size());
-            return Integer.valueOf(this.f20376l[this.f20377m + i7]);
+            return Integer.valueOf(this.f20375l[this.f20376m + i7]);
         }
 
         @Override // java.util.AbstractList, java.util.List
         /* renamed from: g, reason: merged with bridge method [inline-methods] */
         public Integer set(int i7, Integer num) {
             o.o(i7, size());
-            int[] iArr = this.f20376l;
-            int i8 = this.f20377m;
+            int[] iArr = this.f20375l;
+            int i8 = this.f20376m;
             int i9 = iArr[i8 + i7];
             iArr[i8 + i7] = ((Integer) o.q(num)).intValue();
             return Integer.valueOf(i9);
         }
 
         public int[] h() {
-            return Arrays.copyOfRange(this.f20376l, this.f20377m, this.f20378n);
+            return Arrays.copyOfRange(this.f20375l, this.f20376m, this.f20377n);
         }
 
         @Override // java.util.AbstractList, java.util.Collection, java.util.List
         public int hashCode() {
             int iJ = 1;
-            for (int i7 = this.f20377m; i7 < this.f20378n; i7++) {
-                iJ = (iJ * 31) + g.j(this.f20376l[i7]);
+            for (int i7 = this.f20376m; i7 < this.f20377n; i7++) {
+                iJ = (iJ * 31) + g.j(this.f20375l[i7]);
             }
             return iJ;
         }
@@ -87,10 +87,10 @@ public abstract class g extends h {
         @Override // java.util.AbstractList, java.util.List
         public int indexOf(Object obj) {
             int iL;
-            if (!(obj instanceof Integer) || (iL = g.l(this.f20376l, ((Integer) obj).intValue(), this.f20377m, this.f20378n)) < 0) {
+            if (!(obj instanceof Integer) || (iL = g.l(this.f20375l, ((Integer) obj).intValue(), this.f20376m, this.f20377n)) < 0) {
                 return -1;
             }
-            return iL - this.f20377m;
+            return iL - this.f20376m;
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
@@ -101,15 +101,15 @@ public abstract class g extends h {
         @Override // java.util.AbstractList, java.util.List
         public int lastIndexOf(Object obj) {
             int iM;
-            if (!(obj instanceof Integer) || (iM = g.m(this.f20376l, ((Integer) obj).intValue(), this.f20377m, this.f20378n)) < 0) {
+            if (!(obj instanceof Integer) || (iM = g.m(this.f20375l, ((Integer) obj).intValue(), this.f20376m, this.f20377n)) < 0) {
                 return -1;
             }
-            return iM - this.f20377m;
+            return iM - this.f20376m;
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
         public int size() {
-            return this.f20378n - this.f20377m;
+            return this.f20377n - this.f20376m;
         }
 
         @Override // java.util.AbstractList, java.util.List
@@ -118,8 +118,8 @@ public abstract class g extends h {
             if (i7 == i8) {
                 return Collections.EMPTY_LIST;
             }
-            int[] iArr = this.f20376l;
-            int i9 = this.f20377m;
+            int[] iArr = this.f20375l;
+            int i9 = this.f20376m;
             return new a(iArr, i7 + i9, i9 + i8);
         }
 
@@ -127,23 +127,23 @@ public abstract class g extends h {
         public String toString() {
             StringBuilder sb = new StringBuilder(size() * 5);
             sb.append('[');
-            sb.append(this.f20376l[this.f20377m]);
-            int i7 = this.f20377m;
+            sb.append(this.f20375l[this.f20376m]);
+            int i7 = this.f20376m;
             while (true) {
                 i7++;
-                if (i7 >= this.f20378n) {
+                if (i7 >= this.f20377n) {
                     sb.append(']');
                     return sb.toString();
                 }
                 sb.append(", ");
-                sb.append(this.f20376l[i7]);
+                sb.append(this.f20375l[i7]);
             }
         }
 
         public a(int[] iArr, int i7, int i8) {
-            this.f20376l = iArr;
-            this.f20377m = i7;
-            this.f20378n = i8;
+            this.f20375l = iArr;
+            this.f20376m = i7;
+            this.f20377n = i8;
         }
     }
 

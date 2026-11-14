@@ -32,11 +32,11 @@ public abstract class w {
         }
     }
 
-    public final Object a(AbstractC1654j abstractC1654j) {
+    public final Object a(AbstractC1653j abstractC1653j) {
         try {
-            return c(new x3.g(abstractC1654j));
+            return c(new x3.g(abstractC1653j));
         } catch (IOException e7) {
-            throw new C1655k(e7);
+            throw new C1654k(e7);
         }
     }
 
@@ -46,13 +46,13 @@ public abstract class w {
 
     public abstract Object c(C3.a aVar);
 
-    public final AbstractC1654j d(Object obj) {
+    public final AbstractC1653j d(Object obj) {
         try {
             x3.h hVar = new x3.h();
             e(hVar, obj);
             return hVar.Z();
         } catch (IOException e7) {
-            throw new C1655k(e7);
+            throw new C1654k(e7);
         }
     }
 

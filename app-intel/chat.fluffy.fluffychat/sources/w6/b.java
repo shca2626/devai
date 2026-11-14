@@ -8,7 +8,7 @@ import v6.h;
 public abstract class b {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final char[] f23419a = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+    public static final char[] f23425a = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     /* JADX WARN: Code restructure failed: missing block: B:115:0x010c, code lost:
     
@@ -62,6 +62,6 @@ public abstract class b {
     }
 
     public static final char[] f() {
-        return f23419a;
+        return f23425a;
     }
 }

@@ -2,8 +2,8 @@ package W5;
 
 /* loaded from: classes.dex */
 public final class P0 extends y0 {
-    public P0(InterfaceC0652w0 interfaceC0652w0) {
-        super(interfaceC0652w0);
+    public P0(InterfaceC0653w0 interfaceC0653w0) {
+        super(interfaceC0653w0);
     }
 
     @Override // W5.C0

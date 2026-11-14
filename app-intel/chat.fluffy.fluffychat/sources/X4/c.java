@@ -11,7 +11,7 @@ import java.util.WeakHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
-import u5.C1669d;
+import u5.C1668d;
 
 /* loaded from: classes.dex */
 public class c implements h5.b, X4.e {
@@ -200,16 +200,16 @@ public class c implements h5.b, X4.e {
 
     public static /* synthetic */ void i(c cVar, String str, int i7, f fVar, ByteBuffer byteBuffer, long j7) {
         cVar.getClass();
-        C1669d.i("PlatformChannel ScheduleHandler on " + str, i7);
+        C1668d.i("PlatformChannel ScheduleHandler on " + str, i7);
         try {
-            C1669d c1669dJ = C1669d.j("DartMessenger#handleMessageFromDart on " + str);
+            C1668d c1668dJ = C1668d.j("DartMessenger#handleMessageFromDart on " + str);
             try {
                 cVar.l(fVar, byteBuffer, i7);
                 if (byteBuffer != null && byteBuffer.isDirect()) {
                     byteBuffer.limit(0);
                 }
-                if (c1669dJ != null) {
-                    c1669dJ.close();
+                if (c1668dJ != null) {
+                    c1668dJ.close();
                 }
             } finally {
             }
@@ -241,7 +241,7 @@ public class c implements h5.b, X4.e {
 
     @Override // h5.b
     public void d(String str, ByteBuffer byteBuffer, b.InterfaceC0193b interfaceC0193b) {
-        C1669d c1669dJ = C1669d.j("DartMessenger#send on " + str);
+        C1668d c1668dJ = C1668d.j("DartMessenger#send on " + str);
         try {
             U4.b.f("DartMessenger", "Sending message with callback over channel '" + str + "'");
             int i7 = this.f9324g;
@@ -254,13 +254,13 @@ public class c implements h5.b, X4.e {
             } else {
                 this.f9318a.dispatchPlatformMessage(str, byteBuffer, byteBuffer.position(), i7);
             }
-            if (c1669dJ != null) {
-                c1669dJ.close();
+            if (c1668dJ != null) {
+                c1668dJ.close();
             }
         } catch (Throwable th) {
-            if (c1669dJ != null) {
+            if (c1668dJ != null) {
                 try {
-                    c1669dJ.close();
+                    c1668dJ.close();
                 } catch (Throwable th2) {
                     th.addSuppressed(th2);
                 }
@@ -357,7 +357,7 @@ public class c implements h5.b, X4.e {
 
     public final void j(final String str, final f fVar, final ByteBuffer byteBuffer, final int i7, final long j7) {
         d dVar = fVar != null ? fVar.f9334b : null;
-        C1669d.d("PlatformChannel ScheduleHandler on " + str, i7);
+        C1668d.d("PlatformChannel ScheduleHandler on " + str, i7);
         Runnable runnable = new Runnable() { // from class: X4.b
             @Override // java.lang.Runnable
             public final void run() {

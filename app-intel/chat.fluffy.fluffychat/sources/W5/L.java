@@ -1,8 +1,8 @@
 package W5;
 
-import b6.AbstractC0871g;
+import b6.AbstractC0872g;
 import java.lang.reflect.InvocationTargetException;
-import y5.C1806a;
+import y5.C1805a;
 
 /* loaded from: classes.dex */
 public abstract class L {
@@ -15,10 +15,10 @@ public abstract class L {
             if (k7 != null) {
                 k7.M(iVar, th);
             } else {
-                AbstractC0871g.a(iVar, th);
+                AbstractC0872g.a(iVar, th);
             }
         } catch (Throwable th2) {
-            AbstractC0871g.a(iVar, b(th, th2));
+            AbstractC0872g.a(iVar, b(th, th2));
         }
     }
 
@@ -27,7 +27,7 @@ public abstract class L {
             return th;
         }
         RuntimeException runtimeException = new RuntimeException("Exception while trying to handle coroutine exception", th2);
-        C1806a.a(runtimeException, th);
+        C1805a.a(runtimeException, th);
         return runtimeException;
     }
 }

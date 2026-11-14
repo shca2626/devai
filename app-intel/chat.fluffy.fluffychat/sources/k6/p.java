@@ -9,7 +9,7 @@ import java.util.List;
 public abstract class p {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final p f19390a = new a();
+    public static final p f19389a = new a();
 
     public class a extends p {
     }

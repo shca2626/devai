@@ -40,18 +40,27 @@ public class LocalVideoTrack extends LocalTrack implements VideoProcessor {
 
     @Override // org.webrtc.CapturerObserver
     public void onFrameCaptured(VideoFrame videoFrame) {
+        VideoFrame videoFrame2;
         if (this.sink != null) {
             synchronized (this.processors) {
                 try {
                     Iterator<ExternalVideoFrameProcessing> it = this.processors.iterator();
+                    videoFrame2 = videoFrame;
                     while (it.hasNext()) {
-                        videoFrame = it.next().onFrame(videoFrame);
+                        VideoFrame videoFrameOnFrame = it.next().onFrame(videoFrame2);
+                        if (videoFrameOnFrame != videoFrame2 && videoFrame2 != videoFrame) {
+                            videoFrame2.release();
+                        }
+                        videoFrame2 = videoFrameOnFrame;
                     }
                 } catch (Throwable th) {
                     throw th;
                 }
             }
-            this.sink.onFrame(videoFrame);
+            this.sink.onFrame(videoFrame2);
+            if (videoFrame2 != videoFrame) {
+                videoFrame2.release();
+            }
         }
     }
 

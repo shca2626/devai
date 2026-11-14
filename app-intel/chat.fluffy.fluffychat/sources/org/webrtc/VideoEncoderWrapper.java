@@ -6,7 +6,7 @@ import org.webrtc.VideoEncoder;
 class VideoEncoderWrapper {
     @CalledByNative
     public static VideoEncoder.Callback createEncoderCallback(final long j7) {
-        return new VideoEncoder.Callback() { // from class: org.webrtc.h0
+        return new VideoEncoder.Callback() { // from class: org.webrtc.o0
             @Override // org.webrtc.VideoEncoder.Callback
             public final void onEncodedFrame(EncodedImage encodedImage, VideoEncoder.CodecSpecificInfo codecSpecificInfo) {
                 VideoEncoderWrapper.nativeOnEncodedFrame(j7, encodedImage);

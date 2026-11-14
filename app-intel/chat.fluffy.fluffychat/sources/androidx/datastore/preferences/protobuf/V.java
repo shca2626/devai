@@ -23,14 +23,14 @@ public final class V {
     }
 
     public Z b(Class cls, Z z7) {
-        AbstractC0789u.b(cls, "messageType");
-        AbstractC0789u.b(z7, "schema");
+        AbstractC0790u.b(cls, "messageType");
+        AbstractC0790u.b(z7, "schema");
         return (Z) this.f11990b.putIfAbsent(cls, z7);
     }
 
     public Z c(Class cls) {
         Z zB;
-        AbstractC0789u.b(cls, "messageType");
+        AbstractC0790u.b(cls, "messageType");
         Z zA = (Z) this.f11990b.get(cls);
         return (zA != null || (zB = b(cls, (zA = this.f11989a.a(cls)))) == null) ? zA : zB;
     }

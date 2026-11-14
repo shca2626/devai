@@ -15,7 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.util.List;
-import y.C1797k;
+import y.C1796k;
 
 /* loaded from: classes.dex */
 public class u extends z {
@@ -111,13 +111,13 @@ public class u extends z {
         if (objL == null) {
             return null;
         }
-        C1797k c1797k = new C1797k();
+        C1796k c1796k = new C1796k();
         for (i.b bVar : bVarArr) {
             Uri uriD = bVar.d();
-            ByteBuffer byteBufferF = (ByteBuffer) c1797k.get(uriD);
+            ByteBuffer byteBufferF = (ByteBuffer) c1796k.get(uriD);
             if (byteBufferF == null) {
                 byteBufferF = A.f(context, cancellationSignal, uriD);
-                c1797k.put(uriD, byteBufferF);
+                c1796k.put(uriD, byteBufferF);
             }
             if (byteBufferF == null || !i(objL, byteBufferF, bVar.c(), bVar.f(), bVar.g())) {
                 return null;

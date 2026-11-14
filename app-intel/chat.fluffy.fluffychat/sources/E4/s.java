@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
-import z5.C1878l;
+import z5.C1881l;
 
 /* loaded from: classes.dex */
 public final class s implements h5.n {
@@ -84,7 +84,7 @@ public final class s implements h5.n {
         if (i7 != 100) {
             return false;
         }
-        int iC = C1878l.C(strArr, "android.permission.POST_NOTIFICATIONS");
+        int iC = C1881l.C(strArr, "android.permission.POST_NOTIFICATIONS");
         if (iC < 0 || iArr[iC] != 0) {
             Activity activity = this.f2371l;
             if (activity != null && !activity.shouldShowRequestPermissionRationale("android.permission.POST_NOTIFICATIONS")) {

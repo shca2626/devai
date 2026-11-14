@@ -1,19 +1,19 @@
 package R0;
 
-import E0.AbstractC0322h;
+import E0.AbstractC0323h;
 import android.content.Context;
 import android.media.MediaCodecInfo;
 import android.media.MediaCodecList;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Pair;
-import j3.AbstractC1229c;
+import j3.AbstractC1228c;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public abstract class T {
@@ -186,7 +186,7 @@ public abstract class T {
         if ("audio/eac3-joc".equals(sVar.f759o)) {
             return "audio/eac3";
         }
-        if ("video/dolby-vision".equals(sVar.f759o) && (pairU = AbstractC0322h.u(sVar)) != null) {
+        if ("video/dolby-vision".equals(sVar.f759o) && (pairU = AbstractC0323h.u(sVar)) != null) {
             int iIntValue = ((Integer) pairU.first).intValue();
             if (iIntValue == 16 || iIntValue == 256) {
                 return "video/hevc";
@@ -206,7 +206,7 @@ public abstract class T {
 
     public static List h(J j7, B0.s sVar, boolean z7, boolean z8) {
         String strG = g(sVar);
-        return strG == null ? AbstractC1279v.v() : j7.b(strG, z7, z8);
+        return strG == null ? AbstractC1278v.v() : j7.b(strG, z7, z8);
     }
 
     public static String i(MediaCodecInfo mediaCodecInfo, String str, String str2) {
@@ -263,9 +263,9 @@ public abstract class T {
                 arrayListL.isEmpty();
             }
             e(str, arrayListL);
-            AbstractC1279v abstractC1279vR = AbstractC1279v.r(arrayListL);
-            map.put(bVar, abstractC1279vR);
-            return abstractC1279vR;
+            AbstractC1278v abstractC1278vR = AbstractC1278v.r(arrayListL);
+            map.put(bVar, abstractC1278vR);
+            return abstractC1278vR;
         } catch (Throwable th) {
             throw th;
         }
@@ -286,7 +286,7 @@ public abstract class T {
 
     public static List m(J j7, B0.s sVar, boolean z7, boolean z8) {
         List listB = j7.b(sVar.f759o, z7, z8);
-        return AbstractC1279v.o().j(listB).j(h(j7, sVar, z7, z8)).k();
+        return AbstractC1278v.o().j(listB).j(h(j7, sVar, z7, z8)).k();
     }
 
     public static List n(final Context context, List list, final B0.s sVar) {
@@ -308,7 +308,7 @@ public abstract class T {
                 return T.b((x) obj);
             }
         });
-        return AbstractC1279v.r(arrayList);
+        return AbstractC1278v.r(arrayList);
     }
 
     public static x p() {
@@ -320,7 +320,7 @@ public abstract class T {
         if (strH == null) {
             return null;
         }
-        return AbstractC0322h.x(strH, E0.U.k1(strH.trim(), "\\."), sVar.f732E);
+        return AbstractC0323h.x(strH, E0.U.k1(strH.trim(), "\\."), sVar.f732E);
     }
 
     public static boolean r(MediaCodecInfo mediaCodecInfo) {
@@ -353,7 +353,7 @@ public abstract class T {
         if (B0.z.o(str)) {
             return true;
         }
-        String strF = AbstractC1229c.f(mediaCodecInfo.getName());
+        String strF = AbstractC1228c.f(mediaCodecInfo.getName());
         if (strF.startsWith("arc.")) {
             return false;
         }
@@ -368,7 +368,7 @@ public abstract class T {
         if (Build.VERSION.SDK_INT >= 29) {
             return z(mediaCodecInfo);
         }
-        String strF = AbstractC1229c.f(mediaCodecInfo.getName());
+        String strF = AbstractC1228c.f(mediaCodecInfo.getName());
         return (strF.startsWith("omx.google.") || strF.startsWith("c2.android.") || strF.startsWith("c2.google.")) ? false : true;
     }
 

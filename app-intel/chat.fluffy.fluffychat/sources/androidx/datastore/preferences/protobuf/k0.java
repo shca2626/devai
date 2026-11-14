@@ -11,9 +11,9 @@ public abstract class k0 {
     public static final b f12112a;
 
     public static class a {
-        public static void h(byte b7, byte b8, byte b9, byte b10, char[] cArr, int i7) throws C0790v {
+        public static void h(byte b7, byte b8, byte b9, byte b10, char[] cArr, int i7) throws C0791v {
             if (m(b8) || (((b7 << 28) + (b8 + 112)) >> 30) != 0 || m(b9) || m(b10)) {
-                throw C0790v.d();
+                throw C0791v.d();
             }
             int iR = ((b7 & 7) << 18) | (r(b8) << 12) | (r(b9) << 6) | r(b10);
             cArr[i7] = l(iR);
@@ -24,16 +24,16 @@ public abstract class k0 {
             cArr[i7] = (char) b7;
         }
 
-        public static void j(byte b7, byte b8, byte b9, char[] cArr, int i7) throws C0790v {
+        public static void j(byte b7, byte b8, byte b9, char[] cArr, int i7) throws C0791v {
             if (m(b8) || ((b7 == -32 && b8 < -96) || ((b7 == -19 && b8 >= -96) || m(b9)))) {
-                throw C0790v.d();
+                throw C0791v.d();
             }
             cArr[i7] = (char) (((b7 & 15) << 12) | (r(b8) << 6) | r(b9));
         }
 
-        public static void k(byte b7, byte b8, char[] cArr, int i7) throws C0790v {
+        public static void k(byte b7, byte b8, char[] cArr, int i7) throws C0791v {
             if (b7 < -62 || m(b8)) {
-                throw C0790v.d();
+                throw C0791v.d();
             }
             cArr[i7] = (char) (((b7 & 31) << 6) | r(b8));
         }
@@ -75,7 +75,7 @@ public abstract class k0 {
 
     public static final class c extends b {
         @Override // androidx.datastore.preferences.protobuf.k0.b
-        public String a(byte[] bArr, int i7, int i8) throws C0790v {
+        public String a(byte[] bArr, int i7, int i8) throws C0791v {
             if ((i7 | i8 | ((bArr.length - i7) - i8)) < 0) {
                 throw new ArrayIndexOutOfBoundsException(String.format("buffer length=%d, index=%d, size=%d", Integer.valueOf(bArr.length), Integer.valueOf(i7), Integer.valueOf(i8)));
             }
@@ -112,14 +112,14 @@ public abstract class k0 {
                     i7 = i14;
                 } else if (a.p(b8)) {
                     if (i12 >= i9) {
-                        throw C0790v.d();
+                        throw C0791v.d();
                     }
                     i7 += 2;
                     a.k(b8, bArr[i12], cArr, i11);
                     i11++;
                 } else if (a.o(b8)) {
                     if (i12 >= i9 - 1) {
-                        throw C0790v.d();
+                        throw C0791v.d();
                     }
                     int i15 = i7 + 2;
                     i7 += 3;
@@ -127,7 +127,7 @@ public abstract class k0 {
                     i11++;
                 } else {
                     if (i12 >= i9 - 2) {
-                        throw C0790v.d();
+                        throw C0791v.d();
                     }
                     byte b10 = bArr[i12];
                     int i16 = i7 + 3;
@@ -216,11 +216,11 @@ public abstract class k0 {
         }
 
         @Override // androidx.datastore.preferences.protobuf.k0.b
-        public String a(byte[] bArr, int i7, int i8) throws C0790v {
-            Charset charset = AbstractC0789u.f12246b;
+        public String a(byte[] bArr, int i7, int i8) throws C0791v {
+            Charset charset = AbstractC0790u.f12246b;
             String str = new String(bArr, i7, i8, charset);
             if (str.indexOf(65533) >= 0 && !Arrays.equals(str.getBytes(charset), Arrays.copyOfRange(bArr, i7, i8 + i7))) {
-                throw C0790v.d();
+                throw C0791v.d();
             }
             return str;
         }
@@ -309,7 +309,7 @@ public abstract class k0 {
     }
 
     static {
-        f12112a = (!e.c() || AbstractC0773d.c()) ? new c() : new e();
+        f12112a = (!e.c() || AbstractC0774d.c()) ? new c() : new e();
     }
 
     public static String a(byte[] bArr, int i7, int i8) {

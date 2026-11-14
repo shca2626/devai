@@ -3,10 +3,10 @@ package A5;
 import M5.m;
 import java.util.Collection;
 import java.util.Iterator;
-import z5.AbstractC1870d;
+import z5.AbstractC1873d;
 
 /* loaded from: classes.dex */
-public final class g extends AbstractC1870d implements Collection, N5.b {
+public final class g extends AbstractC1873d implements Collection, N5.b {
 
     /* renamed from: l, reason: collision with root package name */
     public final d f312l;
@@ -37,7 +37,7 @@ public final class g extends AbstractC1870d implements Collection, N5.b {
         return this.f312l.containsValue(obj);
     }
 
-    @Override // z5.AbstractC1870d
+    @Override // z5.AbstractC1873d
     public int f() {
         return this.f312l.size();
     }

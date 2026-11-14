@@ -1,7 +1,7 @@
 package M5;
 
 import java.util.Arrays;
-import y5.C1823r;
+import y5.C1822r;
 
 /* loaded from: classes.dex */
 public abstract class m {
@@ -89,7 +89,7 @@ public abstract class m {
     }
 
     public static void n(String str) {
-        throw ((C1823r) h(new C1823r(str)));
+        throw ((C1822r) h(new C1822r(str)));
     }
 
     public static void o(String str) {

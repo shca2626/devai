@@ -6,7 +6,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Objects;
-import w3.AbstractC1737G;
+import w3.AbstractC1736G;
 import w3.v;
 
 /* loaded from: classes.dex */
@@ -43,7 +43,7 @@ public class a<T> {
     public static void g(Type type) {
         if (type instanceof TypeVariable) {
             TypeVariable typeVariable = (TypeVariable) type;
-            throw new IllegalArgumentException("TypeToken type argument must not contain a type variable; captured type variable " + typeVariable.getName() + " declared by " + typeVariable.getGenericDeclaration() + "\nSee " + AbstractC1737G.a("typetoken-type-variable"));
+            throw new IllegalArgumentException("TypeToken type argument must not contain a type variable; captured type variable " + typeVariable.getName() + " declared by " + typeVariable.getGenericDeclaration() + "\nSee " + AbstractC1736G.a("typetoken-type-variable"));
         }
         if (type instanceof GenericArrayType) {
             g(((GenericArrayType) type).getGenericComponentType());
@@ -102,7 +102,7 @@ public class a<T> {
                 return typeB;
             }
         } else if (genericSuperclass == a.class) {
-            throw new IllegalStateException("TypeToken must be created with a type argument: new TypeToken<...>() {}; When using code shrinkers (ProGuard, R8, ...) make sure that generic signatures are preserved.\nSee " + AbstractC1737G.a("type-token-raw"));
+            throw new IllegalStateException("TypeToken must be created with a type argument: new TypeToken<...>() {}; When using code shrinkers (ProGuard, R8, ...) make sure that generic signatures are preserved.\nSee " + AbstractC1736G.a("type-token-raw"));
         }
         throw new IllegalStateException("Must only create direct subclasses of TypeToken");
     }

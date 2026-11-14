@@ -1,7 +1,7 @@
 package I0;
 
 import java.util.Objects;
-import k3.AbstractC1258B;
+import k3.AbstractC1257B;
 
 /* loaded from: classes.dex */
 public final class I1 {
@@ -10,7 +10,7 @@ public final class I1 {
     public static final I1 f3682j = new b().i();
 
     /* renamed from: a, reason: collision with root package name */
-    public final AbstractC1258B f3683a;
+    public final AbstractC1257B f3683a;
 
     /* renamed from: b, reason: collision with root package name */
     public final Double f3684b;
@@ -45,7 +45,7 @@ public final class I1 {
         public Double f3694c;
 
         /* renamed from: a, reason: collision with root package name */
-        public AbstractC1258B f3692a = AbstractC1258B.w(1, 5);
+        public AbstractC1257B f3692a = AbstractC1257B.w(1, 5);
 
         /* renamed from: d, reason: collision with root package name */
         public boolean f3695d = true;

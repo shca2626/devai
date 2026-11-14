@@ -8,7 +8,7 @@ import com.hiennv.flutter_callkit_incoming.Utils;
 import java.lang.ref.WeakReference;
 import java.util.Collection;
 import org.webrtc.PeerConnection;
-import z5.C1886t;
+import z5.C1889t;
 
 /* loaded from: classes.dex */
 public final class Utils {
@@ -94,7 +94,7 @@ public final class Utils {
 
         public final <T, C extends Collection<WeakReference<T>>> C reapCollection(C c7) {
             M5.m.e(c7, "<this>");
-            C1886t.v(c7, new L5.l() { // from class: com.hiennv.flutter_callkit_incoming.F
+            C1889t.v(c7, new L5.l() { // from class: com.hiennv.flutter_callkit_incoming.F
                 @Override // L5.l
                 public final Object a(Object obj) {
                     return Boolean.valueOf(Utils.Companion.reapCollection$lambda$0((WeakReference) obj));

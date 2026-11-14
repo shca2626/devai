@@ -1,6 +1,6 @@
 package R;
 
-import Z.AbstractC0684b;
+import Z.AbstractC0685b;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.view.MenuItem;
@@ -8,9 +8,9 @@ import android.view.View;
 
 /* loaded from: classes.dex */
 public interface b extends MenuItem {
-    b a(AbstractC0684b abstractC0684b);
+    b a(AbstractC0685b abstractC0685b);
 
-    AbstractC0684b b();
+    AbstractC0685b b();
 
     @Override // android.view.MenuItem
     boolean collapseActionView();

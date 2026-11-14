@@ -4,25 +4,25 @@ import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import z5.C1877k;
+import z5.C1880k;
 
 /* loaded from: classes3.dex */
 public class h implements Serializable, Comparable {
 
     /* renamed from: o, reason: collision with root package name */
-    public static final a f23187o = new a(null);
+    public static final a f23193o = new a(null);
 
     /* renamed from: p, reason: collision with root package name */
-    public static final h f23188p = new h(new byte[0]);
+    public static final h f23194p = new h(new byte[0]);
 
     /* renamed from: l, reason: collision with root package name */
-    public final byte[] f23189l;
+    public final byte[] f23195l;
 
     /* renamed from: m, reason: collision with root package name */
-    public transient int f23190m;
+    public transient int f23196m;
 
     /* renamed from: n, reason: collision with root package name */
-    public transient String f23191n;
+    public transient String f23197n;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -31,7 +31,7 @@ public class h implements Serializable, Comparable {
 
         public final h a(String str) {
             M5.m.e(str, "<this>");
-            byte[] bArrA = AbstractC1719a.a(str);
+            byte[] bArrA = AbstractC1718a.a(str);
             if (bArrA != null) {
                 return new h(bArrA);
             }
@@ -72,23 +72,23 @@ public class h implements Serializable, Comparable {
 
     public h(byte[] bArr) {
         M5.m.e(bArr, "data");
-        this.f23189l = bArr;
+        this.f23195l = bArr;
     }
 
     public static final h e(String str) {
-        return f23187o.a(str);
+        return f23193o.a(str);
     }
 
     public static final h f(String str) {
-        return f23187o.b(str);
+        return f23193o.b(str);
     }
 
     public static final h i(String str) {
-        return f23187o.c(str);
+        return f23193o.c(str);
     }
 
     public static final h s(byte... bArr) {
-        return f23187o.d(bArr);
+        return f23193o.d(bArr);
     }
 
     public h A() {
@@ -134,7 +134,7 @@ public class h implements Serializable, Comparable {
     }
 
     public String a() {
-        return AbstractC1719a.c(k(), null, 1, null);
+        return AbstractC1718a.c(k(), null, 1, null);
     }
 
     @Override // java.lang.Comparable
@@ -173,7 +173,7 @@ public class h implements Serializable, Comparable {
     public h h(String str) throws NoSuchAlgorithmException {
         M5.m.e(str, "algorithm");
         MessageDigest messageDigest = MessageDigest.getInstance(str);
-        messageDigest.update(this.f23189l, 0, y());
+        messageDigest.update(this.f23195l, 0, y());
         byte[] bArrDigest = messageDigest.digest();
         M5.m.d(bArrDigest, "digestBytes");
         return new h(bArrDigest);
@@ -194,11 +194,11 @@ public class h implements Serializable, Comparable {
     }
 
     public final byte[] k() {
-        return this.f23189l;
+        return this.f23195l;
     }
 
     public final int l() {
-        return this.f23190m;
+        return this.f23196m;
     }
 
     public int m() {
@@ -206,7 +206,7 @@ public class h implements Serializable, Comparable {
     }
 
     public final String n() {
-        return this.f23191n;
+        return this.f23197n;
     }
 
     public String o() {
@@ -260,12 +260,12 @@ public class h implements Serializable, Comparable {
         sb.append("[size=");
         sb.append(k().length);
         sb.append(" hex=");
-        int iC2 = AbstractC1720b.c(this, 64);
+        int iC2 = AbstractC1719b.c(this, 64);
         if (iC2 <= k().length) {
             if (iC2 < 0) {
                 throw new IllegalArgumentException("endIndex < beginIndex");
             }
-            sb.append((iC2 == k().length ? this : new h(C1877k.l(k(), 0, iC2))).o());
+            sb.append((iC2 == k().length ? this : new h(C1880k.l(k(), 0, iC2))).o());
             sb.append("…]");
             return sb.toString();
         }
@@ -274,15 +274,15 @@ public class h implements Serializable, Comparable {
 
     public boolean u(int i7, byte[] bArr, int i8, int i9) {
         M5.m.e(bArr, "other");
-        return i7 >= 0 && i7 <= k().length - i9 && i8 >= 0 && i8 <= bArr.length - i9 && AbstractC1720b.a(k(), i7, bArr, i8, i9);
+        return i7 >= 0 && i7 <= k().length - i9 && i8 >= 0 && i8 <= bArr.length - i9 && AbstractC1719b.a(k(), i7, bArr, i8, i9);
     }
 
     public final void v(int i7) {
-        this.f23190m = i7;
+        this.f23196m = i7;
     }
 
     public final void w(String str) {
-        this.f23191n = str;
+        this.f23197n = str;
     }
 
     public final h x() {

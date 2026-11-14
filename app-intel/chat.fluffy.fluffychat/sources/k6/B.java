@@ -9,33 +9,33 @@ public abstract class B implements Closeable {
     public class a extends B {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ u f19138l;
+        public final /* synthetic */ u f19137l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final /* synthetic */ long f19139m;
+        public final /* synthetic */ long f19138m;
 
         /* renamed from: n, reason: collision with root package name */
-        public final /* synthetic */ v6.g f19140n;
+        public final /* synthetic */ v6.g f19139n;
 
         public a(u uVar, long j7, v6.g gVar) {
-            this.f19138l = uVar;
-            this.f19139m = j7;
-            this.f19140n = gVar;
+            this.f19137l = uVar;
+            this.f19138m = j7;
+            this.f19139n = gVar;
         }
 
         @Override // k6.B
         public long a() {
-            return this.f19139m;
+            return this.f19138m;
         }
 
         @Override // k6.B
         public u d() {
-            return this.f19138l;
+            return this.f19137l;
         }
 
         @Override // k6.B
         public v6.g i() {
-            return this.f19140n;
+            return this.f19139n;
         }
     }
 

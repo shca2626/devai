@@ -3,9 +3,9 @@ package W5;
 import C5.f;
 import C5.i;
 import W5.J;
-import b6.AbstractC0877m;
-import b6.C0873i;
-import b6.C0876l;
+import b6.AbstractC0878m;
+import b6.C0874i;
+import b6.C0877l;
 
 /* loaded from: classes.dex */
 public abstract class J extends C5.a implements C5.f {
@@ -51,7 +51,7 @@ public abstract class J extends C5.a implements C5.f {
 
     @Override // C5.f
     public final C5.e B(C5.e eVar) {
-        return new C0873i(this, eVar);
+        return new C0874i(this, eVar);
     }
 
     public abstract void U(C5.i iVar, Runnable runnable);
@@ -61,8 +61,8 @@ public abstract class J extends C5.a implements C5.f {
     }
 
     public J W(int i7, String str) {
-        AbstractC0877m.a(i7);
-        return new C0876l(this, i7, str);
+        AbstractC0878m.a(i7);
+        return new C0877l(this, i7, str);
     }
 
     @Override // C5.a, C5.i.b, C5.i
@@ -78,7 +78,7 @@ public abstract class J extends C5.a implements C5.f {
     @Override // C5.f
     public final void t(C5.e eVar) {
         M5.m.c(eVar, "null cannot be cast to non-null type kotlinx.coroutines.internal.DispatchedContinuation<*>");
-        ((C0873i) eVar).r();
+        ((C0874i) eVar).r();
     }
 
     public String toString() {

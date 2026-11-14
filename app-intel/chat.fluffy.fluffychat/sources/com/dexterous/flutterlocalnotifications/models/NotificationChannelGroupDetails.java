@@ -1,10 +1,10 @@
 package com.dexterous.flutterlocalnotifications.models;
 
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import java.io.Serializable;
 import java.util.Map;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class NotificationChannelGroupDetails implements Serializable {
     private static final String DESCRIPTION = "description";

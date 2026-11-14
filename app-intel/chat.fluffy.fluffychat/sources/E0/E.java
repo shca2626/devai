@@ -5,7 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
-import k3.AbstractC1258B;
+import k3.AbstractC1257B;
 
 /* loaded from: classes.dex */
 public final class E {
@@ -17,7 +17,7 @@ public final class E {
     public static final char[] f2024e = {'\n'};
 
     /* renamed from: f, reason: collision with root package name */
-    public static final AbstractC1258B f2025f = AbstractC1258B.y(StandardCharsets.US_ASCII, StandardCharsets.UTF_8, StandardCharsets.UTF_16, StandardCharsets.UTF_16BE, StandardCharsets.UTF_16LE);
+    public static final AbstractC1257B f2025f = AbstractC1257B.y(StandardCharsets.US_ASCII, StandardCharsets.UTF_8, StandardCharsets.UTF_16, StandardCharsets.UTF_16BE, StandardCharsets.UTF_16LE);
 
     /* renamed from: g, reason: collision with root package name */
     public static final AtomicBoolean f2026g = new AtomicBoolean();

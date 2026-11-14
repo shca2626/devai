@@ -6,13 +6,13 @@ import U0.s;
 import U0.t;
 import android.net.Uri;
 import androidx.media3.exoplayer.rtsp.e;
-import j3.C1234h;
+import j3.C1233h;
 import j3.o;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import k3.AbstractC1279v;
-import k3.C1280w;
+import k3.AbstractC1278v;
+import k3.C1279w;
 import k3.h0;
 
 /* loaded from: classes.dex */
@@ -77,7 +77,7 @@ public abstract class h {
     }
 
     public static byte[] b(List list) {
-        return C1234h.h(f12799h).e(list).getBytes(g.f12773r);
+        return C1233h.h(f12799h).e(list).getBytes(g.f12773r);
     }
 
     public static String c(int i7) {
@@ -189,11 +189,11 @@ public abstract class h {
         }
     }
 
-    public static AbstractC1279v j(String str) {
+    public static AbstractC1278v j(String str) {
         if (str == null) {
-            return AbstractC1279v.v();
+            return AbstractC1278v.v();
         }
-        AbstractC1279v.a aVar = new AbstractC1279v.a();
+        AbstractC1278v.a aVar = new AbstractC1278v.a();
         for (String str2 : U.k1(str, ",\\s?")) {
             int i7 = i(str2);
             if (i7 != 0) {
@@ -210,7 +210,7 @@ public abstract class h {
         Uri uri = Uri.parse((String) o.q(matcher.group(2)));
         int iIndexOf = list.indexOf("");
         o.d(iIndexOf > 0);
-        return new s(uri, i7, new e.b().c(list.subList(1, iIndexOf)).e(), C1234h.h(f12799h).e(list.subList(iIndexOf + 1, list.size())));
+        return new s(uri, i7, new e.b().c(list.subList(1, iIndexOf)).e(), C1233h.h(f12799h).e(list.subList(iIndexOf + 1, list.size())));
     }
 
     public static t l(List list) throws NumberFormatException {
@@ -219,7 +219,7 @@ public abstract class h {
         int i7 = Integer.parseInt((String) o.q(matcher.group(1)));
         int iIndexOf = list.indexOf("");
         o.d(iIndexOf > 0);
-        return new t(i7, new e.b().c(list.subList(1, iIndexOf)).e(), C1234h.h(f12799h).e(list.subList(iIndexOf + 1, list.size())));
+        return new t(i7, new e.b().c(list.subList(1, iIndexOf)).e(), C1233h.h(f12799h).e(list.subList(iIndexOf + 1, list.size())));
     }
 
     public static b m(String str) throws A {
@@ -271,17 +271,17 @@ public abstract class h {
         return uri.buildUpon().encodedAuthority(U.k1(str, "@")[1]).build();
     }
 
-    public static AbstractC1279v q(s sVar) {
+    public static AbstractC1278v q(s sVar) {
         o.d(sVar.f8377c.d("CSeq") != null);
-        AbstractC1279v.a aVar = new AbstractC1279v.a();
+        AbstractC1278v.a aVar = new AbstractC1278v.a();
         aVar.a(U.G("%s %s %s", t(sVar.f8376b), sVar.f8375a, "RTSP/1.0"));
-        C1280w c1280wB = sVar.f8377c.b();
-        h0 it = c1280wB.keySet().iterator();
+        C1279w c1279wB = sVar.f8377c.b();
+        h0 it = c1279wB.keySet().iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
-            AbstractC1279v abstractC1279v = c1280wB.get(str);
-            for (int i7 = 0; i7 < abstractC1279v.size(); i7++) {
-                aVar.a(U.G("%s: %s", str, abstractC1279v.get(i7)));
+            AbstractC1278v abstractC1278v = c1279wB.get(str);
+            for (int i7 = 0; i7 < abstractC1278v.size(); i7++) {
+                aVar.a(U.G("%s: %s", str, abstractC1278v.get(i7)));
             }
         }
         aVar.a("");
@@ -289,17 +289,17 @@ public abstract class h {
         return aVar.k();
     }
 
-    public static AbstractC1279v r(t tVar) {
+    public static AbstractC1278v r(t tVar) {
         o.d(tVar.f8380b.d("CSeq") != null);
-        AbstractC1279v.a aVar = new AbstractC1279v.a();
+        AbstractC1278v.a aVar = new AbstractC1278v.a();
         aVar.a(U.G("%s %s %s", "RTSP/1.0", Integer.valueOf(tVar.f8379a), c(tVar.f8379a)));
-        C1280w c1280wB = tVar.f8380b.b();
-        h0 it = c1280wB.keySet().iterator();
+        C1279w c1279wB = tVar.f8380b.b();
+        h0 it = c1279wB.keySet().iterator();
         while (it.hasNext()) {
             String str = (String) it.next();
-            AbstractC1279v abstractC1279v = c1280wB.get(str);
-            for (int i7 = 0; i7 < abstractC1279v.size(); i7++) {
-                aVar.a(U.G("%s: %s", str, abstractC1279v.get(i7)));
+            AbstractC1278v abstractC1278v = c1279wB.get(str);
+            for (int i7 = 0; i7 < abstractC1278v.size(); i7++) {
+                aVar.a(U.G("%s: %s", str, abstractC1278v.get(i7)));
             }
         }
         aVar.a("");

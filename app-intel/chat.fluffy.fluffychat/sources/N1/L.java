@@ -1,7 +1,7 @@
 package N1;
 
 import android.util.SparseArray;
-import g1.InterfaceC1088s;
+import g1.InterfaceC1089s;
 import java.util.Collections;
 import java.util.List;
 
@@ -128,5 +128,5 @@ public interface L {
 
     void b();
 
-    void c(E0.M m7, InterfaceC1088s interfaceC1088s, d dVar);
+    void c(E0.M m7, InterfaceC1089s interfaceC1089s, d dVar);
 }

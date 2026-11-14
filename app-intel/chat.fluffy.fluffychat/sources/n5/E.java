@@ -8,20 +8,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import p0.C1436a;
+import p0.C1435a;
 
 /* loaded from: classes.dex */
 public class E {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Context f20112a;
+    public final Context f20111a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final C1367d f20113b;
+    public final C1366d f20112b;
 
-    public E(Context context, C1367d c1367d) {
-        this.f20112a = context;
-        this.f20113b = c1367d;
+    public E(Context context, C1366d c1366d) {
+        this.f20111a = context;
+        this.f20112b = c1366d;
     }
 
     public final int a(BitmapFactory.Options options, int i7, int i8) {
@@ -64,7 +64,7 @@ public class E {
 
     public final void c(String str, String str2) throws Throwable {
         try {
-            this.f20113b.a(new C1436a(str), new C1436a(str2));
+            this.f20112b.a(new C1435a(str), new C1435a(str2));
         } catch (Exception e7) {
             Log.e("ImageResizer", "Error preserving Exif data on selected image: " + e7);
         }
@@ -85,7 +85,7 @@ public class E {
             Log.d("ImageResizer", "image_picker: compressing is not supported for type PNG. Returning the image with original quality");
         }
         bitmap.compress(zHasAlpha ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, i7, byteArrayOutputStream);
-        File fileD = d(this.f20112a.getCacheDir(), str);
+        File fileD = d(this.f20111a.getCacheDir(), str);
         FileOutputStream fileOutputStreamF = f(fileD);
         fileOutputStreamF.write(byteArrayOutputStream.toByteArray());
         fileOutputStreamF.close();

@@ -14,7 +14,7 @@ import androidx.emoji2.text.c;
 import java.nio.ByteBuffer;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
-import l0.AbstractC1294c;
+import l0.AbstractC1293c;
 
 /* loaded from: classes.dex */
 public class e extends c.AbstractC0107c {
@@ -203,14 +203,14 @@ public class e extends c.AbstractC0107c {
                         return;
                     }
                     if (this.f12332f == null) {
-                        ThreadPoolExecutor threadPoolExecutorB = AbstractC1294c.b("emojiCompat");
+                        ThreadPoolExecutor threadPoolExecutorB = AbstractC1293c.b("emojiCompat");
                         this.f12333g = threadPoolExecutorB;
                         this.f12332f = threadPoolExecutorB;
                     }
                     this.f12332f.execute(new Runnable() { // from class: l0.g
                         @Override // java.lang.Runnable
                         public final void run() {
-                            this.f19527l.c();
+                            this.f19526l.c();
                         }
                     });
                 } catch (Throwable th) {
@@ -240,7 +240,7 @@ public class e extends c.AbstractC0107c {
                 try {
                     Handler handlerC = this.f12331e;
                     if (handlerC == null) {
-                        handlerC = AbstractC1294c.c();
+                        handlerC = AbstractC1293c.c();
                         this.f12331e = handlerC;
                     }
                     if (this.f12336j == null) {
@@ -252,7 +252,7 @@ public class e extends c.AbstractC0107c {
                         this.f12337k = new Runnable() { // from class: l0.h
                             @Override // java.lang.Runnable
                             public final void run() {
-                                this.f19528l.d();
+                                this.f19527l.d();
                             }
                         };
                     }

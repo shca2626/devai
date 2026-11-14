@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
-import u3.C1648d;
+import u3.C1647d;
 import u3.t;
 
 /* loaded from: classes.dex */
@@ -36,7 +36,7 @@ public class c implements Closeable, Flushable {
     public int f1376n = 0;
 
     /* renamed from: o, reason: collision with root package name */
-    public C1648d f1377o;
+    public C1647d f1377o;
 
     /* renamed from: p, reason: collision with root package name */
     public String f1378p;
@@ -86,7 +86,7 @@ public class c implements Closeable, Flushable {
         this.f1384v = true;
         Objects.requireNonNull(writer, "out == null");
         this.f1374l = writer;
-        J(C1648d.f22794d);
+        J(C1647d.f22800d);
     }
 
     public static boolean a(Class cls) {
@@ -148,11 +148,11 @@ public class c implements Closeable, Flushable {
         this.f1375m[this.f1376n - 1] = i7;
     }
 
-    public final void J(C1648d c1648d) {
-        Objects.requireNonNull(c1648d);
-        this.f1377o = c1648d;
+    public final void J(C1647d c1647d) {
+        Objects.requireNonNull(c1647d);
+        this.f1377o = c1647d;
         this.f1379q = ",";
-        if (c1648d.c()) {
+        if (c1647d.c()) {
             this.f1378p = ": ";
             if (this.f1377o.b().isEmpty()) {
                 this.f1379q = ", ";

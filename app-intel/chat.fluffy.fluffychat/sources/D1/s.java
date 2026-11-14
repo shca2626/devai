@@ -1,8 +1,8 @@
 package D1;
 
-import E0.InterfaceC0325k;
+import E0.InterfaceC0326k;
 import java.util.Objects;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public interface s {
@@ -62,14 +62,14 @@ public interface s {
         }
     }
 
-    void a(byte[] bArr, int i7, int i8, b bVar, InterfaceC0325k interfaceC0325k);
+    void a(byte[] bArr, int i7, int i8, b bVar, InterfaceC0326k interfaceC0326k);
 
     default k b(byte[] bArr, int i7, int i8) {
-        final AbstractC1279v.a aVarO = AbstractC1279v.o();
+        final AbstractC1278v.a aVarO = AbstractC1278v.o();
         b bVar = b.f1639c;
         Objects.requireNonNull(aVarO);
-        a(bArr, i7, i8, bVar, new InterfaceC0325k() { // from class: D1.r
-            @Override // E0.InterfaceC0325k
+        a(bArr, i7, i8, bVar, new InterfaceC0326k() { // from class: D1.r
+            @Override // E0.InterfaceC0326k
             public final void accept(Object obj) {
                 aVarO.a((e) obj);
             }

@@ -1,9 +1,9 @@
 package Q1;
 
 import java.util.List;
-import z5.C1880n;
-import z5.C1881o;
-import z5.C1886t;
+import z5.C1883n;
+import z5.C1884o;
+import z5.C1889t;
 
 /* loaded from: classes.dex */
 public final class f {
@@ -26,7 +26,7 @@ public final class f {
                 return;
             }
         }
-        throw new IllegalArgumentException(("Invalid 'NavigationEventHistory' state:  'currentIndex' must be within the bounds of 'mergedHistory' (or -1 if empty). Received: currentIndex = '" + i7 + "', bounds = '" + C1881o.j(list) + "'.").toString());
+        throw new IllegalArgumentException(("Invalid 'NavigationEventHistory' state:  'currentIndex' must be within the bounds of 'mergedHistory' (or -1 if empty). Received: currentIndex = '" + i7 + "', bounds = '" + C1884o.j(list) + "'.").toString());
     }
 
     public boolean equals(Object obj) {
@@ -49,7 +49,7 @@ public final class f {
     }
 
     public f() {
-        this(C1881o.i(), -1);
+        this(C1884o.i(), -1);
     }
 
     /* JADX WARN: Illegal instructions before constructor call */
@@ -57,10 +57,10 @@ public final class f {
         M5.m.e(gVar, "currentInfo");
         M5.m.e(list, "backInfo");
         M5.m.e(list2, "forwardInfo");
-        List listC = C1880n.c();
-        C1886t.q(listC, list);
+        List listC = C1883n.c();
+        C1889t.q(listC, list);
         listC.add(gVar);
-        C1886t.q(listC, list2);
-        this(C1880n.a(listC), list.size());
+        C1889t.q(listC, list2);
+        this(C1883n.a(listC), list.size());
     }
 }

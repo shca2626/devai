@@ -23,48 +23,48 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.GCMParameterSpec;
 
 /* loaded from: classes.dex */
-public class j implements InterfaceC1241b {
+public class j implements InterfaceC1240b {
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f18752a;
+    public final String f18751a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final Context f18753b;
+    public final Context f18752b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final t f18754c;
+    public final t f18753c;
 
     public j(Context context, t tVar) throws Exception {
-        this.f18753b = context;
-        this.f18754c = tVar;
-        this.f18752a = f(context);
+        this.f18752b = context;
+        this.f18753c = tVar;
+        this.f18751a = f(context);
         g();
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public byte[] a(Key key) {
         throw new UnsupportedOperationException("AES symmetric keys in AndroidKeyStore cannot wrap other keys");
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public Key b(byte[] bArr, String str) {
         throw new UnsupportedOperationException("AES symmetric keys in AndroidKeyStore cannot unwrap other keys");
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public void c() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
-        keyStore.deleteEntry(this.f18752a);
-        this.f18753b.getSharedPreferences(this.f18754c.e(), 0).edit().remove("KeyStoreIV1").apply();
+        keyStore.deleteEntry(this.f18751a);
+        this.f18752b.getSharedPreferences(this.f18753c.e(), 0).edit().remove("KeyStoreIV1").apply();
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public Cipher d(Context context) throws Exception {
         g();
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
-        return i(context, keyStore.getKey(this.f18752a, null));
+        return i(context, keyStore.getKey(this.f18751a, null));
     }
 
     public final void e(KeyGenParameterSpec.Builder builder) {
@@ -72,13 +72,13 @@ public class j implements InterfaceC1241b {
     }
 
     public String f(Context context) {
-        return context.getPackageName() + ".FlutterSecureStoragePluginKey" + this.f18754c.g();
+        return context.getPackageName() + ".FlutterSecureStoragePluginKey" + this.f18753c.g();
     }
 
     public final void g() throws Exception {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
-        Key key = keyStore.getKey(this.f18752a, null);
+        Key key = keyStore.getKey(this.f18751a, null);
         if (key == null) {
             h();
             return;
@@ -86,25 +86,25 @@ public class j implements InterfaceC1241b {
         if (key instanceof SecretKey) {
             return;
         }
-        Log.w("AESCipher23", "Alias " + this.f18752a + " holds a " + key.getClass().getSimpleName() + ", not a SecretKey, replacing it with a fresh symmetric key");
-        keyStore.deleteEntry(this.f18752a);
+        Log.w("AESCipher23", "Alias " + this.f18751a + " holds a " + key.getClass().getSimpleName() + ", not a SecretKey, replacing it with a fresh symmetric key");
+        keyStore.deleteEntry(this.f18751a);
         h();
     }
 
     public void h() throws Exception {
         KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", "AndroidKeyStore");
         boolean zJ = j();
-        if (this.f18754c.f() && !zJ) {
+        if (this.f18753c.f() && !zJ) {
             throw new Exception("BIOMETRIC_UNAVAILABLE: Biometric enforcement enabled but device has no PIN, pattern, password, or biometric enrolled. Cannot generate secure key.");
         }
         if (!zJ) {
             Log.w("AESCipher23", "Device has no PIN/biometric security. Generating key without user authentication requirement (enforceBiometrics=false).");
         }
-        KeyGenParameterSpec.Builder keySize = new KeyGenParameterSpec.Builder(this.f18752a, 3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setKeySize(256);
+        KeyGenParameterSpec.Builder keySize = new KeyGenParameterSpec.Builder(this.f18751a, 3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setKeySize(256);
         if (zJ) {
             keySize.setUserAuthenticationRequired(true);
             if (Build.VERSION.SDK_INT >= 30) {
-                keySize.setUserAuthenticationParameters(0, this.f18754c.t() ? 2 : 3);
+                keySize.setUserAuthenticationParameters(0, this.f18753c.t() ? 2 : 3);
             } else {
                 e(keySize);
             }
@@ -130,11 +130,11 @@ public class j implements InterfaceC1241b {
                 throw e7;
             }
             Log.w("AESCipher23", " Key generation failed with StrongBox. Retrying without StrongBox.", e7);
-            KeyGenParameterSpec.Builder unlockedDeviceRequired = new KeyGenParameterSpec.Builder(this.f18752a, 3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setKeySize(256).setUnlockedDeviceRequired(true);
+            KeyGenParameterSpec.Builder unlockedDeviceRequired = new KeyGenParameterSpec.Builder(this.f18751a, 3).setBlockModes("GCM").setEncryptionPaddings("NoPadding").setKeySize(256).setUnlockedDeviceRequired(true);
             if (zJ) {
                 unlockedDeviceRequired.setUserAuthenticationRequired(true);
                 if (i7 >= 30) {
-                    unlockedDeviceRequired.setUserAuthenticationParameters(0, this.f18754c.t() ? 2 : 3);
+                    unlockedDeviceRequired.setUserAuthenticationParameters(0, this.f18753c.t() ? 2 : 3);
                 } else {
                     e(unlockedDeviceRequired);
                 }
@@ -148,7 +148,7 @@ public class j implements InterfaceC1241b {
 
     public Cipher i(Context context, Key key) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, InvalidAlgorithmParameterException {
         Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-        SharedPreferences sharedPreferences = context.getSharedPreferences(this.f18754c.e(), 0);
+        SharedPreferences sharedPreferences = context.getSharedPreferences(this.f18753c.e(), 0);
         String string = sharedPreferences.getString("KeyStoreIV1", null);
         if (string != null && r.f(sharedPreferences)) {
             cipher.init(2, key, new GCMParameterSpec(128, Base64.decode(string, 0)));
@@ -163,7 +163,7 @@ public class j implements InterfaceC1241b {
     }
 
     public boolean j() {
-        KeyguardManager keyguardManager = (KeyguardManager) this.f18753b.getSystemService("keyguard");
+        KeyguardManager keyguardManager = (KeyguardManager) this.f18752b.getSystemService("keyguard");
         return keyguardManager != null && keyguardManager.isDeviceSecure();
     }
 
@@ -171,6 +171,6 @@ public class j implements InterfaceC1241b {
         if (Build.VERSION.SDK_INT < 28) {
             return false;
         }
-        return this.f18753b.getPackageManager().hasSystemFeature("android.hardware.strongbox_keystore");
+        return this.f18752b.getPackageManager().hasSystemFeature("android.hardware.strongbox_keystore");
     }
 }

@@ -12,7 +12,7 @@ public final class d implements y {
 
     @Override // v6.y
     public B c() {
-        return B.f23157e;
+        return B.f23163e;
     }
 
     @Override // v6.y, java.io.Closeable, java.lang.AutoCloseable

@@ -3,8 +3,8 @@ package P2;
 import android.animation.TimeInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
-import t0.C1621a;
-import t0.C1622b;
+import t0.C1620a;
+import t0.C1621b;
 
 /* loaded from: classes.dex */
 public class a {
@@ -13,10 +13,10 @@ public class a {
     public static final TimeInterpolator f7542a = new LinearInterpolator();
 
     /* renamed from: b, reason: collision with root package name */
-    public static final TimeInterpolator f7543b = new C1622b();
+    public static final TimeInterpolator f7543b = new C1621b();
 
     /* renamed from: c, reason: collision with root package name */
-    public static final TimeInterpolator f7544c = new C1621a();
+    public static final TimeInterpolator f7544c = new C1620a();
 
     /* renamed from: d, reason: collision with root package name */
     public static final TimeInterpolator f7545d = new t0.c();

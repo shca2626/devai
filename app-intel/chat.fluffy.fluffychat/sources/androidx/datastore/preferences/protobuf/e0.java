@@ -6,10 +6,10 @@ public abstract class e0 {
     public class a implements b {
 
         /* renamed from: a, reason: collision with root package name */
-        public final /* synthetic */ AbstractC0775f f12024a;
+        public final /* synthetic */ AbstractC0776f f12024a;
 
-        public a(AbstractC0775f abstractC0775f) {
-            this.f12024a = abstractC0775f;
+        public a(AbstractC0776f abstractC0776f) {
+            this.f12024a = abstractC0776f;
         }
 
         @Override // androidx.datastore.preferences.protobuf.e0.b
@@ -29,8 +29,8 @@ public abstract class e0 {
         int size();
     }
 
-    public static String a(AbstractC0775f abstractC0775f) {
-        return b(new a(abstractC0775f));
+    public static String a(AbstractC0776f abstractC0776f) {
+        return b(new a(abstractC0776f));
     }
 
     public static String b(b bVar) {
@@ -84,6 +84,6 @@ public abstract class e0 {
     }
 
     public static String c(String str) {
-        return a(AbstractC0775f.l(str));
+        return a(AbstractC0776f.l(str));
     }
 }

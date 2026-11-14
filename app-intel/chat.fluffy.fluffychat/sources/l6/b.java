@@ -4,10 +4,10 @@ package l6;
 public abstract class b implements Runnable {
 
     /* renamed from: l, reason: collision with root package name */
-    public final String f19668l;
+    public final String f19667l;
 
     public b(String str, Object... objArr) {
-        this.f19668l = c.p(str, objArr);
+        this.f19667l = c.p(str, objArr);
     }
 
     public abstract void k();
@@ -15,7 +15,7 @@ public abstract class b implements Runnable {
     @Override // java.lang.Runnable
     public final void run() {
         String name = Thread.currentThread().getName();
-        Thread.currentThread().setName(this.f19668l);
+        Thread.currentThread().setName(this.f19667l);
         try {
             k();
         } finally {

@@ -11,22 +11,22 @@ import javax.net.ssl.SSLSession;
 public final class q {
 
     /* renamed from: a, reason: collision with root package name */
-    public final D f19392a;
+    public final D f19391a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final h f19393b;
+    public final h f19392b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final List f19394c;
+    public final List f19393c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final List f19395d;
+    public final List f19394d;
 
     public q(D d7, h hVar, List list, List list2) {
-        this.f19392a = d7;
-        this.f19393b = hVar;
-        this.f19394c = list;
-        this.f19395d = list2;
+        this.f19391a = d7;
+        this.f19392b = hVar;
+        this.f19393c = list;
+        this.f19394d = list2;
     }
 
     public static q b(SSLSession sSLSession) throws IOException {
@@ -68,15 +68,15 @@ public final class q {
     }
 
     public h a() {
-        return this.f19393b;
+        return this.f19392b;
     }
 
     public List d() {
-        return this.f19395d;
+        return this.f19394d;
     }
 
     public List e() {
-        return this.f19394c;
+        return this.f19393c;
     }
 
     public boolean equals(Object obj) {
@@ -84,14 +84,14 @@ public final class q {
             return false;
         }
         q qVar = (q) obj;
-        return this.f19392a.equals(qVar.f19392a) && this.f19393b.equals(qVar.f19393b) && this.f19394c.equals(qVar.f19394c) && this.f19395d.equals(qVar.f19395d);
+        return this.f19391a.equals(qVar.f19391a) && this.f19392b.equals(qVar.f19392b) && this.f19393c.equals(qVar.f19393c) && this.f19394d.equals(qVar.f19394d);
     }
 
     public D f() {
-        return this.f19392a;
+        return this.f19391a;
     }
 
     public int hashCode() {
-        return ((((((527 + this.f19392a.hashCode()) * 31) + this.f19393b.hashCode()) * 31) + this.f19394c.hashCode()) * 31) + this.f19395d.hashCode();
+        return ((((((527 + this.f19391a.hashCode()) * 31) + this.f19392b.hashCode()) * 31) + this.f19393c.hashCode()) * 31) + this.f19394d.hashCode();
     }
 }

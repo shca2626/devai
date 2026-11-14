@@ -11,14 +11,14 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeProvider;
 import android.view.accessibility.AccessibilityRecord;
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 class AccessibilityViewEmbedder {
     private static final String TAG = "AccessibilityBridge";

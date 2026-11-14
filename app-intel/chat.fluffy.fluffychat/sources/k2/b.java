@@ -9,7 +9,7 @@ import android.inputmethodservice.InputMethodService;
 public final class b {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final b f18829a = new b();
+    public static final b f18828a = new b();
 
     public final Context a(Context context) {
         M5.m.e(context, "context");

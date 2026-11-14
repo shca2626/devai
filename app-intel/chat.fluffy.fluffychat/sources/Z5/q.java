@@ -1,17 +1,17 @@
 package Z5;
 
-import W5.InterfaceC0652w0;
+import W5.InterfaceC0653w0;
 
 /* loaded from: classes.dex */
 public final class q implements w, d, a6.k {
-    private final InterfaceC0652w0 job;
+    private final InterfaceC0653w0 job;
 
     /* renamed from: l, reason: collision with root package name */
     public final /* synthetic */ w f10438l;
 
-    public q(w wVar, InterfaceC0652w0 interfaceC0652w0) {
+    public q(w wVar, InterfaceC0653w0 interfaceC0653w0) {
         this.f10438l = wVar;
-        this.job = interfaceC0652w0;
+        this.job = interfaceC0653w0;
     }
 
     @Override // Z5.s, Z5.d

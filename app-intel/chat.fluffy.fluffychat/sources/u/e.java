@@ -11,13 +11,13 @@ import java.lang.reflect.Method;
 public class e {
 
     /* renamed from: a, reason: collision with root package name */
-    public final d f22638a;
+    public final d f22644a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final BiometricManager f22639b;
+    public final BiometricManager f22645b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final Q.a f22640c;
+    public final Q.a f22646c;
 
     public static class a {
         public static int a(BiometricManager biometricManager) {
@@ -46,40 +46,40 @@ public class e {
     public static class c implements d {
 
         /* renamed from: a, reason: collision with root package name */
-        public final Context f22641a;
+        public final Context f22647a;
 
         public c(Context context) {
-            this.f22641a = context.getApplicationContext();
+            this.f22647a = context.getApplicationContext();
         }
 
         @Override // u.e.d
         public BiometricManager a() {
-            return a.b(this.f22641a);
+            return a.b(this.f22647a);
         }
 
         @Override // u.e.d
         public boolean b() {
-            return m.a(this.f22641a) != null;
+            return m.a(this.f22647a) != null;
         }
 
         @Override // u.e.d
         public boolean c() {
-            return n.a(this.f22641a);
+            return n.a(this.f22647a);
         }
 
         @Override // u.e.d
         public boolean d() {
-            return m.b(this.f22641a);
+            return m.b(this.f22647a);
         }
 
         @Override // u.e.d
         public boolean e() {
-            return j.a(this.f22641a, Build.MODEL);
+            return j.a(this.f22647a, Build.MODEL);
         }
 
         @Override // u.e.d
         public Q.a f() {
-            return Q.a.b(this.f22641a);
+            return Q.a.b(this.f22647a);
         }
     }
 
@@ -98,10 +98,10 @@ public class e {
     }
 
     public e(d dVar) {
-        this.f22638a = dVar;
+        this.f22644a = dVar;
         int i7 = Build.VERSION.SDK_INT;
-        this.f22639b = i7 >= 29 ? dVar.a() : null;
-        this.f22640c = i7 <= 29 ? dVar.f() : null;
+        this.f22645b = i7 >= 29 ? dVar.a() : null;
+        this.f22646c = i7 <= 29 ? dVar.f() : null;
     }
 
     public static e g(Context context) {
@@ -112,7 +112,7 @@ public class e {
         if (Build.VERSION.SDK_INT < 30) {
             return b(i7);
         }
-        BiometricManager biometricManager = this.f22639b;
+        BiometricManager biometricManager = this.f22645b;
         if (biometricManager != null) {
             return b.a(biometricManager, i7);
         }
@@ -121,42 +121,42 @@ public class e {
     }
 
     public final int b(int i7) {
-        if (!AbstractC1640b.e(i7)) {
+        if (!AbstractC1639b.e(i7)) {
             return -2;
         }
-        if (i7 == 0 || !this.f22638a.b()) {
+        if (i7 == 0 || !this.f22644a.b()) {
             return 12;
         }
-        if (AbstractC1640b.c(i7)) {
-            return this.f22638a.d() ? 0 : 11;
+        if (AbstractC1639b.c(i7)) {
+            return this.f22644a.d() ? 0 : 11;
         }
         int i8 = Build.VERSION.SDK_INT;
         if (i8 == 29) {
-            return AbstractC1640b.f(i7) ? f() : e();
+            return AbstractC1639b.f(i7) ? f() : e();
         }
         if (i8 != 28) {
             return c();
         }
-        if (this.f22638a.c()) {
+        if (this.f22644a.c()) {
             return d();
         }
         return 12;
     }
 
     public final int c() {
-        Q.a aVar = this.f22640c;
+        Q.a aVar = this.f22646c;
         if (aVar == null) {
             Log.e("BiometricManager", "Failure in canAuthenticate(). FingerprintManager was null.");
             return 1;
         }
         if (aVar.d()) {
-            return !this.f22640c.c() ? 11 : 0;
+            return !this.f22646c.c() ? 11 : 0;
         }
         return 12;
     }
 
     public final int d() {
-        return !this.f22638a.d() ? c() : c() == 0 ? 0 : -1;
+        return !this.f22644a.d() ? c() : c() == 0 ? 0 : -1;
     }
 
     /* JADX WARN: Removed duplicated region for block: B:21:0x0044 A[ADDED_TO_REGION] */
@@ -174,7 +174,7 @@ public class e {
             u.f$c r2 = u.i.a()
             android.hardware.biometrics.BiometricPrompt$CryptoObject r2 = u.i.c(r2)
             if (r2 == 0) goto L38
-            android.hardware.biometrics.BiometricManager r3 = r4.f22639b     // Catch: java.lang.reflect.InvocationTargetException -> L27 java.lang.IllegalArgumentException -> L29 java.lang.IllegalAccessException -> L2b
+            android.hardware.biometrics.BiometricManager r3 = r4.f22645b     // Catch: java.lang.reflect.InvocationTargetException -> L27 java.lang.IllegalArgumentException -> L29 java.lang.IllegalAccessException -> L2b
             java.lang.Object[] r2 = new java.lang.Object[]{r2}     // Catch: java.lang.reflect.InvocationTargetException -> L27 java.lang.IllegalArgumentException -> L29 java.lang.IllegalAccessException -> L2b
             java.lang.Object r1 = r1.invoke(r3, r2)     // Catch: java.lang.reflect.InvocationTargetException -> L27 java.lang.IllegalArgumentException -> L29 java.lang.IllegalAccessException -> L2b
             boolean r2 = r1 instanceof java.lang.Integer     // Catch: java.lang.reflect.InvocationTargetException -> L27 java.lang.IllegalArgumentException -> L29 java.lang.IllegalAccessException -> L2b
@@ -200,7 +200,7 @@ public class e {
             android.util.Log.w(r0, r2, r1)
         L38:
             int r0 = r4.f()
-            u.e$d r1 = r4.f22638a
+            u.e$d r1 = r4.f22644a
             boolean r1 = r1.e()
             if (r1 != 0) goto L4b
             if (r0 == 0) goto L47
@@ -214,7 +214,7 @@ public class e {
     }
 
     public final int f() {
-        BiometricManager biometricManager = this.f22639b;
+        BiometricManager biometricManager = this.f22645b;
         if (biometricManager != null) {
             return a.a(biometricManager);
         }

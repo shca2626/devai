@@ -3,8 +3,8 @@ package androidx.versionedparcelable;
 import android.annotation.SuppressLint;
 import android.os.Parcel;
 import android.os.Parcelable;
-import b2.C0840b;
-import b2.InterfaceC0841c;
+import b2.C0841b;
+import b2.InterfaceC0842c;
 import java.lang.reflect.InvocationTargetException;
 
 @SuppressLint({"BanParcelableUsage"})
@@ -13,7 +13,7 @@ public class ParcelImpl implements Parcelable {
     public static final Parcelable.Creator<ParcelImpl> CREATOR = new a();
 
     /* renamed from: l, reason: collision with root package name */
-    public final InterfaceC0841c f13472l;
+    public final InterfaceC0842c f13472l;
 
     public static class a implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
@@ -30,7 +30,7 @@ public class ParcelImpl implements Parcelable {
     }
 
     public ParcelImpl(Parcel parcel) {
-        this.f13472l = new C0840b(parcel).u();
+        this.f13472l = new C0841b(parcel).u();
     }
 
     @Override // android.os.Parcelable
@@ -40,6 +40,6 @@ public class ParcelImpl implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i7) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        new C0840b(parcel).L(this.f13472l);
+        new C0841b(parcel).L(this.f13472l);
     }
 }

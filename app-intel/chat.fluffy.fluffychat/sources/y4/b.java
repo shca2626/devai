@@ -6,7 +6,7 @@ import java.io.File;
 public final class b {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final b f24001a = new b();
+    public static final b f24007a = new b();
 
     public final Object a(Object obj) {
         obj.getClass();

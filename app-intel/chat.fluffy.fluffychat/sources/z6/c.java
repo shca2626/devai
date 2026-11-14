@@ -15,13 +15,13 @@ import android.util.Log;
 public final class c {
 
     /* renamed from: c, reason: collision with root package name */
-    public static final a f24185c = new a(null);
+    public static final a f24211c = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final Activity f24186a;
+    public final Activity f24212a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final int f24187b;
+    public final int f24213b;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -55,13 +55,13 @@ public final class c {
 
     public c(Activity activity) {
         m.e(activity, "activity");
-        this.f24186a = activity;
-        this.f24187b = S5.e.m(new S5.c(1, Integer.MAX_VALUE), Q5.c.f7685l);
+        this.f24212a = activity;
+        this.f24213b = S5.e.m(new S5.c(1, Integer.MAX_VALUE), Q5.c.f7685l);
     }
 
     public final boolean a(int i7, int i8, Intent intent) {
         String targetPackage;
-        boolean z7 = i7 == this.f24187b;
+        boolean z7 = i7 == this.f24213b;
         boolean z8 = i8 == -1;
         if (!z7 || !z8) {
             Log.d("UnifiedPush.Link", "The deep link hasn't been proceeded. isRequestCodeMatching=" + z7 + " isResultCodeOK=" + z8);
@@ -81,14 +81,14 @@ public final class c {
             return false;
         }
         Log.d("UnifiedPush.Link", "Using distributor " + targetPackage + '.');
-        B6.d.f1155o.a(this.f24186a).r().A(targetPackage);
+        B6.d.f1155o.a(this.f24212a).r().A(targetPackage);
         return true;
     }
 
     public final boolean b() {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.setData(Uri.parse("unifiedpush://link"));
-        String strA = f24185c.a(this.f24186a, intent);
+        String strA = f24211c.a(this.f24212a, intent);
         if (strA == null) {
             Log.d("UnifiedPush.Link", "No activity found for deeplink");
             return false;
@@ -99,7 +99,7 @@ public final class c {
         sb.append(" default=");
         sb.append(!m.a(strA, "android"));
         Log.d("UnifiedPush.Link", sb.toString());
-        this.f24186a.startActivityForResult(intent, this.f24187b);
+        this.f24212a.startActivityForResult(intent, this.f24213b);
         return true;
     }
 }

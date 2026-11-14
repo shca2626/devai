@@ -69,12 +69,12 @@ public final class l {
         return f15284b.get(this) != null ? e() + 1 : e();
     }
 
-    public final void j(C1004d c1004d) {
+    public final void j(C1005d c1005d) {
         h hVar = (h) f15284b.getAndSet(this, null);
         if (hVar != null) {
-            c1004d.a(hVar);
+            c1005d.a(hVar);
         }
-        while (n(c1004d)) {
+        while (n(c1005d)) {
         }
     }
 
@@ -102,12 +102,12 @@ public final class l {
         }
     }
 
-    public final boolean n(C1004d c1004d) {
+    public final boolean n(C1005d c1005d) {
         h hVarM = m();
         if (hVarM == null) {
             return false;
         }
-        c1004d.a(hVarM);
+        c1005d.a(hVarM);
         return true;
     }
 

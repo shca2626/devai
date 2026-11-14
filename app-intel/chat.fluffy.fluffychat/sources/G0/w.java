@@ -48,7 +48,7 @@ public final class w implements f {
         return this.f3225a.r();
     }
 
-    @Override // B0.InterfaceC0309k
+    @Override // B0.InterfaceC0310k
     public int read(byte[] bArr, int i7, int i8) {
         int i9 = this.f3225a.read(bArr, i7, i8);
         if (i9 != -1) {

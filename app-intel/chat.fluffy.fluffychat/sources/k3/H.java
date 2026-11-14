@@ -1,7 +1,7 @@
 package k3;
 
-import j3.AbstractC1237k;
-import j3.InterfaceC1232f;
+import j3.AbstractC1236k;
+import j3.InterfaceC1231f;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.Collection;
@@ -16,78 +16,78 @@ import k3.d0;
 /* loaded from: classes.dex */
 public abstract class H {
 
-    public class a implements InterfaceC1232f {
+    public class a implements InterfaceC1231f {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ i f18852l;
+        public final /* synthetic */ i f18851l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final /* synthetic */ Object f18853m;
+        public final /* synthetic */ Object f18852m;
 
         public a(i iVar, Object obj) {
-            this.f18852l = iVar;
-            this.f18853m = obj;
+            this.f18851l = iVar;
+            this.f18852m = obj;
         }
 
-        @Override // j3.InterfaceC1232f
+        @Override // j3.InterfaceC1231f
         public Object apply(Object obj) {
-            return this.f18852l.a(this.f18853m, obj);
+            return this.f18851l.a(this.f18852m, obj);
         }
     }
 
-    public class b implements InterfaceC1232f {
+    public class b implements InterfaceC1231f {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ i f18854l;
+        public final /* synthetic */ i f18853l;
 
         public b(i iVar) {
-            this.f18854l = iVar;
+            this.f18853l = iVar;
         }
 
-        @Override // j3.InterfaceC1232f
+        @Override // j3.InterfaceC1231f
         /* renamed from: a, reason: merged with bridge method [inline-methods] */
         public Object apply(Map.Entry entry) {
-            return this.f18854l.a(entry.getKey(), entry.getValue());
+            return this.f18853l.a(entry.getKey(), entry.getValue());
         }
     }
 
-    public class c extends AbstractC1263e {
+    public class c extends AbstractC1262e {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ Map.Entry f18855l;
+        public final /* synthetic */ Map.Entry f18854l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final /* synthetic */ i f18856m;
+        public final /* synthetic */ i f18855m;
 
         public c(Map.Entry entry, i iVar) {
-            this.f18855l = entry;
-            this.f18856m = iVar;
+            this.f18854l = entry;
+            this.f18855m = iVar;
         }
 
-        @Override // k3.AbstractC1263e, java.util.Map.Entry
+        @Override // k3.AbstractC1262e, java.util.Map.Entry
         public Object getKey() {
-            return this.f18855l.getKey();
+            return this.f18854l.getKey();
         }
 
-        @Override // k3.AbstractC1263e, java.util.Map.Entry
+        @Override // k3.AbstractC1262e, java.util.Map.Entry
         public Object getValue() {
-            return this.f18856m.a(this.f18855l.getKey(), this.f18855l.getValue());
+            return this.f18855m.a(this.f18854l.getKey(), this.f18854l.getValue());
         }
     }
 
-    public class d implements InterfaceC1232f {
+    public class d implements InterfaceC1231f {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ i f18857l;
+        public final /* synthetic */ i f18856l;
 
         public d(i iVar) {
-            this.f18857l = iVar;
+            this.f18856l = iVar;
         }
 
-        @Override // j3.InterfaceC1232f
+        @Override // j3.InterfaceC1231f
         /* renamed from: a, reason: merged with bridge method [inline-methods] */
         public Map.Entry apply(Map.Entry entry) {
-            return H.r(this.f18857l, entry);
+            return H.r(this.f18856l, entry);
         }
     }
 
@@ -106,37 +106,37 @@ public abstract class H {
     public class f implements i {
 
         /* renamed from: a, reason: collision with root package name */
-        public final /* synthetic */ InterfaceC1232f f18858a;
+        public final /* synthetic */ InterfaceC1231f f18857a;
 
-        public f(InterfaceC1232f interfaceC1232f) {
-            this.f18858a = interfaceC1232f;
+        public f(InterfaceC1231f interfaceC1231f) {
+            this.f18857a = interfaceC1231f;
         }
 
         @Override // k3.H.i
         public Object a(Object obj, Object obj2) {
-            return this.f18858a.apply(obj2);
+            return this.f18857a.apply(obj2);
         }
     }
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
-    public static abstract class g implements InterfaceC1232f {
+    public static abstract class g implements InterfaceC1231f {
 
         /* renamed from: l, reason: collision with root package name */
-        public static final g f18859l = new a("KEY", 0);
+        public static final g f18858l = new a("KEY", 0);
 
         /* renamed from: m, reason: collision with root package name */
-        public static final g f18860m = new b("VALUE", 1);
+        public static final g f18859m = new b("VALUE", 1);
 
         /* renamed from: n, reason: collision with root package name */
-        public static final /* synthetic */ g[] f18861n = a();
+        public static final /* synthetic */ g[] f18860n = a();
 
         public enum a extends g {
             public a(String str, int i7) {
                 super(str, i7, null);
             }
 
-            @Override // j3.InterfaceC1232f
+            @Override // j3.InterfaceC1231f
             /* renamed from: d, reason: merged with bridge method [inline-methods] */
             public Object apply(Map.Entry entry) {
                 return entry.getKey();
@@ -148,7 +148,7 @@ public abstract class H {
                 super(str, i7, null);
             }
 
-            @Override // j3.InterfaceC1232f
+            @Override // j3.InterfaceC1231f
             /* renamed from: d, reason: merged with bridge method [inline-methods] */
             public Object apply(Map.Entry entry) {
                 return entry.getValue();
@@ -159,7 +159,7 @@ public abstract class H {
         }
 
         public static /* synthetic */ g[] a() {
-            return new g[]{f18859l, f18860m};
+            return new g[]{f18858l, f18859m};
         }
 
         public static g valueOf(String str) {
@@ -167,7 +167,7 @@ public abstract class H {
         }
 
         public static g[] values() {
-            return (g[]) f18861n.clone();
+            return (g[]) f18860n.clone();
         }
 
         public /* synthetic */ g(String str, int i7, I i8) {
@@ -187,7 +187,7 @@ public abstract class H {
                 Map.Entry entry = (Map.Entry) obj;
                 Object key = entry.getKey();
                 Object objN = H.n(f(), key);
-                if (AbstractC1237k.a(objN, entry.getValue()) && (objN != null || f().containsKey(key))) {
+                if (AbstractC1236k.a(objN, entry.getValue()) && (objN != null || f().containsKey(key))) {
                     return true;
                 }
             }
@@ -271,10 +271,10 @@ public abstract class H {
     public static class k extends d0.d {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Map f18863l;
+        public final Map f18862l;
 
         public k(Map map) {
-            this.f18863l = (Map) j3.o.q(map);
+            this.f18862l = (Map) j3.o.q(map);
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
@@ -283,7 +283,7 @@ public abstract class H {
         }
 
         public Map f() {
-            return this.f18863l;
+            return this.f18862l;
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
@@ -300,56 +300,56 @@ public abstract class H {
     public static class l extends j {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Map f18864l;
+        public final Map f18863l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final i f18865m;
+        public final i f18864m;
 
         public l(Map map, i iVar) {
-            this.f18864l = (Map) j3.o.q(map);
-            this.f18865m = (i) j3.o.q(iVar);
+            this.f18863l = (Map) j3.o.q(map);
+            this.f18864m = (i) j3.o.q(iVar);
         }
 
         @Override // k3.H.j
         public Iterator a() {
-            return E.t(this.f18864l.entrySet().iterator(), H.a(this.f18865m));
+            return E.t(this.f18863l.entrySet().iterator(), H.a(this.f18864m));
         }
 
         @Override // java.util.AbstractMap, java.util.Map
         public void clear() {
-            this.f18864l.clear();
+            this.f18863l.clear();
         }
 
         @Override // java.util.AbstractMap, java.util.Map
         public boolean containsKey(Object obj) {
-            return this.f18864l.containsKey(obj);
+            return this.f18863l.containsKey(obj);
         }
 
         @Override // java.util.AbstractMap, java.util.Map
         public Object get(Object obj) {
-            Object obj2 = this.f18864l.get(obj);
-            if (obj2 != null || this.f18864l.containsKey(obj)) {
-                return this.f18865m.a(obj, Q.a(obj2));
+            Object obj2 = this.f18863l.get(obj);
+            if (obj2 != null || this.f18863l.containsKey(obj)) {
+                return this.f18864m.a(obj, Q.a(obj2));
             }
             return null;
         }
 
         @Override // java.util.AbstractMap, java.util.Map
         public Set keySet() {
-            return this.f18864l.keySet();
+            return this.f18863l.keySet();
         }
 
         @Override // java.util.AbstractMap, java.util.Map
         public Object remove(Object obj) {
-            if (this.f18864l.containsKey(obj)) {
-                return this.f18865m.a(obj, Q.a(this.f18864l.remove(obj)));
+            if (this.f18863l.containsKey(obj)) {
+                return this.f18864m.a(obj, Q.a(this.f18863l.remove(obj)));
             }
             return null;
         }
 
         @Override // java.util.AbstractMap, java.util.Map
         public int size() {
-            return this.f18864l.size();
+            return this.f18863l.size();
         }
 
         @Override // java.util.AbstractMap, java.util.Map
@@ -361,10 +361,10 @@ public abstract class H {
     public static class m extends AbstractCollection {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Map f18866l;
+        public final Map f18865l;
 
         public m(Map map) {
-            this.f18866l = (Map) j3.o.q(map);
+            this.f18865l = (Map) j3.o.q(map);
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection
@@ -378,7 +378,7 @@ public abstract class H {
         }
 
         public final Map f() {
-            return this.f18866l;
+            return this.f18865l;
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection
@@ -397,7 +397,7 @@ public abstract class H {
                 return super.remove(obj);
             } catch (UnsupportedOperationException unused) {
                 for (Map.Entry entry : f().entrySet()) {
-                    if (AbstractC1237k.a(obj, entry.getValue())) {
+                    if (AbstractC1236k.a(obj, entry.getValue())) {
                         f().remove(entry.getKey());
                         return true;
                     }
@@ -445,10 +445,10 @@ public abstract class H {
     public static abstract class n extends AbstractMap {
 
         /* renamed from: l, reason: collision with root package name */
-        public transient Set f18867l;
+        public transient Set f18866l;
 
         /* renamed from: m, reason: collision with root package name */
-        public transient Collection f18868m;
+        public transient Collection f18867m;
 
         public abstract Set a();
 
@@ -458,50 +458,50 @@ public abstract class H {
 
         @Override // java.util.AbstractMap, java.util.Map
         public Set entrySet() {
-            Set set = this.f18867l;
+            Set set = this.f18866l;
             if (set != null) {
                 return set;
             }
             Set setA = a();
-            this.f18867l = setA;
+            this.f18866l = setA;
             return setA;
         }
 
         @Override // java.util.AbstractMap, java.util.Map
         public Collection values() {
-            Collection collection = this.f18868m;
+            Collection collection = this.f18867m;
             if (collection != null) {
                 return collection;
             }
             Collection collectionB = b();
-            this.f18868m = collectionB;
+            this.f18867m = collectionB;
             return collectionB;
         }
     }
 
-    public static InterfaceC1232f a(i iVar) {
+    public static InterfaceC1231f a(i iVar) {
         j3.o.q(iVar);
         return new d(iVar);
     }
 
-    public static InterfaceC1232f b(i iVar) {
+    public static InterfaceC1231f b(i iVar) {
         j3.o.q(iVar);
         return new b(iVar);
     }
 
-    public static i c(InterfaceC1232f interfaceC1232f) {
-        j3.o.q(interfaceC1232f);
-        return new f(interfaceC1232f);
+    public static i c(InterfaceC1231f interfaceC1231f) {
+        j3.o.q(interfaceC1231f);
+        return new f(interfaceC1231f);
     }
 
-    public static InterfaceC1232f d(i iVar, Object obj) {
+    public static InterfaceC1231f d(i iVar, Object obj) {
         j3.o.q(iVar);
         return new a(iVar, obj);
     }
 
     public static int e(int i7) {
         if (i7 < 3) {
-            AbstractC1267i.b(i7, "expectedSize");
+            AbstractC1266i.b(i7, "expectedSize");
             return i7 + 1;
         }
         if (i7 < 1073741824) {
@@ -525,11 +525,11 @@ public abstract class H {
     }
 
     public static Map.Entry h(Object obj, Object obj2) {
-        return new C1278u(obj, obj2);
+        return new C1277u(obj, obj2);
     }
 
-    public static InterfaceC1232f i() {
-        return g.f18859l;
+    public static InterfaceC1231f i() {
+        return g.f18858l;
     }
 
     public static HashMap j() {
@@ -572,7 +572,7 @@ public abstract class H {
     }
 
     public static String p(Map map) {
-        StringBuilder sbB = AbstractC1268j.b(map.size());
+        StringBuilder sbB = AbstractC1267j.b(map.size());
         sbB.append('{');
         boolean z7 = true;
         for (Map.Entry entry : map.entrySet()) {
@@ -598,12 +598,12 @@ public abstract class H {
         return new c(entry, iVar);
     }
 
-    public static Map s(Map map, InterfaceC1232f interfaceC1232f) {
-        return q(map, c(interfaceC1232f));
+    public static Map s(Map map, InterfaceC1231f interfaceC1231f) {
+        return q(map, c(interfaceC1231f));
     }
 
-    public static InterfaceC1232f t() {
-        return g.f18860m;
+    public static InterfaceC1231f t() {
+        return g.f18859m;
     }
 
     public static Iterator u(Iterator it) {

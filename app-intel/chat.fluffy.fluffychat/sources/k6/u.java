@@ -9,32 +9,32 @@ import java.util.regex.Pattern;
 public final class u {
 
     /* renamed from: e, reason: collision with root package name */
-    public static final Pattern f19416e = Pattern.compile("([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)/([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)");
+    public static final Pattern f19415e = Pattern.compile("([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)/([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)");
 
     /* renamed from: f, reason: collision with root package name */
-    public static final Pattern f19417f = Pattern.compile(";\\s*(?:([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)=(?:([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)|\"([^\"]*)\"))?");
+    public static final Pattern f19416f = Pattern.compile(";\\s*(?:([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)=(?:([a-zA-Z0-9-!#$%&'*+.^_`{|}~]+)|\"([^\"]*)\"))?");
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f19418a;
+    public final String f19417a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final String f19419b;
+    public final String f19418b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final String f19420c;
+    public final String f19419c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final String f19421d;
+    public final String f19420d;
 
     public u(String str, String str2, String str3, String str4) {
-        this.f19418a = str;
-        this.f19419b = str2;
-        this.f19420c = str3;
-        this.f19421d = str4;
+        this.f19417a = str;
+        this.f19418b = str2;
+        this.f19419c = str3;
+        this.f19420d = str4;
     }
 
     public static u a(String str) {
-        Matcher matcher = f19416e.matcher(str);
+        Matcher matcher = f19415e.matcher(str);
         if (!matcher.lookingAt()) {
             throw new IllegalArgumentException("No subtype found for: \"" + str + JsonFactory.DEFAULT_QUOTE_CHAR);
         }
@@ -42,7 +42,7 @@ public final class u {
         Locale locale = Locale.US;
         String lowerCase = strGroup.toLowerCase(locale);
         String lowerCase2 = matcher.group(2).toLowerCase(locale);
-        Matcher matcher2 = f19417f.matcher(str);
+        Matcher matcher2 = f19416f.matcher(str);
         String str2 = null;
         for (int iEnd = matcher.end(); iEnd < str.length(); iEnd = matcher2.end()) {
             matcher2.region(iEnd, str.length());
@@ -75,14 +75,14 @@ public final class u {
     }
 
     public boolean equals(Object obj) {
-        return (obj instanceof u) && ((u) obj).f19418a.equals(this.f19418a);
+        return (obj instanceof u) && ((u) obj).f19417a.equals(this.f19417a);
     }
 
     public int hashCode() {
-        return this.f19418a.hashCode();
+        return this.f19417a.hashCode();
     }
 
     public String toString() {
-        return this.f19418a;
+        return this.f19417a;
     }
 }

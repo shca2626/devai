@@ -1,7 +1,7 @@
 package V5;
 
 /* loaded from: classes.dex */
-public class b extends C0607a {
+public class b extends C0608a {
     public static final boolean d(char c7, char c8, boolean z7) {
         if (c7 == c8) {
             return true;

@@ -10,7 +10,7 @@ public class n implements y {
     public final File f16749a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final InterfaceC1117A f16750b;
+    public final InterfaceC1118A f16750b;
 
     /* renamed from: c, reason: collision with root package name */
     public final AtomicBoolean f16751c;
@@ -41,11 +41,11 @@ public class n implements y {
         }
     }
 
-    public n(File file, InterfaceC1117A interfaceC1117A) {
+    public n(File file, InterfaceC1118A interfaceC1118A) {
         M5.m.e(file, "file");
-        M5.m.e(interfaceC1117A, "serializer");
+        M5.m.e(interfaceC1118A, "serializer");
         this.f16749a = file;
-        this.f16750b = interfaceC1117A;
+        this.f16750b = interfaceC1118A;
         this.f16751c = new AtomicBoolean(false);
     }
 
@@ -88,7 +88,7 @@ public class n implements y {
             if (r2 != r3) goto L35
             java.lang.Object r7 = r0.f16752o
             java.io.Closeable r7 = (java.io.Closeable) r7
-            y5.AbstractC1815j.b(r8)     // Catch: java.lang.Throwable -> L32
+            y5.AbstractC1814j.b(r8)     // Catch: java.lang.Throwable -> L32
             goto L9d
         L32:
             r8 = move-exception
@@ -103,13 +103,13 @@ public class n implements y {
             java.io.Closeable r7 = (java.io.Closeable) r7
             java.lang.Object r2 = r0.f16752o
             h0.n r2 = (h0.n) r2
-            y5.AbstractC1815j.b(r8)     // Catch: java.lang.Throwable -> L49
+            y5.AbstractC1814j.b(r8)     // Catch: java.lang.Throwable -> L49
             goto L6b
         L49:
             r8 = move-exception
             goto L76
         L4b:
-            y5.AbstractC1815j.b(r8)
+            y5.AbstractC1814j.b(r8)
             r7.f()
             java.io.FileInputStream r8 = new java.io.FileInputStream     // Catch: java.io.FileNotFoundException -> L7c
             java.io.File r2 = r7.f16749a     // Catch: java.io.FileNotFoundException -> L7c
@@ -190,7 +190,7 @@ public class n implements y {
         return i(this, eVar);
     }
 
-    @Override // h0.InterfaceC1127c
+    @Override // h0.InterfaceC1128c
     public void close() {
         this.f16751c.set(true);
     }
@@ -205,7 +205,7 @@ public class n implements y {
         return this.f16749a;
     }
 
-    public final InterfaceC1117A h() {
+    public final InterfaceC1118A h() {
         return this.f16750b;
     }
 }

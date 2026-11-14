@@ -4,22 +4,22 @@ package j;
 public class x {
 
     /* renamed from: d, reason: collision with root package name */
-    public static x f18612d;
+    public static x f18611d;
 
     /* renamed from: a, reason: collision with root package name */
-    public long f18613a;
+    public long f18612a;
 
     /* renamed from: b, reason: collision with root package name */
-    public long f18614b;
+    public long f18613b;
 
     /* renamed from: c, reason: collision with root package name */
-    public int f18615c;
+    public int f18614c;
 
     public static x b() {
-        if (f18612d == null) {
-            f18612d = new x();
+        if (f18611d == null) {
+            f18611d = new x();
         }
-        return f18612d;
+        return f18611d;
     }
 
     public void a(long j7, double d7, double d8) {
@@ -30,24 +30,24 @@ public class x {
         double d10 = 0.01745329238474369d * d7;
         double dSin2 = (Math.sin(-0.10471975803375244d) - (Math.sin(d10) * Math.sin(dAsin))) / (Math.cos(d10) * Math.cos(dAsin));
         if (dSin2 >= 1.0d) {
-            this.f18615c = 1;
-            this.f18613a = -1L;
-            this.f18614b = -1L;
+            this.f18614c = 1;
+            this.f18612a = -1L;
+            this.f18613b = -1L;
         } else {
             if (dSin2 <= -1.0d) {
-                this.f18615c = 0;
-                this.f18613a = -1L;
-                this.f18614b = -1L;
+                this.f18614c = 0;
+                this.f18612a = -1L;
+                this.f18613b = -1L;
                 return;
             }
             double dAcos = (float) (Math.acos(dSin2) / 6.283185307179586d);
-            this.f18613a = Math.round((dRound + dAcos) * 8.64E7d) + 946728000000L;
+            this.f18612a = Math.round((dRound + dAcos) * 8.64E7d) + 946728000000L;
             long jRound = Math.round((dRound - dAcos) * 8.64E7d) + 946728000000L;
-            this.f18614b = jRound;
-            if (jRound >= j7 || this.f18613a <= j7) {
-                this.f18615c = 1;
+            this.f18613b = jRound;
+            if (jRound >= j7 || this.f18612a <= j7) {
+                this.f18614c = 1;
             } else {
-                this.f18615c = 0;
+                this.f18614c = 0;
             }
         }
     }

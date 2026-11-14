@@ -8,7 +8,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
-import p2.InterfaceC1439a;
+import p2.InterfaceC1438a;
 import y2.h;
 
 /* loaded from: classes.dex */
@@ -19,7 +19,7 @@ public final class CircleTransform implements a {
     }
 
     @Override // A2.a
-    public Object transform(InterfaceC1439a interfaceC1439a, Bitmap bitmap, h hVar, e eVar) {
+    public Object transform(InterfaceC1438a interfaceC1438a, Bitmap bitmap, h hVar, e eVar) {
         int iMin = Math.min(bitmap.getWidth(), bitmap.getHeight());
         Bitmap bitmapCreateBitmap = Bitmap.createBitmap(bitmap, (bitmap.getWidth() - iMin) / 2, (bitmap.getHeight() - iMin) / 2, iMin, iMin);
         m.d(bitmapCreateBitmap, "createBitmap(...)");

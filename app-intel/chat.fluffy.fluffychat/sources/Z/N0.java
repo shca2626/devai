@@ -4,7 +4,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowInsetsController;
-import y.C1797k;
+import y.C1796k;
 
 /* loaded from: classes.dex */
 public final class N0 {
@@ -136,7 +136,7 @@ public final class N0 {
         public final S f9951c;
 
         /* renamed from: d, reason: collision with root package name */
-        public final C1797k f9952d;
+        public final C1796k f9952d;
 
         /* renamed from: e, reason: collision with root package name */
         public Window f9953e;
@@ -184,7 +184,7 @@ public final class N0 {
         }
 
         public d(WindowInsetsController windowInsetsController, N0 n02, S s7) {
-            this.f9952d = new C1797k();
+            this.f9952d = new C1796k();
             this.f9950b = windowInsetsController;
             this.f9949a = n02;
             this.f9951c = s7;

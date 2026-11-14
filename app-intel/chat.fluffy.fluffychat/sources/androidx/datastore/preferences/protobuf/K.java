@@ -7,11 +7,11 @@ public interface K extends L {
         K i();
     }
 
-    AbstractC0775f c();
+    AbstractC0776f c();
 
     int f();
 
-    void g(AbstractC0778i abstractC0778i);
+    void g(AbstractC0779i abstractC0779i);
 
     a h();
 

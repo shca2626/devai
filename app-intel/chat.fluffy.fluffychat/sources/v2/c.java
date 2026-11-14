@@ -7,7 +7,7 @@ import v2.p;
 public final class c implements u {
 
     /* renamed from: b, reason: collision with root package name */
-    public static final c f22915b = new c();
+    public static final c f22921b = new c();
 
     @Override // v2.u
     public p.a b(m mVar) {

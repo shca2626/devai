@@ -6,11 +6,11 @@ import androidx.media.AudioAttributesImpl;
 import androidx.media.AudioAttributesImplApi21;
 import androidx.media.AudioAttributesImplApi26;
 import androidx.media.AudioAttributesImplBase;
-import b2.InterfaceC0841c;
+import b2.InterfaceC0842c;
 import com.fasterxml.jackson.databind.deser.std.StdKeyDeserializer;
 
 /* loaded from: classes.dex */
-public class AudioAttributesCompat implements InterfaceC0841c {
+public class AudioAttributesCompat implements InterfaceC0842c {
 
     /* renamed from: b, reason: collision with root package name */
     public static final SparseIntArray f12466b;

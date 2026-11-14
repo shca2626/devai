@@ -1,7 +1,7 @@
 package androidx.coordinatorlayout.widget;
 
-import Z.AbstractC0718v;
-import Z.C0701j0;
+import Z.AbstractC0719v;
+import Z.C0702j0;
 import Z.F;
 import Z.G;
 import Z.H;
@@ -28,7 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.ViewTreeObserver;
-import e0.AbstractC1008a;
+import e0.AbstractC1009a;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Constructor;
@@ -115,15 +115,15 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
     public boolean f11864y;
 
     /* renamed from: z, reason: collision with root package name */
-    public C0701j0 f11865z;
+    public C0702j0 f11865z;
 
     public class a implements I {
         public a() {
         }
 
         @Override // Z.I
-        public C0701j0 a(View view, C0701j0 c0701j0) {
-            return CoordinatorLayout.this.U(c0701j0);
+        public C0702j0 a(View view, C0702j0 c0702j0) {
+            return CoordinatorLayout.this.U(c0702j0);
         }
     }
 
@@ -255,8 +255,8 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
         public b(Context context, AttributeSet attributeSet) {
         }
 
-        public C0701j0 f(CoordinatorLayout coordinatorLayout, View view, C0701j0 c0701j0) {
-            return c0701j0;
+        public C0702j0 f(CoordinatorLayout coordinatorLayout, View view, C0702j0 c0702j0) {
+            return c0702j0;
         }
     }
 
@@ -401,7 +401,7 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
             rectA.bottom -= this.f11865z.i();
         }
         Rect rectA2 = a();
-        AbstractC0718v.a(Q(eVar.f11870c), view.getMeasuredWidth(), view.getMeasuredHeight(), rectA, rectA2, i7);
+        AbstractC0719v.a(Q(eVar.f11870c), view.getMeasuredWidth(), view.getMeasuredHeight(), rectA, rectA2, i7);
         view.layout(rectA2.left, rectA2.top, rectA2.right, rectA2.bottom);
         M(rectA);
         M(rectA2);
@@ -422,7 +422,7 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
 
     public final void C(View view, int i7, int i8) {
         e eVar = (e) view.getLayoutParams();
-        int iB = AbstractC0718v.b(R(eVar.f11870c), i8);
+        int iB = AbstractC0719v.b(R(eVar.f11870c), i8);
         int i9 = iB & 7;
         int i10 = iB & 112;
         int width = getWidth();
@@ -471,7 +471,7 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
                 M(rectA);
                 return;
             }
-            int iB = AbstractC0718v.b(eVar.f11875h, i7);
+            int iB = AbstractC0719v.b(eVar.f11875h, i7);
             boolean z9 = true;
             if ((iB & 48) != 48 || (i12 = (rectA.top - ((ViewGroup.MarginLayoutParams) eVar).topMargin) - eVar.f11877j) >= (i13 = rect.top)) {
                 z7 = false;
@@ -692,21 +692,21 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
         }
     }
 
-    public final C0701j0 U(C0701j0 c0701j0) {
-        if (Y.c.a(this.f11865z, c0701j0)) {
-            return c0701j0;
+    public final C0702j0 U(C0702j0 c0702j0) {
+        if (Y.c.a(this.f11865z, c0702j0)) {
+            return c0702j0;
         }
-        this.f11865z = c0701j0;
+        this.f11865z = c0702j0;
         boolean z7 = false;
-        boolean z8 = c0701j0 != null && c0701j0.l() > 0;
+        boolean z8 = c0702j0 != null && c0702j0.l() > 0;
         this.f11846A = z8;
         if (!z8 && getBackground() == null) {
             z7 = true;
         }
         setWillNotDraw(z7);
-        C0701j0 c0701j0E = e(c0701j0);
+        C0702j0 c0702j0E = e(c0702j0);
         requestLayout();
-        return c0701j0E;
+        return c0702j0E;
     }
 
     public final void V() {
@@ -833,22 +833,22 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
         }
     }
 
-    public final C0701j0 e(C0701j0 c0701j0) {
+    public final C0702j0 e(C0702j0 c0702j0) {
         b bVarE;
-        if (c0701j0.p()) {
-            return c0701j0;
+        if (c0702j0.p()) {
+            return c0702j0;
         }
         int childCount = getChildCount();
         for (int i7 = 0; i7 < childCount; i7++) {
             View childAt = getChildAt(i7);
             if (W.x(childAt) && (bVarE = ((e) childAt.getLayoutParams()).e()) != null) {
-                c0701j0 = bVarE.f(this, childAt, c0701j0);
-                if (c0701j0.p()) {
-                    return c0701j0;
+                c0702j0 = bVarE.f(this, childAt, c0702j0);
+                if (c0702j0.p()) {
+                    return c0702j0;
                 }
             }
         }
-        return c0701j0;
+        return c0702j0;
     }
 
     public void f() {
@@ -885,7 +885,7 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
         return Collections.unmodifiableList(this.f11851l);
     }
 
-    public final C0701j0 getLastWindowInsets() {
+    public final C0702j0 getLastWindowInsets() {
         return this.f11865z;
     }
 
@@ -1097,8 +1097,8 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
         if (!this.f11846A || this.f11847B == null) {
             return;
         }
-        C0701j0 c0701j0 = this.f11865z;
-        int iL = c0701j0 != null ? c0701j0.l() : 0;
+        C0702j0 c0702j0 = this.f11865z;
+        int iL = c0702j0 != null ? c0702j0.l() : 0;
         if (iL > 0) {
             this.f11847B.setBounds(0, 0, getWidth(), iL);
             this.f11847B.draw(canvas);
@@ -1494,8 +1494,8 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
     }
 
     public final void t(View view, int i7, Rect rect, Rect rect2, e eVar, int i8, int i9) {
-        int iB = AbstractC0718v.b(P(eVar.f11870c), i7);
-        int iB2 = AbstractC0718v.b(Q(eVar.f11871d), i7);
+        int iB = AbstractC0719v.b(P(eVar.f11870c), i7);
+        int iB2 = AbstractC0719v.b(Q(eVar.f11871d), i7);
         int i10 = iB & 7;
         int i11 = iB & 112;
         int i12 = iB2 & 7;
@@ -1629,7 +1629,7 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
         }
     }
 
-    public static class g extends AbstractC1008a {
+    public static class g extends AbstractC1009a {
         public static final Parcelable.Creator<g> CREATOR = new a();
 
         /* renamed from: n, reason: collision with root package name */
@@ -1667,7 +1667,7 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
             }
         }
 
-        @Override // e0.AbstractC1008a, android.os.Parcelable
+        @Override // e0.AbstractC1009a, android.os.Parcelable
         public void writeToParcel(Parcel parcel, int i7) {
             super.writeToParcel(parcel, i7);
             SparseArray sparseArray = this.f11887n;
@@ -1902,8 +1902,8 @@ public class CoordinatorLayout extends ViewGroup implements F, G {
         }
 
         public final boolean r(View view, int i7) {
-            int iB = AbstractC0718v.b(((e) view.getLayoutParams()).f11874g, i7);
-            return iB != 0 && (AbstractC0718v.b(this.f11875h, i7) & iB) == iB;
+            int iB = AbstractC0719v.b(((e) view.getLayoutParams()).f11874g, i7);
+            return iB != 0 && (AbstractC0719v.b(this.f11875h, i7) & iB) == iB;
         }
 
         public final boolean s(View view, CoordinatorLayout coordinatorLayout) {

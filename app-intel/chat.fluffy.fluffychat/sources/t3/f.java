@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 /* loaded from: classes.dex */
 public abstract class f {
     public static byte[] a(String str, byte[] bArr, byte[] bArr2, byte[] bArr3, int i7) throws IllegalStateException, GeneralSecurityException {
-        Mac mac = (Mac) C1631c.f22561c.a(str);
+        Mac mac = (Mac) C1630c.f22567c.a(str);
         if (i7 > mac.getMacLength() * 255) {
             throw new GeneralSecurityException("size too large");
         }

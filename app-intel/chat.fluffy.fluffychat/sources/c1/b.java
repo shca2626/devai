@@ -4,16 +4,16 @@ package c1;
 public interface b {
 
     public interface a {
-        C0899a a();
+        C0900a a();
 
         a next();
     }
 
-    void a(C0899a c0899a);
+    void a(C0900a c0900a);
 
     void b(a aVar);
 
-    C0899a c();
+    C0900a c();
 
     void d();
 

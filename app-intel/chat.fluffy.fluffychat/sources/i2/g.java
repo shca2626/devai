@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
-import y5.C1824s;
+import y5.C1823s;
 
 /* loaded from: classes.dex */
 public final class g implements Y.a, Consumer {
@@ -45,7 +45,7 @@ public final class g implements Y.a, Consumer {
             while (it.hasNext()) {
                 ((Y.a) it.next()).accept(this.f17420c);
             }
-            C1824s c1824s = C1824s.f24014a;
+            C1823s c1823s = C1823s.f24020a;
             reentrantLock.unlock();
         } catch (Throwable th) {
             reentrantLock.unlock();

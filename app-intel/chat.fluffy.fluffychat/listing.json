@@ -1,17 +1,17 @@
 {
  "apks": [
   {
-   "apkId": "chat.fluffy.fluffychat:3576",
-   "versionName": "2.11.4",
-   "versionCode": 3576,
-   "sha256": "e0428eb3056b22a0d9330ea4c5517db507f12cff79b08bb1805c4f2e85c0b7e5",
+   "apkId": "chat.fluffy.fluffychat:3578",
+   "versionName": "2.11.5",
+   "versionCode": 3578,
+   "sha256": "a40f3876ec60adec4eb44ee91467b3094708dca0d4a38bb97b725a13367bd833",
    "isLatest": true,
-   "fileSize": 197812230,
+   "fileSize": 199696390,
    "fromGooglePlay": false
   }
  ],
  "securityByApkId": {
-  "chat.fluffy.fluffychat:3576": {
+  "chat.fluffy.fluffychat:3578": {
    "fromGooglePlay": false,
    "verdict": "official F-Droid repository build (open-source; signed with the F-Droid key, not the upstream release key); not VT-scanned",
    "scannedByVirusTotal": false,

@@ -9,12 +9,12 @@ import java.util.List;
 public final class r {
 
     /* renamed from: a, reason: collision with root package name */
-    public final String[] f19396a;
+    public final String[] f19395a;
 
     public static final class a {
 
         /* renamed from: a, reason: collision with root package name */
-        public final List f19397a = new ArrayList(20);
+        public final List f19396a = new ArrayList(20);
 
         public a a(String str, String str2) {
             r.a(str);
@@ -28,8 +28,8 @@ public final class r {
         }
 
         public a c(String str, String str2) {
-            this.f19397a.add(str);
-            this.f19397a.add(str2.trim());
+            this.f19396a.add(str);
+            this.f19396a.add(str2.trim());
             return this;
         }
 
@@ -38,9 +38,9 @@ public final class r {
         }
 
         public String e(String str) {
-            for (int size = this.f19397a.size() - 2; size >= 0; size -= 2) {
-                if (str.equalsIgnoreCase((String) this.f19397a.get(size))) {
-                    return (String) this.f19397a.get(size + 1);
+            for (int size = this.f19396a.size() - 2; size >= 0; size -= 2) {
+                if (str.equalsIgnoreCase((String) this.f19396a.get(size))) {
+                    return (String) this.f19396a.get(size + 1);
                 }
             }
             return null;
@@ -48,10 +48,10 @@ public final class r {
 
         public a f(String str) {
             int i7 = 0;
-            while (i7 < this.f19397a.size()) {
-                if (str.equalsIgnoreCase((String) this.f19397a.get(i7))) {
-                    this.f19397a.remove(i7);
-                    this.f19397a.remove(i7);
+            while (i7 < this.f19396a.size()) {
+                if (str.equalsIgnoreCase((String) this.f19396a.get(i7))) {
+                    this.f19396a.remove(i7);
+                    this.f19396a.remove(i7);
                     i7 -= 2;
                 }
                 i7 += 2;
@@ -69,8 +69,8 @@ public final class r {
     }
 
     public r(a aVar) {
-        List list = aVar.f19397a;
-        this.f19396a = (String[]) list.toArray(new String[list.size()]);
+        List list = aVar.f19396a;
+        this.f19395a = (String[]) list.toArray(new String[list.size()]);
     }
 
     public static void a(String str) {
@@ -112,33 +112,33 @@ public final class r {
     }
 
     public String c(String str) {
-        return d(this.f19396a, str);
+        return d(this.f19395a, str);
     }
 
     public String e(int i7) {
-        return this.f19396a[i7 * 2];
+        return this.f19395a[i7 * 2];
     }
 
     public boolean equals(Object obj) {
-        return (obj instanceof r) && Arrays.equals(((r) obj).f19396a, this.f19396a);
+        return (obj instanceof r) && Arrays.equals(((r) obj).f19395a, this.f19395a);
     }
 
     public a f() {
         a aVar = new a();
-        Collections.addAll(aVar.f19397a, this.f19396a);
+        Collections.addAll(aVar.f19396a, this.f19395a);
         return aVar;
     }
 
     public int g() {
-        return this.f19396a.length / 2;
+        return this.f19395a.length / 2;
     }
 
     public String h(int i7) {
-        return this.f19396a[(i7 * 2) + 1];
+        return this.f19395a[(i7 * 2) + 1];
     }
 
     public int hashCode() {
-        return Arrays.hashCode(this.f19396a);
+        return Arrays.hashCode(this.f19395a);
     }
 
     public List i(String str) {

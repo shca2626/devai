@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import z5.C1880n;
-import z5.C1881o;
+import z5.C1883n;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class I {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final I f20120a = new I();
+    public static final I f20119a = new I();
 
     /* JADX WARN: Code restructure failed: missing block: B:101:0x013e, code lost:
     
@@ -119,14 +119,14 @@ public final class I {
 
     public final List g(Throwable th) {
         M5.m.e(th, "exception");
-        if (th instanceof C1369f) {
-            C1369f c1369f = (C1369f) th;
-            return C1881o.l(c1369f.a(), c1369f.getMessage(), c1369f.b());
+        if (th instanceof C1368f) {
+            C1368f c1368f = (C1368f) th;
+            return C1884o.l(c1368f.a(), c1368f.getMessage(), c1368f.b());
         }
-        return C1881o.l(th.getClass().getSimpleName(), th.toString(), "Cause: " + th.getCause() + ", Stacktrace: " + Log.getStackTraceString(th));
+        return C1884o.l(th.getClass().getSimpleName(), th.toString(), "Cause: " + th.getCause() + ", Stacktrace: " + Log.getStackTraceString(th));
     }
 
     public final List h(Object obj) {
-        return C1880n.d(obj);
+        return C1883n.d(obj);
     }
 }

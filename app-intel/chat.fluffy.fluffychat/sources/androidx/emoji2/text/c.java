@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import l0.AbstractC1297f;
-import l0.C1296e;
+import l0.AbstractC1296f;
+import l0.C1295e;
 import l0.k;
-import y.C1788b;
+import y.C1787b;
 
 /* loaded from: classes.dex */
 public class c {
@@ -261,8 +261,8 @@ public class c {
     }
 
     public static class i {
-        public AbstractC1297f a(C1296e c1296e) {
-            return new k(c1296e);
+        public AbstractC1296f a(C1295e c1295e) {
+            return new k(c1295e);
         }
     }
 
@@ -275,11 +275,11 @@ public class c {
         this.f12289f = abstractC0107c.f12301a;
         this.f12295l = abstractC0107c.f12308h;
         this.f12296m = abstractC0107c.f12309i;
-        C1788b c1788b = new C1788b();
-        this.f12285b = c1788b;
+        C1787b c1787b = new C1787b();
+        this.f12285b = c1787b;
         Set set = abstractC0107c.f12305e;
         if (set != null && !set.isEmpty()) {
-            c1788b.addAll(abstractC0107c.f12305e);
+            c1787b.addAll(abstractC0107c.f12305e);
         }
         this.f12288e = new a(this);
         l();

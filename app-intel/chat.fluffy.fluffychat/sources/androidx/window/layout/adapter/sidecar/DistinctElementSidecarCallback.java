@@ -4,7 +4,7 @@ import android.os.IBinder;
 import androidx.window.sidecar.SidecarDeviceState;
 import androidx.window.sidecar.SidecarInterface;
 import androidx.window.sidecar.SidecarWindowLayoutInfo;
-import j2.C1226a;
+import j2.C1225a;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -15,7 +15,7 @@ public class DistinctElementSidecarCallback implements SidecarInterface.SidecarC
     public SidecarDeviceState f13474b;
 
     /* renamed from: d, reason: collision with root package name */
-    public final C1226a f13476d;
+    public final C1225a f13476d;
 
     /* renamed from: e, reason: collision with root package name */
     public final SidecarInterface.SidecarCallback f13477e;
@@ -26,8 +26,8 @@ public class DistinctElementSidecarCallback implements SidecarInterface.SidecarC
     /* renamed from: c, reason: collision with root package name */
     public final Map f13475c = new WeakHashMap();
 
-    public DistinctElementSidecarCallback(C1226a c1226a, SidecarInterface.SidecarCallback sidecarCallback) {
-        this.f13476d = c1226a;
+    public DistinctElementSidecarCallback(C1225a c1225a, SidecarInterface.SidecarCallback sidecarCallback) {
+        this.f13476d = c1225a;
         this.f13477e = sidecarCallback;
     }
 

@@ -4,5 +4,5 @@ package j$.time.temporal;
 public abstract class l {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final k f18395a = k.MODIFIED_JULIAN_DAY;
+    public static final k f18394a = k.MODIFIED_JULIAN_DAY;
 }

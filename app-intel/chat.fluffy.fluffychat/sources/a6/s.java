@@ -1,7 +1,7 @@
 package a6;
 
 import Y5.w;
-import y5.C1824s;
+import y5.C1823s;
 
 /* loaded from: classes.dex */
 public final class s implements Z5.e {
@@ -16,6 +16,6 @@ public final class s implements Z5.e {
     @Override // Z5.e
     public Object b(Object obj, C5.e eVar) {
         Object objW = this.f10898l.w(obj, eVar);
-        return objW == D5.c.e() ? objW : C1824s.f24014a;
+        return objW == D5.c.e() ? objW : C1823s.f24020a;
     }
 }

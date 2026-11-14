@@ -5,15 +5,15 @@ import Y.h;
 import android.graphics.Typeface;
 import android.util.SparseArray;
 import java.nio.ByteBuffer;
-import l0.AbstractC1300i;
-import l0.C1296e;
-import m0.C1320b;
+import l0.AbstractC1299i;
+import l0.C1295e;
+import m0.C1319b;
 
 /* loaded from: classes.dex */
 public final class f {
 
     /* renamed from: a, reason: collision with root package name */
-    public final C1320b f12339a;
+    public final C1319b f12339a;
 
     /* renamed from: b, reason: collision with root package name */
     public final char[] f12340b;
@@ -30,7 +30,7 @@ public final class f {
         public final SparseArray f12343a;
 
         /* renamed from: b, reason: collision with root package name */
-        public C1296e f12344b;
+        public C1295e f12344b;
 
         public a() {
             this(1);
@@ -44,20 +44,20 @@ public final class f {
             return (a) sparseArray.get(i7);
         }
 
-        public final C1296e b() {
+        public final C1295e b() {
             return this.f12344b;
         }
 
-        public void c(C1296e c1296e, int i7, int i8) {
-            a aVarA = a(c1296e.b(i7));
+        public void c(C1295e c1295e, int i7, int i8) {
+            a aVarA = a(c1295e.b(i7));
             if (aVarA == null) {
                 aVarA = new a();
-                this.f12343a.put(c1296e.b(i7), aVarA);
+                this.f12343a.put(c1295e.b(i7), aVarA);
             }
             if (i8 > i7) {
-                aVarA.c(c1296e, i7 + 1, i8);
+                aVarA.c(c1295e, i7 + 1, i8);
             } else {
-                aVarA.f12344b = c1296e;
+                aVarA.f12344b = c1295e;
             }
         }
 
@@ -66,28 +66,28 @@ public final class f {
         }
     }
 
-    public f(Typeface typeface, C1320b c1320b) {
+    public f(Typeface typeface, C1319b c1319b) {
         this.f12342d = typeface;
-        this.f12339a = c1320b;
-        this.f12340b = new char[c1320b.k() * 2];
-        a(c1320b);
+        this.f12339a = c1319b;
+        this.f12340b = new char[c1319b.k() * 2];
+        a(c1319b);
     }
 
     public static f b(Typeface typeface, ByteBuffer byteBuffer) {
         try {
             k.a("EmojiCompat.MetadataRepo.create");
-            return new f(typeface, AbstractC1300i.b(byteBuffer));
+            return new f(typeface, AbstractC1299i.b(byteBuffer));
         } finally {
             k.b();
         }
     }
 
-    public final void a(C1320b c1320b) {
-        int iK = c1320b.k();
+    public final void a(C1319b c1319b) {
+        int iK = c1319b.k();
         for (int i7 = 0; i7 < iK; i7++) {
-            C1296e c1296e = new C1296e(this, i7);
-            Character.toChars(c1296e.f(), this.f12340b, i7 * 2);
-            h(c1296e);
+            C1295e c1295e = new C1295e(this, i7);
+            Character.toChars(c1295e.f(), this.f12340b, i7 * 2);
+            h(c1295e);
         }
     }
 
@@ -95,7 +95,7 @@ public final class f {
         return this.f12340b;
     }
 
-    public C1320b d() {
+    public C1319b d() {
         return this.f12339a;
     }
 
@@ -111,9 +111,9 @@ public final class f {
         return this.f12342d;
     }
 
-    public void h(C1296e c1296e) {
-        h.k(c1296e, "emoji metadata cannot be null");
-        h.a(c1296e.c() > 0, "invalid metadata codepoint length");
-        this.f12341c.c(c1296e, 0, c1296e.c() - 1);
+    public void h(C1295e c1295e) {
+        h.k(c1295e, "emoji metadata cannot be null");
+        h.a(c1295e.c() > 0, "invalid metadata codepoint length");
+        this.f12341c.c(c1295e, 0, c1295e.c() - 1);
     }
 }

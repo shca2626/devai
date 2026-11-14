@@ -1,7 +1,7 @@
 package A1;
 
 import E0.E;
-import v1.C1678d;
+import v1.C1677d;
 
 /* loaded from: classes.dex */
 public abstract class u {
@@ -47,7 +47,7 @@ public abstract class u {
                 if (iA == -2147483647) {
                     return null;
                 }
-                return new B0.y(new C1678d(iA, i9));
+                return new B0.y(new C1677d(iA, i9));
             }
             e7.f0(iG + iZ);
         }

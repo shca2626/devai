@@ -1,9 +1,9 @@
 package Y0;
 
-import B0.InterfaceC0309k;
+import B0.InterfaceC0310k;
 import J0.G1;
 import android.net.Uri;
-import g1.InterfaceC1088s;
+import g1.InterfaceC1089s;
 import java.util.Map;
 
 /* loaded from: classes.dex */
@@ -21,7 +21,7 @@ public interface T {
 
     void d();
 
-    void e(InterfaceC0309k interfaceC0309k, Uri uri, Map map, long j7, long j8, InterfaceC1088s interfaceC1088s);
+    void e(InterfaceC0310k interfaceC0310k, Uri uri, Map map, long j7, long j8, InterfaceC1089s interfaceC1089s);
 
     void release();
 }

@@ -8,25 +8,25 @@ import y2.j;
 public final class f implements j {
 
     /* renamed from: c, reason: collision with root package name */
-    public final View f23983c;
+    public final View f23989c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final boolean f23984d;
+    public final boolean f23990d;
 
     public f(View view, boolean z7) {
         m.e(view, "view");
-        this.f23983c = view;
-        this.f23984d = z7;
+        this.f23989c = view;
+        this.f23990d = z7;
     }
 
     @Override // y2.j
     public View a() {
-        return this.f23983c;
+        return this.f23989c;
     }
 
     @Override // y2.j
     public boolean b() {
-        return this.f23984d;
+        return this.f23990d;
     }
 
     @Override // y2.i

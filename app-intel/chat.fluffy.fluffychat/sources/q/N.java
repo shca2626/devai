@@ -15,33 +15,33 @@ import java.lang.reflect.Method;
 public abstract class N {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final int[] f21085a = {R.attr.state_checked};
+    public static final int[] f21091a = {R.attr.state_checked};
 
     /* renamed from: b, reason: collision with root package name */
-    public static final int[] f21086b = new int[0];
+    public static final int[] f21092b = new int[0];
 
     /* renamed from: c, reason: collision with root package name */
-    public static final Rect f21087c = new Rect();
+    public static final Rect f21093c = new Rect();
 
     public static class a {
 
         /* renamed from: a, reason: collision with root package name */
-        public static final boolean f21088a;
+        public static final boolean f21094a;
 
         /* renamed from: b, reason: collision with root package name */
-        public static final Method f21089b;
+        public static final Method f21095b;
 
         /* renamed from: c, reason: collision with root package name */
-        public static final Field f21090c;
+        public static final Field f21096c;
 
         /* renamed from: d, reason: collision with root package name */
-        public static final Field f21091d;
+        public static final Field f21097d;
 
         /* renamed from: e, reason: collision with root package name */
-        public static final Field f21092e;
+        public static final Field f21098e;
 
         /* renamed from: f, reason: collision with root package name */
-        public static final Field f21093f;
+        public static final Field f21099f;
 
         /* JADX WARN: Removed duplicated region for block: B:25:0x004a  */
         /* JADX WARN: Removed duplicated region for block: B:26:0x0057  */
@@ -111,20 +111,20 @@ public abstract class N {
                 r8 = r2
             L48:
                 if (r8 == 0) goto L57
-                q.N.a.f21089b = r4
-                q.N.a.f21090c = r5
-                q.N.a.f21091d = r6
-                q.N.a.f21092e = r7
-                q.N.a.f21093f = r3
-                q.N.a.f21088a = r0
+                q.N.a.f21095b = r4
+                q.N.a.f21096c = r5
+                q.N.a.f21097d = r6
+                q.N.a.f21098e = r7
+                q.N.a.f21099f = r3
+                q.N.a.f21094a = r0
                 goto L63
             L57:
-                q.N.a.f21089b = r1
-                q.N.a.f21090c = r1
-                q.N.a.f21091d = r1
-                q.N.a.f21092e = r1
-                q.N.a.f21093f = r1
-                q.N.a.f21088a = r2
+                q.N.a.f21095b = r1
+                q.N.a.f21096c = r1
+                q.N.a.f21097d = r1
+                q.N.a.f21098e = r1
+                q.N.a.f21099f = r1
+                q.N.a.f21094a = r2
             L63:
                 return
             */
@@ -132,16 +132,16 @@ public abstract class N {
         }
 
         public static Rect a(Drawable drawable) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-            if (Build.VERSION.SDK_INT < 29 && f21088a) {
+            if (Build.VERSION.SDK_INT < 29 && f21094a) {
                 try {
-                    Object objInvoke = f21089b.invoke(drawable, null);
+                    Object objInvoke = f21095b.invoke(drawable, null);
                     if (objInvoke != null) {
-                        return new Rect(f21090c.getInt(objInvoke), f21091d.getInt(objInvoke), f21092e.getInt(objInvoke), f21093f.getInt(objInvoke));
+                        return new Rect(f21096c.getInt(objInvoke), f21097d.getInt(objInvoke), f21098e.getInt(objInvoke), f21099f.getInt(objInvoke));
                     }
                 } catch (IllegalAccessException | InvocationTargetException unused) {
                 }
             }
-            return N.f21087c;
+            return N.f21093c;
         }
     }
 
@@ -167,9 +167,9 @@ public abstract class N {
     public static void c(Drawable drawable) {
         int[] state = drawable.getState();
         if (state == null || state.length == 0) {
-            drawable.setState(f21085a);
+            drawable.setState(f21091a);
         } else {
-            drawable.setState(f21086b);
+            drawable.setState(f21092b);
         }
         drawable.setState(state);
     }

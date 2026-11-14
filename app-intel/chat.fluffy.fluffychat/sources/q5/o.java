@@ -2,22 +2,22 @@ package q5;
 
 import java.util.List;
 import java.util.Map;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class o {
 
     /* renamed from: d, reason: collision with root package name */
-    public static final a f21461d = new a(null);
+    public static final a f21467d = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final boolean f21462a;
+    public final boolean f21468a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final boolean f21463b;
+    public final boolean f21469b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final Map f21464c;
+    public final Map f21470c;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -43,25 +43,25 @@ public final class o {
 
     public o(boolean z7, boolean z8, Map map) {
         M5.m.e(map, "headers");
-        this.f21462a = z7;
-        this.f21463b = z8;
-        this.f21464c = map;
+        this.f21468a = z7;
+        this.f21469b = z8;
+        this.f21470c = map;
     }
 
     public final boolean a() {
-        return this.f21463b;
+        return this.f21469b;
     }
 
     public final boolean b() {
-        return this.f21462a;
+        return this.f21468a;
     }
 
     public final Map c() {
-        return this.f21464c;
+        return this.f21470c;
     }
 
     public final List d() {
-        return C1881o.l(Boolean.valueOf(this.f21462a), Boolean.valueOf(this.f21463b), this.f21464c);
+        return C1884o.l(Boolean.valueOf(this.f21468a), Boolean.valueOf(this.f21469b), this.f21470c);
     }
 
     public boolean equals(Object obj) {
@@ -70,8 +70,8 @@ public final class o {
                 return true;
             }
             o oVar = (o) obj;
-            C1505d c1505d = C1505d.f21447a;
-            if (c1505d.a(Boolean.valueOf(this.f21462a), Boolean.valueOf(oVar.f21462a)) && c1505d.a(Boolean.valueOf(this.f21463b), Boolean.valueOf(oVar.f21463b)) && c1505d.a(this.f21464c, oVar.f21464c)) {
+            C1504d c1504d = C1504d.f21453a;
+            if (c1504d.a(Boolean.valueOf(this.f21468a), Boolean.valueOf(oVar.f21468a)) && c1504d.a(Boolean.valueOf(this.f21469b), Boolean.valueOf(oVar.f21469b)) && c1504d.a(this.f21470c, oVar.f21470c)) {
                 return true;
             }
         }
@@ -80,11 +80,11 @@ public final class o {
 
     public int hashCode() {
         int iHashCode = o.class.hashCode() * 31;
-        C1505d c1505d = C1505d.f21447a;
-        return ((((iHashCode + c1505d.b(Boolean.valueOf(this.f21462a))) * 31) + c1505d.b(Boolean.valueOf(this.f21463b))) * 31) + c1505d.b(this.f21464c);
+        C1504d c1504d = C1504d.f21453a;
+        return ((((iHashCode + c1504d.b(Boolean.valueOf(this.f21468a))) * 31) + c1504d.b(Boolean.valueOf(this.f21469b))) * 31) + c1504d.b(this.f21470c);
     }
 
     public String toString() {
-        return "WebViewOptions(enableJavaScript=" + this.f21462a + ", enableDomStorage=" + this.f21463b + ", headers=" + this.f21464c + ")";
+        return "WebViewOptions(enableJavaScript=" + this.f21468a + ", enableDomStorage=" + this.f21469b + ", headers=" + this.f21470c + ")";
     }
 }

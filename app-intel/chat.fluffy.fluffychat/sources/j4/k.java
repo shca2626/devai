@@ -26,25 +26,25 @@ import javax.crypto.spec.PSource;
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes.dex */
-public class k implements InterfaceC1241b {
+public class k implements InterfaceC1240b {
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f18755a;
+    public final String f18754a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final Context f18756b;
+    public final Context f18755b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final t f18757c;
+    public final t f18756c;
 
     public k(Context context, t tVar) throws NoSuchAlgorithmException, UnrecoverableKeyException, IOException, KeyStoreException, CertificateException {
-        this.f18756b = context;
-        this.f18757c = tVar;
-        this.f18755a = context.getPackageName() + ".FlutterSecureStoragePluginKeyOAEP" + tVar.g();
+        this.f18755b = context;
+        this.f18756c = tVar;
+        this.f18754a = context.getPackageName() + ".FlutterSecureStoragePluginKeyOAEP" + tVar.g();
         f(context);
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public byte[] a(Key key) throws Exception {
         PublicKey publicKeyI = i();
         Cipher cipherJ = j();
@@ -52,7 +52,7 @@ public class k implements InterfaceC1241b {
         return cipherJ.wrap(key);
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public Key b(byte[] bArr, String str) throws Exception {
         PrivateKey privateKeyH = h();
         Cipher cipherJ = j();
@@ -60,14 +60,14 @@ public class k implements InterfaceC1241b {
         return cipherJ.unwrap(bArr, str, 3);
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public void c() throws NoSuchAlgorithmException, IOException, KeyStoreException, CertificateException {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
-        keyStore.deleteEntry(this.f18755a);
+        keyStore.deleteEntry(this.f18754a);
     }
 
-    @Override // j4.InterfaceC1241b
+    @Override // j4.InterfaceC1240b
     public Cipher d(Context context) {
         return null;
     }
@@ -90,8 +90,8 @@ public class k implements InterfaceC1241b {
     public final void f(Context context) throws NoSuchAlgorithmException, UnrecoverableKeyException, IOException, KeyStoreException, CertificateException {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
-        Key key = keyStore.getKey(this.f18755a, null);
-        Certificate certificate = keyStore.getCertificate(this.f18755a);
+        Key key = keyStore.getKey(this.f18754a, null);
+        Certificate certificate = keyStore.getCertificate(this.f18754a);
         if (key == null || certificate == null) {
             e(context);
         }
@@ -104,28 +104,28 @@ public class k implements InterfaceC1241b {
     public final PrivateKey h() throws Exception {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
-        Key key = keyStore.getKey(this.f18755a, null);
+        Key key = keyStore.getKey(this.f18754a, null);
         if (key != null) {
             if (key instanceof PrivateKey) {
                 return (PrivateKey) key;
             }
             throw new Exception("Not an instance of a PrivateKey");
         }
-        throw new Exception("No key found under alias: " + this.f18755a);
+        throw new Exception("No key found under alias: " + this.f18754a);
     }
 
     public final PublicKey i() throws Exception {
         KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
         keyStore.load(null);
-        Certificate certificate = keyStore.getCertificate(this.f18755a);
+        Certificate certificate = keyStore.getCertificate(this.f18754a);
         if (certificate == null) {
-            throw new Exception("No certificate found under alias: " + this.f18755a);
+            throw new Exception("No certificate found under alias: " + this.f18754a);
         }
         PublicKey publicKey = certificate.getPublicKey();
         if (publicKey != null) {
             return publicKey;
         }
-        throw new Exception("No key found under alias: " + this.f18755a);
+        throw new Exception("No key found under alias: " + this.f18754a);
     }
 
     public final Cipher j() {
@@ -133,13 +133,13 @@ public class k implements InterfaceC1241b {
     }
 
     public final AlgorithmParameterSpec k(Context context, Calendar calendar, Calendar calendar2) {
-        return new KeyGenParameterSpec.Builder(this.f18755a, 3).setCertificateSubject(new X500Principal("CN=" + this.f18755a)).setDigests("SHA-256").setBlockModes("ECB").setEncryptionPaddings("OAEPPadding").setCertificateSerialNumber(BigInteger.valueOf(1L)).setCertificateNotBefore(calendar.getTime()).setCertificateNotAfter(calendar2.getTime()).build();
+        return new KeyGenParameterSpec.Builder(this.f18754a, 3).setCertificateSubject(new X500Principal("CN=" + this.f18754a)).setDigests("SHA-256").setBlockModes("ECB").setEncryptionPaddings("OAEPPadding").setCertificateSerialNumber(BigInteger.valueOf(1L)).setCertificateNotBefore(calendar.getTime()).setCertificateNotAfter(calendar2.getTime()).build();
     }
 
     public final void l(Locale locale) {
         Locale.setDefault(locale);
-        Configuration configuration = this.f18756b.getResources().getConfiguration();
+        Configuration configuration = this.f18755b.getResources().getConfiguration();
         configuration.setLocale(locale);
-        this.f18756b.createConfigurationContext(configuration);
+        this.f18755b.createConfigurationContext(configuration);
     }
 }

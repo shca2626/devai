@@ -10,13 +10,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
-import y.C1797k;
+import y.C1796k;
 
 /* loaded from: classes.dex */
 public abstract class PreferenceGroup extends Preference {
 
     /* renamed from: P, reason: collision with root package name */
-    public final C1797k f12928P;
+    public final C1796k f12928P;
 
     /* renamed from: Q, reason: collision with root package name */
     public final Handler f12929Q;
@@ -53,7 +53,7 @@ public abstract class PreferenceGroup extends Preference {
 
     public PreferenceGroup(Context context, AttributeSet attributeSet, int i7, int i8) {
         super(context, attributeSet, i7, i8);
-        this.f12928P = new C1797k();
+        this.f12928P = new C1796k();
         this.f12929Q = new Handler(Looper.getMainLooper());
         this.f12931S = true;
         this.f12932T = 0;

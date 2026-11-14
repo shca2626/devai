@@ -4,17 +4,17 @@ package j$.time;
 public abstract /* synthetic */ class o {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ int[] f18363a;
+    public static final /* synthetic */ int[] f18362a;
 
     static {
         int[] iArr = new int[j$.time.temporal.a.values().length];
-        f18363a = iArr;
+        f18362a = iArr;
         try {
-            iArr[j$.time.temporal.a.DAY_OF_MONTH.ordinal()] = 1;
+            iArr[j$.time.temporal.a.INSTANT_SECONDS.ordinal()] = 1;
         } catch (NoSuchFieldError unused) {
         }
         try {
-            f18363a[j$.time.temporal.a.MONTH_OF_YEAR.ordinal()] = 2;
+            f18362a[j$.time.temporal.a.OFFSET_SECONDS.ordinal()] = 2;
         } catch (NoSuchFieldError unused2) {
         }
     }

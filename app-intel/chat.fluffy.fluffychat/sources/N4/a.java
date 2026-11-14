@@ -2,7 +2,7 @@ package N4;
 
 import java.util.Arrays;
 import java.util.List;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class a {
@@ -65,7 +65,7 @@ public final class a {
     }
 
     public final List a() {
-        return C1881o.l(this.f6406a, this.f6407b, this.f6408c, Long.valueOf(this.f6409d), this.f6410e, this.f6411f);
+        return C1884o.l(this.f6406a, this.f6407b, this.f6408c, Long.valueOf(this.f6409d), this.f6410e, this.f6411f);
     }
 
     public boolean equals(Object obj) {

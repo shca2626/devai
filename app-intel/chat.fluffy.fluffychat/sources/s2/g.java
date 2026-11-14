@@ -1,6 +1,6 @@
 package s2;
 
-import p2.InterfaceC1439a;
+import p2.InterfaceC1438a;
 
 /* loaded from: classes.dex */
 public interface g {
@@ -15,7 +15,7 @@ public interface g {
 
     boolean a(Object obj);
 
-    Object b(InterfaceC1439a interfaceC1439a, Object obj, y2.h hVar, r2.m mVar, C5.e eVar);
+    Object b(InterfaceC1438a interfaceC1438a, Object obj, y2.h hVar, r2.m mVar, C5.e eVar);
 
     String c(Object obj);
 }

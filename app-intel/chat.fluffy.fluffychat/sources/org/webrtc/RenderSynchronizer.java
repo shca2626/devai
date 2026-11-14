@@ -36,10 +36,10 @@ public final class RenderSynchronizer {
         this.targetFrameIntervalNanos = Math.round(TimeUnit.SECONDS.toNanos(1L) / f7);
         Handler handler = new Handler(Looper.getMainLooper());
         this.mainThreadHandler = handler;
-        handler.post(new Runnable() { // from class: org.webrtc.T
+        handler.post(new Runnable() { // from class: org.webrtc.a0
             @Override // java.lang.Runnable
             public final void run() {
-                this.f20550l.lambda$new$0();
+                this.f20558l.lambda$new$0();
             }
         });
         Logging.d(TAG, "Created");
@@ -61,7 +61,7 @@ public final class RenderSynchronizer {
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$registerListener$1() {
-        this.choreographer.postFrameCallback(new S(this));
+        this.choreographer.postFrameCallback(new Z(this));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -73,7 +73,7 @@ public final class RenderSynchronizer {
                     this.isListening = false;
                     return;
                 }
-                this.choreographer.postFrameCallback(new S(this));
+                this.choreographer.postFrameCallback(new Z(this));
                 long j8 = j7 - this.lastOpenedTimeNanos;
                 long j9 = j7 - this.lastRefreshTimeNanos;
                 this.lastRefreshTimeNanos = j7;
@@ -111,10 +111,10 @@ public final class RenderSynchronizer {
                 if (!this.isListening) {
                     Logging.d(TAG, "First listener, subscribing to frame callbacks");
                     this.isListening = true;
-                    this.mainThreadHandler.post(new Runnable() { // from class: org.webrtc.Q
+                    this.mainThreadHandler.post(new Runnable() { // from class: org.webrtc.Y
                         @Override // java.lang.Runnable
                         public final void run() {
-                            this.f20548l.lambda$registerListener$1();
+                            this.f20555l.lambda$registerListener$1();
                         }
                     });
                 }

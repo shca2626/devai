@@ -12,7 +12,7 @@ public abstract class g0 {
 
     public abstract void c(Object obj, int i7, Object obj2);
 
-    public abstract void d(Object obj, int i7, AbstractC0775f abstractC0775f);
+    public abstract void d(Object obj, int i7, AbstractC0776f abstractC0776f);
 
     public abstract void e(Object obj, int i7, long j7);
 
@@ -33,7 +33,7 @@ public abstract class g0 {
         }
     }
 
-    public final boolean m(Object obj, Y y7, int i7) throws C0790v {
+    public final boolean m(Object obj, Y y7, int i7) throws C0791v {
         int iT = y7.t();
         int iA = l0.a(iT);
         int iB = l0.b(iT);
@@ -54,7 +54,7 @@ public abstract class g0 {
                 return false;
             }
             if (iB != 5) {
-                throw C0790v.e();
+                throw C0791v.e();
             }
             a(obj, iA, y7.g());
             return true;
@@ -63,11 +63,11 @@ public abstract class g0 {
         int iC = l0.c(iA, 4);
         int i8 = i7 + 1;
         if (i8 >= f12061a) {
-            throw C0790v.i();
+            throw C0791v.i();
         }
         l(objN, y7, i8);
         if (iC != y7.t()) {
-            throw C0790v.b();
+            throw C0791v.b();
         }
         c(obj, iA, r(objN));
         return true;

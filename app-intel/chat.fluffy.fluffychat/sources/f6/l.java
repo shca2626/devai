@@ -1,28 +1,28 @@
 package f6;
 
-import b6.AbstractC0855H;
-import b6.C0852E;
+import b6.AbstractC0856H;
+import b6.C0853E;
 
 /* loaded from: classes.dex */
 public abstract class l {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final int f15903a = AbstractC0855H.e("kotlinx.coroutines.semaphore.maxSpinCycles", 100, 0, 0, 12, null);
+    public static final int f15903a = AbstractC0856H.e("kotlinx.coroutines.semaphore.maxSpinCycles", 100, 0, 0, 12, null);
 
     /* renamed from: b, reason: collision with root package name */
-    public static final C0852E f15904b = new C0852E("PERMIT");
+    public static final C0853E f15904b = new C0853E("PERMIT");
 
     /* renamed from: c, reason: collision with root package name */
-    public static final C0852E f15905c = new C0852E("TAKEN");
+    public static final C0853E f15905c = new C0853E("TAKEN");
 
     /* renamed from: d, reason: collision with root package name */
-    public static final C0852E f15906d = new C0852E("BROKEN");
+    public static final C0853E f15906d = new C0853E("BROKEN");
 
     /* renamed from: e, reason: collision with root package name */
-    public static final C0852E f15907e = new C0852E("CANCELLED");
+    public static final C0853E f15907e = new C0853E("CANCELLED");
 
     /* renamed from: f, reason: collision with root package name */
-    public static final int f15908f = AbstractC0855H.e("kotlinx.coroutines.semaphore.segmentSize", 16, 0, 0, 12, null);
+    public static final int f15908f = AbstractC0856H.e("kotlinx.coroutines.semaphore.segmentSize", 16, 0, 0, 12, null);
 
     public static final h a(int i7, int i8) {
         return new k(i7, i8);

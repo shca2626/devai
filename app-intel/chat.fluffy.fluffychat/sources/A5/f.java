@@ -4,10 +4,10 @@ import M5.m;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Set;
-import z5.AbstractC1872f;
+import z5.AbstractC1875f;
 
 /* loaded from: classes.dex */
-public final class f extends AbstractC1872f implements Set, N5.b {
+public final class f extends AbstractC1875f implements Set, N5.b {
 
     /* renamed from: l, reason: collision with root package name */
     public final d f311l;
@@ -38,7 +38,7 @@ public final class f extends AbstractC1872f implements Set, N5.b {
         return this.f311l.containsKey(obj);
     }
 
-    @Override // z5.AbstractC1872f
+    @Override // z5.AbstractC1875f
     public int f() {
         return this.f311l.size();
     }

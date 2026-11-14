@@ -1,6 +1,6 @@
 package Z0;
 
-import I0.C0361d1;
+import I0.C0362d1;
 import I0.J1;
 import c1.k;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 public interface j {
     void a();
 
-    void c(C0361d1 c0361d1, long j7, List list, h hVar);
+    void c(C0362d1 c0362d1, long j7, List list, h hVar);
 
     int d(long j7, List list);
 

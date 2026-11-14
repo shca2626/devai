@@ -33,7 +33,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import androidx.appcompat.widget.b;
 import androidx.core.widget.NestedScrollView;
-import i.AbstractC1145a;
+import i.AbstractC1146a;
 import i.f;
 import i.j;
 import j.p;
@@ -602,7 +602,7 @@ public class AlertController {
         this.f10991b = pVar;
         this.f10992c = window;
         this.f10988R = new c(pVar);
-        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, j.f17128F, AbstractC1145a.f16940k, 0);
+        TypedArray typedArrayObtainStyledAttributes = context.obtainStyledAttributes(null, j.f17128F, AbstractC1146a.f16940k, 0);
         this.f10980J = typedArrayObtainStyledAttributes.getResourceId(j.f17133G, 0);
         this.f10981K = typedArrayObtainStyledAttributes.getResourceId(j.f17143I, 0);
         this.f10982L = typedArrayObtainStyledAttributes.getResourceId(j.f17153K, 0);
@@ -635,7 +635,7 @@ public class AlertController {
 
     public static boolean y(Context context) {
         TypedValue typedValue = new TypedValue();
-        context.getTheme().resolveAttribute(AbstractC1145a.f16939j, typedValue, true);
+        context.getTheme().resolveAttribute(AbstractC1146a.f16939j, typedValue, true);
         return typedValue.data != 0;
     }
 

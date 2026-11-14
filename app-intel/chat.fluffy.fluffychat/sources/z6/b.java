@@ -8,12 +8,12 @@ public abstract class b {
             try {
                 aVarValueOf = a.valueOf(str);
             } catch (IllegalArgumentException unused) {
-                aVarValueOf = a.f24179l;
+                aVarValueOf = a.f24205l;
             }
             if (aVarValueOf != null) {
                 return aVarValueOf;
             }
         }
-        return a.f24179l;
+        return a.f24205l;
     }
 }

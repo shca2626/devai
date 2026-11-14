@@ -4,10 +4,10 @@ package b6;
 public final class y {
 
     /* renamed from: a, reason: collision with root package name */
-    public final C0880p f13816a;
+    public final C0881p f13816a;
 
-    public y(C0880p c0880p) {
-        this.f13816a = c0880p;
+    public y(C0881p c0881p) {
+        this.f13816a = c0881p;
     }
 
     public String toString() {

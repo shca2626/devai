@@ -1,7 +1,7 @@
 package h0;
 
 /* loaded from: classes.dex */
-public final class x extends AbstractC1120D {
+public final class x extends AbstractC1121D {
 
     /* renamed from: b, reason: collision with root package name */
     public final Throwable f16794b;

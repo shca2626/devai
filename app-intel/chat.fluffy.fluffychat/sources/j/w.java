@@ -10,28 +10,28 @@ import java.lang.reflect.Field;
 public abstract class w {
 
     /* renamed from: a, reason: collision with root package name */
-    public static Field f18604a;
+    public static Field f18603a;
 
     /* renamed from: b, reason: collision with root package name */
-    public static boolean f18605b;
+    public static boolean f18604b;
 
     /* renamed from: c, reason: collision with root package name */
-    public static Class f18606c;
+    public static Class f18605c;
 
     /* renamed from: d, reason: collision with root package name */
-    public static boolean f18607d;
+    public static boolean f18606d;
 
     /* renamed from: e, reason: collision with root package name */
-    public static Field f18608e;
+    public static Field f18607e;
 
     /* renamed from: f, reason: collision with root package name */
-    public static boolean f18609f;
+    public static boolean f18608f;
 
     /* renamed from: g, reason: collision with root package name */
-    public static Field f18610g;
+    public static Field f18609g;
 
     /* renamed from: h, reason: collision with root package name */
-    public static boolean f18611h;
+    public static boolean f18610h;
 
     public static class a {
         public static void a(LongSparseArray longSparseArray) {
@@ -48,17 +48,17 @@ public abstract class w {
 
     public static void b(Resources resources) throws IllegalAccessException, NoSuchFieldException, SecurityException, IllegalArgumentException {
         Object obj;
-        if (!f18611h) {
+        if (!f18610h) {
             try {
                 Field declaredField = Resources.class.getDeclaredField("mResourcesImpl");
-                f18610g = declaredField;
+                f18609g = declaredField;
                 declaredField.setAccessible(true);
             } catch (NoSuchFieldException e7) {
                 Log.e("ResourcesFlusher", "Could not retrieve Resources#mResourcesImpl field", e7);
             }
-            f18611h = true;
+            f18610h = true;
         }
-        Field field = f18610g;
+        Field field = f18609g;
         if (field == null) {
             return;
         }
@@ -72,17 +72,17 @@ public abstract class w {
         if (obj == null) {
             return;
         }
-        if (!f18605b) {
+        if (!f18604b) {
             try {
                 Field declaredField2 = obj.getClass().getDeclaredField("mDrawableCache");
-                f18604a = declaredField2;
+                f18603a = declaredField2;
                 declaredField2.setAccessible(true);
             } catch (NoSuchFieldException e9) {
                 Log.e("ResourcesFlusher", "Could not retrieve ResourcesImpl#mDrawableCache field", e9);
             }
-            f18605b = true;
+            f18604b = true;
         }
-        Field field2 = f18604a;
+        Field field2 = f18603a;
         if (field2 != null) {
             try {
                 obj2 = field2.get(obj);
@@ -97,29 +97,29 @@ public abstract class w {
 
     public static void c(Object obj) throws NoSuchFieldException, SecurityException {
         LongSparseArray longSparseArray;
-        if (!f18607d) {
+        if (!f18606d) {
             try {
-                f18606c = Class.forName("android.content.res.ThemedResourceCache");
+                f18605c = Class.forName("android.content.res.ThemedResourceCache");
             } catch (ClassNotFoundException e7) {
                 Log.e("ResourcesFlusher", "Could not find ThemedResourceCache class", e7);
             }
-            f18607d = true;
+            f18606d = true;
         }
-        Class cls = f18606c;
+        Class cls = f18605c;
         if (cls == null) {
             return;
         }
-        if (!f18609f) {
+        if (!f18608f) {
             try {
                 Field declaredField = cls.getDeclaredField("mUnthemedEntries");
-                f18608e = declaredField;
+                f18607e = declaredField;
                 declaredField.setAccessible(true);
             } catch (NoSuchFieldException e8) {
                 Log.e("ResourcesFlusher", "Could not retrieve ThemedResourceCache#mUnthemedEntries field", e8);
             }
-            f18609f = true;
+            f18608f = true;
         }
-        Field field = f18608e;
+        Field field = f18607e;
         if (field == null) {
             return;
         }

@@ -5,7 +5,7 @@ import Y.f;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import y.C1797k;
+import y.C1796k;
 
 /* loaded from: classes.dex */
 public final class b {
@@ -14,7 +14,7 @@ public final class b {
     public final e f3529a = new f(10);
 
     /* renamed from: b, reason: collision with root package name */
-    public final C1797k f3530b = new C1797k();
+    public final C1796k f3530b = new C1796k();
 
     /* renamed from: c, reason: collision with root package name */
     public final ArrayList f3531c = new ArrayList();

@@ -20,10 +20,10 @@ import k6.w;
 public class k {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final k f22487a = k();
+    public static final k f22493a = k();
 
     /* renamed from: b, reason: collision with root package name */
-    public static final Logger f22488b = Logger.getLogger(v.class.getName());
+    public static final Logger f22494b = Logger.getLogger(v.class.getName());
 
     public static List b(List list) {
         ArrayList arrayList = new ArrayList(list.size());
@@ -80,7 +80,7 @@ public class k {
     }
 
     public static k l() {
-        return f22487a;
+        return f22493a;
     }
 
     public static boolean q() {
@@ -129,7 +129,7 @@ public class k {
     }
 
     public Object p(String str) {
-        if (f22488b.isLoggable(Level.FINE)) {
+        if (f22494b.isLoggable(Level.FINE)) {
             return new Throwable(str);
         }
         return null;
@@ -140,7 +140,7 @@ public class k {
     }
 
     public void t(int i7, String str, Throwable th) {
-        f22488b.log(i7 == 5 ? Level.WARNING : Level.INFO, str, th);
+        f22494b.log(i7 == 5 ? Level.WARNING : Level.INFO, str, th);
     }
 
     public String toString() {

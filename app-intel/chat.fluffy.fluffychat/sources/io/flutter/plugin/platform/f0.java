@@ -23,7 +23,7 @@ public class f0 {
     public final Context f17823b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final C1169a f17824c;
+    public final C1170a f17824c;
 
     /* renamed from: d, reason: collision with root package name */
     public final int f17825d;
@@ -32,7 +32,7 @@ public class f0 {
     public final int f17826e;
 
     /* renamed from: f, reason: collision with root package name */
-    public final InterfaceC1183o f17827f;
+    public final InterfaceC1184o f17827f;
 
     /* renamed from: g, reason: collision with root package name */
     public final View.OnFocusChangeListener f17828g;
@@ -124,31 +124,31 @@ public class f0 {
         }
     }
 
-    public f0(Context context, C1169a c1169a, VirtualDisplay virtualDisplay, InterfaceC1179k interfaceC1179k, InterfaceC1183o interfaceC1183o, View.OnFocusChangeListener onFocusChangeListener, int i7, Object obj) {
+    public f0(Context context, C1170a c1170a, VirtualDisplay virtualDisplay, InterfaceC1180k interfaceC1180k, InterfaceC1184o interfaceC1184o, View.OnFocusChangeListener onFocusChangeListener, int i7, Object obj) {
         this.f17823b = context;
-        this.f17824c = c1169a;
-        this.f17827f = interfaceC1183o;
+        this.f17824c = c1170a;
+        this.f17827f = interfaceC1184o;
         this.f17828g = onFocusChangeListener;
         this.f17826e = i7;
         this.f17829h = virtualDisplay;
         this.f17825d = context.getResources().getDisplayMetrics().densityDpi;
-        SingleViewPresentation singleViewPresentation = new SingleViewPresentation(context, this.f17829h.getDisplay(), interfaceC1179k, c1169a, i7, onFocusChangeListener);
+        SingleViewPresentation singleViewPresentation = new SingleViewPresentation(context, this.f17829h.getDisplay(), interfaceC1180k, c1170a, i7, onFocusChangeListener);
         this.f17822a = singleViewPresentation;
         singleViewPresentation.show();
     }
 
-    public static f0 b(Context context, C1169a c1169a, InterfaceC1179k interfaceC1179k, InterfaceC1183o interfaceC1183o, int i7, int i8, int i9, Object obj, View.OnFocusChangeListener onFocusChangeListener) {
+    public static f0 b(Context context, C1170a c1170a, InterfaceC1180k interfaceC1180k, InterfaceC1184o interfaceC1184o, int i7, int i8, int i9, Object obj, View.OnFocusChangeListener onFocusChangeListener) {
         if (i7 == 0 || i8 == 0) {
             return null;
         }
         DisplayManager displayManager = (DisplayManager) context.getSystemService("display");
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
-        interfaceC1183o.a(i7, i8);
-        VirtualDisplay virtualDisplayCreateVirtualDisplay = displayManager.createVirtualDisplay("flutter-vd#" + i9, i7, i8, displayMetrics.densityDpi, interfaceC1183o.getSurface(), 0, f17821i, null);
+        interfaceC1184o.a(i7, i8);
+        VirtualDisplay virtualDisplayCreateVirtualDisplay = displayManager.createVirtualDisplay("flutter-vd#" + i9, i7, i8, displayMetrics.densityDpi, interfaceC1184o.getSurface(), 0, f17821i, null);
         if (virtualDisplayCreateVirtualDisplay == null) {
             return null;
         }
-        return new f0(context, c1169a, virtualDisplayCreateVirtualDisplay, interfaceC1179k, interfaceC1183o, onFocusChangeListener, i9, obj);
+        return new f0(context, c1170a, virtualDisplayCreateVirtualDisplay, interfaceC1180k, interfaceC1184o, onFocusChangeListener, i9, obj);
     }
 
     public void a() {
@@ -171,17 +171,17 @@ public class f0 {
     }
 
     public int e() {
-        InterfaceC1183o interfaceC1183o = this.f17827f;
-        if (interfaceC1183o != null) {
-            return interfaceC1183o.getHeight();
+        InterfaceC1184o interfaceC1184o = this.f17827f;
+        if (interfaceC1184o != null) {
+            return interfaceC1184o.getHeight();
         }
         return 0;
     }
 
     public int f() {
-        InterfaceC1183o interfaceC1183o = this.f17827f;
-        if (interfaceC1183o != null) {
-            return interfaceC1183o.getWidth();
+        InterfaceC1184o interfaceC1184o = this.f17827f;
+        if (interfaceC1184o != null) {
+            return interfaceC1184o.getWidth();
         }
         return 0;
     }

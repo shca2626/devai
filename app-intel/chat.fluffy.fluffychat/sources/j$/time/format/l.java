@@ -10,10 +10,10 @@ public final class l implements e {
     public static final l STRICT;
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ l[] f18304a;
+    public static final /* synthetic */ l[] f18312a;
 
     @Override // j$.time.format.e
-    public final boolean s(s sVar, StringBuilder sb) {
+    public final boolean r(s sVar, StringBuilder sb) {
         return true;
     }
 
@@ -22,7 +22,7 @@ public final class l implements e {
     }
 
     public static l[] values() {
-        return (l[]) f18304a.clone();
+        return (l[]) f18312a.clone();
     }
 
     static {
@@ -34,28 +34,28 @@ public final class l implements e {
         STRICT = lVar3;
         l lVar4 = new l("LENIENT", 3);
         LENIENT = lVar4;
-        f18304a = new l[]{lVar, lVar2, lVar3, lVar4};
+        f18312a = new l[]{lVar, lVar2, lVar3, lVar4};
     }
 
     @Override // j$.time.format.e
-    public final int A(p pVar, CharSequence charSequence, int i7) {
+    public final int z(p pVar, CharSequence charSequence, int i7) {
         int iOrdinal = ordinal();
         if (iOrdinal == 0) {
-            pVar.f18317b = true;
+            pVar.f18325b = true;
             return i7;
         }
         if (iOrdinal == 1) {
-            pVar.f18317b = false;
+            pVar.f18325b = false;
             return i7;
         }
         if (iOrdinal == 2) {
-            pVar.f18318c = true;
+            pVar.f18326c = true;
             return i7;
         }
         if (iOrdinal != 3) {
             return i7;
         }
-        pVar.f18318c = false;
+        pVar.f18326c = false;
         return i7;
     }
 

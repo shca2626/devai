@@ -35,32 +35,32 @@ public enum a implements q {
 
 
     /* renamed from: a, reason: collision with root package name */
-    public final String f18379a;
+    public final String f18378a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final u f18380b;
+    public final u f18379b;
 
     static {
         b bVar = b.NANOS;
     }
 
     a(String str, u uVar) {
-        this.f18379a = str;
-        this.f18380b = uVar;
+        this.f18378a = str;
+        this.f18379b = uVar;
     }
 
     a(String str, u uVar, int i7) {
-        this.f18379a = str;
-        this.f18380b = uVar;
+        this.f18378a = str;
+        this.f18379b = uVar;
     }
 
     @Override // j$.time.temporal.q
-    public final u I() {
-        return this.f18380b;
+    public final u H() {
+        return this.f18379b;
     }
 
-    public final void X(long j7) {
-        this.f18380b.b(j7, this);
+    public final void W(long j7) {
+        this.f18379b.b(j7, this);
     }
 
     @Override // j$.time.temporal.q
@@ -68,32 +68,32 @@ public enum a implements q {
         return ordinal() >= DAY_OF_WEEK.ordinal() && ordinal() <= ERA.ordinal();
     }
 
-    public final boolean Y() {
+    public final boolean X() {
         return ordinal() < DAY_OF_WEEK.ordinal();
     }
 
     @Override // j$.time.temporal.q
-    public final boolean s(TemporalAccessor temporalAccessor) {
+    public final boolean r(TemporalAccessor temporalAccessor) {
         return temporalAccessor.h(this);
     }
 
     @Override // j$.time.temporal.q
-    public final u A(TemporalAccessor temporalAccessor) {
-        return temporalAccessor.l(this);
+    public final u z(TemporalAccessor temporalAccessor) {
+        return temporalAccessor.k(this);
     }
 
     @Override // j$.time.temporal.q
-    public final long P(TemporalAccessor temporalAccessor) {
+    public final long O(TemporalAccessor temporalAccessor) {
         return temporalAccessor.i(this);
     }
 
     @Override // j$.time.temporal.q
-    public final m V(m mVar, long j7) {
+    public final m U(m mVar, long j7) {
         return mVar.c(j7, this);
     }
 
     @Override // java.lang.Enum
     public final String toString() {
-        return this.f18379a;
+        return this.f18378a;
     }
 }

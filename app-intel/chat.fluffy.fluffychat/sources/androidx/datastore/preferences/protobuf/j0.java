@@ -16,7 +16,7 @@ public abstract class j0 {
     public static final Unsafe f12088a = A();
 
     /* renamed from: b, reason: collision with root package name */
-    public static final Class f12089b = AbstractC0773d.b();
+    public static final Class f12089b = AbstractC0774d.b();
 
     /* renamed from: c, reason: collision with root package name */
     public static final boolean f12090c = m(Long.TYPE);
@@ -520,7 +520,7 @@ public abstract class j0 {
 
     public static Field l() {
         Field fieldN;
-        if (AbstractC0773d.c() && (fieldN = n(Buffer.class, "effectiveDirectAddress")) != null) {
+        if (AbstractC0774d.c() && (fieldN = n(Buffer.class, "effectiveDirectAddress")) != null) {
             return fieldN;
         }
         Field fieldN2 = n(Buffer.class, "address");
@@ -531,7 +531,7 @@ public abstract class j0 {
     }
 
     public static boolean m(Class cls) {
-        if (!AbstractC0773d.c()) {
+        if (!AbstractC0774d.c()) {
             return false;
         }
         try {
@@ -609,7 +609,7 @@ public abstract class j0 {
         if (unsafe == null) {
             return null;
         }
-        if (!AbstractC0773d.c()) {
+        if (!AbstractC0774d.c()) {
             return new d(unsafe);
         }
         if (f12090c) {

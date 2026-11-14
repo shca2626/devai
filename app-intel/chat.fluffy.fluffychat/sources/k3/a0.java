@@ -6,7 +6,7 @@ import java.io.Serializable;
 public final class a0 extends U implements Serializable {
 
     /* renamed from: l, reason: collision with root package name */
-    public static final a0 f18921l = new a0();
+    public static final a0 f18920l = new a0();
 
     @Override // k3.U
     public U g() {

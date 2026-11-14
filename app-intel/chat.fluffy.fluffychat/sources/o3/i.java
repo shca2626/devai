@@ -9,7 +9,7 @@ public abstract class i {
     public static final class a {
 
         /* renamed from: a, reason: collision with root package name */
-        public static final byte[] f20379a;
+        public static final byte[] f20378a;
 
         static {
             byte[] bArr = new byte[128];
@@ -22,12 +22,12 @@ public abstract class i {
                 bArr[i8 + 65] = b7;
                 bArr[i8 + 97] = b7;
             }
-            f20379a = bArr;
+            f20378a = bArr;
         }
 
         public static int a(char c7) {
             if (c7 < 128) {
-                return f20379a[c7];
+                return f20378a[c7];
             }
             return -1;
         }

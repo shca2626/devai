@@ -1,6 +1,6 @@
 package V5;
 
-import z5.AbstractC1869c;
+import z5.AbstractC1872c;
 
 /* loaded from: classes.dex */
 public class w extends v {
@@ -11,7 +11,7 @@ public class w extends v {
 
     public static String q(char[] cArr, int i7, int i8) {
         M5.m.e(cArr, "<this>");
-        AbstractC1869c.f24160l.a(i7, i8, cArr.length);
+        AbstractC1872c.f24186l.a(i7, i8, cArr.length);
         return new String(cArr, i7, i8 - i7);
     }
 
@@ -43,8 +43,8 @@ public class w extends v {
         M5.m.e(str2, "oldValue");
         M5.m.e(str3, "newValue");
         int i7 = 0;
-        int iF = y.F(str, str2, 0, z7);
-        if (iF < 0) {
+        int iH = y.H(str, str2, 0, z7);
+        if (iH < 0) {
             return str;
         }
         int length = str2.length();
@@ -55,14 +55,14 @@ public class w extends v {
         }
         StringBuilder sb = new StringBuilder(length2);
         do {
-            sb.append((CharSequence) str, i7, iF);
+            sb.append((CharSequence) str, i7, iH);
             sb.append(str3);
-            i7 = iF + length;
-            if (iF >= str.length()) {
+            i7 = iH + length;
+            if (iH >= str.length()) {
                 break;
             }
-            iF = y.F(str, str2, iF + iB, z7);
-        } while (iF > 0);
+            iH = y.H(str, str2, iH + iB, z7);
+        } while (iH > 0);
         sb.append((CharSequence) str, i7, str.length());
         String string = sb.toString();
         M5.m.d(string, "toString(...)");

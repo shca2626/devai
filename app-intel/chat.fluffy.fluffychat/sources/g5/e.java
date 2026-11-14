@@ -1,7 +1,7 @@
 package g5;
 
 import android.view.KeyEvent;
-import h5.C1144a;
+import h5.C1145a;
 import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONException;
@@ -11,7 +11,7 @@ import org.json.JSONObject;
 public class e {
 
     /* renamed from: a, reason: collision with root package name */
-    public final C1144a f16319a;
+    public final C1145a f16319a;
 
     public interface a {
         void a(boolean z7);
@@ -32,7 +32,7 @@ public class e {
     }
 
     public e(h5.b bVar) {
-        this.f16319a = new C1144a(bVar, "flutter/keyevent", h5.e.f16893a);
+        this.f16319a = new C1145a(bVar, "flutter/keyevent", h5.e.f16893a);
     }
 
     public static /* synthetic */ void a(a aVar, Object obj) throws JSONException {
@@ -47,9 +47,9 @@ public class e {
         aVar.a(z7);
     }
 
-    public static C1144a.e b(final a aVar) {
-        return new C1144a.e() { // from class: g5.d
-            @Override // h5.C1144a.e
+    public static C1145a.e b(final a aVar) {
+        return new C1145a.e() { // from class: g5.d
+            @Override // h5.C1145a.e
             public final void a(Object obj) throws JSONException {
                 e.a(aVar, obj);
             }

@@ -3,10 +3,10 @@ package g;
 import M5.m;
 import android.content.Context;
 import android.content.Intent;
-import f.C1037a;
+import f.C1038a;
 
 /* loaded from: classes.dex */
-public final class l extends AbstractC1065a {
+public final class l extends AbstractC1066a {
 
     /* renamed from: a, reason: collision with root package name */
     public static final a f15923a = new a(null);
@@ -20,7 +20,7 @@ public final class l extends AbstractC1065a {
         }
     }
 
-    @Override // g.AbstractC1065a
+    @Override // g.AbstractC1066a
     /* renamed from: d, reason: merged with bridge method [inline-methods] */
     public Intent a(Context context, Intent intent) {
         m.e(context, "context");
@@ -28,9 +28,9 @@ public final class l extends AbstractC1065a {
         return intent;
     }
 
-    @Override // g.AbstractC1065a
+    @Override // g.AbstractC1066a
     /* renamed from: e, reason: merged with bridge method [inline-methods] */
-    public C1037a c(int i7, Intent intent) {
-        return new C1037a(i7, intent);
+    public C1038a c(int i7, Intent intent) {
+        return new C1038a(i7, intent);
     }
 }

@@ -1,9 +1,9 @@
 package J1;
 
 import android.text.TextUtils;
-import j3.AbstractC1229c;
+import j3.AbstractC1228c;
 import java.util.regex.Pattern;
-import k3.AbstractC1258B;
+import k3.AbstractC1257B;
 
 /* loaded from: classes.dex */
 public final class b {
@@ -12,16 +12,16 @@ public final class b {
     public static final Pattern f4653d = Pattern.compile("\\s+");
 
     /* renamed from: e, reason: collision with root package name */
-    public static final AbstractC1258B f4654e = AbstractC1258B.w("auto", "none");
+    public static final AbstractC1257B f4654e = AbstractC1257B.w("auto", "none");
 
     /* renamed from: f, reason: collision with root package name */
-    public static final AbstractC1258B f4655f = AbstractC1258B.x("dot", "sesame", "circle");
+    public static final AbstractC1257B f4655f = AbstractC1257B.x("dot", "sesame", "circle");
 
     /* renamed from: g, reason: collision with root package name */
-    public static final AbstractC1258B f4656g = AbstractC1258B.w("filled", "open");
+    public static final AbstractC1257B f4656g = AbstractC1257B.w("filled", "open");
 
     /* renamed from: h, reason: collision with root package name */
-    public static final AbstractC1258B f4657h = AbstractC1258B.x("after", "before", "outside");
+    public static final AbstractC1257B f4657h = AbstractC1257B.x("after", "before", "outside");
 
     /* renamed from: a, reason: collision with root package name */
     public final int f4658a;
@@ -42,11 +42,11 @@ public final class b {
         if (str == null) {
             return null;
         }
-        String strF = AbstractC1229c.f(str.trim());
+        String strF = AbstractC1228c.f(str.trim());
         if (strF.isEmpty()) {
             return null;
         }
-        return b(AbstractC1258B.r(TextUtils.split(strF, f4653d)));
+        return b(AbstractC1257B.r(TextUtils.split(strF, f4653d)));
     }
 
     /* JADX WARN: Removed duplicated region for block: B:18:0x0042  */
@@ -58,7 +58,7 @@ public final class b {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct add '--show-bad-code' argument
     */
-    public static J1.b b(k3.AbstractC1258B r9) {
+    public static J1.b b(k3.AbstractC1257B r9) {
         /*
             Method dump skipped, instructions count: 272
             To view this dump add '--comments-level debug' option

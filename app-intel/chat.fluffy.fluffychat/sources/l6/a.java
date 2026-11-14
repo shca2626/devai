@@ -5,7 +5,7 @@ import java.net.Socket;
 import javax.net.ssl.SSLSocket;
 import k6.A;
 import k6.C;
-import k6.C1287a;
+import k6.C1286a;
 import k6.e;
 import k6.j;
 import k6.k;
@@ -16,7 +16,7 @@ import n6.g;
 public abstract class a {
 
     /* renamed from: a, reason: collision with root package name */
-    public static a f19667a;
+    public static a f19666a;
 
     public abstract void a(r.a aVar, String str);
 
@@ -28,11 +28,11 @@ public abstract class a {
 
     public abstract boolean e(j jVar, n6.c cVar);
 
-    public abstract Socket f(j jVar, C1287a c1287a, g gVar);
+    public abstract Socket f(j jVar, C1286a c1286a, g gVar);
 
-    public abstract boolean g(C1287a c1287a, C1287a c1287a2);
+    public abstract boolean g(C1286a c1286a, C1286a c1286a2);
 
-    public abstract n6.c h(j jVar, C1287a c1287a, g gVar, C c7);
+    public abstract n6.c h(j jVar, C1286a c1286a, g gVar, C c7);
 
     public abstract void i(j jVar, n6.c cVar);
 

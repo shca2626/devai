@@ -4,13 +4,13 @@ import C0.u;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public final class t {
 
     /* renamed from: a, reason: collision with root package name */
-    public final AbstractC1279v f1250a;
+    public final AbstractC1278v f1250a;
 
     /* renamed from: b, reason: collision with root package name */
     public final List f1251b = new ArrayList();
@@ -27,8 +27,8 @@ public final class t {
     /* renamed from: f, reason: collision with root package name */
     public boolean f1255f;
 
-    public t(AbstractC1279v abstractC1279v) {
-        this.f1250a = abstractC1279v;
+    public t(AbstractC1278v abstractC1278v) {
+        this.f1250a = abstractC1278v;
         u.a aVar = u.a.f1257e;
         this.f1253d = aVar;
         this.f1254e = aVar;

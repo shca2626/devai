@@ -3,7 +3,7 @@ package i1;
 import E0.E;
 
 /* loaded from: classes.dex */
-public final class h implements InterfaceC1150a {
+public final class h implements InterfaceC1151a {
 
     /* renamed from: a, reason: collision with root package name */
     public final String f17404a;
@@ -16,7 +16,7 @@ public final class h implements InterfaceC1150a {
         return new h(e7.N(e7.a()));
     }
 
-    @Override // i1.InterfaceC1150a
+    @Override // i1.InterfaceC1151a
     public int getType() {
         return 1852994675;
     }

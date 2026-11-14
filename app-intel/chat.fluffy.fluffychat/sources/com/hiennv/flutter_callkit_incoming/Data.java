@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import z5.C1863G;
+import z5.C1866G;
 
 /* loaded from: classes.dex */
 public final class Data {
@@ -139,7 +139,7 @@ public final class Data {
 
         public final Data fromBundle(Bundle bundle) {
             M5.m.e(bundle, "bundle");
-            Data data = new Data(C1863G.h());
+            Data data = new Data(C1866G.h());
             String string = bundle.getString(CallkitConstants.EXTRA_CALLKIT_ID, "");
             M5.m.d(string, "getString(...)");
             data.setId(string);
@@ -790,6 +790,6 @@ public final class Data {
     }
 
     public Data() {
-        this(C1863G.h());
+        this(C1866G.h());
     }
 }

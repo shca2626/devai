@@ -1,6 +1,6 @@
 package e1;
 
-import E0.InterfaceC0321g;
+import E0.InterfaceC0322g;
 import E0.U;
 import android.content.Context;
 import android.view.Surface;
@@ -51,7 +51,7 @@ public final class s {
     public float f15554k = 1.0f;
 
     /* renamed from: l, reason: collision with root package name */
-    public InterfaceC0321g f15555l = InterfaceC0321g.f2159a;
+    public InterfaceC0322g f15555l = InterfaceC0322g.f2159a;
 
     public static class a {
 
@@ -208,8 +208,8 @@ public final class s {
         this.f15545b.m(i7);
     }
 
-    public void m(InterfaceC0321g interfaceC0321g) {
-        this.f15555l = interfaceC0321g;
+    public void m(InterfaceC0322g interfaceC0322g) {
+        this.f15555l = interfaceC0322g;
     }
 
     public void n(float f7) {

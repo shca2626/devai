@@ -20,11 +20,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import c3.AbstractC0903c;
+import c3.AbstractC0904c;
 import com.google.android.material.behavior.SwipeDismissBehavior;
 import f3.g;
 import f3.k;
-import i3.AbstractC1152a;
+import i3.AbstractC1153a;
 
 /* loaded from: classes.dex */
 public abstract class BaseTransientBottomBar {
@@ -140,7 +140,7 @@ public abstract class BaseTransientBottomBar {
         }
 
         public c(Context context, AttributeSet attributeSet) {
-            super(AbstractC1152a.c(context, attributeSet, 0, 0), attributeSet);
+            super(AbstractC1153a.c(context, attributeSet, 0, 0), attributeSet);
             Context context2 = getContext();
             TypedArray typedArrayObtainStyledAttributes = context2.obtainStyledAttributes(attributeSet, j.f7165i4);
             if (typedArrayObtainStyledAttributes.hasValue(j.f7221p4)) {
@@ -151,7 +151,7 @@ public abstract class BaseTransientBottomBar {
                 this.f14607l = k.e(context2, attributeSet, 0, 0).m();
             }
             this.f14609n = typedArrayObtainStyledAttributes.getFloat(j.f7197m4, 1.0f);
-            setBackgroundTintList(AbstractC0903c.a(context2, typedArrayObtainStyledAttributes, j.f7205n4));
+            setBackgroundTintList(AbstractC0904c.a(context2, typedArrayObtainStyledAttributes, j.f7205n4));
             setBackgroundTintMode(l.f(typedArrayObtainStyledAttributes.getInt(j.f7213o4, -1), PorterDuff.Mode.SRC_IN));
             this.f14610o = typedArrayObtainStyledAttributes.getFloat(j.f7181k4, 1.0f);
             this.f14611p = typedArrayObtainStyledAttributes.getDimensionPixelSize(j.f7173j4, -1);

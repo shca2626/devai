@@ -2,10 +2,10 @@ package A5;
 
 import M5.m;
 import java.util.Map;
-import z5.AbstractC1872f;
+import z5.AbstractC1875f;
 
 /* loaded from: classes.dex */
-public abstract class a extends AbstractC1872f {
+public abstract class a extends AbstractC1875f {
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
     public final /* bridge */ boolean contains(Object obj) {
         if (obj instanceof Map.Entry) {

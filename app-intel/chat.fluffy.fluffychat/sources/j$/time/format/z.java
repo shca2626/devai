@@ -12,14 +12,14 @@ public final class z {
     public static final z SHORT_STANDALONE;
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ z[] f18340a;
+    public static final /* synthetic */ z[] f18348a;
 
     public static z valueOf(String str) {
         return (z) Enum.valueOf(z.class, str);
     }
 
     public static z[] values() {
-        return (z[]) f18340a.clone();
+        return (z[]) f18348a.clone();
     }
 
     static {
@@ -35,6 +35,6 @@ public final class z {
         NARROW = zVar5;
         z zVar6 = new z("NARROW_STANDALONE", 5);
         NARROW_STANDALONE = zVar6;
-        f18340a = new z[]{zVar, zVar2, zVar3, zVar4, zVar5, zVar6};
+        f18348a = new z[]{zVar, zVar2, zVar3, zVar4, zVar5, zVar6};
     }
 }

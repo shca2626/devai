@@ -10,14 +10,14 @@ import javax.net.ssl.SSLSocket;
 public final class h extends k {
 
     /* renamed from: c, reason: collision with root package name */
-    public final Method f22474c;
+    public final Method f22480c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final Method f22475d;
+    public final Method f22481d;
 
     public h(Method method, Method method2) {
-        this.f22474c = method;
-        this.f22475d = method2;
+        this.f22480c = method;
+        this.f22481d = method2;
     }
 
     public static h v() {
@@ -33,7 +33,7 @@ public final class h extends k {
         try {
             SSLParameters sSLParameters = sSLSocket.getSSLParameters();
             List listB = k.b(list);
-            this.f22474c.invoke(sSLParameters, listB.toArray(new String[listB.size()]));
+            this.f22480c.invoke(sSLParameters, listB.toArray(new String[listB.size()]));
             sSLSocket.setSSLParameters(sSLParameters);
         } catch (IllegalAccessException | InvocationTargetException e7) {
             throw l6.c.b("unable to set ssl parameters", e7);
@@ -43,7 +43,7 @@ public final class h extends k {
     @Override // s6.k
     public String o(SSLSocket sSLSocket) {
         try {
-            String str = (String) this.f22475d.invoke(sSLSocket, null);
+            String str = (String) this.f22481d.invoke(sSLSocket, null);
             if (str != null) {
                 if (!str.equals("")) {
                     return str;

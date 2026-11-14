@@ -1,7 +1,7 @@
 package g2;
 
 import java.util.List;
-import z5.C1889w;
+import z5.C1892w;
 
 /* loaded from: classes.dex */
 public final class j {
@@ -33,6 +33,6 @@ public final class j {
     }
 
     public String toString() {
-        return C1889w.L(this.f16207a, ", ", "WindowLayoutInfo{ DisplayFeatures[", "] }", 0, null, null, 56, null);
+        return C1892w.L(this.f16207a, ", ", "WindowLayoutInfo{ DisplayFeatures[", "] }", 0, null, null, 56, null);
     }
 }

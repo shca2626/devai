@@ -166,7 +166,7 @@ class EglBase10Impl implements EglBase10 {
             this.refCountDelegate = new RefCountDelegate(new Runnable() { // from class: org.webrtc.i
                 @Override // java.lang.Runnable
                 public final void run() {
-                    this.f20579l.lambda$new$0();
+                    this.f20576l.lambda$new$0();
                 }
             });
         }

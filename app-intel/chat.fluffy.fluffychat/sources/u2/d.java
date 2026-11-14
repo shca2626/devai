@@ -13,11 +13,11 @@ import java.util.List;
 public final class d implements b {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Context f22784a;
+    public final Context f22790a;
 
     public d(Context context) {
         m.e(context, "context");
-        this.f22784a = context;
+        this.f22790a = context;
     }
 
     @Override // u2.b
@@ -25,7 +25,7 @@ public final class d implements b {
     public boolean a(Uri uri) {
         String authority;
         m.e(uri, "data");
-        if (!m.a(uri.getScheme(), "android.resource") || (authority = uri.getAuthority()) == null || y.L(authority)) {
+        if (!m.a(uri.getScheme(), "android.resource") || (authority = uri.getAuthority()) == null || y.N(authority)) {
             return false;
         }
         List<String> pathSegments = uri.getPathSegments();
@@ -41,7 +41,7 @@ public final class d implements b {
         if (authority == null) {
             authority = "";
         }
-        Resources resourcesForApplication = this.f22784a.getPackageManager().getResourcesForApplication(authority);
+        Resources resourcesForApplication = this.f22790a.getPackageManager().getResourcesForApplication(authority);
         m.d(resourcesForApplication, "context.packageManager.g…rApplication(packageName)");
         List<String> pathSegments = uri.getPathSegments();
         m.d(pathSegments, "pathSegments");

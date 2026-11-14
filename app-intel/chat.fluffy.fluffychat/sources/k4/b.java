@@ -10,17 +10,17 @@ import java.util.Map;
 public class b {
 
     /* renamed from: a, reason: collision with root package name */
-    public D3.n f19061a;
+    public D3.n f19060a;
 
     /* renamed from: b, reason: collision with root package name */
-    public t f19062b;
+    public t f19061b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final int f19063c = 2;
+    public final int f19062c = 2;
 
     public b(D3.n nVar, t tVar) {
-        this.f19061a = nVar;
-        this.f19062b = tVar;
+        this.f19060a = nVar;
+        this.f19061b = tVar;
     }
 
     public static List f(List list, t tVar) {
@@ -33,26 +33,26 @@ public class b {
     }
 
     public D3.a a() {
-        return this.f19061a.b();
+        return this.f19060a.b();
     }
 
     public Bitmap b() {
-        return this.f19062b.b(null, 2);
+        return this.f19061b.b(null, 2);
     }
 
     public byte[] c() {
-        return this.f19061a.c();
+        return this.f19060a.c();
     }
 
     public Map d() {
-        return this.f19061a.d();
+        return this.f19060a.d();
     }
 
     public String e() {
-        return this.f19061a.f();
+        return this.f19060a.f();
     }
 
     public String toString() {
-        return this.f19061a.f();
+        return this.f19060a.f();
     }
 }

@@ -16,7 +16,7 @@ import javax.crypto.spec.SecretKeySpec;
 public abstract class m {
 
     public interface a {
-        InterfaceC1241b a(t tVar);
+        InterfaceC1240b a(t tVar);
     }
 
     public static boolean b(Context context, String str, t tVar) {
@@ -58,8 +58,8 @@ public abstract class m {
     public static boolean e(final Context context, t tVar) {
         return f(context, tVar, new a() { // from class: j4.l
             @Override // j4.m.a
-            public final InterfaceC1241b a(t tVar2) {
-                return e.RSA_ECB_OAEPwithSHA_256andMGF1Padding.f18750l.a(context, tVar2);
+            public final InterfaceC1240b a(t tVar2) {
+                return e.RSA_ECB_OAEPwithSHA_256andMGF1Padding.f18749l.a(context, tVar2);
             }
         });
     }

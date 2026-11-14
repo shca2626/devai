@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.RectF;
-import e3.C1032a;
+import e3.C1033a;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -53,10 +53,10 @@ public class m {
         }
 
         @Override // f3.m.g
-        public void a(Matrix matrix, C1032a c1032a, int i7, Canvas canvas) {
+        public void a(Matrix matrix, C1033a c1033a, int i7, Canvas canvas) {
             Iterator it = this.f15824c.iterator();
             while (it.hasNext()) {
-                ((g) it.next()).a(this.f15825d, c1032a, i7, canvas);
+                ((g) it.next()).a(this.f15825d, c1033a, i7, canvas);
             }
         }
     }
@@ -71,8 +71,8 @@ public class m {
         }
 
         @Override // f3.m.g
-        public void a(Matrix matrix, C1032a c1032a, int i7, Canvas canvas) {
-            c1032a.a(canvas, matrix, new RectF(this.f15827c.k(), this.f15827c.o(), this.f15827c.l(), this.f15827c.j()), i7, this.f15827c.m(), this.f15827c.n());
+        public void a(Matrix matrix, C1033a c1033a, int i7, Canvas canvas) {
+            c1033a.a(canvas, matrix, new RectF(this.f15827c.k(), this.f15827c.o(), this.f15827c.l(), this.f15827c.j()), i7, this.f15827c.m(), this.f15827c.n());
         }
     }
 
@@ -94,12 +94,12 @@ public class m {
         }
 
         @Override // f3.m.g
-        public void a(Matrix matrix, C1032a c1032a, int i7, Canvas canvas) {
+        public void a(Matrix matrix, C1033a c1033a, int i7, Canvas canvas) {
             RectF rectF = new RectF(0.0f, 0.0f, (float) Math.hypot(this.f15828c.f15839c - this.f15830e, this.f15828c.f15838b - this.f15829d), 0.0f);
             this.f15842a.set(matrix);
             this.f15842a.preTranslate(this.f15829d, this.f15830e);
             this.f15842a.preRotate(c());
-            c1032a.b(canvas, this.f15842a, rectF, i7);
+            c1033a.b(canvas, this.f15842a, rectF, i7);
         }
 
         public float c() {
@@ -231,10 +231,10 @@ public class m {
         /* renamed from: a, reason: collision with root package name */
         public final Matrix f15842a = new Matrix();
 
-        public abstract void a(Matrix matrix, C1032a c1032a, int i7, Canvas canvas);
+        public abstract void a(Matrix matrix, C1033a c1033a, int i7, Canvas canvas);
 
-        public final void b(C1032a c1032a, int i7, Canvas canvas) {
-            a(f15841b, c1032a, i7, canvas);
+        public final void b(C1033a c1033a, int i7, Canvas canvas) {
+            a(f15841b, c1033a, i7, canvas);
         }
     }
 

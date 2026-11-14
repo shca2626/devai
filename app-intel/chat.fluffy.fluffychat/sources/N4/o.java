@@ -1,7 +1,7 @@
 package N4;
 
 import java.util.List;
-import z5.C1881o;
+import z5.C1884o;
 
 /* loaded from: classes.dex */
 public final class o {
@@ -41,7 +41,7 @@ public final class o {
     }
 
     public final List a() {
-        return C1881o.l(this.f6444a, this.f6445b);
+        return C1884o.l(this.f6444a, this.f6445b);
     }
 
     public boolean equals(Object obj) {

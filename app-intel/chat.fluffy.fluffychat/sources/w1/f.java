@@ -6,72 +6,72 @@ import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes.dex */
-public final class f extends AbstractC1728b {
+public final class f extends AbstractC1727b {
 
     /* renamed from: a, reason: collision with root package name */
-    public final List f23277a;
+    public final List f23283a;
 
     public static final class b {
 
         /* renamed from: a, reason: collision with root package name */
-        public final int f23278a;
+        public final int f23284a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final long f23279b;
+        public final long f23285b;
 
         public b(int i7, long j7) {
-            this.f23278a = i7;
-            this.f23279b = j7;
+            this.f23284a = i7;
+            this.f23285b = j7;
         }
     }
 
     public static final class c {
 
         /* renamed from: a, reason: collision with root package name */
-        public final long f23280a;
+        public final long f23286a;
 
         /* renamed from: b, reason: collision with root package name */
-        public final boolean f23281b;
+        public final boolean f23287b;
 
         /* renamed from: c, reason: collision with root package name */
-        public final boolean f23282c;
+        public final boolean f23288c;
 
         /* renamed from: d, reason: collision with root package name */
-        public final boolean f23283d;
+        public final boolean f23289d;
 
         /* renamed from: e, reason: collision with root package name */
-        public final long f23284e;
+        public final long f23290e;
 
         /* renamed from: f, reason: collision with root package name */
-        public final List f23285f;
+        public final List f23291f;
 
         /* renamed from: g, reason: collision with root package name */
-        public final boolean f23286g;
+        public final boolean f23292g;
 
         /* renamed from: h, reason: collision with root package name */
-        public final long f23287h;
+        public final long f23293h;
 
         /* renamed from: i, reason: collision with root package name */
-        public final int f23288i;
+        public final int f23294i;
 
         /* renamed from: j, reason: collision with root package name */
-        public final int f23289j;
+        public final int f23295j;
 
         /* renamed from: k, reason: collision with root package name */
-        public final int f23290k;
+        public final int f23296k;
 
         public c(long j7, boolean z7, boolean z8, boolean z9, List list, long j8, boolean z10, long j9, int i7, int i8, int i9) {
-            this.f23280a = j7;
-            this.f23281b = z7;
-            this.f23282c = z8;
-            this.f23283d = z9;
-            this.f23285f = Collections.unmodifiableList(list);
-            this.f23284e = j8;
-            this.f23286g = z10;
-            this.f23287h = j9;
-            this.f23288i = i7;
-            this.f23289j = i8;
-            this.f23290k = i9;
+            this.f23286a = j7;
+            this.f23287b = z7;
+            this.f23288c = z8;
+            this.f23289d = z9;
+            this.f23291f = Collections.unmodifiableList(list);
+            this.f23290e = j8;
+            this.f23292g = z10;
+            this.f23293h = j9;
+            this.f23294i = i7;
+            this.f23295j = i8;
+            this.f23296k = i9;
         }
 
         public static c b(E e7) {
@@ -152,7 +152,7 @@ public final class f extends AbstractC1728b {
     }
 
     public f(List list) {
-        this.f23277a = Collections.unmodifiableList(list);
+        this.f23283a = Collections.unmodifiableList(list);
     }
 
     public static f d(E e7) {

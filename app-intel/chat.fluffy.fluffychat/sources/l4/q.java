@@ -11,21 +11,21 @@ import k4.s;
 public abstract class q {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final String f19661a = "q";
+    public static final String f19660a = "q";
 
     public class a implements Comparator {
 
         /* renamed from: l, reason: collision with root package name */
-        public final /* synthetic */ s f19662l;
+        public final /* synthetic */ s f19661l;
 
         public a(s sVar) {
-            this.f19662l = sVar;
+            this.f19661l = sVar;
         }
 
         @Override // java.util.Comparator
         /* renamed from: a, reason: merged with bridge method [inline-methods] */
         public int compare(s sVar, s sVar2) {
-            return Float.compare(q.this.c(sVar2, this.f19662l), q.this.c(sVar, this.f19662l));
+            return Float.compare(q.this.c(sVar2, this.f19661l), q.this.c(sVar, this.f19661l));
         }
     }
 
@@ -39,7 +39,7 @@ public abstract class q {
 
     public s b(List list, s sVar) {
         List listA = a(list, sVar);
-        String str = f19661a;
+        String str = f19660a;
         Log.i(str, "Viewfinder size: " + sVar);
         Log.i(str, "Preview in order of preference: " + listA);
         return (s) listA.get(0);

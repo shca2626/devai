@@ -15,7 +15,7 @@ public class g {
     public final String f2678c;
 
     /* renamed from: d, reason: collision with root package name */
-    public final C0340a f2679d;
+    public final C0341a f2679d;
 
     /* renamed from: e, reason: collision with root package name */
     public final boolean f2680e;
@@ -29,11 +29,11 @@ public class g {
     /* renamed from: h, reason: collision with root package name */
     public final Integer f2683h;
 
-    public g(String str, String str2, String str3, C0340a c0340a, boolean z7, boolean z8, boolean z9, Integer num) {
+    public g(String str, String str2, String str3, C0341a c0341a, boolean z7, boolean z8, boolean z9, Integer num) {
         this.f2676a = str;
         this.f2677b = str2;
         this.f2678c = str3;
-        this.f2679d = c0340a;
+        this.f2679d = c0341a;
         this.f2680e = z7;
         this.f2681f = z8;
         this.f2682g = z9;
@@ -44,7 +44,7 @@ public class g {
         if (map == null) {
             return null;
         }
-        C0340a c0340aC = C0340a.c((Map) map.get("notificationIcon"));
+        C0341a c0341aC = C0341a.c((Map) map.get("notificationIcon"));
         String str = (String) map.get("notificationTitle");
         String str2 = (String) map.get("notificationChannelName");
         String str3 = (String) map.get("notificationText");
@@ -52,7 +52,7 @@ public class g {
         Boolean bool2 = (Boolean) map.get("enableWakeLock");
         Boolean bool3 = (Boolean) map.get("setOngoing");
         Object obj = map.get("color");
-        return new g(str, str3, str2, c0340aC, bool.booleanValue(), bool2.booleanValue(), bool3.booleanValue(), obj != null ? Integer.valueOf(((Number) obj).intValue()) : null);
+        return new g(str, str3, str2, c0341aC, bool.booleanValue(), bool2.booleanValue(), bool3.booleanValue(), obj != null ? Integer.valueOf(((Number) obj).intValue()) : null);
     }
 
     public Integer a() {
@@ -63,7 +63,7 @@ public class g {
         return this.f2678c;
     }
 
-    public C0340a c() {
+    public C0341a c() {
         return this.f2679d;
     }
 

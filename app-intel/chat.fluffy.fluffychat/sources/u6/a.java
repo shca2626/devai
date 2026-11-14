@@ -17,10 +17,10 @@ import javax.net.ssl.SSLPeerUnverifiedException;
 public final class a extends c {
 
     /* renamed from: a, reason: collision with root package name */
-    public final e f22893a;
+    public final e f22899a;
 
     public a(e eVar) {
-        this.f22893a = eVar;
+        this.f22899a = eVar;
     }
 
     @Override // u6.c
@@ -31,7 +31,7 @@ public final class a extends c {
         boolean z7 = false;
         for (int i7 = 0; i7 < 9; i7++) {
             X509Certificate x509Certificate = (X509Certificate) arrayList.get(arrayList.size() - 1);
-            X509Certificate x509CertificateA = this.f22893a.a(x509Certificate);
+            X509Certificate x509CertificateA = this.f22899a.a(x509Certificate);
             if (x509CertificateA == null) {
                 Iterator it = arrayDeque.iterator();
                 while (it.hasNext()) {
@@ -73,10 +73,10 @@ public final class a extends c {
         if (obj == this) {
             return true;
         }
-        return (obj instanceof a) && ((a) obj).f22893a.equals(this.f22893a);
+        return (obj instanceof a) && ((a) obj).f22899a.equals(this.f22899a);
     }
 
     public int hashCode() {
-        return this.f22893a.hashCode();
+        return this.f22899a.hashCode();
     }
 }

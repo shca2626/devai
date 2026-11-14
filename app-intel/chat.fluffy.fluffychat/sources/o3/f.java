@@ -8,40 +8,40 @@ import java.util.Arrays;
 public final class f implements Serializable {
 
     /* renamed from: o, reason: collision with root package name */
-    public static final f f20372o = new f(new int[0]);
+    public static final f f20371o = new f(new int[0]);
 
     /* renamed from: l, reason: collision with root package name */
-    public final int[] f20373l;
+    public final int[] f20372l;
 
     /* renamed from: m, reason: collision with root package name */
-    public final transient int f20374m;
+    public final transient int f20373m;
 
     /* renamed from: n, reason: collision with root package name */
-    public final int f20375n;
+    public final int f20374n;
 
     public f(int[] iArr) {
         this(iArr, 0, iArr.length);
     }
 
     public static f a(int[] iArr) {
-        return iArr.length == 0 ? f20372o : new f(Arrays.copyOf(iArr, iArr.length));
+        return iArr.length == 0 ? f20371o : new f(Arrays.copyOf(iArr, iArr.length));
     }
 
     public static f e() {
-        return f20372o;
+        return f20371o;
     }
 
     public int b(int i7) {
         o.o(i7, d());
-        return this.f20373l[this.f20374m + i7];
+        return this.f20372l[this.f20373m + i7];
     }
 
     public boolean c() {
-        return this.f20375n == this.f20374m;
+        return this.f20374n == this.f20373m;
     }
 
     public int d() {
-        return this.f20375n - this.f20374m;
+        return this.f20374n - this.f20373m;
     }
 
     public boolean equals(Object obj) {
@@ -65,8 +65,8 @@ public final class f implements Serializable {
 
     public int hashCode() {
         int iJ = 1;
-        for (int i7 = this.f20374m; i7 < this.f20375n; i7++) {
-            iJ = (iJ * 31) + g.j(this.f20373l[i7]);
+        for (int i7 = this.f20373m; i7 < this.f20374n; i7++) {
+            iJ = (iJ * 31) + g.j(this.f20372l[i7]);
         }
         return iJ;
     }
@@ -77,22 +77,22 @@ public final class f implements Serializable {
         }
         StringBuilder sb = new StringBuilder(d() * 5);
         sb.append('[');
-        sb.append(this.f20373l[this.f20374m]);
-        int i7 = this.f20374m;
+        sb.append(this.f20372l[this.f20373m]);
+        int i7 = this.f20373m;
         while (true) {
             i7++;
-            if (i7 >= this.f20375n) {
+            if (i7 >= this.f20374n) {
                 sb.append(']');
                 return sb.toString();
             }
             sb.append(", ");
-            sb.append(this.f20373l[i7]);
+            sb.append(this.f20372l[i7]);
         }
     }
 
     public f(int[] iArr, int i7, int i8) {
-        this.f20373l = iArr;
-        this.f20374m = i7;
-        this.f20375n = i8;
+        this.f20372l = iArr;
+        this.f20373m = i7;
+        this.f20374n = i8;
     }
 }

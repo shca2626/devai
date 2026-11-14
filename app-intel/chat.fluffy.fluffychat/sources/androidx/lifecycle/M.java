@@ -6,7 +6,7 @@ public abstract class M {
     /* renamed from: a, reason: collision with root package name */
     public final x0.e f12375a = new x0.e();
 
-    public final void a(String str, AutoCloseable autoCloseable) {
+    public final void a(String str, AutoCloseable autoCloseable) throws Exception {
         M5.m.e(str, "key");
         M5.m.e(autoCloseable, "closeable");
         x0.e eVar = this.f12375a;

@@ -11,27 +11,27 @@ import java.lang.reflect.Method;
 public abstract class n0 {
 
     /* renamed from: a, reason: collision with root package name */
-    public static Method f21323a;
+    public static Method f21329a;
 
     /* renamed from: b, reason: collision with root package name */
-    public static final boolean f21324b;
+    public static final boolean f21330b;
 
     static {
-        f21324b = Build.VERSION.SDK_INT >= 27;
+        f21330b = Build.VERSION.SDK_INT >= 27;
         try {
             Method declaredMethod = View.class.getDeclaredMethod("computeFitSystemWindows", Rect.class, Rect.class);
-            f21323a = declaredMethod;
+            f21329a = declaredMethod;
             if (declaredMethod.isAccessible()) {
                 return;
             }
-            f21323a.setAccessible(true);
+            f21329a.setAccessible(true);
         } catch (NoSuchMethodException unused) {
             Log.d("ViewUtils", "Could not find method computeFitSystemWindows. Oh well.");
         }
     }
 
     public static void a(View view, Rect rect, Rect rect2) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Method method = f21323a;
+        Method method = f21329a;
         if (method != null) {
             try {
                 method.invoke(view, rect, rect2);

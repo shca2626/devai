@@ -2,7 +2,7 @@ package u3;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import w3.AbstractC1731A;
+import w3.AbstractC1730A;
 import w3.y;
 
 /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
@@ -11,10 +11,10 @@ import w3.y;
 public abstract class u implements v {
 
     /* renamed from: l, reason: collision with root package name */
-    public static final u f22871l = new a("DOUBLE", 0);
+    public static final u f22877l = new a("DOUBLE", 0);
 
     /* renamed from: m, reason: collision with root package name */
-    public static final u f22872m = new u("LAZILY_PARSED_NUMBER", 1) { // from class: u3.u.b
+    public static final u f22878m = new u("LAZILY_PARSED_NUMBER", 1) { // from class: u3.u.b
         {
             a aVar = null;
         }
@@ -26,7 +26,7 @@ public abstract class u implements v {
     };
 
     /* renamed from: n, reason: collision with root package name */
-    public static final u f22873n = new u("LONG_OR_DOUBLE", 2) { // from class: u3.u.c
+    public static final u f22879n = new u("LONG_OR_DOUBLE", 2) { // from class: u3.u.c
         {
             a aVar = null;
         }
@@ -54,13 +54,13 @@ public abstract class u implements v {
                 }
                 return dValueOf;
             } catch (NumberFormatException e7) {
-                throw new C1658n("Cannot parse " + str + "; at path " + aVar.x(), e7);
+                throw new C1657n("Cannot parse " + str + "; at path " + aVar.x(), e7);
             }
         }
     };
 
     /* renamed from: o, reason: collision with root package name */
-    public static final u f22874o = new u("BIG_DECIMAL", 3) { // from class: u3.u.d
+    public static final u f22880o = new u("BIG_DECIMAL", 3) { // from class: u3.u.d
         {
             a aVar = null;
         }
@@ -70,15 +70,15 @@ public abstract class u implements v {
         public BigDecimal a(C3.a aVar) throws IOException {
             String strR = aVar.R();
             try {
-                return AbstractC1731A.b(strR);
+                return AbstractC1730A.b(strR);
             } catch (NumberFormatException e7) {
-                throw new C1658n("Cannot parse " + strR + "; at path " + aVar.x(), e7);
+                throw new C1657n("Cannot parse " + strR + "; at path " + aVar.x(), e7);
             }
         }
     };
 
     /* renamed from: p, reason: collision with root package name */
-    public static final /* synthetic */ u[] f22875p = d();
+    public static final /* synthetic */ u[] f22881p = d();
 
     public enum a extends u {
         public a(String str, int i7) {
@@ -96,7 +96,7 @@ public abstract class u implements v {
     }
 
     public static /* synthetic */ u[] d() {
-        return new u[]{f22871l, f22872m, f22873n, f22874o};
+        return new u[]{f22877l, f22878m, f22879n, f22880o};
     }
 
     public static u valueOf(String str) {
@@ -104,7 +104,7 @@ public abstract class u implements v {
     }
 
     public static u[] values() {
-        return (u[]) f22875p.clone();
+        return (u[]) f22881p.clone();
     }
 
     public /* synthetic */ u(String str, int i7, a aVar) {

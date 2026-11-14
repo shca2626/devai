@@ -1,18 +1,18 @@
 package io.flutter.embedding.engine.plugins.lifecycle;
 
-import androidx.lifecycle.AbstractC0804j;
-import h.InterfaceC1116a;
+import androidx.lifecycle.AbstractC0805j;
+import h.InterfaceC1117a;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class HiddenLifecycleReference {
-    private final AbstractC0804j lifecycle;
+    private final AbstractC0805j lifecycle;
 
-    public HiddenLifecycleReference(AbstractC0804j abstractC0804j) {
-        this.lifecycle = abstractC0804j;
+    public HiddenLifecycleReference(AbstractC0805j abstractC0805j) {
+        this.lifecycle = abstractC0805j;
     }
 
-    public AbstractC0804j getLifecycle() {
+    public AbstractC0805j getLifecycle() {
         return this.lifecycle;
     }
 }

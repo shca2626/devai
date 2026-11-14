@@ -1,7 +1,7 @@
 package U0;
 
 import java.util.List;
-import k3.AbstractC1279v;
+import k3.AbstractC1278v;
 
 /* loaded from: classes.dex */
 public final class q {
@@ -10,10 +10,10 @@ public final class q {
     public final int f8370a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final AbstractC1279v f8371b;
+    public final AbstractC1278v f8371b;
 
     public q(int i7, List list) {
         this.f8370a = i7;
-        this.f8371b = AbstractC1279v.r(list);
+        this.f8371b = AbstractC1278v.r(list);
     }
 }

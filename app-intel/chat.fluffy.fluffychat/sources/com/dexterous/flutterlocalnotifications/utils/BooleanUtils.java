@@ -1,8 +1,8 @@
 package com.dexterous.flutterlocalnotifications.utils;
 
-import h.InterfaceC1116a;
+import h.InterfaceC1117a;
 
-@InterfaceC1116a
+@InterfaceC1117a
 /* loaded from: classes.dex */
 public class BooleanUtils {
     public static boolean getValue(Boolean bool) {

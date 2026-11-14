@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 import java.util.RandomAccess;
-import z5.AbstractC1869c;
-import z5.AbstractC1871e;
-import z5.C1877k;
-import z5.C1880n;
+import z5.AbstractC1872c;
+import z5.AbstractC1874e;
+import z5.C1880k;
+import z5.C1883n;
 
 /* loaded from: classes.dex */
-public final class b extends AbstractC1871e implements List, RandomAccess, Serializable, N5.b {
+public final class b extends AbstractC1874e implements List, RandomAccess, Serializable, N5.b {
 
     /* renamed from: o, reason: collision with root package name */
     public static final C0005b f270o = new C0005b(null);
@@ -34,7 +34,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
     /* renamed from: n, reason: collision with root package name */
     public boolean f274n;
 
-    public static final class a extends AbstractC1871e implements List, RandomAccess, Serializable, N5.b {
+    public static final class a extends AbstractC1874e implements List, RandomAccess, Serializable, N5.b {
 
         /* renamed from: l, reason: collision with root package name */
         public Object[] f275l;
@@ -215,24 +215,24 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
             return true;
         }
 
-        @Override // z5.AbstractC1871e
+        @Override // z5.AbstractC1874e
         public int f() {
             o();
             return this.f277n;
         }
 
-        @Override // z5.AbstractC1871e
+        @Override // z5.AbstractC1874e
         public Object g(int i7) {
             p();
             o();
-            AbstractC1869c.f24160l.b(i7, this.f277n);
+            AbstractC1872c.f24186l.b(i7, this.f277n);
             return t(this.f276m + i7);
         }
 
         @Override // java.util.AbstractList, java.util.List
         public Object get(int i7) {
             o();
-            AbstractC1869c.f24160l.b(i7, this.f277n);
+            AbstractC1872c.f24186l.b(i7, this.f277n);
             return this.f275l[this.f276m + i7];
         }
 
@@ -349,7 +349,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         public Object set(int i7, Object obj) {
             p();
             o();
-            AbstractC1869c.f24160l.b(i7, this.f277n);
+            AbstractC1872c.f24186l.b(i7, this.f277n);
             Object[] objArr = this.f275l;
             int i8 = this.f276m;
             Object obj2 = objArr[i8 + i7];
@@ -359,7 +359,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
 
         @Override // java.util.AbstractList, java.util.List
         public List subList(int i7, int i8) {
-            AbstractC1869c.f24160l.d(i7, i8, this.f277n);
+            AbstractC1872c.f24186l.d(i7, i8, this.f277n);
             return new a(this.f275l, this.f276m + i7, i8 - i7, this, this.f279p);
         }
 
@@ -379,8 +379,8 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
             if (length >= i7) {
                 Object[] objArr2 = this.f275l;
                 int i8 = this.f276m;
-                C1877k.h(objArr2, objArr, 0, i8, i7 + i8);
-                return C1880n.e(this.f277n, objArr);
+                C1880k.h(objArr2, objArr, 0, i8, i7 + i8);
+                return C1883n.e(this.f277n, objArr);
             }
             Object[] objArr3 = this.f275l;
             int i9 = this.f276m;
@@ -421,7 +421,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         @Override // java.util.AbstractList, java.util.List
         public ListIterator listIterator(int i7) {
             o();
-            AbstractC1869c.f24160l.c(i7, this.f277n);
+            AbstractC1872c.f24186l.c(i7, this.f277n);
             return new C0004a(this, i7);
         }
 
@@ -429,7 +429,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         public void add(int i7, Object obj) {
             p();
             o();
-            AbstractC1869c.f24160l.c(i7, this.f277n);
+            AbstractC1872c.f24186l.c(i7, this.f277n);
             n(this.f276m + i7, obj);
         }
 
@@ -438,7 +438,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
             m.e(collection, "elements");
             p();
             o();
-            AbstractC1869c.f24160l.c(i7, this.f277n);
+            AbstractC1872c.f24186l.c(i7, this.f277n);
             int size = collection.size();
             m(this.f276m + i7, collection, size);
             return size > 0;
@@ -449,7 +449,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
             o();
             Object[] objArr = this.f275l;
             int i7 = this.f276m;
-            return C1877k.n(objArr, i7, this.f277n + i7);
+            return C1880k.n(objArr, i7, this.f277n + i7);
         }
     }
 
@@ -587,7 +587,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
             y();
         }
         Object[] objArr = this.f272l;
-        C1877k.h(objArr, objArr, i7, i7 + i8, this.f273m);
+        C1880k.h(objArr, objArr, i7, i7 + i8, this.f273m);
         Object[] objArr2 = this.f272l;
         int i9 = this.f273m;
         A5.c.g(objArr2, i9 - i8, i9);
@@ -611,7 +611,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         }
         int i12 = i8 - i10;
         Object[] objArr2 = this.f272l;
-        C1877k.h(objArr2, objArr2, i7 + i10, i8 + i7, this.f273m);
+        C1880k.h(objArr2, objArr2, i7 + i10, i8 + i7, this.f273m);
         Object[] objArr3 = this.f272l;
         int i13 = this.f273m;
         A5.c.g(objArr3, i13 - i12, i13);
@@ -658,7 +658,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         y();
         Object[] objArr = this.f272l;
         Object obj = objArr[i7];
-        C1877k.h(objArr, objArr, i7, i7 + 1, this.f273m);
+        C1880k.h(objArr, objArr, i7, i7 + 1, this.f273m);
         A5.c.f(this.f272l, this.f273m - 1);
         this.f273m--;
         return obj;
@@ -694,21 +694,21 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         return true;
     }
 
-    @Override // z5.AbstractC1871e
+    @Override // z5.AbstractC1874e
     public int f() {
         return this.f273m;
     }
 
-    @Override // z5.AbstractC1871e
+    @Override // z5.AbstractC1874e
     public Object g(int i7) {
         t();
-        AbstractC1869c.f24160l.b(i7, this.f273m);
+        AbstractC1872c.f24186l.b(i7, this.f273m);
         return z(i7);
     }
 
     @Override // java.util.AbstractList, java.util.List
     public Object get(int i7) {
-        AbstractC1869c.f24160l.b(i7, this.f273m);
+        AbstractC1872c.f24186l.b(i7, this.f273m);
         return this.f272l[i7];
     }
 
@@ -785,7 +785,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
     @Override // java.util.AbstractList, java.util.List
     public Object set(int i7, Object obj) {
         t();
-        AbstractC1869c.f24160l.b(i7, this.f273m);
+        AbstractC1872c.f24186l.b(i7, this.f273m);
         Object[] objArr = this.f272l;
         Object obj2 = objArr[i7];
         objArr[i7] = obj;
@@ -794,7 +794,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
 
     @Override // java.util.AbstractList, java.util.List
     public List subList(int i7, int i8) {
-        AbstractC1869c.f24160l.d(i7, i8, this.f273m);
+        AbstractC1872c.f24186l.d(i7, i8, this.f273m);
         return new a(this.f272l, i7, i8 - i7, null, this);
     }
 
@@ -804,8 +804,8 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         int length = objArr.length;
         int i7 = this.f273m;
         if (length >= i7) {
-            C1877k.h(this.f272l, objArr, 0, 0, i7);
-            return C1880n.e(this.f273m, objArr);
+            C1880k.h(this.f272l, objArr, 0, 0, i7);
+            return C1883n.e(this.f273m, objArr);
         }
         Object[] objArrCopyOfRange = Arrays.copyOfRange(this.f272l, 0, i7, objArr.getClass());
         m.d(objArrCopyOfRange, "copyOfRange(...)");
@@ -823,7 +823,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
         }
         Object[] objArr = this.f272l;
         if (i7 > objArr.length) {
-            this.f272l = A5.c.e(this.f272l, AbstractC1869c.f24160l.e(objArr.length, i7));
+            this.f272l = A5.c.e(this.f272l, AbstractC1872c.f24186l.e(objArr.length, i7));
         }
     }
 
@@ -834,7 +834,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
     public final void x(int i7, int i8) {
         w(i8);
         Object[] objArr = this.f272l;
-        C1877k.h(objArr, objArr, i7 + i8, i7, this.f273m);
+        C1880k.h(objArr, objArr, i7 + i8, i7, this.f273m);
         this.f273m += i8;
     }
 
@@ -844,14 +844,14 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
 
     @Override // java.util.AbstractList, java.util.List
     public ListIterator listIterator(int i7) {
-        AbstractC1869c.f24160l.c(i7, this.f273m);
+        AbstractC1872c.f24186l.c(i7, this.f273m);
         return new c(this, i7);
     }
 
     @Override // java.util.AbstractList, java.util.List
     public void add(int i7, Object obj) {
         t();
-        AbstractC1869c.f24160l.c(i7, this.f273m);
+        AbstractC1872c.f24186l.c(i7, this.f273m);
         r(i7, obj);
     }
 
@@ -863,7 +863,7 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
     public boolean addAll(int i7, Collection collection) {
         m.e(collection, "elements");
         t();
-        AbstractC1869c.f24160l.c(i7, this.f273m);
+        AbstractC1872c.f24186l.c(i7, this.f273m);
         int size = collection.size();
         q(i7, collection, size);
         return size > 0;
@@ -871,6 +871,6 @@ public final class b extends AbstractC1871e implements List, RandomAccess, Seria
 
     @Override // java.util.AbstractCollection, java.util.Collection, java.util.List
     public Object[] toArray() {
-        return C1877k.n(this.f272l, 0, this.f273m);
+        return C1880k.n(this.f272l, 0, this.f273m);
     }
 }

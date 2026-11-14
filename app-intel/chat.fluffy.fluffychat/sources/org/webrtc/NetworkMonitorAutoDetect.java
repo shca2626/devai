@@ -382,10 +382,10 @@ public class NetworkMonitorAutoDetect extends BroadcastReceiver implements Netwo
             context.registerReceiver(this, intentFilter);
             if (Build.VERSION.SDK_INT > 28) {
                 WifiP2pManager wifiP2pManager = (WifiP2pManager) context.getSystemService("wifip2p");
-                wifiP2pManager.requestGroupInfo(wifiP2pManager.initialize(context, context.getMainLooper(), null), new WifiP2pManager.GroupInfoListener() { // from class: org.webrtc.L
+                wifiP2pManager.requestGroupInfo(wifiP2pManager.initialize(context, context.getMainLooper(), null), new WifiP2pManager.GroupInfoListener() { // from class: org.webrtc.T
                     @Override // android.net.wifi.p2p.WifiP2pManager.GroupInfoListener
                     public final void onGroupInfoAvailable(WifiP2pGroup wifiP2pGroup) {
-                        this.f20547a.lambda$new$0(wifiP2pGroup);
+                        this.f20553a.lambda$new$0(wifiP2pGroup);
                     }
                 });
             }

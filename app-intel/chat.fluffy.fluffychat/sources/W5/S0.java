@@ -1,7 +1,7 @@
 package W5;
 
-import b6.AbstractC0860M;
-import b6.C0852E;
+import b6.AbstractC0861M;
+import b6.C0853E;
 
 /* loaded from: classes.dex */
 public final class S0 {
@@ -10,28 +10,28 @@ public final class S0 {
     public static final S0 f9124a = new S0();
 
     /* renamed from: b, reason: collision with root package name */
-    public static final ThreadLocal f9125b = AbstractC0860M.a(new C0852E("ThreadLocalEventLoop"));
+    public static final ThreadLocal f9125b = AbstractC0861M.a(new C0853E("ThreadLocalEventLoop"));
 
-    public final AbstractC0621g0 a() {
-        return (AbstractC0621g0) f9125b.get();
+    public final AbstractC0622g0 a() {
+        return (AbstractC0622g0) f9125b.get();
     }
 
-    public final AbstractC0621g0 b() {
+    public final AbstractC0622g0 b() {
         ThreadLocal threadLocal = f9125b;
-        AbstractC0621g0 abstractC0621g0 = (AbstractC0621g0) threadLocal.get();
-        if (abstractC0621g0 != null) {
-            return abstractC0621g0;
+        AbstractC0622g0 abstractC0622g0 = (AbstractC0622g0) threadLocal.get();
+        if (abstractC0622g0 != null) {
+            return abstractC0622g0;
         }
-        AbstractC0621g0 abstractC0621g0A = AbstractC0627j0.a();
-        threadLocal.set(abstractC0621g0A);
-        return abstractC0621g0A;
+        AbstractC0622g0 abstractC0622g0A = AbstractC0628j0.a();
+        threadLocal.set(abstractC0622g0A);
+        return abstractC0622g0A;
     }
 
     public final void c() {
         f9125b.set(null);
     }
 
-    public final void d(AbstractC0621g0 abstractC0621g0) {
-        f9125b.set(abstractC0621g0);
+    public final void d(AbstractC0622g0 abstractC0622g0) {
+        f9125b.set(abstractC0622g0);
     }
 }

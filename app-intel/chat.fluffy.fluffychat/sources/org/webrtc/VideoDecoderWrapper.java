@@ -6,7 +6,7 @@ import org.webrtc.VideoDecoder;
 class VideoDecoderWrapper {
     @CalledByNative
     public static VideoDecoder.Callback createDecoderCallback(final long j7) {
-        return new VideoDecoder.Callback() { // from class: org.webrtc.g0
+        return new VideoDecoder.Callback() { // from class: org.webrtc.n0
             @Override // org.webrtc.VideoDecoder.Callback
             public final void onDecodedFrame(VideoFrame videoFrame, Integer num, Integer num2) {
                 VideoDecoderWrapper.nativeOnDecodedFrame(j7, videoFrame, num, num2);

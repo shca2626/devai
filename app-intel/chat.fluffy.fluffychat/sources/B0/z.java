@@ -2,7 +2,7 @@ package B0;
 
 import E0.U;
 import android.text.TextUtils;
-import j3.AbstractC1229c;
+import j3.AbstractC1228c;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -153,7 +153,7 @@ public abstract class z {
         if (str == null) {
             return null;
         }
-        String strF = AbstractC1229c.f(str.trim());
+        String strF = AbstractC1228c.f(str.trim());
         if (strF.startsWith("avc1") || strF.startsWith("avc3")) {
             return "video/avc";
         }
@@ -360,7 +360,7 @@ public abstract class z {
         if (str == null) {
             return null;
         }
-        strF = AbstractC1229c.f(str);
+        strF = AbstractC1228c.f(str);
         strF.getClass();
         switch (strF) {
             case "video/x-mvhevc":

@@ -11,7 +11,7 @@ import v6.y;
 public interface a {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final a f22336a = new C0264a();
+    public static final a f22342a = new C0264a();
 
     /* renamed from: r6.a$a, reason: collision with other inner class name */
     public class C0264a implements a {

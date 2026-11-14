@@ -1,6 +1,6 @@
 package N;
 
-import O.AbstractC0562a;
+import O.AbstractC0563a;
 import android.graphics.Color;
 
 /* loaded from: classes.dex */
@@ -34,7 +34,7 @@ public abstract class b {
             f10 = ((f8 * 116.0f) - 16.0f) / 903.2963f;
         }
         float[] fArr = f5738c;
-        return AbstractC0562a.b(f11 * fArr[0], f9 * fArr[1], f10 * fArr[2]);
+        return AbstractC0563a.b(f11 * fArr[0], f9 * fArr[1], f10 * fArr[2]);
     }
 
     public static float b(int i7) {

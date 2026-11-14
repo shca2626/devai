@@ -6,7 +6,7 @@ import android.view.DisplayCutout;
 public final class m {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final m f18832a = new m();
+    public static final m f18831a = new m();
 
     public final int a(DisplayCutout displayCutout) {
         M5.m.e(displayCutout, "displayCutout");

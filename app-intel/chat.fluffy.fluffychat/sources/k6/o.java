@@ -9,7 +9,7 @@ import java.util.List;
 public interface o {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final o f19389a = new a();
+    public static final o f19388a = new a();
 
     public class a implements o {
         @Override // k6.o

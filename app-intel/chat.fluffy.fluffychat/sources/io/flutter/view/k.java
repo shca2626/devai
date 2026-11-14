@@ -20,8 +20,8 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityNodeProvider;
-import g5.C1113a;
-import io.flutter.plugin.platform.InterfaceC1185q;
+import g5.C1114a;
+import io.flutter.plugin.platform.InterfaceC1186q;
 import io.flutter.view.k;
 import io.flutter.view.m;
 import java.nio.ByteBuffer;
@@ -72,7 +72,7 @@ public class k extends AccessibilityNodeProvider {
     public final View f17949a;
 
     /* renamed from: b, reason: collision with root package name */
-    public final C1113a f17950b;
+    public final C1114a f17950b;
 
     /* renamed from: c, reason: collision with root package name */
     public final AccessibilityManager f17951c;
@@ -81,7 +81,7 @@ public class k extends AccessibilityNodeProvider {
     public final AccessibilityViewEmbedder f17952d;
 
     /* renamed from: e, reason: collision with root package name */
-    public final InterfaceC1185q f17953e;
+    public final InterfaceC1186q f17953e;
 
     /* renamed from: f, reason: collision with root package name */
     public final ContentResolver f17954f;
@@ -135,7 +135,7 @@ public class k extends AccessibilityNodeProvider {
     public boolean f17970v;
 
     /* renamed from: w, reason: collision with root package name */
-    public final C1113a.b f17971w;
+    public final C1114a.b f17971w;
 
     /* renamed from: x, reason: collision with root package name */
     public final AccessibilityManager.AccessibilityStateChangeListener f17972x;
@@ -146,7 +146,7 @@ public class k extends AccessibilityNodeProvider {
     /* renamed from: z, reason: collision with root package name */
     public final i f17974z;
 
-    public class a implements C1113a.b {
+    public class a implements C1114a.b {
         public a() {
         }
 
@@ -165,7 +165,7 @@ public class k extends AccessibilityNodeProvider {
             k.this.j0(byteBuffer, strArr);
         }
 
-        @Override // g5.C1113a.b
+        @Override // g5.C1114a.b
         public void c(int i7) {
             k.this.V(i7, 1);
         }
@@ -175,7 +175,7 @@ public class k extends AccessibilityNodeProvider {
             k.this.U();
         }
 
-        @Override // g5.C1113a.b
+        @Override // g5.C1114a.b
         public void e(String str) {
             if (Build.VERSION.SDK_INT >= 36) {
                 U4.b.g("AccessibilityBridge", "Using AnnounceSemanticsEvent for accessibility is deprecated on Android. Migrate to using semantic properties for a more robust and accessible user experience.\nFlutter: If you are unsure why you are seeing this bug, it might be because you are using a widget that calls this method. See https://github.com/flutter/flutter/issues/165510 for more details.\nAndroid documentation: https://developer.android.com/reference/android/view/View#announceForAccessibility(java.lang.CharSequence)");
@@ -188,7 +188,7 @@ public class k extends AccessibilityNodeProvider {
             k.this.d0(str);
         }
 
-        @Override // g5.C1113a.b
+        @Override // g5.C1114a.b
         public void g(String str) {
             if (Build.VERSION.SDK_INT >= 28) {
                 return;
@@ -198,12 +198,12 @@ public class k extends AccessibilityNodeProvider {
             k.this.W(accessibilityEventI);
         }
 
-        @Override // g5.C1113a.b
+        @Override // g5.C1114a.b
         public void h(int i7) {
             k.this.V(i7, 8);
         }
 
-        @Override // g5.C1113a.b
+        @Override // g5.C1114a.b
         public void i(int i7) {
             k.this.V(i7, 2);
         }
@@ -1150,8 +1150,8 @@ public class k extends AccessibilityNodeProvider {
         }
     }
 
-    public k(View view, C1113a c1113a, AccessibilityManager accessibilityManager, ContentResolver contentResolver, InterfaceC1185q interfaceC1185q) {
-        this(view, c1113a, accessibilityManager, contentResolver, new AccessibilityViewEmbedder(view, 65536), interfaceC1185q);
+    public k(View view, C1114a c1114a, AccessibilityManager accessibilityManager, ContentResolver contentResolver, InterfaceC1186q interfaceC1186q) {
+        this(view, c1114a, accessibilityManager, contentResolver, new AccessibilityViewEmbedder(view, 65536), interfaceC1186q);
     }
 
     public static String C(ByteBuffer byteBuffer, String[] strArr) {
@@ -1413,7 +1413,7 @@ public class k extends AccessibilityNodeProvider {
     public final void S(Context context) {
         UiModeManager uiModeManager = (UiModeManager) context.getSystemService("uimode");
         if (uiModeManager != null) {
-            uiModeManager.addContrastChangeListener(context.getMainExecutor(), AbstractC1194a.a(this.f17974z));
+            uiModeManager.addContrastChangeListener(context.getMainExecutor(), AbstractC1195a.a(this.f17974z));
         }
     }
 
@@ -1627,7 +1627,7 @@ public class k extends AccessibilityNodeProvider {
     public final void h0(Context context) {
         UiModeManager uiModeManager = (UiModeManager) context.getSystemService("uimode");
         if (uiModeManager != null) {
-            uiModeManager.removeContrastChangeListener(AbstractC1194a.a(this.f17974z));
+            uiModeManager.removeContrastChangeListener(AbstractC1195a.a(this.f17974z));
         }
     }
 
@@ -2049,7 +2049,7 @@ public class k extends AccessibilityNodeProvider {
         return jVar2;
     }
 
-    public k(View view, C1113a c1113a, AccessibilityManager accessibilityManager, ContentResolver contentResolver, AccessibilityViewEmbedder accessibilityViewEmbedder, InterfaceC1185q interfaceC1185q) {
+    public k(View view, C1114a c1114a, AccessibilityManager accessibilityManager, ContentResolver contentResolver, AccessibilityViewEmbedder accessibilityViewEmbedder, InterfaceC1186q interfaceC1186q) {
         this.f17955g = new HashMap();
         this.f17956h = new HashMap();
         this.f17960l = 0;
@@ -2066,12 +2066,12 @@ public class k extends AccessibilityNodeProvider {
         this.f17974z = i7 >= 34 ? new io.flutter.view.g(this) : new i() { // from class: io.flutter.view.h
         };
         this.f17949a = view;
-        this.f17950b = c1113a;
+        this.f17950b = c1114a;
         this.f17951c = accessibilityManager;
         this.f17954f = contentResolver;
         this.f17952d = accessibilityViewEmbedder;
-        this.f17953e = interfaceC1185q;
-        c1113a.g(aVar);
+        this.f17953e = interfaceC1186q;
+        c1114a.g(aVar);
         bVar.onAccessibilityStateChanged(accessibilityManager.isEnabled());
         accessibilityManager.addAccessibilityStateChangeListener(bVar);
         c cVar = new c(accessibilityManager);
@@ -2094,6 +2094,6 @@ public class k extends AccessibilityNodeProvider {
             c0();
             S(view.getContext());
         }
-        interfaceC1185q.f(this);
+        interfaceC1186q.f(this);
     }
 }

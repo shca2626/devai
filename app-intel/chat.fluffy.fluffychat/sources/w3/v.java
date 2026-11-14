@@ -21,16 +21,16 @@ import java.util.Properties;
 public abstract class v {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final Type[] f23339a = new Type[0];
+    public static final Type[] f23345a = new Type[0];
 
     public static final class a implements GenericArrayType, Serializable {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Type f23340l;
+        public final Type f23346l;
 
         public a(Type type) {
             Objects.requireNonNull(type);
-            this.f23340l = v.b(type);
+            this.f23346l = v.b(type);
         }
 
         public boolean equals(Object obj) {
@@ -39,43 +39,43 @@ public abstract class v {
 
         @Override // java.lang.reflect.GenericArrayType
         public Type getGenericComponentType() {
-            return this.f23340l;
+            return this.f23346l;
         }
 
         public int hashCode() {
-            return this.f23340l.hashCode();
+            return this.f23346l.hashCode();
         }
 
         public String toString() {
-            return v.u(this.f23340l) + "[]";
+            return v.u(this.f23346l) + "[]";
         }
     }
 
     public static final class b implements ParameterizedType, Serializable {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Type f23341l;
+        public final Type f23347l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final Type f23342m;
+        public final Type f23348m;
 
         /* renamed from: n, reason: collision with root package name */
-        public final Type[] f23343n;
+        public final Type[] f23349n;
 
         public b(Type type, Class cls, Type... typeArr) {
             Objects.requireNonNull(cls);
             if (type == null && v.o(cls)) {
                 throw new IllegalArgumentException("Must specify owner type for " + cls);
             }
-            this.f23341l = type == null ? null : v.b(type);
-            this.f23342m = v.b(cls);
+            this.f23347l = type == null ? null : v.b(type);
+            this.f23348m = v.b(cls);
             Type[] typeArr2 = (Type[]) typeArr.clone();
-            this.f23343n = typeArr2;
+            this.f23349n = typeArr2;
             int length = typeArr2.length;
             for (int i7 = 0; i7 < length; i7++) {
-                Objects.requireNonNull(this.f23343n[i7]);
-                v.c(this.f23343n[i7]);
-                Type[] typeArr3 = this.f23343n;
+                Objects.requireNonNull(this.f23349n[i7]);
+                v.c(this.f23349n[i7]);
+                Type[] typeArr3 = this.f23349n;
                 typeArr3[i7] = v.b(typeArr3[i7]);
             }
         }
@@ -93,35 +93,35 @@ public abstract class v {
 
         @Override // java.lang.reflect.ParameterizedType
         public Type[] getActualTypeArguments() {
-            return (Type[]) this.f23343n.clone();
+            return (Type[]) this.f23349n.clone();
         }
 
         @Override // java.lang.reflect.ParameterizedType
         public Type getOwnerType() {
-            return this.f23341l;
+            return this.f23347l;
         }
 
         @Override // java.lang.reflect.ParameterizedType
         public Type getRawType() {
-            return this.f23342m;
+            return this.f23348m;
         }
 
         public int hashCode() {
-            return (Arrays.hashCode(this.f23343n) ^ this.f23342m.hashCode()) ^ a(this.f23341l);
+            return (Arrays.hashCode(this.f23349n) ^ this.f23348m.hashCode()) ^ a(this.f23347l);
         }
 
         public String toString() {
-            int length = this.f23343n.length;
+            int length = this.f23349n.length;
             if (length == 0) {
-                return v.u(this.f23342m);
+                return v.u(this.f23348m);
             }
             StringBuilder sb = new StringBuilder((length + 1) * 30);
-            sb.append(v.u(this.f23342m));
+            sb.append(v.u(this.f23348m));
             sb.append("<");
-            sb.append(v.u(this.f23343n[0]));
+            sb.append(v.u(this.f23349n[0]));
             for (int i7 = 1; i7 < length; i7++) {
                 sb.append(", ");
-                sb.append(v.u(this.f23343n[i7]));
+                sb.append(v.u(this.f23349n[i7]));
             }
             sb.append(">");
             return sb.toString();
@@ -131,10 +131,10 @@ public abstract class v {
     public static final class c implements WildcardType, Serializable {
 
         /* renamed from: l, reason: collision with root package name */
-        public final Type f23344l;
+        public final Type f23350l;
 
         /* renamed from: m, reason: collision with root package name */
-        public final Type f23345m;
+        public final Type f23351m;
 
         public c(Type[] typeArr, Type[] typeArr2) {
             if (typeArr2.length > 1) {
@@ -146,8 +146,8 @@ public abstract class v {
             if (typeArr2.length != 1) {
                 Objects.requireNonNull(typeArr[0]);
                 v.c(typeArr[0]);
-                this.f23345m = null;
-                this.f23344l = v.b(typeArr[0]);
+                this.f23351m = null;
+                this.f23350l = v.b(typeArr[0]);
                 return;
             }
             Objects.requireNonNull(typeArr2[0]);
@@ -155,8 +155,8 @@ public abstract class v {
             if (typeArr[0] != Object.class) {
                 throw new IllegalArgumentException("When lower bound is specified, upper bound must be Object");
             }
-            this.f23345m = v.b(typeArr2[0]);
-            this.f23344l = Object.class;
+            this.f23351m = v.b(typeArr2[0]);
+            this.f23350l = Object.class;
         }
 
         public boolean equals(Object obj) {
@@ -165,28 +165,28 @@ public abstract class v {
 
         @Override // java.lang.reflect.WildcardType
         public Type[] getLowerBounds() {
-            Type type = this.f23345m;
-            return type != null ? new Type[]{type} : v.f23339a;
+            Type type = this.f23351m;
+            return type != null ? new Type[]{type} : v.f23345a;
         }
 
         @Override // java.lang.reflect.WildcardType
         public Type[] getUpperBounds() {
-            return new Type[]{this.f23344l};
+            return new Type[]{this.f23350l};
         }
 
         public int hashCode() {
-            Type type = this.f23345m;
-            return (type != null ? type.hashCode() + 31 : 1) ^ (this.f23344l.hashCode() + 31);
+            Type type = this.f23351m;
+            return (type != null ? type.hashCode() + 31 : 1) ^ (this.f23350l.hashCode() + 31);
         }
 
         public String toString() {
-            if (this.f23345m != null) {
-                return "? super " + v.u(this.f23345m);
+            if (this.f23351m != null) {
+                return "? super " + v.u(this.f23351m);
             }
-            if (this.f23344l == Object.class) {
+            if (this.f23350l == Object.class) {
                 return "?";
             }
-            return "? extends " + v.u(this.f23344l);
+            return "? extends " + v.u(this.f23350l);
         }
     }
 
@@ -527,7 +527,7 @@ public abstract class v {
     }
 
     public static WildcardType s(Type type) {
-        return new c(type instanceof WildcardType ? ((WildcardType) type).getUpperBounds() : new Type[]{type}, f23339a);
+        return new c(type instanceof WildcardType ? ((WildcardType) type).getUpperBounds() : new Type[]{type}, f23345a);
     }
 
     public static WildcardType t(Type type) {

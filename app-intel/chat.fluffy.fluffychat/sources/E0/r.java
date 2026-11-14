@@ -12,13 +12,13 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public final class r {
 
     /* renamed from: a, reason: collision with root package name */
-    public final InterfaceC0321g f2190a;
+    public final InterfaceC0322g f2190a;
 
     /* renamed from: b, reason: collision with root package name */
     public final Thread f2191b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final InterfaceC0329o f2192c;
+    public final InterfaceC0330o f2192c;
 
     /* renamed from: d, reason: collision with root package name */
     public final b f2193d;
@@ -137,9 +137,9 @@ public final class r {
         }
     }
 
-    public r d(Looper looper, InterfaceC0321g interfaceC0321g, b bVar) {
-        j3.o.v(interfaceC0321g != null || bVar == null);
-        return new r(this.f2194e, looper, looper.getThread(), interfaceC0321g, bVar, this.f2199j);
+    public r d(Looper looper, InterfaceC0322g interfaceC0322g, b bVar) {
+        j3.o.v(interfaceC0322g != null || bVar == null);
+        return new r(this.f2194e, looper, looper.getThread(), interfaceC0322g, bVar, this.f2199j);
     }
 
     public void e() {
@@ -147,9 +147,9 @@ public final class r {
         if (this.f2196g.isEmpty()) {
             return;
         }
-        if (this.f2193d != null && !((InterfaceC0329o) j3.o.q(this.f2192c)).e(1)) {
-            InterfaceC0329o interfaceC0329o = this.f2192c;
-            interfaceC0329o.j(interfaceC0329o.d(1));
+        if (this.f2193d != null && !((InterfaceC0330o) j3.o.q(this.f2192c)).e(1)) {
+            InterfaceC0330o interfaceC0330o = this.f2192c;
+            interfaceC0330o.j(interfaceC0330o.d(1));
         }
         boolean zIsEmpty = this.f2195f.isEmpty();
         this.f2195f.addAll(this.f2196g);
@@ -167,7 +167,7 @@ public final class r {
         Iterator it = this.f2194e.iterator();
         while (it.hasNext()) {
             ((c) it.next()).c(bVar);
-            if (((InterfaceC0329o) j3.o.q(this.f2192c)).e(1)) {
+            if (((InterfaceC0330o) j3.o.q(this.f2192c)).e(1)) {
                 break;
             }
         }
@@ -232,20 +232,20 @@ public final class r {
         this(new CopyOnWriteArraySet(), null, thread, null, null, true);
     }
 
-    public r(Looper looper, InterfaceC0321g interfaceC0321g, b bVar) {
-        this(new CopyOnWriteArraySet(), looper, looper.getThread(), interfaceC0321g, bVar, true);
+    public r(Looper looper, InterfaceC0322g interfaceC0322g, b bVar) {
+        this(new CopyOnWriteArraySet(), looper, looper.getThread(), interfaceC0322g, bVar, true);
     }
 
-    public r(CopyOnWriteArraySet copyOnWriteArraySet, Looper looper, Thread thread, InterfaceC0321g interfaceC0321g, b bVar, boolean z7) {
-        this.f2190a = interfaceC0321g;
+    public r(CopyOnWriteArraySet copyOnWriteArraySet, Looper looper, Thread thread, InterfaceC0322g interfaceC0322g, b bVar, boolean z7) {
+        this.f2190a = interfaceC0322g;
         this.f2191b = thread;
         this.f2194e = copyOnWriteArraySet;
         this.f2193d = bVar;
         this.f2197h = new Object();
         this.f2195f = new ArrayDeque();
         this.f2196g = new ArrayDeque();
-        if (looper != null && interfaceC0321g != null && bVar != null) {
-            this.f2192c = interfaceC0321g.c(looper, new Handler.Callback() { // from class: E0.p
+        if (looper != null && interfaceC0322g != null && bVar != null) {
+            this.f2192c = interfaceC0322g.c(looper, new Handler.Callback() { // from class: E0.p
                 @Override // android.os.Handler.Callback
                 public final boolean handleMessage(Message message) {
                     return this.f2186l.f(message);

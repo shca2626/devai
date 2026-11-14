@@ -152,7 +152,7 @@ public class EglThread implements RenderSynchronizer.Listener {
         this.handler.post(new Runnable() { // from class: org.webrtc.z
             @Override // java.lang.Runnable
             public final void run() {
-                this.f20620l.lambda$onRenderWindowClose$3();
+                this.f20626l.lambda$onRenderWindowClose$3();
             }
         });
     }
@@ -162,7 +162,7 @@ public class EglThread implements RenderSynchronizer.Listener {
         this.handler.post(new Runnable() { // from class: org.webrtc.y
             @Override // java.lang.Runnable
             public final void run() {
-                this.f20619l.lambda$onRenderWindowOpen$2();
+                this.f20625l.lambda$onRenderWindowOpen$2();
             }
         });
     }

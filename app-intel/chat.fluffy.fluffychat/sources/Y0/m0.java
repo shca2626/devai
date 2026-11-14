@@ -1,6 +1,6 @@
 package Y0;
 
-import E0.InterfaceC0325k;
+import E0.InterfaceC0326k;
 import android.util.SparseArray;
 
 /* loaded from: classes.dex */
@@ -13,11 +13,11 @@ public final class m0 {
     public final SparseArray f9781b;
 
     /* renamed from: c, reason: collision with root package name */
-    public final InterfaceC0325k f9782c;
+    public final InterfaceC0326k f9782c;
 
     public m0() {
-        this(new InterfaceC0325k() { // from class: Y0.l0
-            @Override // E0.InterfaceC0325k
+        this(new InterfaceC0326k() { // from class: Y0.l0
+            @Override // E0.InterfaceC0326k
             public final void accept(Object obj) {
                 m0.a(obj);
             }
@@ -37,9 +37,9 @@ public final class m0 {
             int iKeyAt = sparseArray.keyAt(sparseArray.size() - 1);
             j3.o.d(i7 >= iKeyAt);
             if (iKeyAt == i7) {
-                InterfaceC0325k interfaceC0325k = this.f9782c;
+                InterfaceC0326k interfaceC0326k = this.f9782c;
                 SparseArray sparseArray2 = this.f9781b;
-                interfaceC0325k.accept(sparseArray2.valueAt(sparseArray2.size() - 1));
+                interfaceC0326k.accept(sparseArray2.valueAt(sparseArray2.size() - 1));
             }
         }
         this.f9781b.append(i7, obj);
@@ -103,9 +103,9 @@ public final class m0 {
         return this.f9781b.size() == 0;
     }
 
-    public m0(InterfaceC0325k interfaceC0325k) {
+    public m0(InterfaceC0326k interfaceC0326k) {
         this.f9781b = new SparseArray();
-        this.f9782c = interfaceC0325k;
+        this.f9782c = interfaceC0326k;
         this.f9780a = -1;
     }
 }

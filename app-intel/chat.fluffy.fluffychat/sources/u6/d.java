@@ -16,7 +16,7 @@ import javax.net.ssl.SSLSession;
 public final class d implements HostnameVerifier {
 
     /* renamed from: a, reason: collision with root package name */
-    public static final d f22895a = new d();
+    public static final d f22901a = new d();
 
     public static List a(X509Certificate x509Certificate) throws CertificateParsingException {
         List listB = b(x509Certificate, 7);

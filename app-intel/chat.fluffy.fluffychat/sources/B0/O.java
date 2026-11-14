@@ -7,7 +7,7 @@ import java.util.concurrent.Executor;
 public interface O {
 
     public interface a {
-        O a(Context context, C0308j c0308j, InterfaceC0311m interfaceC0311m, b bVar, Executor executor, long j7, boolean z7);
+        O a(Context context, C0309j c0309j, InterfaceC0312m interfaceC0312m, b bVar, Executor executor, long j7, boolean z7);
     }
 
     public interface b {

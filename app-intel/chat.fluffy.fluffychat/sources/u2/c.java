@@ -9,11 +9,11 @@ import com.fasterxml.jackson.core.JsonPointer;
 public final class c implements b {
 
     /* renamed from: a, reason: collision with root package name */
-    public final Context f22783a;
+    public final Context f22789a;
 
     public c(Context context) {
         m.e(context, "context");
-        this.f22783a = context;
+        this.f22789a = context;
     }
 
     @Override // u2.b
@@ -27,11 +27,11 @@ public final class c implements b {
     }
 
     public boolean c(int i7) {
-        return this.f22783a.getResources().getResourceEntryName(i7) != null;
+        return this.f22789a.getResources().getResourceEntryName(i7) != null;
     }
 
     public Uri d(int i7) {
-        Uri uri = Uri.parse("android.resource://" + ((Object) this.f22783a.getPackageName()) + JsonPointer.SEPARATOR + i7);
+        Uri uri = Uri.parse("android.resource://" + ((Object) this.f22789a.getPackageName()) + JsonPointer.SEPARATOR + i7);
         m.d(uri, "parse(this)");
         return uri;
     }

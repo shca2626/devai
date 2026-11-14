@@ -13,7 +13,7 @@ public class f0 extends RuntimeException {
         this.f12037l = null;
     }
 
-    public C0790v a() {
-        return new C0790v(getMessage());
+    public C0791v a() {
+        return new C0791v(getMessage());
     }
 }

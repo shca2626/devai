@@ -6,6 +6,6 @@ import java.util.Iterator;
 public abstract class b {
     public static final Iterator a(Object[] objArr) {
         m.e(objArr, "array");
-        return new C0529a(objArr);
+        return new C0530a(objArr);
     }
 }

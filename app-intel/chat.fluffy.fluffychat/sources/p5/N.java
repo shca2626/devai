@@ -6,25 +6,25 @@ package p5;
 public final class N {
 
     /* renamed from: m, reason: collision with root package name */
-    public static final a f20976m;
+    public static final a f20982m;
 
     /* renamed from: n, reason: collision with root package name */
-    public static final N f20977n = new N("PLATFORM_ENCODED", 0, 0);
+    public static final N f20983n = new N("PLATFORM_ENCODED", 0, 0);
 
     /* renamed from: o, reason: collision with root package name */
-    public static final N f20978o = new N("JSON_ENCODED", 1, 1);
+    public static final N f20984o = new N("JSON_ENCODED", 1, 1);
 
     /* renamed from: p, reason: collision with root package name */
-    public static final N f20979p = new N("UNEXPECTED_STRING", 2, 2);
+    public static final N f20985p = new N("UNEXPECTED_STRING", 2, 2);
 
     /* renamed from: q, reason: collision with root package name */
-    public static final /* synthetic */ N[] f20980q;
+    public static final /* synthetic */ N[] f20986q;
 
     /* renamed from: r, reason: collision with root package name */
-    public static final /* synthetic */ F5.a f20981r;
+    public static final /* synthetic */ F5.a f20987r;
 
     /* renamed from: l, reason: collision with root package name */
-    public final int f20982l;
+    public final int f20988l;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -46,17 +46,17 @@ public final class N {
 
     static {
         N[] nArrA = a();
-        f20980q = nArrA;
-        f20981r = F5.b.a(nArrA);
-        f20976m = new a(null);
+        f20986q = nArrA;
+        f20987r = F5.b.a(nArrA);
+        f20982m = new a(null);
     }
 
     public N(String str, int i7, int i8) {
-        this.f20982l = i8;
+        this.f20988l = i8;
     }
 
     public static final /* synthetic */ N[] a() {
-        return new N[]{f20977n, f20978o, f20979p};
+        return new N[]{f20983n, f20984o, f20985p};
     }
 
     public static N valueOf(String str) {
@@ -64,10 +64,10 @@ public final class N {
     }
 
     public static N[] values() {
-        return (N[]) f20980q.clone();
+        return (N[]) f20986q.clone();
     }
 
     public final int d() {
-        return this.f20982l;
+        return this.f20988l;
     }
 }

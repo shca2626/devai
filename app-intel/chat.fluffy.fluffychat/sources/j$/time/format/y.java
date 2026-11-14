@@ -11,14 +11,14 @@ public final class y {
     public static final y NOT_NEGATIVE;
 
     /* renamed from: a, reason: collision with root package name */
-    public static final /* synthetic */ y[] f18339a;
+    public static final /* synthetic */ y[] f18347a;
 
     public static y valueOf(String str) {
         return (y) Enum.valueOf(y.class, str);
     }
 
     public static y[] values() {
-        return (y[]) f18339a.clone();
+        return (y[]) f18347a.clone();
     }
 
     static {
@@ -32,6 +32,6 @@ public final class y {
         NOT_NEGATIVE = yVar4;
         y yVar5 = new y("EXCEEDS_PAD", 4);
         EXCEEDS_PAD = yVar5;
-        f18339a = new y[]{yVar, yVar2, yVar3, yVar4, yVar5};
+        f18347a = new y[]{yVar, yVar2, yVar3, yVar4, yVar5};
     }
 }

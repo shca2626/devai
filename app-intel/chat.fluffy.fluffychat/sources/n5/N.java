@@ -1,16 +1,16 @@
 package n5;
 
 import java.util.List;
-import z5.C1880n;
+import z5.C1883n;
 
 /* loaded from: classes.dex */
 public final class N {
 
     /* renamed from: b, reason: collision with root package name */
-    public static final a f20136b = new a(null);
+    public static final a f20135b = new a(null);
 
     /* renamed from: a, reason: collision with root package name */
-    public final Long f20137a;
+    public final Long f20136a;
 
     public static final class a {
         public /* synthetic */ a(M5.g gVar) {
@@ -32,11 +32,11 @@ public final class N {
     }
 
     public final Long a() {
-        return this.f20137a;
+        return this.f20136a;
     }
 
     public final List b() {
-        return C1880n.d(this.f20137a);
+        return C1883n.d(this.f20136a);
     }
 
     public boolean equals(Object obj) {
@@ -46,19 +46,19 @@ public final class N {
         if (this == obj) {
             return true;
         }
-        return I.f20120a.a(this.f20137a, ((N) obj).f20137a);
+        return I.f20119a.a(this.f20136a, ((N) obj).f20136a);
     }
 
     public int hashCode() {
-        return (N.class.hashCode() * 31) + I.f20120a.b(this.f20137a);
+        return (N.class.hashCode() * 31) + I.f20119a.b(this.f20136a);
     }
 
     public String toString() {
-        return "VideoSelectionOptions(maxDurationSeconds=" + this.f20137a + ")";
+        return "VideoSelectionOptions(maxDurationSeconds=" + this.f20136a + ")";
     }
 
     public N(Long l7) {
-        this.f20137a = l7;
+        this.f20136a = l7;
     }
 
     public /* synthetic */ N(Long l7, int i7, M5.g gVar) {

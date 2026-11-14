@@ -1,6 +1,6 @@
 package A1;
 
-import E0.AbstractC0332s;
+import E0.AbstractC0333s;
 import g1.V;
 
 /* loaded from: classes.dex */
@@ -67,7 +67,7 @@ public final class x {
             case 1:
                 return 2;
             default:
-                AbstractC0332s.h("TrackEncryptionBox", "Unsupported protection scheme type '" + str + "'. Assuming AES-CTR crypto mode.");
+                AbstractC0333s.h("TrackEncryptionBox", "Unsupported protection scheme type '" + str + "'. Assuming AES-CTR crypto mode.");
             case 2:
             case 3:
                 return 1;

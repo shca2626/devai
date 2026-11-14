@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 /* loaded from: classes.dex */
 public abstract class D {
-    public static int a(C1370g c1370g) {
-        Long lB = c1370g.b();
+    public static int a(C1369g c1369g) {
+        Long lB = c1369g.b();
         int iB = b();
         return (lB == null || lB.longValue() >= ((long) iB)) ? iB : Math.toIntExact(lB.longValue());
     }
